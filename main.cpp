@@ -1,6 +1,7 @@
-#include <iostream>
+#include "lib/Shell.h"
+
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    hdg::Shell::run();
     return 0;
 }

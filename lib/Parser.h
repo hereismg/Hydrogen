@@ -14,13 +14,22 @@ namespace hdg {
     class Parser {
     private:
         std::vector<Token> tokens;
-        Token* currentToken;
+        std::vector<Token>::iterator currentToken;
 
     public:
         explicit Parser(std::vector<Token> tokens);
         void advance();
+
+        void run();
+        void expr();
+        void term();
+        void factor();
+        void power();
+
+        void binaryOperator();
+        void unaryOperator();
     };
 
-} // hdg
+0} // hdg
 
 #endif //HDG_PARSER_H

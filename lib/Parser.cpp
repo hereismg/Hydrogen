@@ -6,6 +6,11 @@
 
 namespace hdg {
     Parser::Parser(std::vector<Token> tokens):
-        tokens(std::move(tokens)), currentToken(nullptr){
+        tokens(std::move(tokens)), currentToken(tokens.begin()){
+    }
+
+    void Parser::advance() {
+        if (currentToken!=tokens.end())
+            currentToken++;
     }
 } // hdg

@@ -16,7 +16,8 @@ expr        : term (plus|minus term)*
 
 term        : factor (mul|div factor)*
 
-factor      : num|float
+factor      : power (pow factor)*
 
-power       : a 
+power       : int|float
+            : lparen expr rparen
 ```

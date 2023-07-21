@@ -5,4 +5,9 @@
 #include "Node.h"
 
 namespace hdg {
+    Node::Node() = default;
+
+    std::string Node::toString() {
+        return "node";
+    }
 } // hdg

@@ -4,7 +4,13 @@
 
 #include <vector>
 #include <utility>
+#include <functional>
+#include <set>
+#include <iostream>
 #include "Token.h"
+#include "node/Node.h"
+#include "node/BinaryOperatorNode.h"
+#include "node/IntNode.h"
 
 #ifndef HDG_PARSER_H
 #define HDG_PARSER_H
@@ -18,18 +24,21 @@ namespace hdg {
 
     public:
         explicit Parser(std::vector<Token> tokens);
+        Node* run();
+
+    private:
         void advance();
 
-        void run();
-        void expr();
-        void term();
-        void factor();
-        void power();
+        Node* expr();
+        Node* term();
+        Node* factor();
+        Node* power();
 
-        void binaryOperator();
-        void unaryOperator();
+        Node* binaryOperator(const std::set<std::string>&opers, std::function<Node*()> funA, std::function<Node*()> funB=nullptr);
+        Node* unaryOperator();
+
     };
 
-0} // hdg
+} // hdg
 
 #endif //HDG_PARSER_H

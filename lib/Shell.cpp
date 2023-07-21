@@ -14,11 +14,14 @@ namespace hdg {
 
             try {
                 Lexer lexer(text);
-                Parser parser(lexer.getTokens());
-
                 lexer.run();
 
+                Parser parser(lexer.getTokens());
+                Node* tree = parser.run();
+
                 std::cout << lexer.getTokens() << std::endl;
+                std::cout << tree->toString() << std::endl;
+
             }catch(Error &error){
                 std::cout << error << std::endl;
                 continue;

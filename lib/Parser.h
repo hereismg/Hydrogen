@@ -11,6 +11,7 @@
 #include "node/Node.h"
 #include "node/BinaryOperatorNode.h"
 #include "node/IntNode.h"
+#include "node/UnaryOperatorNode.h"
 
 #ifndef HDG_PARSER_H
 #define HDG_PARSER_H

@@ -6,8 +6,8 @@
 
 
 namespace hdg {
-    IllegalCharError::IllegalCharError(int posStart, int posEnd, std::string errorDetails):
-        Error(posStart, posEnd, "IllegalCharError", std::move(errorDetails)){
+    IllegalCharError::IllegalCharError(int posStart, int posEnd, const std::string& text, std::string errorDetails):
+        Error(posStart, posEnd, text, "IllegalCharError", std::move(errorDetails)){
 
     }
 } // hdg

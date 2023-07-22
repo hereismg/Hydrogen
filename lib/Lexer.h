@@ -22,17 +22,17 @@ namespace hdg {
 
     class Lexer {
     private:
-        std::string text;
+        const std::string& text;
         std::vector<Token> tokens;
 
         char currentChar;
         int pos;
 
     public:
-        explicit Lexer(std::string text);
+        explicit Lexer(const std::string& text);
         void advance();
 
-        std::string& getText();
+        const std::string& getText();
         std::vector<Token>& getTokens();
 
         void run();

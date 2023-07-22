@@ -26,8 +26,8 @@ namespace hdg {
         return out;
     }
 
-    Lexer::Lexer(std::string text):
-        text(std::move(text)), currentChar('\0'), pos(-1) {
+    Lexer::Lexer(const std::string& text):
+        text(text), currentChar('\0'), pos(-1) {
         advance();
     }
 
@@ -35,7 +35,7 @@ namespace hdg {
         currentChar = text[++pos];
     }
 
-    std::string& Lexer::getText() {
+    const std::string& Lexer::getText() {
         return text;
     }
 
@@ -59,8 +59,27 @@ namespace hdg {
                 tokens.emplace_back(TT_MUL);
                 advance();
             }
+            else if (currentChar == '/'){
+                tokens.emplace_back(TT_DIV);
+                advance();
+            }
+            else if (currentChar == '^'){
+                tokens.emplace_back(TT_POW);
+                advance();
+            }
+            else if (currentChar == '('){
+                tokens.emplace_back(TT_LPAREN);
+                advance();
+            }
+            else if (currentChar == ')'){
+                tokens.emplace_back(TT_RPAREN);
+                advance();
+            }
             else{
-                throw IllegalCharError(pos, pos+1, "Expect '+', '-' or '*'");
+                throw IllegalCharError(
+                        pos, pos+1, text,
+                        "Expect digital, '+', '-', '*', '/' or '^'."
+                        );
             }
         }
     }

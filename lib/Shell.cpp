@@ -19,9 +19,12 @@ namespace hdg {
                 Parser parser(lexer.getTokens());
                 Node* tree = parser.run();
 
-                std::cout << lexer.getTokens() << std::endl;
-                std::cout << tree->toString() << std::endl;
+                Interpreter interpreter(tree);
 
+//                std::cout << tree->toString() << std::endl;
+                std::cout << interpreter.run() << std::endl;
+
+                delete tree;
             }catch(Error &error){
                 std::cout << error << std::endl;
                 continue;

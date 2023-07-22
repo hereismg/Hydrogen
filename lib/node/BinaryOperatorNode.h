@@ -5,8 +5,11 @@
 #ifndef HDG_BINARYOPERATORNODE_H
 #define HDG_BINARYOPERATORNODE_H
 
-#include "Node.h"
 #include <string>
+#include <cmath>
+#include "Node.h"
+#include "../Token.h"
+#include "../error/RunTimeError.h"
 
 namespace hdg {
 
@@ -26,7 +29,9 @@ namespace hdg {
         std::string getOperator();
         Node* getLeft();
         Node* getRight();
+
         std::string toString() override;
+        std::string interpret() override;
     };
 
 } // hdg

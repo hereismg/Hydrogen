@@ -6,13 +6,25 @@
 
 #include <utility>
 
+
 namespace hdg {
-    Error::Error(int posStart, int posEnd, std::string errorName, std::string errorDetails):
-        posStart(posStart), posEnd(posEnd), errorName(std::move(errorName)), errorDetails(std::move(errorDetails)){
+    std::string buildArrow(const std::string& text, int posStart, int posEnd){
+        std::string arrowStart(posStart, ' ');
+        std::string arrowEnd(posEnd-posStart, '^');
+        return text + "\n" + arrowStart + arrowEnd + "\n";
+    }
+
+    Error::Error(int posStart, int posEnd, const std::string& text, std::string errorName, std::string errorDetails):
+        posStart(posStart),
+        posEnd(posEnd),
+        text(text),
+        errorName(std::move(errorName)),
+        errorDetails(std::move(errorDetails)){
     }
 
     std::ostream &operator<<(std::ostream &out, Error &error) {
-        std::cout << error.errorName << ": " << error.errorDetails;
+        std::cout << error.errorName << ": " << error.errorDetails << std::endl << std::endl;
+        std::cout << buildArrow(error.text, error.posStart, error.posEnd);
         return out;
     }
 } // hdg

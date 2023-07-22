@@ -19,6 +19,7 @@ namespace hdg {
         int getValue();
         void setValue(int value);
         std::string toString() override;
+        std::string interpret() override;
     };
 
 } // hdg

@@ -14,6 +14,7 @@ namespace hdg {
         Node();
 
         virtual std::string toString();
+        virtual std::string interpret();
     };
 
 } // hdg

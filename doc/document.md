@@ -4,8 +4,9 @@
 
 ## 基础数据类型
 
-- Number
-  - 在Number数据类型中，包含C++中的“int”、“double”、“”
+- int
+- float
+
 - String
   - 不区分字符串类型和字符类型，统一是字符串类型
 
@@ -19,5 +20,6 @@ term        : factor (mul|div factor)*
 factor      : power (pow factor)*
 
 power       : int|float
+            : (plus|minus) power
             : lparen expr rparen
 ```

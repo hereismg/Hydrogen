@@ -48,4 +48,30 @@ namespace hdg {
         }
         return Node::toString();
     }
+
+    std::string BinaryOperatorNode::interpret() {
+        if (left_ == nullptr || right_ == nullptr) return "NONE";
+
+        int leftValue = std::atoi(left_->interpret().c_str());
+        int rightValue = std::atoi(right_->interpret().c_str());
+        int result = 0;
+
+        if (oper_ == TT_PLUS){
+            result = leftValue + rightValue;
+        }else if (oper_ == TT_MINUS){
+            result = leftValue - rightValue;
+        }else if (oper_ == TT_MUL){
+            result = leftValue * rightValue;
+        }else if (oper_ == TT_DIV){
+            if (rightValue==0){
+                throw RunTimeError(0, 1, *new std::string("0"), "Division by zero");
+            }else {
+                result = leftValue / rightValue;
+            }
+        }else if (oper_ == TT_POW){
+            result = std::pow(leftValue, rightValue);
+        }
+
+        return std::to_string(result);
+    }
 } // hdg

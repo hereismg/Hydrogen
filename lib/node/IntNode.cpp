@@ -21,4 +21,8 @@ namespace hdg {
     std::string IntNode::toString() {
         return std::to_string(value);
     }
+
+    std::string IntNode::interpret() {
+        return std::to_string(value);
+    }
 } // hdg

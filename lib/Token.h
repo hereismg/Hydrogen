@@ -12,7 +12,6 @@ namespace hdg {
 
     const std::string TT_INT = "int";
     const std::string TT_FLOAT = "float";
-    const std::string TT_NUM = "num";
 
     const std::string TT_PLUS = "plus";
     const std::string TT_MINUS = "minus";

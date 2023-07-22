@@ -45,6 +45,12 @@ namespace hdg {
             node = new IntNode(std::atoi(currentToken->getValue().c_str()));
             advance();
         }
+        else if (currentToken->getType() == TT_PLUS || currentToken->getType() == TT_MINUS){
+            std::string token = currentToken->getType();
+            advance();
+            Node* obj = power();
+            node = new UnaryOperatorNode(token, obj);
+        }
         else if (currentToken->getType() == TT_LPAREN){
             advance();
             node = expr();

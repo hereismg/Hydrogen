@@ -12,7 +12,7 @@ namespace hdg {
 
     class IllegalCharError: public Error{
     public:
-        IllegalCharError(int posStart, int posEnd, std::string errorDetails);
+        IllegalCharError(int posStart, int posEnd, const std::string& text, std::string errorDetails);
     };
 
 } // hdg

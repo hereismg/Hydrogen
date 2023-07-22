@@ -10,4 +10,8 @@ namespace hdg {
     std::string Node::toString() {
         return "node";
     }
+
+    std::string Node::interpret() {
+        return "NONE";
+    }
 } // hdg

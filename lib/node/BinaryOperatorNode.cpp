@@ -49,29 +49,28 @@ namespace hdg {
         return Node::toString();
     }
 
-    std::string BinaryOperatorNode::interpret() {
-        if (left_ == nullptr || right_ == nullptr) return "NONE";
+    DataType* BinaryOperatorNode::interpret() {
+        DataType* left = left_->interpret();
+        DataType* right = right_->interpret();
 
-        int leftValue = std::atoi(left_->interpret().c_str());
-        int rightValue = std::atoi(right_->interpret().c_str());
-        int result = 0;
+        DataType* result = nullptr;
 
         if (oper_ == TT_PLUS){
-            result = leftValue + rightValue;
-        }else if (oper_ == TT_MINUS){
-            result = leftValue - rightValue;
-        }else if (oper_ == TT_MUL){
-            result = leftValue * rightValue;
-        }else if (oper_ == TT_DIV){
-            if (rightValue==0){
-                throw RunTimeError(0, 1, *new std::string("0"), "Division by zero");
-            }else {
-                result = leftValue / rightValue;
-            }
-        }else if (oper_ == TT_POW){
-            result = std::pow(leftValue, rightValue);
+            result = left->plus(right);
+        }
+        else if (oper_ == TT_MINUS){
+            result = left->minus(right);
+        }
+        else if (oper_ == TT_MUL){
+            result = left->mul(right);
+        }
+        else if (oper_ == TT_DIV){
+            result = left->div(right);
+        }
+        else if (oper_ == TT_POW){
+            result = left->pow(right);
         }
 
-        return std::to_string(result);
+        return result;
     }
 } // hdg

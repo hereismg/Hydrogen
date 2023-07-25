@@ -8,10 +8,10 @@ namespace hdg {
     Node::Node() = default;
 
     std::string Node::toString() {
-        return "node";
+        return "NULL";
     }
 
-    std::string Node::interpret() {
-        return "NONE";
+    DataType* Node::interpret() {
+        return nullptr;
     }
 } // hdg

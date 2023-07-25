@@ -3,6 +3,7 @@
 //
 
 #include<string>
+#include"../data_type/DataType.h"
 
 #ifndef HDG_NODE_H
 #define HDG_NODE_H
@@ -14,7 +15,7 @@ namespace hdg {
         Node();
 
         virtual std::string toString();
-        virtual std::string interpret();
+        virtual DataType* interpret();
     };
 
 } // hdg

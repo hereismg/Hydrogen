@@ -31,7 +31,7 @@ namespace hdg {
         Node* getRight();
 
         std::string toString() override;
-        std::string interpret() override;
+        DataType* interpret() override;
     };
 
 } // hdg

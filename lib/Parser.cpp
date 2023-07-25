@@ -42,7 +42,11 @@ namespace hdg {
     Node *Parser::power() {
         Node* node = nullptr;
         if (currentToken->getType() == TT_INT){
-            node = new IntNode(std::atoi(currentToken->getValue().c_str()));
+            node = new NumberNode(std::atoi(currentToken->getValue().c_str()));
+            advance();
+        }
+        else if (currentToken->getType() == TT_FLOAT){
+            node = new NumberNode((float)std::atof(currentToken->getValue().c_str()));
             advance();
         }
         else if (currentToken->getType() == TT_PLUS || currentToken->getType() == TT_MINUS){

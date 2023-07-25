@@ -30,14 +30,19 @@ namespace hdg {
         return "(" + oper + ", " + obj->toString() + ")";
     }
 
-    std::string UnaryOperatorNode::interpret() {
-        if (obj == nullptr) return "NONE";
+    DataType* UnaryOperatorNode::interpret() {
 
-        int value = atoi(obj->interpret().c_str());
+        DataType* value = obj->interpret();
 
         if (oper == TT_MINUS){
-            value = -value;
+            if (value->typeName == DT_INTEGER){
+                return new Integer(-((Integer*)value)->getValue());
+            }
+            else if (value->typeName == DT_FLOAT){
+                return new Float(-((Float*)value)->getValue());
+            }
         }
-        return std::to_string(value);
+
+        return value;
     }
 } // hdg

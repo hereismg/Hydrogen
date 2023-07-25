@@ -5,7 +5,15 @@
 #include "Node.h"
 
 namespace hdg {
-    Node::Node() = default;
+
+    Node::Node(const std::string& context, int posStart, int posEnd):
+            position(context, posStart, posEnd){
+    }
+
+    Node::Node(const Position &position) :
+            position(position){
+
+    }
 
     std::string Node::toString() {
         return "NULL";
@@ -14,4 +22,9 @@ namespace hdg {
     DataType* Node::interpret() {
         return nullptr;
     }
+
+    Position &Node::thisPosition() {
+        return position;
+    }
+
 } // hdg

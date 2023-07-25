@@ -10,7 +10,17 @@ namespace hdg {
     }
 
     std::string Float::toString() {
-        return std::to_string(value);
+        std::string str = std::to_string(value);
+
+        unsigned long long i = str.length()-1;
+        while(i>=0 && str[i]!='.' && str[i]=='0') i--;
+
+        if (str[i]=='.'){
+            return str.substr(0, i+2);
+        }
+        else{
+            return str.substr(0, i+1);
+        }
     }
 
     float Float::getValue() {

@@ -4,5 +4,13 @@
 
 #include "InvalidSyntaxError.h"
 
+
 namespace hdg {
+    InvalidSyntaxError::InvalidSyntaxError(
+            int posStart,
+            int posEnd,
+            const std::string &text,
+            std::string errorDetails):
+            Error(posStart, posEnd, text, "InvalidSyntaxError", std::move(errorDetails)){
+    }
 } // hdg

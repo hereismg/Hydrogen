@@ -7,12 +7,12 @@
 
 namespace hdg {
 
-    Token::Token(std::string type, std::string  value, int posStart, int posEnd):
-            type(std::move(type)), value(std::move(value)), posStart(posStart), posEnd(posEnd){
+    Token::Token(std::string type, std::string value, const std::string& context, int posStart, int posEnd):
+            type(std::move(type)), value(std::move(value)), position(context, posStart, posEnd){
     }
 
     Token::Token(const hdg::Token &tok):
-            type(tok.type), value(tok.value), posStart(tok.posStart), posEnd(tok.posEnd){
+            type(tok.type), value(tok.value), position(tok.position){
     }
 
     Token::~Token() {
@@ -44,4 +44,9 @@ namespace hdg {
         }
         return out;
     }
+
+    Position &Token::thisPosition() {
+        return position;
+    }
+
 } // hdg

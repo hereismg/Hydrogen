@@ -51,11 +51,17 @@ namespace hdg {
 
     DataType *Integer::div(DataType *other) {
         if (other->typeName == DT_INTEGER){
-            int result = value / ((Integer*)other)->value;
+            int right = ((Integer*)other)->value;
+            if (right == 0) throw -1;
+
+            int result = value / right;
             return new Integer(result);
         }
         else if (other->typeName == DT_FLOAT){
-            float result = (float)value / ((Float*)other)->getValue();
+            float right = ((Float*)other)->getValue();
+            if (right==0) throw -1;
+
+            float result = (float)value / right;
             return new Float(result);
         }
     }

@@ -5,11 +5,13 @@
 #include "NumberNode.h"
 
 namespace hdg {
-    NumberNode::NumberNode(int value) {
+    NumberNode::NumberNode(int value, const Position& position):
+            Node(position){
         this->value = new Integer(value);
     }
 
-    NumberNode::NumberNode(float value) {
+    NumberNode::NumberNode(float value, const Position& position):
+            Node(position){
         this->value = new Float(value);
     }
 

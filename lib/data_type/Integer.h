@@ -8,6 +8,7 @@
 
 #include "DataType.h"
 #include "Float.h"
+#include "../error/RunTimeError.h"
 
 namespace hdg {
 

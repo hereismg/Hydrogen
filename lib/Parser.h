@@ -16,6 +16,7 @@
 #include "node/BinaryOperatorNode.h"
 #include "node/NumberNode.h"
 #include "node/UnaryOperatorNode.h"
+#include"error/InvalidSyntaxError.h"
 
 namespace hdg {
 

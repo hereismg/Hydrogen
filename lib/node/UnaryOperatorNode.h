@@ -19,8 +19,7 @@ namespace hdg {
         Node* obj;
 
     public:
-        explicit UnaryOperatorNode(std::string oper);
-        UnaryOperatorNode(std::string oper, Node* obj);
+        UnaryOperatorNode(std::string oper, Node* obj, const Position& position);
 
         void setOperator(std::string oper);
         void setObject(Node* obj);

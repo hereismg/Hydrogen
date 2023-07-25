@@ -4,6 +4,7 @@
 
 #include<string>
 #include"../data_type/DataType.h"
+#include "../Position.h"
 
 #ifndef HDG_NODE_H
 #define HDG_NODE_H
@@ -11,8 +12,14 @@
 namespace hdg {
 
     class Node {
+    protected:
+        Position position;
+
     public:
-        Node();
+        Node(const std::string& context, int posStart, int posEnd);
+        Node(const Position& position);
+
+        Position& thisPosition();
 
         virtual std::string toString();
         virtual DataType* interpret();

@@ -8,13 +8,10 @@
 
 namespace hdg {
 
-    BinaryOperatorNode::BinaryOperatorNode(std::string oper):
-        oper_(std::move(oper)), left_(nullptr), right_(nullptr){
+    BinaryOperatorNode::BinaryOperatorNode(std::string oper, Node *left, Node *right, const Position& position):
+        Node(position), oper_(std::move(oper)), left_(left), right_(right){
     }
 
-    BinaryOperatorNode::BinaryOperatorNode(std::string oper, Node *left, Node *right):
-        oper_(std::move(oper)), left_(left), right_(right){
-    }
 
     void BinaryOperatorNode::setOperator(std::string oper) {
         oper_ = std::move(oper);
@@ -65,7 +62,17 @@ namespace hdg {
             result = left->mul(right);
         }
         else if (oper_ == TT_DIV){
-            result = left->div(right);
+            try{
+                result = left->div(right);
+            }
+            catch (int error){
+                throw RunTimeError(
+                        right_->thisPosition().getPosStart(),
+                        right_->thisPosition().getPosEnd(),
+                        position.getContext(),
+                        "Division by zero"
+                        );
+            }
         }
         else if (oper_ == TT_POW){
             result = left->pow(right);

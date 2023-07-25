@@ -2,11 +2,12 @@
 // Created by Magnesium on 2023/7/11.
 //
 
-#include<string>
-#include <utility>
-
 #ifndef HDG_TOKEN_H
 #define HDG_TOKEN_H
+
+#include <string>
+#include <utility>
+#include "Position.h"
 
 namespace hdg {
 
@@ -22,6 +23,7 @@ namespace hdg {
     const std::string TT_LPAREN = "lparen";
     const std::string TT_RPAREN = "rparen";
 
+    const std::string TT_EOF = "EOF";
     const std::string NONE = "NONE";
 
 
@@ -30,18 +32,18 @@ namespace hdg {
         std::string type;
         std::string value;
 
-        int posStart;
-        int posEnd;
+        Position position;
 
     public:
-        explicit Token(std::string type, std::string value=NONE, int posStart=-1, int posEnd=-1);
+        Token(std::string type, std::string value, const std::string& context, int posStart, int posEnd);
         Token(const Token& tok);
         ~Token();
 
-        std::string getType();
-        std::string getValue();
         void setType(const std::string& type);
         void setValue(const std::string& value);
+        std::string getType();
+        std::string getValue();
+        Position& thisPosition();
 
         friend std::ostream& operator<<(std::ostream& out, Token& tok);
     };

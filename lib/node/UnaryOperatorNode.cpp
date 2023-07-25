@@ -5,11 +5,9 @@
 #include "UnaryOperatorNode.h"
 
 namespace hdg {
-    UnaryOperatorNode::UnaryOperatorNode(std::string oper):
-        oper(std::move(oper)), obj(nullptr){
-    }
-    UnaryOperatorNode::UnaryOperatorNode(std::string oper, Node* obj):
-    oper(std::move(oper)), obj(obj){
+
+    UnaryOperatorNode::UnaryOperatorNode(std::string oper, Node* obj, const Position& position):
+        Node(position), oper(std::move(oper)), obj(obj){
     }
 
     void UnaryOperatorNode::setOperator(std::string oper){

@@ -16,8 +16,8 @@ namespace hdg {
         DataType* value;
 
     public:
-        explicit NumberNode(int value);
-        explicit NumberNode(float value);
+        explicit NumberNode(int value, const Position& position);
+        explicit NumberNode(float value, const Position& position);
         ~NumberNode();
 
         std::string toString() override;

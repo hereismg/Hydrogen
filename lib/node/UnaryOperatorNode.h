@@ -2,11 +2,14 @@
 // Created by Magnesium on 2023/7/22.
 //
 
-#include "Node.h"
-#include "../Token.h"
 
 #ifndef HDG_UNARYOPERATORNODE_H
 #define HDG_UNARYOPERATORNODE_H
+
+#include "Node.h"
+#include "../Token.h"
+#include "../data_type/Integer.h"
+#include "../data_type/Float.h"
 
 namespace hdg {
 
@@ -16,8 +19,7 @@ namespace hdg {
         Node* obj;
 
     public:
-        explicit UnaryOperatorNode(std::string oper);
-        UnaryOperatorNode(std::string oper, Node* obj);
+        UnaryOperatorNode(std::string oper, Node* obj, const Position& position);
 
         void setOperator(std::string oper);
         void setObject(Node* obj);
@@ -26,7 +28,7 @@ namespace hdg {
         Node* getObject();
 
         std::string toString() override;
-        std::string interpret() override;
+        DataType* interpret() override;
     };
 
 } // hdg

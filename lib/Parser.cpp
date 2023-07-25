@@ -14,7 +14,20 @@ namespace hdg {
     }
 
     Node* Parser::run() {
-        return expr();
+        if (tokens.empty())return nullptr;
+
+        Node* result = expr();
+
+        if (currentToken->getType() != TT_EOF){
+            throw InvalidSyntaxError(
+                    currentToken->thisPosition().getPosStart(),
+                    tokens[tokens.size()-1].thisPosition().getPosEnd(),
+                    currentToken->thisPosition().getContext(),
+                    "Expected '+', '-', '*', '/' or '^'"
+            );
+        }
+
+        return result;
     }
 
     Node* Parser::expr() {
@@ -42,19 +55,36 @@ namespace hdg {
     Node *Parser::power() {
         Node* node = nullptr;
         if (currentToken->getType() == TT_INT){
-            node = new IntNode(std::atoi(currentToken->getValue().c_str()));
+            node = new NumberNode(std::atoi(currentToken->getValue().c_str()), currentToken->thisPosition());
+            advance();
+        }
+        else if (currentToken->getType() == TT_FLOAT){
+            node = new NumberNode((float)std::atof(currentToken->getValue().c_str()), currentToken->thisPosition());
             advance();
         }
         else if (currentToken->getType() == TT_PLUS || currentToken->getType() == TT_MINUS){
             std::string token = currentToken->getType();
+            Position currentPos(currentToken->thisPosition());
+
             advance();
             Node* obj = power();
-            node = new UnaryOperatorNode(token, obj);
+            node = new UnaryOperatorNode(
+                    token,
+                    obj,
+                    Position(currentPos.getContext(), currentPos.getPosStart(), obj->thisPosition().getPosEnd())
+                    );
         }
         else if (currentToken->getType() == TT_LPAREN){
             advance();
             node = expr();
             advance();
+        }else {
+            throw InvalidSyntaxError(
+                    currentToken->thisPosition().getPosStart(),
+                    currentToken->thisPosition().getPosEnd(),
+                    currentToken->thisPosition().getContext(),
+                    "Expected int, float, '+', '-' or '('"
+                    );
         }
         return node;
     }
@@ -64,13 +94,19 @@ namespace hdg {
         Node* left = funA();
 
         while(tokens.end() != currentToken && opers.find(currentToken->getType())!=opers.end()){
-            BinaryOperatorNode* oper = new BinaryOperatorNode(currentToken->getType());
+            BinaryOperatorNode* oper = new BinaryOperatorNode(
+                    currentToken->getType(),
+                    nullptr,
+                    nullptr,
+                    Position(currentToken->thisPosition().getContext(), left->thisPosition().getPosStart(), -1)
+                    );
             advance();
 
             Node* right = funB();
 
             oper->setLeft(left);
             oper->setRight(right);
+            oper->thisPosition().setPosEnd(right->thisPosition().getPosEnd());
             left = oper;
         }
 

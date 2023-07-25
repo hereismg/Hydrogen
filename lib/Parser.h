@@ -2,6 +2,10 @@
 // Created by Magnesium on 2023/7/16.
 //
 
+
+#ifndef HDG_PARSER_H
+#define HDG_PARSER_H
+
 #include <vector>
 #include <utility>
 #include <functional>
@@ -10,11 +14,9 @@
 #include "Token.h"
 #include "node/Node.h"
 #include "node/BinaryOperatorNode.h"
-#include "node/IntNode.h"
+#include "node/NumberNode.h"
 #include "node/UnaryOperatorNode.h"
-
-#ifndef HDG_PARSER_H
-#define HDG_PARSER_H
+#include"error/InvalidSyntaxError.h"
 
 namespace hdg {
 

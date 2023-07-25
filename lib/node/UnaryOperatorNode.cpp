@@ -5,11 +5,9 @@
 #include "UnaryOperatorNode.h"
 
 namespace hdg {
-    UnaryOperatorNode::UnaryOperatorNode(std::string oper):
-        oper(std::move(oper)), obj(nullptr){
-    }
-    UnaryOperatorNode::UnaryOperatorNode(std::string oper, Node* obj):
-    oper(std::move(oper)), obj(obj){
+
+    UnaryOperatorNode::UnaryOperatorNode(std::string oper, Node* obj, const Position& position):
+        Node(position), oper(std::move(oper)), obj(obj){
     }
 
     void UnaryOperatorNode::setOperator(std::string oper){
@@ -30,14 +28,19 @@ namespace hdg {
         return "(" + oper + ", " + obj->toString() + ")";
     }
 
-    std::string UnaryOperatorNode::interpret() {
-        if (obj == nullptr) return "NONE";
+    DataType* UnaryOperatorNode::interpret() {
 
-        int value = atoi(obj->interpret().c_str());
+        DataType* value = obj->interpret();
 
         if (oper == TT_MINUS){
-            value = -value;
+            if (value->typeName == DT_INTEGER){
+                return new Integer(-((Integer*)value)->getValue());
+            }
+            else if (value->typeName == DT_FLOAT){
+                return new Float(-((Float*)value)->getValue());
+            }
         }
-        return std::to_string(value);
+
+        return value;
     }
 } // hdg

@@ -48,31 +48,31 @@ namespace hdg {
                 buildNumber();
             }
             else if (currentChar == '+'){
-                tokens.emplace_back(TT_PLUS);
+                tokens.emplace_back(TT_PLUS, NONE, text, pos, pos+1);
                 advance();
             }
             else if (currentChar == '-'){
-                tokens.emplace_back(TT_MINUS);
+                tokens.emplace_back(TT_MINUS, NONE, text, pos, pos+1);
                 advance();
             }
             else if (currentChar == '*'){
-                tokens.emplace_back(TT_MUL);
+                tokens.emplace_back(TT_MUL, NONE, text, pos, pos+1);
                 advance();
             }
             else if (currentChar == '/'){
-                tokens.emplace_back(TT_DIV);
+                tokens.emplace_back(TT_DIV, NONE, text, pos, pos+1);
                 advance();
             }
             else if (currentChar == '^'){
-                tokens.emplace_back(TT_POW);
+                tokens.emplace_back(TT_POW, NONE, text, pos, pos+1);
                 advance();
             }
             else if (currentChar == '('){
-                tokens.emplace_back(TT_LPAREN);
+                tokens.emplace_back(TT_LPAREN, NONE, text, pos, pos+1);
                 advance();
             }
             else if (currentChar == ')'){
-                tokens.emplace_back(TT_RPAREN);
+                tokens.emplace_back(TT_RPAREN, NONE, text, pos, pos+1);
                 advance();
             }
             else{
@@ -82,6 +82,7 @@ namespace hdg {
                         );
             }
         }
+        tokens.emplace_back(TT_EOF, NONE, text, pos, pos+1);
     }
 
     void Lexer::buildNumber() {
@@ -98,7 +99,7 @@ namespace hdg {
             advance();
         }
 
-        tokens.emplace_back(type, text.substr(posStart, pos-posStart));
+        tokens.emplace_back(type, text.substr(posStart, pos-posStart), text, posStart, pos);
     }
 
     std::vector<Token>& Lexer::getTokens() {

@@ -20,8 +20,7 @@ namespace hdg {
         Node* right_;
 
     public:
-        explicit BinaryOperatorNode(std::string oper);
-        BinaryOperatorNode(std::string oper, Node* left, Node* right);
+        BinaryOperatorNode(std::string oper, Node* left, Node* right, const Position& position);
 
         void setOperator(std::string oper);
         void setLeft(Node* node);
@@ -31,7 +30,7 @@ namespace hdg {
         Node* getRight();
 
         std::string toString() override;
-        std::string interpret() override;
+        DataType* interpret() override;
     };
 
 } // hdg

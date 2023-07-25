@@ -10,6 +10,7 @@ namespace hdg {
         tree(tree){}
 
     std::string Interpreter::run() {
-        return tree->interpret();
+        if (tree == nullptr) return "";
+        return tree->interpret()->toString();
     }
 } // hdg

@@ -10,7 +10,7 @@ namespace hdg {
     }
 
     void Parser::advance() {
-        if (currentToken!=tokens.end()) currentToken++;
+        if (currentToken->getType() != TT_EOF) currentToken++;
     }
 
     Node* Parser::run() {
@@ -77,13 +77,24 @@ namespace hdg {
         else if (currentToken->getType() == TT_LPAREN){
             advance();
             node = expr();
-            advance();
-        }else {
+
+            if (currentToken->getType() != TT_RPAREN){
+                throw InvalidSyntaxError(
+                        currentToken->thisPosition().getPosStart(),
+                        currentToken->thisPosition().getPosEnd(),
+                        currentToken->thisPosition().getContext(),
+                        "Expected ')'."
+                        );
+            }else{
+                advance();
+            }
+        }
+        else {
             throw InvalidSyntaxError(
                     currentToken->thisPosition().getPosStart(),
                     currentToken->thisPosition().getPosEnd(),
                     currentToken->thisPosition().getContext(),
-                    "Expected int, float, '+', '-' or '('"
+                    "Expected int, float, '+', '-' or '('."
                     );
         }
         return node;

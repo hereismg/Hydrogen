@@ -48,31 +48,31 @@ namespace hdg {
                 buildNumber();
             }
             else if (currentChar == '+'){
-                tokens.emplace_back(TT_PLUS, NONE, text, pos, pos+1);
+                tokens.emplace_back(PLUS, text, pos);
                 advance();
             }
             else if (currentChar == '-'){
-                tokens.emplace_back(TT_MINUS, NONE, text, pos, pos+1);
+                tokens.emplace_back(MINUS, text, pos);
                 advance();
             }
             else if (currentChar == '*'){
-                tokens.emplace_back(TT_MUL, NONE, text, pos, pos+1);
+                tokens.emplace_back(MUL, text, pos);
                 advance();
             }
             else if (currentChar == '/'){
-                tokens.emplace_back(TT_DIV, NONE, text, pos, pos+1);
+                tokens.emplace_back(DIV, text, pos);
                 advance();
             }
             else if (currentChar == '^'){
-                tokens.emplace_back(TT_POW, NONE, text, pos, pos+1);
+                tokens.emplace_back(POW, text, pos);
                 advance();
             }
             else if (currentChar == '('){
-                tokens.emplace_back(TT_LPAREN, NONE, text, pos, pos+1);
+                tokens.emplace_back(LPAREN, text, pos);
                 advance();
             }
             else if (currentChar == ')'){
-                tokens.emplace_back(TT_RPAREN, NONE, text, pos, pos+1);
+                tokens.emplace_back(RPAREN, text, pos);
                 advance();
             }
             else{
@@ -82,18 +82,18 @@ namespace hdg {
                         );
             }
         }
-        tokens.emplace_back(TT_EOF, NONE, text, pos, pos+1);
+        tokens.emplace_back(EF, text, pos);
     }
 
     void Lexer::buildNumber() {
         int posStart = pos;
         int counter = 0;
-        std::string type = TT_INT;
+        TokenType type = INT;
 
         while(pos<text.length() && (whatIsThis(currentChar)==DIGITAL || currentChar=='.')) {
             if (currentChar=='.') {
                 if (counter==1) break;
-                type = TT_FLOAT;
+                type = FLOAT;
                 counter++;
             }
             advance();

@@ -37,7 +37,7 @@ namespace hdg {
         Node* factor();
         Node* power();
 
-        Node* binaryOperator(const std::set<std::string>&opers, std::function<Node*()> funA, std::function<Node*()> funB=nullptr);
+        Node* binaryOperator(const std::set<TokenType>&opers, std::function<Node*()> funA, std::function<Node*()> funB=nullptr);
         Node* unaryOperator();
 
     };

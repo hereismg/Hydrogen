@@ -6,33 +6,33 @@
 
 namespace hdg {
 
-    UnaryOperatorNode::UnaryOperatorNode(std::string oper, Node* obj, const Position& position):
-        Node(position), oper(std::move(oper)), obj(obj){
+    UnaryOperatorNode::UnaryOperatorNode(TokenType oper, Node* obj, const Position& position):
+            Node(position), m_oper(oper), m_obj(obj){
     }
 
-    void UnaryOperatorNode::setOperator(std::string oper){
-        this->oper = std::move(oper);
+    void UnaryOperatorNode::setOperator(TokenType oper){
+        this->m_oper = oper;
     }
     void UnaryOperatorNode::setObject(Node* obj){
-        this->obj = obj;
+        this->m_obj = obj;
     }
 
-    std::string UnaryOperatorNode::getOperator(){
-        return oper;
+    TokenType UnaryOperatorNode::getOperator(){
+        return m_oper;
     }
     Node* UnaryOperatorNode::getObject(){
-        return obj;
+        return m_obj;
     }
 
     std::string UnaryOperatorNode::toString() {
-        return "(" + oper + ", " + obj->toString() + ")";
+        return "(" + tokenTypeName[m_oper] + ", " + m_obj->toString() + ")";
     }
 
     DataType* UnaryOperatorNode::interpret() {
 
-        DataType* value = obj->interpret();
+        DataType* value = m_obj->interpret();
 
-        if (oper == TT_MINUS){
+        if (m_oper == MINUS){
             if (value->typeName == DT_INTEGER){
                 return new Integer(-((Integer*)value)->getValue());
             }

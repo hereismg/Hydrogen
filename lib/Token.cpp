@@ -6,36 +6,8 @@
 
 
 namespace hdg {
-//    tokenTypeName = {
-//        {INT, "integer"},
-//        {FLOAT, "float"},
-//        {IDENTIFIER, "identifier"},
-//        {KEYWORD, "keyword"},
-//
-//        {EE, "ee"},
-//        {GT, "greaterThan"},
-//        {LT, "lessThan"},
-//        {GTE, "greaterThanEqual"},
-//        {LTE, "lessThanEqual"},
-//
-//        {PLUS, "plus"},
-//        {MINUS, "minus"},
-//        {MUL, "multiply"},
-//        {DIV, "division"},
-//        {POW, "power"},
-//
-//        {LPAREN, "leftParenthesis"},
-//        {RPAREN, "rightParenthesis"},
-//        {EQ, "equation"},
-//
-//        {EF, "endOfFile"},
-//        {NONE, "none"}
-//    };
-
-
-
     Token::Token(TokenType type, std::string value, const std::string& context, int posStart, int posEnd):
-            m_type(type), m_value(std::move(value)), m_position(context, posStart, posEnd){
+            m_type(type), m_value(std::move(value)), m_position(context, posStart,posEnd){
     }
 
     Token::Token(TokenType type, std::string value, const std::string &context, int posStart):

@@ -37,7 +37,7 @@ namespace hdg {
         EF,
         NONE
     };
-//    std::map<TokenType, std::string> tokenTypeName;
+
     static std::map<TokenType, std::string> tokenTypeName = {
             {INT,           "integer"},
             {FLOAT,         "float"},

@@ -77,7 +77,6 @@ namespace hdg {
         else if (currentToken->getType() == TT_LPAREN){
             advance();
             node = expr();
-            advance();
 
             if (currentToken->getType() != TT_RPAREN){
                 throw InvalidSyntaxError(
@@ -86,6 +85,8 @@ namespace hdg {
                         currentToken->thisPosition().getContext(),
                         "Expected ')'."
                         );
+            }else{
+                advance();
             }
         }
         else {

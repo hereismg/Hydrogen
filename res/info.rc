@@ -1,0 +1,38 @@
+// 编译该文件的命令：
+// windres -i res/info.rc -o res/info.o --input-format=rc --output-format=coff
+
+// 添加图标
+1 ICON "logo.ico"
+
+// 添加版本资源信息
+
+// #include <winver.h>
+//
+// VS_VERSION_INFO VERSIONINFO
+//     FILEVERSION 1,0,0,10
+//     PRODUCTVERSION 1,0,0,10
+//     FILEFLAGSMASK 0x3fL
+// #ifdef _DEBUG
+//     FILEFLAGS VS_FF_DEBUG
+// #else
+//     FILEFLAGS 0x0L
+// #endif
+//     FILEOS VOS__WINDOWS32
+//     FILETYPE VFT_DLL
+//     FILESUBTYPE 0x0L
+//     BEGIN
+//         BLOCK "StringFileInfo"
+//         BEGIN
+//             BLOCK "080404b0"  //支持中文
+//             BEGIN
+//                 VALUE "FileDescription", "程序解释器\0"
+//                 VALUE "ProductName", "Hydrogen\0"
+//                 VALUE "InternalName", "Hydrogen.exe\0"
+//            END
+//         END
+//
+//         BLOCK "VarFileInfo"
+//         BEGIN
+//             VALUE "Translation", 0x804, 1200  //语言-简体中文
+//         END
+//     END

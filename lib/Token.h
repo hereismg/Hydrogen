@@ -6,42 +6,82 @@
 #define HDG_TOKEN_H
 
 #include <string>
+#include <map>
 #include <utility>
 #include "Position.h"
 
 namespace hdg {
 
-    const std::string TT_INT = "int";
-    const std::string TT_FLOAT = "float";
+    enum TokenType{
+        INT,
+        FLOAT,      // 虽然名称为“float”，但实际上全都是双精度浮点型
+        IDENTIFIER,
+        KEYWORD,
 
-    const std::string TT_PLUS = "plus";
-    const std::string TT_MINUS = "minus";
-    const std::string TT_MUL = "mul";
-    const std::string TT_DIV = "div";
-    const std::string TT_POW = "pow";
+        EE,         // 逻辑表达式的等于号“==”
+        GT,
+        LT,
+        GTE,
+        LTE,
 
-    const std::string TT_LPAREN = "lparen";
-    const std::string TT_RPAREN = "rparen";
+        PLUS,
+        MINUS,
+        MUL,
+        DIV,
+        POW,
 
-    const std::string TT_EOF = "EOF";
-    const std::string NONE = "NONE";
+        LPAREN,
+        RPAREN,
+        EQ,         // 赋值语句的等于号“=”
 
+        EF,
+        NONE
+    };
+
+    static std::map<TokenType, std::string> tokenTypeName = {
+            {INT,           "integer"},
+            {FLOAT,         "float"},
+            {IDENTIFIER,    "identifier"},
+            {KEYWORD,       "keyword"},
+
+            {EE,            "ee"},
+            {GT,            "greaterThan"},
+            {LT,            "lessThan"},
+            {GTE,           "greaterThanEqual"},
+            {LTE,           "lessThanEqual"},
+
+            {PLUS,          "plus"},
+            {MINUS,         "minus"},
+            {MUL,           "multiply"},
+            {DIV,           "division"},
+            {POW,           "power"},
+
+            {LPAREN,        "leftParenthesis"},
+            {RPAREN,        "rightParenthesis"},
+            {EQ,            "equation"},
+
+            {EF,            "endOfFile"},
+            {NONE,          "none"}
+    };
 
     class Token {
     private:
-        std::string type;
-        std::string value;
+        TokenType m_type;
+        std::string m_value;
 
-        Position position;
+        Position m_position;
 
     public:
-        Token(std::string type, std::string value, const std::string& context, int posStart, int posEnd);
+        Token(TokenType type, std::string value, const std::string& context, int posStart, int posEnd);
+        Token(TokenType type, std::string value, const std::string& context, int posStart);
+        Token(TokenType type, const std::string& context, int posStart, int posEnd);
+        Token(TokenType type, const std::string& context, int posStart);
         Token(const Token& tok);
         ~Token();
 
-        void setType(const std::string& type);
+        void setType(TokenType type);
         void setValue(const std::string& value);
-        std::string getType();
+        TokenType getType();
         std::string getValue();
         Position& thisPosition();
 

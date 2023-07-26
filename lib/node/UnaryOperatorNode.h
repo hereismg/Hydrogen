@@ -15,16 +15,16 @@ namespace hdg {
 
     class UnaryOperatorNode: public Node{
     private:
-        std::string oper;
-        Node* obj;
+        TokenType m_oper;
+        Node* m_obj;
 
     public:
-        UnaryOperatorNode(std::string oper, Node* obj, const Position& position);
+        UnaryOperatorNode(TokenType oper, Node* obj, const Position& position);
 
-        void setOperator(std::string oper);
+        void setOperator(TokenType oper);
         void setObject(Node* obj);
 
-        std::string getOperator();
+        TokenType getOperator();
         Node* getObject();
 
         std::string toString() override;

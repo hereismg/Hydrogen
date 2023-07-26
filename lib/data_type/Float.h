@@ -14,12 +14,13 @@ namespace hdg {
 
     class Float: public DataType {
     private:
-        float value;
+        double value;
 
     public:
         explicit Float(float value);
+        explicit Float(double value);
 
-        float getValue();
+        double getValue() const;
 
         DataType* plus(DataType* other) override;
         DataType* minus(DataType* other) override;

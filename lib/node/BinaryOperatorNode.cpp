@@ -8,73 +8,72 @@
 
 namespace hdg {
 
-    BinaryOperatorNode::BinaryOperatorNode(std::string oper, Node *left, Node *right, const Position& position):
-        Node(position), oper_(std::move(oper)), left_(left), right_(right){
+    BinaryOperatorNode::BinaryOperatorNode(TokenType oper, Node *left, Node *right, const Position& position):
+        Node(position), m_oper(oper), m_left(left), m_right(right){
     }
 
 
-    void BinaryOperatorNode::setOperator(std::string oper) {
-        oper_ = std::move(oper);
+    void BinaryOperatorNode::setOperator(TokenType oper){
+        m_oper = oper;
     }
 
     void BinaryOperatorNode::setLeft(Node *node) {
-        left_ = node;
+        m_left = node;
     }
 
     void BinaryOperatorNode::setRight(Node *node) {
-        right_ = node;
+        m_right = node;
     }
 
-    std::string BinaryOperatorNode::getOperator() {
-        return oper_;
+    TokenType BinaryOperatorNode::getOperator() {
+        return m_oper;
     }
 
     Node *BinaryOperatorNode::getLeft() {
-        return left_;
+        return m_left;
     }
 
     Node *BinaryOperatorNode::getRight() {
-        return right_;
+        return m_right;
     }
 
     std::string BinaryOperatorNode::toString() {
-        if (left_ == nullptr && right_ == nullptr){
-            return oper_;
+        if (m_left == nullptr && m_right == nullptr){
+            return tokenTypeName[m_oper];
         }else{
-            return "(" + left_->toString() + ", " + oper_ + ", " + right_->toString() + ")";
+            return "(" + m_left->toString() + ", " + tokenTypeName[m_oper] + ", " + m_right->toString() + ")";
         }
-        return Node::toString();
     }
 
     DataType* BinaryOperatorNode::interpret() {
-        DataType* left = left_->interpret();
-        DataType* right = right_->interpret();
+        DataType* left = m_left->interpret();
+        DataType* right = m_right->interpret();
 
         DataType* result = nullptr;
 
-        if (oper_ == TT_PLUS){
+        if (m_oper == PLUS){
             result = left->plus(right);
         }
-        else if (oper_ == TT_MINUS){
+        else if (m_oper == MINUS){
             result = left->minus(right);
         }
-        else if (oper_ == TT_MUL){
+        else if (m_oper == MUL){
             result = left->mul(right);
         }
-        else if (oper_ == TT_DIV){
+        else if (m_oper == DIV){
             try{
                 result = left->div(right);
             }
             catch (int error){
                 throw RunTimeError(
-                        right_->thisPosition().getPosStart(),
-                        right_->thisPosition().getPosEnd(),
+                        m_right->thisPosition().getPosStart(),
+                        m_right->thisPosition().getPosEnd(),
                         position.getContext(),
                         "Division by zero"
                         );
             }
         }
-        else if (oper_ == TT_POW){
+        else if (m_oper == POW){
             result = left->pow(right);
         }
 

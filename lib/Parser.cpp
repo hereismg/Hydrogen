@@ -10,7 +10,7 @@ namespace hdg {
     }
 
     void Parser::advance() {
-        if (currentToken->getType() != TT_EOF) currentToken++;
+        if (currentToken->getType() != EF) currentToken++;
     }
 
     Node* Parser::run() {
@@ -18,7 +18,7 @@ namespace hdg {
 
         Node* result = expr();
 
-        if (currentToken->getType() != TT_EOF){
+        if (currentToken->getType() != EF){
             throw InvalidSyntaxError(
                     currentToken->thisPosition().getPosStart(),
                     tokens[tokens.size()-1].thisPosition().getPosEnd(),
@@ -26,44 +26,44 @@ namespace hdg {
                     "Expected '+', '-', '*', '/' or '^'"
             );
         }
-
         return result;
     }
 
     Node* Parser::expr() {
         return binaryOperator(
-                std::set<std::string>{TT_PLUS, TT_MINUS},
+                std::set<TokenType>{PLUS, MINUS},
                 [this](){return this->term();}
                 );
     }
 
     Node *Parser::term() {
         return binaryOperator(
-                std::set<std::string>{TT_MUL, TT_DIV},
+                std::set<TokenType>{MUL, DIV},
                 [this](){return this->factor();}
                 );
     }
 
     Node *Parser::factor() {
         return binaryOperator(
-                std::set<std::string>{TT_POW},
+                std::set<TokenType>{POW},
                 [this](){return this->power();},
                 [this](){return this->factor();}
                 );
     }
 
     Node *Parser::power() {
-        Node* node = nullptr;
-        if (currentToken->getType() == TT_INT){
+        Node* node;
+
+        if (currentToken->getType() == INT){
             node = new NumberNode(std::atoi(currentToken->getValue().c_str()), currentToken->thisPosition());
             advance();
         }
-        else if (currentToken->getType() == TT_FLOAT){
-            node = new NumberNode((float)std::atof(currentToken->getValue().c_str()), currentToken->thisPosition());
+        else if (currentToken->getType() == FLOAT){
+            node = new NumberNode((double)std::atof(currentToken->getValue().c_str()), currentToken->thisPosition());
             advance();
         }
-        else if (currentToken->getType() == TT_PLUS || currentToken->getType() == TT_MINUS){
-            std::string token = currentToken->getType();
+        else if (currentToken->getType() == PLUS || currentToken->getType() == MINUS){
+            TokenType token = currentToken->getType();
             Position currentPos(currentToken->thisPosition());
 
             advance();
@@ -74,11 +74,11 @@ namespace hdg {
                     Position(currentPos.getContext(), currentPos.getPosStart(), obj->thisPosition().getPosEnd())
                     );
         }
-        else if (currentToken->getType() == TT_LPAREN){
+        else if (currentToken->getType() == LPAREN){
             advance();
             node = expr();
 
-            if (currentToken->getType() != TT_RPAREN){
+            if (currentToken->getType() != RPAREN){
                 throw InvalidSyntaxError(
                         currentToken->thisPosition().getPosStart(),
                         currentToken->thisPosition().getPosEnd(),
@@ -100,7 +100,7 @@ namespace hdg {
         return node;
     }
 
-    Node *Parser::binaryOperator(const std::set<std::string>&opers, std::function<Node*()> funA, std::function<Node*()> funB) {
+    Node *Parser::binaryOperator(const std::set<TokenType>&opers, std::function<Node*()> funA, std::function<Node*()> funB) {
         if (funB == nullptr) funB = funA;
         Node* left = funA();
 

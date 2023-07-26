@@ -15,17 +15,17 @@ namespace hdg {
 
     class BinaryOperatorNode: public Node{
     private:
-        std::string oper_;
-        Node* left_;
-        Node* right_;
+        TokenType m_oper;
+        Node* m_left;
+        Node* m_right;
 
     public:
-        BinaryOperatorNode(std::string oper, Node* left, Node* right, const Position& position);
+        BinaryOperatorNode(TokenType oper, Node* left, Node* right, const Position& position);
 
-        void setOperator(std::string oper);
+        void setOperator(TokenType oper);
         void setLeft(Node* node);
         void setRight(Node* node);
-        std::string getOperator();
+        TokenType getOperator();
         Node* getLeft();
         Node* getRight();
 

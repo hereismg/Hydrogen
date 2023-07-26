@@ -15,6 +15,11 @@ namespace hdg {
         this->value = new Float(value);
     }
 
+    NumberNode::NumberNode(double value, const Position &position):
+            Node(position){
+        this->value = new Float(value);
+    }
+
     NumberNode::~NumberNode() {
         delete value;
     }

@@ -9,10 +9,19 @@
 #include<vector>
 #include<iostream>
 #include<utility>
+#include<set>
 #include"basic/Token.h"
 #include"error/IllegalCharError.h"
 
 namespace hdg {
+    static std::set<std::string> keywordSet = {
+            "hydrogen",
+
+            "null",
+            "and",
+            "or",
+    };
+
     const int DIGITAL = 1;
     const int LOWERCASE = 2;
     const int UPPERCASE = 3;
@@ -22,11 +31,11 @@ namespace hdg {
 
     class Lexer {
     private:
-        const std::string& text;
-        std::vector<Token> tokens;
+        const std::string& m_text;
+        std::vector<Token> m_tokens;
 
-        char currentChar;
-        int pos;
+        char m_currentChar;
+        int m_pos;
 
     public:
         explicit Lexer(const std::string& text);
@@ -37,6 +46,10 @@ namespace hdg {
 
         void run();
         void buildNumber();
+        void buildGreaterThan();
+        void buildLessThan();
+        void buildEquation();
+        void buildIdentifier();
     };
 } // hdg
 

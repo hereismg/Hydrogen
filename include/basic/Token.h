@@ -39,29 +39,29 @@ namespace hdg {
     };
 
     static std::map<TokenType, std::string> tokenTypeName = {
-            {INT,           "integer"},
-            {FLOAT,         "float"},
-            {IDENTIFIER,    "identifier"},
-            {KEYWORD,       "keyword"},
+            {INT,           "INT"},
+            {FLOAT,         "FLOAT"},
+            {IDENTIFIER,    "IDENTIFIER"},
+            {KEYWORD,       "KEYWORD"},
 
-            {EE,            "ee"},
-            {GT,            "greaterThan"},
-            {LT,            "lessThan"},
-            {GTE,           "greaterThanEqual"},
-            {LTE,           "lessThanEqual"},
+            {EE,            "EE"},
+            {GT,            "GT"},
+            {LT,            "LT"},
+            {GTE,           "GTE"},
+            {LTE,           "LTE"},
 
-            {PLUS,          "plus"},
-            {MINUS,         "minus"},
-            {MUL,           "multiply"},
-            {DIV,           "division"},
-            {POW,           "power"},
+            {PLUS,          "PLUS"},
+            {MINUS,         "MINUS"},
+            {MUL,           "MUL"},
+            {DIV,           "DIV"},
+            {POW,           "POW"},
 
-            {LPAREN,        "leftParenthesis"},
-            {RPAREN,        "rightParenthesis"},
-            {EQ,            "equation"},
+            {LPAREN,        "LPAREN"},
+            {RPAREN,        "RPAREN"},
+            {EQ,            "EQ"},
 
-            {EF,            "endOfFile"},
-            {NONE,          "none"}
+            {EF,            "EF"},          // EOF   end of file    由于EOF是C++中的关键字，所以这里用EF代替
+            {NONE,          "NONE"}
     };
 
     class Token {

@@ -5,24 +5,28 @@
 #include "../include/Parser.h"
 
 namespace hdg {
-    Parser::Parser(std::vector<Token> tokens):
-        tokens(std::move(tokens)), currentToken(this->tokens.begin()){
+    Parser::Parser(std::vector<Token> tokens, Environment* environment):
+            m_tokens(std::move(tokens)), m_currentToken(m_tokens.begin()), m_environment(environment){
     }
 
     void Parser::advance() {
-        if (currentToken->getType() != EF) currentToken++;
+        if (m_currentToken->getType() != EF) m_currentToken++;
+    }
+
+    void Parser::retreat() {
+        if (m_currentToken != m_tokens.begin()) m_currentToken--;
     }
 
     Node* Parser::run() {
-        if (tokens.empty())return nullptr;
+        if (m_tokens.empty())return nullptr;
 
         Node* result = expr();
 
-        if (currentToken->getType() != EF){
+        if (m_currentToken->getType() != EF){
             throw InvalidSyntaxError(
-                    currentToken->thisPosition().getPosStart(),
-                    tokens[tokens.size()-1].thisPosition().getPosEnd(),
-                    currentToken->thisPosition().getContext(),
+                    m_currentToken->thisPosition().getPosStart(),
+                    m_tokens[m_tokens.size() - 1].thisPosition().getPosEnd(),
+                    m_currentToken->thisPosition().getContext(),
                     "Expected '+', '-', '*', '/' or '^'"
             );
         }
@@ -30,10 +34,43 @@ namespace hdg {
     }
 
     Node* Parser::expr() {
-        return binaryOperator(
-                std::set<TokenType>{PLUS, MINUS},
-                [this](){return this->term();}
-                );
+        if (m_currentToken->getType() == TokenType::IDENTIFIER){
+            std::string name = m_currentToken->getValue();
+            int posStart = m_currentToken->thisPosition().getPosStart(),
+                posEnd = -1;
+            advance();
+
+            if (m_currentToken->getType() == TokenType::EQ){
+                advance();
+
+                Node* exprNode = expr();
+                posEnd = exprNode->thisPosition().getPosEnd();
+
+                return new VariableAssignNode(
+                        name,
+                        exprNode,
+                        Position(m_currentToken->thisPosition().getContext(), posStart, posEnd),
+                        m_environment
+                        );
+            }
+            else {
+                retreat();
+            }
+        }
+        else {
+            return binaryOperator(
+                    std::set<TokenType>{PLUS, MINUS},
+                    [this](){return this->term();}
+            );
+        }
+    }
+
+    Node *Parser::compExpr() {
+        return nullptr;
+    }
+
+    Node *Parser::arithExpr() {
+        return nullptr;
     }
 
     Node *Parser::term() {
@@ -54,17 +91,17 @@ namespace hdg {
     Node *Parser::power() {
         Node* node;
 
-        if (currentToken->getType() == INT){
-            node = new NumberNode(std::atoi(currentToken->getValue().c_str()), currentToken->thisPosition());
+        if (m_currentToken->getType() == INT){
+            node = new NumberNode(std::atoi(m_currentToken->getValue().c_str()), m_currentToken->thisPosition());
             advance();
         }
-        else if (currentToken->getType() == FLOAT){
-            node = new NumberNode((double)std::atof(currentToken->getValue().c_str()), currentToken->thisPosition());
+        else if (m_currentToken->getType() == FLOAT){
+            node = new NumberNode((double)std::atof(m_currentToken->getValue().c_str()), m_currentToken->thisPosition());
             advance();
         }
-        else if (currentToken->getType() == PLUS || currentToken->getType() == MINUS){
-            TokenType token = currentToken->getType();
-            Position currentPos(currentToken->thisPosition());
+        else if (m_currentToken->getType() == PLUS || m_currentToken->getType() == MINUS){
+            TokenType token = m_currentToken->getType();
+            Position currentPos(m_currentToken->thisPosition());
 
             advance();
             Node* obj = power();
@@ -74,26 +111,34 @@ namespace hdg {
                     Position(currentPos.getContext(), currentPos.getPosStart(), obj->thisPosition().getPosEnd())
                     );
         }
-        else if (currentToken->getType() == LPAREN){
+        else if (m_currentToken->getType() == LPAREN){
             advance();
             node = expr();
 
-            if (currentToken->getType() != RPAREN){
+            if (m_currentToken->getType() != RPAREN){
                 throw InvalidSyntaxError(
-                        currentToken->thisPosition().getPosStart(),
-                        currentToken->thisPosition().getPosEnd(),
-                        currentToken->thisPosition().getContext(),
+                        m_currentToken->thisPosition().getPosStart(),
+                        m_currentToken->thisPosition().getPosEnd(),
+                        m_currentToken->thisPosition().getContext(),
                         "Expected ')'."
                         );
             }else{
                 advance();
             }
         }
+        else if (m_currentToken->getType() == TokenType::IDENTIFIER){
+            Node* node = new VariableAccessNode(
+                    m_currentToken->getValue(),
+                    Position(m_currentToken->thisPosition().getContext(), m_currentToken->thisPosition().getPosStart(), m_currentToken->thisPosition().getPosEnd()),
+                    m_environment
+                    );
+            return node;
+        }
         else {
             throw InvalidSyntaxError(
-                    currentToken->thisPosition().getPosStart(),
-                    currentToken->thisPosition().getPosEnd(),
-                    currentToken->thisPosition().getContext(),
+                    m_currentToken->thisPosition().getPosStart(),
+                    m_currentToken->thisPosition().getPosEnd(),
+                    m_currentToken->thisPosition().getContext(),
                     "Expected int, float, '+', '-' or '('."
                     );
         }
@@ -104,12 +149,12 @@ namespace hdg {
         if (funB == nullptr) funB = funA;
         Node* left = funA();
 
-        while(tokens.end() != currentToken && opers.find(currentToken->getType())!=opers.end()){
+        while(m_tokens.end() != m_currentToken && opers.find(m_currentToken->getType()) != opers.end()){
             BinaryOperatorNode* oper = new BinaryOperatorNode(
-                    currentToken->getType(),
+                    m_currentToken->getType(),
                     nullptr,
                     nullptr,
-                    Position(currentToken->thisPosition().getContext(), left->thisPosition().getPosStart(), -1)
+                    Position(m_currentToken->thisPosition().getContext(), left->thisPosition().getPosStart(), -1)
                     );
             advance();
 
@@ -127,5 +172,7 @@ namespace hdg {
     Node *Parser::unaryOperator() {
         return nullptr;
     }
+
+
 
 } // hdg

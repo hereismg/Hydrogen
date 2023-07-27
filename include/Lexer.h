@@ -18,15 +18,22 @@ namespace hdg {
             "hydrogen",
 
             "null",
+            "true",
+            "false",
             "and",
             "or",
     };
 
-    const int DIGITAL = 1;
-    const int LOWERCASE = 2;
-    const int UPPERCASE = 3;
+    enum LegalChar{
+        ILLEGAL = 0,
+        DIGITAL = 1,
+        LOWERCASE = 2,
+        UPPERCASE = 4,
+        UNDERLINE = 8
+    };
 
-    int whatIsThis(char c);
+    LegalChar whatIsThis(char c);
+    bool whatIsThis(char c, int target);
     std::ostream& operator<<(std::ostream& out, std::vector<Token>& tokens);
 
     class Lexer {

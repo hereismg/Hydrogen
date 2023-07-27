@@ -6,8 +6,8 @@
 
 namespace hdg {
 
-    Interpreter::Interpreter(Node *tree):
-        m_tree(tree){}
+    Interpreter::Interpreter(Node *tree, Environment* environment):
+        m_tree(tree), m_environment(environment){}
 
     std::string Interpreter::run() {
         if (m_tree == nullptr) return "";

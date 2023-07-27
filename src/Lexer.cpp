@@ -6,11 +6,17 @@
 
 namespace hdg {
 
-    int whatIsThis(char c){
-        if (c>='0' && c<='9') return DIGITAL;
-        else if (c>='a' && c<='z') return LOWERCASE;
-        else if (c>='A' && c <='Z') return UPPERCASE;
-        else return 0;
+    LegalChar whatIsThis(char c){
+        if (c>='0' && c<='9') return LegalChar::DIGITAL;
+        else if (c>='a' && c<='z') return LegalChar::LOWERCASE;
+        else if (c>='A' && c <='Z') return LegalChar::UPPERCASE;
+        else if (c=='_') return LegalChar::UNDERLINE;
+        else return LegalChar::ILLEGAL;
+    }
+
+    bool whatIsThis(char c, int target){
+        LegalChar what = whatIsThis(c);
+        return what & target;
     }
 
     std::ostream& operator<<(std::ostream& out, std::vector<Token>& tokens) {
@@ -46,11 +52,10 @@ namespace hdg {
             if (m_currentChar == ' ' || m_currentChar == '\n' || m_currentChar == '\t'){
                 advance();
             }
-            else if (whatIsThis(m_currentChar) == DIGITAL){
+            else if (whatIsThis(m_currentChar) == LegalChar::DIGITAL){
                 buildNumber();
             }
-
-            else if (whatIsThis(m_currentChar) == UPPERCASE || whatIsThis(m_currentChar) == LOWERCASE){
+            else if (whatIsThis(m_currentChar, LegalChar::UNDERLINE | LegalChar::UPPERCASE | LegalChar::LOWERCASE)){
                 buildIdentifier();
             }
             else if (m_currentChar == '>'){
@@ -106,7 +111,7 @@ namespace hdg {
         int counter = 0;
         TokenType type = INT;
 
-        while(m_pos < m_text.length() && (whatIsThis(m_currentChar) == DIGITAL || m_currentChar == '.')) {
+        while(m_pos < m_text.length() && (whatIsThis(m_currentChar) == LegalChar::DIGITAL || m_currentChar == '.')) {
             if (m_currentChar == '.') {
                 if (counter==1) break;
                 type = FLOAT;
@@ -170,10 +175,7 @@ namespace hdg {
 
         advance();
 
-        while(m_pos < m_text.size() && (
-              whatIsThis(m_currentChar) == DIGITAL ||
-              whatIsThis(m_currentChar) == UPPERCASE ||
-              whatIsThis(m_currentChar) == LOWERCASE)){
+        while(m_pos < m_text.size() && (whatIsThis(m_currentChar, LegalChar::DIGITAL | LegalChar::UPPERCASE | LegalChar::LOWERCASE))){
             advance();
         }
 

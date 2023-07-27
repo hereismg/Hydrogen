@@ -8,15 +8,18 @@
 
 #include <string>
 #include "node/Node.h"
+#include "basic/Environment.h"
 
 namespace hdg {
 
     class Interpreter {
     private:
         Node* m_tree;
+        Environment* m_environment;
+
 
     public:
-        explicit Interpreter(Node* tree);
+        Interpreter(Node* tree, Environment* environment);
 
         std::string run();
     };

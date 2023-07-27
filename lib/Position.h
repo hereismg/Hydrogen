@@ -11,9 +11,9 @@ namespace hdg {
 
     class Position {
     private:
-        const std::string& context;
-        int posStart;
-        int posEnd;
+        const std::string& m_context;
+        int m_posStart;
+        int m_posEnd;
 
     public:
         Position(const std::string& context, int posStart, int posEnd);
@@ -21,8 +21,8 @@ namespace hdg {
 
         void setPosStart(int posStart);
         void setPosEnd(int posEnd);
-        int getPosStart();
-        int getPosEnd();
+        int getPosStart() const;
+        int getPosEnd() const;
         const std::string& getContext();
     };
 

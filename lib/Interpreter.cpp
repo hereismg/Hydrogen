@@ -7,10 +7,10 @@
 namespace hdg {
 
     Interpreter::Interpreter(Node *tree):
-        tree(tree){}
+        m_tree(tree){}
 
     std::string Interpreter::run() {
-        if (tree == nullptr) return "";
-        return tree->interpret()->toString();
+        if (m_tree == nullptr) return "";
+        return m_tree->interpret()->toString();
     }
 } // hdg

@@ -12,7 +12,7 @@ namespace hdg {
 
     class Interpreter {
     private:
-        Node* tree;
+        Node* m_tree;
 
     public:
         explicit Interpreter(Node* tree);

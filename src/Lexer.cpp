@@ -16,7 +16,7 @@ namespace hdg {
 
     bool whatIsThis(char c, int target){
         LegalChar what = whatIsThis(c);
-        return c & target;
+        return what & target;
     }
 
     std::ostream& operator<<(std::ostream& out, std::vector<Token>& tokens) {
@@ -55,8 +55,7 @@ namespace hdg {
             else if (whatIsThis(m_currentChar) == LegalChar::DIGITAL){
                 buildNumber();
             }
-
-    else if (whatIsThis(m_currentChar, LegalChar::UNDERLINE | LegalChar::UPPERCASE | LegalChar::LOWERCASE)){
+            else if (whatIsThis(m_currentChar, LegalChar::UNDERLINE | LegalChar::UPPERCASE | LegalChar::LOWERCASE)){
                 buildIdentifier();
             }
             else if (m_currentChar == '>'){

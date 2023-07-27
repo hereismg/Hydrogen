@@ -12,27 +12,34 @@
 #include <set>
 #include <iostream>
 #include "basic/Token.h"
+#include "basic/Environment.h"
 #include "node/Node.h"
 #include "node/BinaryOperatorNode.h"
 #include "node/NumberNode.h"
 #include "node/UnaryOperatorNode.h"
-#include"error/InvalidSyntaxError.h"
+#include "node/VariableAssignNode.h"
+#include "node/VariableAccessNode.h"
+#include "error/InvalidSyntaxError.h"
 
 namespace hdg {
 
     class Parser {
     private:
-        std::vector<Token> tokens;
-        std::vector<Token>::iterator currentToken;
+        std::vector<Token> m_tokens;
+        std::vector<Token>::iterator m_currentToken;
+        Environment* m_environment;
 
     public:
-        explicit Parser(std::vector<Token> tokens);
+        Parser(std::vector<Token> tokens, Environment* environment);
         Node* run();
 
     private:
         void advance();
+        void retreat();
 
         Node* expr();
+        Node* compExpr();
+        Node* arithExpr();
         Node* term();
         Node* factor();
         Node* power();

@@ -15,6 +15,11 @@ namespace hdg {
 
     }
 
+    Node::Node(const Position &position, Environment *environment):
+            m_position(position), m_environment(environment){
+
+    }
+
     std::string Node::toString() {
         return "NULL";
     }

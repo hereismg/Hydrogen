@@ -18,13 +18,14 @@ namespace hdg {
                                                 {"true", Integer(1)},
                                                 {"false", Integer(0)}
             });
+
             try {
                 Lexer lexer(text);
                 lexer.run();
 
-//                std::cout << lexer.getTokens() << std::endl;
+                std::cout << lexer.getTokens() << std::endl;
 
-                Parser parser(lexer.getTokens());
+                Parser parser(lexer.getTokens(), &globalEnvironment);
                 Node* tree = parser.run();
 
                 Interpreter interpreter(tree, &globalEnvironment);

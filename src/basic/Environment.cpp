@@ -23,6 +23,10 @@ namespace hdg {
         m_parent = parent;
     }
 
+    void Environment::setSymbol(const std::string &name, DataType *value) {
+        m_symbolTable[name] = value;
+    }
+
     void Environment::setSymbol(const std::string& name, const Integer &value) {
         m_symbolTable[name] = new Integer(value);
     }
@@ -46,6 +50,9 @@ namespace hdg {
     }
 
     DataType* Environment::getSymbol(const std::string &name) {
+        if (m_symbolTable.find(name) == m_symbolTable.end()){
+            throw -1;
+        }
         return m_symbolTable[name];
     }
 

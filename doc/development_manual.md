@@ -30,3 +30,7 @@ power       : identifier
             : (plus|minus) power
             : lparen expr rparen
 ```
+
+## 项目目录结构
+
+![Hydrogen项目目录结构](res/Hydrogen项目目录结构.png)

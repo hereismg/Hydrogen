@@ -27,7 +27,7 @@ namespace hdg {
                     m_currentToken->thisPosition().getPosStart(),
                     m_tokens[m_tokens.size() - 1].thisPosition().getPosEnd(),
                     m_currentToken->thisPosition().getContext(),
-                    "Expected '+', '-', '*', '/' or '^'"
+                    "Expected '+', '-', '*', '/' or '^'."
             );
         }
         return result;
@@ -55,13 +55,11 @@ namespace hdg {
             }
             else {
                 retreat();
+                return binaryOperator(
+                        std::set<TokenType>{PLUS, MINUS},
+                        [this](){return this->term();}
+                );
             }
-        }
-        else {
-            return binaryOperator(
-                    std::set<TokenType>{PLUS, MINUS},
-                    [this](){return this->term();}
-            );
         }
     }
 
@@ -132,6 +130,8 @@ namespace hdg {
                     Position(m_currentToken->thisPosition().getContext(), m_currentToken->thisPosition().getPosStart(), m_currentToken->thisPosition().getPosEnd()),
                     m_environment
                     );
+
+            advance();
             return node;
         }
         else {

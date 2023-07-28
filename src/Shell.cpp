@@ -6,24 +6,24 @@
 
 namespace hdg {
     void Shell::run() {
+        Environment globalEnvironment("<stdin>", nullptr);
+        globalEnvironment.setSymbol({
+                                            {"null", Integer(0)},
+                                            {"true", Integer(1)},
+                                            {"false", Integer(0)}
+                                    });
+
         while(true){
             std::string text;
 
             std::cout << "hydrogen > ";
             std::getline(std::cin, text);
 
-            Environment globalEnvironment("<stdin>", nullptr);
-            globalEnvironment.setSymbol({
-                                                {"null", Integer(0)},
-                                                {"true", Integer(1)},
-                                                {"false", Integer(0)}
-            });
-
             try {
                 Lexer lexer(text);
                 lexer.run();
 
-                std::cout << lexer.getTokens() << std::endl;
+//                std::cout << lexer.getTokens() << std::endl;
 
                 Parser parser(lexer.getTokens(), &globalEnvironment);
                 Node* tree = parser.run();

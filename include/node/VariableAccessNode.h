@@ -12,7 +12,6 @@ namespace hdg {
     class VariableAccessNode: public Node{
     private:
         std::string m_name;
-        Environment* m_environment{};
 
     public:
         VariableAccessNode(std::string name, const Position& position, Environment* environment);

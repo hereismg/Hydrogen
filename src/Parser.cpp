@@ -6,7 +6,7 @@
 
 namespace hdg {
     Parser::Parser(std::vector<Token> tokens, Environment* environment):
-            m_tokens(std::move(tokens)), m_currentToken(m_tokens.begin()), m_environment(environment){
+            m_tokens(std::move(tokens)), m_currentToken(m_tokens.begin()), m_environment(environment), m_array({2021, 2022, 2023}){
     }
 
     void Parser::advance() {
@@ -33,33 +33,20 @@ namespace hdg {
         return result;
     }
 
+    void Parser::expr(int a) {
+        if (a == 2023){
+            std::cout << "True!" << std::endl;
+        }
+    }
+
     Node* Parser::expr() {
-        if (m_currentToken->getType() == TokenType::IDENTIFIER){
-            std::string name = m_currentToken->getValue();
-            int posStart = m_currentToken->thisPosition().getPosStart(),
-                posEnd = -1;
-            advance();
-
-            if (m_currentToken->getType() == TokenType::EQ){
-                advance();
-
-                Node* exprNode = expr();
-                posEnd = exprNode->thisPosition().getPosEnd();
-
-                return new VariableAssignNode(
-                        name,
-                        exprNode,
-                        Position(m_currentToken->thisPosition().getContext(), posStart, posEnd),
-                        m_environment
-                        );
-            }
-            else {
-                retreat();
-                return binaryOperator(
-                        std::set<TokenType>{PLUS, MINUS},
-                        [this](){return this->term();}
-                );
-            }
+        bool flag = (m_array[2] == 2022);
+        std::cout << "token: " << m_array[2] << ", target: " << 2022 << std::endl;
+        std::cout << "flag: " << flag << std::endl;
+        if (flag){
+            printf("Hello!\n");
+            std::cout << "True!!!" << std::endl;
+            return nullptr;
         }
     }
 

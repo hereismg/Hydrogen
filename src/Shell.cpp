@@ -26,12 +26,15 @@ namespace hdg {
 //                std::cout << lexer.getTokens() << std::endl;
 
                 Parser parser(lexer.getTokens(), &globalEnvironment);
-                Node* tree = parser.run();
 
-                Interpreter interpreter(tree, &globalEnvironment);
+                Node* tree = parser.expr();
+
+//                Node* tree = parser.run();
+
+//                Interpreter interpreter(tree, &globalEnvironment);
 
 //                std::cout << tree->toString() << std::endl;
-                std::cout << interpreter.run() << std::endl;
+//                std::cout << interpreter.run() << std::endl;
 
 //                delete tree;
             }catch(Error &error){

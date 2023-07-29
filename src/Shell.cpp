@@ -7,10 +7,11 @@
 namespace hdg {
     void Shell::run() {
         Environment globalEnvironment("<stdin>", nullptr);
+        globalEnvironment.setSymbol("hydrogen", Float(3.1415926));
         globalEnvironment.setSymbol({
                                             {"null", Integer(0)},
                                             {"true", Integer(1)},
-                                            {"false", Integer(0)}
+                                            {"false", Integer(0)},
                                     });
 
         while(true){

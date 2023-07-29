@@ -15,11 +15,6 @@
 
 namespace hdg {
     static std::set<std::string> keywordSet = {
-            "hydrogen",
-
-            "null",
-            "true",
-            "false",
             "and",
             "or",
     };
@@ -46,12 +41,13 @@ namespace hdg {
 
     public:
         explicit Lexer(const std::string& text);
-        void advance();
-
         const std::string& getText();
         std::vector<Token>& getTokens();
-
         void run();
+
+    private:
+        void advance();
+
         void buildNumber();
         void buildGreaterThan();
         void buildLessThan();

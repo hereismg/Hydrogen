@@ -34,7 +34,7 @@ namespace hdg {
     }
 
     Node* Parser::expr() {
-        if (m_currentToken->getType() == TokenType::IDENTIFIER){
+        if (TokenType::IDENTIFIER == m_currentToken->getType()){
             std::string name = m_currentToken->getValue();
             int posStart = m_currentToken->thisPosition().getPosStart(),
                 posEnd = -1;
@@ -55,12 +55,13 @@ namespace hdg {
             }
             else {
                 retreat();
-                return binaryOperator(
-                        std::set<TokenType>{PLUS, MINUS},
-                        [this](){return this->term();}
-                );
             }
         }
+
+        return binaryOperator(
+                std::set<TokenType>{PLUS, MINUS},
+                [this](){return this->term();}
+        );
     }
 
     Node *Parser::compExpr() {
@@ -139,7 +140,7 @@ namespace hdg {
                     m_currentToken->thisPosition().getPosStart(),
                     m_currentToken->thisPosition().getPosEnd(),
                     m_currentToken->thisPosition().getContext(),
-                    "Expected int, float, '+', '-' or '('."
+                    "Expected identifier, int, float, '+', '-' or '('."
                     );
         }
         return node;

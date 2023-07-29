@@ -2,7 +2,7 @@
 // windres -i res/info.rc -o res/info.o --input-format=rc --output-format=coff
 
 // 添加图标
-1 ICON "logo.ico"
+1 ICON "logo/logo2.ico"
 
 // 添加版本资源信息
 

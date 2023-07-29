@@ -30,3 +30,13 @@ hydrogen > (1 + 3) / 2
 2
 ```
 
+## 赋值语句
+
+海琛是弱类型语言，在使用变量时不需要声明其类型。如下：
+
+```Hydrogen
+hydrogen > num = 2
+2
+hydrogen > num = num ^ 0.5
+1.414214
+```

@@ -6,11 +6,7 @@
 
 
 namespace hdg {
-    InvalidSyntaxError::InvalidSyntaxError(
-            int posStart,
-            int posEnd,
-            const std::string &text,
-            std::string errorDetails):
-            Error(posStart, posEnd, text, "InvalidSyntaxError", std::move(errorDetails)){
+    InvalidSyntaxError::InvalidSyntaxError(std::string detail, const Position& position):
+            Error("InvalidSyntaxError", std::move(detail), position){
     }
 } // hdg

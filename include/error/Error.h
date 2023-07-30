@@ -8,23 +8,22 @@
 #include <iostream>
 #include <exception>
 #include <utility>
+#include <sstream>
+#include "../basic/Position.h"
 
 
 namespace hdg {
 
-    std::string buildArrow(const std::string& text, int posStart, int posEnd);
-
     class Error: public std::exception{
+    protected:
+        std::string m_name;
+        std::string m_details;
+
+        Position m_position;
+
     public:
-        int posStart;
-        int posEnd;
-        const std::string& text;
-        std::string errorName;
-        std::string errorDetails;
-
-        Error(int posStart, int posEnd, const std::string& text, std::string errorName, std::string errorDetails);
-
-        friend std::ostream& operator<<(std::ostream& out, Error& error);
+        Error(std::string name, std::string details, const Position& position);
+        virtual std::string toString();
     };
 
 } // hdg

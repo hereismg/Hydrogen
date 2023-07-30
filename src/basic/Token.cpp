@@ -4,27 +4,27 @@
 
 #include "../../include/basic/Token.h"
 
-
 namespace hdg {
-    Token::Token(TokenType type, std::string value, const std::string& context, int posStart, int posEnd):
-            m_type(type), m_value(std::move(value)), m_position(context, posStart,posEnd){
+    Token::Token(TokenType type, std::string value, const Position &position):
+        m_type(type), m_value(std::move(value)), m_position(position){
     }
 
-    Token::Token(TokenType type, std::string value, const std::string &context, int posStart):
-        m_type(type), m_value(std::move(value)), m_position(context, posStart, posStart+1){
+    Token::Token(TokenType type, std::string value):
+        m_type(type), m_value(std::move(value)), m_position(nullptr, -1){
     }
 
-    Token::Token(TokenType type, const std::string &context, int posStart, int posEnd):
-        m_type(type), m_value(""), m_position(context, posStart, posEnd){
-    }
-
-    Token::Token(TokenType type, const std::string &context, int posStart):
-        m_type(type), m_value(""), m_position(context, posStart, posStart+1){
+    Token::Token(TokenType type, const Position &position):
+        m_type(type), m_position(position){
     }
 
     Token::Token(const hdg::Token &tok) = default;
 
     Token::~Token() = default;
+
+    bool Token::match(TokenType type, const std::string &value) {
+        if (type == m_type && value == m_value) return true;
+        else return false;
+    }
 
     void Token::setType(TokenType type) {
         m_type = type;
@@ -53,8 +53,8 @@ namespace hdg {
         return out;
     }
 
-    Position &Token::thisPosition() {
-        return m_position;
+    Position* Token::thisPosition() {
+        return &m_position;
     }
 
 

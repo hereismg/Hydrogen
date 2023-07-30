@@ -24,19 +24,20 @@ namespace hdg {
 
         if (m_currentToken->getType() != EF){
             throw InvalidSyntaxError(
-                    m_currentToken->thisPosition().getPosStart(),
-                    m_tokens[m_tokens.size() - 1].thisPosition().getPosEnd(),
-                    m_currentToken->thisPosition().getContext(),
-                    "Expected '+', '-', '*', '/' or '^'."
-            );
+                    "Expected '+', '-', '*', '/' or '^'.",
+                    {m_currentToken->thisPosition()->thisContext(),
+                     m_currentToken->thisPosition()->getPosStart(),
+                     m_currentToken->thisPosition()->getPosEnd()
+                    });
         }
+
         return result;
     }
 
     Node* Parser::expr() {
         if (TokenType::IDENTIFIER == m_currentToken->getType()){
             std::string name = m_currentToken->getValue();
-            int posStart = m_currentToken->thisPosition().getPosStart(),
+            int posStart = m_currentToken->thisPosition()->getPosStart(),
                 posEnd = -1;
             advance();
 
@@ -44,12 +45,12 @@ namespace hdg {
                 advance();
 
                 Node* exprNode = expr();
-                posEnd = exprNode->thisPosition().getPosEnd();
+                posEnd = exprNode->thisPosition()->getPosEnd();
 
                 return new VariableAssignNode(
                         name,
                         exprNode,
-                        Position(m_currentToken->thisPosition().getContext(), posStart, posEnd),
+                        Position(m_currentToken->thisPosition()->thisContext(), posStart, posEnd),
                         m_environment
                         );
             }
@@ -65,10 +66,16 @@ namespace hdg {
     }
 
     Node *Parser::compExpr() {
+        if (m_currentToken->match(TokenType::KEYWORD, "not")){
+//            return unaryOperator();
+        }
         return nullptr;
     }
 
     Node *Parser::arithExpr() {
+        Node* node;
+        if (m_currentToken->match(TokenType::KEYWORD, "not")){
+        }
         return nullptr;
     }
 
@@ -88,47 +95,41 @@ namespace hdg {
     }
 
     Node *Parser::power() {
-        Node* node;
 
         if (m_currentToken->getType() == INT){
-            node = new NumberNode(std::atoi(m_currentToken->getValue().c_str()), m_currentToken->thisPosition());
+            Node *node = new NumberNode(std::atoi(m_currentToken->getValue().c_str()), *m_currentToken->thisPosition());
             advance();
+            return node;
         }
         else if (m_currentToken->getType() == FLOAT){
-            node = new NumberNode((double)std::atof(m_currentToken->getValue().c_str()), m_currentToken->thisPosition());
+            Node* node = new NumberNode((double)std::atof(m_currentToken->getValue().c_str()), *m_currentToken->thisPosition());
             advance();
+            return node;
         }
         else if (m_currentToken->getType() == PLUS || m_currentToken->getType() == MINUS){
-            TokenType token = m_currentToken->getType();
-            Position currentPos(m_currentToken->thisPosition());
-
-            advance();
-            Node* obj = power();
-            node = new UnaryOperatorNode(
-                    token,
-                    obj,
-                    Position(currentPos.getContext(), currentPos.getPosStart(), obj->thisPosition().getPosEnd())
-                    );
+            return unaryOperator(std::set<TokenType>{PLUS, MINUS}, [this](){return this->power();});
         }
         else if (m_currentToken->getType() == LPAREN){
             advance();
-            node = expr();
+            Node* node = expr();
 
             if (m_currentToken->getType() != RPAREN){
                 throw InvalidSyntaxError(
-                        m_currentToken->thisPosition().getPosStart(),
-                        m_currentToken->thisPosition().getPosEnd(),
-                        m_currentToken->thisPosition().getContext(),
-                        "Expected ')'."
-                        );
+                        "Expected ')'.",
+                        {m_currentToken->thisPosition()->thisContext(),
+                         m_currentToken->thisPosition()->getPosStart(),
+                         m_currentToken->thisPosition()->getPosEnd()
+                        });
             }else{
                 advance();
             }
+
+            return node;
         }
         else if (m_currentToken->getType() == TokenType::IDENTIFIER){
             Node* node = new VariableAccessNode(
                     m_currentToken->getValue(),
-                    Position(m_currentToken->thisPosition().getContext(), m_currentToken->thisPosition().getPosStart(), m_currentToken->thisPosition().getPosEnd()),
+                    Position(m_currentToken->thisPosition()->thisContext(), m_currentToken->thisPosition()->getPosStart(), m_currentToken->thisPosition()->getPosEnd()),
                     m_environment
                     );
 
@@ -137,13 +138,12 @@ namespace hdg {
         }
         else {
             throw InvalidSyntaxError(
-                    m_currentToken->thisPosition().getPosStart(),
-                    m_currentToken->thisPosition().getPosEnd(),
-                    m_currentToken->thisPosition().getContext(),
-                    "Expected identifier, int, float, '+', '-' or '('."
+                    "Expected identifier, int, float, '+', '-' or '('.",
+            {m_currentToken->thisPosition()->thisContext(),
+                    m_currentToken->thisPosition()->getPosStart(),
+                    m_currentToken->thisPosition()->getPosEnd()}
                     );
         }
-        return node;
     }
 
     Node *Parser::binaryOperator(const std::set<TokenType>&opers, std::function<Node*()> funA, std::function<Node*()> funB) {
@@ -155,7 +155,7 @@ namespace hdg {
                     m_currentToken->getType(),
                     nullptr,
                     nullptr,
-                    Position(m_currentToken->thisPosition().getContext(), left->thisPosition().getPosStart(), -1)
+                    Position(m_currentToken->thisPosition()->thisContext(), left->thisPosition()->getPosStart(), -1)
                     );
             advance();
 
@@ -163,17 +163,28 @@ namespace hdg {
 
             oper->setLeft(left);
             oper->setRight(right);
-            oper->thisPosition().setPosEnd(right->thisPosition().getPosEnd());
+            oper->thisPosition()->setPosEnd(right->thisPosition()->getPosEnd());
             left = oper;
         }
 
         return left;
     }
 
-    Node *Parser::unaryOperator() {
-        return nullptr;
-    }
+    Node *Parser::unaryOperator(const std::set<TokenType>&opers, std::function<Node*()> fun) {
+        Node* node;
+        TokenType type = m_currentToken->getType();
+        Position currentPos(*m_currentToken->thisPosition());
 
+        advance();
+        Node* obj = fun();
+
+        node = new UnaryOperatorNode(
+                type,
+                obj,
+                Position(currentPos.thisContext(), currentPos.getPosStart(), obj->thisPosition()->getPosEnd())
+                );
+        return node;
+    }
 
 
 } // hdg

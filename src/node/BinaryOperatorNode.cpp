@@ -10,6 +10,9 @@ namespace hdg {
         Node(position), m_oper(oper), m_left(left), m_right(right){
     }
 
+    BinaryOperatorNode::BinaryOperatorNode(TokenType oper, Node *left, Node *right, const Position& position, Environment* environment):
+        Node(position, environment), m_oper(oper), m_left(left), m_right(right){
+    }
 
     void BinaryOperatorNode::setOperator(TokenType oper){
         m_oper = oper;
@@ -64,10 +67,11 @@ namespace hdg {
             }
             catch (int error){
                 throw RunTimeError(
-                        m_right->thisPosition().getPosStart(),
-                        m_right->thisPosition().getPosEnd(),
-                        m_position.getContext(),
-                        "Division by zero"
+                        "Division by zero",
+                        Position(
+                                m_position.thisContext(),
+                                m_right->thisPosition()->getPosStart(),
+                                m_right->thisPosition()->getPosEnd())
                         );
             }
         }

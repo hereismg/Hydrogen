@@ -72,18 +72,18 @@ namespace hdg {
         Position m_position;
 
     public:
-        Token(TokenType type, std::string value, const std::string& context, int posStart, int posEnd);
-        Token(TokenType type, std::string value, const std::string& context, int posStart);
-        Token(TokenType type, const std::string& context, int posStart, int posEnd);
-        Token(TokenType type, const std::string& context, int posStart);
+        Token(TokenType type, std::string value, const Position& position);
+        Token(TokenType type, std::string value);
+        Token(TokenType type, const Position& position);
         Token(const Token& tok);
         ~Token();
 
+        bool match(TokenType type, const std::string& value);
         void setType(TokenType type);
         void setValue(const std::string& value);
         TokenType getType();
         std::string getValue();
-        Position& thisPosition();
+        Position* thisPosition();
 
         friend std::ostream& operator<<(std::ostream& out, Token& tok);
     };

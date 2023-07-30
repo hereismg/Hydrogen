@@ -19,11 +19,11 @@ namespace hdg {
         Environment* m_environment;
 
     public:
-        Node(const std::string& context, int posStart, int posEnd);
-        Node(const Position& position);
+        explicit Node(const Position& position);
         Node(const Position& position, Environment* environment);
 
-        Position& thisPosition();
+
+        Position* thisPosition();
 
         virtual std::string toString();
         virtual DataType* interpret();

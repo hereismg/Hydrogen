@@ -21,7 +21,7 @@ namespace hdg {
             std::getline(std::cin, text);
 
             try {
-                Lexer lexer(text);
+                Lexer lexer(&text);
                 lexer.run();
 
 //                std::cout << lexer.getTokens() << std::endl;
@@ -36,7 +36,7 @@ namespace hdg {
 
 //                delete tree;
             }catch(Error &error){
-                std::cout << error << std::endl;
+                std::cout << error.toString() << std::endl;
                 continue;
             }
         }

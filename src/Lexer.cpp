@@ -34,21 +34,21 @@ namespace hdg {
         return out;
     }
 
-    Lexer::Lexer(const std::string& text):
+    Lexer::Lexer(std::string* text):
             m_text(text), m_currentChar('\0'), m_pos(-1) {
         advance();
     }
 
     void Lexer::advance() {
-        m_currentChar = m_text[++m_pos];
+        m_currentChar = (*m_text)[++m_pos];
     }
 
-    const std::string& Lexer::getText() {
+    std::string* Lexer::thisText() {
         return m_text;
     }
 
     void Lexer::run() {
-        while (m_pos < m_text.length()){
+        while (m_pos < m_text->length()){
             if (m_currentChar == ' ' || m_currentChar == '\n' || m_currentChar == '\t'){
                 advance();
             }
@@ -69,41 +69,41 @@ namespace hdg {
             }
 
             else if (m_currentChar == '+'){
-                m_tokens.emplace_back(PLUS, m_text, m_pos);
+                m_tokens.emplace_back(PLUS, Position(m_text, m_pos));
                 advance();
             }
             else if (m_currentChar == '-'){
-                m_tokens.emplace_back(MINUS, m_text, m_pos);
+                m_tokens.emplace_back(MINUS, Position(m_text, m_pos));
                 advance();
             }
             else if (m_currentChar == '*'){
-                m_tokens.emplace_back(MUL, m_text, m_pos);
+                m_tokens.emplace_back(MUL , Position(m_text, m_pos));
                 advance();
             }
             else if (m_currentChar == '/'){
-                m_tokens.emplace_back(DIV, m_text, m_pos);
+                m_tokens.emplace_back(DIV, Position(m_text, m_pos));
                 advance();
             }
             else if (m_currentChar == '^'){
-                m_tokens.emplace_back(POW, m_text, m_pos);
+                m_tokens.emplace_back(POW, Position(m_text, m_pos));
                 advance();
             }
             else if (m_currentChar == '('){
-                m_tokens.emplace_back(LPAREN, m_text, m_pos);
+                m_tokens.emplace_back(LPAREN, Position(m_text, m_pos));
                 advance();
             }
             else if (m_currentChar == ')'){
-                m_tokens.emplace_back(RPAREN, m_text, m_pos);
+                m_tokens.emplace_back(RPAREN, Position(m_text, m_pos));
                 advance();
             }
             else{
                 throw IllegalCharError(
-                        m_pos, m_pos + 1, m_text,
-                        "Expect digital, '+', '-', '*', '/' or '^'."
+                        "Expect digital, '+', '-', '*', '/' or '^'.",
+                        Position(m_text, m_pos)
                         );
             }
         }
-        m_tokens.emplace_back(EF, m_text, m_pos);
+        m_tokens.emplace_back(EF, Position(m_text, m_pos));
     }
 
     void Lexer::buildNumber() {
@@ -111,7 +111,7 @@ namespace hdg {
         int counter = 0;
         TokenType type = INT;
 
-        while(m_pos < m_text.length() && (whatIsThis(m_currentChar) == LegalChar::DIGITAL || m_currentChar == '.')) {
+        while(m_pos < m_text->length() && (whatIsThis(m_currentChar) == LegalChar::DIGITAL || m_currentChar == '.')) {
             if (m_currentChar == '.') {
                 if (counter==1) break;
                 type = FLOAT;
@@ -120,7 +120,7 @@ namespace hdg {
             advance();
         }
 
-        m_tokens.emplace_back(type, m_text.substr(posStart, m_pos - posStart), m_text, posStart, m_pos);
+        m_tokens.emplace_back(type, m_text->substr(posStart, m_pos - posStart), Position(m_text, posStart, m_pos));
     }
 
     std::vector<Token>& Lexer::getTokens() {
@@ -133,12 +133,12 @@ namespace hdg {
 
         advance();
 
-        if (m_pos<m_text.length() && m_currentChar=='='){
+        if (m_pos<m_text->length() && m_currentChar=='='){
             type = GTE;
             advance();
         }
 
-        m_tokens.emplace_back(type, m_text.substr(posStart, m_pos-posStart), m_text, posStart, m_pos);
+        m_tokens.emplace_back(type, m_text->substr(posStart, m_pos-posStart), Position(m_text, posStart, m_pos));
     }
 
     void Lexer::buildLessThan() {
@@ -147,12 +147,12 @@ namespace hdg {
 
         advance();
 
-        if (m_pos<m_text.length() && m_currentChar=='='){
+        if (m_pos<m_text->length() && m_currentChar=='='){
             type = LTE;
             advance();
         }
 
-        m_tokens.emplace_back(type, m_text.substr(posStart, m_pos-posStart), m_text, posStart, m_pos);
+        m_tokens.emplace_back(type, m_text->substr(posStart, m_pos-posStart), Position(m_text, posStart, m_pos));
     }
 
     void Lexer::buildEquation() {
@@ -161,12 +161,12 @@ namespace hdg {
 
         advance();
 
-        if (m_pos<m_text.length() && m_currentChar=='='){
+        if (m_pos<m_text->length() && m_currentChar=='='){
             type = EE;
             advance();
         }
 
-        m_tokens.emplace_back(type, m_text.substr(posStart, m_pos-posStart), m_text, posStart, m_pos);
+        m_tokens.emplace_back(type, m_text->substr(posStart, m_pos-posStart), Position(m_text, posStart, m_pos));
     }
 
     void Lexer::buildIdentifier() {
@@ -175,15 +175,15 @@ namespace hdg {
 
         advance();
 
-        while(m_pos < m_text.size() && (whatIsThis(m_currentChar, LegalChar::DIGITAL | LegalChar::UPPERCASE | LegalChar::LOWERCASE))){
+        while(m_pos < m_text->size() && (whatIsThis(m_currentChar, LegalChar::DIGITAL | LegalChar::UPPERCASE | LegalChar::LOWERCASE))){
             advance();
         }
 
-        std::string value = m_text.substr(posStart, m_pos-posStart);
+        std::string value = m_text->substr(posStart, m_pos-posStart);
 
         if (keywordSet.find(value) != keywordSet.end()) type = KEYWORD;
 
-        m_tokens.emplace_back(type, value, m_text, posStart, m_pos);
+        m_tokens.emplace_back(type, value, Position(m_text, posStart, m_pos));
     }
 
 } // hdg

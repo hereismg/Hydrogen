@@ -19,7 +19,7 @@ expr        : identifier eq expr
 comp-expr   : keyword:not comp-expr
             : arith-expr (ee|gt|lt|gte|lte arith-expr)*
 
-arith-expr  : term (plus|minus term)*
+arith-expr  : term (plus|minus term)* 
 
 term        : factor (mul|div factor)*
 

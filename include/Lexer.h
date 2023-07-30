@@ -15,6 +15,7 @@
 
 namespace hdg {
     static std::set<std::string> keywordSet = {
+            "not",
             "and",
             "or",
     };
@@ -33,15 +34,15 @@ namespace hdg {
 
     class Lexer {
     private:
-        const std::string& m_text;
+        std::string* m_text;
         std::vector<Token> m_tokens;
 
         char m_currentChar;
         int m_pos;
 
     public:
-        explicit Lexer(const std::string& text);
-        const std::string& getText();
+        explicit Lexer(std::string* text);
+        std::string* thisText();
         std::vector<Token>& getTokens();
         void run();
 

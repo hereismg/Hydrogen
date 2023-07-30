@@ -6,7 +6,7 @@
 
 namespace hdg {
     NumberNode::NumberNode(int value, const Position& position):
-            Node(position){
+            Node(Position(position)){
         m_value = new Integer(value);
     }
 
@@ -15,7 +15,7 @@ namespace hdg {
         m_value = new Float(value);
     }
 
-    NumberNode::NumberNode(double value, const Position &position):
+    NumberNode::NumberNode(double value, const Position& position):
             Node(position){
         m_value = new Float(value);
     }

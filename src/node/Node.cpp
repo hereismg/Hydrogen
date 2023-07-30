@@ -6,18 +6,12 @@
 
 namespace hdg {
 
-    Node::Node(const std::string& context, int posStart, int posEnd):
-            m_position(context, posStart, posEnd){
-    }
-
-    Node::Node(const Position &position) :
-            m_position(position){
-
+    Node::Node(const Position &position):
+        m_position(position){
     }
 
     Node::Node(const Position &position, Environment *environment):
-            m_position(position), m_environment(environment){
-
+        m_position(position), m_environment(environment){
     }
 
     std::string Node::toString() {
@@ -28,8 +22,9 @@ namespace hdg {
         return nullptr;
     }
 
-    Position &Node::thisPosition() {
-        return m_position;
+    Position* Node::thisPosition() {
+        return &m_position;
     }
+
 
 } // hdg

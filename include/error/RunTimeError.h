@@ -6,14 +6,14 @@
 #ifndef HDG_RUNTIMEERROR_H
 #define HDG_RUNTIMEERROR_H
 
-#include "Error.h"
 #include <utility>
+#include "Error.h"
 
 namespace hdg {
 
     class RunTimeError: public Error{
     public:
-        RunTimeError(int posStart, int posEnd, const std::string& text, std::string errorDetails);
+        RunTimeError(std::string details, const Position& position);
     };
 
 } // hdg

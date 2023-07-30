@@ -22,6 +22,7 @@ namespace hdg {
 
     public:
         BinaryOperatorNode(TokenType oper, Node* left, Node* right, const Position& position);
+        BinaryOperatorNode(TokenType oper, Node* left, Node* right, const Position& position, Environment* environment);
 
         void setOperator(TokenType oper);
         void setLeft(Node* node);

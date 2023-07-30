@@ -6,14 +6,14 @@
 #ifndef HDG_ILLEGALCHARERROR_H
 #define HDG_ILLEGALCHARERROR_H
 
-#include "Error.h"
 #include <utility>
+#include "Error.h"
 
 namespace hdg {
 
     class IllegalCharError: public Error{
     public:
-        IllegalCharError(int posStart, int posEnd, const std::string& text, std::string errorDetails);
+        IllegalCharError(std::string details, const Position& position);
     };
 
 } // hdg

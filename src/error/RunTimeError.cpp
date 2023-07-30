@@ -5,8 +5,8 @@
 #include "../../include/error/RunTimeError.h"
 
 namespace hdg {
-    RunTimeError::RunTimeError(int posStart, int posEnd, const std::string &text, std::string errorDetails):
-        Error(posStart, posEnd, text, "RunTimeError", std::move(errorDetails)){
+    RunTimeError::RunTimeError(std::string details, const Position& position):
+        Error("RunTimeError", std::move(details), position){
 
     }
 } // hdg

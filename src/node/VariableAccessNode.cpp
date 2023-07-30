@@ -20,10 +20,11 @@ namespace hdg {
         }
         catch (int error){
             throw RunTimeError(
-                    m_position.getPosStart(),
-                    m_position.getPosEnd(),
-                    m_position.getContext(),
-                    "'" + m_name + "' is not defind."
+                    "'" + m_name + "' is not defind.",
+                    Position(
+                            m_position.thisContext(),
+                            m_position.getPosStart(),
+                            m_position.getPosEnd())
                     );
         }
     }

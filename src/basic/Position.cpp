@@ -5,8 +5,13 @@
 #include "../../include/basic/Position.h"
 
 namespace hdg {
-    Position::Position(const std::string &context, int posStart, int posEnd):
+
+    Position::Position(std::string* context, int posStart, int posEnd):
         m_context(context), m_posStart(posStart), m_posEnd(posEnd){
+    }
+
+    Position::Position(std::string *context, int posStart):
+        m_context(context), m_posStart(posStart), m_posEnd(posStart+1){
     }
 
     Position::Position(const Position &position) = default;
@@ -27,10 +32,15 @@ namespace hdg {
         return m_posEnd;
     }
 
-    const std::string &Position::getContext() {
+    std::string* Position::thisContext() {
         return m_context;
     }
 
+    std::string Position::arrow() {
+        std::string arrowStart(m_posStart, ' ');
+        std::string arrowEnd(m_posEnd-m_posStart, '^');
+        return *m_context + "\n" + arrowStart + arrowEnd;
+    }
 
 
 } // hdg

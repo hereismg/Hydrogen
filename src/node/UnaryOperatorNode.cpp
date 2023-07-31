@@ -10,18 +10,23 @@ namespace hdg {
             Node(position), m_oper(oper), m_obj(obj){
     }
 
+    UnaryOperatorNode::UnaryOperatorNode(Token oper, Node *obj, const Position &position):
+        Node(position), m_oper(oper), m_obj(obj){
+
+    }
+
     UnaryOperatorNode::~UnaryOperatorNode() {
         delete m_obj;
     }
 
-    void UnaryOperatorNode::setOperator(TokenType oper){
+    void UnaryOperatorNode::setOperator(const Token& oper){
         this->m_oper = oper;
     }
     void UnaryOperatorNode::setObject(Node* obj){
         this->m_obj = obj;
     }
 
-    TokenType UnaryOperatorNode::getOperator(){
+    Token UnaryOperatorNode::getOperator(){
         return m_oper;
     }
     Node* UnaryOperatorNode::getObject(){
@@ -29,13 +34,13 @@ namespace hdg {
     }
 
     std::string UnaryOperatorNode::toString() {
-        return "(" + tokenTypeName[m_oper] + ", " + m_obj->toString() + ")";
+        return "(" + tokenTypeName[m_oper.getType()] + ", " + m_obj->toString() + ")";
     }
 
     DataType* UnaryOperatorNode::interpret() {
         DataType* value = m_obj->interpret();
 
-        if (m_oper == MINUS){
+        if (m_oper.getType() == MINUS){
             if (value->typeName == DT_INTEGER){
                 int num = -((Integer*)value)->getValue();
                 delete value;
@@ -47,8 +52,12 @@ namespace hdg {
                 return new Float(num);
             }
         }
-        else if(m_oper == PLUS){
+        else if(m_oper.getType() == PLUS){
             return value;
         }
+        else if(m_oper.match(KEYWORD, "not")){
+            return  value->notOperator();
+        }
     }
+
 } // hdg

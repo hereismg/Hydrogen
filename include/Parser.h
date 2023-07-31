@@ -22,7 +22,6 @@
 #include "error/InvalidSyntaxError.h"
 
 namespace hdg {
-
     class Parser {
     private:
         std::vector<Token> m_tokens;
@@ -44,8 +43,8 @@ namespace hdg {
         Node* factor();
         Node* power();
 
-        Node* binaryOperator(const std::set<TokenType>&opers, std::function<Node*()> funA, std::function<Node*()> funB=nullptr);
-        Node* unaryOperator(const std::set<TokenType>&opers, std::function<Node*()> fun);
+        Node* binaryOperator(const std::set<Token, std::less<>>&opers, std::function<Node*()> funA, std::function<Node*()> funB=nullptr);
+        Node* unaryOperator(const std::set<Token>&opers, std::function<Node*()> fun);
 
     };
 

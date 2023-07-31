@@ -16,19 +16,19 @@ namespace hdg {
 
     class BinaryOperatorNode: public Node{
     private:
-        TokenType m_oper;
+        Token m_oper;
         Node* m_left;
         Node* m_right;
 
     public:
-        BinaryOperatorNode(TokenType oper, Node* left, Node* right, const Position& position);
+        BinaryOperatorNode(const Token& oper, Node* left, Node* right, const Position& position);
         BinaryOperatorNode(TokenType oper, Node* left, Node* right, const Position& position, Environment* environment);
         ~BinaryOperatorNode() override;
 
-        void setOperator(TokenType oper);
+        void setOperator(const Token& oper);
         void setLeft(Node* node);
         void setRight(Node* node);
-        TokenType getOperator();
+        Token getOperator();
         Node* getLeft();
         Node* getRight();
 

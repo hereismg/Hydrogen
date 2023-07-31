@@ -60,35 +60,45 @@ namespace hdg {
         }
 
         return binaryOperator(
-                std::set<TokenType>{PLUS, MINUS},
-                [this](){return this->term();}
+            std::set<Token, std::less<>>{{KEYWORD, "and"}, {KEYWORD, "or"}},
+                [this](){return this->compExpr();}
         );
     }
 
     Node *Parser::compExpr() {
-        if (m_currentToken->match(TokenType::KEYWORD, "not")){
-//            return unaryOperator();
+        if (m_currentToken->match(KEYWORD, "not")){
+            Token token(*m_currentToken);
+            advance();
+            Node* obj = compExpr();
+
+            return new UnaryOperatorNode(
+                    token,
+                    obj,
+                    Position(token.thisPosition()->thisContext(), token.thisPosition()->getPosStart(), obj->thisPosition()->getPosEnd())
+                    );
         }
-        return nullptr;
+        return binaryOperator(
+                std::set<Token, std::less<>>{{EE}, {GT}, {LT}, {GTE}, {LTE}},
+                [this](){return this->arithExpr();});
     }
 
     Node *Parser::arithExpr() {
-        Node* node;
-        if (m_currentToken->match(TokenType::KEYWORD, "not")){
-        }
-        return nullptr;
+        return binaryOperator(
+                std::set<Token, std::less<>>{{PLUS}, {MINUS}},
+                [this](){return this->term();}
+        );
     }
 
     Node *Parser::term() {
         return binaryOperator(
-                std::set<TokenType>{MUL, DIV},
+                std::set<Token, std::less<>>{{MUL}, {DIV}},
                 [this](){return this->factor();}
                 );
     }
 
     Node *Parser::factor() {
         return binaryOperator(
-                std::set<TokenType>{POW},
+                std::set<Token, std::less<>>{{POW}},
                 [this](){return this->power();},
                 [this](){return this->factor();}
                 );
@@ -107,7 +117,15 @@ namespace hdg {
             return node;
         }
         else if (m_currentToken->getType() == PLUS || m_currentToken->getType() == MINUS){
-            return unaryOperator(std::set<TokenType>{PLUS, MINUS}, [this](){return this->power();});
+            Token oper = *m_currentToken;
+            advance();
+            Node* obj = power();
+
+            return new UnaryOperatorNode(
+                    oper,
+                    obj,
+                    Position(oper.thisPosition()->thisContext(), oper.thisPosition()->getPosStart(), obj->thisPosition()->getPosEnd())
+                    );
         }
         else if (m_currentToken->getType() == LPAREN){
             advance();
@@ -146,16 +164,16 @@ namespace hdg {
         }
     }
 
-    Node *Parser::binaryOperator(const std::set<TokenType>&opers, std::function<Node*()> funA, std::function<Node*()> funB) {
+    Node *Parser::binaryOperator(const std::set<Token, std::less<>>&opers, std::function<Node*()> funA, std::function<Node*()> funB) {
         if (funB == nullptr) funB = funA;
         Node* left = funA();
 
-        while(m_tokens.end() != m_currentToken && opers.find(m_currentToken->getType()) != opers.end()){
+        while(m_tokens.end() != m_currentToken && opers.find(*m_currentToken) != opers.end()){
             BinaryOperatorNode* oper = new BinaryOperatorNode(
-                    m_currentToken->getType(),
+                    *m_currentToken,
                     nullptr,
                     nullptr,
-                    Position(m_currentToken->thisPosition()->thisContext(), left->thisPosition()->getPosStart(), -1)
+                    Position(m_currentToken->thisPosition()->thisContext(), left->thisPosition()->getPosStart())
                     );
             advance();
 
@@ -170,16 +188,17 @@ namespace hdg {
         return left;
     }
 
-    Node *Parser::unaryOperator(const std::set<TokenType>&opers, std::function<Node*()> fun) {
+    Node *Parser::unaryOperator(const std::set<Token>&opers, std::function<Node*()> fun) {
         Node* node;
-        TokenType type = m_currentToken->getType();
+
+        Token oper(*m_currentToken);
         Position currentPos(*m_currentToken->thisPosition());
 
         advance();
         Node* obj = fun();
 
         node = new UnaryOperatorNode(
-                type,
+                oper,
                 obj,
                 Position(currentPos.thisContext(), currentPos.getPosStart(), obj->thisPosition()->getPosEnd())
                 );

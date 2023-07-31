@@ -18,6 +18,7 @@ namespace hdg {
         IDENTIFIER,
         KEYWORD,
 
+        NE,         // 不等于号“!=”
         EE,         // 逻辑表达式的等于号“==”
         GT,
         LT,
@@ -63,7 +64,6 @@ namespace hdg {
             {EF,            "EF"},          // EOF   end of file    由于EOF是C++中的关键字，所以这里用EF代替
             {NONE,          "NONE"}
     };
-
     class Token {
     private:
         TokenType m_type;
@@ -74,6 +74,7 @@ namespace hdg {
     public:
         Token(TokenType type, std::string value, const Position& position);
         Token(TokenType type, std::string value);
+        Token(TokenType type);
         Token(TokenType type, const Position& position);
         Token(const Token& tok);
         ~Token();
@@ -87,6 +88,8 @@ namespace hdg {
 
         friend std::ostream& operator<<(std::ostream& out, Token& tok);
     };
+
+    bool operator<(Token a, Token b);
 } // hdg
 
 #endif //HDG_TOKEN_H

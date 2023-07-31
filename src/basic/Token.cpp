@@ -13,6 +13,11 @@ namespace hdg {
         m_type(type), m_value(std::move(value)), m_position(nullptr, -1){
     }
 
+    Token::Token(TokenType type):
+        m_type(type), m_position(nullptr, -1){
+
+    }
+
     Token::Token(TokenType type, const Position &position):
         m_type(type), m_position(position){
     }
@@ -57,5 +62,13 @@ namespace hdg {
         return &m_position;
     }
 
+    bool operator<(Token a, Token b){
+        if (a.getType()==b.getType()){
+            return a.getValue() < a.getValue();
+        }
+        else {
+            return a.getType() < b.getType();
+        }
+    }
 
 } // hdg

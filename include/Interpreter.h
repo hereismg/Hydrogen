@@ -20,6 +20,7 @@ namespace hdg {
 
     public:
         Interpreter(Node* tree, Environment* environment);
+        ~Interpreter();
 
         std::string run();
     };

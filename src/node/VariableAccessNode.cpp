@@ -9,6 +9,8 @@ namespace hdg {
             Node(position, environment), m_name(std::move(name)){
     }
 
+    VariableAccessNode::~VariableAccessNode() = default;
+
     std::string VariableAccessNode::toString() {
         return m_name;
     }
@@ -16,7 +18,7 @@ namespace hdg {
     DataType *VariableAccessNode::interpret() {
         try{
             DataType* value = m_environment->getSymbol(m_name);
-            return value;
+            return value->copy();
         }
         catch (int error){
             throw RunTimeError(

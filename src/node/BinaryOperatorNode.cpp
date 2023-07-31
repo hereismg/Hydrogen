@@ -14,6 +14,11 @@ namespace hdg {
         Node(position, environment), m_oper(oper), m_left(left), m_right(right){
     }
 
+    BinaryOperatorNode::~BinaryOperatorNode() {
+        delete m_left;
+        delete m_right;
+    }
+
     void BinaryOperatorNode::setOperator(TokenType oper){
         m_oper = oper;
     }
@@ -66,6 +71,7 @@ namespace hdg {
                 result = left->div(right);
             }
             catch (int error){
+                delete left, right;
                 throw RunTimeError(
                         "Division by zero",
                         Position(
@@ -79,6 +85,7 @@ namespace hdg {
             result = left->pow(right);
         }
 
+        delete left, right;
         return result;
     }
 } // hdg

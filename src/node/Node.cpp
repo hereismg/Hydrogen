@@ -14,6 +14,16 @@ namespace hdg {
         m_position(position), m_environment(environment){
     }
 
+    Node::~Node() = default;
+
+    Position* Node::thisPosition() {
+        return &m_position;
+    }
+
+    Environment *Node::thisEnvironment() {
+        return m_environment;
+    }
+
     std::string Node::toString() {
         return "NULL";
     }
@@ -21,10 +31,5 @@ namespace hdg {
     DataType* Node::interpret() {
         return nullptr;
     }
-
-    Position* Node::thisPosition() {
-        return &m_position;
-    }
-
 
 } // hdg

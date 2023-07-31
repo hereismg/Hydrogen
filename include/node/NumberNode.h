@@ -19,7 +19,7 @@ namespace hdg {
         NumberNode(int value, const Position& position);
         NumberNode(float value, const Position& position);
         NumberNode(double value, const Position& position);
-        ~NumberNode();
+        ~NumberNode() override;
 
         std::string toString() override;
         DataType* interpret() override;

@@ -15,20 +15,21 @@ namespace hdg {
         m_value = new Float(value);
     }
 
+    NumberNode::~NumberNode() {
+        delete m_value;
+    }
+
     NumberNode::NumberNode(double value, const Position& position):
             Node(position){
         m_value = new Float(value);
     }
 
-    NumberNode::~NumberNode() {
-        delete m_value;
-    }
 
     std::string NumberNode::toString() {
         return m_value->toString();
     }
 
     DataType *NumberNode::interpret() {
-        return m_value;
+        return m_value->copy();
     }
 } // hdg

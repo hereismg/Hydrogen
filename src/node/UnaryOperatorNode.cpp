@@ -10,6 +10,10 @@ namespace hdg {
             Node(position), m_oper(oper), m_obj(obj){
     }
 
+    UnaryOperatorNode::~UnaryOperatorNode() {
+        delete m_obj;
+    }
+
     void UnaryOperatorNode::setOperator(TokenType oper){
         this->m_oper = oper;
     }
@@ -29,18 +33,22 @@ namespace hdg {
     }
 
     DataType* UnaryOperatorNode::interpret() {
-
         DataType* value = m_obj->interpret();
 
         if (m_oper == MINUS){
             if (value->typeName == DT_INTEGER){
-                return new Integer(-((Integer*)value)->getValue());
+                int num = -((Integer*)value)->getValue();
+                delete value;
+                return new Integer(num);
             }
             else if (value->typeName == DT_FLOAT){
-                return new Float(-((Float*)value)->getValue());
+                double num = -((Float*)value)->getValue();
+                delete value;
+                return new Float(num);
             }
         }
-
-        return value;
+        else if(m_oper == PLUS){
+            return value;
+        }
     }
 } // hdg

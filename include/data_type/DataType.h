@@ -25,7 +25,16 @@ namespace hdg {
         virtual DataType* mul(DataType* other);
         virtual DataType* div(DataType* other);
         virtual DataType* pow(DataType* other);
+
+        virtual DataType* equation(DataType* other);
+        virtual DataType* greaterThan(DataType* other);
+        virtual DataType* lessThan(DataType* other);
+        virtual DataType* greaterThanEquation(DataType* other);
+        virtual DataType* lessThanEquation(DataType* other);
+
+        virtual void illegalOperator();
         virtual std::string toString() = 0;
+        virtual DataType* copy() = 0;
     };
 
 } // hdg

@@ -16,6 +16,7 @@ namespace hdg {
 
     public:
         VariableAssignNode(std::string name, Node* expr, const Position& position, Environment* environment);
+        ~VariableAssignNode() override;
 
         std::string toString() override;
         DataType* interpret() override;

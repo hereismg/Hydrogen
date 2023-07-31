@@ -26,7 +26,9 @@ namespace hdg {
         DataType* mul(DataType* other) override;
         DataType* div(DataType* other) override;
         DataType* pow(DataType* other) override;
+
         std::string toString() override;
+        DataType* copy() override;
     };
 
 } // hdg

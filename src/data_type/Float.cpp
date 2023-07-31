@@ -14,20 +14,6 @@ namespace hdg {
 
     }
 
-    std::string Float::toString() {
-        std::string str = std::to_string(value);
-
-        unsigned long long i = str.length()-1;
-        while(i>=0 && str[i]!='.' && str[i]=='0') i--;
-
-        if (str[i]=='.'){
-            return str.substr(0, i+2);
-        }
-        else{
-            return str.substr(0, i+1);
-        }
-    }
-
     double Float::getValue() const {
         return value;
     }
@@ -85,6 +71,46 @@ namespace hdg {
             double result = std::pow(value, (double)((Integer*)other)->getValue());
             return new Float(result);
         }
+    }
+
+    DataType *Float::equation(DataType *other) {
+
+        return DataType::equation(other);
+    }
+
+    DataType *Float::greaterThan(DataType *other) {
+        return DataType::greaterThan(other);
+    }
+
+    DataType *Float::lessThan(DataType *other) {
+        return DataType::lessThan(other);
+    }
+
+    DataType *Float::greaterThanEquation(DataType *other) {
+        return DataType::greaterThanEquation(other);
+    }
+
+    DataType *Float::lessThanEquation(DataType *other) {
+        return DataType::lessThanEquation(other);
+    }
+
+
+    std::string Float::toString() {
+        std::string str = std::to_string(value);
+
+        unsigned long long i = str.length()-1;
+        while(i>=0 && str[i]!='.' && str[i]=='0') i--;
+
+        if (str[i]=='.'){
+            return str.substr(0, i+2);
+        }
+        else{
+            return str.substr(0, i+1);
+        }
+    }
+
+    DataType *Float::copy() {
+        return new Float(value);
     }
 
 } // hdg

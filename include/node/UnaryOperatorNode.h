@@ -20,6 +20,7 @@ namespace hdg {
 
     public:
         UnaryOperatorNode(TokenType oper, Node* obj, const Position& position);
+        ~UnaryOperatorNode() override;
 
         void setOperator(TokenType oper);
         void setObject(Node* obj);

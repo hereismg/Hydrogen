@@ -15,6 +15,7 @@ namespace hdg {
 
     public:
         VariableAccessNode(std::string name, const Position& position, Environment* environment);
+        ~VariableAccessNode() override;
 
         std::string toString() override;
         DataType* interpret() override;

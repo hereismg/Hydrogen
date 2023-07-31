@@ -20,14 +20,22 @@ namespace hdg {
         explicit Float(float value);
         explicit Float(double value);
 
-        double getValue() const;
+        [[nodiscard]] double getValue() const;
 
         DataType* plus(DataType* other) override;
         DataType* minus(DataType* other) override;
         DataType* mul(DataType* other) override;
         DataType* div(DataType* other) override;
         DataType* pow(DataType* other) override;
+
+        DataType* equation(DataType* other) override;
+        DataType* greaterThan(DataType* other) override;
+        DataType* lessThan(DataType* other) override;
+        DataType* greaterThanEquation(DataType* other) override;
+        DataType* lessThanEquation(DataType* other) override;
+
         std::string toString() override;
+        DataType* copy() override;
     };
 
 } // hdg

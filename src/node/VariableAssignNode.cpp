@@ -9,6 +9,10 @@ namespace hdg {
         Node(position, environment), m_name(std::move(name)), m_expr(expr){
     }
 
+    VariableAssignNode::~VariableAssignNode() {
+        delete m_expr;
+    }
+
     std::string VariableAssignNode::toString() {
         std::string value = m_expr->interpret()->toString();
         return m_name + "=" + value;
@@ -17,8 +21,9 @@ namespace hdg {
     DataType *VariableAssignNode::interpret() {
         DataType* value = m_expr->interpret();
         m_environment->setSymbol(m_name, value);
-        return value;
+        return value->copy();
     }
+
 
 
 } // hdg

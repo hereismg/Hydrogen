@@ -21,12 +21,13 @@ namespace hdg {
     public:
         explicit Node(const Position& position);
         Node(const Position& position, Environment* environment);
-
+        virtual ~Node() = 0;
 
         Position* thisPosition();
+        Environment* thisEnvironment();
 
-        virtual std::string toString();
-        virtual DataType* interpret();
+        virtual std::string toString() = 0;
+        virtual DataType* interpret() = 0;
     };
 
 } // hdg

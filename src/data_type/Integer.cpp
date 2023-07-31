@@ -8,9 +8,6 @@ namespace hdg {
     Integer::Integer(int value): DataType(DT_INTEGER), value(value) {
     }
 
-    std::string Integer::toString() {
-        return std::to_string(value);
-    }
 
     int Integer::getValue() const {
         return value;
@@ -75,5 +72,13 @@ namespace hdg {
             float result = std::pow(value, ((Float*)other)->getValue());
             return new Float(result);
         }
+    }
+
+    std::string Integer::toString() {
+        return std::to_string(value);
+    }
+
+    DataType *Integer::copy() {
+        return new Integer(value);
     }
 } // hdg

@@ -5,98 +5,157 @@
 #include "../../include/data_type/Float.h"
 
 namespace hdg {
-    Float::Float(float value):DataType(DT_FLOAT), value(value) {
+    Float::Float(float value): DataType(DT_FLOAT), m_value(value) {
 
     }
 
 
-    Float::Float(double value): DataType(DT_FLOAT), value(value) {
+    Float::Float(double value): DataType(DT_FLOAT), m_value(value) {
 
     }
 
     double Float::getValue() const {
-        return value;
+        return m_value;
     }
 
     DataType* Float::plus(DataType *other) {
         if (other->typeName == DT_FLOAT){
-            double result = value + ((Float*)other)->value;
+            double result = m_value + ((Float*)other)->m_value;
             return new Float(result);
         }
         else if (other->typeName == DT_INTEGER){
-            double result = value + (double)((Integer*)other)->getValue();
+            double result = m_value + (double)((Integer*)other)->getValue();
             return new Float(result);
         }
     }
 
     DataType *Float::minus(DataType *other) {
         if (other->typeName == DT_FLOAT){
-            double result = value - ((Float*)other)->value;
+            double result = m_value - ((Float*)other)->m_value;
             return new Float(result);
         }
         else if (other->typeName == DT_INTEGER){
-            double result = value - (double)((Integer*)other)->getValue();
+            double result = m_value - (double)((Integer*)other)->getValue();
             return new Float(result);
         }
     }
 
     DataType *Float::mul(DataType *other) {
         if (other->typeName == DT_FLOAT){
-            double result = value * ((Float*)other)->value;
+            double result = m_value * ((Float*)other)->m_value;
             return new Float(result);
         }
         else if (other->typeName == DT_INTEGER){
-            double result = value * (double)((Integer*)other)->getValue();
+            double result = m_value * (double)((Integer*)other)->getValue();
             return new Float(result);
         }
     }
 
     DataType *Float::div(DataType *other) {
         if (other->typeName == DT_FLOAT){
-            double result = value / ((Float*)other)->value;
+            double result = m_value / ((Float*)other)->m_value;
             return new Float(result);
         }
         else if (other->typeName == DT_INTEGER){
-            double result = value / (double)((Integer*)other)->getValue();
+            double result = m_value / (double)((Integer*)other)->getValue();
             return new Float(result);
         }
     }
 
     DataType *Float::pow(DataType *other) {
         if (other->typeName == DT_FLOAT){
-            double result = std::pow(value, ((Float*)other)->value);
+            double result = std::pow(m_value, ((Float*)other)->m_value);
             return new Float(result);
         }
         else if (other->typeName == DT_INTEGER){
-            double result = std::pow(value, (double)((Integer*)other)->getValue());
+            double result = std::pow(m_value, (double)((Integer*)other)->getValue());
             return new Float(result);
         }
     }
 
     DataType *Float::equation(DataType *other) {
+        if (other->typeName == DT_FLOAT){
+            int result = m_value == ((Float*)other)->m_value;
+            return new Integer(result);
+        }
+        else if (other->typeName == DT_INTEGER){
+            int result = m_value == (double)((Integer*)other)->getValue();
+            return new Integer(result);
+        }
+    }
 
-        return DataType::equation(other);
+    DataType* Float::notEquation(DataType* other) {
+        if (other->typeName == DT_FLOAT){
+            int result = m_value != ((Float*)other)->m_value;
+            return new Integer(result);
+        }
+        else if (other->typeName == DT_INTEGER){
+            int result = m_value != (double)((Integer*)other)->getValue();
+            return new Integer(result);
+        }
     }
 
     DataType *Float::greaterThan(DataType *other) {
-        return DataType::greaterThan(other);
+        if (other->typeName == DT_FLOAT){
+            int result = m_value > ((Float*)other)->m_value;
+            return new Integer(result);
+        }
+        else if (other->typeName == DT_INTEGER){
+            int result = m_value > (double)((Integer*)other)->getValue();
+            return new Integer(result);
+        }
     }
 
     DataType *Float::lessThan(DataType *other) {
-        return DataType::lessThan(other);
+        if (other->typeName == DT_FLOAT){
+            int result = m_value < ((Float*)other)->m_value;
+            return new Integer(result);
+        }
+        else if (other->typeName == DT_INTEGER){
+            int result = m_value < (double)((Integer*)other)->getValue();
+            return new Integer(result);
+        }
     }
 
     DataType *Float::greaterThanEquation(DataType *other) {
-        return DataType::greaterThanEquation(other);
+        if (other->typeName == DT_FLOAT){
+            int result = m_value >= ((Float*)other)->m_value;
+            return new Integer(result);
+        }
+        else if (other->typeName == DT_INTEGER){
+            int result = m_value >= (double)((Integer*)other)->getValue();
+            return new Integer(result);
+        }
     }
 
     DataType *Float::lessThanEquation(DataType *other) {
-        return DataType::lessThanEquation(other);
+        if (other->typeName == DT_FLOAT){
+            int result = m_value <= ((Float*)other)->m_value;
+            return new Integer(result);
+        }
+        else if (other->typeName == DT_INTEGER){
+            int result = m_value <= (double)((Integer*)other)->getValue();
+            return new Integer(result);
+        }
     }
 
+    DataType *Float::andOperator(DataType *other) {
+        int result = isTrue() && other->isTrue();
+        return new Integer(result);
+    }
+
+    DataType *Float::orOperator(DataType *other) {
+        int result = isTrue() || other->isTrue();
+        return new Integer(result);
+    }
+
+    DataType *Float::notOperator() {
+        int result = !isTrue();
+        return new Integer(result);
+    }
 
     std::string Float::toString() {
-        std::string str = std::to_string(value);
+        std::string str = std::to_string(m_value);
 
         unsigned long long i = str.length()-1;
         while(i>=0 && str[i]!='.' && str[i]=='0') i--;
@@ -110,7 +169,11 @@ namespace hdg {
     }
 
     DataType *Float::copy() {
-        return new Float(value);
+        return new Float(m_value);
     }
 
+    bool Float::isTrue() {
+        if (m_value!=0) return true;
+        else return false;
+    }
 } // hdg

@@ -14,7 +14,7 @@ namespace hdg {
 
     class Integer: public DataType{
     private:
-        int value;
+        int m_value;
 
     public:
         explicit Integer(int value);
@@ -27,6 +27,18 @@ namespace hdg {
         DataType* div(DataType* other) override;
         DataType* pow(DataType* other) override;
 
+        DataType* equation(DataType* other) override;
+        DataType* notEquation(DataType* other) override;
+        DataType* greaterThan(DataType* other) override;
+        DataType* lessThan(DataType* other) override;
+        DataType* greaterThanEquation(DataType* other) override;
+        DataType* lessThanEquation(DataType* other) override;
+
+        DataType* andOperator(DataType* other) override;
+        DataType* orOperator(DataType* other) override;
+        DataType* notOperator() override;
+
+        bool isTrue() override;
         std::string toString() override;
         DataType* copy() override;
     };

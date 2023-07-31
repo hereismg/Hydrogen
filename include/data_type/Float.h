@@ -14,7 +14,7 @@ namespace hdg {
 
     class Float: public DataType {
     private:
-        double value;
+        double m_value;
 
     public:
         explicit Float(float value);
@@ -29,11 +29,17 @@ namespace hdg {
         DataType* pow(DataType* other) override;
 
         DataType* equation(DataType* other) override;
+        DataType* notEquation(DataType* other) override;
         DataType* greaterThan(DataType* other) override;
         DataType* lessThan(DataType* other) override;
         DataType* greaterThanEquation(DataType* other) override;
         DataType* lessThanEquation(DataType* other) override;
 
+        DataType* andOperator(DataType* other) override;
+        DataType* orOperator(DataType* other) override;
+        DataType* notOperator() override;
+
+        bool isTrue() override;
         std::string toString() override;
         DataType* copy() override;
     };

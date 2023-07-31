@@ -27,11 +27,17 @@ namespace hdg {
         virtual DataType* pow(DataType* other);
 
         virtual DataType* equation(DataType* other);
+        virtual DataType* notEquation(DataType* other);
         virtual DataType* greaterThan(DataType* other);
         virtual DataType* lessThan(DataType* other);
         virtual DataType* greaterThanEquation(DataType* other);
         virtual DataType* lessThanEquation(DataType* other);
 
+        virtual DataType* andOperator(DataType* other);
+        virtual DataType* orOperator(DataType* other);
+        virtual DataType* notOperator();
+
+        virtual bool isTrue();
         virtual void illegalOperator();
         virtual std::string toString() = 0;
         virtual DataType* copy() = 0;

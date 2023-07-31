@@ -42,6 +42,11 @@ namespace hdg {
         return nullptr;
     }
 
+    DataType* DataType::notEquation(DataType* other){
+        illegalOperator();
+        return nullptr;
+    }
+
     DataType *DataType::greaterThan(DataType *other) {
         illegalOperator();
         return nullptr;
@@ -60,6 +65,25 @@ namespace hdg {
     DataType *DataType::lessThanEquation(DataType *other) {
         illegalOperator();
         return nullptr;
+    }
+
+    DataType *DataType::andOperator(DataType *other) {
+        illegalOperator();
+        return nullptr;
+    }
+
+    DataType *DataType::orOperator(DataType *other) {
+        illegalOperator();
+        return nullptr;
+    }
+
+    DataType *DataType::notOperator() {
+        illegalOperator();
+        return nullptr;
+    }
+
+    bool DataType::isTrue() {
+        return false;
     }
 
     void DataType::illegalOperator() {

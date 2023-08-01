@@ -154,6 +154,9 @@ namespace hdg {
             advance();
             return node;
         }
+        else if (m_currentToken->match(KEYWORD, "if")){
+            return ifExpr();
+        }
         else {
             throw InvalidSyntaxError(
                     "Expected identifier, int, float, '+', '-' or '('.",
@@ -164,11 +167,50 @@ namespace hdg {
         }
     }
 
+    Node *Parser::ifExpr() {
+        IfNode *ifNode = new IfNode(
+                Position(m_currentToken->thisPosition()->thisContext(), m_currentToken->thisPosition()->getPosStart()),
+                m_environment);
+        Node *condition, *expression;
+
+        while(m_currentToken != m_tokens.end() && (m_currentToken->match(KEYWORD, "if") || m_currentToken->match(KEYWORD, "elif"))){
+            advance();
+            condition = expr();
+
+            if (m_currentToken->getType() != COLON){
+                throw InvalidSyntaxError(
+                        "Expected ':'.",
+                        *m_currentToken->thisPosition()
+                        );
+            }
+            advance();
+
+            expression = expr();
+            ifNode->addBranch(condition, expression);
+        }
+
+        if (m_currentToken != m_tokens.end() && m_currentToken->match(KEYWORD, "else")){
+            advance();
+            if (m_currentToken->getType() != COLON){
+                throw InvalidSyntaxError(
+                        "Expected ':'.",
+                        *m_currentToken->thisPosition()
+                );
+            }
+            advance();
+
+            ifNode->addBranch(nullptr, expr());
+        }
+
+        return ifNode;
+    }
+
     Node *Parser::binaryOperator(const std::set<Token, std::less<>>&opers, std::function<Node*()> funA, std::function<Node*()> funB) {
         if (funB == nullptr) funB = funA;
         Node* left = funA();
 
         while(m_tokens.end() != m_currentToken && opers.find(*m_currentToken) != opers.end()){
+            auto iter = opers.find(*m_currentToken);
             BinaryOperatorNode* oper = new BinaryOperatorNode(
                     *m_currentToken,
                     nullptr,
@@ -204,6 +246,7 @@ namespace hdg {
                 );
         return node;
     }
+
 
 
 } // hdg

@@ -92,6 +92,7 @@ namespace hdg {
         TokenType getType();
         std::string getValue();
         Position* thisPosition();
+        std::string toString();
 
         friend std::ostream& operator<<(std::ostream& out, Token& tok);
     };

@@ -49,17 +49,22 @@ namespace hdg {
 
 
     std::ostream& operator<<(std::ostream &out, Token& tok) {
-        if (tok.m_value.empty()){
-            out << tokenTypeName[tok.m_type];
-        }else{
-            std::string str = ":";
-            out << tokenTypeName[tok.m_type] << str << tok.m_value;
-        }
+        out << tok.toString();
         return out;
     }
 
     Position* Token::thisPosition() {
         return &m_position;
+    }
+
+    std::string Token::toString() {
+        std::string str;
+        if (m_value.empty()){
+            str = tokenTypeName[m_type];
+        }else{
+            str = tokenTypeName[m_type] + ":" + m_value;
+        }
+        return str;
     }
 
     bool operator<(Token a, Token b){

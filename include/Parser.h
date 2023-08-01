@@ -19,6 +19,7 @@
 #include "node/UnaryOperatorNode.h"
 #include "node/VariableAssignNode.h"
 #include "node/VariableAccessNode.h"
+#include "node/IfNode.h"
 #include "error/InvalidSyntaxError.h"
 
 namespace hdg {
@@ -42,6 +43,7 @@ namespace hdg {
         Node* term();
         Node* factor();
         Node* power();
+        Node* ifExpr();
 
         Node* binaryOperator(const std::set<Token, std::less<>>&opers, std::function<Node*()> funA, std::function<Node*()> funB=nullptr);
         Node* unaryOperator(const std::set<Token>&opers, std::function<Node*()> fun);

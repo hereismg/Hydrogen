@@ -31,7 +31,7 @@ namespace hdg {
 
                 Interpreter interpreter(tree, &globalEnvironment);
 
-//                std::cout << tree->toString() << std::endl;
+                std::cout << tree->toString() << std::endl;
                 std::cout << interpreter.run() << std::endl;
 
 //                delete tree;

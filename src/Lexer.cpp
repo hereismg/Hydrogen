@@ -96,6 +96,10 @@ namespace hdg {
                 m_tokens.emplace_back(RPAREN, Position(m_text, m_pos));
                 advance();
             }
+            else if (m_currentChar == ':'){
+                m_tokens.emplace_back(COLON, Position(m_text, m_pos));
+                advance();
+            }
             else{
                 throw IllegalCharError(
                         "Expect digital, '+', '-', '*', '/' or '^'.",

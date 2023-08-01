@@ -35,6 +35,11 @@ namespace hdg {
         RPAREN,
         EQ,         // 赋值语句的等于号“=”
 
+        IF,
+        ELIF,
+        ELSE,
+        COLON,
+
         EF,
         NONE
     };
@@ -60,6 +65,8 @@ namespace hdg {
             {LPAREN,        "LPAREN"},
             {RPAREN,        "RPAREN"},
             {EQ,            "EQ"},
+
+            {COLON,         "COLON"},
 
             {EF,            "EF"},          // EOF   end of file    由于EOF是C++中的关键字，所以这里用EF代替
             {NONE,          "NONE"}

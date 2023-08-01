@@ -18,6 +18,9 @@ namespace hdg {
             "not",
             "and",
             "or",
+            "if",
+            "elif",
+            "else"
     };
 
     enum LegalChar{

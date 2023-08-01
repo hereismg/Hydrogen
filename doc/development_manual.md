@@ -25,10 +25,17 @@ term        : factor (mul|div factor)*
 
 factor      : power (pow factor)*
 
-power       : identifier
-            : int|float
+power       : identifier|int|float
             : (plus|minus) power
             : lparen expr rparen
+            : if-expr
+            : for-expr
+            : while-expr
+
+if-expr     : expr keyword:if expr (else expr)?
+            : keyword:if expr : expr 
+              (keyword:elif expr : expr)*
+              (keyword:else expr)?
 ```
 
 ## 项目目录结构

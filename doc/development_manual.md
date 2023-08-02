@@ -14,9 +14,9 @@
 
 ```CFG
 expr        : identifier eq expr
-            : comp-expr (keyword:and|keyword:or comp-expr)*
+            : comp-expr ("and"|"or" comp-expr)*
 
-comp-expr   : keyword:not comp-expr
+comp-expr   : "not" comp-expr
             : arith-expr (ee|gt|lt|gte|lte arith-expr)*
 
 arith-expr  : term (plus|minus term)* 
@@ -32,10 +32,14 @@ power       : identifier|int|float
             : for-expr
             : while-expr
 
-if-expr     : expr keyword:if expr (else expr)?
-            : keyword:if expr : expr 
-              (keyword:elif expr : expr)*
-              (keyword:else expr)?
+if-expr     : expr "if" expr (else expr)?
+            : "if" expr colon expr 
+              ("elif" expr colon expr)*
+              ("else" expr)?
+
+for-expr    : "for" identifier (from int)? to int (step int)? colon expr
+
+while-expr  : "while" expr colon expr
 ```
 
 ## 项目目录结构

@@ -157,6 +157,9 @@ namespace hdg {
         else if (m_currentToken->match(KEYWORD, "if")){
             return ifExpr();
         }
+        else if (m_currentToken->match(KEYWORD, "for")){
+            return forExpr();
+        }
         else {
             throw InvalidSyntaxError(
                     "Expected identifier, int, float, '+', '-' or '('.",
@@ -203,6 +206,87 @@ namespace hdg {
         }
 
         return ifNode;
+    }
+
+    Node *Parser::forExpr() {
+        Position position(*m_currentToken->thisPosition());
+        ForNode* forNode;
+        Token index(IDENTIFIER);
+        int from = 0,
+            to,
+            step = 1;
+        Node* node;
+
+        if (m_currentToken->match(KEYWORD, "for")) advance();
+
+        if (m_currentToken->getType() == IDENTIFIER) index.setValue(m_currentToken->getValue());
+        else throw InvalidSyntaxError(
+                "Expected identifier.",
+                *m_currentToken->thisPosition()
+                );
+        advance();
+
+        if (m_currentToken->match(KEYWORD, "from")){
+            advance();
+
+            if (m_currentToken->getType() != INT){
+                throw InvalidSyntaxError(
+                        "Expected int",
+                        *m_currentToken->thisPosition()
+                        );
+            }
+
+            from = atoi(m_currentToken->getValue().c_str());
+            advance();
+        }
+
+        if (m_currentToken->match(KEYWORD, "to")){
+            advance();
+
+            if (m_currentToken->getType() != INT){
+                throw InvalidSyntaxError(
+                        "Expected int",
+                        *m_currentToken->thisPosition()
+                );
+            }
+
+            to = atoi(m_currentToken->getValue().c_str());
+            advance();
+        }
+        else{
+            throw InvalidSyntaxError(
+                    "Expected 'to'",
+                    *m_currentToken->thisPosition()
+                    );
+        }
+
+        if (m_currentToken->match(KEYWORD, "step")){
+            advance();
+
+            if (m_currentToken->getType() != INT){
+                throw InvalidSyntaxError(
+                        "Expected int",
+                        *m_currentToken->thisPosition()
+                );
+            }
+
+            step = atoi(m_currentToken->getValue().c_str());
+            advance();
+        }
+
+        if (m_currentToken->getType() != COLON){
+            throw InvalidSyntaxError(
+                    "Expected ':'",
+                    *m_currentToken->thisPosition()
+                    );
+        }
+        advance();
+
+        node = expr();
+
+        position.setPosEnd(node->thisPosition()->getPosEnd());
+
+        return new ForNode(index, from, to, step, node, position, m_environment);
     }
 
     Node *Parser::binaryOperator(const std::set<Token, std::less<>>&opers, std::function<Node*()> funA, std::function<Node*()> funB) {

@@ -168,4 +168,8 @@ namespace hdg {
         else return false;
     }
 
+    void Integer::setValue(int value) {
+        m_value = value;
+    }
+
 } // hdg

@@ -19,6 +19,7 @@ namespace hdg {
     public:
         explicit Integer(int value);
 
+        void setValue(int value);
         int getValue() const;
 
         DataType* plus(DataType* other) override;

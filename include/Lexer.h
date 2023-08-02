@@ -18,9 +18,16 @@ namespace hdg {
             "not",
             "and",
             "or",
+
             "if",
             "elif",
-            "else"
+            "else",
+
+            "for",
+            "from",
+            "to",
+            "step",
+            "while",
     };
 
     enum LegalChar{

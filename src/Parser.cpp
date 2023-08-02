@@ -60,8 +60,8 @@ namespace hdg {
         }
 
         return binaryOperator(
-            std::set<Token, std::less<>>{{KEYWORD, "and"}, {KEYWORD, "or"}},
-                [this](){return this->compExpr();}
+            std::set<Token, std::less<>>{{KEYWORD, "or"}, {KEYWORD, "and"}},
+            [this](){return this->compExpr();}
         );
     }
 
@@ -210,7 +210,6 @@ namespace hdg {
         Node* left = funA();
 
         while(m_tokens.end() != m_currentToken && opers.find(*m_currentToken) != opers.end()){
-            auto iter = opers.find(*m_currentToken);
             BinaryOperatorNode* oper = new BinaryOperatorNode(
                     *m_currentToken,
                     nullptr,

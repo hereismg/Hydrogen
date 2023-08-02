@@ -5,8 +5,9 @@
 #ifndef HDG_IFNODE_H
 #define HDG_IFNODE_H
 
-#include "Node.h"
 #include <vector>
+#include "Node.h"
+#include "../data_type/None.h"
 
 namespace hdg {
 

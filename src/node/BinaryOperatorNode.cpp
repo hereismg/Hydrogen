@@ -53,7 +53,19 @@ namespace hdg {
 
     DataType* BinaryOperatorNode::interpret() {
         DataType* left = m_left->interpret();
+        if (left->typeName == "None"){
+            throw RunTimeError(
+                "this is 'None'.",
+                *m_left->thisPosition()
+                    );
+        }
         DataType* right = m_right->interpret();
+        if (right->typeName == "None"){
+            throw RunTimeError(
+                    "this is 'None'.",
+                    *m_right->thisPosition()
+            );
+        }
 
         DataType* result = nullptr;
 

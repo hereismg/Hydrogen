@@ -8,6 +8,7 @@
 #include <string>
 #include <map>
 #include <utility>
+#include <iostream>
 #include "Position.h"
 
 namespace hdg {
@@ -95,9 +96,10 @@ namespace hdg {
         std::string toString();
 
         friend std::ostream& operator<<(std::ostream& out, Token& tok);
+        friend bool operator<(const Token& a, const Token& b);
     };
 
-    bool operator<(Token a, Token b);
+    bool operator<(const Token& left, const Token& right);
 } // hdg
 
 #endif //HDG_TOKEN_H

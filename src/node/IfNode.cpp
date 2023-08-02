@@ -2,7 +2,7 @@
 // Created by Magnesium on 2023/8/1.
 //
 
-#include "IfNode.h"
+#include "../../include/node/IfNode.h"
 
 namespace hdg {
     IfNode::IfNode(const Position &position, Environment *environment):
@@ -17,13 +17,14 @@ namespace hdg {
             conditions.push_back(condition);
             expressions.push_back(expression);
         }
+        m_position.setPosEnd(expression->thisPosition()->getPosEnd());
     }
 
     std::string IfNode::toString() {
         std::string result;
         result += "if " + conditions[0]->toString() + ": " + expressions[0]->toString() + " ";
         for (int i=1; i<conditions.size(); i++){
-            result += "elif " + conditions[0]->toString() + ": " + expressions[0]->toString() + " ";
+            result += "elif " + conditions[i]->toString() + ": " + expressions[i]->toString() + " ";
         }
         if (elseExpression != nullptr){
             result += "else :" + elseExpression->toString();
@@ -42,6 +43,6 @@ namespace hdg {
             return elseExpression->interpret();
         }
 
-        return nullptr;
+        return new None();
     }
 } // hdg

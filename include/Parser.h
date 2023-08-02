@@ -47,7 +47,6 @@ namespace hdg {
 
         Node* binaryOperator(const std::set<Token, std::less<>>&opers, std::function<Node*()> funA, std::function<Node*()> funB=nullptr);
         Node* unaryOperator(const std::set<Token>&opers, std::function<Node*()> fun);
-
     };
 
 } // hdg

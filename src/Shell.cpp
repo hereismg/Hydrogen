@@ -13,6 +13,7 @@ namespace hdg {
                                             {"true", Integer(1)},
                                             {"false", Integer(0)},
                                     });
+        globalEnvironment.setSymbol("None", new None());
 
         while(true){
             std::string text;
@@ -24,14 +25,14 @@ namespace hdg {
                 Lexer lexer(&text);
                 lexer.run();
 
-                std::cout << lexer.getTokens() << std::endl;
+//                std::cout << lexer.getTokens() << std::endl;
 
                 Parser parser(lexer.getTokens(), &globalEnvironment);
                 Node* tree = parser.run();
 
                 Interpreter interpreter(tree, &globalEnvironment);
 
-                std::cout << tree->toString() << std::endl;
+//                std::cout << tree->toString() << std::endl;
                 std::cout << interpreter.run() << std::endl;
 
 //                delete tree;

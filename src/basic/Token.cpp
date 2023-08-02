@@ -67,13 +67,12 @@ namespace hdg {
         return str;
     }
 
-    bool operator<(Token a, Token b){
-        if (a.getType()==b.getType()){
-            return a.getValue() < a.getValue();
+    bool operator<(const Token &left, const Token &right) {
+        if (left.m_type == right.m_type){
+            return left.m_value < right.m_value;
         }
         else {
-            return a.getType() < b.getType();
+            return left.m_type < right.m_type;
         }
     }
-
 } // hdg

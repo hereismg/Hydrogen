@@ -23,21 +23,21 @@ namespace hdg {
         m_parent = parent;
     }
 
-    void Environment::setSymbol(const std::string &name, DataType *value) {
+    void Environment::addSymbol(const std::string &name, DataType *value) {
         m_symbolTable[name] = value;
     }
 
-    void Environment::setSymbol(const std::string& name, const Integer &value) {
+    void Environment::addSymbol(const std::string& name, const Integer &value) {
         m_symbolTable[name] = new Integer(value);
     }
 
-    void Environment::setSymbol(std::initializer_list<std::pair<std::string, const Integer &>> list) {
+    void Environment::addSymbol(std::initializer_list<std::pair<std::string, const Integer &>> list) {
         for (const auto& iter: list){
-            setSymbol(iter.first, iter.second);
+            addSymbol(iter.first, iter.second);
         }
     }
 
-    void Environment::setSymbol(const std::string& name, const Float &value) {
+    void Environment::addSymbol(const std::string& name, const Float &value) {
         m_symbolTable[name] = new Float(value);
     }
 
@@ -50,10 +50,13 @@ namespace hdg {
     }
 
     DataType* Environment::getSymbol(const std::string &name) {
-        if (m_symbolTable.find(name) == m_symbolTable.end()){
-            throw -1;
+        if (m_symbolTable.find(name) != m_symbolTable.end()){
+            return m_symbolTable[name];
         }
-        return m_symbolTable[name];
+        else {
+            if (m_parent == nullptr) throw -1;
+            return m_parent->getSymbol(name);
+        }
     }
 
 

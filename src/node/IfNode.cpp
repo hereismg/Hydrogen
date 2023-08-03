@@ -6,7 +6,11 @@
 
 namespace hdg {
     IfNode::IfNode(const Position &position, Environment *environment):
-        Node(position, environment), elseExpression(nullptr){
+        Node(position, new Environment("if", environment)), elseExpression(nullptr){
+    }
+
+    IfNode::~IfNode() noexcept {
+        delete m_environment;
     }
 
     void IfNode::addBranch(Node *condition, Node *expression) {

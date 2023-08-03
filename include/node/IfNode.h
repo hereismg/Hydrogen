@@ -18,7 +18,8 @@ namespace hdg {
         Node* elseExpression;
 
     public:
-        IfNode(const Position& position, Environment* environment);
+        IfNode(const Position& position, Environment* parent);
+        ~IfNode() override;
 
         void addBranch(Node* condition, Node* expression);
 

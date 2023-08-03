@@ -21,7 +21,7 @@ namespace hdg {
     DataType *ForNode::interpret() {
         auto* index = new Integer(m_from);
         DataType* result;
-        m_environment->setSymbol(m_index.getValue(), index);
+        m_environment->addSymbol(m_index.getValue(), index);
 
         while(index->getValue() <= m_to){
             result = m_expr->interpret();

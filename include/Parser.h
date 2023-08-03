@@ -21,6 +21,7 @@
 #include "node/VariableAccessNode.h"
 #include "node/IfNode.h"
 #include "node/ForNode.h"
+#include "node/WhileNode.h"
 #include "error/InvalidSyntaxError.h"
 
 namespace hdg {
@@ -38,17 +39,18 @@ namespace hdg {
         void advance();
         void retreat();
 
-        Node* expr();
-        Node* compExpr();
-        Node* arithExpr();
-        Node* term();
-        Node* factor();
-        Node* power();
-        Node* ifExpr();
-        Node* forExpr();
+        Node* expr(Environment* environment);
+        Node* compExpr(Environment* environment);
+        Node* arithExpr(Environment* environment);
+        Node* term(Environment* environment);
+        Node* factor(Environment* environment);
+        Node* power(Environment* environment);
+        Node* ifExpr(Environment* environment);
+        Node* forExpr(Environment* environment);
+        Node* whileExpr(Environment* environment);
 
-        Node* binaryOperator(const std::set<Token, std::less<>>&opers, std::function<Node*()> funA, std::function<Node*()> funB=nullptr);
-        Node* unaryOperator(const std::set<Token>&opers, std::function<Node*()> fun);
+        Node* binaryOperator(Environment* environment, const std::set<Token, std::less<>>&opers, std::function<Node*(Environment* envir)> funA, std::function<Node*(Environment* envir)> funB=nullptr);
+        Node* unaryOperator(Environment* environment, const std::set<Token>&opers, std::function<Node*(Environment* envir)> fun);
     };
 
 } // hdg

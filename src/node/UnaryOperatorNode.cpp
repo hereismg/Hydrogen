@@ -6,12 +6,12 @@
 
 namespace hdg {
 
-    UnaryOperatorNode::UnaryOperatorNode(TokenType oper, Node* obj, const Position& position):
-            Node(position), m_oper(oper), m_obj(obj){
+    UnaryOperatorNode::UnaryOperatorNode(TokenType oper, Node* obj, const Position& position, Environment* environment):
+            Node(position, environment), m_oper(oper), m_obj(obj){
     }
 
-    UnaryOperatorNode::UnaryOperatorNode(Token oper, Node *obj, const Position &position):
-        Node(position), m_oper(oper), m_obj(obj){
+    UnaryOperatorNode::UnaryOperatorNode(Token oper, Node *obj, const Position &position, Environment* environment):
+        Node(position, environment), m_oper(oper), m_obj(obj){
 
     }
 

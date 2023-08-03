@@ -5,8 +5,8 @@
 #include "../../include/node/IfNode.h"
 
 namespace hdg {
-    IfNode::IfNode(const Position &position, Environment *environment):
-        Node(position, new Environment("if", environment)), elseExpression(nullptr){
+    IfNode::IfNode(const Position &position, Environment *parent):
+        Node(position, new Environment("if", parent)), elseExpression(nullptr){
     }
 
     IfNode::~IfNode() noexcept {

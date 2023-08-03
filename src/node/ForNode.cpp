@@ -6,12 +6,17 @@
 
 namespace hdg {
 
-    ForNode::ForNode(const Token &index, int to, const Position &position, Environment *environment):
-            Node(position, environment), m_index(index), m_from(0), m_to(to), m_step(1){
+    ForNode::ForNode(const Token &index, int to, const Position &position, Environment *parent):
+            Node(position, new Environment("for", parent)), m_index(index), m_from(0), m_to(to), m_step(1){
     }
+
     ForNode::ForNode(const Token &index, int from, int to, int step, Node *expr,
-                     const Position &position, Environment *environment):
-            Node(position, environment), m_index(index), m_from(from), m_to(to), m_step(step), m_expr(expr){
+                     const Position &position, Environment *parent):
+            Node(position, new Environment("for", parent)), m_index(index), m_from(from), m_to(to), m_step(step), m_expr(expr){
+    }
+
+    ForNode::~ForNode() {
+        delete m_environment;
     }
 
     std::string ForNode::toString() {

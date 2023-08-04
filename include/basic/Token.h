@@ -80,6 +80,7 @@ namespace hdg {
         Position m_position;
 
     public:
+        Token();
         Token(TokenType type, std::string value, const Position& position);
         Token(TokenType type, std::string value);
         Token(TokenType type);

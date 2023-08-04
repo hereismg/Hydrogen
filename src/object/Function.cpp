@@ -5,4 +5,7 @@
 #include "../../include/object/Function.h"
 
 namespace hdg {
+    Function::Function()= default;
+
+
 } // hdg

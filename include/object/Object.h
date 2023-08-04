@@ -15,17 +15,11 @@ namespace hdg {
     const std::string DT_INTEGER = "Integer";
     const std::string DT_FLOAT = "FLOAT";
 
-    class Float;
-    class Function;
-    class Integer;
-    class List;
-    class None;
-    class String;
-
 
     class Object {
     public:
-        const std::string typeName;
+        std::string typeName;
+        Object();
         explicit Object(std::string typeName);
         virtual ~Object();
 
@@ -50,11 +44,6 @@ namespace hdg {
         virtual void illegalOperator();
         virtual std::string toString() = 0;
         virtual Object* copy() = 0;
-    };
-
-    class BasicOperator{
-    public:
-        static Object* plus(Integer* left, Integer* right);
     };
 } // hdg
 

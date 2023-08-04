@@ -5,6 +5,8 @@
 #include "../../include/basic/Token.h"
 
 namespace hdg {
+    Token::Token(){}
+
     Token::Token(TokenType type, std::string value, const Position &position):
         m_type(type), m_value(std::move(value)), m_position(position){
     }

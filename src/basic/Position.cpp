@@ -6,6 +6,10 @@
 
 namespace hdg {
 
+    Position::Position():
+        m_context(nullptr), m_posStart(-1), m_posEnd(-1){
+    }
+
     Position::Position(std::string* context, int posStart, int posEnd):
         m_context(context), m_posStart(posStart), m_posEnd(posEnd){
     }
@@ -41,6 +45,7 @@ namespace hdg {
         std::string arrowEnd(m_posEnd-m_posStart, '^');
         return *m_context + "\n" + arrowStart + arrowEnd;
     }
+
 
 
 } // hdg

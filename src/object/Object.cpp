@@ -6,11 +6,13 @@
 
 
 namespace hdg {
-    Object::~Object() = default;
+
+    Object::Object() = default;
 
     Object::Object(std::string typeName): typeName(std::move(typeName)) {
-
     }
+
+    Object::~Object() = default;
 
     Object *Object::plus(Object *other) {
         illegalOperator();
@@ -89,4 +91,5 @@ namespace hdg {
     void Object::illegalOperator() {
         throw -2;
     }
+
 } // hdg

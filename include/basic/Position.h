@@ -16,6 +16,7 @@ namespace hdg {
         int m_posEnd;
 
     public:
+        Position();
         Position(std::string* context, int posStart, int posEnd);
         Position(std::string* context, int posStart);
         Position(const Position& position);

@@ -13,7 +13,7 @@ namespace hdg {
 
     class NumberNode: public Node{
     private:
-        DataType* m_value;
+        Object* m_value;
 
     public:
         NumberNode(int value, const Position& position);
@@ -22,7 +22,7 @@ namespace hdg {
         ~NumberNode() override;
 
         std::string toString() override;
-        DataType* interpret() override;
+        Object* interpret() override;
     };
 
 } // hdg

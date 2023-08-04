@@ -15,9 +15,9 @@ namespace hdg {
         return m_name;
     }
 
-    DataType *VariableAccessNode::interpret() {
+    Object *VariableAccessNode::interpret() {
         try{
-            DataType* value = m_environment->getSymbol(m_name);
+            Object* value = m_environment->getSymbol(m_name);
             return value->copy();
         }
         catch (int error){

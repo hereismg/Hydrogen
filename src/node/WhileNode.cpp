@@ -21,8 +21,8 @@ namespace hdg {
         return "while";
     }
 
-    DataType *WhileNode::interpret() {
-        DataType* result = new None();
+    Object *WhileNode::interpret() {
+        Object* result = new None();
         while(m_condition->interpret()->isTrue()){
             result = m_expression->interpret();
         }

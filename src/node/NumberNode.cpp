@@ -29,7 +29,7 @@ namespace hdg {
         return m_value->toString();
     }
 
-    DataType *NumberNode::interpret() {
+    Object *NumberNode::interpret() {
         return m_value->copy();
     }
 } // hdg

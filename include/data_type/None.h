@@ -5,19 +5,19 @@
 #ifndef HDG_NONE_H
 #define HDG_NONE_H
 
-#include "DataType.h"
+#include "Object.h"
 #include "Integer.h"
 
 namespace hdg {
 
-    class None: public DataType{
+    class None: public Object{
     public:
         None();
 
-        DataType* notOperator() override;
+        Object* notOperator() override;
 
         std::string toString() override;
-        DataType* copy() override;
+        Object* copy() override;
     };
 
 } // hdg

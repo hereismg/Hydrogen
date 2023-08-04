@@ -22,7 +22,7 @@ namespace hdg {
         void setExpression(Node* expression);
 
         std::string toString() override;
-        DataType* interpret() override;
+        Object* interpret() override;
 
     };
 

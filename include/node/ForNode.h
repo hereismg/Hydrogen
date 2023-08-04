@@ -30,7 +30,7 @@ namespace hdg {
         void setExpr(Node* expr);
 
         std::string toString() override;
-        DataType* interpret() override;
+        Object* interpret() override;
     };
 
 } // hdg

@@ -36,7 +36,7 @@ namespace hdg {
         return result;
     }
 
-    DataType *IfNode::interpret() {
+    Object *IfNode::interpret() {
         for (int i=0; i<conditions.size(); i++){
             if (conditions[i]->interpret()->isTrue()){
                 return expressions[i]->interpret();

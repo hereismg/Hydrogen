@@ -42,9 +42,9 @@ namespace hdg {
         return "for";
     }
 
-    DataType *ForNode::interpret() {
+    Object *ForNode::interpret() {
         auto* index = new Integer(m_from);
-        DataType* result;
+        Object* result;
         m_environment->addLocalSymbol(m_index.getValue(), index);
 
         if (m_from <= m_to){

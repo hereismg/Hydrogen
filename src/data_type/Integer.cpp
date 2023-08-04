@@ -5,7 +5,7 @@
 #include "../../include/data_type/Integer.h"
 
 namespace hdg {
-    Integer::Integer(int value): DataType(DT_INTEGER), m_value(value) {
+    Integer::Integer(int value): Object(DT_INTEGER), m_value(value) {
     }
 
 
@@ -13,7 +13,7 @@ namespace hdg {
         return m_value;
     }
 
-    DataType *Integer::plus(DataType* other) {
+    Object *Integer::plus(Object* other) {
         if (other->typeName == DT_INTEGER){
             int result = m_value + ((Integer*)other)->m_value;
             return new Integer(result);
@@ -24,7 +24,7 @@ namespace hdg {
         }
     }
 
-    DataType *Integer::minus(DataType *other) {
+    Object *Integer::minus(Object *other) {
         if (other->typeName == DT_INTEGER){
             int result = m_value - ((Integer*)other)->m_value;
             return new Integer(result);
@@ -35,7 +35,7 @@ namespace hdg {
         }
     }
 
-    DataType *Integer::mul(DataType *other) {
+    Object *Integer::mul(Object *other) {
         if (other->typeName == DT_INTEGER){
             int result = m_value * ((Integer*)other)->m_value;
             return new Integer(result);
@@ -46,7 +46,7 @@ namespace hdg {
         }
     }
 
-    DataType *Integer::div(DataType *other) {
+    Object *Integer::div(Object *other) {
         if (other->typeName == DT_INTEGER){
             int right = ((Integer*)other)->m_value;
             if (right == 0) throw -1;
@@ -63,7 +63,7 @@ namespace hdg {
         }
     }
 
-    DataType *Integer::pow(DataType *other) {
+    Object *Integer::pow(Object *other) {
         if (other->typeName == DT_INTEGER){
             double result = std::pow(m_value, ((Integer*)other)->m_value);
             return new Float(result);
@@ -74,7 +74,7 @@ namespace hdg {
         }
     }
 
-    DataType *Integer::equation(DataType *other) {
+    Object *Integer::equation(Object *other) {
         if (other->typeName == DT_INTEGER){
             int result = m_value == ((Integer*)other)->m_value;
             return new Integer(result);
@@ -85,7 +85,7 @@ namespace hdg {
         }
     }
 
-    DataType *Integer::notEquation(DataType *other) {
+    Object *Integer::notEquation(Object *other) {
         if (other->typeName == DT_INTEGER){
             int result = m_value != ((Integer*)other)->m_value;
             return new Integer(result);
@@ -96,7 +96,7 @@ namespace hdg {
         }
     }
 
-    DataType *Integer::greaterThan(DataType *other) {
+    Object *Integer::greaterThan(Object *other) {
         if (other->typeName == DT_INTEGER){
             int result = m_value > ((Integer*)other)->m_value;
             return new Integer(result);
@@ -107,7 +107,7 @@ namespace hdg {
         }
     }
 
-    DataType *Integer::lessThan(DataType *other) {
+    Object *Integer::lessThan(Object *other) {
         if (other->typeName == DT_INTEGER){
             int result = m_value < ((Integer*)other)->m_value;
             return new Integer(result);
@@ -118,7 +118,7 @@ namespace hdg {
         }
     }
 
-    DataType *Integer::greaterThanEquation(DataType *other) {
+    Object *Integer::greaterThanEquation(Object *other) {
         if (other->typeName == DT_INTEGER){
             int result = m_value >= ((Integer*)other)->m_value;
             return new Integer(result);
@@ -129,7 +129,7 @@ namespace hdg {
         }
     }
 
-    DataType *Integer::lessThanEquation(DataType *other) {
+    Object *Integer::lessThanEquation(Object *other) {
         if (other->typeName == DT_INTEGER){
             int result = m_value <= ((Integer*)other)->m_value;
             return new Integer(result);
@@ -140,17 +140,17 @@ namespace hdg {
         }
     }
 
-    DataType *Integer::andOperator(DataType *other) {
+    Object *Integer::andOperator(Object *other) {
         bool result = isTrue() && other->isTrue();
         return new Integer(result);
     }
 
-    DataType *Integer::orOperator(DataType *other) {
+    Object *Integer::orOperator(Object *other) {
         bool result = isTrue() || other->isTrue();
         return new Integer(result);
     }
 
-    DataType *Integer::notOperator() {
+    Object *Integer::notOperator() {
         bool result = !isTrue();
         return new Integer(result);
     }
@@ -159,7 +159,7 @@ namespace hdg {
         return std::to_string(m_value);
     }
 
-    DataType *Integer::copy() {
+    Object *Integer::copy() {
         return new Integer(m_value);
     }
 

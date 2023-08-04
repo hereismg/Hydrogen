@@ -37,8 +37,8 @@ namespace hdg {
         return "(" + tokenTypeName[m_oper.getType()] + ", " + m_obj->toString() + ")";
     }
 
-    DataType* UnaryOperatorNode::interpret() {
-        DataType* value = m_obj->interpret();
+    Object* UnaryOperatorNode::interpret() {
+        Object* value = m_obj->interpret();
 
         if (m_oper.getType() == MINUS){
             if (value->typeName == DT_INTEGER){

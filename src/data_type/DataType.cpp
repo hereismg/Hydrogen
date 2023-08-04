@@ -2,91 +2,91 @@
 // Created by Magnesium on 2023/7/25.
 //
 
-#include "../../include/data_type/DataType.h"
+#include "../../include/data_type/Object.h"
 
 
 namespace hdg {
-    DataType::~DataType() = default;
+    Object::~Object() = default;
 
-    DataType::DataType(std::string typeName):typeName(std::move(typeName)) {
+    Object::Object(std::string typeName): typeName(std::move(typeName)) {
 
     }
 
-    DataType *DataType::plus(DataType *other) {
+    Object *Object::plus(Object *other) {
         illegalOperator();
         return nullptr;
     }
 
-    DataType *DataType::minus(DataType *other) {
+    Object *Object::minus(Object *other) {
         illegalOperator();
         return nullptr;
     }
 
-    DataType *DataType::mul(DataType *other) {
+    Object *Object::mul(Object *other) {
         illegalOperator();
         return nullptr;
     }
 
-    DataType *DataType::div(DataType *other) {
+    Object *Object::div(Object *other) {
         illegalOperator();
         return nullptr;
     }
 
-    DataType *DataType::pow(DataType *other) {
+    Object *Object::pow(Object *other) {
         illegalOperator();
         return nullptr;
     }
 
-    DataType *DataType::equation(DataType *other) {
+    Object *Object::equation(Object *other) {
         illegalOperator();
         return nullptr;
     }
 
-    DataType* DataType::notEquation(DataType* other){
+    Object* Object::notEquation(Object* other){
         illegalOperator();
         return nullptr;
     }
 
-    DataType *DataType::greaterThan(DataType *other) {
+    Object *Object::greaterThan(Object *other) {
         illegalOperator();
         return nullptr;
     }
 
-    DataType *DataType::lessThan(DataType *other) {
+    Object *Object::lessThan(Object *other) {
         illegalOperator();
         return nullptr;
     }
 
-    DataType *DataType::greaterThanEquation(DataType *other) {
+    Object *Object::greaterThanEquation(Object *other) {
         illegalOperator();
         return nullptr;
     }
 
-    DataType *DataType::lessThanEquation(DataType *other) {
+    Object *Object::lessThanEquation(Object *other) {
         illegalOperator();
         return nullptr;
     }
 
-    DataType *DataType::andOperator(DataType *other) {
+    Object *Object::andOperator(Object *other) {
         illegalOperator();
         return nullptr;
     }
 
-    DataType *DataType::orOperator(DataType *other) {
+    Object *Object::orOperator(Object *other) {
         illegalOperator();
         return nullptr;
     }
 
-    DataType *DataType::notOperator() {
+    Object *Object::notOperator() {
         illegalOperator();
         return nullptr;
     }
 
-    bool DataType::isTrue() {
+    bool Object::isTrue() {
         return false;
     }
 
-    void DataType::illegalOperator() {
+    void Object::illegalOperator() {
         throw -2;
     }
 } // hdg

@@ -24,7 +24,7 @@ namespace hdg {
         void addBranch(Node* condition, Node* expression);
 
         std::string toString() override;
-        DataType* interpret() override;
+        Object* interpret() override;
     };
 
 } // hdg

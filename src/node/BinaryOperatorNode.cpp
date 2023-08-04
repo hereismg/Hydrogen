@@ -51,15 +51,15 @@ namespace hdg {
         }
     }
 
-    DataType* BinaryOperatorNode::interpret() {
-        DataType* left = m_left->interpret();
+    Object* BinaryOperatorNode::interpret() {
+        Object* left = m_left->interpret();
         if (left->typeName == "None"){
             throw RunTimeError(
                 "this is 'None'.",
                 *m_left->thisPosition()
                     );
         }
-        DataType* right = m_right->interpret();
+        Object* right = m_right->interpret();
         if (right->typeName == "None"){
             throw RunTimeError(
                     "this is 'None'.",
@@ -67,7 +67,7 @@ namespace hdg {
             );
         }
 
-        DataType* result = nullptr;
+        Object* result = nullptr;
 
         if (m_oper.getType() == PLUS){
             result = left->plus(right);

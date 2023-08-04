@@ -6,13 +6,13 @@
 #ifndef HDG_FLOAT_H
 #define HDG_FLOAT_H
 
-#include "DataType.h"
+#include "Object.h"
 #include "Integer.h"
 #include <iostream>
 
 namespace hdg {
 
-    class Float: public DataType {
+    class Float: public Object {
     private:
         double m_value;
 
@@ -22,26 +22,26 @@ namespace hdg {
 
         [[nodiscard]] double getValue() const;
 
-        DataType* plus(DataType* other) override;
-        DataType* minus(DataType* other) override;
-        DataType* mul(DataType* other) override;
-        DataType* div(DataType* other) override;
-        DataType* pow(DataType* other) override;
+        Object* plus(Object* other) override;
+        Object* minus(Object* other) override;
+        Object* mul(Object* other) override;
+        Object* div(Object* other) override;
+        Object* pow(Object* other) override;
 
-        DataType* equation(DataType* other) override;
-        DataType* notEquation(DataType* other) override;
-        DataType* greaterThan(DataType* other) override;
-        DataType* lessThan(DataType* other) override;
-        DataType* greaterThanEquation(DataType* other) override;
-        DataType* lessThanEquation(DataType* other) override;
+        Object* equation(Object* other) override;
+        Object* notEquation(Object* other) override;
+        Object* greaterThan(Object* other) override;
+        Object* lessThan(Object* other) override;
+        Object* greaterThanEquation(Object* other) override;
+        Object* lessThanEquation(Object* other) override;
 
-        DataType* andOperator(DataType* other) override;
-        DataType* orOperator(DataType* other) override;
-        DataType* notOperator() override;
+        Object* andOperator(Object* other) override;
+        Object* orOperator(Object* other) override;
+        Object* notOperator() override;
 
         bool isTrue() override;
         std::string toString() override;
-        DataType* copy() override;
+        Object* copy() override;
     };
 
 } // hdg

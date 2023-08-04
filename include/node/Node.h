@@ -6,7 +6,7 @@
 #define HDG_NODE_H
 
 #include <string>
-#include "../data_type/DataType.h"
+#include "../data_type/Object.h"
 #include "../basic/Position.h"
 #include "../basic/Environment.h"
 
@@ -27,7 +27,7 @@ namespace hdg {
         Environment* thisEnvironment();
 
         virtual std::string toString() = 0;
-        virtual DataType* interpret() = 0;
+        virtual Object* interpret() = 0;
     };
 
 } // hdg

@@ -18,8 +18,8 @@ namespace hdg {
         return m_name + "=" + value;
     }
 
-    DataType *VariableAssignNode::interpret() {
-        DataType* value = m_expr->interpret();
+    Object *VariableAssignNode::interpret() {
+        Object* value = m_expr->interpret();
         m_environment->addSymbol(m_name, value);
         return value->copy();
     }

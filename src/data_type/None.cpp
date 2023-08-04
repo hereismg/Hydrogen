@@ -6,7 +6,7 @@
 
 namespace hdg {
     None::None():
-        DataType("None"){
+            Object("None"){
 
     }
 
@@ -14,11 +14,11 @@ namespace hdg {
         return "None";
     }
 
-    DataType *None::copy() {
+    Object *None::copy() {
         return new None();
     }
 
-    DataType *None::notOperator() {
+    Object *None::notOperator() {
         return new Integer(1);
     }
 } // hdg

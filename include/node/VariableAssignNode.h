@@ -19,7 +19,7 @@ namespace hdg {
         ~VariableAssignNode() override;
 
         std::string toString() override;
-        DataType* interpret() override;
+        Object* interpret() override;
     };
 
 } // hdg

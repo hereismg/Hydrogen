@@ -23,7 +23,7 @@ namespace hdg {
         m_parent = parent;
     }
 
-    void Environment::addSymbol(const std::string &name, DataType *value) {
+    void Environment::addSymbol(const std::string &name, Object *value) {
         Environment* iter = this;
         std::stack<Environment*> stack;
         while (iter != nullptr) {
@@ -40,7 +40,7 @@ namespace hdg {
         iter->m_symbolTable[name] = value;
     }
 
-    void Environment::addLocalSymbol(const std::string &name, hdg::DataType *value) {
+    void Environment::addLocalSymbol(const std::string &name, hdg::Object *value) {
         m_symbolTable[name] = value;
     }
 
@@ -66,7 +66,7 @@ namespace hdg {
         return m_parent;
     }
 
-    DataType* Environment::getSymbol(const std::string &name) {
+    Object* Environment::getSymbol(const std::string &name) {
         if (m_symbolTable.find(name) != m_symbolTable.end()){
             return m_symbolTable[name];
         }

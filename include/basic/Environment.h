@@ -9,12 +9,12 @@
 #include <string>
 #include <initializer_list>
 #include <stack>
-#include "../data_type/DataType.h"
+#include "../data_type/Object.h"
 #include "../data_type/Integer.h"
 #include "../data_type/Float.h"
 
 namespace hdg {
-    typedef std::map<std::string, DataType*> SymbolTable;
+    typedef std::map<std::string, Object*> SymbolTable;
 
     class Environment {
     private:
@@ -28,8 +28,8 @@ namespace hdg {
 
         void setName(std::string name);
         void setParent(Environment* parent);
-        void addSymbol(const std::string& name, DataType* value);
-        void addLocalSymbol(const std::string& name, DataType* value);
+        void addSymbol(const std::string& name, Object* value);
+        void addLocalSymbol(const std::string& name, Object* value);
 
         void addSymbol(const std::string& name, const Integer& value);
         void addSymbol(std::initializer_list<std::pair<std::string, const Integer&>> list);
@@ -37,7 +37,7 @@ namespace hdg {
 
         std::string getName();
         Environment* getParent();
-        DataType* getSymbol(const std::string& name);
+        Object* getSymbol(const std::string& name);
     };
 
 } // hdg

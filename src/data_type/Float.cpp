@@ -5,12 +5,12 @@
 #include "../../include/data_type/Float.h"
 
 namespace hdg {
-    Float::Float(float value): DataType(DT_FLOAT), m_value(value) {
+    Float::Float(float value): Object(DT_FLOAT), m_value(value) {
 
     }
 
 
-    Float::Float(double value): DataType(DT_FLOAT), m_value(value) {
+    Float::Float(double value): Object(DT_FLOAT), m_value(value) {
 
     }
 
@@ -18,7 +18,7 @@ namespace hdg {
         return m_value;
     }
 
-    DataType* Float::plus(DataType *other) {
+    Object* Float::plus(Object *other) {
         if (other->typeName == DT_FLOAT){
             double result = m_value + ((Float*)other)->m_value;
             return new Float(result);
@@ -29,7 +29,7 @@ namespace hdg {
         }
     }
 
-    DataType *Float::minus(DataType *other) {
+    Object *Float::minus(Object *other) {
         if (other->typeName == DT_FLOAT){
             double result = m_value - ((Float*)other)->m_value;
             return new Float(result);
@@ -40,7 +40,7 @@ namespace hdg {
         }
     }
 
-    DataType *Float::mul(DataType *other) {
+    Object *Float::mul(Object *other) {
         if (other->typeName == DT_FLOAT){
             double result = m_value * ((Float*)other)->m_value;
             return new Float(result);
@@ -51,7 +51,7 @@ namespace hdg {
         }
     }
 
-    DataType *Float::div(DataType *other) {
+    Object *Float::div(Object *other) {
         if (other->typeName == DT_FLOAT){
             double result = m_value / ((Float*)other)->m_value;
             return new Float(result);
@@ -62,7 +62,7 @@ namespace hdg {
         }
     }
 
-    DataType *Float::pow(DataType *other) {
+    Object *Float::pow(Object *other) {
         if (other->typeName == DT_FLOAT){
             double result = std::pow(m_value, ((Float*)other)->m_value);
             return new Float(result);
@@ -73,7 +73,7 @@ namespace hdg {
         }
     }
 
-    DataType *Float::equation(DataType *other) {
+    Object *Float::equation(Object *other) {
         if (other->typeName == DT_FLOAT){
             int result = m_value == ((Float*)other)->m_value;
             return new Integer(result);
@@ -84,7 +84,7 @@ namespace hdg {
         }
     }
 
-    DataType* Float::notEquation(DataType* other) {
+    Object* Float::notEquation(Object* other) {
         if (other->typeName == DT_FLOAT){
             int result = m_value != ((Float*)other)->m_value;
             return new Integer(result);
@@ -95,7 +95,7 @@ namespace hdg {
         }
     }
 
-    DataType *Float::greaterThan(DataType *other) {
+    Object *Float::greaterThan(Object *other) {
         if (other->typeName == DT_FLOAT){
             int result = m_value > ((Float*)other)->m_value;
             return new Integer(result);
@@ -106,7 +106,7 @@ namespace hdg {
         }
     }
 
-    DataType *Float::lessThan(DataType *other) {
+    Object *Float::lessThan(Object *other) {
         if (other->typeName == DT_FLOAT){
             int result = m_value < ((Float*)other)->m_value;
             return new Integer(result);
@@ -117,7 +117,7 @@ namespace hdg {
         }
     }
 
-    DataType *Float::greaterThanEquation(DataType *other) {
+    Object *Float::greaterThanEquation(Object *other) {
         if (other->typeName == DT_FLOAT){
             int result = m_value >= ((Float*)other)->m_value;
             return new Integer(result);
@@ -128,7 +128,7 @@ namespace hdg {
         }
     }
 
-    DataType *Float::lessThanEquation(DataType *other) {
+    Object *Float::lessThanEquation(Object *other) {
         if (other->typeName == DT_FLOAT){
             int result = m_value <= ((Float*)other)->m_value;
             return new Integer(result);
@@ -139,17 +139,17 @@ namespace hdg {
         }
     }
 
-    DataType *Float::andOperator(DataType *other) {
+    Object *Float::andOperator(Object *other) {
         int result = isTrue() && other->isTrue();
         return new Integer(result);
     }
 
-    DataType *Float::orOperator(DataType *other) {
+    Object *Float::orOperator(Object *other) {
         int result = isTrue() || other->isTrue();
         return new Integer(result);
     }
 
-    DataType *Float::notOperator() {
+    Object *Float::notOperator() {
         int result = !isTrue();
         return new Integer(result);
     }
@@ -168,7 +168,7 @@ namespace hdg {
         }
     }
 
-    DataType *Float::copy() {
+    Object *Float::copy() {
         return new Float(m_value);
     }
 

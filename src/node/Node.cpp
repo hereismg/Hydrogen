@@ -27,7 +27,7 @@ namespace hdg {
         return "NULL";
     }
 
-    DataType* Node::interpret() {
+    Object* Node::interpret() {
         return nullptr;
     }
 

@@ -17,7 +17,7 @@ namespace hdg {
     std::string Interpreter::run() {
         if (m_tree == nullptr) return "";
 
-        DataType* value = m_tree->interpret();
+        Object* value = m_tree->interpret();
         std::string result = value->toString();
 
         delete value;

@@ -317,6 +317,8 @@ namespace hdg {
 
         expression = expr(node->thisEnvironment());
         node->thisPosition()->setPosEnd(expression->thisPosition()->getPosEnd());
+        node->setCondition(condition);
+        node->setExpression(expression);
         return node;
     }
 

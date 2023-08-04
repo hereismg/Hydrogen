@@ -24,11 +24,24 @@ namespace hdg {
     }
 
     void Environment::addSymbol(const std::string &name, DataType *value) {
-        m_symbolTable[name] = value;
+        Environment* iter = this;
+        std::stack<Environment*> stack;
+        while (iter != nullptr) {
+            stack.push(iter);
+            iter = iter->m_parent;
+        }
+
+        while (!stack.empty()){
+            iter = stack.top();
+            stack.pop();
+            if (iter->m_symbolTable.find(name) != iter->m_symbolTable.end()) break;
+        }
+
+        iter->m_symbolTable[name] = value;
     }
 
     void Environment::addSymbol(const std::string& name, const Integer &value) {
-        m_symbolTable[name] = new Integer(value);
+        addSymbol(name, new Integer(value));
     }
 
     void Environment::addSymbol(std::initializer_list<std::pair<std::string, const Integer &>> list) {
@@ -38,7 +51,7 @@ namespace hdg {
     }
 
     void Environment::addSymbol(const std::string& name, const Float &value) {
-        m_symbolTable[name] = new Float(value);
+        addSymbol(name, new Float(value));
     }
 
     std::string Environment::getName() {
@@ -58,7 +71,4 @@ namespace hdg {
             return m_parent->getSymbol(name);
         }
     }
-
-
-
 } // hdg

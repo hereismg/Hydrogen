@@ -7,7 +7,7 @@
 
 #include <vector>
 #include "Node.h"
-#include "../data_type/None.h"
+#include "../object/None.h"
 
 namespace hdg {
 

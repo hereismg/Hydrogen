@@ -6,7 +6,7 @@
 #define HDG_NODE_H
 
 #include <string>
-#include "../data_type/Object.h"
+#include "../object/Object.h"
 #include "../basic/Position.h"
 #include "../basic/Environment.h"
 

@@ -9,9 +9,9 @@
 #include <string>
 #include <initializer_list>
 #include <stack>
-#include "../data_type/Object.h"
-#include "../data_type/Integer.h"
-#include "../data_type/Float.h"
+#include "../object/Object.h"
+#include "../object/Integer.h"
+#include "../object/Float.h"
 
 namespace hdg {
     typedef std::map<std::string, Object*> SymbolTable;

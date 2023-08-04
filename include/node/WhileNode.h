@@ -6,7 +6,7 @@
 #define HDG_WHILENODE_H
 
 #include "Node.h"
-#include "../data_type/None.h"
+#include "../object/None.h"
 
 namespace hdg {
 

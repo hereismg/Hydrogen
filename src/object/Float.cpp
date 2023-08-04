@@ -2,7 +2,7 @@
 // Created by Magnesium on 2023/7/25.
 //
 
-#include "../../include/data_type/Float.h"
+#include "../../include/object/Float.h"
 
 namespace hdg {
     Float::Float(float value): Object(DT_FLOAT), m_value(value) {

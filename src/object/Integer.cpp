@@ -2,7 +2,7 @@
 // Created by Magnesium on 2023/7/25.
 //
 
-#include "../../include/data_type/Integer.h"
+#include "../../include/object/Integer.h"
 
 namespace hdg {
     Integer::Integer(int value): Object(DT_INTEGER), m_value(value) {

@@ -11,8 +11,17 @@
 #include <cmath>
 
 namespace hdg {
+
     const std::string DT_INTEGER = "Integer";
     const std::string DT_FLOAT = "FLOAT";
+
+    class Float;
+    class Function;
+    class Integer;
+    class List;
+    class None;
+    class String;
+
 
     class Object {
     public:
@@ -43,6 +52,10 @@ namespace hdg {
         virtual Object* copy() = 0;
     };
 
+    class BasicOperator{
+    public:
+        static Object* plus(Integer* left, Integer* right);
+    };
 } // hdg
 
 #endif //HDG_OBJECT_H

@@ -2,7 +2,7 @@
 // Created by Magnesium on 2023/7/25.
 //
 
-#include "../../include/data_type/Object.h"
+#include "../../include/object/Object.h"
 
 
 namespace hdg {

@@ -42,6 +42,8 @@ for-expr    : "for" identifier (from int)? to int (step int)? colon expr
 while-expr  : "while" expr colon expr
 ```
 
+for i=1 to 3: print(i)
+
 ## 项目目录结构
 
 ![Hydrogen项目目录结构](res/Hydrogen项目目录结构.png)

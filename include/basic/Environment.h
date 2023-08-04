@@ -28,7 +28,9 @@ namespace hdg {
 
         void setName(std::string name);
         void setParent(Environment* parent);
-        void addSymbol(const std::string& name, DataType* value);       // 该函数可能以后弃用
+        void addSymbol(const std::string& name, DataType* value);
+        void addLocalSymbol(const std::string& name, DataType* value);
+
         void addSymbol(const std::string& name, const Integer& value);
         void addSymbol(std::initializer_list<std::pair<std::string, const Integer&>> list);
         void addSymbol(const std::string& name, const Float& value);

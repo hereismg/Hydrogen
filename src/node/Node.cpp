@@ -5,7 +5,6 @@
 #include "../../include/node/Node.h"
 
 namespace hdg {
-
     Node::Node(const Position &position):
         m_position(position){
     }
@@ -31,5 +30,6 @@ namespace hdg {
     DataType* Node::interpret() {
         return nullptr;
     }
+
 
 } // hdg

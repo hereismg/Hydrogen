@@ -220,16 +220,12 @@ namespace hdg {
 
     Node *Parser::forExpr(Environment* environment) {
         Position position(*m_currentToken->thisPosition());
-        ForNode* forNode;
         Token index(IDENTIFIER);
-        int from = 0,
-            to,
-            step = 1;
-        Node* node;
+        auto* forNode = new ForNode(index, 0, -1, 1, nullptr, *m_currentToken->thisPosition(), environment);
 
         if (m_currentToken->match(KEYWORD, "for")) advance();
 
-        if (m_currentToken->getType() == IDENTIFIER) index.setValue(m_currentToken->getValue());
+        if (m_currentToken->getType() == IDENTIFIER) forNode->setIndex({IDENTIFIER, m_currentToken->getValue()});
         else throw InvalidSyntaxError(
                 "Expected identifier.",
                 *m_currentToken->thisPosition()
@@ -239,64 +235,93 @@ namespace hdg {
         if (m_currentToken->match(KEYWORD, "from")){
             advance();
 
+            int flag = 1;
+            if (m_currentToken->getType() ==PLUS){
+                advance();
+            }
+            if (m_currentToken->getType() == MINUS) {
+                flag = -1;
+                advance();
+            }
+
+
             if (m_currentToken->getType() != INT){
                 throw InvalidSyntaxError(
-                        "Expected int",
+                        "Expected int.",
                         *m_currentToken->thisPosition()
                         );
             }
 
-            from = atoi(m_currentToken->getValue().c_str());
+            forNode->setFrom(atoi(m_currentToken->getValue().c_str()) * flag);
             advance();
         }
 
         if (m_currentToken->match(KEYWORD, "to")){
             advance();
+            int flag = 1;
+
+            if (m_currentToken->getType() ==PLUS){
+                advance();
+            }
+            if (m_currentToken->getType() == MINUS) {
+                flag = -1;
+                advance();
+            }
 
             if (m_currentToken->getType() != INT){
                 throw InvalidSyntaxError(
-                        "Expected int",
+                        "Expected int.",
                         *m_currentToken->thisPosition()
                 );
             }
 
-            to = atoi(m_currentToken->getValue().c_str());
+            forNode->setTo(atoi(m_currentToken->getValue().c_str()) * flag);
             advance();
         }
         else{
             throw InvalidSyntaxError(
-                    "Expected 'to'",
+                    "Expected 'to'.",
                     *m_currentToken->thisPosition()
                     );
         }
 
         if (m_currentToken->match(KEYWORD, "step")){
             advance();
+            int flag = 1;
+
+            if (m_currentToken->getType() ==PLUS){
+                advance();
+            }
+            if (m_currentToken->getType() == MINUS) {
+                flag = -1;
+                advance();
+            }
+
 
             if (m_currentToken->getType() != INT){
                 throw InvalidSyntaxError(
-                        "Expected int",
+                        "Expected int.",
                         *m_currentToken->thisPosition()
                 );
             }
 
-            step = atoi(m_currentToken->getValue().c_str());
+            forNode->setStep(atoi(m_currentToken->getValue().c_str()) * flag);
             advance();
         }
 
         if (m_currentToken->getType() != COLON){
             throw InvalidSyntaxError(
-                    "Expected ':'",
+                    "Expected ':'.",
                     *m_currentToken->thisPosition()
                     );
         }
         advance();
 
-        node = expr(environment);
+        Node* node = expr(forNode->thisEnvironment());
+        forNode->setExpr(node);
+        forNode->thisPosition()->setPosEnd(node->thisPosition()->getPosEnd());
 
-        position.setPosEnd(node->thisPosition()->getPosEnd());
-
-        return new ForNode(index, from, to, step, node, position, environment);
+        return forNode;
     }
 
     Node *Parser::whileExpr(Environment *environment) {
@@ -309,7 +334,7 @@ namespace hdg {
 
         if (m_currentToken->getType() != COLON){
             throw InvalidSyntaxError(
-                    "Expected ':'",
+                    "Expected ':'.",
                     *m_currentToken->thisPosition()
             );
         }
@@ -363,7 +388,4 @@ namespace hdg {
                 );
         return node;
     }
-
-
-
 } // hdg

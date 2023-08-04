@@ -23,6 +23,12 @@ namespace hdg {
         ForNode(const Token& index, int from, int to, int step, Node* expr, const Position& position, Environment* parent);
         ~ForNode() override;
 
+        void setIndex(const Token& index);
+        void setFrom(int from);
+        void setTo(int to);
+        void setStep(int step);
+        void setExpr(Node* expr);
+
         std::string toString() override;
         DataType* interpret() override;
     };

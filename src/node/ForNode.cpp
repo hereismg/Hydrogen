@@ -5,7 +5,6 @@
 #include "../../include/node/ForNode.h"
 
 namespace hdg {
-
     ForNode::ForNode(const Token &index, int to, const Position &position, Environment *parent):
             Node(position, new Environment("for", parent)), m_index(index), m_from(0), m_to(to), m_step(1){
     }
@@ -19,6 +18,26 @@ namespace hdg {
         delete m_environment;
     }
 
+    void ForNode::setIndex(const Token &index) {
+        m_index = index;
+    }
+
+    void ForNode::setFrom(int from) {
+        m_from = from;
+    }
+
+    void ForNode::setTo(int to) {
+        m_to = to;
+    }
+
+    void ForNode::setExpr(Node *expr) {
+        m_expr = expr;
+    }
+
+    void ForNode::setStep(int step) {
+        m_step = step;
+    }
+
     std::string ForNode::toString() {
         return "for";
     }
@@ -26,14 +45,21 @@ namespace hdg {
     DataType *ForNode::interpret() {
         auto* index = new Integer(m_from);
         DataType* result;
-        m_environment->addSymbol(m_index.getValue(), index);
+        m_environment->addLocalSymbol(m_index.getValue(), index);
 
-        while(index->getValue() <= m_to){
-            result = m_expr->interpret();
-            index->setValue(index->getValue()+m_step);
+        if (m_from <= m_to){
+            while(index->getValue() <= m_to){
+                result = m_expr->interpret();
+                index->setValue(index->getValue()+m_step);
+            }
+        }
+        else{
+            while(index->getValue() >= m_to){
+                result = m_expr->interpret();
+                index->setValue(index->getValue()-m_step);
+            }
         }
 
         return result;
     }
-
 } // hdg

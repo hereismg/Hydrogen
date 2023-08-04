@@ -40,6 +40,10 @@ namespace hdg {
         iter->m_symbolTable[name] = value;
     }
 
+    void Environment::addLocalSymbol(const std::string &name, hdg::DataType *value) {
+        m_symbolTable[name] = value;
+    }
+
     void Environment::addSymbol(const std::string& name, const Integer &value) {
         addSymbol(name, new Integer(value));
     }

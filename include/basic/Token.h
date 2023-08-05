@@ -40,6 +40,7 @@ namespace hdg {
         ELIF,
         ELSE,
         COLON,
+        COMMA,
 
         EF,
         NONE

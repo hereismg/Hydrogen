@@ -23,14 +23,19 @@ arith-expr  : term (plus|minus term)*
 
 term        : factor (mul|div factor)*
 
-factor      : power (pow factor)*
+factor      : (plus|minus) factor
+            : power
 
-power       : identifier|int|float
-            : (plus|minus) power
+power       : call (pow factor)*
+
+call        : atom (LPAREN (expr (COMMA expr)*)? RPAREN)?
+
+atom        : identifier|int|float
             : lparen expr rparen
             : if-expr
             : for-expr
             : while-expr
+            : func-expr
 
 if-expr     : expr "if" expr (else expr)?
             : "if" expr colon expr 
@@ -40,7 +45,12 @@ if-expr     : expr "if" expr (else expr)?
 for-expr    : "for" identifier (from int)? to int (step int)? colon expr
 
 while-expr  : "while" expr colon expr
+
+func-expr    : "function" identifier lparen (identifier (comma identifier)*)? rparen colon expr
 ```
+
+function add(a, b): a+b
+add(1, 2)
 
 for i=1 to 3: print(i)
 

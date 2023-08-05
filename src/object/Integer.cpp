@@ -105,6 +105,9 @@ namespace hdg {
             int result = m_value > ((Float*)other)->getValue();
             return new Integer(result);
         }
+        else{
+            illegalOperator();
+        }
     }
 
     Object *Integer::lessThan(Object *other) {

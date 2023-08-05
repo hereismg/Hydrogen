@@ -142,7 +142,7 @@ namespace hdg {
             advance();
         }
 
-        m_tokens.emplace_back(type, m_text->substr(posStart, m_pos-posStart), Position(m_text, posStart, m_pos));
+        m_tokens.emplace_back(type, "", Position(m_text, posStart, m_pos));
     }
 
     void Lexer::buildLessThan() {
@@ -156,7 +156,7 @@ namespace hdg {
             advance();
         }
 
-        m_tokens.emplace_back(type, m_text->substr(posStart, m_pos-posStart), Position(m_text, posStart, m_pos));
+        m_tokens.emplace_back(type, "", Position(m_text, posStart, m_pos));
     }
 
     void Lexer::buildEquation() {
@@ -170,7 +170,7 @@ namespace hdg {
             advance();
         }
 
-        m_tokens.emplace_back(type, m_text->substr(posStart, m_pos-posStart), Position(m_text, posStart, m_pos));
+        m_tokens.emplace_back(type, "", Position(m_text, posStart, m_pos));
     }
 
     void Lexer::buildIdentifier() {

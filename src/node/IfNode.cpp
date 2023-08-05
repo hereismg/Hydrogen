@@ -25,6 +25,7 @@ namespace hdg {
     }
 
     std::string IfNode::toString() {
+        std::cout << "if" << std::endl;
         std::string result;
         result += "if " + conditions[0]->toString() + ": " + expressions[0]->toString() + " ";
         for (int i=1; i<conditions.size(); i++){

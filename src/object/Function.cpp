@@ -8,4 +8,11 @@ namespace hdg {
     Function::Function()= default;
 
 
+    std::string Function::toString() {
+        return "<" + name + ">";
+    }
+
+    Object *Function::copy() {
+        return this;
+    }
 } // hdg

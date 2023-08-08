@@ -5,6 +5,9 @@
 #include "../../include/node/Node.h"
 
 namespace hdg {
+    Node::Node() {
+    }
+
     Node::Node(const Position &position):
         m_position(position){
     }
@@ -22,14 +25,4 @@ namespace hdg {
     Environment *Node::thisEnvironment() {
         return m_environment;
     }
-
-    std::string Node::toString() {
-        return "NULL";
-    }
-
-    Object* Node::interpret() {
-        return nullptr;
-    }
-
-
 } // hdg

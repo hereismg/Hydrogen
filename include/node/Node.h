@@ -19,6 +19,7 @@ namespace hdg {
         Environment* m_environment;
 
     public:
+        Node();
         explicit Node(const Position& position);
         Node(const Position& position, Environment* environment);
         virtual ~Node() = 0;

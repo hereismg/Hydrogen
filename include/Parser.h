@@ -45,12 +45,24 @@ namespace hdg {
         Node* term(Environment* environment);
         Node* factor(Environment* environment);
         Node* power(Environment* environment);
+        Node* call(Environment* environment);
+        Node* atom(Environment* environment);
         Node* ifExpr(Environment* environment);
         Node* forExpr(Environment* environment);
         Node* whileExpr(Environment* environment);
+        Node* funcExpr(Environment* environment);
 
-        Node* binaryOperator(Environment* environment, const std::set<Token, std::less<>>&opers, std::function<Node*(Environment* envir)> funA, std::function<Node*(Environment* envir)> funB=nullptr);
-        Node* unaryOperator(Environment* environment, const std::set<Token>&opers, std::function<Node*(Environment* envir)> fun);
+        Node* binaryOperator(
+                Environment* environment,
+                const std::set<Token, std::less<>>&opers,
+                std::function<Node*(Environment* envir)> funA,
+                std::function<Node*(Environment* envir)> funB=nullptr
+                        );
+        Node* unaryOperator(
+                Environment* environment,
+                const std::set<Token, std::less<>>&opers,
+                std::function<Node*(Environment* envir)> fun
+                );
     };
 
 } // hdg

@@ -102,16 +102,31 @@ namespace hdg {
     }
 
     Node *Parser::factor(Environment* environment) {
+        if (m_currentToken->getType() == PLUS || m_currentToken->getType() == MINUS){
+            return unaryOperator(
+                    environment,
+                    std::set<Token, std::less<>>{{PLUS}, {MINUS}},
+                    [this](Environment* e){return this->factor(e);}
+                    );
+        }else{
+            return power(environment);
+        }
+    }
+
+    Node *Parser::power(Environment* environment) {
         return binaryOperator(
                 environment,
                 std::set<Token, std::less<>>{{POW}},
-                [this](Environment* e){return this->power(e);},
+                [this](Environment* e){return this->call(e);},
                 [this](Environment* e){return this->factor(e);}
                 );
     }
 
-    Node *Parser::power(Environment* environment) {
+    Node *Parser::call(Environment *environment) {
+        return atom(environment);
+    }
 
+    Node *Parser::atom(Environment *environment) {
         if (m_currentToken->getType() == INT){
             Node *node = new NumberNode(std::atoi(m_currentToken->getValue().c_str()), *m_currentToken->thisPosition());
             advance();
@@ -121,18 +136,6 @@ namespace hdg {
             Node* node = new NumberNode((double)std::atof(m_currentToken->getValue().c_str()), *m_currentToken->thisPosition());
             advance();
             return node;
-        }
-        else if (m_currentToken->getType() == PLUS || m_currentToken->getType() == MINUS){
-            Token oper = *m_currentToken;
-            advance();
-            Node* obj = power(environment);
-
-            return new UnaryOperatorNode(
-                    oper,
-                    obj,
-                    Position(oper.thisPosition()->thisContext(), oper.thisPosition()->getPosStart(), obj->thisPosition()->getPosEnd()),
-                    environment
-                    );
         }
         else if (m_currentToken->getType() == LPAREN){
             advance();
@@ -156,7 +159,7 @@ namespace hdg {
                     m_currentToken->getValue(),
                     Position(m_currentToken->thisPosition()->thisContext(), m_currentToken->thisPosition()->getPosStart(), m_currentToken->thisPosition()->getPosEnd()),
                     environment
-                    );
+            );
 
             advance();
             return node;
@@ -173,10 +176,10 @@ namespace hdg {
         else {
             throw InvalidSyntaxError(
                     "Expected identifier, int, float, '+', '-' or '('.",
-            {m_currentToken->thisPosition()->thisContext(),
-                    m_currentToken->thisPosition()->getPosStart(),
-                    m_currentToken->thisPosition()->getPosEnd()}
-                    );
+                    {m_currentToken->thisPosition()->thisContext(),
+                     m_currentToken->thisPosition()->getPosStart(),
+                     m_currentToken->thisPosition()->getPosEnd()}
+            );
         }
     }
 
@@ -347,6 +350,10 @@ namespace hdg {
         return node;
     }
 
+    Node *Parser::funcExpr(hdg::Environment *environment) {
+        return nullptr;
+    }
+
     Node *Parser::binaryOperator(Environment* environment, const std::set<Token, std::less<>>&opers, std::function<Node*(Environment* envir)> funA, std::function<Node*(Environment* envir)> funB) {
         if (funB == nullptr) funB = funA;
         Node* left = funA(environment);
@@ -371,7 +378,7 @@ namespace hdg {
         return left;
     }
 
-    Node *Parser::unaryOperator(Environment* environment, const std::set<Token>&opers, std::function<Node*(Environment* envir)> fun) {
+    Node *Parser::unaryOperator(Environment* environment, const std::set<Token, std::less<>>&opers, std::function<Node*(Environment* envir)> fun) {
         Node* node;
 
         Token oper(*m_currentToken);
@@ -388,4 +395,5 @@ namespace hdg {
                 );
         return node;
     }
+
 } // hdg

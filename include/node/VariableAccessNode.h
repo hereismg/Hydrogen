@@ -10,7 +10,7 @@
 namespace hdg {
 
     class VariableAccessNode: public Node{
-    private:
+    protected:
         std::string m_name;
 
     public:

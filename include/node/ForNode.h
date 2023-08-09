@@ -11,7 +11,7 @@
 namespace hdg {
 
     class ForNode: public Node{
-    private:
+    protected:
         Token m_index;
         int m_from;
         int m_to;

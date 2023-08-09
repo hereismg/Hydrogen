@@ -25,7 +25,7 @@ namespace hdg {
                 Lexer lexer(&text);
                 lexer.run();
 
-                std::cout << lexer.getTokens() << std::endl;
+//                std::cout << lexer.getTokens() << std::endl;
 
                 Parser parser(lexer.getTokens(), &globalEnvironment);
                 Node* tree = parser.run();

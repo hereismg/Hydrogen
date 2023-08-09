@@ -10,7 +10,7 @@
 namespace hdg {
 
     class Position {
-    private:
+    protected:
         std::string* m_context;
         int m_posStart;
         int m_posEnd;

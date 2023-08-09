@@ -12,7 +12,7 @@
 namespace hdg {
 
     class IfNode: public Node{
-    private:
+    protected:
         std::vector<Node*> conditions;
         std::vector<Node*> expressions;
         Node* elseExpression;

@@ -12,12 +12,12 @@
 namespace hdg {
 
     class Function: public Object{
-    private:
-        std::string name;
-        std::vector<std::string> formals;
+    protected:
+        std::string m_name;
+        std::vector<std::string> m_formals;
 
     public:
-        Function();
+        ~Function() override;
 
         std::string toString() override;
         Object* copy() override;

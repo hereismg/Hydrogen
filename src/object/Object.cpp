@@ -9,7 +9,11 @@ namespace hdg {
 
     Object::Object() = default;
 
-    Object::Object(std::string typeName): typeName(std::move(typeName)) {
+    Object::Object(std::string name): m_name(std::move(name)) {
+    }
+
+    std::string Object::getClass() {
+        return m_name;
     }
 
     Object::~Object() = default;
@@ -84,6 +88,21 @@ namespace hdg {
         return nullptr;
     }
 
+    Object *Object::parenthesis(std::initializer_list<Object *> list) {
+        illegalOperator();
+        return nullptr;
+    }
+
+    Object *Object::brackets(Object *other) {
+        illegalOperator();
+        return nullptr;
+    }
+
+    Object *Object::braces(std::initializer_list<Object *> list) {
+        illegalOperator();
+        return nullptr;
+    }
+
     bool Object::isTrue() {
         return false;
     }
@@ -91,5 +110,4 @@ namespace hdg {
     void Object::illegalOperator() {
         throw -2;
     }
-
 } // hdg

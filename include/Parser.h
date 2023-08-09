@@ -26,7 +26,7 @@
 
 namespace hdg {
     class Parser {
-    private:
+    protected:
         std::vector<Token> m_tokens;
         std::vector<Token>::iterator m_currentToken;
         Environment* m_environment;
@@ -35,7 +35,7 @@ namespace hdg {
         Parser(std::vector<Token> tokens, Environment* environment);
         Node* run();
 
-    private:
+    protected:
         void advance();
         void retreat();
 

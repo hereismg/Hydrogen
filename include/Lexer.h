@@ -45,7 +45,7 @@ namespace hdg {
     std::ostream& operator<<(std::ostream& out, std::vector<Token>& tokens);
 
     class Lexer {
-    private:
+    protected:
         std::string* m_text;
         std::vector<Token> m_tokens;
 
@@ -58,7 +58,7 @@ namespace hdg {
         std::vector<Token>& getTokens();
         void run();
 
-    private:
+    protected:
         void advance();
 
         void buildNumber();

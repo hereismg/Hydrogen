@@ -9,19 +9,21 @@
 #include <string>
 #include <utility>
 #include <cmath>
+#include <functional>
 
 namespace hdg {
 
-    const std::string DT_INTEGER = "Integer";
-    const std::string DT_FLOAT = "FLOAT";
-
-
     class Object {
+    protected:
+        std::string m_name;
+
     public:
-        std::string typeName;
         Object();
-        explicit Object(std::string typeName);
+        explicit Object(std::string name = "Object");
+
         virtual ~Object();
+
+        std::string getClass();
 
         virtual Object* plus(Object* other);
         virtual Object* minus(Object* other);
@@ -39,6 +41,10 @@ namespace hdg {
         virtual Object* andOperator(Object* other);
         virtual Object* orOperator(Object* other);
         virtual Object* notOperator();
+
+        virtual Object* parenthesis(std::initializer_list<Object*> list);
+        virtual Object* brackets(Object* other);
+        virtual Object* braces(std::initializer_list<Object*> list);
 
         virtual bool isTrue();
         virtual void illegalOperator();

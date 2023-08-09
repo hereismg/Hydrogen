@@ -17,7 +17,7 @@ namespace hdg {
     typedef std::map<std::string, Object*> SymbolTable;
 
     class Environment {
-    private:
+    protected:
         std::string m_name;
         Environment* m_parent;
         SymbolTable m_symbolTable;

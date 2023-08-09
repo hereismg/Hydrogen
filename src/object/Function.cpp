@@ -5,11 +5,10 @@
 #include "../../include/object/Function.h"
 
 namespace hdg {
-    Function::Function()= default;
-
+    Function::~Function() = default;
 
     std::string Function::toString() {
-        return "<" + name + ">";
+        return "<" + m_name + ">";
     }
 
     Object *Function::copy() {

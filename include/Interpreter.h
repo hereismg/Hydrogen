@@ -13,7 +13,7 @@
 namespace hdg {
 
     class Interpreter {
-    private:
+    protected:
         Node* m_tree;
         Environment* m_environment;
 

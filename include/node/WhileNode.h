@@ -11,7 +11,7 @@
 namespace hdg {
 
     class WhileNode: public Node {
-    private:
+    protected:
         Node* m_condition;
         Node* m_expression;
 

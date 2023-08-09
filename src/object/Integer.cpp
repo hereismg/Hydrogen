@@ -5,56 +5,55 @@
 #include "../../include/object/Integer.h"
 
 namespace hdg {
-    Integer::Integer(int value): Object(DT_INTEGER), m_value(value) {
+    Integer::Integer(int value): Object("Integer"), m_value(value) {
     }
-
 
     int Integer::getValue() const {
         return m_value;
     }
 
     Object *Integer::plus(Object* other) {
-        if (other->typeName == DT_INTEGER){
+        if (other->getClass() == "Integer"){
             int result = m_value + ((Integer*)other)->m_value;
             return new Integer(result);
         }
-        else if (other->typeName == DT_FLOAT){
+        else if (other->getClass() == "Float"){
             double result = (double)m_value + ((Float*)other)->getValue();
             return new Float(result);
         }
     }
 
     Object *Integer::minus(Object *other) {
-        if (other->typeName == DT_INTEGER){
+        if (other->getClass() == "Integer"){
             int result = m_value - ((Integer*)other)->m_value;
             return new Integer(result);
         }
-        else if (other->typeName == DT_FLOAT){
+        else if (other->getClass() == "Float"){
             double result = (double)m_value - ((Float*)other)->getValue();
             return new Float(result);
         }
     }
 
     Object *Integer::mul(Object *other) {
-        if (other->typeName == DT_INTEGER){
+        if (other->getClass() == "Integer"){
             int result = m_value * ((Integer*)other)->m_value;
             return new Integer(result);
         }
-        else if (other->typeName == DT_FLOAT){
+        else if (other->getClass() == "Float"){
             double result = (double)m_value * ((Float*)other)->getValue();
             return new Float(result);
         }
     }
 
     Object *Integer::div(Object *other) {
-        if (other->typeName == DT_INTEGER){
+        if (other->getClass() == "Integer"){
             int right = ((Integer*)other)->m_value;
             if (right == 0) throw -1;
 
             int result = m_value / right;
             return new Integer(result);
         }
-        else if (other->typeName == DT_FLOAT){
+        else if (other->getClass() == "Float"){
             double right = ((Float*)other)->getValue();
             if (right==0) throw -1;
 
@@ -64,44 +63,44 @@ namespace hdg {
     }
 
     Object *Integer::pow(Object *other) {
-        if (other->typeName == DT_INTEGER){
+        if (other->getClass() == "Integer"){
             double result = std::pow(m_value, ((Integer*)other)->m_value);
             return new Float(result);
         }
-        else if (other->typeName == DT_FLOAT){
+        else if (other->getClass() == "Float"){
             double result = std::pow(m_value, ((Float*)other)->getValue());
             return new Float(result);
         }
     }
 
     Object *Integer::equation(Object *other) {
-        if (other->typeName == DT_INTEGER){
+        if (other->getClass() == "Integer"){
             int result = m_value == ((Integer*)other)->m_value;
             return new Integer(result);
         }
-        else if (other->typeName == DT_FLOAT){
+        else if (other->getClass() == "Float"){
             int result = m_value == ((Float*)other)->getValue();
             return new Integer(result);
         }
     }
 
     Object *Integer::notEquation(Object *other) {
-        if (other->typeName == DT_INTEGER){
+        if (other->getClass() == "Integer"){
             int result = m_value != ((Integer*)other)->m_value;
             return new Integer(result);
         }
-        else if (other->typeName == DT_FLOAT){
+        else if (other->getClass() == "Float"){
             int result = m_value != ((Float*)other)->getValue();
             return new Integer(result);
         }
     }
 
     Object *Integer::greaterThan(Object *other) {
-        if (other->typeName == DT_INTEGER){
+        if (other->getClass() == "Integer"){
             int result = m_value > ((Integer*)other)->m_value;
             return new Integer(result);
         }
-        else if (other->typeName == DT_FLOAT){
+        else if (other->getClass() == "Float"){
             int result = m_value > ((Float*)other)->getValue();
             return new Integer(result);
         }
@@ -111,33 +110,33 @@ namespace hdg {
     }
 
     Object *Integer::lessThan(Object *other) {
-        if (other->typeName == DT_INTEGER){
+        if (other->getClass() == "Integer"){
             int result = m_value < ((Integer*)other)->m_value;
             return new Integer(result);
         }
-        else if (other->typeName == DT_FLOAT){
+        else if (other->getClass() == "Float"){
             int result = m_value < ((Float*)other)->getValue();
             return new Integer(result);
         }
     }
 
     Object *Integer::greaterThanEquation(Object *other) {
-        if (other->typeName == DT_INTEGER){
+        if (other->getClass() == "Integer"){
             int result = m_value >= ((Integer*)other)->m_value;
             return new Integer(result);
         }
-        else if (other->typeName == DT_FLOAT){
+        else if (other->getClass() == "Float"){
             int result = m_value >= ((Float*)other)->getValue();
             return new Integer(result);
         }
     }
 
     Object *Integer::lessThanEquation(Object *other) {
-        if (other->typeName == DT_INTEGER){
+        if (other->getClass() == "Integer"){
             int result = m_value <= ((Integer*)other)->m_value;
             return new Integer(result);
         }
-        else if (other->typeName == DT_FLOAT){
+        else if (other->getClass() == "Float"){
             int result = m_value <= ((Float*)other)->getValue();
             return new Integer(result);
         }

@@ -74,7 +74,7 @@ namespace hdg {
             {NONE,          "NONE"}
     };
     class Token {
-    private:
+    protected:
         TokenType m_type;
         std::string m_value;
 

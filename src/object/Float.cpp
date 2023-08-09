@@ -5,12 +5,12 @@
 #include "../../include/object/Float.h"
 
 namespace hdg {
-    Float::Float(float value): Object(DT_FLOAT), m_value(value) {
+    Float::Float(float value): Object("Float"), m_value(value) {
 
     }
 
 
-    Float::Float(double value): Object(DT_FLOAT), m_value(value) {
+    Float::Float(double value): Object("Float"), m_value(value) {
 
     }
 
@@ -19,121 +19,121 @@ namespace hdg {
     }
 
     Object* Float::plus(Object *other) {
-        if (other->typeName == DT_FLOAT){
+        if (other->getClass() == "Float"){
             double result = m_value + ((Float*)other)->m_value;
             return new Float(result);
         }
-        else if (other->typeName == DT_INTEGER){
+        else if (other->getClass() == "Integer"){
             double result = m_value + (double)((Integer*)other)->getValue();
             return new Float(result);
         }
     }
 
     Object *Float::minus(Object *other) {
-        if (other->typeName == DT_FLOAT){
+        if (other->getClass() == "Float"){
             double result = m_value - ((Float*)other)->m_value;
             return new Float(result);
         }
-        else if (other->typeName == DT_INTEGER){
+        else if (other->getClass() == "Integer"){
             double result = m_value - (double)((Integer*)other)->getValue();
             return new Float(result);
         }
     }
 
     Object *Float::mul(Object *other) {
-        if (other->typeName == DT_FLOAT){
+        if (other->getClass() == "Float"){
             double result = m_value * ((Float*)other)->m_value;
             return new Float(result);
         }
-        else if (other->typeName == DT_INTEGER){
+        else if (other->getClass() == "Integer"){
             double result = m_value * (double)((Integer*)other)->getValue();
             return new Float(result);
         }
     }
 
     Object *Float::div(Object *other) {
-        if (other->typeName == DT_FLOAT){
+        if (other->getClass() == "Float"){
             double result = m_value / ((Float*)other)->m_value;
             return new Float(result);
         }
-        else if (other->typeName == DT_INTEGER){
+        else if (other->getClass() == "Integer"){
             double result = m_value / (double)((Integer*)other)->getValue();
             return new Float(result);
         }
     }
 
     Object *Float::pow(Object *other) {
-        if (other->typeName == DT_FLOAT){
+        if (other->getClass() == "Float"){
             double result = std::pow(m_value, ((Float*)other)->m_value);
             return new Float(result);
         }
-        else if (other->typeName == DT_INTEGER){
+        else if (other->getClass() == "Integer"){
             double result = std::pow(m_value, (double)((Integer*)other)->getValue());
             return new Float(result);
         }
     }
 
     Object *Float::equation(Object *other) {
-        if (other->typeName == DT_FLOAT){
+        if (other->getClass() == "Float"){
             int result = m_value == ((Float*)other)->m_value;
             return new Integer(result);
         }
-        else if (other->typeName == DT_INTEGER){
+        else if (other->getClass() == "Integer"){
             int result = m_value == (double)((Integer*)other)->getValue();
             return new Integer(result);
         }
     }
 
     Object* Float::notEquation(Object* other) {
-        if (other->typeName == DT_FLOAT){
+        if (other->getClass() == "Float"){
             int result = m_value != ((Float*)other)->m_value;
             return new Integer(result);
         }
-        else if (other->typeName == DT_INTEGER){
+        else if (other->getClass() == "Integer"){
             int result = m_value != (double)((Integer*)other)->getValue();
             return new Integer(result);
         }
     }
 
     Object *Float::greaterThan(Object *other) {
-        if (other->typeName == DT_FLOAT){
+        if (other->getClass() == "Float"){
             int result = m_value > ((Float*)other)->m_value;
             return new Integer(result);
         }
-        else if (other->typeName == DT_INTEGER){
+        else if (other->getClass() == "Integer"){
             int result = m_value > (double)((Integer*)other)->getValue();
             return new Integer(result);
         }
     }
 
     Object *Float::lessThan(Object *other) {
-        if (other->typeName == DT_FLOAT){
+        if (other->getClass() == "Float"){
             int result = m_value < ((Float*)other)->m_value;
             return new Integer(result);
         }
-        else if (other->typeName == DT_INTEGER){
+        else if (other->getClass() == "Integer"){
             int result = m_value < (double)((Integer*)other)->getValue();
             return new Integer(result);
         }
     }
 
     Object *Float::greaterThanEquation(Object *other) {
-        if (other->typeName == DT_FLOAT){
+        if (other->getClass() == "Float"){
             int result = m_value >= ((Float*)other)->m_value;
             return new Integer(result);
         }
-        else if (other->typeName == DT_INTEGER){
+        else if (other->getClass() == "Integer"){
             int result = m_value >= (double)((Integer*)other)->getValue();
             return new Integer(result);
         }
     }
 
     Object *Float::lessThanEquation(Object *other) {
-        if (other->typeName == DT_FLOAT){
+        if (other->getClass() == "Float"){
             int result = m_value <= ((Float*)other)->m_value;
             return new Integer(result);
         }
-        else if (other->typeName == DT_INTEGER){
+        else if (other->getClass() == "Integer"){
             int result = m_value <= (double)((Integer*)other)->getValue();
             return new Integer(result);
         }

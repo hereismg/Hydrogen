@@ -12,7 +12,7 @@
 namespace hdg {
 
     class NumberNode: public Node{
-    private:
+    protected:
         Object* m_value;
 
     public:

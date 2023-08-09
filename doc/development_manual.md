@@ -46,7 +46,7 @@ for-expr    : "for" identifier (from int)? to int (step int)? colon expr
 
 while-expr  : "while" expr colon expr
 
-func-expr    : "function" identifier lparen (identifier (comma identifier)*)? rparen colon expr
+func-expr   : "function" identifier lparen (identifier (comma identifier)*)? rparen colon expr
 ```
 
 function add(a, b): a+b

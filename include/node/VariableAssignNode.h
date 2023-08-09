@@ -10,7 +10,7 @@
 namespace hdg {
 
     class VariableAssignNode: public Node{
-    private:
+    protected:
         std::string m_name;
         Node* m_expr;
 

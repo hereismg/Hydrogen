@@ -41,12 +41,12 @@ namespace hdg {
         Object* value = m_obj->interpret();
 
         if (m_oper.getType() == MINUS){
-            if (value->typeName == DT_INTEGER){
+            if (value->getClass() == "Integer"){
                 int num = -((Integer*)value)->getValue();
                 delete value;
                 return new Integer(num);
             }
-            else if (value->typeName == DT_FLOAT){
+            else if (value->getClass() == "Float"){
                 double num = -((Float*)value)->getValue();
                 delete value;
                 return new Float(num);

@@ -53,15 +53,15 @@ namespace hdg {
 
     Object* BinaryOperatorNode::interpret() {
         Object* left = m_left->interpret();
-        if (left->typeName == "None"){
-            throw RunTimeError(
+        if (left->getClass() == "None"){
+            throw RuntimeError(
                 "this is 'None'.",
                 *m_left->thisPosition()
                     );
         }
         Object* right = m_right->interpret();
-        if (right->typeName == "None"){
-            throw RunTimeError(
+        if (right->getClass() == "None"){
+            throw RuntimeError(
                     "this is 'None'.",
                     *m_right->thisPosition()
             );
@@ -84,7 +84,7 @@ namespace hdg {
             }
             catch (int error){
                 delete left, right;
-                throw RunTimeError(
+                throw RuntimeError(
                         "Division by zero",
                         Position(
                                 m_position.thisContext(),

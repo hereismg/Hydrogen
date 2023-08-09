@@ -14,7 +14,7 @@
 namespace hdg {
 
     class UnaryOperatorNode: public Node{
-    private:
+    protected:
         Token m_oper;
         Node* m_obj;
 

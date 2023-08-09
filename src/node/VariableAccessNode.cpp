@@ -21,7 +21,7 @@ namespace hdg {
             return value->copy();
         }
         catch (int error){
-            throw RunTimeError(
+            throw RuntimeError(
                     "'" + m_name + "' is not defind.",
                     Position(
                             m_position.thisContext(),

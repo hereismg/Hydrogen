@@ -10,12 +10,12 @@
 #include <utility>
 #include "Node.h"
 #include "../basic/Token.h"
-#include "../error/RunTimeError.h"
+#include "../error/RuntimeError.h"
 
 namespace hdg {
 
     class BinaryOperatorNode: public Node{
-    private:
+    protected:
         Token m_oper;
         Node* m_left;
         Node* m_right;

@@ -5,7 +5,7 @@
 #ifndef HDG_NUMBERNODE_H
 #define HDG_NUMBERNODE_H
 
-#include "Node.h"
+#include "ObjectNode.h"
 #include "../object/Integer.h"
 #include "../object/Float.h"
 

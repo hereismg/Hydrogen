@@ -15,11 +15,11 @@ namespace hdg {
 
     class Object {
     protected:
-        std::string m_name;
+        std::string m_class;
 
     public:
         Object();
-        explicit Object(std::string name = "Object");
+        explicit Object(std::string className = "Object");
 
         virtual ~Object();
 

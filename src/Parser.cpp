@@ -47,7 +47,7 @@ namespace hdg {
                 Node* exprNode = expr(environment);
                 posEnd = exprNode->thisPosition()->getPosEnd();
 
-                return new VariableAssignNode(
+                return new ObjAssignNode(
                         name,
                         exprNode,
                         Position(m_currentToken->thisPosition()->thisContext(), posStart, posEnd),
@@ -155,7 +155,7 @@ namespace hdg {
             return node;
         }
         else if (m_currentToken->getType() == TokenType::IDENTIFIER){
-            Node* node = new VariableAccessNode(
+            Node* node = new ObjAccessNode(
                     m_currentToken->getValue(),
                     Position(m_currentToken->thisPosition()->thisContext(), m_currentToken->thisPosition()->getPosStart(), m_currentToken->thisPosition()->getPosEnd()),
                     environment
@@ -328,7 +328,8 @@ namespace hdg {
     }
 
     Node *Parser::whileExpr(Environment *environment) {
-        WhileNode* node = new WhileNode(nullptr, nullptr, *m_currentToken->thisPosition(), environment);
+        WhileNode *node;
+        node = new WhileNode(nullptr, nullptr, *m_currentToken->thisPosition(), environment);
         Node *condition, *expression;
 
         if (m_currentToken->match(KEYWORD, "while")) advance();
@@ -359,12 +360,13 @@ namespace hdg {
         Node* left = funA(environment);
 
         while(m_tokens.end() != m_currentToken && opers.find(*m_currentToken) != opers.end()){
-            BinaryOperatorNode* oper = new BinaryOperatorNode(
+            BinaryOperatorNode *oper;
+            oper = new BinaryOperatorNode(
                     *m_currentToken,
                     nullptr,
                     nullptr,
                     Position(m_currentToken->thisPosition()->thisContext(), left->thisPosition()->getPosStart())
-                    );
+            );
             advance();
 
             Node* right = funB(environment);

@@ -12,7 +12,6 @@ namespace hdg {
     class ObjectNode: public Node{
     public:
         ObjectNode();
-
         ~ObjectNode() override;
 
         virtual std::string toString() = 0;

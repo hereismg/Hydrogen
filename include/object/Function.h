@@ -6,18 +6,24 @@
 #define HDG_FUNCTION_H
 
 #include <vector>
+#include "../basic/Environment.h"]
+#include "../node/Node.h"
+#include "../node/ObjAssignNode.h"
 #include "Object.h"
-#include "../basic/Token.h"
 
 namespace hdg {
 
     class Function: public Object{
     protected:
-        std::string m_name;
-        std::vector<std::string> m_formals;
+        std::vector<ObjAssignNode*> m_args;
+
+        Environment* m_environment;
+        Node* m_body;
 
     public:
         ~Function() override;
+
+        Object* parenthesis(std::initializer_list<Object*> list);
 
         std::string toString() override;
         Object* copy() override;

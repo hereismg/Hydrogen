@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Object{
+    # std::string m_class
+
+    + Object(class)
+}
+class Integer{
+    # int m_value
+}
+class Float{
+    # double m_value
+}
+class Function{
+    # std::vector<ObjAssignNode*> args
+
+    # Environment* environment
+    # Node* body
+
+    + Function(args, body, environment): Object("Function")
+}
+note bottom: 其中 args里ObjAssignNode 与 body 的Environment都为该函数中的Environment
+
+class None
+
+Object <|-- Integer
+Object <|-- Float
+Object <|-- Function
+Object <|-- String
+Object <|-- List
+Object <|-- None
+
+@enduml

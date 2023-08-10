@@ -7,11 +7,16 @@
 namespace hdg {
     Function::~Function() = default;
 
+    Object *Function::parenthesis(std::initializer_list<Object *> list) {
+        return Object::parenthesis(list);
+    }
+
     std::string Function::toString() {
-        return "<" + m_name + ">";
+        return "<function>";
     }
 
     Object *Function::copy() {
         return this;
     }
+
 } // hdg

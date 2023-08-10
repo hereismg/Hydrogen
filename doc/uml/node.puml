@@ -1,0 +1,47 @@
+@startuml
+'!include https://unpkg.com/plantuml-style-c4@latest/core.puml
+'!theme std
+
+'https://plantuml.com/class-diagram
+abstract class Node{
+    # Position m_position
+    # Environment* m_environment
+}
+
+abstract class ObjectNode
+class NumObjNode{
+    # Node* m_expr
+}
+class FuncObjNode{
+    #
+}
+class StrObjNode{
+    # std::string value
+}
+class ListObjNode{
+    # std::vector<ObjectNode*> list
+}
+
+ObjectNode <|-- NumObjNode
+ObjectNode <|-- FuncObjNode
+ObjectNode <|-- StrObjNode
+ObjectNode <|-- ListObjNode
+
+class ObjAssignNode{
+    # std::string m_name
+    # ObjectNode* m_obj
+}
+
+class ObjAccessNode
+
+Node <|-- ObjectNode
+Node <|-- ObjAccessNode
+Node <|-- ObjAssignNode
+Node <|-- IfNode
+Node <|-- WhileNode
+Node <|-- ForNode
+
+
+
+
+@enduml

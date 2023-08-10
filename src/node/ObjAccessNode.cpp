@@ -2,20 +2,20 @@
 // Created by Magnesium on 2023/7/27.
 //
 
-#include "../../include/node/VariableAccessNode.h"
+#include "../../include/node/ObjAccessNode.h"
 
 namespace hdg {
-    VariableAccessNode::VariableAccessNode(std::string name, const Position &position, Environment *environment):
+    ObjAccessNode::ObjAccessNode(std::string name, const Position &position, Environment *environment):
             Node(position, environment), m_name(std::move(name)){
     }
 
-    VariableAccessNode::~VariableAccessNode() = default;
+    ObjAccessNode::~ObjAccessNode() = default;
 
-    std::string VariableAccessNode::toString() {
+    std::string ObjAccessNode::toString() {
         return m_name;
     }
 
-    Object *VariableAccessNode::interpret() {
+    Object *ObjAccessNode::interpret() {
         try{
             Object* value = m_environment->getSymbol(m_name);
             return value->copy();

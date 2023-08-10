@@ -5,7 +5,7 @@
 #ifndef HDG_OBJASSIGNNODE_H
 #define HDG_OBJASSIGNNODE_H
 
-#include "Node.h"
+#include "../Node.h"
 #include "ObjectNode.h"
 
 namespace hdg {
@@ -22,8 +22,7 @@ namespace hdg {
 
         std::string toString() override;
         Object* interpret() override;
-    }
-    ;
+    };
 
 } // hdg
 

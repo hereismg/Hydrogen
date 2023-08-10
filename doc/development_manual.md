@@ -46,13 +46,24 @@ for-expr    : "for" identifier (from int)? to int (step int)? colon expr
 
 while-expr  : "while" expr colon expr
 
-func-expr   : "function" identifier lparen (identifier (comma identifier)*)? rparen colon expr
+func-expr   : "function" identifier 
+              lparen 
+                  (identifier (eq expr)? 
+                      (comma identifier (eq expr)?)*
+                  )?
+              rparen
+              colon expr
 ```
 
 function add(a, b): a+b
 add(1, 2)
 
 for i=1 to 3: print(i)
+
+
+```Hydrogen
+function add(a, b): a + b
+```
 
 ## 项目目录结构
 

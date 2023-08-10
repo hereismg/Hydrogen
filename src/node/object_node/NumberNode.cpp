@@ -2,7 +2,7 @@
 // Created by Magnesium on 2023/7/25.
 //
 
-#include "../../include/node/NumberNode.h"
+#include "../../../include/node/object_node/NumberNode.h"
 
 namespace hdg {
     NumberNode::NumberNode(int value, const Position& position):

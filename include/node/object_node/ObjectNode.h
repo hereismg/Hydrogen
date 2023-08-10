@@ -5,13 +5,14 @@
 #ifndef HDG_OBJECTNODE_H
 #define HDG_OBJECTNODE_H
 
-#include "Node.h"
+#include "../Node.h"
 
 namespace hdg {
 
     class ObjectNode: public Node{
     public:
         ObjectNode();
+        ObjectNode(const Position& position, Environment* environment);
         ~ObjectNode() override;
 
         virtual std::string toString() = 0;

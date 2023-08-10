@@ -8,7 +8,7 @@
 #include <vector>
 #include "../basic/Environment.h"]
 #include "../node/Node.h"
-#include "../node/ObjAssignNode.h"
+#include "../node/object_node/ObjAssignNode.h"
 #include "Object.h"
 
 namespace hdg {

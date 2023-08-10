@@ -6,15 +6,31 @@
 abstract class Node{
     # Position m_position
     # Environment* m_environment
+
+    + Node()
+    + Node(const Position& position)
+    + Node(const Position& position, Environment* environment)
+
+    + Environment* thisEnvironment()
+    + Position* thisPosition()
 }
 
-abstract class ObjectNode
+abstract class ObjectNode{
+    + ObjectNode()
+    + ObjectNode(const Position& position)
+    + ObjectNode(const Position& position, Environment* environment)
+}
 class NumObjNode{
     # Node* m_expr
 }
 class FuncObjNode{
-    #
+    # std::vector<ObjectAssignNode*> args
+    # Node* body
+
+    + FuncObjNode()
+    + FuncObjNode(position, environmentParent)
 }
+note bottom: 注意，FuncObjNode的无参构造函数，需要默认构建一个独立的环境。外部传入的环境都是“父环境”。
 class StrObjNode{
     # std::string value
 }

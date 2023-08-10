@@ -5,7 +5,7 @@
 #ifndef HDG_OBJACCESSNODE_H
 #define HDG_OBJACCESSNODE_H
 
-#include "Node.h"
+#include "../Node.h"
 
 namespace hdg {
 

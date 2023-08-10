@@ -6,8 +6,8 @@
 #define HDG_NUMBERNODE_H
 
 #include "ObjectNode.h"
-#include "../object/Integer.h"
-#include "../object/Float.h"
+#include "../../object/Integer.h"
+#include "../../object/Float.h"
 
 namespace hdg {
 

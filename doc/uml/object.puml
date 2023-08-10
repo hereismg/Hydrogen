@@ -20,7 +20,7 @@ class Function{
 
     + Function(args, body, environment): Object("Function")
 }
-note bottom: 其中 args里ObjAssignNode 与 body 的Environment都为该函数中的Environment
+note bottom: 其中 args里ObjAssignNode 与 body 的Environment都为该函数中的Environment。
 
 class None
 

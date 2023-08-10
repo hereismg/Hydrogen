@@ -37,22 +37,16 @@ namespace hdg {
     Node* Parser::expr(Environment* environment) {
         if (TokenType::IDENTIFIER == m_currentToken->getType()){
             std::string name = m_currentToken->getValue();
-            int posStart = m_currentToken->thisPosition()->getPosStart(),
-                posEnd = -1;
+            Position pos(*m_currentToken->thisPosition());
             advance();
 
             if (m_currentToken->getType() == TokenType::EQ){
                 advance();
 
-                Node* exprNode = expr(environment);
-                posEnd = exprNode->thisPosition()->getPosEnd();
+                auto* obj = (ObjectNode*)expr(environment);
+                pos.setPosEnd(obj->thisPosition()->getPosEnd());
 
-                return new ObjAssignNode(
-                        name,
-                        exprNode,
-                        Position(m_currentToken->thisPosition()->thisContext(), posStart, posEnd),
-                        environment
-                        );
+                return new ObjAssignNode(name, obj, pos, environment);
             }
             else {
                 retreat();
@@ -352,6 +346,64 @@ namespace hdg {
     }
 
     Node *Parser::funcExpr(hdg::Environment *environment) {
+        auto* func = new FuncObjNode;
+        Token name;
+        std::vector<ObjAssignNode*> args;
+        Node* body;
+        func->thisEnvironment()->setParent(environment);
+        func->thisPosition()->setPosStart(m_currentToken->thisPosition()->getPosStart());
+        advance();
+
+        if (m_currentToken->getType() != IDENTIFIER){
+            throw InvalidSyntaxError(
+                    "Expected identifier.",
+                    *m_currentToken->thisPosition()
+            );
+        }else{
+            name = *m_currentToken;
+            advance();
+        }
+
+        if (m_currentToken->getType() != LPAREN){
+            throw InvalidSyntaxError(
+                    "Expected '('",
+                    *m_currentToken->thisPosition()
+                    );
+        }else{
+            advance();
+        }
+
+        while (m_currentToken->getType() == IDENTIFIER){
+            Position pos(*m_currentToken->thisPosition());
+            std::string argName = m_currentToken->getValue();
+            ObjectNode* argExpr = nullptr;
+            advance();
+
+            if (m_currentToken->getType() == EQ){
+                advance();
+                argExpr = (ObjectNode*)expr(func->thisEnvironment());
+                pos.setPosEnd(argExpr->thisPosition()->getPosEnd());
+            }
+
+            args.push_back(new ObjAssignNode(argName, argExpr, pos, func->thisEnvironment()));
+
+            if (m_currentToken->getType() == COMMA) {
+                advance();
+                continue;
+            }
+            else if (m_currentToken->getType() == RPAREN){
+                advance();
+                break;
+            }
+            else {
+                throw InvalidSyntaxError(
+                        "Expected ',' or ')'",
+                        *m_currentToken->thisPosition()
+                        );
+            }
+        }
+
+
         return nullptr;
     }
 

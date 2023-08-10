@@ -1,0 +1,11 @@
+@startebnf
+!theme toy
+
+expr                    = "identifier", "=", expr |
+                          comp_expr, [("and"|"or"), comp-expr];
+
+comp-expr               = "not", comp-expr |
+                          arith-expr, [(ee|gt|lt|gte|lte), arith-expr];
+
+arith-expr              = term, [(plus|minus), term];
+@endyaml

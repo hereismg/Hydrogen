@@ -56,8 +56,7 @@ Node <|-- ObjAssignNode
 Node <|-- IfNode
 Node <|-- WhileNode
 Node <|-- ForNode
-
-
-
+Node <|-- BinaryOperatorNode
+Node <|-- UnaryOperatorNode
 
 @enduml

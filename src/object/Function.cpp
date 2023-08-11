@@ -14,15 +14,19 @@ namespace hdg {
 
     Object *Function::parenthesis(const std::vector<Object*>& list) {
         if (m_args.size() > list.size()){
-            std::string detail = m_name + "() missing " + std::to_string(m_args.size()-list.size()) + " required positional argument.";
-            throw RuntimeError(detail, m_position);
+//            std::stringstream detail;
+//            detail << 1;
+//            detail << "() missing " << std::to_string(m_args.size()-list.size()) << " required positional argument.";
+            return new None;
+//            throw RuntimeError("too few args.", m_position);
+        }else if (m_args.size() < list.size()){
+//            std::string detail =
+//                    m_name + "() takes " + std::to_string(m_args.size()) + " positional arguments but " +
+//                    std::to_string(list.size()) + " were given.";
+            return new None;
+//            throw RuntimeError("too many args.", m_position);
         }
-        if (m_args.size() < list.size()){
-            std::string detail =
-                    m_name + "() takes " + std::to_string(m_args.size()) + " positional arguments but " +
-                    std::to_string(list.size()) + " were given.";
-            throw RuntimeError(detail, m_position);
-        }
+
 
         for (int i=0; i<m_args.size(); i++){
             m_environment->setSymbol(m_args[i]->getName(), list[i]);

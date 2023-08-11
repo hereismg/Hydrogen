@@ -117,7 +117,42 @@ namespace hdg {
     }
 
     Node *Parser::call(Environment *environment) {
-        return atom(environment);
+        Node* node = atom(environment);
+
+        if (m_currentToken->getType() == LPAREN){
+            auto* callNode = new CallNode(*node->thisPosition(), environment);
+            advance();
+
+            while (m_currentToken->getType() != RPAREN){
+                callNode->addNode(expr(environment));
+
+                if (m_currentToken->getType() == COMMA){
+                    advance();
+                    if (m_currentToken->getType()==RPAREN){
+                        throw InvalidSyntaxError(
+                                "Expected int, float, plus, minus.",
+                                *m_currentToken->thisPosition()
+                                );
+                    }
+                }
+            }
+
+            if (m_currentToken->getType() == RPAREN){
+                callNode->setCall(node);
+                callNode->setOperator(LPAREN);
+                callNode->thisPosition()->setPosEnd(m_currentToken->thisPosition()->getPosEnd());
+                advance();
+                return callNode;
+            }else{
+                throw InvalidSyntaxError(
+                        "Expected ')'.",
+                        *m_currentToken->thisPosition()
+                        );
+            }
+        }
+        else{
+            return node;
+        }
     }
 
     Node *Parser::atom(Environment *environment) {

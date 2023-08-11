@@ -9,8 +9,7 @@ namespace hdg {
 
     Object::Object() = default;
 
-    Object::Object(std::string className): m_class(std::move(className)) {
-    }
+    Object::Object(std::string className): m_class(std::move(className)) {}
 
     std::string Object::getClass() {
         return m_class;

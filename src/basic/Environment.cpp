@@ -23,7 +23,7 @@ namespace hdg {
         m_parent = parent;
     }
 
-    void Environment::addSymbol(const std::string &name, Object *value) {
+    void Environment::setSymbol(const std::string &name, Object *value) {
         Environment* iter = this;
         std::stack<Environment*> stack;
         while (iter != nullptr) {
@@ -40,22 +40,22 @@ namespace hdg {
         iter->m_symbolTable[name] = value;
     }
 
-    void Environment::addLocalSymbol(const std::string &name, hdg::Object *value) {
+    void Environment::setLocalSymbol(const std::string &name, Object *value) {
         m_symbolTable[name] = value;
     }
 
-    void Environment::addSymbol(const std::string& name, const Integer &value) {
-        addSymbol(name, new Integer(value));
+    void Environment::setSymbol(const std::string& name, const Integer &value) {
+        setSymbol(name, new Integer(value));
     }
 
-    void Environment::addSymbol(std::initializer_list<std::pair<std::string, const Integer &>> list) {
+    void Environment::setSymbol(std::initializer_list<std::pair<std::string, const Integer &>> list) {
         for (const auto& iter: list){
-            addSymbol(iter.first, iter.second);
+            setSymbol(iter.first, iter.second);
         }
     }
 
-    void Environment::addSymbol(const std::string& name, const Float &value) {
-        addSymbol(name, new Float(value));
+    void Environment::setSymbol(const std::string& name, const Float &value) {
+        setSymbol(name, new Float(value));
     }
 
     std::string Environment::getName() {

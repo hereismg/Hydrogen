@@ -20,8 +20,10 @@ abstract class ObjectNode{
     + ObjectNode(const Position& position)
     + ObjectNode(const Position& position, Environment* environment)
 }
+note top: ObjectNode类的主要任务是构建对应的对象，只能作为叶子节点
 class NumObjNode{
-    # Node* m_expr
+    # union{long long i, double f} m_value
+    # std::string m_class
 }
 class FuncObjNode{
     # std::vector<ObjectAssignNode*> args
@@ -45,7 +47,7 @@ ObjectNode <|-- ListObjNode
 
 class ObjAssignNode{
     # std::string m_name
-    # ObjectNode* m_obj
+    # Node* m_expr
 }
 
 class ObjAccessNode

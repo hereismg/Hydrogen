@@ -16,7 +16,7 @@
 #include "node/Node.h"
 #include "node/BinaryOperatorNode.h"
 #include "node/UnaryOperatorNode.h"
-#include "node/object_node/NumberNode.h"
+#include "node/object_node/NumObjNode.h"
 #include "node/object_node/ObjAssignNode.h"
 #include "node/object_node/ObjAccessNode.h"
 #include "node/object_node/FuncObjNode.h"

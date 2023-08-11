@@ -13,11 +13,11 @@ namespace hdg {
     class ObjAssignNode: public Node{
     protected:
         std::string m_name;
-        ObjectNode* m_obj;
+        Node* m_expr;
 
     public:
         ObjAssignNode();
-        ObjAssignNode(std::string name, ObjectNode* obj, const Position& position, Environment* environment);
+        ObjAssignNode(std::string name, Node* obj, const Position& position, Environment* environment);
         ~ObjAssignNode() override;
 
         std::string toString() override;

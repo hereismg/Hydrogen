@@ -28,12 +28,12 @@ namespace hdg {
 
         void setName(std::string name);
         void setParent(Environment* parent);
-        void addSymbol(const std::string& name, Object* value);
-        void addLocalSymbol(const std::string& name, Object* value);
+        void setSymbol(const std::string& name, Object* value);
+        void setLocalSymbol(const std::string& name, Object* value);
 
-        void addSymbol(const std::string& name, const Integer& value);
-        void addSymbol(std::initializer_list<std::pair<std::string, const Integer&>> list);
-        void addSymbol(const std::string& name, const Float& value);
+        void setSymbol(const std::string& name, const Integer& value);
+        void setSymbol(std::initializer_list<std::pair<std::string, const Integer&>> list);
+        void setSymbol(const std::string& name, const Float& value);
 
         std::string getName();
         Environment* getParent();

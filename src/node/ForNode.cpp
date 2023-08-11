@@ -45,7 +45,7 @@ namespace hdg {
     Object *ForNode::interpret() {
         auto* index = new Integer(m_from);
         Object* result;
-        m_environment->addLocalSymbol(m_index.getValue(), index);
+        m_environment->setLocalSymbol(m_index.getValue(), index);
 
         if (m_from <= m_to){
             while(index->getValue() <= m_to){

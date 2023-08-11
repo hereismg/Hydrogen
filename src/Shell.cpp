@@ -7,13 +7,13 @@
 namespace hdg {
     void Shell::run() {
         Environment globalEnvironment("<stdin>", nullptr);
-        globalEnvironment.addSymbol("hydrogen", Float(3.1415926));
-        globalEnvironment.addSymbol({
+        globalEnvironment.setSymbol("hydrogen", Float(3.1415926));
+        globalEnvironment.setSymbol({
                                             {"null",  Integer(0)},
                                             {"true",  Integer(1)},
                                             {"false", Integer(0)},
                                     });
-        globalEnvironment.addSymbol("None", new None());
+        globalEnvironment.setSymbol("None", new None());
 
         while(true){
             std::string text;

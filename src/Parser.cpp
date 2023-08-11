@@ -122,12 +122,12 @@ namespace hdg {
 
     Node *Parser::atom(Environment *environment) {
         if (m_currentToken->getType() == INT){
-            Node *node = new NumberNode(std::atoi(m_currentToken->getValue().c_str()), *m_currentToken->thisPosition());
+            Node *node = new NumObjNode((long long)std::atoi(m_currentToken->getValue().c_str()), *m_currentToken->thisPosition());
             advance();
             return node;
         }
         else if (m_currentToken->getType() == FLOAT){
-            Node* node = new NumberNode((double)std::atof(m_currentToken->getValue().c_str()), *m_currentToken->thisPosition());
+            Node* node = new NumObjNode((double)std::atof(m_currentToken->getValue().c_str()), *m_currentToken->thisPosition());
             advance();
             return node;
         }

@@ -9,12 +9,14 @@
 #include "ObjectNode.h"
 #include "../ObjAssignNode.h"
 #include "../../object/None.h"
+#include "../../object/Function.h"
 
 namespace hdg {
 
     class FuncObjNode: public ObjectNode {
     protected:
-        std::set<ObjAssignNode*> m_args;
+        std::string m_name;
+        std::vector<ObjAssignNode*> m_args;
         Node* m_body;
 
     public:
@@ -23,6 +25,7 @@ namespace hdg {
 
         void setArg(ObjAssignNode* arg);
         void setBody(Node* body);
+        void setName(const std::string& name);
 
         std::string toString();
         Object* interpret();

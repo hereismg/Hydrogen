@@ -22,6 +22,7 @@ namespace hdg {
         Environment* m_parent;
         SymbolTable m_symbolTable;
 
+
     public:
         Environment(std::string name, Environment* parent);
         ~Environment();

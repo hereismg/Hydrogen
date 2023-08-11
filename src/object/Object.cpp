@@ -7,9 +7,13 @@
 
 namespace hdg {
 
-    Object::Object() = default;
+    Object::Object(): m_class("Object"){};
 
-    Object::Object(std::string className): m_class(std::move(className)) {}
+    Object::Object(std::string className):
+        m_class(std::move(className)) {}
+
+    Object::Object(std::string className, const Position &position):
+        m_class(std::move(className)), m_position(position){}
 
     std::string Object::getClass() {
         return m_class;
@@ -87,7 +91,7 @@ namespace hdg {
         return nullptr;
     }
 
-    Object *Object::parenthesis(std::initializer_list<Object *> list) {
+    Object *Object::parenthesis(const std::vector<Object*>& list) {
         illegalOperator();
         return nullptr;
     }
@@ -97,7 +101,7 @@ namespace hdg {
         return nullptr;
     }
 
-    Object *Object::braces(std::initializer_list<Object *> list) {
+    Object *Object::braces(const std::vector<Object*>& list) {
         illegalOperator();
         return nullptr;
     }

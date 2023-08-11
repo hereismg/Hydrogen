@@ -15,6 +15,14 @@ namespace hdg {
         delete m_expr;
     }
 
+    void ObjAssignNode::setExpr(Node *expr) {
+        m_expr = expr;
+    }
+
+    std::string ObjAssignNode::getName() {
+        return m_name;
+    }
+
     std::string ObjAssignNode::toString() {
         std::string value = m_expr->interpret()->toString();
         return m_name + "=" + value;
@@ -25,7 +33,6 @@ namespace hdg {
         m_environment->setSymbol(m_name, value);
         return value->copy();
     }
-
 
 
 } // hdg

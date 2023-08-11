@@ -10,16 +10,19 @@
 #include <utility>
 #include <cmath>
 #include <functional>
+#include "../basic/Position.h"
 
 namespace hdg {
 
     class Object {
     protected:
         std::string m_class;
+        Position m_position;
 
     public:
         Object();
-        explicit Object(std::string className = "Object");
+        explicit Object(std::string className);
+        Object(std::string className, const Position& position);
 
         virtual ~Object();
 
@@ -42,9 +45,9 @@ namespace hdg {
         virtual Object* orOperator(Object* other);
         virtual Object* notOperator();
 
-        virtual Object* parenthesis(std::initializer_list<Object*> list);
+        virtual Object* parenthesis(const std::vector<Object*>& list);
         virtual Object* brackets(Object* other);
-        virtual Object* braces(std::initializer_list<Object*> list);
+        virtual Object* braces(const std::vector<Object*>& list);
 
         virtual bool isTrue();
         virtual void illegalOperator();

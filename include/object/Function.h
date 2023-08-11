@@ -5,8 +5,7 @@
 #ifndef HDG_FUNCTION_H
 #define HDG_FUNCTION_H
 
-#include <vector>
-#include "../basic/Environment.h"]
+#include "../basic/Environment.h"
 #include "../node/Node.h"
 #include "../node/ObjAssignNode.h"
 #include "Object.h"
@@ -15,15 +14,17 @@ namespace hdg {
 
     class Function: public Object{
     protected:
+        std::string m_name;
         std::vector<ObjAssignNode*> m_args;
-
         Environment* m_environment;
-        Node* m_body;
 
+        Node* m_body;
     public:
+        Function();
+        Function(std::string name, std::vector<ObjAssignNode*>args, Environment* environment, Node* body, const Position& position);
         ~Function() override;
 
-        Object* parenthesis(std::initializer_list<Object*> list);
+        Object* parenthesis(const std::vector<Object*>& list) override;
 
         std::string toString() override;
         Object* copy() override;

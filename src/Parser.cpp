@@ -421,6 +421,7 @@ namespace hdg {
         Node* temp = expr(func->thisEnvironment());
         func->setBody(temp);
         func->thisPosition()->setPosEnd(temp->thisPosition()->getPosEnd());
+        func->setName(name.getValue());
 
         return new ObjAssignNode(name.getValue(), func, *func->thisPosition(), environment);
     }

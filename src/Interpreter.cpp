@@ -20,7 +20,7 @@ namespace hdg {
         Object* value = m_tree->interpret();
         std::string result = value->toString();
 
-        delete value;
+//        delete value;
         return result;
     }
 

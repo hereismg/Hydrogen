@@ -33,7 +33,7 @@ namespace hdg {
     }
 
     std::string Function::toString() {
-        return "<function>";
+        return "<" + m_name + ">";
     }
 
     Object *Function::copy() {

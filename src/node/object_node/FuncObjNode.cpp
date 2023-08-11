@@ -12,11 +12,19 @@ namespace hdg {
     FuncObjNode::FuncObjNode(const Position &position, Environment *parent) :
         ObjectNode(position, new Environment("function", parent)) {}
 
+    void FuncObjNode::setArg(ObjAssignNode *arg) {
+        m_args.insert(arg);
+    }
+
+    void FuncObjNode::setBody(Node *body) {
+        m_body = body;
+    }
+
     std::string FuncObjNode::toString() {
         return "FuncObjNode";
     }
 
     Object *FuncObjNode::interpret() {
-        return nullptr;
+        return new None();
     }
 } // hdg

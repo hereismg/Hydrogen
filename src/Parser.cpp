@@ -43,7 +43,7 @@ namespace hdg {
             if (m_currentToken->getType() == TokenType::EQ){
                 advance();
 
-                auto* obj = (ObjectNode*)expr(environment);
+                Node* obj = expr(environment);
                 pos.setPosEnd(obj->thisPosition()->getPosEnd());
 
                 return new ObjAssignNode(name, obj, pos, environment);
@@ -166,6 +166,9 @@ namespace hdg {
         }
         else if (m_currentToken->match(KEYWORD, "while")){
             return whileExpr(environment);
+        }
+        else if (m_currentToken->match(KEYWORD, "function")){
+            return funcExpr(environment);
         }
         else {
             throw InvalidSyntaxError(
@@ -348,63 +351,78 @@ namespace hdg {
     Node *Parser::funcExpr(hdg::Environment *environment) {
         auto* func = new FuncObjNode;
         Token name;
-        std::vector<ObjAssignNode*> args;
-        Node* body;
         func->thisEnvironment()->setParent(environment);
         func->thisPosition()->setPosStart(m_currentToken->thisPosition()->getPosStart());
         advance();
 
-        if (m_currentToken->getType() != IDENTIFIER){
+        if (m_currentToken->getType() == IDENTIFIER){
+            name = *m_currentToken;
+            advance();
+        }else{
             throw InvalidSyntaxError(
                     "Expected identifier.",
                     *m_currentToken->thisPosition()
             );
-        }else{
-            name = *m_currentToken;
-            advance();
         }
 
-        if (m_currentToken->getType() != LPAREN){
+        if (m_currentToken->getType() == LPAREN){
+            advance();
+        }else{
             throw InvalidSyntaxError(
                     "Expected '('",
                     *m_currentToken->thisPosition()
-                    );
-        }else{
-            advance();
+            );
         }
 
-        while (m_currentToken->getType() == IDENTIFIER){
+        while (m_tokens.end() != m_currentToken && m_currentToken->getType() == IDENTIFIER){
             Position pos(*m_currentToken->thisPosition());
             std::string argName = m_currentToken->getValue();
-            ObjectNode* argExpr = nullptr;
+            Node* argExpr = nullptr;
             advance();
 
             if (m_currentToken->getType() == EQ){
                 advance();
-                argExpr = (ObjectNode*)expr(func->thisEnvironment());
+                argExpr = expr(func->thisEnvironment());
                 pos.setPosEnd(argExpr->thisPosition()->getPosEnd());
             }
-
-            args.push_back(new ObjAssignNode(argName, argExpr, pos, func->thisEnvironment()));
+            func->setArg(new ObjAssignNode(argName, argExpr, pos, func->thisEnvironment()));
 
             if (m_currentToken->getType() == COMMA) {
                 advance();
+                if (m_currentToken->getType()!=IDENTIFIER)
+                    throw InvalidSyntaxError(
+                            "Expected identifier.",
+                            *m_currentToken->thisPosition()
+                        );
                 continue;
             }
-            else if (m_currentToken->getType() == RPAREN){
-                advance();
-                break;
-            }
             else {
-                throw InvalidSyntaxError(
-                        "Expected ',' or ')'",
-                        *m_currentToken->thisPosition()
-                        );
+                break;
             }
         }
 
+        if (m_currentToken->getType() == RPAREN){
+            advance();
+        }else{
+            throw InvalidSyntaxError(
+                    "Expected ',' or ')'",
+                    *m_currentToken->thisPosition()
+            );
+        }
 
-        return nullptr;
+        if (m_currentToken->getType() == COLON){
+            advance();
+        }else{
+            throw InvalidSyntaxError(
+                    "Expected ':'",
+                    *m_currentToken->thisPosition()
+                    );
+        }
+        Node* temp = expr(func->thisEnvironment());
+        func->setBody(temp);
+        func->thisPosition()->setPosEnd(temp->thisPosition()->getPosEnd());
+
+        return new ObjAssignNode(name.getValue(), func, *func->thisPosition(), environment);
     }
 
     Node *Parser::binaryOperator(Environment* environment, const std::set<Token, std::less<>>&opers, std::function<Node*(Environment* envir)> funA, std::function<Node*(Environment* envir)> funB) {

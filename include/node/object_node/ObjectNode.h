@@ -22,7 +22,7 @@ namespace hdg {
         void setClass(const std::string& className);
         std::string getClass();
 
-        std::string toString() override = 0;
+        virtual std::string toString() = 0;
         virtual Object* interpret() = 0;
     };
 

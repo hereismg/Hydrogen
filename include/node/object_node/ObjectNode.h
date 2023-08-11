@@ -10,12 +10,19 @@
 namespace hdg {
 
     class ObjectNode: public Node{
+    protected:
+        std::string m_class;
+
     public:
         ObjectNode();
+        ObjectNode(std::string className, const Position& position, Environment* environment);
         ObjectNode(const Position& position, Environment* environment);
         ~ObjectNode() override;
 
-        virtual std::string toString() = 0;
+        void setClass(const std::string& className);
+        std::string getClass();
+
+        std::string toString() override = 0;
         virtual Object* interpret() = 0;
     };
 

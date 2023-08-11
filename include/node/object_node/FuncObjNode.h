@@ -6,7 +6,7 @@
 #define HDG_FUNCOBJNODE_H
 
 #include "ObjectNode.h"
-#include "ObjAssignNode.h"
+#include "../ObjAssignNode.h"
 
 namespace hdg {
 

@@ -2,7 +2,7 @@
 // Created by Magnesium on 2023/7/27.
 //
 
-#include "../../../include/node/object_node/ObjAssignNode.h"
+#include "../../include/node/ObjAssignNode.h"
 
 namespace hdg {
     ObjAssignNode::ObjAssignNode(): m_expr(nullptr){}

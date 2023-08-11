@@ -5,8 +5,8 @@
 #ifndef HDG_OBJASSIGNNODE_H
 #define HDG_OBJASSIGNNODE_H
 
-#include "../Node.h"
-#include "ObjectNode.h"
+#include "Node.h"
+#include "object_node/ObjectNode.h"
 
 namespace hdg {
 

@@ -9,8 +9,11 @@ namespace hdg {
         Node(position, new Environment("if", parent)), elseExpression(nullptr){
     }
 
-    IfNode::~IfNode() noexcept {
+    IfNode::~IfNode() {
         delete m_environment;
+        for (auto i: conditions) delete i;
+        for (auto i: expressions) delete i;
+        delete elseExpression;
     }
 
     void IfNode::addBranch(Node *condition, Node *expression) {

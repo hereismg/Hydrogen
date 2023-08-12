@@ -16,6 +16,7 @@ namespace hdg {
 
     ForNode::~ForNode() {
         delete m_environment;
+        delete m_expr;
     }
 
     void ForNode::setIndex(const Token &index) {

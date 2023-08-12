@@ -19,6 +19,7 @@ namespace hdg {
     public:
         explicit Float(float value);
         explicit Float(double value);
+        explicit Float(double value, const Position& position);
 
         [[nodiscard]] double getValue() const;
 

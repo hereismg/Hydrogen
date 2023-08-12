@@ -7,11 +7,16 @@
 namespace hdg {
     FuncObjNode::FuncObjNode():
         m_name("anonymous"){
-        m_environment = new Environment("function", nullptr);
-    }
+        m_environment = new Environment("function", nullptr);}
 
     FuncObjNode::FuncObjNode(const Position &position, Environment *parent) :
         ObjectNode(position, new Environment("function", parent)), m_name("anonymous") {}
+
+    /* FunObjNode类的主要功能是构建函数对象。在构建过程中，需要函数环境和函数体以及参数变量。
+     * 函数环境、函数体和参数变量直接传入新创建的对象中
+     * 故这些数据的生存周期由新创建的对象控制，FuncObjNode不负责管理
+     * */
+    FuncObjNode::~FuncObjNode() = default;
 
     void FuncObjNode::setArg(ObjAssignNode *arg) {
         m_args.push_back(arg);

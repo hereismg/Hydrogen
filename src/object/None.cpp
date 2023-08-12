@@ -5,9 +5,8 @@
 #include "../../include/object/None.h"
 
 namespace hdg {
-    None::None():
-            Object("None"){
-
+    None::None(): Integer(0){
+        m_class = "None";
     }
 
     std::string None::toString() {

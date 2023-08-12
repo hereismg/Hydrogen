@@ -1,0 +1,138 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Position{
+    # *context
+    # posStart
+    # posEnd
+
+    + Position()
+    + Position(*context, posStart, posEnd)
+    + Position(*context, posStart)
+    + Position(position)
+}
+
+abstract class Error{
+    # name
+    # details
+
+    # position
+
+    + Error(name, details, position)
+}
+
+class IllegalCharError{
+    + IllegalCharError(details, position)
+}
+
+class InvalidSyntaxError{
+    + InvalidSyntaxError(details, position)
+}
+
+class RuntimeError{
+    + RuntimeError(details, position)
+}
+
+class NotImplementedError{
+
+}
+
+abstract class Node{
+    # Position m_position
+    # Environment* m_environment
+
+    + Node()
+    + Node(const Position& position)
+    + Node(const Position& position, Environment* environment)
+
+    + Environment* thisEnvironment()
+    + Position* thisPosition()
+}
+
+abstract class ObjectNode{
+    + ObjectNode()
+    + ObjectNode(const Position& position)
+    + ObjectNode(const Position& position, Environment* environment)
+}
+note top: ObjectNode类的主要任务是构建对应的对象，只能作为叶子节点
+class NumObjNode{
+    # union{long long i, double f} m_value
+    # std::string m_class
+}
+class FuncObjNode{
+    # std::vector<ObjectAssignNode*> args
+    # Node* body
+
+    + FuncObjNode()
+    + FuncObjNode(position, environmentParent)
+}
+note bottom: 注意，FuncObjNode的无参构造函数，需要默认构建一个独立的环境。外部传入的环境都是“父环境”。
+class StrObjNode{
+    # std::string value
+}
+class ListObjNode{
+    # std::vector<ObjectNode*> list
+}
+
+ObjectNode <|-- NumObjNode
+ObjectNode <|-- FuncObjNode
+ObjectNode <|-- StrObjNode
+ObjectNode <|-- ListObjNode
+
+class ObjAssignNode{
+    # std::string m_name
+    # Node* m_expr
+}
+
+class ObjAccessNode
+
+
+
+abstract class Object{
+    # std::string m_class
+
+    + Object(class)
+}
+class Integer{
+    # int m_value
+}
+class Float{
+    # double m_value
+}
+class Function{
+    # std::vector<ObjAssignNode*> args
+
+    # Environment* environment
+    # Node* body
+
+    + Function(args, body, environment): Object("Function")
+}
+note bottom: 其中 args里ObjAssignNode 与 body 的Environment都为该函数中的Environment。
+
+class None
+
+Object <|-- Integer
+Object <|-- Float
+Object <|-- Function
+Object <|-- String
+Object <|-- List
+Object <|-- None
+Object *-- Position
+
+Node <|-- ObjectNode
+Node <|-- ObjAccessNode
+Node <|-- ObjAssignNode
+Node <|-- IfNode
+Node <|-- WhileNode
+Node <|-- ForNode
+Node <|-- BinaryOperatorNode
+Node <|-- UnaryOperatorNode
+Node *-- Position
+
+Error <|-- IllegalCharError
+Error <|-- InvalidSyntaxError
+Error <|-- RuntimeError
+Error *-- Position
+RuntimeError <|-- NotImplementedError
+
+@enduml

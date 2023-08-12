@@ -20,6 +20,7 @@ namespace hdg {
         CallNode();
         CallNode(const Position& position, Environment* environment);
         CallNode(Node* call, std::vector<Node*>list, TokenType oper, const Position& position, Environment* environment);
+        ~CallNode();
 
         void addNode(Node* node);
         void setOperator(TokenType oper);

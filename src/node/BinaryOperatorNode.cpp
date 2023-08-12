@@ -53,19 +53,19 @@ namespace hdg {
 
     Object* BinaryOperatorNode::interpret() {
         Object* left = m_left->interpret();
-        if (left->getClass() == "None"){
-            throw RuntimeError(
-                "this is 'None'.",
-                *m_left->thisPosition()
-                    );
-        }
+//        if (left->getClass() == "None"){
+//            throw RuntimeError(
+//                "this is 'None'.",
+//                *m_left->thisPosition()
+//                    );
+//        }
         Object* right = m_right->interpret();
-        if (right->getClass() == "None"){
-            throw RuntimeError(
-                    "this is 'None'.",
-                    *m_right->thisPosition()
-            );
-        }
+//        if (right->getClass() == "None"){
+//            throw RuntimeError(
+//                    "this is 'None'.",
+//                    *m_right->thisPosition()
+//            );
+//        }
 
         Object* result = nullptr;
 

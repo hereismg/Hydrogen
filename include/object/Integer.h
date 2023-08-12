@@ -18,6 +18,7 @@ namespace hdg {
 
     public:
         explicit Integer(long long value);
+        Integer(long long value, const Position& position);
 
         void setValue(long long value);
         long long getValue() const;

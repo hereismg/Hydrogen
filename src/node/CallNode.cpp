@@ -15,6 +15,11 @@ namespace hdg {
     CallNode::CallNode(const Position &position, Environment *environment):
         Node(position, environment){}
 
+    CallNode::~CallNode() {
+        delete m_call;
+        for (auto i: m_list) delete i;
+    }
+
     void CallNode::addNode(Node *node) {
         m_list.push_back(node);
     }

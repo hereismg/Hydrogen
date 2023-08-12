@@ -1,0 +1,24 @@
+@startuml
+!theme toy
+
+map global {
+  add       => <func>
+  anonymity => <for>
+  a         => <int>
+  b         => <float>
+}
+
+map add{
+    num1    => <obj>
+    num2    => <obj>
+    body    => <node>
+}
+
+map for{
+    index => <int>
+}
+
+global::add <-- add
+global::anonymity <-- for
+@enduml
+

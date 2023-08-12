@@ -17,6 +17,7 @@ namespace hdg {
 
     public:
         WhileNode(Node* condition, Node* expression, const Position& position, Environment* parent);
+        ~WhileNode() override;
 
         void setCondition(Node* condition);
         void setExpression(Node* expression);

@@ -11,6 +11,7 @@
 #include <cmath>
 #include <functional>
 #include "../basic/Position.h"
+#include "../error/RuntimeError.h"
 
 namespace hdg {
 

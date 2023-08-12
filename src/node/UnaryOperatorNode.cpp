@@ -42,7 +42,7 @@ namespace hdg {
 
         if (m_oper.getType() == MINUS){
             if (value->getClass() == "Integer"){
-                int num = -((Integer*)value)->getValue();
+                long long num = -((Integer*)value)->getValue();
                 delete value;
                 return new Integer(num);
             }

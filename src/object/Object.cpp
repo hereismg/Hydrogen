@@ -111,6 +111,9 @@ namespace hdg {
     }
 
     void Object::illegalOperator() {
-        throw -2;
+        throw RuntimeError(
+                "illegal operator.",
+                m_position
+                );
     }
 } // hdg

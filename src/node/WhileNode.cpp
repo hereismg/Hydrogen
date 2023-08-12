@@ -9,6 +9,12 @@ namespace hdg {
             Node(position, new Environment("while", parent)), m_condition(condition), m_expression(expression){
     }
 
+    WhileNode::~WhileNode() {
+        delete m_environment;
+        delete m_condition;
+        delete m_expression;
+    }
+
     void WhileNode::setCondition(Node *condition) {
         m_condition = condition;
     }

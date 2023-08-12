@@ -5,8 +5,11 @@
 #include "../../include/object/Integer.h"
 
 namespace hdg {
-    Integer::Integer(long long value): Object("Integer"), m_value(value) {
-    }
+    Integer::Integer(long long value):
+        Object("Integer"), m_value(value) {}
+
+    Integer::Integer(long long int value, const Position &position):
+        Object("Integer", position), m_value(value){}
 
     void Integer::setValue(long long value) {
         m_value = value;
@@ -25,6 +28,10 @@ namespace hdg {
             double result = (double)m_value + ((Float*)other)->getValue();
             return new Float(result);
         }
+        else{
+            illegalOperator();
+            return nullptr;
+        }
     }
 
     Object *Integer::minus(Object *other) {
@@ -36,6 +43,10 @@ namespace hdg {
             double result = (double)m_value - ((Float*)other)->getValue();
             return new Float(result);
         }
+        else{
+            illegalOperator();
+            return nullptr;
+        }
     }
 
     Object *Integer::mul(Object *other) {
@@ -46,6 +57,10 @@ namespace hdg {
         else if (other->getClass() == "Float"){
             double result = (double)m_value * ((Float*)other)->getValue();
             return new Float(result);
+        }
+        else{
+            illegalOperator();
+            return nullptr;
         }
     }
 
@@ -79,6 +94,10 @@ namespace hdg {
             double result = std::pow(m_value, ((Float*)other)->getValue());
             return new Float(result);
         }
+        else{
+            illegalOperator();
+            return nullptr;
+        }
     }
 
     Object *Integer::equation(Object *other) {
@@ -90,6 +109,10 @@ namespace hdg {
             long long result = m_value == ((Float*)other)->getValue();
             return new Integer(result);
         }
+        else{
+            illegalOperator();
+            return nullptr;
+        }
     }
 
     Object *Integer::notEquation(Object *other) {
@@ -100,6 +123,10 @@ namespace hdg {
         else if (other->getClass() == "Float"){
             long long result = m_value != ((Float*)other)->getValue();
             return new Integer(result);
+        }
+        else{
+            illegalOperator();
+            return nullptr;
         }
     }
 
@@ -126,6 +153,10 @@ namespace hdg {
             int result = m_value < ((Float*)other)->getValue();
             return new Integer(result);
         }
+        else{
+            illegalOperator();
+            return nullptr;
+        }
     }
 
     Object *Integer::greaterThanEquation(Object *other) {
@@ -137,6 +168,10 @@ namespace hdg {
             long long result = m_value >= ((Float*)other)->getValue();
             return new Integer(result);
         }
+        else{
+            illegalOperator();
+            return nullptr;
+        }
     }
 
     Object *Integer::lessThanEquation(Object *other) {
@@ -147,6 +182,10 @@ namespace hdg {
         else if (other->getClass() == "Float"){
             long long result = m_value <= ((Float*)other)->getValue();
             return new Integer(result);
+        }
+        else{
+            illegalOperator();
+            return nullptr;
         }
     }
 

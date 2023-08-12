@@ -10,7 +10,7 @@
 
 namespace hdg {
 
-    class None: public Object{
+    class None: public Integer{
     public:
         None();
 

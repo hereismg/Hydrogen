@@ -31,10 +31,10 @@ namespace hdg {
 
     Object *NumObjNode::interpret() {
         if (m_class == "Integer"){
-            return new Integer(m_value.i);
+            return new Integer(m_value.i, m_position);
         }
         else if (m_class == "Float") {
-            return new Float(m_value.f);
+            return new Float(m_value.f, m_position);
         }
         else{
             throw -1;

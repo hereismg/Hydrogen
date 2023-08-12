@@ -22,6 +22,7 @@ namespace hdg {
     public:
         FuncObjNode();
         FuncObjNode(const Position& position, Environment* parent);
+        ~FuncObjNode() override;
 
         void setArg(ObjAssignNode* arg);
         void setBody(Node* body);

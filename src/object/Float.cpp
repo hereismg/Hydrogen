@@ -75,82 +75,82 @@ namespace hdg {
 
     Object *Float::equation(Object *other) {
         if (other->getClass() == "Float"){
-            int result = m_value == ((Float*)other)->m_value;
+            long long result = m_value == ((Float*)other)->m_value;
             return new Integer(result);
         }
         else if (other->getClass() == "Integer"){
-            int result = m_value == (double)((Integer*)other)->getValue();
+            long long result = m_value == (double)((Integer*)other)->getValue();
             return new Integer(result);
         }
     }
 
     Object* Float::notEquation(Object* other) {
         if (other->getClass() == "Float"){
-            int result = m_value != ((Float*)other)->m_value;
+            long long result = m_value != ((Float*)other)->m_value;
             return new Integer(result);
         }
         else if (other->getClass() == "Integer"){
-            int result = m_value != (double)((Integer*)other)->getValue();
+            long long result = m_value != (double)((Integer*)other)->getValue();
             return new Integer(result);
         }
     }
 
     Object *Float::greaterThan(Object *other) {
         if (other->getClass() == "Float"){
-            int result = m_value > ((Float*)other)->m_value;
+            long long result = m_value > ((Float*)other)->m_value;
             return new Integer(result);
         }
         else if (other->getClass() == "Integer"){
-            int result = m_value > (double)((Integer*)other)->getValue();
+            long long result = m_value > (double)((Integer*)other)->getValue();
             return new Integer(result);
         }
     }
 
     Object *Float::lessThan(Object *other) {
         if (other->getClass() == "Float"){
-            int result = m_value < ((Float*)other)->m_value;
+            long long result = m_value < ((Float*)other)->m_value;
             return new Integer(result);
         }
         else if (other->getClass() == "Integer"){
-            int result = m_value < (double)((Integer*)other)->getValue();
+            long long result = m_value < (double)((Integer*)other)->getValue();
             return new Integer(result);
         }
     }
 
     Object *Float::greaterThanEquation(Object *other) {
         if (other->getClass() == "Float"){
-            int result = m_value >= ((Float*)other)->m_value;
+            long long result = m_value >= ((Float*)other)->m_value;
             return new Integer(result);
         }
         else if (other->getClass() == "Integer"){
-            int result = m_value >= (double)((Integer*)other)->getValue();
+            long long result = m_value >= (double)((Integer*)other)->getValue();
             return new Integer(result);
         }
     }
 
     Object *Float::lessThanEquation(Object *other) {
         if (other->getClass() == "Float"){
-            int result = m_value <= ((Float*)other)->m_value;
+            long long result = m_value <= ((Float*)other)->m_value;
             return new Integer(result);
         }
         else if (other->getClass() == "Integer"){
-            int result = m_value <= (double)((Integer*)other)->getValue();
+            long long result = m_value <= (double)((Integer*)other)->getValue();
             return new Integer(result);
         }
     }
 
     Object *Float::andOperator(Object *other) {
-        int result = isTrue() && other->isTrue();
+        long long result = isTrue() && other->isTrue();
         return new Integer(result);
     }
 
     Object *Float::orOperator(Object *other) {
-        int result = isTrue() || other->isTrue();
+        long long result = isTrue() || other->isTrue();
         return new Integer(result);
     }
 
     Object *Float::notOperator() {
-        int result = !isTrue();
+        long long result = !isTrue();
         return new Integer(result);
     }
 

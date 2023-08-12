@@ -14,13 +14,13 @@ namespace hdg {
 
     class Integer: public Object{
     private:
-        int m_value;
+        long long m_value;
 
     public:
-        explicit Integer(int value);
+        explicit Integer(long long value);
 
-        void setValue(int value);
-        int getValue() const;
+        void setValue(long long value);
+        long long getValue() const;
 
         Object* plus(Object* other) override;
         Object* minus(Object* other) override;

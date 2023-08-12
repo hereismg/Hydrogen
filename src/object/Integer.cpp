@@ -5,16 +5,20 @@
 #include "../../include/object/Integer.h"
 
 namespace hdg {
-    Integer::Integer(int value): Object("Integer"), m_value(value) {
+    Integer::Integer(long long value): Object("Integer"), m_value(value) {
     }
 
-    int Integer::getValue() const {
+    void Integer::setValue(long long value) {
+        m_value = value;
+    }
+
+    long long Integer::getValue() const {
         return m_value;
     }
 
     Object *Integer::plus(Object* other) {
         if (other->getClass() == "Integer"){
-            int result = m_value + ((Integer*)other)->m_value;
+            long long result = m_value + ((Integer*)other)->m_value;
             return new Integer(result);
         }
         else if (other->getClass() == "Float"){
@@ -25,7 +29,7 @@ namespace hdg {
 
     Object *Integer::minus(Object *other) {
         if (other->getClass() == "Integer"){
-            int result = m_value - ((Integer*)other)->m_value;
+            long long result = m_value - ((Integer*)other)->m_value;
             return new Integer(result);
         }
         else if (other->getClass() == "Float"){
@@ -36,7 +40,7 @@ namespace hdg {
 
     Object *Integer::mul(Object *other) {
         if (other->getClass() == "Integer"){
-            int result = m_value * ((Integer*)other)->m_value;
+            long long result = m_value * ((Integer*)other)->m_value;
             return new Integer(result);
         }
         else if (other->getClass() == "Float"){
@@ -47,18 +51,22 @@ namespace hdg {
 
     Object *Integer::div(Object *other) {
         if (other->getClass() == "Integer"){
-            int right = ((Integer*)other)->m_value;
+            long long right = ((Integer*)other)->m_value;
             if (right == 0) throw -1;
 
-            int result = m_value / right;
+            long long result = m_value / right;
             return new Integer(result);
         }
         else if (other->getClass() == "Float"){
             double right = ((Float*)other)->getValue();
             if (right==0) throw -1;
 
-            double result = (double)m_value / right;
+            double result = m_value / right;
             return new Float(result);
+        }
+        else{
+            illegalOperator();
+            return nullptr;
         }
     }
 
@@ -75,33 +83,33 @@ namespace hdg {
 
     Object *Integer::equation(Object *other) {
         if (other->getClass() == "Integer"){
-            int result = m_value == ((Integer*)other)->m_value;
+            long long result = m_value == ((Integer*)other)->m_value;
             return new Integer(result);
         }
         else if (other->getClass() == "Float"){
-            int result = m_value == ((Float*)other)->getValue();
+            long long result = m_value == ((Float*)other)->getValue();
             return new Integer(result);
         }
     }
 
     Object *Integer::notEquation(Object *other) {
         if (other->getClass() == "Integer"){
-            int result = m_value != ((Integer*)other)->m_value;
+            long long result = m_value != ((Integer*)other)->m_value;
             return new Integer(result);
         }
         else if (other->getClass() == "Float"){
-            int result = m_value != ((Float*)other)->getValue();
+            long long result = m_value != ((Float*)other)->getValue();
             return new Integer(result);
         }
     }
 
     Object *Integer::greaterThan(Object *other) {
         if (other->getClass() == "Integer"){
-            int result = m_value > ((Integer*)other)->m_value;
+            long long result = m_value > ((Integer*)other)->m_value;
             return new Integer(result);
         }
         else if (other->getClass() == "Float"){
-            int result = m_value > ((Float*)other)->getValue();
+            long long result = m_value > ((Float*)other)->getValue();
             return new Integer(result);
         }
         else{
@@ -111,7 +119,7 @@ namespace hdg {
 
     Object *Integer::lessThan(Object *other) {
         if (other->getClass() == "Integer"){
-            int result = m_value < ((Integer*)other)->m_value;
+            long long result = m_value < ((Integer*)other)->m_value;
             return new Integer(result);
         }
         else if (other->getClass() == "Float"){
@@ -122,22 +130,22 @@ namespace hdg {
 
     Object *Integer::greaterThanEquation(Object *other) {
         if (other->getClass() == "Integer"){
-            int result = m_value >= ((Integer*)other)->m_value;
+            long long result = m_value >= ((Integer*)other)->m_value;
             return new Integer(result);
         }
         else if (other->getClass() == "Float"){
-            int result = m_value >= ((Float*)other)->getValue();
+            long long result = m_value >= ((Float*)other)->getValue();
             return new Integer(result);
         }
     }
 
     Object *Integer::lessThanEquation(Object *other) {
         if (other->getClass() == "Integer"){
-            int result = m_value <= ((Integer*)other)->m_value;
+            long long result = m_value <= ((Integer*)other)->m_value;
             return new Integer(result);
         }
         else if (other->getClass() == "Float"){
-            int result = m_value <= ((Float*)other)->getValue();
+            long long result = m_value <= ((Float*)other)->getValue();
             return new Integer(result);
         }
     }
@@ -168,10 +176,6 @@ namespace hdg {
     bool Integer::isTrue() {
         if (m_value!=0) return true;
         else return false;
-    }
-
-    void Integer::setValue(int value) {
-        m_value = value;
     }
 
 } // hdg

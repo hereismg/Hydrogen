@@ -20,6 +20,7 @@
 #include "node/ObjAssignNode.h"
 #include "node/ObjAccessNode.h"
 #include "node/object_node/FuncObjNode.h"
+#include "node/object_node/StrObjNode.h"
 #include "node/IfNode.h"
 #include "node/ForNode.h"
 #include "node/WhileNode.h"

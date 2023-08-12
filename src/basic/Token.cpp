@@ -64,7 +64,13 @@ namespace hdg {
         if (m_value.empty()){
             str = tokenTypeName[m_type];
         }else{
-            str = tokenTypeName[m_type] + ":" + m_value;
+            str = tokenTypeName[m_type] + ":";
+            if (m_type == STRING){
+                str += "\"" + m_value + "\"";
+            }
+            else {
+                str += m_value;
+            }
         }
         return str;
     }

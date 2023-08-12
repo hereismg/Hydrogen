@@ -166,6 +166,11 @@ namespace hdg {
             advance();
             return node;
         }
+        else if (m_currentToken->getType() == STRING){
+            Node* node = new StrObjNode(m_currentToken->getValue(), *m_currentToken->thisPosition(), environment);
+            advance();
+            return node;
+        }
         else if (m_currentToken->getType() == LPAREN){
             advance();
             Node* node = expr(environment);

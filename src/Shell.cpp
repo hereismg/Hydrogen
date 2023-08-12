@@ -7,7 +7,7 @@
 namespace hdg {
     void Shell::run() {
         Environment globalEnvironment("<stdin>", nullptr);
-        globalEnvironment.setSymbol("hydrogen", Float(3.1415926));
+        globalEnvironment.setSymbol("hydrogen", new String("Hello, Hydrogen_v0.2.1!"));
         globalEnvironment.setSymbol({
                                             {"null",  Integer(0)},
                                             {"true",  Integer(1)},

@@ -16,6 +16,7 @@ namespace hdg {
     enum TokenType{
         INT,
         FLOAT,      // 虽然名称为“float”，但实际上全都是双精度浮点型
+        STRING,
         IDENTIFIER,
         KEYWORD,
 
@@ -49,6 +50,7 @@ namespace hdg {
     static std::map<TokenType, std::string> tokenTypeName = {
             {INT,           "INT"},
             {FLOAT,         "FLOAT"},
+            {STRING,        "STRING"},
             {IDENTIFIER,    "IDENTIFIER"},
             {KEYWORD,       "KEYWORD"},
 

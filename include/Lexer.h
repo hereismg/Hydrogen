@@ -66,6 +66,7 @@ namespace hdg {
         void buildLessThan();
         void buildEquation();
         void buildIdentifier();
+        void buildString();
     };
 } // hdg
 

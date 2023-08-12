@@ -30,7 +30,7 @@ power       : call (pow factor)*
 
 call        : atom (LPAREN (expr (COMMA expr)*)? RPAREN)?
 
-atom        : identifier|int|float
+atom        : identifier|int|float|string
             : lparen expr rparen
             : if-expr
             : for-expr

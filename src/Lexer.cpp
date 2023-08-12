@@ -67,7 +67,9 @@ namespace hdg {
             else if (m_currentChar == '='){
                 buildEquation();
             }
-
+            else if (m_currentChar == '\"'){
+                buildString();
+            }
             else if (m_currentChar == '+'){
                 m_tokens.emplace_back(PLUS, Position(m_text, m_pos));
                 advance();
@@ -192,6 +194,39 @@ namespace hdg {
         if (keywordSet.find(value) != keywordSet.end()) type = KEYWORD;
 
         m_tokens.emplace_back(type, value, Position(m_text, posStart, m_pos));
+    }
+
+    void Lexer::buildString() {
+        std::string str;
+        Position pos(m_text, m_pos);
+        advance();
+
+        static std::map<char, char> transChar{
+                {'n', '\n'},
+                {'t', '\t'},
+                {'\\', '\\'},
+                {'\"', '\"'},
+        };
+
+        while (m_pos < m_text->size() && m_currentChar!='\"'){
+            if (m_currentChar == '\\'){
+                advance();
+                auto trans = transChar.find(m_currentChar);
+                if (trans != transChar.end()){
+                    str += trans->second;
+                }
+                else{
+                    str += ' ';
+                }
+            }else{
+                str += m_currentChar;
+            }
+            advance();
+        }
+        advance();
+        pos.setPosEnd(m_pos);
+
+        m_tokens.emplace_back(STRING, str, pos);
     }
 
 } // hdg

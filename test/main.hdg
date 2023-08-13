@@ -1,0 +1,8 @@
+function add(a, b){
+    return a+b
+}
+
+num1 = input_int()
+num2 = input_int()
+
+print(add(num1, num2))

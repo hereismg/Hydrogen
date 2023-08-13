@@ -7,6 +7,7 @@
 #define HDG_SHELL_H
 
 #include <iostream>
+#include <fstream>
 #include "Lexer.h"
 #include "Parser.h"
 #include "Interpreter.h"
@@ -17,7 +18,9 @@ namespace hdg {
 
     class Shell {
     public:
+        static std::string input();
         static void run();
+        static void run(const std::string& path);
     };
 
 } // hdg

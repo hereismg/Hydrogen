@@ -1,0 +1,10 @@
+// 输入
+n = input()
+result = 1
+
+for i from 1 to n{
+    result = result * i
+}
+
+// 输出
+print(result)

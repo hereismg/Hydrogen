@@ -24,7 +24,7 @@ namespace hdg {
             conditions.push_back(condition);
             expressions.push_back(expression);
         }
-        m_position.setPosEnd(expression->thisPosition()->getPosEnd());
+        m_position.setIEnd(expression->thisPosition()->getPosEnd());
     }
 
     std::string IfNode::toString() {

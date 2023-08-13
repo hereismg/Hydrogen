@@ -44,6 +44,7 @@ namespace hdg {
         COMMA,
 
         EF,
+        EL,
         NONE
     };
 
@@ -73,6 +74,7 @@ namespace hdg {
             {COLON,         "COLON"},
 
             {EF,            "EF"},          // EOF   end of file    由于EOF是C++中的关键字，所以这里用EF代替
+            {EL,            "EL"},          // EOL   end of line    意为“一行的末尾”，这里使用“EL”是为了和上面的”EF“统一表达语言
             {NONE,          "NONE"}
     };
     class Token {

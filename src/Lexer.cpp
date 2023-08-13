@@ -35,12 +35,15 @@ namespace hdg {
     }
 
     Lexer::Lexer(std::string* text):
-            m_text(text), m_currentChar('\0'), m_pos(-1) {
+            m_text(text), m_currentChar('\0'), m_pos(-1), m_line(1) {
         advance();
     }
 
     void Lexer::advance() {
         m_currentChar = (*m_text)[++m_pos];
+        if (m_currentChar == EL) {
+            m_line++;
+        }
     }
 
     std::string* Lexer::thisText() {
@@ -49,7 +52,7 @@ namespace hdg {
 
     void Lexer::run() {
         while (m_pos < m_text->length()){
-            if (m_currentChar == ' ' || m_currentChar == '\n' || m_currentChar == '\t'){
+            if (m_currentChar == ' ' || m_currentChar == '\t'){
                 advance();
             }
             else if (whatIsThis(m_currentChar) == LegalChar::DIGITAL){
@@ -69,6 +72,9 @@ namespace hdg {
             }
             else if (m_currentChar == '\"'){
                 buildString();
+            }
+            else if (m_currentChar == '\n'){
+                m_tokens.emplace_back(EL, Position(m_text, m_pos));
             }
             else if (m_currentChar == '+'){
                 m_tokens.emplace_back(PLUS, Position(m_text, m_pos));
@@ -224,7 +230,7 @@ namespace hdg {
             advance();
         }
         advance();
-        pos.setPosEnd(m_pos);
+        pos.setIEnd(m_pos);
 
         m_tokens.emplace_back(STRING, str, pos);
     }

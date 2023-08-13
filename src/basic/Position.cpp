@@ -7,33 +7,33 @@
 namespace hdg {
 
     Position::Position():
-        m_context(nullptr), m_posStart(0), m_posEnd(0){
+            m_context(nullptr), m_iStart(0), m_iEnd(0){
     }
 
-    Position::Position(std::string* context, int posStart, int posEnd):
-        m_context(context), m_posStart(posStart), m_posEnd(posEnd){
+    Position::Position(std::string* context, int iStart, int iEnd):
+            m_context(context), m_iStart(iStart), m_iEnd(iEnd){
     }
 
-    Position::Position(std::string *context, int posStart):
-        m_context(context), m_posStart(posStart), m_posEnd(posStart+1){
+    Position::Position(std::string *context, int iStart):
+            m_context(context), m_iStart(iStart), m_iEnd(iStart + 1){
     }
 
     Position::Position(const Position &position) = default;
 
-    void Position::setPosStart(int posStart) {
-        m_posStart = posStart;
+    void Position::setIStart(int posStart) {
+        m_iStart = posStart;
     }
 
-    void Position::setPosEnd(int posEnd) {
-        m_posEnd = posEnd;
+    void Position::setIEnd(int posEnd) {
+        m_iEnd = posEnd;
     }
 
     int Position::getPosStart() const {
-        return m_posStart;
+        return m_iStart;
     }
 
     int Position::getPosEnd() const {
-        return m_posEnd;
+        return m_iEnd;
     }
 
     std::string* Position::thisContext() {
@@ -41,8 +41,8 @@ namespace hdg {
     }
 
     std::string Position::arrow() {
-        std::string arrowStart(m_posStart, ' ');
-        std::string arrowEnd(m_posEnd-m_posStart, '^');
+        std::string arrowStart(m_iStart, ' ');
+        std::string arrowEnd(m_iEnd - m_iStart, '^');
         return m_context==nullptr ? "" : *m_context + "\n" + arrowStart + arrowEnd;
     }
 

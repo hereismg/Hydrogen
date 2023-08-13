@@ -1,0 +1,9 @@
+// 目标是将 a 上的盘子全部移动到 c 盘上
+function solution(layer, a, b, c){
+    print(a + "->" + b)
+    solution(layer-1, a, c, b)
+    print(b + "->" + c)
+}
+
+layer = input()
+solution(2, "x", "y", "z")

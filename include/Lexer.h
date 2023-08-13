@@ -51,6 +51,7 @@ namespace hdg {
 
         char m_currentChar;
         int m_pos;
+        int m_line;
 
     public:
         explicit Lexer(std::string* text);

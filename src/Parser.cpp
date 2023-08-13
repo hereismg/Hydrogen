@@ -44,7 +44,7 @@ namespace hdg {
                 advance();
 
                 Node* obj = expr(environment);
-                pos.setPosEnd(obj->thisPosition()->getPosEnd());
+                pos.setIEnd(obj->thisPosition()->getPosEnd());
 
                 return new ObjAssignNode(name, obj, pos, environment);
             }
@@ -140,7 +140,7 @@ namespace hdg {
             if (m_currentToken->getType() == RPAREN){
                 callNode->setCall(node);
                 callNode->setOperator(LPAREN);
-                callNode->thisPosition()->setPosEnd(m_currentToken->thisPosition()->getPosEnd());
+                callNode->thisPosition()->setIEnd(m_currentToken->thisPosition()->getPosEnd());
                 advance();
                 return callNode;
             }else{
@@ -359,7 +359,7 @@ namespace hdg {
 
         Node* node = expr(forNode->thisEnvironment());
         forNode->setExpr(node);
-        forNode->thisPosition()->setPosEnd(node->thisPosition()->getPosEnd());
+        forNode->thisPosition()->setIEnd(node->thisPosition()->getPosEnd());
 
         return forNode;
     }
@@ -382,7 +382,7 @@ namespace hdg {
         advance();
 
         expression = expr(node->thisEnvironment());
-        node->thisPosition()->setPosEnd(expression->thisPosition()->getPosEnd());
+        node->thisPosition()->setIEnd(expression->thisPosition()->getPosEnd());
         node->setCondition(condition);
         node->setExpression(expression);
         return node;
@@ -392,7 +392,7 @@ namespace hdg {
         auto* func = new FuncObjNode;
         Token name;
         func->thisEnvironment()->setParent(environment);
-        func->thisPosition()->setPosStart(m_currentToken->thisPosition()->getPosStart());
+        func->thisPosition()->setIStart(m_currentToken->thisPosition()->getPosStart());
         advance();
 
         if (m_currentToken->getType() == IDENTIFIER){
@@ -423,7 +423,7 @@ namespace hdg {
             if (m_currentToken->getType() == EQ){
                 advance();
                 argExpr = expr(func->thisEnvironment());
-                pos.setPosEnd(argExpr->thisPosition()->getPosEnd());
+                pos.setIEnd(argExpr->thisPosition()->getPosEnd());
             }
             func->setArg(new ObjAssignNode(argName, argExpr, pos, func->thisEnvironment()));
 
@@ -460,7 +460,7 @@ namespace hdg {
         }
         Node* temp = expr(func->thisEnvironment());
         func->setBody(temp);
-        func->thisPosition()->setPosEnd(temp->thisPosition()->getPosEnd());
+        func->thisPosition()->setIEnd(temp->thisPosition()->getPosEnd());
         func->setName(name.getValue());
 
         return new ObjAssignNode(name.getValue(), func, *func->thisPosition(), environment);
@@ -484,7 +484,7 @@ namespace hdg {
 
             oper->setLeft(left);
             oper->setRight(right);
-            oper->thisPosition()->setPosEnd(right->thisPosition()->getPosEnd());
+            oper->thisPosition()->setIEnd(right->thisPosition()->getPosEnd());
             left = oper;
         }
 

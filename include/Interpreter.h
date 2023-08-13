@@ -7,22 +7,30 @@
 #define HDG_INTERPRETER_H
 
 #include <string>
+#include "Parser.h"
+#include "Lexer.h"
 #include "node/Node.h"
 #include "basic/Environment.h"
 
 namespace hdg {
+    enum Mode{
+        debug,
+        release,
+    };
 
     class Interpreter {
     protected:
-        Node* m_tree;
-        Environment* m_environment;
-
+        Environment* m_globalEnvironment;
 
     public:
-        Interpreter(Node* tree, Environment* environment);
+        Interpreter();
+        explicit Interpreter(std::string name);
         ~Interpreter();
 
-        std::string run();
+        std::string interpret(std::string code, Mode mode = release);
+
+    protected:
+        void init();
     };
 
 } // hdg

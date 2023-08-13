@@ -9,20 +9,45 @@
 
 namespace hdg {
 
+    struct Indicator{
+    public:
+        int index;
+        int line;
+        int col;
+    };
+
     class Position {
     protected:
+
         std::string* m_context;
-        int m_posStart;
-        int m_posEnd;
+        std::string m_fName;
+
+        Indicator m_start;
+        Indicator m_end;
+
+        int m_iStart;
+        int m_fStart[2];
+
+        int m_iEnd;
+        int m_fEnd[2];
 
     public:
         Position();
-        Position(std::string* context, int posStart, int posEnd);
-        Position(std::string* context, int posStart);
+        Position(std::string* context, int iStart, int iEnd);
+        Position(std::string* context, int iStart);
         Position(const Position& position);
 
-        void setPosStart(int posStart);
-        void setPosEnd(int posEnd);
+        void setStart(int index, int line, int col);
+        void setStart(const Indicator& index);
+        Indicator getStart();
+
+        void setEnd(int index, int line, int col);
+        void setEnd(const Indicator& index);
+        Indicator getEnd();
+
+
+        void setIStart(int posStart);
+        void setIEnd(int posEnd);
         [[nodiscard]] int getPosStart() const;
         [[nodiscard]] int getPosEnd() const;
         std::string* thisContext();

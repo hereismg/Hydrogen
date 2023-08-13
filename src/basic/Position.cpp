@@ -10,8 +10,8 @@ namespace hdg {
             m_context(nullptr), m_iStart(0), m_iEnd(0){
     }
 
-    Position::Position(std::string* context, int iStart, int iEnd):
-            m_context(context), m_iStart(iStart), m_iEnd(iEnd){
+    Position::Position(std::string* context, int start, int end):
+            m_context(context), m_iStart(start), m_iEnd(end){
     }
 
     Position::Position(std::string *context, int iStart):

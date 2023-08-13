@@ -31,7 +31,7 @@ namespace hdg {
         }
         else{
             code = input(path);
-            interpreter.interpret(code);
+            interpreter.interpret(code, mode);
         }
     }
 

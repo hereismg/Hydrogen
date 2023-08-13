@@ -33,7 +33,7 @@ namespace hdg {
 
     public:
         Position();
-        Position(std::string* context, int iStart, int iEnd);
+        Position(std::string* context, int start, int end);
         Position(std::string* context, int iStart);
         Position(const Position& position);
 

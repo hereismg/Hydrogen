@@ -75,6 +75,7 @@ namespace hdg {
             }
             else if (m_currentChar == '\n'){
                 m_tokens.emplace_back(EL, Position(m_text, m_pos));
+                advance();
             }
             else if (m_currentChar == '+'){
                 m_tokens.emplace_back(PLUS, Position(m_text, m_pos));

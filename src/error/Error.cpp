@@ -7,6 +7,8 @@
 #include "../../include/error/Error.h"
 
 namespace hdg {
+    Error::Error() = default;
+
     Error::Error(std::string name, std::string details, const Position& position):
         m_name(std::move(name)), m_details(std::move(details)), m_position(position){
     }

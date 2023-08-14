@@ -10,7 +10,7 @@
 #include <utility>
 #include <sstream>
 #include "../basic/Position.h"
-
+#include "../basic/Environment.h"
 
 namespace hdg {
 
@@ -20,8 +20,10 @@ namespace hdg {
         std::string m_details;
 
         Position m_position;
+        Environment* m_environment{};
 
     public:
+        Error();
         Error(std::string name, std::string details, const Position& position);
         virtual std::string toString();
     };

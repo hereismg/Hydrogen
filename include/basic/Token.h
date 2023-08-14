@@ -33,19 +33,19 @@ namespace hdg {
         DIV,
         POW,
 
-        LPAREN,
+        LPAREN,     // 左圆括号
         RPAREN,
+        LBRACKET,   // 左方括号
+        RBRACKET,
+        LBRACE,     // 左花括号
+        RBRACE,
         EQ,         // 赋值语句的等于号“=”
 
-        IF,
-        ELIF,
-        ELSE,
         COLON,
         COMMA,
 
         EF,
-        EL,
-        NONE
+        EL,         // end of line 有两种表达字符：“;” and “\n”
     };
 
     static std::map<TokenType, std::string> tokenTypeName = {
@@ -69,13 +69,16 @@ namespace hdg {
 
             {LPAREN,        "LPAREN"},
             {RPAREN,        "RPAREN"},
+            {LBRACKET,      "LBRACKET"},
+            {RBRACKET,      "RBRACKET"},
+            {LBRACE,        "LBRACE"},
+            {RBRACE,        "RBRACE"},
             {EQ,            "EQ"},
 
             {COLON,         "COLON"},
 
             {EF,            "EF"},          // EOF   end of file    由于EOF是C++中的关键字，所以这里用EF代替
             {EL,            "EL"},          // EOL   end of line    意为“一行的末尾”，这里使用“EL”是为了和上面的”EF“统一表达语言
-            {NONE,          "NONE"}
     };
     class Token {
     protected:

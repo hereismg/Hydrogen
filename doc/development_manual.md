@@ -10,9 +10,69 @@
 - String
   - 不区分字符串类型和字符类型，统一是字符串类型
 
+## 字符记号表
+
+| 词法单元     | 模式    | 词素            | 备注                   |
+| ------------ | ------- | --------------- | ---------------------- |
+| `INT`        | int     | int             |                        |
+| `FLOAT`      | float   | float           |                        |
+| `STRING`     | "char*" | "Hello World!"  | 有无数满足模式的字符串 |
+| `IDENTIFIER` | char*   | "add"           |                        |
+| `KEYWORD`    | char*   | "if", "while"等 | 详见关键字列表         |
+|              |         |                 |                        |
+| `NE`         |         | !=              |                        |
+| `EE`         |         | ==              |                        |
+| `GT`         |         | >               |                        |
+| `LT`         |         | <               |                        |
+| `GTE`        |         | >=              |                        |
+| `LTE`        |         | <=              |                        |
+|              |         |                 |                        |
+| `PLUS`       |         | +               |                        |
+| `MINUS`      |         | -               |                        |
+| `MUL`        |         | *               |                        |
+| `DIV`        |         | /               |                        |
+| `POW`        |         | ^               |                        |
+|              |         |                 |                        |
+| `LPAREN`     |         | (               |                        |
+| `RPAREN`     |         | )               |                        |
+| `LBRACKET`   |         | [               |                        |
+| `RBRACKET`   |         | ]               |                        |
+| `LBRACCE`    |         | {               |                        |
+| `RBRACE`     |         | }               |                        |
+| `EQ`         |         | =               |                        |
+|              |         |                 |                        |
+| `COLON`      |         | :               |                        |
+| `COMMA`      |         | ,               |                        |
+|              |         |                 |                        |
+| `EF`         |         | end of file     |                        |
+| `EL`         |         | ";", "\n"       |                        |
+
+
+
+## 关键字列表
+
+| 关键字     | 备注 |
+| ---------- | ---- |
+| `not`      |      |
+| `and`      |      |
+| `or`       |      |
+| `if`       |      |
+| `elif`     |      |
+| `else`     |      |
+| `for`      |      |
+| `from`     |      |
+| `to`       |      |
+| `step`     |      |
+| `while`    |      |
+| `function` |      |
+
+
+
 ## 上下文无关文法
 
 ```CFG
+statements  : lbrace EL* expr (EL* expr?)* rbrace
+
 expr        : identifier eq expr
             : comp-expr ("and"|"or" comp-expr)*
 
@@ -41,6 +101,8 @@ if-expr     : expr "if" expr (else expr)?
             : "if" expr colon expr 
               ("elif" expr colon expr)*
               ("else" expr)?
+            : "if" lparen expr rparen
+              
 
 for-expr    : "for" identifier (from int)? to int (step int)? colon expr
 
@@ -52,7 +114,7 @@ func-expr   : "function" identifier
                       (comma identifier (eq expr)?)*
                   )?
               rparen
-              colon expr
+              (colon expr | statements)
 ```
 
 function add(a, b): a+b

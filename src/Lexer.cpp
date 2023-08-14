@@ -73,7 +73,7 @@ namespace hdg {
             else if (m_currentChar == '\"'){
                 buildString();
             }
-            else if (m_currentChar == '\n'){
+            else if (m_currentChar == '\n' || m_currentChar == ';'){
                 m_tokens.emplace_back(EL, Position(m_text, m_pos));
                 advance();
             }
@@ -103,6 +103,22 @@ namespace hdg {
             }
             else if (m_currentChar == ')'){
                 m_tokens.emplace_back(RPAREN, Position(m_text, m_pos));
+                advance();
+            }
+            else if (m_currentChar == '['){
+                m_tokens.emplace_back(RBRACKET, Position(m_text, m_pos));
+                advance();
+            }
+            else if (m_currentChar == '}'){
+                m_tokens.emplace_back(LBRACKET, Position(m_text, m_pos));
+                advance();
+            }
+            else if (m_currentChar == '{'){
+                m_tokens.emplace_back(RBRACE, Position(m_text, m_pos));
+                advance();
+            }
+            else if (m_currentChar == '}'){
+                m_tokens.emplace_back(LBRACE, Position(m_text, m_pos));
                 advance();
             }
             else if (m_currentChar == ':'){

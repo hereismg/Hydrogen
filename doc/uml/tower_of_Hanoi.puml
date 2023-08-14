@@ -1,0 +1,37 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+map list{
+   solution(def) => FuncObjNode*
+   layer => ObjAssignNode*
+   solution(call) => CallNode*
+}
+
+object statements {
+    list: vector<Node*>
+}
+
+object solution_def{
+    name: "solution"
+    args: <vector<ObjAssignNode*>>
+    body: <Node*>
+}
+
+map args{
+    layer => null
+    a => null
+    b => null
+    c => null
+}
+
+object body{
+    print: <CallNode*>
+    solution: <CallNode*>
+    print: <CallNode*>
+}
+
+list --* statements::list
+args --* solution_def::args
+body --* solution_def::body
+statements *--- solution_def
+@enduml

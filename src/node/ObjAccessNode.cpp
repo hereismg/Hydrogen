@@ -23,11 +23,7 @@ namespace hdg {
         catch (int error){
             throw RuntimeError(
                     "'" + m_name + "' is not defind.",
-                    Position(
-                            m_position.thisContext(),
-                            m_position.getPosStart(),
-                            m_position.getPosEnd())
-                    );
+                    m_position);
         }
     }
 } // hdg

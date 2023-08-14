@@ -1,8 +1,8 @@
-function add(a, b){
-    return a+b
+#function add(a, b){
+    a+b
 }
 
-num1 = input_int()
-num2 = input_int()
+num1 = 1
+num2 = 2
 
-print(add(num1, num2))
+add(num1, num2)

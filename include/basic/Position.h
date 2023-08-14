@@ -11,45 +11,33 @@ namespace hdg {
 
     struct Indicator{
     public:
-        int index;
-        int line;
-        int col;
+        unsigned long long index;
+        unsigned long long line;
+        unsigned long long col;
     };
 
     class Position {
     protected:
-
+        std::string m_fPath;
         std::string* m_context;
-        std::string m_fName;
 
-        Indicator m_start;
-        Indicator m_end;
-
-        int m_iStart;
-        int m_fStart[2];
-
-        int m_iEnd;
-        int m_fEnd[2];
+        Indicator m_start{};
+        Indicator m_end{};
 
     public:
         Position();
-        Position(std::string* context, int start, int end);
-        Position(std::string* context, int iStart);
+        Position(std::string fPath, std::string* context, const Indicator& start, const Indicator& end);
+        Position(std::string fPath, std::string* context, const Indicator& start);
         Position(const Position& position);
 
         void setStart(int index, int line, int col);
-        void setStart(const Indicator& index);
-        Indicator getStart();
-
+        void setStart(const Indicator& indicator);
         void setEnd(int index, int line, int col);
-        void setEnd(const Indicator& index);
+        void setEnd(const Indicator& indicator);
+
+        Indicator getStart();
         Indicator getEnd();
-
-
-        void setIStart(int posStart);
-        void setIEnd(int posEnd);
-        [[nodiscard]] int getPosStart() const;
-        [[nodiscard]] int getPosEnd() const;
+        std::string getFilePath();
         std::string* thisContext();
 
         std::string arrow();

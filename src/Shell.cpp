@@ -5,33 +5,33 @@
 #include "../include/Shell.h"
 
 namespace hdg {
-    Shell::Shell(): mode(release) {}
+    Shell::Shell(): m_mode(release) {}
 
     [[noreturn]] void Shell::exe(int argc, char* argv[]) {
         int pos = 1;
         for (int i=1; i<argc; i++){
             if (std::string(argv[i]) == "-debug"){
-                mode = debug;
+                m_mode = debug;
             }
             else if(std::string(argv[i]) == "-release") {
-                mode = release;
+                m_mode = release;
             }
             else{
-                path = argv[i];
+                m_fPath = argv[i];
             }
         }
 
         Interpreter interpreter;
         std::string code;
-        if (path.empty()){
+        if (m_fPath.empty()){
             while(true){
                 code = input();
-                std::cout << interpreter.interpret(code, mode) << std::endl;
+                std::cout << interpreter.interpret("<stdin>", code, m_mode) << std::endl;
             }
         }
         else{
-            code = input(path);
-            interpreter.interpret(code, mode);
+            code = input(m_fPath);
+            interpreter.interpret(m_fPath, code, m_mode);
         }
     }
 

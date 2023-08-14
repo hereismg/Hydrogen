@@ -6,10 +6,7 @@
 
 namespace hdg {
 
-    Interpreter::Interpreter(): m_globalEnvironment(new Environment("<stdin>", nullptr)) {
-        init();
-    }
-    Interpreter::Interpreter(std::string name): m_globalEnvironment(new Environment(std::move(name), nullptr)) {
+    Interpreter::Interpreter(): m_globalEnvironment(new Environment("<main>", nullptr)) {
         init();
     }
     Interpreter::~Interpreter() = default;
@@ -30,9 +27,9 @@ namespace hdg {
      *
      * debug 模式会打印出中间过程的 token列表 与 语法树
      * */
-    std::string Interpreter::interpret(std::string code, Mode mode) {
+    std::string Interpreter::interpret(const std::string& fPath, std::string code, Mode mode) {
         try {
-            Lexer lexer(&code);
+            Lexer lexer(fPath, &code);
             lexer.run();
             if (mode == debug) std::cout << lexer.getTokens() << std::endl;
 

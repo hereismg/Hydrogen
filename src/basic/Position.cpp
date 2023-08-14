@@ -6,44 +6,62 @@
 
 namespace hdg {
 
-    Position::Position():
-            m_context(nullptr), m_iStart(0), m_iEnd(0){
+    Position::Position(): m_context(nullptr){}
+
+    Position::Position(std::string fPath, std::string* context, const Indicator& start, const Indicator& end):
+            m_fPath(std::move(fPath)), m_context(context), m_start(start), m_end(end){}
+
+    Position::Position(std::string fPath, std::string* context, const Indicator& start):
+            m_fPath(std::move(fPath)), m_context(context), m_start(start), m_end(start.index+1, start.line, start.col+1){}
+
+    Position::Position(const Position &position) {
+        m_fPath = position.m_fPath;
+        m_context = position.m_context;
+        m_start = position.m_start;
+        m_end = position.m_end;
     }
 
-    Position::Position(std::string* context, int start, int end):
-            m_context(context), m_iStart(start), m_iEnd(end){
+    void Position::setStart(int index, int line, int col){
+        m_start.index = index;
+        m_start.line = line;
+        m_start.col = col;
     }
 
-    Position::Position(std::string *context, int iStart):
-            m_context(context), m_iStart(iStart), m_iEnd(iStart + 1){
+    void Position::setStart(const hdg::Indicator &indicator) {
+        setStart(indicator.index, indicator.line, indicator.col);
     }
 
-    Position::Position(const Position &position) = default;
-
-    void Position::setIStart(int posStart) {
-        m_iStart = posStart;
+    void Position::setEnd(int index, int line, int col) {
+        m_end.index = index;
+        m_end.line = line;
+        m_end.col = col;
     }
 
-    void Position::setIEnd(int posEnd) {
-        m_iEnd = posEnd;
-    }
-
-    int Position::getPosStart() const {
-        return m_iStart;
-    }
-
-    int Position::getPosEnd() const {
-        return m_iEnd;
+    void Position::setEnd(const hdg::Indicator &indicator) {
+        setEnd(indicator.index, indicator.line, indicator.col);
     }
 
     std::string* Position::thisContext() {
         return m_context;
     }
 
+    Indicator Position::getStart(){
+        return m_start;
+    }
+
+    Indicator Position::getEnd() {
+        return m_end;
+    }
+
+    std::string Position::getFilePath(){
+        return m_fPath;
+    };
+
     std::string Position::arrow() {
-        std::string arrowStart(m_iStart, ' ');
-        std::string arrowEnd(m_iEnd - m_iStart, '^');
-        return m_context==nullptr ? "" : *m_context + "\n" + arrowStart + arrowEnd;
+        return "^";
+//        std::string arrowStart(m_start.col, ' ');
+//        std::string arrowEnd(m_end.col - m_start.col, '^');
+//        return m_context==nullptr ? "" : *m_context + "\n" + arrowStart + arrowEnd;
     }
 
 

@@ -72,8 +72,8 @@
 
 ```CFG
 
-expr        : identifier eq expr
-            : comp-expr ("and"|"or" comp-expr)*
+expr        : EL* identifier eq expr
+            : EL* comp-expr ("and"|"or" comp-expr)*
 
 comp-expr   : "not" comp-expr
             : arith-expr (ee|gt|lt|gte|lte arith-expr)*

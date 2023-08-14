@@ -12,13 +12,10 @@ namespace hdg {
     }
 
     Token::Token(TokenType type, std::string value):
-        m_type(type), m_value(std::move(value)), m_position(nullptr, -1){
+        m_type(type), m_value(std::move(value)){
     }
 
-    Token::Token(TokenType type):
-        m_type(type), m_position(nullptr, -1){
-
-    }
+    Token::Token(TokenType type): m_type(type){}
 
     Token::Token(TokenType type, const Position &position):
         m_type(type), m_position(position){

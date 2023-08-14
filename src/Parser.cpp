@@ -25,16 +25,15 @@ namespace hdg {
         if (m_currentToken->getType() != EF){
             throw InvalidSyntaxError(
                     "Expected '+', '-', '*', '/' or '^'.",
-                    {m_currentToken->thisPosition()->thisContext(),
-                     m_currentToken->thisPosition()->getPosStart(),
-                     m_currentToken->thisPosition()->getPosEnd()
-                    });
+                    *m_currentToken->thisPosition()
+                    );
         }
 
         return result;
     }
 
     Node* Parser::expr(Environment* environment) {
+        while(m_currentToken->getType() == EL) advance();
         if (TokenType::IDENTIFIER == m_currentToken->getType()){
             std::string name = m_currentToken->getValue();
             Position pos(*m_currentToken->thisPosition());
@@ -44,7 +43,7 @@ namespace hdg {
                 advance();
 
                 Node* obj = expr(environment);
-                pos.setIEnd(obj->thisPosition()->getPosEnd());
+                pos.setEnd(obj->thisPosition()->getEnd());
 
                 return new ObjAssignNode(name, obj, pos, environment);
             }
@@ -65,13 +64,10 @@ namespace hdg {
             Token token(*m_currentToken);
             advance();
             Node* obj = compExpr(environment);
+            Position position(*token.thisPosition());
+            position.setEnd(obj->thisPosition()->getEnd());
 
-            return new UnaryOperatorNode(
-                    token,
-                    obj,
-                    Position(token.thisPosition()->thisContext(), token.thisPosition()->getPosStart(), obj->thisPosition()->getPosEnd()),
-                    environment
-                    );
+            return new UnaryOperatorNode(token, obj, position, environment);
         }
         return binaryOperator(
                 environment,
@@ -140,7 +136,7 @@ namespace hdg {
             if (m_currentToken->getType() == RPAREN){
                 callNode->setCall(node);
                 callNode->setOperator(LPAREN);
-                callNode->thisPosition()->setIEnd(m_currentToken->thisPosition()->getPosEnd());
+                callNode->thisPosition()->setEnd(m_currentToken->thisPosition()->getEnd());
                 advance();
                 return callNode;
             }else{
@@ -178,10 +174,7 @@ namespace hdg {
             if (m_currentToken->getType() != RPAREN){
                 throw InvalidSyntaxError(
                         "Expected ')'.",
-                        {m_currentToken->thisPosition()->thisContext(),
-                         m_currentToken->thisPosition()->getPosStart(),
-                         m_currentToken->thisPosition()->getPosEnd()
-                        });
+                        *m_currentToken->thisPosition());
             }else{
                 advance();
             }
@@ -191,7 +184,7 @@ namespace hdg {
         else if (m_currentToken->getType() == TokenType::IDENTIFIER){
             Node* node = new ObjAccessNode(
                     m_currentToken->getValue(),
-                    Position(m_currentToken->thisPosition()->thisContext(), m_currentToken->thisPosition()->getPosStart(), m_currentToken->thisPosition()->getPosEnd()),
+                    *m_currentToken->thisPosition(),
                     environment
             );
 
@@ -213,16 +206,17 @@ namespace hdg {
         else {
             throw InvalidSyntaxError(
                     "Expected identifier, int, float, '+', '-' or '('.",
-                    {m_currentToken->thisPosition()->thisContext(),
-                     m_currentToken->thisPosition()->getPosStart(),
-                     m_currentToken->thisPosition()->getPosEnd()}
-            );
+                    *m_currentToken->thisPosition());
         }
+
     }
 
+    /*
+     * 注意：IfNode 的 Position 由 addBranch 函数维护，故在此只需要设定start即可。
+     * */
     Node *Parser::ifExpr(Environment* environment) {
         IfNode *ifNode = new IfNode(
-                Position(m_currentToken->thisPosition()->thisContext(), m_currentToken->thisPosition()->getPosStart()),
+                Position(*m_currentToken->thisPosition()),
                 m_environment);
         Node *condition, *expression;
 
@@ -359,7 +353,7 @@ namespace hdg {
 
         Node* node = expr(forNode->thisEnvironment());
         forNode->setExpr(node);
-        forNode->thisPosition()->setIEnd(node->thisPosition()->getPosEnd());
+        forNode->thisPosition()->setEnd(node->thisPosition()->getEnd());
 
         return forNode;
     }
@@ -382,7 +376,7 @@ namespace hdg {
         advance();
 
         expression = expr(node->thisEnvironment());
-        node->thisPosition()->setIEnd(expression->thisPosition()->getPosEnd());
+        node->thisPosition()->setEnd(expression->thisPosition()->getEnd());
         node->setCondition(condition);
         node->setExpression(expression);
         return node;
@@ -392,7 +386,7 @@ namespace hdg {
         auto* func = new FuncObjNode;
         Token name;
         func->thisEnvironment()->setParent(environment);
-        func->thisPosition()->setIStart(m_currentToken->thisPosition()->getPosStart());
+        func->thisPosition()->setStart(m_currentToken->thisPosition()->getStart());
         advance();
 
         if (m_currentToken->getType() == IDENTIFIER){
@@ -423,7 +417,7 @@ namespace hdg {
             if (m_currentToken->getType() == EQ){
                 advance();
                 argExpr = expr(func->thisEnvironment());
-                pos.setIEnd(argExpr->thisPosition()->getPosEnd());
+                pos.setEnd(argExpr->thisPosition()->getEnd());
             }
             func->setArg(new ObjAssignNode(argName, argExpr, pos, func->thisEnvironment()));
 
@@ -455,7 +449,7 @@ namespace hdg {
 
             Node* body = expr(func->thisEnvironment());
             func->setBody(body);
-            func->thisPosition()->setIEnd(body->thisPosition()->getPosEnd());
+            func->thisPosition()->setEnd(body->thisPosition()->getEnd());
             func->setName(name.getValue());
 
             return new ObjAssignNode(name.getValue(), func, *func->thisPosition(), environment);
@@ -463,7 +457,7 @@ namespace hdg {
         else if (m_currentToken->getType() == LBRACE){
             Environment* e = func->thisEnvironment();
             Node* body = statements(e);
-            func->thisPosition()->setIEnd(body->thisPosition()->getPosEnd());
+            func->thisPosition()->setEnd(body->thisPosition()->getEnd());
             func->setBody(body);
             func->setName(name.getValue());
 
@@ -479,18 +473,19 @@ namespace hdg {
 
     Node *Parser::statements(Environment *environment) {
         if (m_currentToken->getType() == LBRACE){
-            auto* stets = new StatementsNode(*m_currentToken->thisPosition(), environment);
+            auto* stats = new StatementsNode(*m_currentToken->thisPosition(), environment);
 
-            advance();
-            while (m_currentToken->getType() != EF && m_currentToken->getType() != RBRACE){
-                while(m_currentToken->getType() == EL)advance();
+            while(m_currentToken->getType() == EL || m_currentToken->getType() == LBRACE) advance();
+            while (m_currentToken->getType() != RBRACE){
                 Node* node = expr(environment);
-                stets->append(node);
+                stats->append(node);
+
+                while(m_currentToken->getType() == EL)advance();
             }
-            stets->thisPosition()->setIEnd(m_currentToken->thisPosition()->getPosEnd());
+            stats->thisPosition()->setEnd(m_currentToken->thisPosition()->getEnd());
             advance();
 
-            return stets;
+            return stats;
         }
         else{
             return expr(environment);
@@ -501,13 +496,13 @@ namespace hdg {
         if (funB == nullptr) funB = funA;
         Node* left = funA(environment);
 
-        while(m_tokens.end() != m_currentToken && m_currentToken->getType()!=EL && opers.find(*m_currentToken) != opers.end()){
+        while(opers.find(*m_currentToken) != opers.end()){
             BinaryOperatorNode *oper;
             oper = new BinaryOperatorNode(
                     *m_currentToken,
                     nullptr,
                     nullptr,
-                    Position(m_currentToken->thisPosition()->thisContext(), left->thisPosition()->getPosStart())
+                    *m_currentToken->thisPosition()
             );
             advance();
 
@@ -515,7 +510,7 @@ namespace hdg {
 
             oper->setLeft(left);
             oper->setRight(right);
-            oper->thisPosition()->setIEnd(right->thisPosition()->getPosEnd());
+            oper->thisPosition()->setEnd(right->thisPosition()->getEnd());
             left = oper;
         }
 
@@ -530,11 +525,12 @@ namespace hdg {
 
         advance();
         Node* obj = fun(environment);
+        currentPos.setEnd(obj->thisPosition()->getEnd());
 
         node = new UnaryOperatorNode(
                 oper,
                 obj,
-                Position(currentPos.thisContext(), currentPos.getPosStart(), obj->thisPosition()->getPosEnd()),
+                currentPos,
                 environment
                 );
         return node;

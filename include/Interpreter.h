@@ -24,10 +24,9 @@ namespace hdg {
 
     public:
         Interpreter();
-        explicit Interpreter(std::string name);
         ~Interpreter();
 
-        std::string interpret(std::string code, Mode mode = release);
+        std::string interpret(const std::string& fPath, std::string code, Mode mode = release);
 
     protected:
         void init();

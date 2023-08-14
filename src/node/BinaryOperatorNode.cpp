@@ -87,9 +87,10 @@ namespace hdg {
                 throw RuntimeError(
                         "Division by zero",
                         Position(
+                                m_position.getFilePath(),
                                 m_position.thisContext(),
-                                m_right->thisPosition()->getPosStart(),
-                                m_right->thisPosition()->getPosEnd())
+                                m_right->thisPosition()->getStart(),
+                                m_right->thisPosition()->getEnd())
                         );
             }
         }

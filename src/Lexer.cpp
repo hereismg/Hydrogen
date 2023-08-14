@@ -34,24 +34,31 @@ namespace hdg {
         return out;
     }
 
-    Lexer::Lexer(std::string* text):
-            m_text(text), m_currentChar('\0'), m_pos(-1), m_line(1) {
-        advance();
+    Lexer::Lexer(std::string fPath, std::string* code):
+            m_fPath(std::move(fPath)), m_code(code), m_currentChar((*m_code)[0]), m_pos(0, 1, 0){}
+
+    std::string Lexer::getFilePath() {
+        return m_fPath;
     }
 
     void Lexer::advance() {
-        m_currentChar = (*m_text)[++m_pos];
-        if (m_currentChar == EL) {
-            m_line++;
+        if (m_pos.index >= m_code->length()) return;
+        m_pos.index++;
+        m_pos.col++;
+        m_currentChar = (*m_code)[m_pos.index];
+
+        if (m_pos.index>0 && (*m_code)[m_pos.index - 1] == '\n') {
+            m_pos.line++;
+            m_pos.col = 0;
         }
     }
 
     std::string* Lexer::thisText() {
-        return m_text;
+        return m_code;
     }
 
     void Lexer::run() {
-        while (m_pos < m_text->length()){
+        while (m_pos.index < m_code->length()){
             if (m_currentChar == ' ' || m_currentChar == '\t'){
                 advance();
             }
@@ -74,77 +81,77 @@ namespace hdg {
                 buildString();
             }
             else if (m_currentChar == '\n' || m_currentChar == ';'){
-                m_tokens.emplace_back(EL, Position(m_text, m_pos));
+                m_tokens.emplace_back(EL, std::to_string(m_currentChar), Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == '+'){
-                m_tokens.emplace_back(PLUS, Position(m_text, m_pos));
+                m_tokens.emplace_back(PLUS, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == '-'){
-                m_tokens.emplace_back(MINUS, Position(m_text, m_pos));
+                m_tokens.emplace_back(MINUS, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == '*'){
-                m_tokens.emplace_back(MUL , Position(m_text, m_pos));
+                m_tokens.emplace_back(MUL , Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == '/'){
-                m_tokens.emplace_back(DIV, Position(m_text, m_pos));
+                m_tokens.emplace_back(DIV, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == '^'){
-                m_tokens.emplace_back(POW, Position(m_text, m_pos));
+                m_tokens.emplace_back(POW, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == '('){
-                m_tokens.emplace_back(LPAREN, Position(m_text, m_pos));
+                m_tokens.emplace_back(LPAREN, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == ')'){
-                m_tokens.emplace_back(RPAREN, Position(m_text, m_pos));
+                m_tokens.emplace_back(RPAREN, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == '['){
-                m_tokens.emplace_back(RBRACKET, Position(m_text, m_pos));
+                m_tokens.emplace_back(RBRACKET, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == ']'){
-                m_tokens.emplace_back(LBRACKET, Position(m_text, m_pos));
+                m_tokens.emplace_back(LBRACKET, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == '{'){
-                m_tokens.emplace_back(LBRACE, Position(m_text, m_pos));
+                m_tokens.emplace_back(LBRACE, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == '}'){
-                m_tokens.emplace_back(RBRACE, Position(m_text, m_pos));
+                m_tokens.emplace_back(RBRACE, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == ':'){
-                m_tokens.emplace_back(COLON, Position(m_text, m_pos));
+                m_tokens.emplace_back(COLON, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == ','){
-                m_tokens.emplace_back(COMMA, Position(m_text, m_pos));
+                m_tokens.emplace_back(COMMA, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else{
                 throw IllegalCharError(
                         "Expect digital, '+', '-', '*', '/' or '^'.",
-                        Position(m_text, m_pos)
+                        Position(m_fPath, m_code, m_pos)
                         );
             }
         }
-        m_tokens.emplace_back(EF, Position(m_text, m_pos));
+        m_tokens.emplace_back(EF, Position(m_fPath, m_code, m_pos));
     }
 
     void Lexer::buildNumber() {
-        int posStart = m_pos;
+        Indicator posStart = m_pos;
         int counter = 0;
         TokenType type = INT;
 
-        while(m_pos < m_text->length() && (whatIsThis(m_currentChar) == LegalChar::DIGITAL || m_currentChar == '.')) {
+        while(m_pos.index < m_code->length() && (whatIsThis(m_currentChar) == LegalChar::DIGITAL || m_currentChar == '.')) {
             if (m_currentChar == '.') {
                 if (counter==1) break;
                 type = FLOAT;
@@ -153,7 +160,7 @@ namespace hdg {
             advance();
         }
 
-        m_tokens.emplace_back(type, m_text->substr(posStart, m_pos - posStart), Position(m_text, posStart, m_pos));
+        m_tokens.emplace_back(type, m_code->substr(posStart.index, m_pos.index - posStart.index), Position(m_fPath, m_code, posStart, m_pos));
     }
 
     std::vector<Token>& Lexer::getTokens() {
@@ -161,67 +168,67 @@ namespace hdg {
     }
 
     void Lexer::buildGreaterThan() {
-        int posStart = m_pos;
+        Indicator posStart = m_pos;
         TokenType type = GT;
 
         advance();
 
-        if (m_pos<m_text->length() && m_currentChar=='='){
+        if (m_pos.index < m_code->length() && m_currentChar == '='){
             type = GTE;
             advance();
         }
 
-        m_tokens.emplace_back(type, "", Position(m_text, posStart, m_pos));
+        m_tokens.emplace_back(type, "", Position(m_fPath, m_code, posStart, m_pos));
     }
 
     void Lexer::buildLessThan() {
-        int posStart = m_pos;
+        Indicator posStart = m_pos;
         TokenType type = LT;
 
         advance();
 
-        if (m_pos<m_text->length() && m_currentChar=='='){
+        if (m_pos.index < m_code->length() && m_currentChar == '='){
             type = LTE;
             advance();
         }
 
-        m_tokens.emplace_back(type, "", Position(m_text, posStart, m_pos));
+        m_tokens.emplace_back(type, "", Position(m_fPath, m_code, posStart, m_pos));
     }
 
     void Lexer::buildEquation() {
-        int posStart = m_pos;
+        Indicator posStart = m_pos;
         TokenType type = EQ;
 
         advance();
 
-        if (m_pos<m_text->length() && m_currentChar=='='){
+        if (m_pos.index < m_code->length() && m_currentChar == '='){
             type = EE;
             advance();
         }
 
-        m_tokens.emplace_back(type, "", Position(m_text, posStart, m_pos));
+        m_tokens.emplace_back(type, "", Position(m_fPath, m_code, posStart, m_pos));
     }
 
     void Lexer::buildIdentifier() {
-        int posStart = m_pos;
+        Indicator posStart = m_pos;
         TokenType type = IDENTIFIER;
 
         advance();
 
-        while(m_pos < m_text->size() && (whatIsThis(m_currentChar, LegalChar::DIGITAL | LegalChar::UPPERCASE | LegalChar::LOWERCASE))){
+        while(m_pos.index < m_code->size() && (whatIsThis(m_currentChar, LegalChar::DIGITAL | LegalChar::UPPERCASE | LegalChar::LOWERCASE))){
             advance();
         }
 
-        std::string value = m_text->substr(posStart, m_pos-posStart);
+        std::string value = m_code->substr(posStart.index, m_pos.index - posStart.index);
 
         if (keywordSet.find(value) != keywordSet.end()) type = KEYWORD;
 
-        m_tokens.emplace_back(type, value, Position(m_text, posStart, m_pos));
+        m_tokens.emplace_back(type, value, Position(m_fPath, m_code, posStart, m_pos));
     }
 
     void Lexer::buildString() {
         std::string str;
-        Position pos(m_text, m_pos);
+        Position pos(m_fPath, m_code, m_pos);
         advance();
 
         static std::map<char, char> transChar{
@@ -231,7 +238,7 @@ namespace hdg {
                 {'\"', '\"'},
         };
 
-        while (m_pos < m_text->size() && m_currentChar!='\"'){
+        while (m_pos.index < m_code->size() && m_currentChar != '\"'){
             if (m_currentChar == '\\'){
                 advance();
                 auto trans = transChar.find(m_currentChar);
@@ -247,7 +254,7 @@ namespace hdg {
             advance();
         }
         advance();
-        pos.setIEnd(m_pos);
+        pos.setEnd(m_pos);
 
         m_tokens.emplace_back(STRING, str, pos);
     }

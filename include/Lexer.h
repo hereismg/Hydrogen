@@ -46,15 +46,16 @@ namespace hdg {
 
     class Lexer {
     protected:
-        std::string* m_text;
+        std::string m_fPath;
+        std::string* m_code;
         std::vector<Token> m_tokens;
 
         char m_currentChar;
-        int m_pos;
-        int m_line;
+        Indicator m_pos;
 
     public:
-        explicit Lexer(std::string* text);
+        explicit Lexer(std::string fPath, std::string* code);
+        std::string getFilePath();
         std::string* thisText();
         std::vector<Token>& getTokens();
         void run();

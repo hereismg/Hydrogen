@@ -71,7 +71,6 @@
 ## 上下文无关文法
 
 ```CFG
-statements  : lbrace EL* expr (EL* expr?)* rbrace
 
 expr        : identifier eq expr
             : comp-expr ("and"|"or" comp-expr)*
@@ -114,7 +113,9 @@ func-expr   : "function" identifier
                       (comma identifier (eq expr)?)*
                   )?
               rparen
-              (colon expr | statements)
+              ((colon expr) | statements)
+              
+statements  : lbrace EL* expr (EL* expr?)* rbrace
 ```
 
 function add(a, b): a+b

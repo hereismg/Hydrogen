@@ -17,7 +17,7 @@ namespace hdg {
     protected:
         std::string m_name;
         std::vector<ObjAssignNode*> m_args;
-        Node* m_body;
+        Node* m_body{};
 
     public:
         FuncObjNode();

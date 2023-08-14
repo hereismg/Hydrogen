@@ -5,8 +5,7 @@
 #include "../../include/node/Node.h"
 
 namespace hdg {
-    Node::Node() {
-    }
+    Node::Node() = default;
 
     Node::Node(const Position &position):
         m_position(position){

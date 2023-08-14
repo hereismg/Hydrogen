@@ -25,6 +25,7 @@
 #include "node/ForNode.h"
 #include "node/WhileNode.h"
 #include "node/CallNode.h"
+#include "node/StatementsNode.h"
 #include "error/InvalidSyntaxError.h"
 
 namespace hdg {
@@ -54,6 +55,7 @@ namespace hdg {
         Node* forExpr(Environment* environment);
         Node* whileExpr(Environment* environment);
         Node* funcExpr(Environment* environment);
+        Node* statements(Environment* environment);
 
         Node* binaryOperator(
                 Environment* environment,

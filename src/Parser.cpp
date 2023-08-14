@@ -452,25 +452,56 @@ namespace hdg {
 
         if (m_currentToken->getType() == COLON){
             advance();
-        }else{
+
+            Node* body = expr(func->thisEnvironment());
+            func->setBody(body);
+            func->thisPosition()->setIEnd(body->thisPosition()->getPosEnd());
+            func->setName(name.getValue());
+
+            return new ObjAssignNode(name.getValue(), func, *func->thisPosition(), environment);
+        }
+        else if (m_currentToken->getType() == LBRACE){
+            Environment* e = func->thisEnvironment();
+            Node* body = statements(e);
+            func->thisPosition()->setIEnd(body->thisPosition()->getPosEnd());
+            func->setBody(body);
+            func->setName(name.getValue());
+
+            return new ObjAssignNode(name.getValue(), func, *func->thisPosition(), environment);
+        }
+        else{
             throw InvalidSyntaxError(
                     "Expected ':'",
                     *m_currentToken->thisPosition()
                     );
         }
-        Node* temp = expr(func->thisEnvironment());
-        func->setBody(temp);
-        func->thisPosition()->setIEnd(temp->thisPosition()->getPosEnd());
-        func->setName(name.getValue());
+    }
 
-        return new ObjAssignNode(name.getValue(), func, *func->thisPosition(), environment);
+    Node *Parser::statements(Environment *environment) {
+        if (m_currentToken->getType() == LBRACE){
+            auto* stets = new StatementsNode(*m_currentToken->thisPosition(), environment);
+
+            advance();
+            while (m_currentToken->getType() != EF && m_currentToken->getType() != RBRACE){
+                while(m_currentToken->getType() == EL)advance();
+                Node* node = expr(environment);
+                stets->append(node);
+            }
+            stets->thisPosition()->setIEnd(m_currentToken->thisPosition()->getPosEnd());
+            advance();
+
+            return stets;
+        }
+        else{
+            return expr(environment);
+        }
     }
 
     Node *Parser::binaryOperator(Environment* environment, const std::set<Token, std::less<>>&opers, std::function<Node*(Environment* envir)> funA, std::function<Node*(Environment* envir)> funB) {
         if (funB == nullptr) funB = funA;
         Node* left = funA(environment);
 
-        while(m_tokens.end() != m_currentToken && opers.find(*m_currentToken) != opers.end()){
+        while(m_tokens.end() != m_currentToken && m_currentToken->getType()!=EL && opers.find(*m_currentToken) != opers.end()){
             BinaryOperatorNode *oper;
             oper = new BinaryOperatorNode(
                     *m_currentToken,

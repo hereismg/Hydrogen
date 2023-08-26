@@ -21,7 +21,7 @@ namespace hdg {
         Integer(long long value, const Position& position);
 
         void setValue(long long value);
-        long long getValue() const;
+        [[nodiscard]] long long getValue() const;
 
         Object* plus(Object* other) override;
         Object* minus(Object* other) override;

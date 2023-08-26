@@ -5,7 +5,7 @@
 #include "../../include/object/None.h"
 
 namespace hdg {
-    None::None(): Integer(0){
+    None::None(): Object("None"){
         m_class = "None";
     }
 
@@ -18,6 +18,6 @@ namespace hdg {
     }
 
     Object *None::notOperator() {
-        return new Integer(1);
+        return new None();
     }
 } // hdg

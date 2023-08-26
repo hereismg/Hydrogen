@@ -9,18 +9,19 @@
 #include <string>
 #include <initializer_list>
 #include <stack>
-#include "../object/Object.h"
 #include "../object/Integer.h"
 #include "../object/Float.h"
+#include "../object/Object.h"
 
 namespace hdg {
     typedef std::map<std::string, Object*> SymbolTable;
 
     class Environment {
     protected:
-        std::string m_name;
         Environment* m_parent;
         SymbolTable m_symbolTable;
+
+        std::string m_name;
 
 
     public:

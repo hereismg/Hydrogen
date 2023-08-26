@@ -20,7 +20,6 @@ namespace hdg {
         std::string m_details;
 
         Position m_position;
-        Environment* m_environment{};
 
     public:
         Error();

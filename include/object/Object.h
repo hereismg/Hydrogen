@@ -18,7 +18,7 @@ namespace hdg {
     class Object {
     protected:
         std::string m_class;
-        Position m_position;
+//        Position m_position;
 
     public:
         Object();

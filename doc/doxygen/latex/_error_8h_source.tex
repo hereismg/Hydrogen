@@ -1,0 +1,39 @@
+\doxysection{Error.\+h}
+\hypertarget{_error_8h_source}{}\label{_error_8h_source}\index{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/error/Error.h@{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/error/Error.h}}
+\mbox{\hyperlink{_error_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ Magnesium\ on\ 2023/7/16.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ HDG\_ERROR\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ HDG\_ERROR\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <exception>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}../basic/Position.h"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}../basic/Environment.h"{}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacehdg}{hdg}}\ \{}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhdg_1_1_error}{Error}}:\ \textcolor{keyword}{public}\ std::exception\{}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_error_a0d5348d537268cc719326a965f95752b}{m\_name}};}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_error_af042623dd820bbb31d00c185e194c1c1}{m\_details}};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\ \mbox{\hyperlink{classhdg_1_1_error_a92afb5a38c363127fdb4216533eba041}{m\_position}};}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ \mbox{\hyperlink{classhdg_1_1_error_a0938bbe26aa3cb45dbc5260cae2e50af}{m\_environment}}\{\};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_error_aef566b0791e355d2bae63907ed85a779}{Error}}();}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_error_aef566b0791e355d2bae63907ed85a779}{Error}}(std::string\ name,\ std::string\ details,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\&\ position);}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classhdg_1_1_error_aec8dbff89d5a683cbf078b01623e9967}{toString}}();}
+\DoxyCodeLine{00029\ \ \ \ \ \};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \}\ \textcolor{comment}{//\ hdg}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//HDG\_ERROR\_H}}
+
+\end{DoxyCode}

@@ -21,13 +21,6 @@ namespace hdg {
         m_globalEnvironment->setSymbol("None", new None());
     }
 
-    /**
-     * 解释程序主要分为三个过程：
-     *   ------->  词法分析（Lexer）  --------->  语法分析（Parser）  ------->  解释运行（Interpreter）--------->
-     *    源代码                      token列表                       语法树                          解释结果
-     *
-     * debug 模式会打印出中间过程的 token列表 与 语法树
-     * */
     std::string Interpreter::interpret(const std::string& fPath, std::string code, Mode mode) {
         try {
             Lexer lexer(fPath, &code);

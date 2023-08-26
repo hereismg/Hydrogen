@@ -1,0 +1,37 @@
+\doxysection{Object\+Node.\+h}
+\hypertarget{_object_node_8h_source}{}\label{_object_node_8h_source}\index{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/node/object\_node/ObjectNode.h@{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/node/object\_node/ObjectNode.h}}
+\mbox{\hyperlink{_object_node_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ Magnesium\ on\ 2023/8/9.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ HDG\_OBJECTNODE\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ HDG\_OBJECTNODE\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}../Node.h"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacehdg}{hdg}}\ \{}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhdg_1_1_object_node}{ObjectNode}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classhdg_1_1_node}{Node}}\{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_object_node_a43f1f9454decd1c29ac65f259c5a88fa}{m\_class}};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object_node_a91d2b110978f1ae909073a707725c815}{ObjectNode}}();}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object_node_a91d2b110978f1ae909073a707725c815}{ObjectNode}}(std::string\ className,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\&\ position,\ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ environment);}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object_node_a91d2b110978f1ae909073a707725c815}{ObjectNode}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\&\ position,\ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ environment);}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object_node_a1e496f6a230e1969cda82fc0cdb9d8b6}{\string~ObjectNode}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_object_node_a022d4b83cbf31de500b423573987284e}{setClass}}(\textcolor{keyword}{const}\ std::string\&\ className);}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_object_node_a35ed11b2a5c8744a36e396c0245ba769}{getClass}}();}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classhdg_1_1_object_node_a78a525155a7a49c6d1a3e7bb87bbece8}{toString}}()\ =\ 0;}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ \mbox{\hyperlink{classhdg_1_1_object_node_acb95342eb930bd6eb8aa4cb25a67cc39}{interpret}}()\ =\ 0;}
+\DoxyCodeLine{00027\ \ \ \ \ \};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \}\ \textcolor{comment}{//\ hdg}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//HDG\_OBJECTNODE\_H}}
+
+\end{DoxyCode}

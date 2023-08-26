@@ -1,0 +1,41 @@
+\doxysection{Call\+Node.\+h}
+\hypertarget{_call_node_8h_source}{}\label{_call_node_8h_source}\index{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/node/CallNode.h@{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/node/CallNode.h}}
+\mbox{\hyperlink{_call_node_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ Magnesium\ on\ 2023/8/11.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ HDG\_CALLNODE\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ HDG\_CALLNODE\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_node_8h}{Node.h}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}../basic/Token.h"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacehdg}{hdg}}\ \{}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhdg_1_1_call_node}{CallNode}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classhdg_1_1_node}{Node}}\{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_call_node_a6c05e57c9662c9fce1b39c488517bca1}{m\_call}};}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ std::vector<Node*>\ \mbox{\hyperlink{classhdg_1_1_call_node_a3a8e67b5861e379b7ba74439828ebb32}{m\_list}};}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{TokenType}}\ \mbox{\hyperlink{classhdg_1_1_call_node_a6b5e59d1e93ebb89692bed4ed89bb103}{m\_oper}};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_call_node_a7a4106178eb9785e277a737bd16360fb}{CallNode}}();}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_call_node_a7a4106178eb9785e277a737bd16360fb}{CallNode}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\&\ position,\ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ environment);}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_call_node_a7a4106178eb9785e277a737bd16360fb}{CallNode}}(\mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ call,\ std::vector<Node*>list,\ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{TokenType}}\ oper,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\&\ position,\ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ environment);}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_call_node_acdd44d553803640961d018fa0185ab10}{\string~CallNode}}();}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_call_node_ada9cfccd126c1e41f6daf19bdbe2f4fa}{addNode}}(\mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ node);}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_call_node_a1bb11564f92a9c1b426666daac622afe}{setOperator}}(\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{TokenType}}\ oper);}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_call_node_a36342e32b18c7f52498c41506d27a8bf}{setCall}}(\mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ call);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_call_node_ad02e50be426e38c8fed1e73aecd28820}{toString}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ \mbox{\hyperlink{classhdg_1_1_call_node_aa1943027e74137c18bd972080308bb19}{interpret}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00031\ \ \ \ \ \};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \}\ \textcolor{comment}{//\ hdg}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//HDG\_CALLNODE\_H}}
+
+\end{DoxyCode}

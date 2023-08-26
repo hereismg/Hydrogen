@@ -1,0 +1,45 @@
+\doxysection{D\+:/\+Haaaaaallo\+Mg/\+Workplace/\+Hydrogen/hdg/include/\+Lexer.h File Reference}
+\hypertarget{_lexer_8h}{}\label{_lexer_8h}\index{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/Lexer.h@{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/Lexer.h}}
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$utility$>$}\newline
+{\ttfamily \#include $<$set$>$}\newline
+{\ttfamily \#include "{}basic/\+Token.\+h"{}}\newline
+{\ttfamily \#include "{}error/\+Illegal\+Char\+Error.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classhdg_1_1_lexer}{hdg\+::\+Lexer}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacehdg}{hdg}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespacehdg_af4e516e72fe6edc775660088c94b65a1}{hdg\+::\+Legal\+Char}} \{ \newline
+\mbox{\hyperlink{namespacehdg_af4e516e72fe6edc775660088c94b65a1aa541ccedcbb94e989056939d31aa2673}{hdg\+::\+ILLEGAL}} = 0
+, \mbox{\hyperlink{namespacehdg_af4e516e72fe6edc775660088c94b65a1ae4a2e0db5e9800a406c8d1a6d22694a5}{hdg\+::\+DIGITAL}} = 1
+, \mbox{\hyperlink{namespacehdg_af4e516e72fe6edc775660088c94b65a1ab98d15f9c8290b499d0047f83cda9b10}{hdg\+::\+LOWERCASE}} = 2
+, \mbox{\hyperlink{namespacehdg_af4e516e72fe6edc775660088c94b65a1a3ea2e0dc1c1b200d7d15c5fc93118a6e}{hdg\+::\+UPPERCASE}} = 4
+, \newline
+\mbox{\hyperlink{namespacehdg_af4e516e72fe6edc775660088c94b65a1ad81b142de45e9330d22a19295416f309}{hdg\+::\+UNDERLINE}} = 8
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacehdg_af4e516e72fe6edc775660088c94b65a1}{Legal\+Char}} \mbox{\hyperlink{namespacehdg_a84c19390e221d9ef848f3a3ea4607aa7}{hdg\+::what\+Is\+This}} (char c)
+\item 
+bool \mbox{\hyperlink{namespacehdg_a990fe335a0056b6b655f487b24c07229}{hdg\+::what\+Is\+This}} (char c, int target)
+\item 
+std\+::ostream \& \mbox{\hyperlink{namespacehdg_a1b81edef338001e97c072183c8d2efcd}{hdg\+::operator$<$$<$}} (std\+::ostream \&out, std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_token}{Token}} $>$ \&tokens)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::set$<$ std\+::string $>$ \mbox{\hyperlink{namespacehdg_a20408d8b55c6a33335655f1a95629d05}{hdg\+::keyword\+Set}}
+\end{DoxyCompactItemize}

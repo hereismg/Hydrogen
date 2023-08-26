@@ -1,0 +1,157 @@
+\doxysection{hdg\+::Position Class Reference}
+\hypertarget{classhdg_1_1_position}{}\label{classhdg_1_1_position}\index{hdg::Position@{hdg::Position}}
+
+
+{\ttfamily \#include $<$Position.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_position_a1b3c420aed24eeec77d23d3c65b940ee}{Position}} ()
+\item 
+\mbox{\hyperlink{classhdg_1_1_position_a370191ba9bb941fe8f3c2b3f9a698792}{Position}} (std\+::string f\+Path, std\+::string \texorpdfstring{$\ast$}{*}context, const \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}} \&start, const \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}} \&end)
+\item 
+\mbox{\hyperlink{classhdg_1_1_position_a1770354ce8412b477aac47a623fca75d}{Position}} (std\+::string f\+Path, std\+::string \texorpdfstring{$\ast$}{*}context, const \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}} \&start)
+\item 
+\mbox{\hyperlink{classhdg_1_1_position_ad1a32b9241edf3a8c725793b12bee7c2}{Position}} (const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position)
+\item 
+void \mbox{\hyperlink{classhdg_1_1_position_ae710cd51308cafbfbb782cd0ae7e54dc}{set\+Start}} (int index, int line, int col)
+\item 
+void \mbox{\hyperlink{classhdg_1_1_position_af2039281c02d5c39cd5de293f5a54cb2}{set\+Start}} (const \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}} \&indicator)
+\item 
+void \mbox{\hyperlink{classhdg_1_1_position_a96681f4ec1aa2e01e916cefc1167c233}{set\+End}} (int index, int line, int col)
+\item 
+void \mbox{\hyperlink{classhdg_1_1_position_a4ae2ab705d475b64f03d062ed27038e7}{set\+End}} (const \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}} \&indicator)
+\item 
+\mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}} \mbox{\hyperlink{classhdg_1_1_position_a818932f3e9c549f11468243474c52162}{get\+Start}} ()
+\item 
+\mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}} \mbox{\hyperlink{classhdg_1_1_position_ab04cf1654d431afadd88a4d62a86afa4}{get\+End}} ()
+\item 
+std\+::string \mbox{\hyperlink{classhdg_1_1_position_a0013b684aec0e841a8d94d58e073a37b}{get\+File\+Path}} ()
+\item 
+std\+::string \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_position_a5c12a1e22c8919b6de2363439c76185b}{this\+Context}} ()
+\item 
+std\+::string \mbox{\hyperlink{classhdg_1_1_position_acf354a16622580358e7808ffc9bd4c14}{arrow}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classhdg_1_1_position_a409544c8095591d28eb1a11114cfb19c}{m\+\_\+f\+Path}}
+\item 
+std\+::string \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_position_a20e419647fdd2d02581d0e82b8dcc3b2}{m\+\_\+context}}
+\item 
+\mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}} \mbox{\hyperlink{classhdg_1_1_position_a50161a408f24eaea385b1e05433330e1}{m\+\_\+start}} \{\}
+\item 
+\mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}} \mbox{\hyperlink{classhdg_1_1_position_a274815ba01ed73c208f52f914940d3d7}{m\+\_\+end}} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classhdg_1_1_position_a1b3c420aed24eeec77d23d3c65b940ee}\label{classhdg_1_1_position_a1b3c420aed24eeec77d23d3c65b940ee} 
+\index{hdg::Position@{hdg::Position}!Position@{Position}}
+\index{Position@{Position}!hdg::Position@{hdg::Position}}
+\doxysubsubsection{\texorpdfstring{Position()}{Position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily hdg\+::\+Position\+::\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_position_a370191ba9bb941fe8f3c2b3f9a698792}\label{classhdg_1_1_position_a370191ba9bb941fe8f3c2b3f9a698792} 
+\index{hdg::Position@{hdg::Position}!Position@{Position}}
+\index{Position@{Position}!hdg::Position@{hdg::Position}}
+\doxysubsubsection{\texorpdfstring{Position()}{Position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily hdg\+::\+Position\+::\+Position (\begin{DoxyParamCaption}\item[{std\+::string}]{f\+Path,  }\item[{std\+::string \texorpdfstring{$\ast$}{*}}]{context,  }\item[{const \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}} \&}]{start,  }\item[{const \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}} \&}]{end }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_position_a1770354ce8412b477aac47a623fca75d}\label{classhdg_1_1_position_a1770354ce8412b477aac47a623fca75d} 
+\index{hdg::Position@{hdg::Position}!Position@{Position}}
+\index{Position@{Position}!hdg::Position@{hdg::Position}}
+\doxysubsubsection{\texorpdfstring{Position()}{Position()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily hdg\+::\+Position\+::\+Position (\begin{DoxyParamCaption}\item[{std\+::string}]{f\+Path,  }\item[{std\+::string \texorpdfstring{$\ast$}{*}}]{context,  }\item[{const \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}} \&}]{start }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_position_ad1a32b9241edf3a8c725793b12bee7c2}\label{classhdg_1_1_position_ad1a32b9241edf3a8c725793b12bee7c2} 
+\index{hdg::Position@{hdg::Position}!Position@{Position}}
+\index{Position@{Position}!hdg::Position@{hdg::Position}}
+\doxysubsubsection{\texorpdfstring{Position()}{Position()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily hdg\+::\+Position\+::\+Position (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&}]{position }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classhdg_1_1_position_acf354a16622580358e7808ffc9bd4c14}\label{classhdg_1_1_position_acf354a16622580358e7808ffc9bd4c14} 
+\index{hdg::Position@{hdg::Position}!arrow@{arrow}}
+\index{arrow@{arrow}!hdg::Position@{hdg::Position}}
+\doxysubsubsection{\texorpdfstring{arrow()}{arrow()}}
+{\footnotesize\ttfamily std\+::string hdg\+::\+Position\+::arrow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_position_ab04cf1654d431afadd88a4d62a86afa4}\label{classhdg_1_1_position_ab04cf1654d431afadd88a4d62a86afa4} 
+\index{hdg::Position@{hdg::Position}!getEnd@{getEnd}}
+\index{getEnd@{getEnd}!hdg::Position@{hdg::Position}}
+\doxysubsubsection{\texorpdfstring{getEnd()}{getEnd()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}} hdg\+::\+Position\+::get\+End (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_position_a0013b684aec0e841a8d94d58e073a37b}\label{classhdg_1_1_position_a0013b684aec0e841a8d94d58e073a37b} 
+\index{hdg::Position@{hdg::Position}!getFilePath@{getFilePath}}
+\index{getFilePath@{getFilePath}!hdg::Position@{hdg::Position}}
+\doxysubsubsection{\texorpdfstring{getFilePath()}{getFilePath()}}
+{\footnotesize\ttfamily std\+::string hdg\+::\+Position\+::get\+File\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_position_a818932f3e9c549f11468243474c52162}\label{classhdg_1_1_position_a818932f3e9c549f11468243474c52162} 
+\index{hdg::Position@{hdg::Position}!getStart@{getStart}}
+\index{getStart@{getStart}!hdg::Position@{hdg::Position}}
+\doxysubsubsection{\texorpdfstring{getStart()}{getStart()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}} hdg\+::\+Position\+::get\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_position_a4ae2ab705d475b64f03d062ed27038e7}\label{classhdg_1_1_position_a4ae2ab705d475b64f03d062ed27038e7} 
+\index{hdg::Position@{hdg::Position}!setEnd@{setEnd}}
+\index{setEnd@{setEnd}!hdg::Position@{hdg::Position}}
+\doxysubsubsection{\texorpdfstring{setEnd()}{setEnd()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void hdg\+::\+Position\+::set\+End (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}} \&}]{indicator }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_position_a96681f4ec1aa2e01e916cefc1167c233}\label{classhdg_1_1_position_a96681f4ec1aa2e01e916cefc1167c233} 
+\index{hdg::Position@{hdg::Position}!setEnd@{setEnd}}
+\index{setEnd@{setEnd}!hdg::Position@{hdg::Position}}
+\doxysubsubsection{\texorpdfstring{setEnd()}{setEnd()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void hdg\+::\+Position\+::set\+End (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{int}]{line,  }\item[{int}]{col }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_position_af2039281c02d5c39cd5de293f5a54cb2}\label{classhdg_1_1_position_af2039281c02d5c39cd5de293f5a54cb2} 
+\index{hdg::Position@{hdg::Position}!setStart@{setStart}}
+\index{setStart@{setStart}!hdg::Position@{hdg::Position}}
+\doxysubsubsection{\texorpdfstring{setStart()}{setStart()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void hdg\+::\+Position\+::set\+Start (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}} \&}]{indicator }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_position_ae710cd51308cafbfbb782cd0ae7e54dc}\label{classhdg_1_1_position_ae710cd51308cafbfbb782cd0ae7e54dc} 
+\index{hdg::Position@{hdg::Position}!setStart@{setStart}}
+\index{setStart@{setStart}!hdg::Position@{hdg::Position}}
+\doxysubsubsection{\texorpdfstring{setStart()}{setStart()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void hdg\+::\+Position\+::set\+Start (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{int}]{line,  }\item[{int}]{col }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_position_a5c12a1e22c8919b6de2363439c76185b}\label{classhdg_1_1_position_a5c12a1e22c8919b6de2363439c76185b} 
+\index{hdg::Position@{hdg::Position}!thisContext@{thisContext}}
+\index{thisContext@{thisContext}!hdg::Position@{hdg::Position}}
+\doxysubsubsection{\texorpdfstring{thisContext()}{thisContext()}}
+{\footnotesize\ttfamily std\+::string \texorpdfstring{$\ast$}{*} hdg\+::\+Position\+::this\+Context (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classhdg_1_1_position_a20e419647fdd2d02581d0e82b8dcc3b2}\label{classhdg_1_1_position_a20e419647fdd2d02581d0e82b8dcc3b2} 
+\index{hdg::Position@{hdg::Position}!m\_context@{m\_context}}
+\index{m\_context@{m\_context}!hdg::Position@{hdg::Position}}
+\doxysubsubsection{\texorpdfstring{m\_context}{m\_context}}
+{\footnotesize\ttfamily std\+::string\texorpdfstring{$\ast$}{*} hdg\+::\+Position\+::m\+\_\+context\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_position_a274815ba01ed73c208f52f914940d3d7}\label{classhdg_1_1_position_a274815ba01ed73c208f52f914940d3d7} 
+\index{hdg::Position@{hdg::Position}!m\_end@{m\_end}}
+\index{m\_end@{m\_end}!hdg::Position@{hdg::Position}}
+\doxysubsubsection{\texorpdfstring{m\_end}{m\_end}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}} hdg\+::\+Position\+::m\+\_\+end \{\}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_position_a409544c8095591d28eb1a11114cfb19c}\label{classhdg_1_1_position_a409544c8095591d28eb1a11114cfb19c} 
+\index{hdg::Position@{hdg::Position}!m\_fPath@{m\_fPath}}
+\index{m\_fPath@{m\_fPath}!hdg::Position@{hdg::Position}}
+\doxysubsubsection{\texorpdfstring{m\_fPath}{m\_fPath}}
+{\footnotesize\ttfamily std\+::string hdg\+::\+Position\+::m\+\_\+f\+Path\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_position_a50161a408f24eaea385b1e05433330e1}\label{classhdg_1_1_position_a50161a408f24eaea385b1e05433330e1} 
+\index{hdg::Position@{hdg::Position}!m\_start@{m\_start}}
+\index{m\_start@{m\_start}!hdg::Position@{hdg::Position}}
+\doxysubsubsection{\texorpdfstring{m\_start}{m\_start}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}} hdg\+::\+Position\+::m\+\_\+start \{\}\hspace{0.3cm}{\ttfamily [protected]}}
+

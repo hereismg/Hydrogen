@@ -1,0 +1,68 @@
+\doxysection{hdg\+::Interpreter Class Reference}
+\hypertarget{classhdg_1_1_interpreter}{}\label{classhdg_1_1_interpreter}\index{hdg::Interpreter@{hdg::Interpreter}}
+
+
+{\ttfamily \#include $<$Interpreter.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_interpreter_a58677786eefb07a9cea712eae034b20c}{Interpreter}} ()
+\item 
+\mbox{\hyperlink{classhdg_1_1_interpreter_a4758167a87276295e23dc13209bdd2fc}{\texorpdfstring{$\sim$}{\string~}\+Interpreter}} ()
+\item 
+std\+::string \mbox{\hyperlink{classhdg_1_1_interpreter_a0495701bf3a36d43e7766adf4221c782}{interpret}} (const std\+::string \&f\+Path, std\+::string code, \mbox{\hyperlink{namespacehdg_a5607e634578288231046fe59484159eb}{Mode}} mode=\mbox{\hyperlink{namespacehdg_a5607e634578288231046fe59484159eba6fef1415eedb4f9b6e6ea8a25f01a9c0}{release}})
+\begin{DoxyCompactList}\small\item\em \+: 解释程序主要分为三个过程： -\/-\/-\/-\/---\texorpdfstring{$>$}{>} 词法分析（\+Lexer） -\/-\/-\/-\/-\/-\/---\texorpdfstring{$>$}{>} 语法分析（\+Parser） -\/-\/-\/-\/---\texorpdfstring{$>$}{>} 解释运行（\+Interpreter）-\/-\/-\/-\/-\/-\/---\texorpdfstring{$>$}{>} 源代码 token列表 语法树 解释结果 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classhdg_1_1_interpreter_a43f4d27cbbd27c03b6dbb424a92931e2}{init}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_interpreter_ab22f340778cbb44feb885a7d70994521}{m\+\_\+global\+Environment}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classhdg_1_1_interpreter_a58677786eefb07a9cea712eae034b20c}\label{classhdg_1_1_interpreter_a58677786eefb07a9cea712eae034b20c} 
+\index{hdg::Interpreter@{hdg::Interpreter}!Interpreter@{Interpreter}}
+\index{Interpreter@{Interpreter}!hdg::Interpreter@{hdg::Interpreter}}
+\doxysubsubsection{\texorpdfstring{Interpreter()}{Interpreter()}}
+{\footnotesize\ttfamily hdg\+::\+Interpreter\+::\+Interpreter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_interpreter_a4758167a87276295e23dc13209bdd2fc}\label{classhdg_1_1_interpreter_a4758167a87276295e23dc13209bdd2fc} 
+\index{hdg::Interpreter@{hdg::Interpreter}!````~Interpreter@{\texorpdfstring{$\sim$}{\string~}Interpreter}}
+\index{````~Interpreter@{\texorpdfstring{$\sim$}{\string~}Interpreter}!hdg::Interpreter@{hdg::Interpreter}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Interpreter()}{\string~Interpreter()}}
+{\footnotesize\ttfamily hdg\+::\+Interpreter\+::\texorpdfstring{$\sim$}{\string~}\+Interpreter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classhdg_1_1_interpreter_a43f4d27cbbd27c03b6dbb424a92931e2}\label{classhdg_1_1_interpreter_a43f4d27cbbd27c03b6dbb424a92931e2} 
+\index{hdg::Interpreter@{hdg::Interpreter}!init@{init}}
+\index{init@{init}!hdg::Interpreter@{hdg::Interpreter}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void hdg\+::\+Interpreter\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_interpreter_a0495701bf3a36d43e7766adf4221c782}\label{classhdg_1_1_interpreter_a0495701bf3a36d43e7766adf4221c782} 
+\index{hdg::Interpreter@{hdg::Interpreter}!interpret@{interpret}}
+\index{interpret@{interpret}!hdg::Interpreter@{hdg::Interpreter}}
+\doxysubsubsection{\texorpdfstring{interpret()}{interpret()}}
+{\footnotesize\ttfamily std\+::string hdg\+::\+Interpreter\+::interpret (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{f\+Path,  }\item[{std\+::string}]{code,  }\item[{\mbox{\hyperlink{namespacehdg_a5607e634578288231046fe59484159eb}{Mode}}}]{mode = {\ttfamily \mbox{\hyperlink{namespacehdg_a5607e634578288231046fe59484159eba6fef1415eedb4f9b6e6ea8a25f01a9c0}{release}}} }\end{DoxyParamCaption})}
+
+
+
+\+: 解释程序主要分为三个过程： -\/-\/-\/-\/---\texorpdfstring{$>$}{>} 词法分析（\+Lexer） -\/-\/-\/-\/-\/-\/---\texorpdfstring{$>$}{>} 语法分析（\+Parser） -\/-\/-\/-\/---\texorpdfstring{$>$}{>} 解释运行（\+Interpreter）-\/-\/-\/-\/-\/-\/---\texorpdfstring{$>$}{>} 源代码 token列表 语法树 解释结果 
+
+debug 模式会打印出中间过程的 token列表 与 语法树 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classhdg_1_1_interpreter_ab22f340778cbb44feb885a7d70994521}\label{classhdg_1_1_interpreter_ab22f340778cbb44feb885a7d70994521} 
+\index{hdg::Interpreter@{hdg::Interpreter}!m\_globalEnvironment@{m\_globalEnvironment}}
+\index{m\_globalEnvironment@{m\_globalEnvironment}!hdg::Interpreter@{hdg::Interpreter}}
+\doxysubsubsection{\texorpdfstring{m\_globalEnvironment}{m\_globalEnvironment}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}\texorpdfstring{$\ast$}{*} hdg\+::\+Interpreter\+::m\+\_\+global\+Environment\hspace{0.3cm}{\ttfamily [protected]}}
+

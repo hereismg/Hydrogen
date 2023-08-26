@@ -1,0 +1,81 @@
+\doxysection{Parser.\+h}
+\hypertarget{_parser_8h_source}{}\label{_parser_8h_source}\index{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/Parser.h@{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/Parser.h}}
+\mbox{\hyperlink{_parser_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ Magnesium\ on\ 2023/7/16.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ HDG\_PARSER\_H}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ HDG\_PARSER\_H}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <set>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_token_8h}{basic/Token.h}}"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_environment_8h}{basic/Environment.h}}"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_node_8h}{node/Node.h}}"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_binary_operator_node_8h}{node/BinaryOperatorNode.h}}"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_unary_operator_node_8h}{node/UnaryOperatorNode.h}}"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_num_obj_node_8h}{node/object\_node/NumObjNode.h}}"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_obj_assign_node_8h}{node/ObjAssignNode.h}}"{}}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_obj_access_node_8h}{node/ObjAccessNode.h}}"{}}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_func_obj_node_8h}{node/object\_node/FuncObjNode.h}}"{}}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_str_obj_node_8h}{node/object\_node/StrObjNode.h}}"{}}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_if_node_8h}{node/IfNode.h}}"{}}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_for_node_8h}{node/ForNode.h}}"{}}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_while_node_8h}{node/WhileNode.h}}"{}}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_call_node_8h}{node/CallNode.h}}"{}}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_statements_node_8h}{node/StatementsNode.h}}"{}}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_invalid_syntax_error_8h}{error/InvalidSyntaxError.h}}"{}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacehdg}{hdg}}\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhdg_1_1_parser}{Parser}}\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ std::vector<Token>\ \mbox{\hyperlink{classhdg_1_1_parser_a4c43d79ce50bc774eb0cbaebf60d81c0}{m\_tokens}};}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ std::vector<Token>::iterator\ \mbox{\hyperlink{classhdg_1_1_parser_a945cac49140200d3a36c535e6db1078f}{m\_currentToken}};}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ \mbox{\hyperlink{classhdg_1_1_parser_a786cc9c67414d221d8e5864f0d823eeb}{m\_environment}};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_parser}{Parser}}(std::vector<Token>\ tokens,\ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ environment);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_parser_a57b94cf3562d8835e44deb29b751f114}{run}}();}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_parser_a322dd9db98002c295bfb689c111de385}{advance}}();}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_parser_adba95661514dcb6857af7854e067d8d0}{retreat}}();}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_parser_afc0f7bcf6a1f4f6760834f936ca7e212}{expr}}(\mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ environment);}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_parser_ab93a9cf87d67e68d01a36de362fad4d3}{compExpr}}(\mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ environment);}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_parser_a0b7584b8a9fb11bd2a0f7b1e26d04a7f}{arithExpr}}(\mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ environment);}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_parser_a33194976ff64b5e5bddb7b2672937453}{term}}(\mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ environment);}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_parser_afb17f822eaee1e94e1828ff4c5e95593}{factor}}(\mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ environment);}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_parser_a05b4ee984cd4252a37a1281da603f0b3}{power}}(\mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ environment);}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_parser_ab13a31a77529148450c45185a0fc235a}{call}}(\mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ environment);}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_parser_a96dd4f92e90cc120d1d2a84443cb1d7b}{atom}}(\mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ environment);}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_parser_a146a4639ad683a33be86306ad328e0b0}{ifExpr}}(\mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ environment);}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_parser_a5c0ea96bbf7611f639a8d1622c4a5ad7}{forExpr}}(\mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ environment);}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_parser_a2a502b8aff422d902e624112cf7af14a}{whileExpr}}(\mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ environment);}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_parser_a5b729429909bcd14dfabe8ad5e05e9b7}{funcExpr}}(\mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ environment);}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_parser_a5ba2f44e3e39a0138cf138bf0cdfc5af}{statements}}(\mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ environment);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_parser_aa4d23b86079f88058c7c08830ea409b6}{binaryOperator}}(}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ environment,}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::set<\mbox{\hyperlink{classhdg_1_1_token}{Token}},\ std::less<>>\&opers,}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\mbox{\hyperlink{classhdg_1_1_node}{Node}}*(\mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ envir)>\ funA,}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\mbox{\hyperlink{classhdg_1_1_node}{Node}}*(\mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ envir)>\ funB=\textcolor{keyword}{nullptr}}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_parser_a15fca1e4ffaedbbaa07720780435f0d8}{unaryOperator}}(}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ environment,}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::set<\mbox{\hyperlink{classhdg_1_1_token}{Token}},\ std::less<>>\&opers,}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\mbox{\hyperlink{classhdg_1_1_node}{Node}}*(\mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ envir)>\ fun}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00071\ \ \ \ \ \};}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \}\ \textcolor{comment}{//\ hdg}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//HDG\_PARSER\_H}}
+
+\end{DoxyCode}

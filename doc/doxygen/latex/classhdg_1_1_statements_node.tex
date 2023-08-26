@@ -1,0 +1,113 @@
+\doxysection{hdg\+::Statements\+Node Class Reference}
+\hypertarget{classhdg_1_1_statements_node}{}\label{classhdg_1_1_statements_node}\index{hdg::StatementsNode@{hdg::StatementsNode}}
+
+
+{\ttfamily \#include $<$Statements\+Node.\+h$>$}
+
+Inheritance diagram for hdg\+::Statements\+Node\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classhdg_1_1_statements_node}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_statements_node_ab4232bf77c0ef493ba1044897bbaa233}{Statements\+Node}} ()
+\item 
+\mbox{\hyperlink{classhdg_1_1_statements_node_af200d4dc0608df462b44e0cb7f35a774}{Statements\+Node}} (const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position, \mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+\mbox{\hyperlink{classhdg_1_1_statements_node_af31fb78f50c9f8051d7f3b1bc4c06a06}{\texorpdfstring{$\sim$}{\string~}\+Statements\+Node}} () override
+\item 
+void \mbox{\hyperlink{classhdg_1_1_statements_node_ab41c4a535ce2c22093fc3e278650a6c5}{append}} (\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}node)
+\item 
+std\+::string \mbox{\hyperlink{classhdg_1_1_statements_node_adc2908272d3e80242860965c7c44855e}{to\+String}} () override
+\item 
+\mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_statements_node_a2df76b78a145dfc61f1c76fe3628842b}{interpret}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classhdg_1_1_node}{hdg\+::\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_node_a50473c6b50f3a6c8e8ebb7327617dfce}{Node}} ()
+\item 
+\mbox{\hyperlink{classhdg_1_1_node_a629d0b488519d193e4c9e10614741187}{Node}} (const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position)
+\item 
+\mbox{\hyperlink{classhdg_1_1_node_a63a9e032a412b58ad3854deba6e80f91}{Node}} (const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position, \mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+virtual \mbox{\hyperlink{classhdg_1_1_node_a7addc8f6e57fbb3d68b8b7d38fd2c145}{\texorpdfstring{$\sim$}{\string~}\+Node}} ()=0
+\item 
+\mbox{\hyperlink{classhdg_1_1_position}{Position}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_node_a3738a37f34e5beca7503dd80fdc06fa8}{this\+Position}} ()
+\item 
+\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_node_a7f6017e27a8abc2cf574c4c57268e028}{this\+Environment}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classhdg_1_1_statements_node_a9c7cc02daab1fab9a99368c54fea605b}{m\+\_\+statements}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classhdg_1_1_node}{hdg\+::\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_position}{Position}} \mbox{\hyperlink{classhdg_1_1_node_a56dc5bce438d6f5aa3e4840ec04c5c4e}{m\+\_\+position}}
+\item 
+\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_node_a0d8af69474640d8876614cea25219720}{m\+\_\+environment}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classhdg_1_1_statements_node_ab4232bf77c0ef493ba1044897bbaa233}\label{classhdg_1_1_statements_node_ab4232bf77c0ef493ba1044897bbaa233} 
+\index{hdg::StatementsNode@{hdg::StatementsNode}!StatementsNode@{StatementsNode}}
+\index{StatementsNode@{StatementsNode}!hdg::StatementsNode@{hdg::StatementsNode}}
+\doxysubsubsection{\texorpdfstring{StatementsNode()}{StatementsNode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily hdg\+::\+Statements\+Node\+::\+Statements\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classhdg_1_1_statements_node_af200d4dc0608df462b44e0cb7f35a774}\label{classhdg_1_1_statements_node_af200d4dc0608df462b44e0cb7f35a774} 
+\index{hdg::StatementsNode@{hdg::StatementsNode}!StatementsNode@{StatementsNode}}
+\index{StatementsNode@{StatementsNode}!hdg::StatementsNode@{hdg::StatementsNode}}
+\doxysubsubsection{\texorpdfstring{StatementsNode()}{StatementsNode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily hdg\+::\+Statements\+Node\+::\+Statements\+Node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&}]{position,  }\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{environment }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_statements_node_af31fb78f50c9f8051d7f3b1bc4c06a06}\label{classhdg_1_1_statements_node_af31fb78f50c9f8051d7f3b1bc4c06a06} 
+\index{hdg::StatementsNode@{hdg::StatementsNode}!````~StatementsNode@{\texorpdfstring{$\sim$}{\string~}StatementsNode}}
+\index{````~StatementsNode@{\texorpdfstring{$\sim$}{\string~}StatementsNode}!hdg::StatementsNode@{hdg::StatementsNode}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}StatementsNode()}{\string~StatementsNode()}}
+{\footnotesize\ttfamily hdg\+::\+Statements\+Node\+::\texorpdfstring{$\sim$}{\string~}\+Statements\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classhdg_1_1_statements_node_ab41c4a535ce2c22093fc3e278650a6c5}\label{classhdg_1_1_statements_node_ab41c4a535ce2c22093fc3e278650a6c5} 
+\index{hdg::StatementsNode@{hdg::StatementsNode}!append@{append}}
+\index{append@{append}!hdg::StatementsNode@{hdg::StatementsNode}}
+\doxysubsubsection{\texorpdfstring{append()}{append()}}
+{\footnotesize\ttfamily void hdg\+::\+Statements\+Node\+::append (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}}]{node }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_statements_node_a2df76b78a145dfc61f1c76fe3628842b}\label{classhdg_1_1_statements_node_a2df76b78a145dfc61f1c76fe3628842b} 
+\index{hdg::StatementsNode@{hdg::StatementsNode}!interpret@{interpret}}
+\index{interpret@{interpret}!hdg::StatementsNode@{hdg::StatementsNode}}
+\doxysubsubsection{\texorpdfstring{interpret()}{interpret()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*} hdg\+::\+Statements\+Node\+::interpret (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhdg_1_1_node_ad54f0d90c2d216075c4b90f5975c9a42}{hdg\+::\+Node}}.
+
+\Hypertarget{classhdg_1_1_statements_node_adc2908272d3e80242860965c7c44855e}\label{classhdg_1_1_statements_node_adc2908272d3e80242860965c7c44855e} 
+\index{hdg::StatementsNode@{hdg::StatementsNode}!toString@{toString}}
+\index{toString@{toString}!hdg::StatementsNode@{hdg::StatementsNode}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily std\+::string hdg\+::\+Statements\+Node\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhdg_1_1_node_a562c3c9807e382b651622f254a08c119}{hdg\+::\+Node}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classhdg_1_1_statements_node_a9c7cc02daab1fab9a99368c54fea605b}\label{classhdg_1_1_statements_node_a9c7cc02daab1fab9a99368c54fea605b} 
+\index{hdg::StatementsNode@{hdg::StatementsNode}!m\_statements@{m\_statements}}
+\index{m\_statements@{m\_statements}!hdg::StatementsNode@{hdg::StatementsNode}}
+\doxysubsubsection{\texorpdfstring{m\_statements}{m\_statements}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classhdg_1_1_node}{Node}}\texorpdfstring{$\ast$}{*}$>$ hdg\+::\+Statements\+Node\+::m\+\_\+statements\hspace{0.3cm}{\ttfamily [protected]}}
+

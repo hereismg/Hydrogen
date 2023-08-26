@@ -1,0 +1,38 @@
+\doxysection{If\+Node.\+h}
+\hypertarget{_if_node_8h_source}{}\label{_if_node_8h_source}\index{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/node/IfNode.h@{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/node/IfNode.h}}
+\mbox{\hyperlink{_if_node_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ Magnesium\ on\ 2023/8/1.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ HDG\_IFNODE\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ HDG\_IFNODE\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_node_8h}{Node.h}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}../object/None.h"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacehdg}{hdg}}\ \{}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhdg_1_1_if_node}{IfNode}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classhdg_1_1_node}{Node}}\{}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ std::vector<Node*>\ \mbox{\hyperlink{classhdg_1_1_if_node_abb6cdd86397fdd7cb372ccb08274d24b}{conditions}};}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ std::vector<Node*>\ \mbox{\hyperlink{classhdg_1_1_if_node_a5dd7620cf4a62acdeaa2932cb6d960a5}{expressions}};}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_if_node_a2dcd54ec5eacb5bca5248ea2b8a48819}{elseExpression}};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_if_node}{IfNode}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\&\ position,\ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ parent);}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_if_node_aa8e56edf50bf958087a2ff19db089f9d}{\string~IfNode}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_if_node_a215e5677b976d7d1a10b06dd265688f9}{addBranch}}(\mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ condition,\ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ expression);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_if_node_a4ff672a898d534875ef15b429c6451e5}{toString}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ \mbox{\hyperlink{classhdg_1_1_if_node_aadb845d897bb32c163a36d22465a7e28}{interpret}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00028\ \ \ \ \ \};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \}\ \textcolor{comment}{//\ hdg}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//HDG\_IFNODE\_H}}
+
+\end{DoxyCode}

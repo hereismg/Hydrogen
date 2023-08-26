@@ -1,0 +1,81 @@
+\doxysection{Lexer.\+h}
+\hypertarget{_lexer_8h_source}{}\label{_lexer_8h_source}\index{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/Lexer.h@{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/Lexer.h}}
+\mbox{\hyperlink{_lexer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ Magnesium\ on\ 2023/7/11.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ HDG\_LEXER\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ HDG\_LEXER\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <set>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_token_8h}{basic/Token.h}}"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_illegal_char_error_8h}{error/IllegalCharError.h}}"{}}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacehdg}{hdg}}\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{static}\ std::set<std::string>\ \mbox{\hyperlink{namespacehdg_a20408d8b55c6a33335655f1a95629d05}{keywordSet}}\ =\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}not"{}},}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}and"{}},}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}or"{}},}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}if"{}},}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}elif"{}},}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}else"{}},}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}for"{}},}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}from"{}},}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}to"{}},}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}step"{}},}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}while"{}},}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}function"{}},}
+\DoxyCodeLine{00033\ \ \ \ \ \};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{namespacehdg_af4e516e72fe6edc775660088c94b65a1}{LegalChar}}\{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_af4e516e72fe6edc775660088c94b65a1aa541ccedcbb94e989056939d31aa2673}{ILLEGAL}}\ =\ 0,}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_af4e516e72fe6edc775660088c94b65a1ae4a2e0db5e9800a406c8d1a6d22694a5}{DIGITAL}}\ =\ 1,}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_af4e516e72fe6edc775660088c94b65a1ab98d15f9c8290b499d0047f83cda9b10}{LOWERCASE}}\ =\ 2,}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_af4e516e72fe6edc775660088c94b65a1a3ea2e0dc1c1b200d7d15c5fc93118a6e}{UPPERCASE}}\ =\ 4,}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_af4e516e72fe6edc775660088c94b65a1ad81b142de45e9330d22a19295416f309}{UNDERLINE}}\ =\ 8}
+\DoxyCodeLine{00041\ \ \ \ \ \};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{namespacehdg_af4e516e72fe6edc775660088c94b65a1}{LegalChar}}\ \mbox{\hyperlink{namespacehdg_a84c19390e221d9ef848f3a3ea4607aa7}{whatIsThis}}(\textcolor{keywordtype}{char}\ c);}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespacehdg_a84c19390e221d9ef848f3a3ea4607aa7}{whatIsThis}}(\textcolor{keywordtype}{char}\ c,\ \textcolor{keywordtype}{int}\ target);}
+\DoxyCodeLine{00045\ \ \ \ \ std::ostream\&\ \mbox{\hyperlink{namespacehdg_a1b81edef338001e97c072183c8d2efcd}{operator<<}}(std::ostream\&\ out,\ std::vector<Token>\&\ tokens);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhdg_1_1_lexer}{Lexer}}\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_lexer_a4e36502619b5c301cd775710c2b16b00}{m\_fPath}};}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ std::string*\ \mbox{\hyperlink{classhdg_1_1_lexer_a1429d500fa702f16145e81db1f22706c}{m\_code}};}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ std::vector<Token>\ \mbox{\hyperlink{classhdg_1_1_lexer_a25fb252caec72fc69c39a67a1d166bca}{m\_tokens}};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classhdg_1_1_lexer_a4f62639338851a38f79c3121b52bdf70}{m\_currentChar}};}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}}\ \mbox{\hyperlink{classhdg_1_1_lexer_a083a7b690b5994d747e888095d68daae}{m\_pos}};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classhdg_1_1_lexer}{Lexer}}(std::string\ fPath,\ std::string*\ code);}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_lexer_aa8b884c1316540174f59cdf366335a59}{getFilePath}}();}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ std::string*\ \mbox{\hyperlink{classhdg_1_1_lexer_adc85f6dd72b21bbb96df3f220c7a7e35}{thisText}}();}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ std::vector<Token>\&\ \mbox{\hyperlink{classhdg_1_1_lexer_ab33f5a4bcfe32f9205cc9b290de30b8e}{getTokens}}();}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_lexer_aab5da4f388e6eee605ebe1c04fb4b25c}{run}}();}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_lexer_ab30b9df4245b8ad2dcab9c6e6b11a813}{advance}}();}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_lexer_a5bad5dc9d686d8efa93b5915085c9e26}{buildNumber}}();}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_lexer_ae0a668786b1ebdf91980f608208f2608}{buildGreaterThan}}();}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_lexer_acc80b0f108be35f777d7dd9f7eed0953}{buildLessThan}}();}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_lexer_ab2616658d58cbe15d7de9c74b91ebe39}{buildEquation}}();}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_lexer_aca0ede41d2d2589f17070975788df66f}{buildIdentifier}}();}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_lexer_ae8b953e28dc0a316270a9675b0750c5b}{buildString}}();}
+\DoxyCodeLine{00072\ \ \ \ \ \};}
+\DoxyCodeLine{00073\ \}\ \textcolor{comment}{//\ hdg}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//HDG\_LEXER\_H}}
+
+\end{DoxyCode}

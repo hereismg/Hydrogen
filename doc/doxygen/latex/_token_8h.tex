@@ -1,0 +1,66 @@
+\doxysection{D\+:/\+Haaaaaallo\+Mg/\+Workplace/\+Hydrogen/hdg/include/basic/\+Token.h File Reference}
+\hypertarget{_token_8h}{}\label{_token_8h}\index{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/basic/Token.h@{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/basic/Token.h}}
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$utility$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include "{}Position.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classhdg_1_1_token}{hdg\+::\+Token}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacehdg}{hdg}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{hdg\+::\+Token\+Type}} \{ \newline
+\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a3bb15b754d10301685de058edb411eb5}{hdg\+::\+INT}}
+, \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1afed4e51ce8166d18edaa557d3e3b2cf3}{hdg\+::\+FLOAT}}
+, \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a71dbcdc850c86155c2b5a10cede6296c}{hdg\+::\+STRING}}
+, \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1acf758f4a0dc2c7930fa4c25ee287f284}{hdg\+::\+IDENTIFIER}}
+, \newline
+\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a469290ac8057965cb09f417ffcb25fdf}{hdg\+::\+KEYWORD}}
+, \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a2bba9b04bae1093fc3a1fd7944088098}{hdg\+::\+NE}}
+, \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a0f02e5897efcf89658f2cefbe49403d5}{hdg\+::\+EE}}
+, \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1aa37acecc8adf3914aae1f76be575be30}{hdg\+::\+GT}}
+, \newline
+\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1af6d61be133399868842fa63e5f63e59c}{hdg\+::\+LT}}
+, \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a3ae526c3c7886406b2c148f7975515f5}{hdg\+::\+GTE}}
+, \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1abdf3fb0c4cdca2f5717e98f99b45c275}{hdg\+::\+LTE}}
+, \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1ae25ad36b00adcc504421711f41c9f0d5}{hdg\+::\+PLUS}}
+, \newline
+\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a0eafa5dcbea7160e3938c480a3f950b1}{hdg\+::\+MINUS}}
+, \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a3808b6e6c5e26a4a30bb2d579e133ca2}{hdg\+::\+MUL}}
+, \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a39d7f16bc7eb038d92645a7f28e005fd}{hdg\+::\+DIV}}
+, \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1abcdf63e0e0f752004d3c48ac70dcaf24}{hdg\+::\+POW}}
+, \newline
+\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1aa6839d4813849cadf29f6f9fe78ef19f}{hdg\+::\+LPAREN}}
+, \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1ae8606dd1fe0314be15838fcdb3f47906}{hdg\+::\+RPAREN}}
+, \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a7facc0fd54100d735ed52038ad5aa463}{hdg\+::\+LBRACKET}}
+, \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a08fb6cb2c5ccca7226e1f772ce770a6d}{hdg\+::\+RBRACKET}}
+, \newline
+\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a2665145bf9f07023b5fc66cb499f2b9c}{hdg\+::\+LBRACE}}
+, \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a6c2885e29931f86583323170cea9e07a}{hdg\+::\+RBRACE}}
+, \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1af097e51643530479147a49763b06fc37}{hdg\+::\+EQ}}
+, \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1aff8fa14b18888d5777c2c8cb59df6a9c}{hdg\+::\+COLON}}
+, \newline
+\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1afd5bad3f86efe1b1ab8a2e6201eccba9}{hdg\+::\+COMMA}}
+, \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a39aef76943593ee964dc01ad87e77978}{hdg\+::\+EF}}
+, \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a328cd568e5f70f8cf5df06c3f2f2503a}{hdg\+::\+EL}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{namespacehdg_a698613a83b8594ea9e40f344c7b93ea3}{hdg\+::operator$<$}} (const \mbox{\hyperlink{classhdg_1_1_token}{Token}} \&left, const \mbox{\hyperlink{classhdg_1_1_token}{Token}} \&right)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::map$<$ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}}, std\+::string $>$ \mbox{\hyperlink{namespacehdg_abceca39548a4a6a54198ec993570ebdc}{hdg\+::token\+Type\+Name}}
+\end{DoxyCompactItemize}

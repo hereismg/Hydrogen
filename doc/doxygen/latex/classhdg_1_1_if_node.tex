@@ -1,0 +1,121 @@
+\doxysection{hdg\+::If\+Node Class Reference}
+\hypertarget{classhdg_1_1_if_node}{}\label{classhdg_1_1_if_node}\index{hdg::IfNode@{hdg::IfNode}}
+
+
+{\ttfamily \#include $<$If\+Node.\+h$>$}
+
+Inheritance diagram for hdg\+::If\+Node\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classhdg_1_1_if_node}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_if_node_ae46c2971276cb56dcaae125aa85ef142}{If\+Node}} (const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position, \mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}parent)
+\item 
+\mbox{\hyperlink{classhdg_1_1_if_node_aa8e56edf50bf958087a2ff19db089f9d}{\texorpdfstring{$\sim$}{\string~}\+If\+Node}} () override
+\item 
+void \mbox{\hyperlink{classhdg_1_1_if_node_a215e5677b976d7d1a10b06dd265688f9}{add\+Branch}} (\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}condition, \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}expression)
+\item 
+std\+::string \mbox{\hyperlink{classhdg_1_1_if_node_a4ff672a898d534875ef15b429c6451e5}{to\+String}} () override
+\item 
+\mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_if_node_aadb845d897bb32c163a36d22465a7e28}{interpret}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classhdg_1_1_node}{hdg\+::\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_node_a50473c6b50f3a6c8e8ebb7327617dfce}{Node}} ()
+\item 
+\mbox{\hyperlink{classhdg_1_1_node_a629d0b488519d193e4c9e10614741187}{Node}} (const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position)
+\item 
+\mbox{\hyperlink{classhdg_1_1_node_a63a9e032a412b58ad3854deba6e80f91}{Node}} (const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position, \mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+virtual \mbox{\hyperlink{classhdg_1_1_node_a7addc8f6e57fbb3d68b8b7d38fd2c145}{\texorpdfstring{$\sim$}{\string~}\+Node}} ()=0
+\item 
+\mbox{\hyperlink{classhdg_1_1_position}{Position}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_node_a3738a37f34e5beca7503dd80fdc06fa8}{this\+Position}} ()
+\item 
+\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_node_a7f6017e27a8abc2cf574c4c57268e028}{this\+Environment}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classhdg_1_1_if_node_abb6cdd86397fdd7cb372ccb08274d24b}{conditions}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classhdg_1_1_if_node_a5dd7620cf4a62acdeaa2932cb6d960a5}{expressions}}
+\item 
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_if_node_a2dcd54ec5eacb5bca5248ea2b8a48819}{else\+Expression}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classhdg_1_1_node}{hdg\+::\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_position}{Position}} \mbox{\hyperlink{classhdg_1_1_node_a56dc5bce438d6f5aa3e4840ec04c5c4e}{m\+\_\+position}}
+\item 
+\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_node_a0d8af69474640d8876614cea25219720}{m\+\_\+environment}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classhdg_1_1_if_node_ae46c2971276cb56dcaae125aa85ef142}\label{classhdg_1_1_if_node_ae46c2971276cb56dcaae125aa85ef142} 
+\index{hdg::IfNode@{hdg::IfNode}!IfNode@{IfNode}}
+\index{IfNode@{IfNode}!hdg::IfNode@{hdg::IfNode}}
+\doxysubsubsection{\texorpdfstring{IfNode()}{IfNode()}}
+{\footnotesize\ttfamily hdg\+::\+If\+Node\+::\+If\+Node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&}]{position,  }\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{parent }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_if_node_aa8e56edf50bf958087a2ff19db089f9d}\label{classhdg_1_1_if_node_aa8e56edf50bf958087a2ff19db089f9d} 
+\index{hdg::IfNode@{hdg::IfNode}!````~IfNode@{\texorpdfstring{$\sim$}{\string~}IfNode}}
+\index{````~IfNode@{\texorpdfstring{$\sim$}{\string~}IfNode}!hdg::IfNode@{hdg::IfNode}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}IfNode()}{\string~IfNode()}}
+{\footnotesize\ttfamily hdg\+::\+If\+Node\+::\texorpdfstring{$\sim$}{\string~}\+If\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classhdg_1_1_if_node_a215e5677b976d7d1a10b06dd265688f9}\label{classhdg_1_1_if_node_a215e5677b976d7d1a10b06dd265688f9} 
+\index{hdg::IfNode@{hdg::IfNode}!addBranch@{addBranch}}
+\index{addBranch@{addBranch}!hdg::IfNode@{hdg::IfNode}}
+\doxysubsubsection{\texorpdfstring{addBranch()}{addBranch()}}
+{\footnotesize\ttfamily void hdg\+::\+If\+Node\+::add\+Branch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}}]{condition,  }\item[{\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}}]{expression }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_if_node_aadb845d897bb32c163a36d22465a7e28}\label{classhdg_1_1_if_node_aadb845d897bb32c163a36d22465a7e28} 
+\index{hdg::IfNode@{hdg::IfNode}!interpret@{interpret}}
+\index{interpret@{interpret}!hdg::IfNode@{hdg::IfNode}}
+\doxysubsubsection{\texorpdfstring{interpret()}{interpret()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*} hdg\+::\+If\+Node\+::interpret (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhdg_1_1_node_ad54f0d90c2d216075c4b90f5975c9a42}{hdg\+::\+Node}}.
+
+\Hypertarget{classhdg_1_1_if_node_a4ff672a898d534875ef15b429c6451e5}\label{classhdg_1_1_if_node_a4ff672a898d534875ef15b429c6451e5} 
+\index{hdg::IfNode@{hdg::IfNode}!toString@{toString}}
+\index{toString@{toString}!hdg::IfNode@{hdg::IfNode}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily std\+::string hdg\+::\+If\+Node\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhdg_1_1_node_a562c3c9807e382b651622f254a08c119}{hdg\+::\+Node}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classhdg_1_1_if_node_abb6cdd86397fdd7cb372ccb08274d24b}\label{classhdg_1_1_if_node_abb6cdd86397fdd7cb372ccb08274d24b} 
+\index{hdg::IfNode@{hdg::IfNode}!conditions@{conditions}}
+\index{conditions@{conditions}!hdg::IfNode@{hdg::IfNode}}
+\doxysubsubsection{\texorpdfstring{conditions}{conditions}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classhdg_1_1_node}{Node}}\texorpdfstring{$\ast$}{*}$>$ hdg\+::\+If\+Node\+::conditions\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_if_node_a2dcd54ec5eacb5bca5248ea2b8a48819}\label{classhdg_1_1_if_node_a2dcd54ec5eacb5bca5248ea2b8a48819} 
+\index{hdg::IfNode@{hdg::IfNode}!elseExpression@{elseExpression}}
+\index{elseExpression@{elseExpression}!hdg::IfNode@{hdg::IfNode}}
+\doxysubsubsection{\texorpdfstring{elseExpression}{elseExpression}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}}\texorpdfstring{$\ast$}{*} hdg\+::\+If\+Node\+::else\+Expression\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_if_node_a5dd7620cf4a62acdeaa2932cb6d960a5}\label{classhdg_1_1_if_node_a5dd7620cf4a62acdeaa2932cb6d960a5} 
+\index{hdg::IfNode@{hdg::IfNode}!expressions@{expressions}}
+\index{expressions@{expressions}!hdg::IfNode@{hdg::IfNode}}
+\doxysubsubsection{\texorpdfstring{expressions}{expressions}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classhdg_1_1_node}{Node}}\texorpdfstring{$\ast$}{*}$>$ hdg\+::\+If\+Node\+::expressions\hspace{0.3cm}{\ttfamily [protected]}}
+

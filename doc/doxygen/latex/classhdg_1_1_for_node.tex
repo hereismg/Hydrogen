@@ -1,0 +1,177 @@
+\doxysection{hdg\+::For\+Node Class Reference}
+\hypertarget{classhdg_1_1_for_node}{}\label{classhdg_1_1_for_node}\index{hdg::ForNode@{hdg::ForNode}}
+
+
+{\ttfamily \#include $<$For\+Node.\+h$>$}
+
+Inheritance diagram for hdg\+::For\+Node\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classhdg_1_1_for_node}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_for_node_a404123df438cc83f6bd9391081b669bd}{For\+Node}} (const \mbox{\hyperlink{classhdg_1_1_token}{Token}} \&index, int to, const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position, \mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}parent)
+\item 
+\mbox{\hyperlink{classhdg_1_1_for_node_a4f6e7524e16c2c4a650521f4c9ff9aa7}{For\+Node}} (const \mbox{\hyperlink{classhdg_1_1_token}{Token}} \&index, int from, int to, int step, \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}expr, const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position, \mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}parent)
+\item 
+\mbox{\hyperlink{classhdg_1_1_for_node_aebf320f4e7721e89651ee0a905031a7e}{\texorpdfstring{$\sim$}{\string~}\+For\+Node}} () override
+\item 
+void \mbox{\hyperlink{classhdg_1_1_for_node_af4484092c28301b0e920ab613d44cb43}{set\+Index}} (const \mbox{\hyperlink{classhdg_1_1_token}{Token}} \&index)
+\item 
+void \mbox{\hyperlink{classhdg_1_1_for_node_a1686228fe634eecb5c296f053e91c103}{set\+From}} (int from)
+\item 
+void \mbox{\hyperlink{classhdg_1_1_for_node_a419e5eb968f5f521b7253fedd72bff1b}{set\+To}} (int to)
+\item 
+void \mbox{\hyperlink{classhdg_1_1_for_node_a5ca9a6a186644481b5c5a6c438678d44}{set\+Step}} (int step)
+\item 
+void \mbox{\hyperlink{classhdg_1_1_for_node_aae12cd629d1ae1efd3ebabd6d8c17554}{set\+Expr}} (\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}expr)
+\item 
+std\+::string \mbox{\hyperlink{classhdg_1_1_for_node_a32b41fe3004f852792b7d1f0e1c7be3d}{to\+String}} () override
+\item 
+\mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_for_node_a330454867b90c0e2bad58c1772b83fe4}{interpret}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classhdg_1_1_node}{hdg\+::\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_node_a50473c6b50f3a6c8e8ebb7327617dfce}{Node}} ()
+\item 
+\mbox{\hyperlink{classhdg_1_1_node_a629d0b488519d193e4c9e10614741187}{Node}} (const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position)
+\item 
+\mbox{\hyperlink{classhdg_1_1_node_a63a9e032a412b58ad3854deba6e80f91}{Node}} (const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position, \mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+virtual \mbox{\hyperlink{classhdg_1_1_node_a7addc8f6e57fbb3d68b8b7d38fd2c145}{\texorpdfstring{$\sim$}{\string~}\+Node}} ()=0
+\item 
+\mbox{\hyperlink{classhdg_1_1_position}{Position}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_node_a3738a37f34e5beca7503dd80fdc06fa8}{this\+Position}} ()
+\item 
+\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_node_a7f6017e27a8abc2cf574c4c57268e028}{this\+Environment}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_token}{Token}} \mbox{\hyperlink{classhdg_1_1_for_node_adf5e216b78a7f6c3b7c71bc16d66f8a3}{m\+\_\+index}}
+\item 
+int \mbox{\hyperlink{classhdg_1_1_for_node_a11b2ed73164921cdd073b90a5a4cd333}{m\+\_\+from}}
+\item 
+int \mbox{\hyperlink{classhdg_1_1_for_node_a8af0fedbee99b65cfe8e7614e3beb398}{m\+\_\+to}}
+\item 
+int \mbox{\hyperlink{classhdg_1_1_for_node_a7ce280fde5bea3c04905b42a6d550505}{m\+\_\+step}}
+\item 
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_for_node_a64a117adc6c6e99e291ae7cac2901ea1}{m\+\_\+expr}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classhdg_1_1_node}{hdg\+::\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_position}{Position}} \mbox{\hyperlink{classhdg_1_1_node_a56dc5bce438d6f5aa3e4840ec04c5c4e}{m\+\_\+position}}
+\item 
+\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_node_a0d8af69474640d8876614cea25219720}{m\+\_\+environment}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classhdg_1_1_for_node_a404123df438cc83f6bd9391081b669bd}\label{classhdg_1_1_for_node_a404123df438cc83f6bd9391081b669bd} 
+\index{hdg::ForNode@{hdg::ForNode}!ForNode@{ForNode}}
+\index{ForNode@{ForNode}!hdg::ForNode@{hdg::ForNode}}
+\doxysubsubsection{\texorpdfstring{ForNode()}{ForNode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily hdg\+::\+For\+Node\+::\+For\+Node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhdg_1_1_token}{Token}} \&}]{index,  }\item[{int}]{to,  }\item[{const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&}]{position,  }\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{parent }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_for_node_a4f6e7524e16c2c4a650521f4c9ff9aa7}\label{classhdg_1_1_for_node_a4f6e7524e16c2c4a650521f4c9ff9aa7} 
+\index{hdg::ForNode@{hdg::ForNode}!ForNode@{ForNode}}
+\index{ForNode@{ForNode}!hdg::ForNode@{hdg::ForNode}}
+\doxysubsubsection{\texorpdfstring{ForNode()}{ForNode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily hdg\+::\+For\+Node\+::\+For\+Node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhdg_1_1_token}{Token}} \&}]{index,  }\item[{int}]{from,  }\item[{int}]{to,  }\item[{int}]{step,  }\item[{\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}}]{expr,  }\item[{const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&}]{position,  }\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{parent }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_for_node_aebf320f4e7721e89651ee0a905031a7e}\label{classhdg_1_1_for_node_aebf320f4e7721e89651ee0a905031a7e} 
+\index{hdg::ForNode@{hdg::ForNode}!````~ForNode@{\texorpdfstring{$\sim$}{\string~}ForNode}}
+\index{````~ForNode@{\texorpdfstring{$\sim$}{\string~}ForNode}!hdg::ForNode@{hdg::ForNode}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ForNode()}{\string~ForNode()}}
+{\footnotesize\ttfamily hdg\+::\+For\+Node\+::\texorpdfstring{$\sim$}{\string~}\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classhdg_1_1_for_node_a330454867b90c0e2bad58c1772b83fe4}\label{classhdg_1_1_for_node_a330454867b90c0e2bad58c1772b83fe4} 
+\index{hdg::ForNode@{hdg::ForNode}!interpret@{interpret}}
+\index{interpret@{interpret}!hdg::ForNode@{hdg::ForNode}}
+\doxysubsubsection{\texorpdfstring{interpret()}{interpret()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*} hdg\+::\+For\+Node\+::interpret (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhdg_1_1_node_ad54f0d90c2d216075c4b90f5975c9a42}{hdg\+::\+Node}}.
+
+\Hypertarget{classhdg_1_1_for_node_aae12cd629d1ae1efd3ebabd6d8c17554}\label{classhdg_1_1_for_node_aae12cd629d1ae1efd3ebabd6d8c17554} 
+\index{hdg::ForNode@{hdg::ForNode}!setExpr@{setExpr}}
+\index{setExpr@{setExpr}!hdg::ForNode@{hdg::ForNode}}
+\doxysubsubsection{\texorpdfstring{setExpr()}{setExpr()}}
+{\footnotesize\ttfamily void hdg\+::\+For\+Node\+::set\+Expr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}}]{expr }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_for_node_a1686228fe634eecb5c296f053e91c103}\label{classhdg_1_1_for_node_a1686228fe634eecb5c296f053e91c103} 
+\index{hdg::ForNode@{hdg::ForNode}!setFrom@{setFrom}}
+\index{setFrom@{setFrom}!hdg::ForNode@{hdg::ForNode}}
+\doxysubsubsection{\texorpdfstring{setFrom()}{setFrom()}}
+{\footnotesize\ttfamily void hdg\+::\+For\+Node\+::set\+From (\begin{DoxyParamCaption}\item[{int}]{from }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_for_node_af4484092c28301b0e920ab613d44cb43}\label{classhdg_1_1_for_node_af4484092c28301b0e920ab613d44cb43} 
+\index{hdg::ForNode@{hdg::ForNode}!setIndex@{setIndex}}
+\index{setIndex@{setIndex}!hdg::ForNode@{hdg::ForNode}}
+\doxysubsubsection{\texorpdfstring{setIndex()}{setIndex()}}
+{\footnotesize\ttfamily void hdg\+::\+For\+Node\+::set\+Index (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhdg_1_1_token}{Token}} \&}]{index }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_for_node_a5ca9a6a186644481b5c5a6c438678d44}\label{classhdg_1_1_for_node_a5ca9a6a186644481b5c5a6c438678d44} 
+\index{hdg::ForNode@{hdg::ForNode}!setStep@{setStep}}
+\index{setStep@{setStep}!hdg::ForNode@{hdg::ForNode}}
+\doxysubsubsection{\texorpdfstring{setStep()}{setStep()}}
+{\footnotesize\ttfamily void hdg\+::\+For\+Node\+::set\+Step (\begin{DoxyParamCaption}\item[{int}]{step }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_for_node_a419e5eb968f5f521b7253fedd72bff1b}\label{classhdg_1_1_for_node_a419e5eb968f5f521b7253fedd72bff1b} 
+\index{hdg::ForNode@{hdg::ForNode}!setTo@{setTo}}
+\index{setTo@{setTo}!hdg::ForNode@{hdg::ForNode}}
+\doxysubsubsection{\texorpdfstring{setTo()}{setTo()}}
+{\footnotesize\ttfamily void hdg\+::\+For\+Node\+::set\+To (\begin{DoxyParamCaption}\item[{int}]{to }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_for_node_a32b41fe3004f852792b7d1f0e1c7be3d}\label{classhdg_1_1_for_node_a32b41fe3004f852792b7d1f0e1c7be3d} 
+\index{hdg::ForNode@{hdg::ForNode}!toString@{toString}}
+\index{toString@{toString}!hdg::ForNode@{hdg::ForNode}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily std\+::string hdg\+::\+For\+Node\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhdg_1_1_node_a562c3c9807e382b651622f254a08c119}{hdg\+::\+Node}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classhdg_1_1_for_node_a64a117adc6c6e99e291ae7cac2901ea1}\label{classhdg_1_1_for_node_a64a117adc6c6e99e291ae7cac2901ea1} 
+\index{hdg::ForNode@{hdg::ForNode}!m\_expr@{m\_expr}}
+\index{m\_expr@{m\_expr}!hdg::ForNode@{hdg::ForNode}}
+\doxysubsubsection{\texorpdfstring{m\_expr}{m\_expr}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}}\texorpdfstring{$\ast$}{*} hdg\+::\+For\+Node\+::m\+\_\+expr\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_for_node_a11b2ed73164921cdd073b90a5a4cd333}\label{classhdg_1_1_for_node_a11b2ed73164921cdd073b90a5a4cd333} 
+\index{hdg::ForNode@{hdg::ForNode}!m\_from@{m\_from}}
+\index{m\_from@{m\_from}!hdg::ForNode@{hdg::ForNode}}
+\doxysubsubsection{\texorpdfstring{m\_from}{m\_from}}
+{\footnotesize\ttfamily int hdg\+::\+For\+Node\+::m\+\_\+from\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_for_node_adf5e216b78a7f6c3b7c71bc16d66f8a3}\label{classhdg_1_1_for_node_adf5e216b78a7f6c3b7c71bc16d66f8a3} 
+\index{hdg::ForNode@{hdg::ForNode}!m\_index@{m\_index}}
+\index{m\_index@{m\_index}!hdg::ForNode@{hdg::ForNode}}
+\doxysubsubsection{\texorpdfstring{m\_index}{m\_index}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_token}{Token}} hdg\+::\+For\+Node\+::m\+\_\+index\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_for_node_a7ce280fde5bea3c04905b42a6d550505}\label{classhdg_1_1_for_node_a7ce280fde5bea3c04905b42a6d550505} 
+\index{hdg::ForNode@{hdg::ForNode}!m\_step@{m\_step}}
+\index{m\_step@{m\_step}!hdg::ForNode@{hdg::ForNode}}
+\doxysubsubsection{\texorpdfstring{m\_step}{m\_step}}
+{\footnotesize\ttfamily int hdg\+::\+For\+Node\+::m\+\_\+step\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_for_node_a8af0fedbee99b65cfe8e7614e3beb398}\label{classhdg_1_1_for_node_a8af0fedbee99b65cfe8e7614e3beb398} 
+\index{hdg::ForNode@{hdg::ForNode}!m\_to@{m\_to}}
+\index{m\_to@{m\_to}!hdg::ForNode@{hdg::ForNode}}
+\doxysubsubsection{\texorpdfstring{m\_to}{m\_to}}
+{\footnotesize\ttfamily int hdg\+::\+For\+Node\+::m\+\_\+to\hspace{0.3cm}{\ttfamily [protected]}}
+

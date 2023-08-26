@@ -1,0 +1,44 @@
+\doxysection{Unary\+Operator\+Node.\+h}
+\hypertarget{_unary_operator_node_8h_source}{}\label{_unary_operator_node_8h_source}\index{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/node/UnaryOperatorNode.h@{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/node/UnaryOperatorNode.h}}
+\mbox{\hyperlink{_unary_operator_node_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ Magnesium\ on\ 2023/7/22.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ HDG\_UNARYOPERATORNODE\_H}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ HDG\_UNARYOPERATORNODE\_H}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_node_8h}{Node.h}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}../basic/Token.h"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}../object/Integer.h"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}../object/Float.h"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacehdg}{hdg}}\ \{}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhdg_1_1_unary_operator_node}{UnaryOperatorNode}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classhdg_1_1_node}{Node}}\{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_token}{Token}}\ \mbox{\hyperlink{classhdg_1_1_unary_operator_node_a3f12e8c94b43c4b44fc85812be708b45}{m\_oper}};}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_unary_operator_node_a69aa044b0033dbfe408adb2ce7ee0f07}{m\_obj}};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_unary_operator_node}{UnaryOperatorNode}}(\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{TokenType}}\ oper,\ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ obj,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\&\ position,\ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ environment);}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_unary_operator_node}{UnaryOperatorNode}}(\mbox{\hyperlink{classhdg_1_1_token}{Token}}\ oper,\ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ obj,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\&\ position,\ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ environment);}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_unary_operator_node_a0cc3fdc156894cdeb64303ef510894c2}{\string~UnaryOperatorNode}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_unary_operator_node_aa94bd71f3170c61759486c5a1552b5be}{setOperator}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_token}{Token}}\&\ oper);}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_unary_operator_node_a447417c5150cb7c8bcba3ac05a3c4a36}{setObject}}(\mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ obj);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_token}{Token}}\ \mbox{\hyperlink{classhdg_1_1_unary_operator_node_af62c0a4190d0cf3c5d49c09d6b8b9961}{getOperator}}();}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_unary_operator_node_a73b9f4eb944ba6a08f6b1a64b80ae0ef}{getObject}}();}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_unary_operator_node_af6ea68290c1403709d60b9a9024d1263}{toString}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ \mbox{\hyperlink{classhdg_1_1_unary_operator_node_a9a8d8689557a5a7071b9ad95d489d664}{interpret}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00034\ \ \ \ \ \};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \}\ \textcolor{comment}{//\ hdg}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//HDG\_UNARYOPERATORNODE\_H}}
+
+\end{DoxyCode}

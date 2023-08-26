@@ -1,0 +1,52 @@
+\doxysection{Environment.\+h}
+\hypertarget{_environment_8h_source}{}\label{_environment_8h_source}\index{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/basic/Environment.h@{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/basic/Environment.h}}
+\mbox{\hyperlink{_environment_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ Magnesium\ on\ 2023/7/27.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ HDG\_ENVIRONMENT\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ HDG\_ENVIRONMENT\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <initializer\_list>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <stack>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}../object/Object.h"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}../object/Integer.h"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}../object/Float.h"{}}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacehdg}{hdg}}\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{typedef}\ std::map<std::string,\ Object*>\ \mbox{\hyperlink{namespacehdg_a76ed6539696e98b83c88d516c64a0250}{SymbolTable}};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhdg_1_1_environment}{Environment}}\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_environment_abed26d79e757af9c2d9987bebc8de78b}{m\_name}};}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ \mbox{\hyperlink{classhdg_1_1_environment_aa87efa02814239a73d220e2cc533e285}{m\_parent}};}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a76ed6539696e98b83c88d516c64a0250}{SymbolTable}}\ \mbox{\hyperlink{classhdg_1_1_environment_a99a6cc3dba8617ae0dbc1814d8e22708}{m\_symbolTable}};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}(std::string\ name,\ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ parent);}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_environment_a384b02a8157020127512610201acc687}{\string~Environment}}();}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_environment_a94a9d4e31c353b415fab86be188c4b33}{setName}}(std::string\ name);}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_environment_a91dfd4d0faf81e1497e2c5a4a7ddf82e}{setParent}}(\mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ parent);}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_environment_a6d9a7063793074831c89b6826f48ff9f}{setSymbol}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ value);}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_environment_a235025021cb503eb31dc498e2514f284}{setLocalSymbol}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ value);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_environment_a6d9a7063793074831c89b6826f48ff9f}{setSymbol}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_integer}{Integer}}\&\ value);}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_environment_a6d9a7063793074831c89b6826f48ff9f}{setSymbol}}(std::initializer\_list<std::pair<std::string,\ const\ Integer\&>>\ list);}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_environment_a6d9a7063793074831c89b6826f48ff9f}{setSymbol}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_float}{Float}}\&\ value);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_environment_a3d8ad17fa051bc921cf01b3a801d2313}{getName}}();}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ \mbox{\hyperlink{classhdg_1_1_environment_a52849c70851aa4d4179ab48947aa7abe}{getParent}}();}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ \mbox{\hyperlink{classhdg_1_1_environment_aa8530983a5f8b5707c0fb640623cee21}{getSymbol}}(\textcolor{keyword}{const}\ std::string\&\ name);}
+\DoxyCodeLine{00042\ \ \ \ \ \};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \}\ \textcolor{comment}{//\ hdg}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//HDG\_ENVIRONMENT\_H}}
+
+\end{DoxyCode}

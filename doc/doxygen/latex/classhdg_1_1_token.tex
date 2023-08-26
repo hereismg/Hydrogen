@@ -1,0 +1,198 @@
+\doxysection{hdg\+::Token Class Reference}
+\hypertarget{classhdg_1_1_token}{}\label{classhdg_1_1_token}\index{hdg::Token@{hdg::Token}}
+
+
+{\ttfamily \#include $<$Token.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_token_a0771e279721224109aefeb8d33d22e57}{Token}} ()
+\item 
+\mbox{\hyperlink{classhdg_1_1_token_a55367a89a682c1956c1f4a455ae10af8}{Token}} (\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} type, std\+::string value, const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position)
+\item 
+\mbox{\hyperlink{classhdg_1_1_token_a72657d3fa6aaaf8f99cd92e37fc78f72}{Token}} (\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} type, std\+::string value)
+\item 
+\mbox{\hyperlink{classhdg_1_1_token_a32f43ffcb89c33a87c339ab0799e8def}{Token}} (\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} type)
+\item 
+\mbox{\hyperlink{classhdg_1_1_token_ad8023705ef40c19803de0109b2f2e4bb}{Token}} (\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} type, const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position)
+\item 
+\mbox{\hyperlink{classhdg_1_1_token_a35f2f8619dd8d06281e96f6f6a3fce54}{Token}} (const \mbox{\hyperlink{classhdg_1_1_token}{Token}} \&tok)
+\item 
+\mbox{\hyperlink{classhdg_1_1_token_a18f1c6c2d8d1f7ef500f09158f4841c3}{\texorpdfstring{$\sim$}{\string~}\+Token}} ()
+\item 
+bool \mbox{\hyperlink{classhdg_1_1_token_aa147fa4c8ac7257266a7f58fa83b0b51}{match}} (\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} type, const std\+::string \&value)
+\begin{DoxyCompactList}\small\item\em 用于匹配 \doxylink{classhdg_1_1_token}{Token} 的类型与值是否全都相同。 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classhdg_1_1_token_a6df27fe12a77630a612d7fa002a55e45}{set\+Type}} (\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} type)
+\item 
+void \mbox{\hyperlink{classhdg_1_1_token_abb2ec86095e3edaa799da04f425eb347}{set\+Value}} (const std\+::string \&value)
+\item 
+\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} \mbox{\hyperlink{classhdg_1_1_token_a577428babf5ca707de3e0eed6ae8a7a7}{get\+Type}} ()
+\item 
+std\+::string \mbox{\hyperlink{classhdg_1_1_token_af84eb7139c648270e948f44f2dfa7acc}{get\+Value}} ()
+\item 
+\mbox{\hyperlink{classhdg_1_1_position}{Position}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_token_ab3c9848df72dec4501c15c3a19be4d7a}{this\+Position}} ()
+\item 
+std\+::string \mbox{\hyperlink{classhdg_1_1_token_aa72f3cbee5d99b50e40d436865648413}{to\+String}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} \mbox{\hyperlink{classhdg_1_1_token_a1cc6d72722b609e2a95bf30fc0061d14}{m\+\_\+type}}
+\item 
+std\+::string \mbox{\hyperlink{classhdg_1_1_token_afd73b684ca24c056d8e4d05bef957819}{m\+\_\+value}}
+\item 
+\mbox{\hyperlink{classhdg_1_1_position}{Position}} \mbox{\hyperlink{classhdg_1_1_token_aa03977c3dac907b6cdd2e096d36ae56a}{m\+\_\+position}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \mbox{\hyperlink{classhdg_1_1_token_a2d0da97c0aedb7bf73e2a4385dc33464}{operator$<$$<$}} (std\+::ostream \&out, \mbox{\hyperlink{classhdg_1_1_token}{Token}} \&tok)
+\item 
+bool \mbox{\hyperlink{classhdg_1_1_token_a30dfa1a5ffd48d30ce994dfd7c858c39}{operator$<$}} (const \mbox{\hyperlink{classhdg_1_1_token}{Token}} \&a, const \mbox{\hyperlink{classhdg_1_1_token}{Token}} \&b)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classhdg_1_1_token_a0771e279721224109aefeb8d33d22e57}\label{classhdg_1_1_token_a0771e279721224109aefeb8d33d22e57} 
+\index{hdg::Token@{hdg::Token}!Token@{Token}}
+\index{Token@{Token}!hdg::Token@{hdg::Token}}
+\doxysubsubsection{\texorpdfstring{Token()}{Token()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily hdg\+::\+Token\+::\+Token (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_token_a55367a89a682c1956c1f4a455ae10af8}\label{classhdg_1_1_token_a55367a89a682c1956c1f4a455ae10af8} 
+\index{hdg::Token@{hdg::Token}!Token@{Token}}
+\index{Token@{Token}!hdg::Token@{hdg::Token}}
+\doxysubsubsection{\texorpdfstring{Token()}{Token()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily hdg\+::\+Token\+::\+Token (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}}}]{type,  }\item[{std\+::string}]{value,  }\item[{const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&}]{position }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_token_a72657d3fa6aaaf8f99cd92e37fc78f72}\label{classhdg_1_1_token_a72657d3fa6aaaf8f99cd92e37fc78f72} 
+\index{hdg::Token@{hdg::Token}!Token@{Token}}
+\index{Token@{Token}!hdg::Token@{hdg::Token}}
+\doxysubsubsection{\texorpdfstring{Token()}{Token()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily hdg\+::\+Token\+::\+Token (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}}}]{type,  }\item[{std\+::string}]{value }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_token_a32f43ffcb89c33a87c339ab0799e8def}\label{classhdg_1_1_token_a32f43ffcb89c33a87c339ab0799e8def} 
+\index{hdg::Token@{hdg::Token}!Token@{Token}}
+\index{Token@{Token}!hdg::Token@{hdg::Token}}
+\doxysubsubsection{\texorpdfstring{Token()}{Token()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily hdg\+::\+Token\+::\+Token (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}}}]{type }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_token_ad8023705ef40c19803de0109b2f2e4bb}\label{classhdg_1_1_token_ad8023705ef40c19803de0109b2f2e4bb} 
+\index{hdg::Token@{hdg::Token}!Token@{Token}}
+\index{Token@{Token}!hdg::Token@{hdg::Token}}
+\doxysubsubsection{\texorpdfstring{Token()}{Token()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily hdg\+::\+Token\+::\+Token (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}}}]{type,  }\item[{const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&}]{position }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_token_a35f2f8619dd8d06281e96f6f6a3fce54}\label{classhdg_1_1_token_a35f2f8619dd8d06281e96f6f6a3fce54} 
+\index{hdg::Token@{hdg::Token}!Token@{Token}}
+\index{Token@{Token}!hdg::Token@{hdg::Token}}
+\doxysubsubsection{\texorpdfstring{Token()}{Token()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily hdg\+::\+Token\+::\+Token (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhdg_1_1_token}{Token}} \&}]{tok }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classhdg_1_1_token_a18f1c6c2d8d1f7ef500f09158f4841c3}\label{classhdg_1_1_token_a18f1c6c2d8d1f7ef500f09158f4841c3} 
+\index{hdg::Token@{hdg::Token}!````~Token@{\texorpdfstring{$\sim$}{\string~}Token}}
+\index{````~Token@{\texorpdfstring{$\sim$}{\string~}Token}!hdg::Token@{hdg::Token}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Token()}{\string~Token()}}
+{\footnotesize\ttfamily hdg\+::\+Token\+::\texorpdfstring{$\sim$}{\string~}\+Token (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classhdg_1_1_token_a577428babf5ca707de3e0eed6ae8a7a7}\label{classhdg_1_1_token_a577428babf5ca707de3e0eed6ae8a7a7} 
+\index{hdg::Token@{hdg::Token}!getType@{getType}}
+\index{getType@{getType}!hdg::Token@{hdg::Token}}
+\doxysubsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} hdg\+::\+Token\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_token_af84eb7139c648270e948f44f2dfa7acc}\label{classhdg_1_1_token_af84eb7139c648270e948f44f2dfa7acc} 
+\index{hdg::Token@{hdg::Token}!getValue@{getValue}}
+\index{getValue@{getValue}!hdg::Token@{hdg::Token}}
+\doxysubsubsection{\texorpdfstring{getValue()}{getValue()}}
+{\footnotesize\ttfamily std\+::string hdg\+::\+Token\+::get\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_token_aa147fa4c8ac7257266a7f58fa83b0b51}\label{classhdg_1_1_token_aa147fa4c8ac7257266a7f58fa83b0b51} 
+\index{hdg::Token@{hdg::Token}!match@{match}}
+\index{match@{match}!hdg::Token@{hdg::Token}}
+\doxysubsubsection{\texorpdfstring{match()}{match()}}
+{\footnotesize\ttfamily bool hdg\+::\+Token\+::match (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}}}]{type,  }\item[{const std\+::string \&}]{value }\end{DoxyParamCaption})}
+
+
+
+用于匹配 \doxylink{classhdg_1_1_token}{Token} 的类型与值是否全都相同。 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & 记号类型种类。 \\
+\hline
+{\em value} & 该记号类型的值。 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+返回一个布尔值。 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+必须当种类和值全部匹配的时候才会返回 True。
+
+cpp里的注释。 
+\end{DoxyNote}
+\Hypertarget{classhdg_1_1_token_a6df27fe12a77630a612d7fa002a55e45}\label{classhdg_1_1_token_a6df27fe12a77630a612d7fa002a55e45} 
+\index{hdg::Token@{hdg::Token}!setType@{setType}}
+\index{setType@{setType}!hdg::Token@{hdg::Token}}
+\doxysubsubsection{\texorpdfstring{setType()}{setType()}}
+{\footnotesize\ttfamily void hdg\+::\+Token\+::set\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}}}]{type }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_token_abb2ec86095e3edaa799da04f425eb347}\label{classhdg_1_1_token_abb2ec86095e3edaa799da04f425eb347} 
+\index{hdg::Token@{hdg::Token}!setValue@{setValue}}
+\index{setValue@{setValue}!hdg::Token@{hdg::Token}}
+\doxysubsubsection{\texorpdfstring{setValue()}{setValue()}}
+{\footnotesize\ttfamily void hdg\+::\+Token\+::set\+Value (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_token_ab3c9848df72dec4501c15c3a19be4d7a}\label{classhdg_1_1_token_ab3c9848df72dec4501c15c3a19be4d7a} 
+\index{hdg::Token@{hdg::Token}!thisPosition@{thisPosition}}
+\index{thisPosition@{thisPosition}!hdg::Token@{hdg::Token}}
+\doxysubsubsection{\texorpdfstring{thisPosition()}{thisPosition()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_position}{Position}} \texorpdfstring{$\ast$}{*} hdg\+::\+Token\+::this\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_token_aa72f3cbee5d99b50e40d436865648413}\label{classhdg_1_1_token_aa72f3cbee5d99b50e40d436865648413} 
+\index{hdg::Token@{hdg::Token}!toString@{toString}}
+\index{toString@{toString}!hdg::Token@{hdg::Token}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily std\+::string hdg\+::\+Token\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classhdg_1_1_token_a30dfa1a5ffd48d30ce994dfd7c858c39}\label{classhdg_1_1_token_a30dfa1a5ffd48d30ce994dfd7c858c39} 
+\index{hdg::Token@{hdg::Token}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!hdg::Token@{hdg::Token}}
+\doxysubsubsection{\texorpdfstring{operator$<$}{operator<}}
+{\footnotesize\ttfamily bool operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhdg_1_1_token}{Token}} \&}]{a,  }\item[{const \mbox{\hyperlink{classhdg_1_1_token}{Token}} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classhdg_1_1_token_a2d0da97c0aedb7bf73e2a4385dc33464}\label{classhdg_1_1_token_a2d0da97c0aedb7bf73e2a4385dc33464} 
+\index{hdg::Token@{hdg::Token}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!hdg::Token@{hdg::Token}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily std\+::ostream \& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{\mbox{\hyperlink{classhdg_1_1_token}{Token}} \&}]{tok }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classhdg_1_1_token_aa03977c3dac907b6cdd2e096d36ae56a}\label{classhdg_1_1_token_aa03977c3dac907b6cdd2e096d36ae56a} 
+\index{hdg::Token@{hdg::Token}!m\_position@{m\_position}}
+\index{m\_position@{m\_position}!hdg::Token@{hdg::Token}}
+\doxysubsubsection{\texorpdfstring{m\_position}{m\_position}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_position}{Position}} hdg\+::\+Token\+::m\+\_\+position\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_token_a1cc6d72722b609e2a95bf30fc0061d14}\label{classhdg_1_1_token_a1cc6d72722b609e2a95bf30fc0061d14} 
+\index{hdg::Token@{hdg::Token}!m\_type@{m\_type}}
+\index{m\_type@{m\_type}!hdg::Token@{hdg::Token}}
+\doxysubsubsection{\texorpdfstring{m\_type}{m\_type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} hdg\+::\+Token\+::m\+\_\+type\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_token_afd73b684ca24c056d8e4d05bef957819}\label{classhdg_1_1_token_afd73b684ca24c056d8e4d05bef957819} 
+\index{hdg::Token@{hdg::Token}!m\_value@{m\_value}}
+\index{m\_value@{m\_value}!hdg::Token@{hdg::Token}}
+\doxysubsubsection{\texorpdfstring{m\_value}{m\_value}}
+{\footnotesize\ttfamily std\+::string hdg\+::\+Token\+::m\+\_\+value\hspace{0.3cm}{\ttfamily [protected]}}
+

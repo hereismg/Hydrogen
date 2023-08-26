@@ -1,0 +1,121 @@
+\doxysection{hdg\+::While\+Node Class Reference}
+\hypertarget{classhdg_1_1_while_node}{}\label{classhdg_1_1_while_node}\index{hdg::WhileNode@{hdg::WhileNode}}
+
+
+{\ttfamily \#include $<$While\+Node.\+h$>$}
+
+Inheritance diagram for hdg\+::While\+Node\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classhdg_1_1_while_node}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_while_node_a0df6edf6f8dae15d2fdd3744fc519473}{While\+Node}} (\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}condition, \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}expression, const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position, \mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}parent)
+\item 
+\mbox{\hyperlink{classhdg_1_1_while_node_a74fa5afb4eeef0fa9cdcc00cda46407a}{\texorpdfstring{$\sim$}{\string~}\+While\+Node}} () override
+\item 
+void \mbox{\hyperlink{classhdg_1_1_while_node_ad4e55151ac262adf809551211d66c5e9}{set\+Condition}} (\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}condition)
+\item 
+void \mbox{\hyperlink{classhdg_1_1_while_node_a294fbb0ace6ec582cd1ecb816417aa48}{set\+Expression}} (\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}expression)
+\item 
+std\+::string \mbox{\hyperlink{classhdg_1_1_while_node_a86b0790d4f4a8b33e7b33833183eb7ed}{to\+String}} () override
+\item 
+\mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_while_node_ad7379a04947b66c469b6ebfb1c71d758}{interpret}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classhdg_1_1_node}{hdg\+::\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_node_a50473c6b50f3a6c8e8ebb7327617dfce}{Node}} ()
+\item 
+\mbox{\hyperlink{classhdg_1_1_node_a629d0b488519d193e4c9e10614741187}{Node}} (const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position)
+\item 
+\mbox{\hyperlink{classhdg_1_1_node_a63a9e032a412b58ad3854deba6e80f91}{Node}} (const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position, \mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+virtual \mbox{\hyperlink{classhdg_1_1_node_a7addc8f6e57fbb3d68b8b7d38fd2c145}{\texorpdfstring{$\sim$}{\string~}\+Node}} ()=0
+\item 
+\mbox{\hyperlink{classhdg_1_1_position}{Position}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_node_a3738a37f34e5beca7503dd80fdc06fa8}{this\+Position}} ()
+\item 
+\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_node_a7f6017e27a8abc2cf574c4c57268e028}{this\+Environment}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_while_node_a32a268d050c40a348ec7202547bd35cc}{m\+\_\+condition}}
+\item 
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_while_node_a2565df10e71c1a477ad9dc305404c595}{m\+\_\+expression}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classhdg_1_1_node}{hdg\+::\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_position}{Position}} \mbox{\hyperlink{classhdg_1_1_node_a56dc5bce438d6f5aa3e4840ec04c5c4e}{m\+\_\+position}}
+\item 
+\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_node_a0d8af69474640d8876614cea25219720}{m\+\_\+environment}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classhdg_1_1_while_node_a0df6edf6f8dae15d2fdd3744fc519473}\label{classhdg_1_1_while_node_a0df6edf6f8dae15d2fdd3744fc519473} 
+\index{hdg::WhileNode@{hdg::WhileNode}!WhileNode@{WhileNode}}
+\index{WhileNode@{WhileNode}!hdg::WhileNode@{hdg::WhileNode}}
+\doxysubsubsection{\texorpdfstring{WhileNode()}{WhileNode()}}
+{\footnotesize\ttfamily hdg\+::\+While\+Node\+::\+While\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}}]{condition,  }\item[{\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}}]{expression,  }\item[{const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&}]{position,  }\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{parent }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_while_node_a74fa5afb4eeef0fa9cdcc00cda46407a}\label{classhdg_1_1_while_node_a74fa5afb4eeef0fa9cdcc00cda46407a} 
+\index{hdg::WhileNode@{hdg::WhileNode}!````~WhileNode@{\texorpdfstring{$\sim$}{\string~}WhileNode}}
+\index{````~WhileNode@{\texorpdfstring{$\sim$}{\string~}WhileNode}!hdg::WhileNode@{hdg::WhileNode}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}WhileNode()}{\string~WhileNode()}}
+{\footnotesize\ttfamily hdg\+::\+While\+Node\+::\texorpdfstring{$\sim$}{\string~}\+While\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classhdg_1_1_while_node_ad7379a04947b66c469b6ebfb1c71d758}\label{classhdg_1_1_while_node_ad7379a04947b66c469b6ebfb1c71d758} 
+\index{hdg::WhileNode@{hdg::WhileNode}!interpret@{interpret}}
+\index{interpret@{interpret}!hdg::WhileNode@{hdg::WhileNode}}
+\doxysubsubsection{\texorpdfstring{interpret()}{interpret()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*} hdg\+::\+While\+Node\+::interpret (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhdg_1_1_node_ad54f0d90c2d216075c4b90f5975c9a42}{hdg\+::\+Node}}.
+
+\Hypertarget{classhdg_1_1_while_node_ad4e55151ac262adf809551211d66c5e9}\label{classhdg_1_1_while_node_ad4e55151ac262adf809551211d66c5e9} 
+\index{hdg::WhileNode@{hdg::WhileNode}!setCondition@{setCondition}}
+\index{setCondition@{setCondition}!hdg::WhileNode@{hdg::WhileNode}}
+\doxysubsubsection{\texorpdfstring{setCondition()}{setCondition()}}
+{\footnotesize\ttfamily void hdg\+::\+While\+Node\+::set\+Condition (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}}]{condition }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_while_node_a294fbb0ace6ec582cd1ecb816417aa48}\label{classhdg_1_1_while_node_a294fbb0ace6ec582cd1ecb816417aa48} 
+\index{hdg::WhileNode@{hdg::WhileNode}!setExpression@{setExpression}}
+\index{setExpression@{setExpression}!hdg::WhileNode@{hdg::WhileNode}}
+\doxysubsubsection{\texorpdfstring{setExpression()}{setExpression()}}
+{\footnotesize\ttfamily void hdg\+::\+While\+Node\+::set\+Expression (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}}]{expression }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_while_node_a86b0790d4f4a8b33e7b33833183eb7ed}\label{classhdg_1_1_while_node_a86b0790d4f4a8b33e7b33833183eb7ed} 
+\index{hdg::WhileNode@{hdg::WhileNode}!toString@{toString}}
+\index{toString@{toString}!hdg::WhileNode@{hdg::WhileNode}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily std\+::string hdg\+::\+While\+Node\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhdg_1_1_node_a562c3c9807e382b651622f254a08c119}{hdg\+::\+Node}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classhdg_1_1_while_node_a32a268d050c40a348ec7202547bd35cc}\label{classhdg_1_1_while_node_a32a268d050c40a348ec7202547bd35cc} 
+\index{hdg::WhileNode@{hdg::WhileNode}!m\_condition@{m\_condition}}
+\index{m\_condition@{m\_condition}!hdg::WhileNode@{hdg::WhileNode}}
+\doxysubsubsection{\texorpdfstring{m\_condition}{m\_condition}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}}\texorpdfstring{$\ast$}{*} hdg\+::\+While\+Node\+::m\+\_\+condition\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_while_node_a2565df10e71c1a477ad9dc305404c595}\label{classhdg_1_1_while_node_a2565df10e71c1a477ad9dc305404c595} 
+\index{hdg::WhileNode@{hdg::WhileNode}!m\_expression@{m\_expression}}
+\index{m\_expression@{m\_expression}!hdg::WhileNode@{hdg::WhileNode}}
+\doxysubsubsection{\texorpdfstring{m\_expression}{m\_expression}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}}\texorpdfstring{$\ast$}{*} hdg\+::\+While\+Node\+::m\+\_\+expression\hspace{0.3cm}{\ttfamily [protected]}}
+

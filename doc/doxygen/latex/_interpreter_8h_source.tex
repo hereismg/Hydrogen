@@ -1,0 +1,43 @@
+\doxysection{Interpreter.\+h}
+\hypertarget{_interpreter_8h_source}{}\label{_interpreter_8h_source}\index{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/Interpreter.h@{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/Interpreter.h}}
+\mbox{\hyperlink{_interpreter_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ Magnesium\ on\ 2023/7/21.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ HDG\_INTERPRETER\_H}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ HDG\_INTERPRETER\_H}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_parser_8h}{Parser.h}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_lexer_8h}{Lexer.h}}"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_node_8h}{node/Node.h}}"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_environment_8h}{basic/Environment.h}}"{}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacehdg}{hdg}}\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{namespacehdg_a5607e634578288231046fe59484159eb}{Mode}}\{}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a5607e634578288231046fe59484159eba3d1e88c276df3486210bd69cac3172d7}{debug}},}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a5607e634578288231046fe59484159eba6fef1415eedb4f9b6e6ea8a25f01a9c0}{release}},}
+\DoxyCodeLine{00019\ \ \ \ \ \};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhdg_1_1_interpreter}{Interpreter}}\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ \mbox{\hyperlink{classhdg_1_1_interpreter_ab22f340778cbb44feb885a7d70994521}{m\_globalEnvironment}};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_interpreter_a58677786eefb07a9cea712eae034b20c}{Interpreter}}();}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_interpreter_a4758167a87276295e23dc13209bdd2fc}{\string~Interpreter}}();}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_interpreter_a0495701bf3a36d43e7766adf4221c782}{interpret}}(\textcolor{keyword}{const}\ std::string\&\ fPath,\ std::string\ code,\ \mbox{\hyperlink{namespacehdg_a5607e634578288231046fe59484159eb}{Mode}}\ mode\ =\ \mbox{\hyperlink{namespacehdg_a5607e634578288231046fe59484159eba6fef1415eedb4f9b6e6ea8a25f01a9c0}{release}});}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_interpreter_a43f4d27cbbd27c03b6dbb424a92931e2}{init}}();}
+\DoxyCodeLine{00041\ \ \ \ \ \};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \}\ \textcolor{comment}{//\ hdg}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//HDG\_INTERPRETER\_H}}
+
+\end{DoxyCode}

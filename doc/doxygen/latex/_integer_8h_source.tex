@@ -1,0 +1,56 @@
+\doxysection{Integer.\+h}
+\hypertarget{_integer_8h_source}{}\label{_integer_8h_source}\index{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/object/Integer.h@{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/object/Integer.h}}
+\mbox{\hyperlink{_integer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ Magnesium\ on\ 2023/7/25.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ HDG\_INTEGER\_H}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ HDG\_INTEGER\_H}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_object_8h}{Object.h}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_float_8h}{Float.h}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}../error/RuntimeError.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacehdg}{hdg}}\ \{}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhdg_1_1_integer}{Integer}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classhdg_1_1_object}{Object}}\{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classhdg_1_1_integer_a25b4791f9b44b92df457e34bdaddabf3}{m\_value}};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classhdg_1_1_integer}{Integer}}(\textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ value);}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_integer_a793b4b7d910a92a4388448b76111574c}{Integer}}(\textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ value,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\&\ position);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_integer_ae6c249fb7d54df2bc2d265d74376b81b}{setValue}}(\textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ value);}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classhdg_1_1_integer_a56171179479d3d98696f5801b502052c}{getValue}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ \mbox{\hyperlink{classhdg_1_1_integer_afa06d374b9aa5c292129d6c0649c734f}{plus}}(\mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ other)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ \mbox{\hyperlink{classhdg_1_1_integer_a91833370471541a50982218c95285d93}{minus}}(\mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ other)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ \mbox{\hyperlink{classhdg_1_1_integer_a762a3705077456bb38c0ba404ef2897c}{mul}}(\mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ other)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ \mbox{\hyperlink{classhdg_1_1_integer_ad97daad14bde3e713967f46f3390da4c}{div}}(\mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ other)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ \mbox{\hyperlink{classhdg_1_1_integer_ad2eaa7b2b4f639c28fdc6bf47736b7b2}{pow}}(\mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ other)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ \mbox{\hyperlink{classhdg_1_1_integer_aa09e1ce2a72e96056c229da13817bc4f}{equation}}(\mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ other)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ \mbox{\hyperlink{classhdg_1_1_integer_a003de7510ea0347ae878a931ec2532fa}{notEquation}}(\mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ other)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ \mbox{\hyperlink{classhdg_1_1_integer_ac3b107f95f7332b3a21589d7ada3e54c}{greaterThan}}(\mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ other)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ \mbox{\hyperlink{classhdg_1_1_integer_a2901f0ec8064a5b2a5b281a2278e8d09}{lessThan}}(\mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ other)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ \mbox{\hyperlink{classhdg_1_1_integer_a3b7cd988d94451c3f246d5d9c040d50e}{greaterThanEquation}}(\mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ other)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ \mbox{\hyperlink{classhdg_1_1_integer_a1e5305662e50a91141b0f4b0033f66ed}{lessThanEquation}}(\mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ other)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ \mbox{\hyperlink{classhdg_1_1_integer_a40ae08c35392fde133702a8a99ec6797}{andOperator}}(\mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ other)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ \mbox{\hyperlink{classhdg_1_1_integer_a45b122616b6343cde448d1fd48018aca}{orOperator}}(\mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ other)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ \mbox{\hyperlink{classhdg_1_1_integer_adeffbc476b4ce40af983091657efec93}{notOperator}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classhdg_1_1_integer_a83f20d5d71f574742d15a77f52810a15}{isTrue}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_integer_ae6d262488ef57086611a66385bf73f1b}{toString}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ \mbox{\hyperlink{classhdg_1_1_integer_a081298e458c7675b82b1613829032e81}{copy}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00046\ \ \ \ \ \};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \}\ \textcolor{comment}{//\ hdg}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//HDG\_INTEGER\_H}}
+
+\end{DoxyCode}

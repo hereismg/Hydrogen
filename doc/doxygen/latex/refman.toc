@@ -1,0 +1,165 @@
+\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
+\contentsline {chapter}{\numberline {1}Hierarchical Index}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Class Hierarchy}{1}{section.1.1}%
+\contentsline {chapter}{\numberline {2}Class Index}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Class List}{3}{section.2.1}%
+\contentsline {chapter}{\numberline {3}File Index}{5}{chapter.3}%
+\contentsline {section}{\numberline {3.1}File List}{5}{section.3.1}%
+\contentsline {chapter}{\numberline {4}Class Documentation}{7}{chapter.4}%
+\contentsline {section}{\numberline {4.1}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Binary\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Operator\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node Class Reference}{7}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Member Function Documentation}{8}{subsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.1.1}interpret()}{8}{subsubsection.4.1.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.1.2}toString()}{8}{subsubsection.4.1.1.2}%
+\contentsline {section}{\numberline {4.2}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Call\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node Class Reference}{8}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Member Function Documentation}{9}{subsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.1.1}interpret()}{9}{subsubsection.4.2.1.1}%
+\contentsline {subsubsection}{\numberline {4.2.1.2}toString()}{9}{subsubsection.4.2.1.2}%
+\contentsline {section}{\numberline {4.3}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Environment Class Reference}{9}{section.4.3}%
+\contentsline {section}{\numberline {4.4}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Error Class Reference}{10}{section.4.4}%
+\contentsline {section}{\numberline {4.5}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Float Class Reference}{10}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Member Function Documentation}{11}{subsection.4.5.1}%
+\contentsline {subsubsection}{\numberline {4.5.1.1}andOperator()}{11}{subsubsection.4.5.1.1}%
+\contentsline {subsubsection}{\numberline {4.5.1.2}copy()}{12}{subsubsection.4.5.1.2}%
+\contentsline {subsubsection}{\numberline {4.5.1.3}div()}{12}{subsubsection.4.5.1.3}%
+\contentsline {subsubsection}{\numberline {4.5.1.4}equation()}{12}{subsubsection.4.5.1.4}%
+\contentsline {subsubsection}{\numberline {4.5.1.5}greaterThan()}{12}{subsubsection.4.5.1.5}%
+\contentsline {subsubsection}{\numberline {4.5.1.6}greaterThanEquation()}{12}{subsubsection.4.5.1.6}%
+\contentsline {subsubsection}{\numberline {4.5.1.7}isTrue()}{12}{subsubsection.4.5.1.7}%
+\contentsline {subsubsection}{\numberline {4.5.1.8}lessThan()}{12}{subsubsection.4.5.1.8}%
+\contentsline {subsubsection}{\numberline {4.5.1.9}lessThanEquation()}{13}{subsubsection.4.5.1.9}%
+\contentsline {subsubsection}{\numberline {4.5.1.10}minus()}{13}{subsubsection.4.5.1.10}%
+\contentsline {subsubsection}{\numberline {4.5.1.11}mul()}{13}{subsubsection.4.5.1.11}%
+\contentsline {subsubsection}{\numberline {4.5.1.12}notEquation()}{13}{subsubsection.4.5.1.12}%
+\contentsline {subsubsection}{\numberline {4.5.1.13}notOperator()}{13}{subsubsection.4.5.1.13}%
+\contentsline {subsubsection}{\numberline {4.5.1.14}orOperator()}{13}{subsubsection.4.5.1.14}%
+\contentsline {subsubsection}{\numberline {4.5.1.15}plus()}{13}{subsubsection.4.5.1.15}%
+\contentsline {subsubsection}{\numberline {4.5.1.16}pow()}{14}{subsubsection.4.5.1.16}%
+\contentsline {subsubsection}{\numberline {4.5.1.17}toString()}{14}{subsubsection.4.5.1.17}%
+\contentsline {section}{\numberline {4.6}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::For\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node Class Reference}{14}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Member Function Documentation}{15}{subsection.4.6.1}%
+\contentsline {subsubsection}{\numberline {4.6.1.1}interpret()}{15}{subsubsection.4.6.1.1}%
+\contentsline {subsubsection}{\numberline {4.6.1.2}toString()}{15}{subsubsection.4.6.1.2}%
+\contentsline {section}{\numberline {4.7}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Func\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Obj\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node Class Reference}{15}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Member Function Documentation}{16}{subsection.4.7.1}%
+\contentsline {subsubsection}{\numberline {4.7.1.1}interpret()}{16}{subsubsection.4.7.1.1}%
+\contentsline {subsubsection}{\numberline {4.7.1.2}toString()}{17}{subsubsection.4.7.1.2}%
+\contentsline {section}{\numberline {4.8}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Function Class Reference}{17}{section.4.8}%
+\contentsline {subsection}{\numberline {4.8.1}Member Function Documentation}{18}{subsection.4.8.1}%
+\contentsline {subsubsection}{\numberline {4.8.1.1}copy()}{18}{subsubsection.4.8.1.1}%
+\contentsline {subsubsection}{\numberline {4.8.1.2}parenthesis()}{18}{subsubsection.4.8.1.2}%
+\contentsline {subsubsection}{\numberline {4.8.1.3}toString()}{18}{subsubsection.4.8.1.3}%
+\contentsline {section}{\numberline {4.9}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::If\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node Class Reference}{18}{section.4.9}%
+\contentsline {subsection}{\numberline {4.9.1}Member Function Documentation}{19}{subsection.4.9.1}%
+\contentsline {subsubsection}{\numberline {4.9.1.1}interpret()}{19}{subsubsection.4.9.1.1}%
+\contentsline {subsubsection}{\numberline {4.9.1.2}toString()}{19}{subsubsection.4.9.1.2}%
+\contentsline {section}{\numberline {4.10}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Illegal\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Char\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Error Class Reference}{20}{section.4.10}%
+\contentsline {section}{\numberline {4.11}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Indicator Struct Reference}{20}{section.4.11}%
+\contentsline {section}{\numberline {4.12}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Integer Class Reference}{21}{section.4.12}%
+\contentsline {subsection}{\numberline {4.12.1}Member Function Documentation}{22}{subsection.4.12.1}%
+\contentsline {subsubsection}{\numberline {4.12.1.1}andOperator()}{22}{subsubsection.4.12.1.1}%
+\contentsline {subsubsection}{\numberline {4.12.1.2}copy()}{22}{subsubsection.4.12.1.2}%
+\contentsline {subsubsection}{\numberline {4.12.1.3}div()}{22}{subsubsection.4.12.1.3}%
+\contentsline {subsubsection}{\numberline {4.12.1.4}equation()}{22}{subsubsection.4.12.1.4}%
+\contentsline {subsubsection}{\numberline {4.12.1.5}greaterThan()}{22}{subsubsection.4.12.1.5}%
+\contentsline {subsubsection}{\numberline {4.12.1.6}greaterThanEquation()}{22}{subsubsection.4.12.1.6}%
+\contentsline {subsubsection}{\numberline {4.12.1.7}isTrue()}{22}{subsubsection.4.12.1.7}%
+\contentsline {subsubsection}{\numberline {4.12.1.8}lessThan()}{23}{subsubsection.4.12.1.8}%
+\contentsline {subsubsection}{\numberline {4.12.1.9}lessThanEquation()}{23}{subsubsection.4.12.1.9}%
+\contentsline {subsubsection}{\numberline {4.12.1.10}minus()}{23}{subsubsection.4.12.1.10}%
+\contentsline {subsubsection}{\numberline {4.12.1.11}mul()}{23}{subsubsection.4.12.1.11}%
+\contentsline {subsubsection}{\numberline {4.12.1.12}notEquation()}{23}{subsubsection.4.12.1.12}%
+\contentsline {subsubsection}{\numberline {4.12.1.13}notOperator()}{23}{subsubsection.4.12.1.13}%
+\contentsline {subsubsection}{\numberline {4.12.1.14}orOperator()}{23}{subsubsection.4.12.1.14}%
+\contentsline {subsubsection}{\numberline {4.12.1.15}plus()}{24}{subsubsection.4.12.1.15}%
+\contentsline {subsubsection}{\numberline {4.12.1.16}pow()}{24}{subsubsection.4.12.1.16}%
+\contentsline {subsubsection}{\numberline {4.12.1.17}toString()}{24}{subsubsection.4.12.1.17}%
+\contentsline {section}{\numberline {4.13}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Interpreter Class Reference}{24}{section.4.13}%
+\contentsline {section}{\numberline {4.14}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Invalid\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Syntax\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Error Class Reference}{25}{section.4.14}%
+\contentsline {section}{\numberline {4.15}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Lexer Class Reference}{25}{section.4.15}%
+\contentsline {section}{\numberline {4.16}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::List Class Reference}{26}{section.4.16}%
+\contentsline {section}{\numberline {4.17}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Node Class Reference}{26}{section.4.17}%
+\contentsline {section}{\numberline {4.18}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::None Class Reference}{28}{section.4.18}%
+\contentsline {subsection}{\numberline {4.18.1}Member Function Documentation}{29}{subsection.4.18.1}%
+\contentsline {subsubsection}{\numberline {4.18.1.1}copy()}{29}{subsubsection.4.18.1.1}%
+\contentsline {subsubsection}{\numberline {4.18.1.2}notOperator()}{29}{subsubsection.4.18.1.2}%
+\contentsline {subsubsection}{\numberline {4.18.1.3}toString()}{29}{subsubsection.4.18.1.3}%
+\contentsline {section}{\numberline {4.19}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Not\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Implemented\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Error Class Reference}{29}{section.4.19}%
+\contentsline {section}{\numberline {4.20}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Num\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Obj\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node Class Reference}{29}{section.4.20}%
+\contentsline {subsection}{\numberline {4.20.1}Member Function Documentation}{30}{subsection.4.20.1}%
+\contentsline {subsubsection}{\numberline {4.20.1.1}interpret()}{30}{subsubsection.4.20.1.1}%
+\contentsline {subsubsection}{\numberline {4.20.1.2}toString()}{30}{subsubsection.4.20.1.2}%
+\contentsline {section}{\numberline {4.21}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Obj\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Access\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node Class Reference}{31}{section.4.21}%
+\contentsline {subsection}{\numberline {4.21.1}Member Function Documentation}{31}{subsection.4.21.1}%
+\contentsline {subsubsection}{\numberline {4.21.1.1}interpret()}{31}{subsubsection.4.21.1.1}%
+\contentsline {subsubsection}{\numberline {4.21.1.2}toString()}{31}{subsubsection.4.21.1.2}%
+\contentsline {section}{\numberline {4.22}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Obj\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Assign\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node Class Reference}{32}{section.4.22}%
+\contentsline {subsection}{\numberline {4.22.1}Member Function Documentation}{32}{subsection.4.22.1}%
+\contentsline {subsubsection}{\numberline {4.22.1.1}interpret()}{32}{subsubsection.4.22.1.1}%
+\contentsline {subsubsection}{\numberline {4.22.1.2}toString()}{33}{subsubsection.4.22.1.2}%
+\contentsline {section}{\numberline {4.23}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Object Class Reference}{33}{section.4.23}%
+\contentsline {section}{\numberline {4.24}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Object\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node Class Reference}{34}{section.4.24}%
+\contentsline {subsection}{\numberline {4.24.1}Member Function Documentation}{35}{subsection.4.24.1}%
+\contentsline {subsubsection}{\numberline {4.24.1.1}interpret()}{35}{subsubsection.4.24.1.1}%
+\contentsline {subsubsection}{\numberline {4.24.1.2}toString()}{35}{subsubsection.4.24.1.2}%
+\contentsline {section}{\numberline {4.25}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Parser Class Reference}{35}{section.4.25}%
+\contentsline {section}{\numberline {4.26}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Position Class Reference}{36}{section.4.26}%
+\contentsline {section}{\numberline {4.27}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Runtime\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Error Class Reference}{36}{section.4.27}%
+\contentsline {section}{\numberline {4.28}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Shell Class Reference}{37}{section.4.28}%
+\contentsline {section}{\numberline {4.29}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Statements\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node Class Reference}{38}{section.4.29}%
+\contentsline {subsection}{\numberline {4.29.1}Member Function Documentation}{38}{subsection.4.29.1}%
+\contentsline {subsubsection}{\numberline {4.29.1.1}interpret()}{38}{subsubsection.4.29.1.1}%
+\contentsline {subsubsection}{\numberline {4.29.1.2}toString()}{38}{subsubsection.4.29.1.2}%
+\contentsline {section}{\numberline {4.30}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::String Class Reference}{39}{section.4.30}%
+\contentsline {subsection}{\numberline {4.30.1}Member Function Documentation}{40}{subsection.4.30.1}%
+\contentsline {subsubsection}{\numberline {4.30.1.1}copy()}{40}{subsubsection.4.30.1.1}%
+\contentsline {subsubsection}{\numberline {4.30.1.2}isTrue()}{40}{subsubsection.4.30.1.2}%
+\contentsline {subsubsection}{\numberline {4.30.1.3}plus()}{40}{subsubsection.4.30.1.3}%
+\contentsline {subsubsection}{\numberline {4.30.1.4}toString()}{40}{subsubsection.4.30.1.4}%
+\contentsline {section}{\numberline {4.31}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Str\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Obj\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node Class Reference}{40}{section.4.31}%
+\contentsline {subsection}{\numberline {4.31.1}Member Function Documentation}{41}{subsection.4.31.1}%
+\contentsline {subsubsection}{\numberline {4.31.1.1}interpret()}{41}{subsubsection.4.31.1.1}%
+\contentsline {subsubsection}{\numberline {4.31.1.2}toString()}{41}{subsubsection.4.31.1.2}%
+\contentsline {section}{\numberline {4.32}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Token Class Reference}{42}{section.4.32}%
+\contentsline {section}{\numberline {4.33}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Unary\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Operator\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node Class Reference}{42}{section.4.33}%
+\contentsline {subsection}{\numberline {4.33.1}Member Function Documentation}{43}{subsection.4.33.1}%
+\contentsline {subsubsection}{\numberline {4.33.1.1}interpret()}{43}{subsubsection.4.33.1.1}%
+\contentsline {subsubsection}{\numberline {4.33.1.2}toString()}{43}{subsubsection.4.33.1.2}%
+\contentsline {section}{\numberline {4.34}hdg\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::While\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node Class Reference}{43}{section.4.34}%
+\contentsline {subsection}{\numberline {4.34.1}Member Function Documentation}{44}{subsection.4.34.1}%
+\contentsline {subsubsection}{\numberline {4.34.1.1}interpret()}{44}{subsubsection.4.34.1.1}%
+\contentsline {subsubsection}{\numberline {4.34.1.2}toString()}{44}{subsubsection.4.34.1.2}%
+\contentsline {chapter}{\numberline {5}File Documentation}{45}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Environment.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{45}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Position.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{45}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Token.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{46}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Error.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{47}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Illegal\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Char\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Error.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{48}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Invalid\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Syntax\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Error.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{48}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Not\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Implemented\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Error.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{49}{section.5.7}%
+\contentsline {section}{\numberline {5.8}Runtime\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Error.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{49}{section.5.8}%
+\contentsline {section}{\numberline {5.9}Interpreter.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{49}{section.5.9}%
+\contentsline {section}{\numberline {5.10}Lexer.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{50}{section.5.10}%
+\contentsline {section}{\numberline {5.11}Binary\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Operator\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{51}{section.5.11}%
+\contentsline {section}{\numberline {5.12}Call\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{51}{section.5.12}%
+\contentsline {section}{\numberline {5.13}For\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{52}{section.5.13}%
+\contentsline {section}{\numberline {5.14}If\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{52}{section.5.14}%
+\contentsline {section}{\numberline {5.15}Node.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{52}{section.5.15}%
+\contentsline {section}{\numberline {5.16}Obj\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Access\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{53}{section.5.16}%
+\contentsline {section}{\numberline {5.17}Obj\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Assign\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{53}{section.5.17}%
+\contentsline {section}{\numberline {5.18}Func\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Obj\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{54}{section.5.18}%
+\contentsline {section}{\numberline {5.19}Num\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Obj\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{54}{section.5.19}%
+\contentsline {section}{\numberline {5.20}Object\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{55}{section.5.20}%
+\contentsline {section}{\numberline {5.21}Str\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Obj\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{55}{section.5.21}%
+\contentsline {section}{\numberline {5.22}Statements\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{56}{section.5.22}%
+\contentsline {section}{\numberline {5.23}Unary\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Operator\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{56}{section.5.23}%
+\contentsline {section}{\numberline {5.24}While\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{57}{section.5.24}%
+\contentsline {section}{\numberline {5.25}Float.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{57}{section.5.25}%
+\contentsline {section}{\numberline {5.26}Function.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{58}{section.5.26}%
+\contentsline {section}{\numberline {5.27}Integer.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{58}{section.5.27}%
+\contentsline {section}{\numberline {5.28}List.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{59}{section.5.28}%
+\contentsline {section}{\numberline {5.29}None.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{59}{section.5.29}%
+\contentsline {section}{\numberline {5.30}Object.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{60}{section.5.30}%
+\contentsline {section}{\numberline {5.31}String.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{60}{section.5.31}%
+\contentsline {section}{\numberline {5.32}Parser.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{61}{section.5.32}%
+\contentsline {section}{\numberline {5.33}Shell.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{62}{section.5.33}%
+\contentsline {chapter}{Index}{63}{section*.140}%

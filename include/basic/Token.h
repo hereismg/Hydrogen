@@ -15,13 +15,13 @@ namespace hdg {
 
     enum TokenType{
         INT,
-        FLOAT,      // 虽然名称为“float”，但实际上全都是双精度浮点型
+        FLOAT,      /// 虽然名称为“float”，但实际上全都是双精度浮点型
         STRING,
         IDENTIFIER,
         KEYWORD,
 
-        NE,         // 不等于号“!=”
-        EE,         // 逻辑表达式的等于号“==”
+        NE,         /// 不等于号“!=”
+        EE,         /// 逻辑表达式的等于号“==”
         GT,
         LT,
         GTE,
@@ -33,13 +33,13 @@ namespace hdg {
         DIV,
         POW,
 
-        LPAREN,     // 左圆括号
+        LPAREN,     /// 左圆括号
         RPAREN,
-        LBRACKET,   // 左方括号
+        LBRACKET,   /// 左方括号
         RBRACKET,
-        LBRACE,     // 左花括号
+        LBRACE,     /// 左花括号
         RBRACE,
-        EQ,         // 赋值语句的等于号“=”
+        EQ,         /// 赋值语句的等于号“=”
 
         COLON,
         COMMA,
@@ -48,6 +48,8 @@ namespace hdg {
         EL,         // end of line 有两种表达字符：“;” and “\n”
     };
 
+    /**
+     * */
     static std::map<TokenType, std::string> tokenTypeName = {
             {INT,           "INT"},
             {FLOAT,         "FLOAT"},
@@ -78,8 +80,8 @@ namespace hdg {
             {COLON,         "COLON"},
             {COMMA,         "COMMA"},
 
-            {EF,            "EF"},          // EOF   end of file    由于EOF是C++中的关键字，所以这里用EF代替
-            {EL,            "EL"},          // EOL   end of line    意为“一行的末尾”，这里使用“EL”是为了和上面的”EF“统一表达语言
+            {EF,            "EF"},          /// EOF   end of file    由于EOF是C++中的关键字，所以这里用EF代替
+            {EL,            "EL"},          /// EOL   end of line    意为“一行的末尾”，这里使用“EL”是为了和上面的”EF“统一表达语言
     };
     class Token {
     protected:
@@ -97,6 +99,13 @@ namespace hdg {
         Token(const Token& tok);
         ~Token();
 
+        /**
+         * 用于匹配 Token 的类型与值是否全都相同。
+         * @param type  记号类型种类。
+         * @param value 该记号类型的值。
+         * @return 返回一个布尔值。
+         * @note 必须当种类和值全部匹配的时候才会返回 True。
+         * */
         bool match(TokenType type, const std::string& value);
         void setType(TokenType type);
         void setValue(const std::string& value);

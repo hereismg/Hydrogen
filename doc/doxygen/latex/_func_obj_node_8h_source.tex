@@ -1,0 +1,43 @@
+\doxysection{Func\+Obj\+Node.\+h}
+\hypertarget{_func_obj_node_8h_source}{}\label{_func_obj_node_8h_source}\index{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/node/object\_node/FuncObjNode.h@{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/node/object\_node/FuncObjNode.h}}
+\mbox{\hyperlink{_func_obj_node_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ Magnesium\ on\ 2023/8/10.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ HDG\_FUNCOBJNODE\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ HDG\_FUNCOBJNODE\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <set>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_object_node_8h}{ObjectNode.h}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}../ObjAssignNode.h"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}../../object/None.h"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}../../object/Function.h"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacehdg}{hdg}}\ \{}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhdg_1_1_func_obj_node}{FuncObjNode}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classhdg_1_1_object_node}{ObjectNode}}\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_func_obj_node_ac934add25786ee1828d4b7efc34d89e3}{m\_name}};}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ std::vector<ObjAssignNode*>\ \mbox{\hyperlink{classhdg_1_1_func_obj_node_ab53ef2dee1be2e2935cfe44cb4ab1ead}{m\_args}};}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_func_obj_node_aaa209844185d6b8bd53aee195460a10e}{m\_body}}\{\};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_func_obj_node_a3a51ffdb97deaf7baefd50da3c9422b8}{FuncObjNode}}();}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_func_obj_node_a3a51ffdb97deaf7baefd50da3c9422b8}{FuncObjNode}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\&\ position,\ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ parent);}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_func_obj_node_a65ce421a60aa85e5130cdd2d5f59c921}{\string~FuncObjNode}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_func_obj_node_aba13ce71acd2b78ae0f8550640f3da1c}{setArg}}(\mbox{\hyperlink{classhdg_1_1_obj_assign_node}{ObjAssignNode}}*\ arg);}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_func_obj_node_a3f2447c19639223e206564daf5223476}{setBody}}(\mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ body);}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_func_obj_node_aa6d31ed512551eaf1529104d46ade63f}{setName}}(\textcolor{keyword}{const}\ std::string\&\ name);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_func_obj_node_a26c56e6fb61343fbd1f9596c91fb5366}{toString}}();}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ \mbox{\hyperlink{classhdg_1_1_func_obj_node_a4543d3fd8756c39c08d8982116d7113c}{interpret}}();}
+\DoxyCodeLine{00033\ \ \ \ \ \};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \}\ \textcolor{comment}{//\ hdg}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//HDG\_FUNCOBJNODE\_H}}
+
+\end{DoxyCode}

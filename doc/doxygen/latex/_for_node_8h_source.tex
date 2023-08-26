@@ -1,0 +1,44 @@
+\doxysection{For\+Node.\+h}
+\hypertarget{_for_node_8h_source}{}\label{_for_node_8h_source}\index{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/node/ForNode.h@{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/node/ForNode.h}}
+\mbox{\hyperlink{_for_node_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ Magnesium\ on\ 2023/8/2.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ HDG\_FORNODE\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ HDG\_FORNODE\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}../basic/Token.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_node_8h}{Node.h}}"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacehdg}{hdg}}\ \{}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhdg_1_1_for_node}{ForNode}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classhdg_1_1_node}{Node}}\{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_token}{Token}}\ \mbox{\hyperlink{classhdg_1_1_for_node_adf5e216b78a7f6c3b7c71bc16d66f8a3}{m\_index}};}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classhdg_1_1_for_node_a11b2ed73164921cdd073b90a5a4cd333}{m\_from}};}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classhdg_1_1_for_node_a8af0fedbee99b65cfe8e7614e3beb398}{m\_to}};}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classhdg_1_1_for_node_a7ce280fde5bea3c04905b42a6d550505}{m\_step}};}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_for_node_a64a117adc6c6e99e291ae7cac2901ea1}{m\_expr}};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_for_node}{ForNode}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_token}{Token}}\&\ index,\ \textcolor{keywordtype}{int}\ to,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\&\ position,\ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ parent);}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_for_node}{ForNode}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_token}{Token}}\&\ index,\ \textcolor{keywordtype}{int}\ from,\ \textcolor{keywordtype}{int}\ to,\ \textcolor{keywordtype}{int}\ step,\ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ expr,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\&\ position,\ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ parent);}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_for_node_aebf320f4e7721e89651ee0a905031a7e}{\string~ForNode}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_for_node_af4484092c28301b0e920ab613d44cb43}{setIndex}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_token}{Token}}\&\ index);}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_for_node_a1686228fe634eecb5c296f053e91c103}{setFrom}}(\textcolor{keywordtype}{int}\ from);}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_for_node_a419e5eb968f5f521b7253fedd72bff1b}{setTo}}(\textcolor{keywordtype}{int}\ to);}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_for_node_a5ca9a6a186644481b5c5a6c438678d44}{setStep}}(\textcolor{keywordtype}{int}\ step);}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_for_node_aae12cd629d1ae1efd3ebabd6d8c17554}{setExpr}}(\mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ expr);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_for_node_a32b41fe3004f852792b7d1f0e1c7be3d}{toString}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ \mbox{\hyperlink{classhdg_1_1_for_node_a330454867b90c0e2bad58c1772b83fe4}{interpret}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00034\ \ \ \ \ \};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \}\ \textcolor{comment}{//\ hdg}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//HDG\_FORNODE\_H}}
+
+\end{DoxyCode}

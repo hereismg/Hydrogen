@@ -1,0 +1,266 @@
+\begin{theindex}
+
+  \item {andOperator}
+    \subitem {hdg::Float}, \hyperpage{11}
+    \subitem {hdg::Integer}, \hyperpage{22}
+
+  \indexspace
+
+  \item {copy}
+    \subitem {hdg::Float}, \hyperpage{11}
+    \subitem {hdg::Function}, \hyperpage{18}
+    \subitem {hdg::Integer}, \hyperpage{22}
+    \subitem {hdg::None}, \hyperpage{29}
+    \subitem {hdg::String}, \hyperpage{40}
+
+  \indexspace
+
+  \item {div}
+    \subitem {hdg::Float}, \hyperpage{12}
+    \subitem {hdg::Integer}, \hyperpage{22}
+
+  \indexspace
+
+  \item {equation}
+    \subitem {hdg::Float}, \hyperpage{12}
+    \subitem {hdg::Integer}, \hyperpage{22}
+
+  \indexspace
+
+  \item {greaterThan}
+    \subitem {hdg::Float}, \hyperpage{12}
+    \subitem {hdg::Integer}, \hyperpage{22}
+  \item {greaterThanEquation}
+    \subitem {hdg::Float}, \hyperpage{12}
+    \subitem {hdg::Integer}, \hyperpage{22}
+
+  \indexspace
+
+  \item {hdg::BinaryOperatorNode}, \hyperpage{7}
+    \subitem {interpret}, \hyperpage{8}
+    \subitem {toString}, \hyperpage{8}
+  \item {hdg::CallNode}, \hyperpage{8}
+    \subitem {interpret}, \hyperpage{9}
+    \subitem {toString}, \hyperpage{9}
+  \item {hdg::Environment}, \hyperpage{9}
+  \item {hdg::Error}, \hyperpage{10}
+  \item {hdg::Float}, \hyperpage{10}
+    \subitem {andOperator}, \hyperpage{11}
+    \subitem {copy}, \hyperpage{11}
+    \subitem {div}, \hyperpage{12}
+    \subitem {equation}, \hyperpage{12}
+    \subitem {greaterThan}, \hyperpage{12}
+    \subitem {greaterThanEquation}, \hyperpage{12}
+    \subitem {isTrue}, \hyperpage{12}
+    \subitem {lessThan}, \hyperpage{12}
+    \subitem {lessThanEquation}, \hyperpage{12}
+    \subitem {minus}, \hyperpage{13}
+    \subitem {mul}, \hyperpage{13}
+    \subitem {notEquation}, \hyperpage{13}
+    \subitem {notOperator}, \hyperpage{13}
+    \subitem {orOperator}, \hyperpage{13}
+    \subitem {plus}, \hyperpage{13}
+    \subitem {pow}, \hyperpage{13}
+    \subitem {toString}, \hyperpage{14}
+  \item {hdg::ForNode}, \hyperpage{14}
+    \subitem {interpret}, \hyperpage{15}
+    \subitem {toString}, \hyperpage{15}
+  \item {hdg::FuncObjNode}, \hyperpage{15}
+    \subitem {interpret}, \hyperpage{16}
+    \subitem {toString}, \hyperpage{16}
+  \item {hdg::Function}, \hyperpage{17}
+    \subitem {copy}, \hyperpage{18}
+    \subitem {parenthesis}, \hyperpage{18}
+    \subitem {toString}, \hyperpage{18}
+  \item {hdg::IfNode}, \hyperpage{18}
+    \subitem {interpret}, \hyperpage{19}
+    \subitem {toString}, \hyperpage{19}
+  \item {hdg::IllegalCharError}, \hyperpage{20}
+  \item {hdg::Indicator}, \hyperpage{20}
+  \item {hdg::Integer}, \hyperpage{21}
+    \subitem {andOperator}, \hyperpage{22}
+    \subitem {copy}, \hyperpage{22}
+    \subitem {div}, \hyperpage{22}
+    \subitem {equation}, \hyperpage{22}
+    \subitem {greaterThan}, \hyperpage{22}
+    \subitem {greaterThanEquation}, \hyperpage{22}
+    \subitem {isTrue}, \hyperpage{22}
+    \subitem {lessThan}, \hyperpage{22}
+    \subitem {lessThanEquation}, \hyperpage{23}
+    \subitem {minus}, \hyperpage{23}
+    \subitem {mul}, \hyperpage{23}
+    \subitem {notEquation}, \hyperpage{23}
+    \subitem {notOperator}, \hyperpage{23}
+    \subitem {orOperator}, \hyperpage{23}
+    \subitem {plus}, \hyperpage{23}
+    \subitem {pow}, \hyperpage{24}
+    \subitem {toString}, \hyperpage{24}
+  \item {hdg::Interpreter}, \hyperpage{24}
+  \item {hdg::InvalidSyntaxError}, \hyperpage{25}
+  \item {hdg::Lexer}, \hyperpage{25}
+  \item {hdg::List}, \hyperpage{26}
+  \item {hdg::Node}, \hyperpage{26}
+  \item {hdg::None}, \hyperpage{28}
+    \subitem {copy}, \hyperpage{29}
+    \subitem {notOperator}, \hyperpage{29}
+    \subitem {toString}, \hyperpage{29}
+  \item {hdg::NotImplementedError}, \hyperpage{29}
+  \item {hdg::NumObjNode}, \hyperpage{29}
+    \subitem {interpret}, \hyperpage{30}
+    \subitem {toString}, \hyperpage{30}
+  \item {hdg::ObjAccessNode}, \hyperpage{31}
+    \subitem {interpret}, \hyperpage{31}
+    \subitem {toString}, \hyperpage{31}
+  \item {hdg::ObjAssignNode}, \hyperpage{32}
+    \subitem {interpret}, \hyperpage{32}
+    \subitem {toString}, \hyperpage{32}
+  \item {hdg::Object}, \hyperpage{33}
+  \item {hdg::ObjectNode}, \hyperpage{34}
+    \subitem {interpret}, \hyperpage{35}
+    \subitem {toString}, \hyperpage{35}
+  \item {hdg::Parser}, \hyperpage{35}
+  \item {hdg::Position}, \hyperpage{36}
+  \item {hdg::RuntimeError}, \hyperpage{36}
+  \item {hdg::Shell}, \hyperpage{37}
+  \item {hdg::StatementsNode}, \hyperpage{38}
+    \subitem {interpret}, \hyperpage{38}
+    \subitem {toString}, \hyperpage{38}
+  \item {hdg::String}, \hyperpage{39}
+    \subitem {copy}, \hyperpage{40}
+    \subitem {isTrue}, \hyperpage{40}
+    \subitem {plus}, \hyperpage{40}
+    \subitem {toString}, \hyperpage{40}
+  \item {hdg::StrObjNode}, \hyperpage{40}
+    \subitem {interpret}, \hyperpage{41}
+    \subitem {toString}, \hyperpage{41}
+  \item {hdg::Token}, \hyperpage{42}
+  \item {hdg::UnaryOperatorNode}, \hyperpage{42}
+    \subitem {interpret}, \hyperpage{43}
+    \subitem {toString}, \hyperpage{43}
+  \item {hdg::WhileNode}, \hyperpage{43}
+    \subitem {interpret}, \hyperpage{44}
+    \subitem {toString}, \hyperpage{44}
+
+  \indexspace
+
+  \item {include/basic/Environment.h}, \hyperpage{45}
+  \item {include/basic/Position.h}, \hyperpage{45}
+  \item {include/basic/Token.h}, \hyperpage{46}
+  \item {include/error/Error.h}, \hyperpage{47}
+  \item {include/error/IllegalCharError.h}, \hyperpage{48}
+  \item {include/error/InvalidSyntaxError.h}, \hyperpage{48}
+  \item {include/error/NotImplementedError.h}, \hyperpage{49}
+  \item {include/error/RuntimeError.h}, \hyperpage{49}
+  \item {include/Interpreter.h}, \hyperpage{49}
+  \item {include/Lexer.h}, \hyperpage{50}
+  \item {include/node/BinaryOperatorNode.h}, \hyperpage{51}
+  \item {include/node/CallNode.h}, \hyperpage{51}
+  \item {include/node/ForNode.h}, \hyperpage{52}
+  \item {include/node/IfNode.h}, \hyperpage{52}
+  \item {include/node/Node.h}, \hyperpage{52}
+  \item {include/node/ObjAccessNode.h}, \hyperpage{53}
+  \item {include/node/ObjAssignNode.h}, \hyperpage{53}
+  \item {include/node/object\_node/FuncObjNode.h}, \hyperpage{54}
+  \item {include/node/object\_node/NumObjNode.h}, \hyperpage{54}
+  \item {include/node/object\_node/ObjectNode.h}, \hyperpage{55}
+  \item {include/node/object\_node/StrObjNode.h}, \hyperpage{55}
+  \item {include/node/StatementsNode.h}, \hyperpage{56}
+  \item {include/node/UnaryOperatorNode.h}, \hyperpage{56}
+  \item {include/node/WhileNode.h}, \hyperpage{57}
+  \item {include/object/Float.h}, \hyperpage{57}
+  \item {include/object/Function.h}, \hyperpage{58}
+  \item {include/object/Integer.h}, \hyperpage{58}
+  \item {include/object/List.h}, \hyperpage{59}
+  \item {include/object/None.h}, \hyperpage{59}
+  \item {include/object/Object.h}, \hyperpage{60}
+  \item {include/object/String.h}, \hyperpage{60}
+  \item {include/Parser.h}, \hyperpage{61}
+  \item {include/Shell.h}, \hyperpage{62}
+  \item {interpret}
+    \subitem {hdg::BinaryOperatorNode}, \hyperpage{8}
+    \subitem {hdg::CallNode}, \hyperpage{9}
+    \subitem {hdg::ForNode}, \hyperpage{15}
+    \subitem {hdg::FuncObjNode}, \hyperpage{16}
+    \subitem {hdg::IfNode}, \hyperpage{19}
+    \subitem {hdg::NumObjNode}, \hyperpage{30}
+    \subitem {hdg::ObjAccessNode}, \hyperpage{31}
+    \subitem {hdg::ObjAssignNode}, \hyperpage{32}
+    \subitem {hdg::ObjectNode}, \hyperpage{35}
+    \subitem {hdg::StatementsNode}, \hyperpage{38}
+    \subitem {hdg::StrObjNode}, \hyperpage{41}
+    \subitem {hdg::UnaryOperatorNode}, \hyperpage{43}
+    \subitem {hdg::WhileNode}, \hyperpage{44}
+  \item {isTrue}
+    \subitem {hdg::Float}, \hyperpage{12}
+    \subitem {hdg::Integer}, \hyperpage{22}
+    \subitem {hdg::String}, \hyperpage{40}
+
+  \indexspace
+
+  \item {lessThan}
+    \subitem {hdg::Float}, \hyperpage{12}
+    \subitem {hdg::Integer}, \hyperpage{22}
+  \item {lessThanEquation}
+    \subitem {hdg::Float}, \hyperpage{12}
+    \subitem {hdg::Integer}, \hyperpage{23}
+
+  \indexspace
+
+  \item {minus}
+    \subitem {hdg::Float}, \hyperpage{13}
+    \subitem {hdg::Integer}, \hyperpage{23}
+  \item {mul}
+    \subitem {hdg::Float}, \hyperpage{13}
+    \subitem {hdg::Integer}, \hyperpage{23}
+
+  \indexspace
+
+  \item {notEquation}
+    \subitem {hdg::Float}, \hyperpage{13}
+    \subitem {hdg::Integer}, \hyperpage{23}
+  \item {notOperator}
+    \subitem {hdg::Float}, \hyperpage{13}
+    \subitem {hdg::Integer}, \hyperpage{23}
+    \subitem {hdg::None}, \hyperpage{29}
+
+  \indexspace
+
+  \item {orOperator}
+    \subitem {hdg::Float}, \hyperpage{13}
+    \subitem {hdg::Integer}, \hyperpage{23}
+
+  \indexspace
+
+  \item {parenthesis}
+    \subitem {hdg::Function}, \hyperpage{18}
+  \item {plus}
+    \subitem {hdg::Float}, \hyperpage{13}
+    \subitem {hdg::Integer}, \hyperpage{23}
+    \subitem {hdg::String}, \hyperpage{40}
+  \item {pow}
+    \subitem {hdg::Float}, \hyperpage{13}
+    \subitem {hdg::Integer}, \hyperpage{24}
+
+  \indexspace
+
+  \item {toString}
+    \subitem {hdg::BinaryOperatorNode}, \hyperpage{8}
+    \subitem {hdg::CallNode}, \hyperpage{9}
+    \subitem {hdg::Float}, \hyperpage{14}
+    \subitem {hdg::ForNode}, \hyperpage{15}
+    \subitem {hdg::FuncObjNode}, \hyperpage{16}
+    \subitem {hdg::Function}, \hyperpage{18}
+    \subitem {hdg::IfNode}, \hyperpage{19}
+    \subitem {hdg::Integer}, \hyperpage{24}
+    \subitem {hdg::None}, \hyperpage{29}
+    \subitem {hdg::NumObjNode}, \hyperpage{30}
+    \subitem {hdg::ObjAccessNode}, \hyperpage{31}
+    \subitem {hdg::ObjAssignNode}, \hyperpage{32}
+    \subitem {hdg::ObjectNode}, \hyperpage{35}
+    \subitem {hdg::StatementsNode}, \hyperpage{38}
+    \subitem {hdg::String}, \hyperpage{40}
+    \subitem {hdg::StrObjNode}, \hyperpage{41}
+    \subitem {hdg::UnaryOperatorNode}, \hyperpage{43}
+    \subitem {hdg::WhileNode}, \hyperpage{44}
+
+\end{theindex}

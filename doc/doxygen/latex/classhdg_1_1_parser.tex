@@ -1,0 +1,200 @@
+\doxysection{hdg\+::Parser Class Reference}
+\hypertarget{classhdg_1_1_parser}{}\label{classhdg_1_1_parser}\index{hdg::Parser@{hdg::Parser}}
+
+
+{\ttfamily \#include $<$Parser.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_parser_a77b844a8d03cd2bfb885727126693b88}{Parser}} (std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_token}{Token}} $>$ tokens, \mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_parser_a57b94cf3562d8835e44deb29b751f114}{run}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classhdg_1_1_parser_a322dd9db98002c295bfb689c111de385}{advance}} ()
+\item 
+void \mbox{\hyperlink{classhdg_1_1_parser_adba95661514dcb6857af7854e067d8d0}{retreat}} ()
+\item 
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_parser_afc0f7bcf6a1f4f6760834f936ca7e212}{expr}} (\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_parser_ab93a9cf87d67e68d01a36de362fad4d3}{comp\+Expr}} (\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_parser_a0b7584b8a9fb11bd2a0f7b1e26d04a7f}{arith\+Expr}} (\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_parser_a33194976ff64b5e5bddb7b2672937453}{term}} (\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_parser_afb17f822eaee1e94e1828ff4c5e95593}{factor}} (\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_parser_a05b4ee984cd4252a37a1281da603f0b3}{power}} (\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_parser_ab13a31a77529148450c45185a0fc235a}{call}} (\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_parser_a96dd4f92e90cc120d1d2a84443cb1d7b}{atom}} (\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_parser_a146a4639ad683a33be86306ad328e0b0}{if\+Expr}} (\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_parser_a5c0ea96bbf7611f639a8d1622c4a5ad7}{for\+Expr}} (\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_parser_a2a502b8aff422d902e624112cf7af14a}{while\+Expr}} (\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_parser_a5b729429909bcd14dfabe8ad5e05e9b7}{func\+Expr}} (\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_parser_a5ba2f44e3e39a0138cf138bf0cdfc5af}{statements}} (\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_parser_aa4d23b86079f88058c7c08830ea409b6}{binary\+Operator}} (\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment, const std\+::set$<$ \mbox{\hyperlink{classhdg_1_1_token}{Token}}, std\+::less$<$$>$ $>$ \&opers, std\+::function$<$ \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}(\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}envir)$>$ funA, std\+::function$<$ \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}(\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}envir)$>$ funB=nullptr)
+\item 
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_parser_a15fca1e4ffaedbbaa07720780435f0d8}{unary\+Operator}} (\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment, const std\+::set$<$ \mbox{\hyperlink{classhdg_1_1_token}{Token}}, std\+::less$<$$>$ $>$ \&opers, std\+::function$<$ \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}(\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}envir)$>$ fun)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_token}{Token}} $>$ \mbox{\hyperlink{classhdg_1_1_parser_a4c43d79ce50bc774eb0cbaebf60d81c0}{m\+\_\+tokens}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_token}{Token}} $>$\+::iterator \mbox{\hyperlink{classhdg_1_1_parser_a945cac49140200d3a36c535e6db1078f}{m\+\_\+current\+Token}}
+\item 
+\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_parser_a786cc9c67414d221d8e5864f0d823eeb}{m\+\_\+environment}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classhdg_1_1_parser_a77b844a8d03cd2bfb885727126693b88}\label{classhdg_1_1_parser_a77b844a8d03cd2bfb885727126693b88} 
+\index{hdg::Parser@{hdg::Parser}!Parser@{Parser}}
+\index{Parser@{Parser}!hdg::Parser@{hdg::Parser}}
+\doxysubsubsection{\texorpdfstring{Parser()}{Parser()}}
+{\footnotesize\ttfamily hdg\+::\+Parser\+::\+Parser (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_token}{Token}} $>$}]{tokens,  }\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{environment }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classhdg_1_1_parser_a322dd9db98002c295bfb689c111de385}\label{classhdg_1_1_parser_a322dd9db98002c295bfb689c111de385} 
+\index{hdg::Parser@{hdg::Parser}!advance@{advance}}
+\index{advance@{advance}!hdg::Parser@{hdg::Parser}}
+\doxysubsubsection{\texorpdfstring{advance()}{advance()}}
+{\footnotesize\ttfamily void hdg\+::\+Parser\+::advance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_parser_a0b7584b8a9fb11bd2a0f7b1e26d04a7f}\label{classhdg_1_1_parser_a0b7584b8a9fb11bd2a0f7b1e26d04a7f} 
+\index{hdg::Parser@{hdg::Parser}!arithExpr@{arithExpr}}
+\index{arithExpr@{arithExpr}!hdg::Parser@{hdg::Parser}}
+\doxysubsubsection{\texorpdfstring{arithExpr()}{arithExpr()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} hdg\+::\+Parser\+::arith\+Expr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{environment }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_parser_a96dd4f92e90cc120d1d2a84443cb1d7b}\label{classhdg_1_1_parser_a96dd4f92e90cc120d1d2a84443cb1d7b} 
+\index{hdg::Parser@{hdg::Parser}!atom@{atom}}
+\index{atom@{atom}!hdg::Parser@{hdg::Parser}}
+\doxysubsubsection{\texorpdfstring{atom()}{atom()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} hdg\+::\+Parser\+::atom (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{environment }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_parser_aa4d23b86079f88058c7c08830ea409b6}\label{classhdg_1_1_parser_aa4d23b86079f88058c7c08830ea409b6} 
+\index{hdg::Parser@{hdg::Parser}!binaryOperator@{binaryOperator}}
+\index{binaryOperator@{binaryOperator}!hdg::Parser@{hdg::Parser}}
+\doxysubsubsection{\texorpdfstring{binaryOperator()}{binaryOperator()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} hdg\+::\+Parser\+::binary\+Operator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{environment,  }\item[{const std\+::set$<$ \mbox{\hyperlink{classhdg_1_1_token}{Token}}, std\+::less$<$$>$ $>$ \&}]{opers,  }\item[{std\+::function$<$ \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}(\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}envir)$>$}]{funA,  }\item[{std\+::function$<$ \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}(\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}envir)$>$}]{funB = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_parser_ab13a31a77529148450c45185a0fc235a}\label{classhdg_1_1_parser_ab13a31a77529148450c45185a0fc235a} 
+\index{hdg::Parser@{hdg::Parser}!call@{call}}
+\index{call@{call}!hdg::Parser@{hdg::Parser}}
+\doxysubsubsection{\texorpdfstring{call()}{call()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} hdg\+::\+Parser\+::call (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{environment }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_parser_ab93a9cf87d67e68d01a36de362fad4d3}\label{classhdg_1_1_parser_ab93a9cf87d67e68d01a36de362fad4d3} 
+\index{hdg::Parser@{hdg::Parser}!compExpr@{compExpr}}
+\index{compExpr@{compExpr}!hdg::Parser@{hdg::Parser}}
+\doxysubsubsection{\texorpdfstring{compExpr()}{compExpr()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} hdg\+::\+Parser\+::comp\+Expr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{environment }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_parser_afc0f7bcf6a1f4f6760834f936ca7e212}\label{classhdg_1_1_parser_afc0f7bcf6a1f4f6760834f936ca7e212} 
+\index{hdg::Parser@{hdg::Parser}!expr@{expr}}
+\index{expr@{expr}!hdg::Parser@{hdg::Parser}}
+\doxysubsubsection{\texorpdfstring{expr()}{expr()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} hdg\+::\+Parser\+::expr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{environment }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_parser_afb17f822eaee1e94e1828ff4c5e95593}\label{classhdg_1_1_parser_afb17f822eaee1e94e1828ff4c5e95593} 
+\index{hdg::Parser@{hdg::Parser}!factor@{factor}}
+\index{factor@{factor}!hdg::Parser@{hdg::Parser}}
+\doxysubsubsection{\texorpdfstring{factor()}{factor()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} hdg\+::\+Parser\+::factor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{environment }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_parser_a5c0ea96bbf7611f639a8d1622c4a5ad7}\label{classhdg_1_1_parser_a5c0ea96bbf7611f639a8d1622c4a5ad7} 
+\index{hdg::Parser@{hdg::Parser}!forExpr@{forExpr}}
+\index{forExpr@{forExpr}!hdg::Parser@{hdg::Parser}}
+\doxysubsubsection{\texorpdfstring{forExpr()}{forExpr()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} hdg\+::\+Parser\+::for\+Expr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{environment }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_parser_a5b729429909bcd14dfabe8ad5e05e9b7}\label{classhdg_1_1_parser_a5b729429909bcd14dfabe8ad5e05e9b7} 
+\index{hdg::Parser@{hdg::Parser}!funcExpr@{funcExpr}}
+\index{funcExpr@{funcExpr}!hdg::Parser@{hdg::Parser}}
+\doxysubsubsection{\texorpdfstring{funcExpr()}{funcExpr()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} hdg\+::\+Parser\+::func\+Expr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_environment}{hdg\+::\+Environment}} \texorpdfstring{$\ast$}{*}}]{environment }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_parser_a146a4639ad683a33be86306ad328e0b0}\label{classhdg_1_1_parser_a146a4639ad683a33be86306ad328e0b0} 
+\index{hdg::Parser@{hdg::Parser}!ifExpr@{ifExpr}}
+\index{ifExpr@{ifExpr}!hdg::Parser@{hdg::Parser}}
+\doxysubsubsection{\texorpdfstring{ifExpr()}{ifExpr()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} hdg\+::\+Parser\+::if\+Expr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{environment }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_parser_a05b4ee984cd4252a37a1281da603f0b3}\label{classhdg_1_1_parser_a05b4ee984cd4252a37a1281da603f0b3} 
+\index{hdg::Parser@{hdg::Parser}!power@{power}}
+\index{power@{power}!hdg::Parser@{hdg::Parser}}
+\doxysubsubsection{\texorpdfstring{power()}{power()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} hdg\+::\+Parser\+::power (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{environment }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_parser_adba95661514dcb6857af7854e067d8d0}\label{classhdg_1_1_parser_adba95661514dcb6857af7854e067d8d0} 
+\index{hdg::Parser@{hdg::Parser}!retreat@{retreat}}
+\index{retreat@{retreat}!hdg::Parser@{hdg::Parser}}
+\doxysubsubsection{\texorpdfstring{retreat()}{retreat()}}
+{\footnotesize\ttfamily void hdg\+::\+Parser\+::retreat (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_parser_a57b94cf3562d8835e44deb29b751f114}\label{classhdg_1_1_parser_a57b94cf3562d8835e44deb29b751f114} 
+\index{hdg::Parser@{hdg::Parser}!run@{run}}
+\index{run@{run}!hdg::Parser@{hdg::Parser}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} hdg\+::\+Parser\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_parser_a5ba2f44e3e39a0138cf138bf0cdfc5af}\label{classhdg_1_1_parser_a5ba2f44e3e39a0138cf138bf0cdfc5af} 
+\index{hdg::Parser@{hdg::Parser}!statements@{statements}}
+\index{statements@{statements}!hdg::Parser@{hdg::Parser}}
+\doxysubsubsection{\texorpdfstring{statements()}{statements()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} hdg\+::\+Parser\+::statements (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{environment }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_parser_a33194976ff64b5e5bddb7b2672937453}\label{classhdg_1_1_parser_a33194976ff64b5e5bddb7b2672937453} 
+\index{hdg::Parser@{hdg::Parser}!term@{term}}
+\index{term@{term}!hdg::Parser@{hdg::Parser}}
+\doxysubsubsection{\texorpdfstring{term()}{term()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} hdg\+::\+Parser\+::term (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{environment }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_parser_a15fca1e4ffaedbbaa07720780435f0d8}\label{classhdg_1_1_parser_a15fca1e4ffaedbbaa07720780435f0d8} 
+\index{hdg::Parser@{hdg::Parser}!unaryOperator@{unaryOperator}}
+\index{unaryOperator@{unaryOperator}!hdg::Parser@{hdg::Parser}}
+\doxysubsubsection{\texorpdfstring{unaryOperator()}{unaryOperator()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} hdg\+::\+Parser\+::unary\+Operator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{environment,  }\item[{const std\+::set$<$ \mbox{\hyperlink{classhdg_1_1_token}{Token}}, std\+::less$<$$>$ $>$ \&}]{opers,  }\item[{std\+::function$<$ \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}(\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}envir)$>$}]{fun }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_parser_a2a502b8aff422d902e624112cf7af14a}\label{classhdg_1_1_parser_a2a502b8aff422d902e624112cf7af14a} 
+\index{hdg::Parser@{hdg::Parser}!whileExpr@{whileExpr}}
+\index{whileExpr@{whileExpr}!hdg::Parser@{hdg::Parser}}
+\doxysubsubsection{\texorpdfstring{whileExpr()}{whileExpr()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} hdg\+::\+Parser\+::while\+Expr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{environment }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classhdg_1_1_parser_a945cac49140200d3a36c535e6db1078f}\label{classhdg_1_1_parser_a945cac49140200d3a36c535e6db1078f} 
+\index{hdg::Parser@{hdg::Parser}!m\_currentToken@{m\_currentToken}}
+\index{m\_currentToken@{m\_currentToken}!hdg::Parser@{hdg::Parser}}
+\doxysubsubsection{\texorpdfstring{m\_currentToken}{m\_currentToken}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classhdg_1_1_token}{Token}}$>$\+::iterator hdg\+::\+Parser\+::m\+\_\+current\+Token\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_parser_a786cc9c67414d221d8e5864f0d823eeb}\label{classhdg_1_1_parser_a786cc9c67414d221d8e5864f0d823eeb} 
+\index{hdg::Parser@{hdg::Parser}!m\_environment@{m\_environment}}
+\index{m\_environment@{m\_environment}!hdg::Parser@{hdg::Parser}}
+\doxysubsubsection{\texorpdfstring{m\_environment}{m\_environment}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}\texorpdfstring{$\ast$}{*} hdg\+::\+Parser\+::m\+\_\+environment\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_parser_a4c43d79ce50bc774eb0cbaebf60d81c0}\label{classhdg_1_1_parser_a4c43d79ce50bc774eb0cbaebf60d81c0} 
+\index{hdg::Parser@{hdg::Parser}!m\_tokens@{m\_tokens}}
+\index{m\_tokens@{m\_tokens}!hdg::Parser@{hdg::Parser}}
+\doxysubsubsection{\texorpdfstring{m\_tokens}{m\_tokens}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classhdg_1_1_token}{Token}}$>$ hdg\+::\+Parser\+::m\+\_\+tokens\hspace{0.3cm}{\ttfamily [protected]}}
+

@@ -1,0 +1,47 @@
+\doxysection{Binary\+Operator\+Node.\+h}
+\hypertarget{_binary_operator_node_8h_source}{}\label{_binary_operator_node_8h_source}\index{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/node/BinaryOperatorNode.h@{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/node/BinaryOperatorNode.h}}
+\mbox{\hyperlink{_binary_operator_node_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ Magnesium\ on\ 2023/7/19.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ HDG\_BINARYOPERATORNODE\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ HDG\_BINARYOPERATORNODE\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_node_8h}{Node.h}}"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}../basic/Token.h"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}../error/RuntimeError.h"{}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacehdg}{hdg}}\ \{}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhdg_1_1_binary_operator_node}{BinaryOperatorNode}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classhdg_1_1_node}{Node}}\{}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_token}{Token}}\ \mbox{\hyperlink{classhdg_1_1_binary_operator_node_aa4da2a7f71ecd4ec3e4f1c100913dd06}{m\_oper}};}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_binary_operator_node_ad167b612ec3826ea7f427d292c964d84}{m\_left}};}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_binary_operator_node_aa398c75d56e88709d3676e543a1e8fd7}{m\_right}};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_binary_operator_node}{BinaryOperatorNode}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_token}{Token}}\&\ oper,\ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ left,\ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ right,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\&\ position);}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_binary_operator_node}{BinaryOperatorNode}}(\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{TokenType}}\ oper,\ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ left,\ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ right,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\&\ position,\ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ environment);}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_binary_operator_node_a065f5132f44e39c83b6bd3573226d860}{\string~BinaryOperatorNode}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_binary_operator_node_aa16373f83ede33e00c0cbf3a700e1d53}{setOperator}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_token}{Token}}\&\ oper);}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_binary_operator_node_aa029cc40680c53a1fa50c0f60dc17777}{setLeft}}(\mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ node);}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_binary_operator_node_a3e411afcd59329b887e59ce3388e969e}{setRight}}(\mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ node);}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_token}{Token}}\ \mbox{\hyperlink{classhdg_1_1_binary_operator_node_ac907f50606627e5136dcc3a24a1a47e5}{getOperator}}();}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_binary_operator_node_afca5a93b364fe52561a2f2d9be0cd816}{getLeft}}();}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_node}{Node}}*\ \mbox{\hyperlink{classhdg_1_1_binary_operator_node_ae9ffc269a7611c8bb43305650b605288}{getRight}}();}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_binary_operator_node_a22b32eec1a1314998db3eb41b120dabc}{toString}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_object}{Object}}*\ \mbox{\hyperlink{classhdg_1_1_binary_operator_node_a30385aa8d2c3e70f65ba51bf8e727313}{interpret}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00037\ \ \ \ \ \};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \}\ \textcolor{comment}{//\ hdg}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//HDG\_BINARYOPERATORNODE\_H}}
+
+\end{DoxyCode}

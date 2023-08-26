@@ -25,6 +25,9 @@ namespace hdg {
 
     Token::~Token() = default;
 
+    /**
+     * @note cpp里的注释。
+     * */
     bool Token::match(TokenType type, const std::string &value) {
         if (type == m_type && value == m_value) return true;
         else return false;

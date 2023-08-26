@@ -1,0 +1,121 @@
+\doxysection{Token.\+h}
+\hypertarget{_token_8h_source}{}\label{_token_8h_source}\index{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/basic/Token.h@{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/basic/Token.h}}
+\mbox{\hyperlink{_token_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ Magnesium\ on\ 2023/7/11.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ HDG\_TOKEN\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ HDG\_TOKEN\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_position_8h}{Position.h}}"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacehdg}{hdg}}\ \{}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{TokenType}}\{}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a3bb15b754d10301685de058edb411eb5}{INT}},}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1afed4e51ce8166d18edaa557d3e3b2cf3}{FLOAT}},\ \ \ \ \ \ }
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a71dbcdc850c86155c2b5a10cede6296c}{STRING}},}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1acf758f4a0dc2c7930fa4c25ee287f284}{IDENTIFIER}},}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a469290ac8057965cb09f417ffcb25fdf}{KEYWORD}},}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a2bba9b04bae1093fc3a1fd7944088098}{NE}},\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a0f02e5897efcf89658f2cefbe49403d5}{EE}},\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1aa37acecc8adf3914aae1f76be575be30}{GT}},}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1af6d61be133399868842fa63e5f63e59c}{LT}},}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a3ae526c3c7886406b2c148f7975515f5}{GTE}},}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1abdf3fb0c4cdca2f5717e98f99b45c275}{LTE}},}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1ae25ad36b00adcc504421711f41c9f0d5}{PLUS}},}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a0eafa5dcbea7160e3938c480a3f950b1}{MINUS}},}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a3808b6e6c5e26a4a30bb2d579e133ca2}{MUL}},}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a39d7f16bc7eb038d92645a7f28e005fd}{DIV}},}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1abcdf63e0e0f752004d3c48ac70dcaf24}{POW}},}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1aa6839d4813849cadf29f6f9fe78ef19f}{LPAREN}},\ \ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1ae8606dd1fe0314be15838fcdb3f47906}{RPAREN}},}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a7facc0fd54100d735ed52038ad5aa463}{LBRACKET}},\ \ \ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a08fb6cb2c5ccca7226e1f772ce770a6d}{RBRACKET}},}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a2665145bf9f07023b5fc66cb499f2b9c}{LBRACE}},\ \ \ \ \ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a6c2885e29931f86583323170cea9e07a}{RBRACE}},}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1af097e51643530479147a49763b06fc37}{EQ}},\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1aff8fa14b18888d5777c2c8cb59df6a9c}{COLON}},}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1afd5bad3f86efe1b1ab8a2e6201eccba9}{COMMA}},}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a39aef76943593ee964dc01ad87e77978}{EF}},}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a328cd568e5f70f8cf5df06c3f2f2503a}{EL}},\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ end\ of\ line\ 有两种表达字符：“;”\ and\ “\(\backslash\)n”}}
+\DoxyCodeLine{00049\ \ \ \ \ \};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{static}\ std::map<TokenType,\ std::string>\ \mbox{\hyperlink{namespacehdg_abceca39548a4a6a54198ec993570ebdc}{tokenTypeName}}\ =\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a3bb15b754d10301685de058edb411eb5}{INT}},\ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}INT"{}}\},}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1afed4e51ce8166d18edaa557d3e3b2cf3}{FLOAT}},\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}FLOAT"{}}\},}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a71dbcdc850c86155c2b5a10cede6296c}{STRING}},\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}STRING"{}}\},}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1acf758f4a0dc2c7930fa4c25ee287f284}{IDENTIFIER}},\ \ \ \ \textcolor{stringliteral}{"{}IDENTIFIER"{}}\},}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a469290ac8057965cb09f417ffcb25fdf}{KEYWORD}},\ \ \ \ \ \ \ \textcolor{stringliteral}{"{}KEYWORD"{}}\},}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a0f02e5897efcf89658f2cefbe49403d5}{EE}},\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}EE"{}}\},}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1aa37acecc8adf3914aae1f76be575be30}{GT}},\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}GT"{}}\},}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1af6d61be133399868842fa63e5f63e59c}{LT}},\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}LT"{}}\},}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a3ae526c3c7886406b2c148f7975515f5}{GTE}},\ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}GTE"{}}\},}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1abdf3fb0c4cdca2f5717e98f99b45c275}{LTE}},\ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}LTE"{}}\},}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1ae25ad36b00adcc504421711f41c9f0d5}{PLUS}},\ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}PLUS"{}}\},}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a0eafa5dcbea7160e3938c480a3f950b1}{MINUS}},\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}MINUS"{}}\},}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a3808b6e6c5e26a4a30bb2d579e133ca2}{MUL}},\ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}MUL"{}}\},}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a39d7f16bc7eb038d92645a7f28e005fd}{DIV}},\ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}DIV"{}}\},}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1abcdf63e0e0f752004d3c48ac70dcaf24}{POW}},\ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}POW"{}}\},}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1aa6839d4813849cadf29f6f9fe78ef19f}{LPAREN}},\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}LPAREN"{}}\},}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1ae8606dd1fe0314be15838fcdb3f47906}{RPAREN}},\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}RPAREN"{}}\},}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a7facc0fd54100d735ed52038ad5aa463}{LBRACKET}},\ \ \ \ \ \ \textcolor{stringliteral}{"{}LBRACKET"{}}\},}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a08fb6cb2c5ccca7226e1f772ce770a6d}{RBRACKET}},\ \ \ \ \ \ \textcolor{stringliteral}{"{}RBRACKET"{}}\},}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a2665145bf9f07023b5fc66cb499f2b9c}{LBRACE}},\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}LBRACE"{}}\},}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a6c2885e29931f86583323170cea9e07a}{RBRACE}},\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}RBRACE"{}}\},}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1af097e51643530479147a49763b06fc37}{EQ}},\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}EQ"{}}\},}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1aff8fa14b18888d5777c2c8cb59df6a9c}{COLON}},\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}COLON"{}}\},}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1afd5bad3f86efe1b1ab8a2e6201eccba9}{COMMA}},\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}COMMA"{}}\},}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a39aef76943593ee964dc01ad87e77978}{EF}},\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}EF"{}}\},\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a328cd568e5f70f8cf5df06c3f2f2503a}{EL}},\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}EL"{}}\},\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00085\ \ \ \ \ \};}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhdg_1_1_token}{Token}}\ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{TokenType}}\ \mbox{\hyperlink{classhdg_1_1_token_a1cc6d72722b609e2a95bf30fc0061d14}{m\_type}};}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_token_afd73b684ca24c056d8e4d05bef957819}{m\_value}};}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\ \mbox{\hyperlink{classhdg_1_1_token_aa03977c3dac907b6cdd2e096d36ae56a}{m\_position}};}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_token_a0771e279721224109aefeb8d33d22e57}{Token}}();}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_token_a0771e279721224109aefeb8d33d22e57}{Token}}(\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{TokenType}}\ type,\ std::string\ value,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\&\ position);}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_token_a0771e279721224109aefeb8d33d22e57}{Token}}(\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{TokenType}}\ type,\ std::string\ value);}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_token_a0771e279721224109aefeb8d33d22e57}{Token}}(\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{TokenType}}\ type);}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_token_a0771e279721224109aefeb8d33d22e57}{Token}}(\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{TokenType}}\ type,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\&\ position);}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_token_a35f2f8619dd8d06281e96f6f6a3fce54}{Token}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_token}{Token}}\&\ tok);}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_token_a18f1c6c2d8d1f7ef500f09158f4841c3}{\string~Token}}();}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classhdg_1_1_token_aa147fa4c8ac7257266a7f58fa83b0b51}{match}}(\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{TokenType}}\ type,\ \textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_token_a6df27fe12a77630a612d7fa002a55e45}{setType}}(\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{TokenType}}\ type);}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_token_abb2ec86095e3edaa799da04f425eb347}{setValue}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{TokenType}}\ \mbox{\hyperlink{classhdg_1_1_token_a577428babf5ca707de3e0eed6ae8a7a7}{getType}}();}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_token_af84eb7139c648270e948f44f2dfa7acc}{getValue}}();}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_position}{Position}}*\ \mbox{\hyperlink{classhdg_1_1_token_ab3c9848df72dec4501c15c3a19be4d7a}{thisPosition}}();}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_token_aa72f3cbee5d99b50e40d436865648413}{toString}}();}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\&\ \mbox{\hyperlink{classhdg_1_1_token_a2d0da97c0aedb7bf73e2a4385dc33464}{operator<<}}(std::ostream\&\ out,\ \mbox{\hyperlink{classhdg_1_1_token}{Token}}\&\ tok);}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classhdg_1_1_token_a30dfa1a5ffd48d30ce994dfd7c858c39}{operator<}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_token}{Token}}\&\ a,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_token}{Token}}\&\ b);}
+\DoxyCodeLine{00119\ \ \ \ \ \};}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespacehdg_a698613a83b8594ea9e40f344c7b93ea3}{operator<}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_token}{Token}}\&\ left,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_token}{Token}}\&\ right);}
+\DoxyCodeLine{00122\ \}\ \textcolor{comment}{//\ hdg}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//HDG\_TOKEN\_H}}
+
+\end{DoxyCode}

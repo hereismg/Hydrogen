@@ -1,0 +1,133 @@
+\doxysection{hdg\+::Str\+Obj\+Node Class Reference}
+\hypertarget{classhdg_1_1_str_obj_node}{}\label{classhdg_1_1_str_obj_node}\index{hdg::StrObjNode@{hdg::StrObjNode}}
+
+
+{\ttfamily \#include $<$Str\+Obj\+Node.\+h$>$}
+
+Inheritance diagram for hdg\+::Str\+Obj\+Node\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classhdg_1_1_str_obj_node}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_str_obj_node_a86aac77a9e0c95a1dfd1be70193a8e58}{Str\+Obj\+Node}} ()
+\item 
+\mbox{\hyperlink{classhdg_1_1_str_obj_node_a123e4696629cc39e2a2a2738d3e222e2}{Str\+Obj\+Node}} (std\+::string value, const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position, \mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+\mbox{\hyperlink{classhdg_1_1_str_obj_node_a070ab2946c5e51628b061372ea1b1a93}{\texorpdfstring{$\sim$}{\string~}\+Str\+Obj\+Node}} () override
+\item 
+void \mbox{\hyperlink{classhdg_1_1_str_obj_node_adbc991e20a98f84e6e4d43d91954560e}{set\+Value}} (const std\+::string \&value)
+\item 
+std\+::string \mbox{\hyperlink{classhdg_1_1_str_obj_node_a926715ded7ab12c29c3195a282e86e3c}{to\+String}} () override
+\item 
+\mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_str_obj_node_a704f6672eec24f37bf033db95bf550f7}{interpret}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classhdg_1_1_object_node}{hdg\+::\+Object\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_object_node_a91d2b110978f1ae909073a707725c815}{Object\+Node}} ()
+\item 
+\mbox{\hyperlink{classhdg_1_1_object_node_a650634e62d6f19eb3b3cc0047e6615bd}{Object\+Node}} (std\+::string class\+Name, const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position, \mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+\mbox{\hyperlink{classhdg_1_1_object_node_ac1fea0f4fc88bb255658a1d0b78a510f}{Object\+Node}} (const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position, \mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+\mbox{\hyperlink{classhdg_1_1_object_node_a1e496f6a230e1969cda82fc0cdb9d8b6}{\texorpdfstring{$\sim$}{\string~}\+Object\+Node}} () override
+\item 
+void \mbox{\hyperlink{classhdg_1_1_object_node_a022d4b83cbf31de500b423573987284e}{set\+Class}} (const std\+::string \&class\+Name)
+\item 
+std\+::string \mbox{\hyperlink{classhdg_1_1_object_node_a35ed11b2a5c8744a36e396c0245ba769}{get\+Class}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classhdg_1_1_node}{hdg\+::\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_node_a50473c6b50f3a6c8e8ebb7327617dfce}{Node}} ()
+\item 
+\mbox{\hyperlink{classhdg_1_1_node_a629d0b488519d193e4c9e10614741187}{Node}} (const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position)
+\item 
+\mbox{\hyperlink{classhdg_1_1_node_a63a9e032a412b58ad3854deba6e80f91}{Node}} (const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position, \mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+virtual \mbox{\hyperlink{classhdg_1_1_node_a7addc8f6e57fbb3d68b8b7d38fd2c145}{\texorpdfstring{$\sim$}{\string~}\+Node}} ()=0
+\item 
+\mbox{\hyperlink{classhdg_1_1_position}{Position}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_node_a3738a37f34e5beca7503dd80fdc06fa8}{this\+Position}} ()
+\item 
+\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_node_a7f6017e27a8abc2cf574c4c57268e028}{this\+Environment}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classhdg_1_1_str_obj_node_ac60dee0989f4852ff2932540301795b1}{m\+\_\+value}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classhdg_1_1_object_node}{hdg\+::\+Object\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classhdg_1_1_object_node_a43f1f9454decd1c29ac65f259c5a88fa}{m\+\_\+class}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classhdg_1_1_node}{hdg\+::\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_position}{Position}} \mbox{\hyperlink{classhdg_1_1_node_a56dc5bce438d6f5aa3e4840ec04c5c4e}{m\+\_\+position}}
+\item 
+\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_node_a0d8af69474640d8876614cea25219720}{m\+\_\+environment}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classhdg_1_1_str_obj_node_a86aac77a9e0c95a1dfd1be70193a8e58}\label{classhdg_1_1_str_obj_node_a86aac77a9e0c95a1dfd1be70193a8e58} 
+\index{hdg::StrObjNode@{hdg::StrObjNode}!StrObjNode@{StrObjNode}}
+\index{StrObjNode@{StrObjNode}!hdg::StrObjNode@{hdg::StrObjNode}}
+\doxysubsubsection{\texorpdfstring{StrObjNode()}{StrObjNode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily hdg\+::\+Str\+Obj\+Node\+::\+Str\+Obj\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_str_obj_node_a123e4696629cc39e2a2a2738d3e222e2}\label{classhdg_1_1_str_obj_node_a123e4696629cc39e2a2a2738d3e222e2} 
+\index{hdg::StrObjNode@{hdg::StrObjNode}!StrObjNode@{StrObjNode}}
+\index{StrObjNode@{StrObjNode}!hdg::StrObjNode@{hdg::StrObjNode}}
+\doxysubsubsection{\texorpdfstring{StrObjNode()}{StrObjNode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily hdg\+::\+Str\+Obj\+Node\+::\+Str\+Obj\+Node (\begin{DoxyParamCaption}\item[{std\+::string}]{value,  }\item[{const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&}]{position,  }\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{environment }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_str_obj_node_a070ab2946c5e51628b061372ea1b1a93}\label{classhdg_1_1_str_obj_node_a070ab2946c5e51628b061372ea1b1a93} 
+\index{hdg::StrObjNode@{hdg::StrObjNode}!````~StrObjNode@{\texorpdfstring{$\sim$}{\string~}StrObjNode}}
+\index{````~StrObjNode@{\texorpdfstring{$\sim$}{\string~}StrObjNode}!hdg::StrObjNode@{hdg::StrObjNode}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}StrObjNode()}{\string~StrObjNode()}}
+{\footnotesize\ttfamily hdg\+::\+Str\+Obj\+Node\+::\texorpdfstring{$\sim$}{\string~}\+Str\+Obj\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classhdg_1_1_str_obj_node_a704f6672eec24f37bf033db95bf550f7}\label{classhdg_1_1_str_obj_node_a704f6672eec24f37bf033db95bf550f7} 
+\index{hdg::StrObjNode@{hdg::StrObjNode}!interpret@{interpret}}
+\index{interpret@{interpret}!hdg::StrObjNode@{hdg::StrObjNode}}
+\doxysubsubsection{\texorpdfstring{interpret()}{interpret()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*} hdg\+::\+Str\+Obj\+Node\+::interpret (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhdg_1_1_object_node_acb95342eb930bd6eb8aa4cb25a67cc39}{hdg\+::\+Object\+Node}}.
+
+\Hypertarget{classhdg_1_1_str_obj_node_adbc991e20a98f84e6e4d43d91954560e}\label{classhdg_1_1_str_obj_node_adbc991e20a98f84e6e4d43d91954560e} 
+\index{hdg::StrObjNode@{hdg::StrObjNode}!setValue@{setValue}}
+\index{setValue@{setValue}!hdg::StrObjNode@{hdg::StrObjNode}}
+\doxysubsubsection{\texorpdfstring{setValue()}{setValue()}}
+{\footnotesize\ttfamily void hdg\+::\+Str\+Obj\+Node\+::set\+Value (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_str_obj_node_a926715ded7ab12c29c3195a282e86e3c}\label{classhdg_1_1_str_obj_node_a926715ded7ab12c29c3195a282e86e3c} 
+\index{hdg::StrObjNode@{hdg::StrObjNode}!toString@{toString}}
+\index{toString@{toString}!hdg::StrObjNode@{hdg::StrObjNode}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily std\+::string hdg\+::\+Str\+Obj\+Node\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhdg_1_1_object_node_a78a525155a7a49c6d1a3e7bb87bbece8}{hdg\+::\+Object\+Node}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classhdg_1_1_str_obj_node_ac60dee0989f4852ff2932540301795b1}\label{classhdg_1_1_str_obj_node_ac60dee0989f4852ff2932540301795b1} 
+\index{hdg::StrObjNode@{hdg::StrObjNode}!m\_value@{m\_value}}
+\index{m\_value@{m\_value}!hdg::StrObjNode@{hdg::StrObjNode}}
+\doxysubsubsection{\texorpdfstring{m\_value}{m\_value}}
+{\footnotesize\ttfamily std\+::string hdg\+::\+Str\+Obj\+Node\+::m\+\_\+value\hspace{0.3cm}{\ttfamily [protected]}}
+

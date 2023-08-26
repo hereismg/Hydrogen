@@ -1,0 +1,54 @@
+\doxysection{Position.\+h}
+\hypertarget{_position_8h_source}{}\label{_position_8h_source}\index{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/basic/Position.h@{D:/HaaaaaalloMg/Workplace/Hydrogen/hdg/include/basic/Position.h}}
+\mbox{\hyperlink{_position_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ Magnesium\ on\ 2023/7/25.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ HDG\_POSITION\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ HDG\_POSITION\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacehdg}{hdg}}\ \{}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}}\{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{structhdg_1_1_indicator_abd157c4dc38004ffa5fede0a8f9b00cf}{index}};}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{structhdg_1_1_indicator_ab0bb602185e8cca3e38bf7e1c9eb3ed2}{line}};}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{structhdg_1_1_indicator_aa80926f8efb3707440566e9b96c45b7d}{col}};}
+\DoxyCodeLine{00017\ \ \ \ \ \};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhdg_1_1_position}{Position}}\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_position_a409544c8095591d28eb1a11114cfb19c}{m\_fPath}};}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ std::string*\ \mbox{\hyperlink{classhdg_1_1_position_a20e419647fdd2d02581d0e82b8dcc3b2}{m\_context}};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}}\ \mbox{\hyperlink{classhdg_1_1_position_a50161a408f24eaea385b1e05433330e1}{m\_start}}\{\};}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}}\ \mbox{\hyperlink{classhdg_1_1_position_a274815ba01ed73c208f52f914940d3d7}{m\_end}}\{\};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_position_a1b3c420aed24eeec77d23d3c65b940ee}{Position}}();}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_position_a1b3c420aed24eeec77d23d3c65b940ee}{Position}}(std::string\ fPath,\ std::string*\ context,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}}\&\ start,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}}\&\ end);}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_position_a1b3c420aed24eeec77d23d3c65b940ee}{Position}}(std::string\ fPath,\ std::string*\ context,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}}\&\ start);}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_position_a1b3c420aed24eeec77d23d3c65b940ee}{Position}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\&\ position);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_position_ae710cd51308cafbfbb782cd0ae7e54dc}{setStart}}(\textcolor{keywordtype}{int}\ index,\ \textcolor{keywordtype}{int}\ line,\ \textcolor{keywordtype}{int}\ col);}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_position_ae710cd51308cafbfbb782cd0ae7e54dc}{setStart}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}}\&\ indicator);}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_position_a96681f4ec1aa2e01e916cefc1167c233}{setEnd}}(\textcolor{keywordtype}{int}\ index,\ \textcolor{keywordtype}{int}\ line,\ \textcolor{keywordtype}{int}\ col);}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_position_a96681f4ec1aa2e01e916cefc1167c233}{setEnd}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}}\&\ indicator);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}}\ \mbox{\hyperlink{classhdg_1_1_position_a818932f3e9c549f11468243474c52162}{getStart}}();}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}}\ \mbox{\hyperlink{classhdg_1_1_position_ab04cf1654d431afadd88a4d62a86afa4}{getEnd}}();}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_position_a0013b684aec0e841a8d94d58e073a37b}{getFilePath}}();}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ std::string*\ \mbox{\hyperlink{classhdg_1_1_position_a5c12a1e22c8919b6de2363439c76185b}{thisContext}}();}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_position_acf354a16622580358e7808ffc9bd4c14}{arrow}}();}
+\DoxyCodeLine{00044\ \ \ \ \ \};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \}\ \textcolor{comment}{//\ hdg}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//HDG\_POSITION\_H}}
+
+\end{DoxyCode}

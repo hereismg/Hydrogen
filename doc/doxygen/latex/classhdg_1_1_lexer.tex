@@ -1,0 +1,160 @@
+\doxysection{hdg\+::Lexer Class Reference}
+\hypertarget{classhdg_1_1_lexer}{}\label{classhdg_1_1_lexer}\index{hdg::Lexer@{hdg::Lexer}}
+
+
+{\ttfamily \#include $<$Lexer.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_lexer_aca09ce9f50611aa4787f25c89cce9792}{Lexer}} (std\+::string f\+Path, std\+::string \texorpdfstring{$\ast$}{*}code)
+\item 
+std\+::string \mbox{\hyperlink{classhdg_1_1_lexer_aa8b884c1316540174f59cdf366335a59}{get\+File\+Path}} ()
+\item 
+std\+::string \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_lexer_adc85f6dd72b21bbb96df3f220c7a7e35}{this\+Text}} ()
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_token}{Token}} $>$ \& \mbox{\hyperlink{classhdg_1_1_lexer_ab33f5a4bcfe32f9205cc9b290de30b8e}{get\+Tokens}} ()
+\item 
+void \mbox{\hyperlink{classhdg_1_1_lexer_aab5da4f388e6eee605ebe1c04fb4b25c}{run}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classhdg_1_1_lexer_ab30b9df4245b8ad2dcab9c6e6b11a813}{advance}} ()
+\item 
+void \mbox{\hyperlink{classhdg_1_1_lexer_a5bad5dc9d686d8efa93b5915085c9e26}{build\+Number}} ()
+\item 
+void \mbox{\hyperlink{classhdg_1_1_lexer_ae0a668786b1ebdf91980f608208f2608}{build\+Greater\+Than}} ()
+\item 
+void \mbox{\hyperlink{classhdg_1_1_lexer_acc80b0f108be35f777d7dd9f7eed0953}{build\+Less\+Than}} ()
+\item 
+void \mbox{\hyperlink{classhdg_1_1_lexer_ab2616658d58cbe15d7de9c74b91ebe39}{build\+Equation}} ()
+\item 
+void \mbox{\hyperlink{classhdg_1_1_lexer_aca0ede41d2d2589f17070975788df66f}{build\+Identifier}} ()
+\item 
+void \mbox{\hyperlink{classhdg_1_1_lexer_ae8b953e28dc0a316270a9675b0750c5b}{build\+String}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classhdg_1_1_lexer_a4e36502619b5c301cd775710c2b16b00}{m\+\_\+f\+Path}}
+\item 
+std\+::string \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_lexer_a1429d500fa702f16145e81db1f22706c}{m\+\_\+code}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_token}{Token}} $>$ \mbox{\hyperlink{classhdg_1_1_lexer_a25fb252caec72fc69c39a67a1d166bca}{m\+\_\+tokens}}
+\item 
+char \mbox{\hyperlink{classhdg_1_1_lexer_a4f62639338851a38f79c3121b52bdf70}{m\+\_\+current\+Char}}
+\item 
+\mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}} \mbox{\hyperlink{classhdg_1_1_lexer_a083a7b690b5994d747e888095d68daae}{m\+\_\+pos}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classhdg_1_1_lexer_aca09ce9f50611aa4787f25c89cce9792}\label{classhdg_1_1_lexer_aca09ce9f50611aa4787f25c89cce9792} 
+\index{hdg::Lexer@{hdg::Lexer}!Lexer@{Lexer}}
+\index{Lexer@{Lexer}!hdg::Lexer@{hdg::Lexer}}
+\doxysubsubsection{\texorpdfstring{Lexer()}{Lexer()}}
+{\footnotesize\ttfamily hdg\+::\+Lexer\+::\+Lexer (\begin{DoxyParamCaption}\item[{std\+::string}]{f\+Path,  }\item[{std\+::string \texorpdfstring{$\ast$}{*}}]{code }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classhdg_1_1_lexer_ab30b9df4245b8ad2dcab9c6e6b11a813}\label{classhdg_1_1_lexer_ab30b9df4245b8ad2dcab9c6e6b11a813} 
+\index{hdg::Lexer@{hdg::Lexer}!advance@{advance}}
+\index{advance@{advance}!hdg::Lexer@{hdg::Lexer}}
+\doxysubsubsection{\texorpdfstring{advance()}{advance()}}
+{\footnotesize\ttfamily void hdg\+::\+Lexer\+::advance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_lexer_ab2616658d58cbe15d7de9c74b91ebe39}\label{classhdg_1_1_lexer_ab2616658d58cbe15d7de9c74b91ebe39} 
+\index{hdg::Lexer@{hdg::Lexer}!buildEquation@{buildEquation}}
+\index{buildEquation@{buildEquation}!hdg::Lexer@{hdg::Lexer}}
+\doxysubsubsection{\texorpdfstring{buildEquation()}{buildEquation()}}
+{\footnotesize\ttfamily void hdg\+::\+Lexer\+::build\+Equation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_lexer_ae0a668786b1ebdf91980f608208f2608}\label{classhdg_1_1_lexer_ae0a668786b1ebdf91980f608208f2608} 
+\index{hdg::Lexer@{hdg::Lexer}!buildGreaterThan@{buildGreaterThan}}
+\index{buildGreaterThan@{buildGreaterThan}!hdg::Lexer@{hdg::Lexer}}
+\doxysubsubsection{\texorpdfstring{buildGreaterThan()}{buildGreaterThan()}}
+{\footnotesize\ttfamily void hdg\+::\+Lexer\+::build\+Greater\+Than (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_lexer_aca0ede41d2d2589f17070975788df66f}\label{classhdg_1_1_lexer_aca0ede41d2d2589f17070975788df66f} 
+\index{hdg::Lexer@{hdg::Lexer}!buildIdentifier@{buildIdentifier}}
+\index{buildIdentifier@{buildIdentifier}!hdg::Lexer@{hdg::Lexer}}
+\doxysubsubsection{\texorpdfstring{buildIdentifier()}{buildIdentifier()}}
+{\footnotesize\ttfamily void hdg\+::\+Lexer\+::build\+Identifier (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_lexer_acc80b0f108be35f777d7dd9f7eed0953}\label{classhdg_1_1_lexer_acc80b0f108be35f777d7dd9f7eed0953} 
+\index{hdg::Lexer@{hdg::Lexer}!buildLessThan@{buildLessThan}}
+\index{buildLessThan@{buildLessThan}!hdg::Lexer@{hdg::Lexer}}
+\doxysubsubsection{\texorpdfstring{buildLessThan()}{buildLessThan()}}
+{\footnotesize\ttfamily void hdg\+::\+Lexer\+::build\+Less\+Than (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_lexer_a5bad5dc9d686d8efa93b5915085c9e26}\label{classhdg_1_1_lexer_a5bad5dc9d686d8efa93b5915085c9e26} 
+\index{hdg::Lexer@{hdg::Lexer}!buildNumber@{buildNumber}}
+\index{buildNumber@{buildNumber}!hdg::Lexer@{hdg::Lexer}}
+\doxysubsubsection{\texorpdfstring{buildNumber()}{buildNumber()}}
+{\footnotesize\ttfamily void hdg\+::\+Lexer\+::build\+Number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_lexer_ae8b953e28dc0a316270a9675b0750c5b}\label{classhdg_1_1_lexer_ae8b953e28dc0a316270a9675b0750c5b} 
+\index{hdg::Lexer@{hdg::Lexer}!buildString@{buildString}}
+\index{buildString@{buildString}!hdg::Lexer@{hdg::Lexer}}
+\doxysubsubsection{\texorpdfstring{buildString()}{buildString()}}
+{\footnotesize\ttfamily void hdg\+::\+Lexer\+::build\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_lexer_aa8b884c1316540174f59cdf366335a59}\label{classhdg_1_1_lexer_aa8b884c1316540174f59cdf366335a59} 
+\index{hdg::Lexer@{hdg::Lexer}!getFilePath@{getFilePath}}
+\index{getFilePath@{getFilePath}!hdg::Lexer@{hdg::Lexer}}
+\doxysubsubsection{\texorpdfstring{getFilePath()}{getFilePath()}}
+{\footnotesize\ttfamily std\+::string hdg\+::\+Lexer\+::get\+File\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_lexer_ab33f5a4bcfe32f9205cc9b290de30b8e}\label{classhdg_1_1_lexer_ab33f5a4bcfe32f9205cc9b290de30b8e} 
+\index{hdg::Lexer@{hdg::Lexer}!getTokens@{getTokens}}
+\index{getTokens@{getTokens}!hdg::Lexer@{hdg::Lexer}}
+\doxysubsubsection{\texorpdfstring{getTokens()}{getTokens()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_token}{Token}} $>$ \& hdg\+::\+Lexer\+::get\+Tokens (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_lexer_aab5da4f388e6eee605ebe1c04fb4b25c}\label{classhdg_1_1_lexer_aab5da4f388e6eee605ebe1c04fb4b25c} 
+\index{hdg::Lexer@{hdg::Lexer}!run@{run}}
+\index{run@{run}!hdg::Lexer@{hdg::Lexer}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void hdg\+::\+Lexer\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_lexer_adc85f6dd72b21bbb96df3f220c7a7e35}\label{classhdg_1_1_lexer_adc85f6dd72b21bbb96df3f220c7a7e35} 
+\index{hdg::Lexer@{hdg::Lexer}!thisText@{thisText}}
+\index{thisText@{thisText}!hdg::Lexer@{hdg::Lexer}}
+\doxysubsubsection{\texorpdfstring{thisText()}{thisText()}}
+{\footnotesize\ttfamily std\+::string \texorpdfstring{$\ast$}{*} hdg\+::\+Lexer\+::this\+Text (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classhdg_1_1_lexer_a1429d500fa702f16145e81db1f22706c}\label{classhdg_1_1_lexer_a1429d500fa702f16145e81db1f22706c} 
+\index{hdg::Lexer@{hdg::Lexer}!m\_code@{m\_code}}
+\index{m\_code@{m\_code}!hdg::Lexer@{hdg::Lexer}}
+\doxysubsubsection{\texorpdfstring{m\_code}{m\_code}}
+{\footnotesize\ttfamily std\+::string\texorpdfstring{$\ast$}{*} hdg\+::\+Lexer\+::m\+\_\+code\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_lexer_a4f62639338851a38f79c3121b52bdf70}\label{classhdg_1_1_lexer_a4f62639338851a38f79c3121b52bdf70} 
+\index{hdg::Lexer@{hdg::Lexer}!m\_currentChar@{m\_currentChar}}
+\index{m\_currentChar@{m\_currentChar}!hdg::Lexer@{hdg::Lexer}}
+\doxysubsubsection{\texorpdfstring{m\_currentChar}{m\_currentChar}}
+{\footnotesize\ttfamily char hdg\+::\+Lexer\+::m\+\_\+current\+Char\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_lexer_a4e36502619b5c301cd775710c2b16b00}\label{classhdg_1_1_lexer_a4e36502619b5c301cd775710c2b16b00} 
+\index{hdg::Lexer@{hdg::Lexer}!m\_fPath@{m\_fPath}}
+\index{m\_fPath@{m\_fPath}!hdg::Lexer@{hdg::Lexer}}
+\doxysubsubsection{\texorpdfstring{m\_fPath}{m\_fPath}}
+{\footnotesize\ttfamily std\+::string hdg\+::\+Lexer\+::m\+\_\+f\+Path\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_lexer_a083a7b690b5994d747e888095d68daae}\label{classhdg_1_1_lexer_a083a7b690b5994d747e888095d68daae} 
+\index{hdg::Lexer@{hdg::Lexer}!m\_pos@{m\_pos}}
+\index{m\_pos@{m\_pos}!hdg::Lexer@{hdg::Lexer}}
+\doxysubsubsection{\texorpdfstring{m\_pos}{m\_pos}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}} hdg\+::\+Lexer\+::m\+\_\+pos\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_lexer_a25fb252caec72fc69c39a67a1d166bca}\label{classhdg_1_1_lexer_a25fb252caec72fc69c39a67a1d166bca} 
+\index{hdg::Lexer@{hdg::Lexer}!m\_tokens@{m\_tokens}}
+\index{m\_tokens@{m\_tokens}!hdg::Lexer@{hdg::Lexer}}
+\doxysubsubsection{\texorpdfstring{m\_tokens}{m\_tokens}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classhdg_1_1_token}{Token}}$>$ hdg\+::\+Lexer\+::m\+\_\+tokens\hspace{0.3cm}{\ttfamily [protected]}}
+

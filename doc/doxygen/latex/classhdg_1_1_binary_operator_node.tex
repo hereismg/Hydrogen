@@ -1,0 +1,169 @@
+\doxysection{hdg\+::Binary\+Operator\+Node Class Reference}
+\hypertarget{classhdg_1_1_binary_operator_node}{}\label{classhdg_1_1_binary_operator_node}\index{hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}}
+
+
+{\ttfamily \#include $<$Binary\+Operator\+Node.\+h$>$}
+
+Inheritance diagram for hdg\+::Binary\+Operator\+Node\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classhdg_1_1_binary_operator_node}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_binary_operator_node_a0fde4d5b90f392e7000b8aca62e853ef}{Binary\+Operator\+Node}} (const \mbox{\hyperlink{classhdg_1_1_token}{Token}} \&oper, \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}left, \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}right, const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position)
+\item 
+\mbox{\hyperlink{classhdg_1_1_binary_operator_node_a6270da3b1c3acf0074d9c5525e00c177}{Binary\+Operator\+Node}} (\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} oper, \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}left, \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}right, const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position, \mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+\mbox{\hyperlink{classhdg_1_1_binary_operator_node_a065f5132f44e39c83b6bd3573226d860}{\texorpdfstring{$\sim$}{\string~}\+Binary\+Operator\+Node}} () override
+\item 
+void \mbox{\hyperlink{classhdg_1_1_binary_operator_node_aa16373f83ede33e00c0cbf3a700e1d53}{set\+Operator}} (const \mbox{\hyperlink{classhdg_1_1_token}{Token}} \&oper)
+\item 
+void \mbox{\hyperlink{classhdg_1_1_binary_operator_node_aa029cc40680c53a1fa50c0f60dc17777}{set\+Left}} (\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}node)
+\item 
+void \mbox{\hyperlink{classhdg_1_1_binary_operator_node_a3e411afcd59329b887e59ce3388e969e}{set\+Right}} (\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}node)
+\item 
+\mbox{\hyperlink{classhdg_1_1_token}{Token}} \mbox{\hyperlink{classhdg_1_1_binary_operator_node_ac907f50606627e5136dcc3a24a1a47e5}{get\+Operator}} ()
+\item 
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_binary_operator_node_afca5a93b364fe52561a2f2d9be0cd816}{get\+Left}} ()
+\item 
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_binary_operator_node_ae9ffc269a7611c8bb43305650b605288}{get\+Right}} ()
+\item 
+std\+::string \mbox{\hyperlink{classhdg_1_1_binary_operator_node_a22b32eec1a1314998db3eb41b120dabc}{to\+String}} () override
+\item 
+\mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_binary_operator_node_a30385aa8d2c3e70f65ba51bf8e727313}{interpret}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classhdg_1_1_node}{hdg\+::\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_node_a50473c6b50f3a6c8e8ebb7327617dfce}{Node}} ()
+\item 
+\mbox{\hyperlink{classhdg_1_1_node_a629d0b488519d193e4c9e10614741187}{Node}} (const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position)
+\item 
+\mbox{\hyperlink{classhdg_1_1_node_a63a9e032a412b58ad3854deba6e80f91}{Node}} (const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position, \mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\item 
+virtual \mbox{\hyperlink{classhdg_1_1_node_a7addc8f6e57fbb3d68b8b7d38fd2c145}{\texorpdfstring{$\sim$}{\string~}\+Node}} ()=0
+\item 
+\mbox{\hyperlink{classhdg_1_1_position}{Position}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_node_a3738a37f34e5beca7503dd80fdc06fa8}{this\+Position}} ()
+\item 
+\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_node_a7f6017e27a8abc2cf574c4c57268e028}{this\+Environment}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_token}{Token}} \mbox{\hyperlink{classhdg_1_1_binary_operator_node_aa4da2a7f71ecd4ec3e4f1c100913dd06}{m\+\_\+oper}}
+\item 
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_binary_operator_node_ad167b612ec3826ea7f427d292c964d84}{m\+\_\+left}}
+\item 
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_binary_operator_node_aa398c75d56e88709d3676e543a1e8fd7}{m\+\_\+right}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classhdg_1_1_node}{hdg\+::\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhdg_1_1_position}{Position}} \mbox{\hyperlink{classhdg_1_1_node_a56dc5bce438d6f5aa3e4840ec04c5c4e}{m\+\_\+position}}
+\item 
+\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_node_a0d8af69474640d8876614cea25219720}{m\+\_\+environment}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classhdg_1_1_binary_operator_node_a0fde4d5b90f392e7000b8aca62e853ef}\label{classhdg_1_1_binary_operator_node_a0fde4d5b90f392e7000b8aca62e853ef} 
+\index{hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}!BinaryOperatorNode@{BinaryOperatorNode}}
+\index{BinaryOperatorNode@{BinaryOperatorNode}!hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{BinaryOperatorNode()}{BinaryOperatorNode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily hdg\+::\+Binary\+Operator\+Node\+::\+Binary\+Operator\+Node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhdg_1_1_token}{Token}} \&}]{oper,  }\item[{\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}}]{left,  }\item[{\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}}]{right,  }\item[{const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&}]{position }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_binary_operator_node_a6270da3b1c3acf0074d9c5525e00c177}\label{classhdg_1_1_binary_operator_node_a6270da3b1c3acf0074d9c5525e00c177} 
+\index{hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}!BinaryOperatorNode@{BinaryOperatorNode}}
+\index{BinaryOperatorNode@{BinaryOperatorNode}!hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{BinaryOperatorNode()}{BinaryOperatorNode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily hdg\+::\+Binary\+Operator\+Node\+::\+Binary\+Operator\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}}}]{oper,  }\item[{\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}}]{left,  }\item[{\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}}]{right,  }\item[{const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&}]{position,  }\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{environment }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_binary_operator_node_a065f5132f44e39c83b6bd3573226d860}\label{classhdg_1_1_binary_operator_node_a065f5132f44e39c83b6bd3573226d860} 
+\index{hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}!````~BinaryOperatorNode@{\texorpdfstring{$\sim$}{\string~}BinaryOperatorNode}}
+\index{````~BinaryOperatorNode@{\texorpdfstring{$\sim$}{\string~}BinaryOperatorNode}!hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}BinaryOperatorNode()}{\string~BinaryOperatorNode()}}
+{\footnotesize\ttfamily hdg\+::\+Binary\+Operator\+Node\+::\texorpdfstring{$\sim$}{\string~}\+Binary\+Operator\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classhdg_1_1_binary_operator_node_afca5a93b364fe52561a2f2d9be0cd816}\label{classhdg_1_1_binary_operator_node_afca5a93b364fe52561a2f2d9be0cd816} 
+\index{hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}!getLeft@{getLeft}}
+\index{getLeft@{getLeft}!hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{getLeft()}{getLeft()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} hdg\+::\+Binary\+Operator\+Node\+::get\+Left (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_binary_operator_node_ac907f50606627e5136dcc3a24a1a47e5}\label{classhdg_1_1_binary_operator_node_ac907f50606627e5136dcc3a24a1a47e5} 
+\index{hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}!getOperator@{getOperator}}
+\index{getOperator@{getOperator}!hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{getOperator()}{getOperator()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_token}{Token}} hdg\+::\+Binary\+Operator\+Node\+::get\+Operator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_binary_operator_node_ae9ffc269a7611c8bb43305650b605288}\label{classhdg_1_1_binary_operator_node_ae9ffc269a7611c8bb43305650b605288} 
+\index{hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}!getRight@{getRight}}
+\index{getRight@{getRight}!hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{getRight()}{getRight()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} hdg\+::\+Binary\+Operator\+Node\+::get\+Right (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_binary_operator_node_a30385aa8d2c3e70f65ba51bf8e727313}\label{classhdg_1_1_binary_operator_node_a30385aa8d2c3e70f65ba51bf8e727313} 
+\index{hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}!interpret@{interpret}}
+\index{interpret@{interpret}!hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{interpret()}{interpret()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*} hdg\+::\+Binary\+Operator\+Node\+::interpret (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhdg_1_1_node_ad54f0d90c2d216075c4b90f5975c9a42}{hdg\+::\+Node}}.
+
+\Hypertarget{classhdg_1_1_binary_operator_node_aa029cc40680c53a1fa50c0f60dc17777}\label{classhdg_1_1_binary_operator_node_aa029cc40680c53a1fa50c0f60dc17777} 
+\index{hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}!setLeft@{setLeft}}
+\index{setLeft@{setLeft}!hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{setLeft()}{setLeft()}}
+{\footnotesize\ttfamily void hdg\+::\+Binary\+Operator\+Node\+::set\+Left (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}}]{node }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_binary_operator_node_aa16373f83ede33e00c0cbf3a700e1d53}\label{classhdg_1_1_binary_operator_node_aa16373f83ede33e00c0cbf3a700e1d53} 
+\index{hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}!setOperator@{setOperator}}
+\index{setOperator@{setOperator}!hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{setOperator()}{setOperator()}}
+{\footnotesize\ttfamily void hdg\+::\+Binary\+Operator\+Node\+::set\+Operator (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhdg_1_1_token}{Token}} \&}]{oper }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_binary_operator_node_a3e411afcd59329b887e59ce3388e969e}\label{classhdg_1_1_binary_operator_node_a3e411afcd59329b887e59ce3388e969e} 
+\index{hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}!setRight@{setRight}}
+\index{setRight@{setRight}!hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{setRight()}{setRight()}}
+{\footnotesize\ttfamily void hdg\+::\+Binary\+Operator\+Node\+::set\+Right (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}}]{node }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_binary_operator_node_a22b32eec1a1314998db3eb41b120dabc}\label{classhdg_1_1_binary_operator_node_a22b32eec1a1314998db3eb41b120dabc} 
+\index{hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}!toString@{toString}}
+\index{toString@{toString}!hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily std\+::string hdg\+::\+Binary\+Operator\+Node\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classhdg_1_1_node_a562c3c9807e382b651622f254a08c119}{hdg\+::\+Node}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classhdg_1_1_binary_operator_node_ad167b612ec3826ea7f427d292c964d84}\label{classhdg_1_1_binary_operator_node_ad167b612ec3826ea7f427d292c964d84} 
+\index{hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}!m\_left@{m\_left}}
+\index{m\_left@{m\_left}!hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{m\_left}{m\_left}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}}\texorpdfstring{$\ast$}{*} hdg\+::\+Binary\+Operator\+Node\+::m\+\_\+left\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_binary_operator_node_aa4da2a7f71ecd4ec3e4f1c100913dd06}\label{classhdg_1_1_binary_operator_node_aa4da2a7f71ecd4ec3e4f1c100913dd06} 
+\index{hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}!m\_oper@{m\_oper}}
+\index{m\_oper@{m\_oper}!hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{m\_oper}{m\_oper}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_token}{Token}} hdg\+::\+Binary\+Operator\+Node\+::m\+\_\+oper\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_binary_operator_node_aa398c75d56e88709d3676e543a1e8fd7}\label{classhdg_1_1_binary_operator_node_aa398c75d56e88709d3676e543a1e8fd7} 
+\index{hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}!m\_right@{m\_right}}
+\index{m\_right@{m\_right}!hdg::BinaryOperatorNode@{hdg::BinaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{m\_right}{m\_right}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}}\texorpdfstring{$\ast$}{*} hdg\+::\+Binary\+Operator\+Node\+::m\+\_\+right\hspace{0.3cm}{\ttfamily [protected]}}
+

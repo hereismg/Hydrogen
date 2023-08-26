@@ -21,7 +21,8 @@ namespace hdg {
         m_globalEnvironment->setSymbol("None", new None());
     }
 
-    /* 解释程序主要分为三个过程：
+    /**
+     * 解释程序主要分为三个过程：
      *   ------->  词法分析（Lexer）  --------->  语法分析（Parser）  ------->  解释运行（Interpreter）--------->
      *    源代码                      token列表                       语法树                          解释结果
      *

@@ -6,13 +6,13 @@
 
 namespace hdg {
     ForNode::ForNode(const Token &index, int to, const Position &position, Environment *parent):
-            Node(position, new Environment("for", parent)), m_index(index), m_from(0), m_to(to), m_step(1){
-    }
+            Node(position, new Environment(parent, parent->getFilePath(), parent->getModuleName())),
+            m_index(index), m_from(0), m_to(to), m_step(1){}
 
     ForNode::ForNode(const Token &index, int from, int to, int step, Node *expr,
                      const Position &position, Environment *parent):
-            Node(position, new Environment("for", parent)), m_index(index), m_from(from), m_to(to), m_step(step), m_expr(expr){
-    }
+            Node(position, new Environment(parent, parent->getFilePath(), parent->getModuleName())),
+            m_index(index), m_from(from), m_to(to), m_step(step), m_expr(expr){}
 
     ForNode::~ForNode() {
         delete m_environment;
@@ -46,7 +46,7 @@ namespace hdg {
     Object *ForNode::interpret() {
         auto* index = new Integer(m_from);
         Object* result;
-        m_environment->setLocalSymbol(m_index.getValue(), index);
+        m_environment->setSymbol(m_index.getValue(), index, 1); /// 本地模式
 
         if (m_from <= m_to){
             while(index->getValue() <= m_to){

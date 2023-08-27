@@ -6,8 +6,8 @@
 
 namespace hdg {
     IfNode::IfNode(const Position &position, Environment *parent):
-        Node(position, new Environment("if", parent)), elseExpression(nullptr){
-    }
+        Node(position, new Environment(parent, parent->getFilePath(), parent->getModuleName())),
+        elseExpression(nullptr){}
 
     IfNode::~IfNode() {
         delete m_environment;

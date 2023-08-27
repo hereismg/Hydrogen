@@ -6,19 +6,21 @@
 
 namespace hdg {
 
-    Interpreter::Interpreter(): m_globalEnvironment(new Environment("<main>", nullptr)) {
+    Interpreter::Interpreter(): m_globalEnvironment(new Environment) {
         init();
     }
     Interpreter::~Interpreter() = default;
 
     void Interpreter::init() {
         m_globalEnvironment->setSymbol("hydrogen", new String("Hello, Hydrogen_v0.2.1!"));
-        m_globalEnvironment->setSymbol({
-                                            {"null",  Integer(0)},
-                                            {"true",  Integer(1)},
-                                            {"false", Integer(0)},
-                                    });
+        m_globalEnvironment->setSymbol("null", new Integer(0));
+        m_globalEnvironment->setSymbol("true", new Integer(1));
+        m_globalEnvironment->setSymbol("false", new Integer(0));
         m_globalEnvironment->setSymbol("None", new None());
+    }
+
+    Environment *Interpreter::thisEnvironment() {
+        return m_globalEnvironment;
     }
 
     /* 解释程序主要分为三个过程：
@@ -31,11 +33,11 @@ namespace hdg {
         try {
             Lexer lexer(fPath, &code);
             lexer.run();
-            if (mode == debug) std::cout << lexer.getTokens() << std::endl;
+            if (mode == Mode::debug) std::cout << lexer.getTokens() << std::endl;   //> 打印 tokens 列表
 
             Parser parser(lexer.getTokens(), m_globalEnvironment);
             Node* tree = parser.run();
-            if (mode == debug) std::cout << tree->toString() << std::endl;
+            if (mode == Mode::debug) std::cout << tree->toString() << std::endl;    //> 打印语法树
 
             std::string result = tree->interpret()->toString();
             return result;

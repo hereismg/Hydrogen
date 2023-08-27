@@ -13,18 +13,21 @@
 #include "basic/Environment.h"
 
 namespace hdg {
-    enum Mode{
-        debug,
-        release,
-    };
-
     class Interpreter {
+    public:
+        enum Mode{
+            debug,
+            release,
+        };
+
     protected:
         Environment* m_globalEnvironment;
 
     public:
         Interpreter();
         ~Interpreter();
+
+        Environment* thisEnvironment();
 
         std::string interpret(const std::string& fPath, std::string code, Mode mode = release);
 

@@ -51,7 +51,7 @@ namespace hdg {
         std::vector<Token> m_tokens;
 
         char m_currentChar;
-        Indicator m_pos;
+        Position::Indicator m_pos;
 
     public:
         explicit Lexer(std::string fPath, std::string* code);

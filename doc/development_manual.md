@@ -128,6 +128,16 @@ for i=1 to 3: print(i)
 function add(a, b): a + b
 ```
 
+```error
+"D:\HaaaaaalloMg\Workplace\Hydrogen\hdg\test\factorial.hdg" in module <global> :
+        1 | function div(a, b): a/b
+          |                      ^
+"D:\HaaaaaalloMg\Workplace\Hydrogen\hdg\test\factorial.hdg" in module <div> :
+    RunTimeError: Divition by zero.
+        2 | div(1, 0)
+          |        ^
+```
+
 ## 项目目录结构
 
 ![Hydrogen项目目录结构](res/Hydrogen项目目录结构.png)

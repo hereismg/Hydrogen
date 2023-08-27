@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <exception>
+#include <vector>
 #include <utility>
 #include <sstream>
 #include "../basic/Position.h"
@@ -17,12 +18,12 @@ namespace hdg {
     class Error: public std::exception{
     protected:
         std::string m_name;
-        std::string m_details;
-
-        Position m_position;
+        std::string m_detail;
+        std::vector<Position> m_posStack;
 
     public:
-        Error(std::string name, std::string details, const Position& position);
+        Error(std::string name, const std::string& detail, const Position& position);
+        void pushPosition(const Position& position);
         virtual std::string toString();
     };
 

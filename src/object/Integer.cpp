@@ -67,14 +67,14 @@ namespace hdg {
     Object *Integer::div(Object *other) {
         if (other->getClass() == "Integer"){
             long long right = ((Integer*)other)->m_value;
-            if (right == 0) throw -1;
+            if (right == 0) throw ZeroDivisionError();
 
             long long result = m_value / right;
             return new Integer(result);
         }
         else if (other->getClass() == "Float"){
             double right = ((Float*)other)->getValue();
-            if (right==0) throw -1;
+            if (right == 0) throw ZeroDivisionError();
 
             double result = m_value / right;
             return new Float(result);

@@ -16,7 +16,7 @@ namespace hdg {
         if (m_args.size() > list.size()){
 //            std::stringstream detail;
 //            detail << 1;
-
+            throw RuntimeError("too many arg.", m_position);
 //            detail << "() missing " << std::to_string(m_args.size()-list.size()) << " required positional argument.";
             return new None;
 //            throw RuntimeError("too few args.", m_position);

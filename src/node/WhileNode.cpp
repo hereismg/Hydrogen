@@ -6,8 +6,8 @@
 
 namespace hdg {
     WhileNode::WhileNode(Node *condition, Node *expression, const Position &position, Environment *parent):
-            Node(position, new Environment("while", parent)), m_condition(condition), m_expression(expression){
-    }
+            Node(position, new Environment(parent, parent->getFilePath(), parent->getModuleName())),
+            m_condition(condition), m_expression(expression){}
 
     WhileNode::~WhileNode() {
         delete m_environment;

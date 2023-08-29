@@ -28,8 +28,8 @@ namespace hdg {
         void setBody(Node* body);
         void setName(const std::string& name);
 
-        std::string toString();
-        Object* interpret();
+        std::string toString() override;
+        Object* interpret() override;
     };
 
 } // hdg

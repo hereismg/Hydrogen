@@ -18,9 +18,9 @@ namespace hdg {
     protected:
         std::string m_name;
         std::vector<ObjAssignNode*> m_args;
-        Environment* m_environment;
+        Environment* m_environment{nullptr};
 
-        Node* m_body;
+        Node* m_body{nullptr};
     public:
         Function();
         Function(std::string name, std::vector<ObjAssignNode*>args, Environment* environment, Node* body, const Position& position);

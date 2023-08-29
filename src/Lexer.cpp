@@ -34,11 +34,21 @@ namespace hdg {
         return out;
     }
 
-    Lexer::Lexer(std::string fPath, std::string* code):
-            m_fPath(std::move(fPath)), m_code(code), m_currentChar((*m_code)[0]), m_pos(0, 1, 0){}
+    Lexer::Lexer(): m_pos(0, 0, 0){}
 
     std::string Lexer::getFilePath() {
         return m_fPath;
+    }
+
+    /**
+     * @details     初始化函数，运行函数时，会重置 m_pos 方法，并且重置 m_currentCahr.
+     * */
+    void Lexer::init(){
+        m_pos.index = 0;
+        m_pos.line ++;      ///> 注意，这里不是初始化为1，而是自增一位。这是为了能够记录行数
+        m_pos.col = 0;
+        m_currentChar = (*m_code)[0];
+        m_tokens.clear();
     }
 
     void Lexer::advance() {
@@ -57,7 +67,11 @@ namespace hdg {
         return m_code;
     }
 
-    void Lexer::run() {
+    std::vector<Token> Lexer::run(const std::string& fPath, std::string* code) {
+        m_fPath = fPath;
+        m_code = code;
+        init();
+
         while (m_pos.index < m_code->length()){
             if (m_currentChar == ' ' || m_currentChar == '\t'){
                 advance();
@@ -144,10 +158,12 @@ namespace hdg {
             }
         }
         m_tokens.emplace_back(EF, Position(m_fPath, m_code, m_pos));
+
+        return m_tokens;
     }
 
     void Lexer::buildNumber() {
-        Indicator posStart = m_pos;
+        Position::Indicator posStart = m_pos;
         int counter = 0;
         TokenType type = INT;
 
@@ -168,7 +184,7 @@ namespace hdg {
     }
 
     void Lexer::buildGreaterThan() {
-        Indicator posStart = m_pos;
+        Position::Indicator posStart = m_pos;
         TokenType type = GT;
 
         advance();
@@ -182,7 +198,7 @@ namespace hdg {
     }
 
     void Lexer::buildLessThan() {
-        Indicator posStart = m_pos;
+        Position::Indicator posStart = m_pos;
         TokenType type = LT;
 
         advance();
@@ -196,7 +212,7 @@ namespace hdg {
     }
 
     void Lexer::buildEquation() {
-        Indicator posStart = m_pos;
+        Position::Indicator posStart = m_pos;
         TokenType type = EQ;
 
         advance();
@@ -210,7 +226,7 @@ namespace hdg {
     }
 
     void Lexer::buildIdentifier() {
-        Indicator posStart = m_pos;
+        Position::Indicator posStart = m_pos;
         TokenType type = IDENTIFIER;
 
         advance();

@@ -11,9 +11,18 @@
 
 namespace hdg {
 
+    /**
+     * @brief       运行时异常
+     * @details
+     * */
+
     class RuntimeError: public Error{
     public:
-        RuntimeError(std::string details, const Position& position);
+        RuntimeError();
+        RuntimeError(std::string detail, const Position& position);
+
+    protected:
+        RuntimeError(std::string name);
     };
 
 } // hdg

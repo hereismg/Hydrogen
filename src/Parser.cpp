@@ -217,7 +217,7 @@ namespace hdg {
     Node *Parser::ifExpr(Environment* environment) {
         auto *ifNode = new IfNode(
                 Position(*m_currentToken->thisPosition()),
-                m_environment);
+                environment);
         Node *condition, *expression;
 
         while(m_currentToken != m_tokens.end() && (m_currentToken->match(Token::KEYWORD, "if") || m_currentToken->match(Token::KEYWORD, "elif"))){

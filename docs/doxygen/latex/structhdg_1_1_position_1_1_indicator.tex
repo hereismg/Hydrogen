@@ -1,0 +1,53 @@
+\doxysection{hdg\+::Position\+::Indicator Struct Reference}
+\hypertarget{structhdg_1_1_position_1_1_indicator}{}\label{structhdg_1_1_position_1_1_indicator}\index{hdg::Position::Indicator@{hdg::Position::Indicator}}
+
+
+文本坐标指示器。  
+
+
+
+
+{\ttfamily \#include $<$Position.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned long long \mbox{\hyperlink{structhdg_1_1_position_1_1_indicator_a61414acf4f96be122d74eb3464c75115}{index}}
+\item 
+unsigned long long \mbox{\hyperlink{structhdg_1_1_position_1_1_indicator_a862990265be8520f19dc0350b4afa1bd}{line}}
+\item 
+unsigned long long \mbox{\hyperlink{structhdg_1_1_position_1_1_indicator_a610227812e1907a6f9161d7782a86604}{col}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+文本坐标指示器。 
+
+总的来说，文本坐标指示器主要存储某个位置的两类坐标。~\newline
+~\newline
+ 一类是该位置的内存索引号 index 。该索引号会算上包括换行符的全部字符。 另一类是易于人类观看的二维坐标（line，col）。其中 line 从 1 开始索引， col从 0 开始索引。
+
+\begin{DoxyWarning}{Warning}
+该结构体内部的三个变量都是无符号长整型（unsigned long long），所以要格外注意类型转换造成的问题。 
+\end{DoxyWarning}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structhdg_1_1_position_1_1_indicator_a610227812e1907a6f9161d7782a86604}\label{structhdg_1_1_position_1_1_indicator_a610227812e1907a6f9161d7782a86604} 
+\index{hdg::Position::Indicator@{hdg::Position::Indicator}!col@{col}}
+\index{col@{col}!hdg::Position::Indicator@{hdg::Position::Indicator}}
+\doxysubsubsection{\texorpdfstring{col}{col}}
+{\footnotesize\ttfamily unsigned long long hdg\+::\+Position\+::\+Indicator\+::col}
+
+\Hypertarget{structhdg_1_1_position_1_1_indicator_a61414acf4f96be122d74eb3464c75115}\label{structhdg_1_1_position_1_1_indicator_a61414acf4f96be122d74eb3464c75115} 
+\index{hdg::Position::Indicator@{hdg::Position::Indicator}!index@{index}}
+\index{index@{index}!hdg::Position::Indicator@{hdg::Position::Indicator}}
+\doxysubsubsection{\texorpdfstring{index}{index}}
+{\footnotesize\ttfamily unsigned long long hdg\+::\+Position\+::\+Indicator\+::index}
+
+\Hypertarget{structhdg_1_1_position_1_1_indicator_a862990265be8520f19dc0350b4afa1bd}\label{structhdg_1_1_position_1_1_indicator_a862990265be8520f19dc0350b4afa1bd} 
+\index{hdg::Position::Indicator@{hdg::Position::Indicator}!line@{line}}
+\index{line@{line}!hdg::Position::Indicator@{hdg::Position::Indicator}}
+\doxysubsubsection{\texorpdfstring{line}{line}}
+{\footnotesize\ttfamily unsigned long long hdg\+::\+Position\+::\+Indicator\+::line}
+

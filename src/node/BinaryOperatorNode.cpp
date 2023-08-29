@@ -7,12 +7,10 @@
 namespace hdg {
 
     BinaryOperatorNode::BinaryOperatorNode(const Token& oper, Node *left, Node *right, const Position& position):
-        Node(position), m_oper(oper), m_left(left), m_right(right){
-    }
+        Node(position), m_oper(oper), m_left(left), m_right(right){}
 
     BinaryOperatorNode::BinaryOperatorNode(Token::Type oper, Node *left, Node *right, const Position& position, Environment* environment):
-        Node(position, environment), m_oper(oper), m_left(left), m_right(right){
-    }
+        Node(position, environment), m_oper(oper), m_left(left), m_right(right){}
 
     BinaryOperatorNode::~BinaryOperatorNode() {
         delete m_left;
@@ -69,60 +67,59 @@ namespace hdg {
 
         Object* result = nullptr;
 
-        if (m_oper.getType() == Token::PLUS){
-            result = left->plus(right);
-        }
-        else if (m_oper.getType() == Token::MINUS){
-            result = left->minus(right);
-        }
-        else if (m_oper.getType() == Token::MUL){
-            result = left->mul(right);
-        }
-        else if (m_oper.getType() == Token::DIV){
-            try{
+        try{
+            if (m_oper.getType() == Token::PLUS){
+                result = left->plus(right);
+            }
+            else if (m_oper.getType() == Token::MINUS){
+                result = left->minus(right);
+            }
+            else if (m_oper.getType() == Token::MUL){
+                result = left->mul(right);
+            }
+            else if (m_oper.getType() == Token::DIV){
                 result = left->div(right);
             }
-            catch (ZeroDivisionError& error){
-                delete left, right;
-                error.thisPosStack()->push_back(*m_right->thisPosition());
-                throw error;
-//                throw RuntimeError(
-//                        "Division by zero",
-//                        Position(
-//                                m_position.getFilePath(),
-//                                m_position.thisContext(),
-//                                m_right->thisPosition()->getStart(),
-//                                m_right->thisPosition()->getEnd())
-//                        );
+            else if (m_oper.getType() == Token::MOD){
+                result = left->mod(right);
+            }
+            else if (m_oper.getType() == Token::POW){
+                result = left->pow(right);
+            }
+            else if (m_oper.getType() == Token::EE){
+                result = left->equation(right);
+            }
+            else if (m_oper.getType() == Token::NE){
+                result  = left->notEquation(right);
+            }
+            else if (m_oper.getType() == Token::GT){
+                result = left->greaterThan(right);
+            }
+            else if (m_oper.getType() == Token::LT){
+                result = left->lessThan(right);
+            }
+            else if (m_oper.getType() == Token::GTE){
+                result = left->greaterThanEquation(right);
+            }
+            else if (m_oper.getType() == Token::LTE){
+                result = left->lessThanEquation(right);
+            }
+            else if (m_oper.match(Token::KEYWORD, "and")){
+                result = left->andOperator(right);
+            }
+            else if (m_oper.match(Token::KEYWORD, "or")){
+                result = left->orOperator(right);
+            }
+            else{
+                std::cout << "BinaryOperator::interpret(): Unknown token type.";
             }
         }
-        else if (m_oper.getType() == Token::POW){
-            result = left->pow(right);
+        catch (ZeroDivisionError& error){
+            delete left, right;
+            error.thisPosStack()->push_back(*m_right->thisPosition());
+            throw error;
         }
-        else if (m_oper.getType() == Token::EE){
-            result = left->equation(right);
-        }
-        else if (m_oper.getType() == Token::NE){
-            result  = left->notEquation(right);
-        }
-        else if (m_oper.getType() == Token::GT){
-            result = left->greaterThan(right);
-        }
-        else if (m_oper.getType() == Token::LT){
-            result = left->lessThan(right);
-        }
-        else if (m_oper.getType() == Token::GTE){
-            result = left->greaterThanEquation(right);
-        }
-        else if (m_oper.getType() == Token::LTE){
-            result = left->lessThanEquation(right);
-        }
-        else if (m_oper.match(Token::KEYWORD, "and")){
-            result = left->andOperator(right);
-        }
-        else if (m_oper.match(Token::KEYWORD, "or")){
-            result = left->orOperator(right);
-        }
+
 
         delete left, right;
         return result;

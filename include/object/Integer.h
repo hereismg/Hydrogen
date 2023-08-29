@@ -27,6 +27,7 @@ namespace hdg {
         Object* minus(Object* other) override;
         Object* mul(Object* other) override;
         Object* div(Object* other) override;
+        Object* mod(Object* other) override;
         Object* pow(Object* other) override;
 
         Object* equation(Object* other) override;

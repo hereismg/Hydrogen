@@ -22,6 +22,7 @@ namespace hdg {
         {Token::Type::MINUS,      "MINUS"},
         {Token::Type::MUL,        "MUL"},
         {Token::Type::DIV,        "DIV"},
+        {Token::Type::MOD,        "MOD"},
         {Token::Type::POW,        "POW"},
 
         {Token::Type::LPAREN,     "LPAREN"},

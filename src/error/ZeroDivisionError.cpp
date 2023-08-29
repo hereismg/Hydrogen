@@ -6,6 +6,6 @@
 
 namespace hdg {
     ZeroDivisionError::ZeroDivisionError(): RuntimeError("ZeroDivisionError") {
-        m_detail = "Division by Zero.";
+        m_detail = "Integer division or modulo by zero.";
     }
 } // hdg

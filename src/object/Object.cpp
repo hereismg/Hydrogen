@@ -41,6 +41,11 @@ namespace hdg {
         return nullptr;
     }
 
+    Object *Object::mod(Object *other) {
+        illegalOperator();
+        return nullptr;
+    }
+
     Object *Object::pow(Object *other) {
         illegalOperator();
         return nullptr;

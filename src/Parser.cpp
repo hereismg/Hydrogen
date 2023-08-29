@@ -86,7 +86,7 @@ namespace hdg {
     Node *Parser::term(Environment* environment) {
         return binaryOperator(
                 environment,
-                std::set<Token, std::less<>>{{Token::MUL}, {Token::DIV}},
+                std::set<Token, std::less<>>{{Token::MUL}, {Token::DIV}, {Token::MOD}},
                 [this](Environment* e){return this->factor(e);}
                 );
     }
@@ -215,7 +215,7 @@ namespace hdg {
      * 注意：IfNode 的 Position 由 addBranch 函数维护，故在此只需要设定start即可。
      * */
     Node *Parser::ifExpr(Environment* environment) {
-        IfNode *ifNode = new IfNode(
+        auto *ifNode = new IfNode(
                 Position(*m_currentToken->thisPosition()),
                 m_environment);
         Node *condition, *expression;
@@ -301,7 +301,6 @@ namespace hdg {
                 flag = -1;
                 advance();
             }
-
             if (m_currentToken->getType() != Token::INT){
                 throw InvalidSyntaxError(
                         "Expected int.",

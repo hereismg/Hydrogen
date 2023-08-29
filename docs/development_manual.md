@@ -80,7 +80,7 @@ comp-expr   : "not" comp-expr
 
 arith-expr  : term (plus|minus term)* 
 
-term        : factor (mul|div factor)*
+term        : factor (mul|div|mod factor)*
 
 factor      : (plus|minus) factor
             : power

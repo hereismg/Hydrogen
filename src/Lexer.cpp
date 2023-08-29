@@ -95,7 +95,7 @@ namespace hdg {
                 buildString();
             }
             else if (m_currentChar == '\n' || m_currentChar == ';'){
-                m_tokens.emplace_back(Token::EL, std::to_string(m_currentChar), Position(m_fPath, m_code, m_pos));
+                m_tokens.emplace_back(Token::EL, std::string(1,m_currentChar), Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == '+'){
@@ -112,6 +112,10 @@ namespace hdg {
             }
             else if (m_currentChar == '/'){
                 m_tokens.emplace_back(Token::DIV, Position(m_fPath, m_code, m_pos));
+                advance();
+            }
+            else if (m_currentChar == '%'){
+                m_tokens.emplace_back(Token::MOD, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == '^'){

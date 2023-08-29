@@ -39,6 +39,7 @@ namespace hdg {
         virtual Object* minus(Object* other);
         virtual Object* mul(Object* other);
         virtual Object* div(Object* other);
+        virtual Object* mod(Object* other);
         virtual Object* pow(Object* other);
 
         virtual Object* equation(Object* other);

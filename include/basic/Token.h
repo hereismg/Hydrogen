@@ -33,6 +33,7 @@ namespace hdg {
             MINUS,
             MUL,
             DIV,
+            MOD,        ///> 百分号”%“，默认为求余符号
             POW,
 
             LPAREN,     ///> 左圆括号

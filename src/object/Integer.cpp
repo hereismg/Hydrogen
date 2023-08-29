@@ -85,6 +85,20 @@ namespace hdg {
         }
     }
 
+    Object *Integer::mod(Object *other) {
+        if (other->getClass() == "Integer"){
+            long long right = ((Integer*)other)->m_value;
+            if (right == 0) throw ZeroDivisionError();
+
+            long long result = m_value % right;
+            return new Integer(result);
+        }
+        else {
+            illegalOperator();
+            return nullptr;
+        }
+    }
+
     Object *Integer::pow(Object *other) {
         if (other->getClass() == "Integer"){
             double result = std::pow(m_value, ((Integer*)other)->m_value);

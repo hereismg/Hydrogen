@@ -7,13 +7,10 @@
 namespace hdg {
 
     UnaryOperatorNode::UnaryOperatorNode(Token::Type oper, Node* obj, const Position& position, Environment* environment):
-            Node(position, environment), m_oper(oper), m_obj(obj){
-    }
+            Node(position, environment), m_oper(oper), m_obj(obj){}
 
-    UnaryOperatorNode::UnaryOperatorNode(Token oper, Node *obj, const Position &position, Environment* environment):
-        Node(position, environment), m_oper(oper), m_obj(obj){
-
-    }
+    UnaryOperatorNode::UnaryOperatorNode(const Token& oper, Node *obj, const Position &position, Environment* environment):
+        Node(position, environment), m_oper(oper), m_obj(obj){}
 
     UnaryOperatorNode::~UnaryOperatorNode() {
         delete m_obj;

@@ -15,10 +15,16 @@
 
 namespace hdg {
 
+    /**
+     * @brief       顶级对象类。海琛语言中所有的对象都是该对象的子代。
+     * @details
+     * @class       这里是class
+     * */
+
     class Object {
     protected:
-        std::string m_class;
-        Position m_position;
+        std::string m_class;        ///> 这里传入该对象实例的类名，用于强制类型转化
+        Position m_position;        ///> 记录该对象定义的位置
 
     public:
         Object();
@@ -46,6 +52,11 @@ namespace hdg {
         virtual Object* orOperator(Object* other);
         virtual Object* notOperator();
 
+        /**
+         * @brief       括号运算符
+         * @arg
+         *      - list  参数列表。
+         * */
         virtual Object* parenthesis(const std::vector<Object*>& list);
         virtual Object* brackets(Object* other);
         virtual Object* braces(const std::vector<Object*>& list);

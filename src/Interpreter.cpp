@@ -29,15 +29,18 @@ namespace hdg {
      *
      * debug 模式会打印出中间过程的 token列表 与 语法树
      * */
-    std::string Interpreter::interpret(const std::string& fPath, std::string code, Mode mode) {
+    std::string Interpreter::interpret(const std::string& fPath, const std::string& code, Mode mode) {
+        m_codeStack.emplace_back(code);
         try {
-            Lexer lexer(fPath, &code);
-            lexer.run();
-            if (mode == Mode::debug) std::cout << lexer.getTokens() << std::endl;   //> 打印 tokens 列表
+            std::vector<Token> tokens = m_lexer.run(fPath, &m_codeStack[m_codeStack.size() - 1]);     ///> 注意，这里不是直接传入 code，而是先将code压入栈中，然后取栈中的code！！！
+            if (mode == Mode::debug) std::cout << tokens << std::endl;                ///> 打印 tokens 列表
 
-            Parser parser(lexer.getTokens(), m_globalEnvironment);
+            Parser parser(tokens, m_globalEnvironment);
             Node* tree = parser.run();
-            if (mode == Mode::debug) std::cout << tree->toString() << std::endl;    //> 打印语法树
+            if (mode == Mode::debug) {
+                std::cout << tree->toString() << std::endl;                            ///> 打印语法树
+                std::cout << "==================================" << std::endl;
+            }
 
             std::string result = tree->interpret()->toString();
             return result;

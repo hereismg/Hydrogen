@@ -16,13 +16,19 @@
 namespace hdg {
     typedef std::map<std::string, Object*> SymbolTable;
 
+    /**
+     * @brief       环境。主要用来存储符号、模块名称等信息。
+     * @details     信息这里式信息是
+     * @section     213
+     * */
+
     class Environment {
     protected:
         Environment* m_parent{nullptr};
         SymbolTable m_symbolTable;
 
-        std::string m_fPath;            /// 创建该环境的代码的文件目录
-        std::string m_moduleName;       /// 创建该环境的模块名称，一般是函数的名称
+        std::string m_fPath;            ///< 创建该环境的代码的文件目录
+        std::string m_moduleName;       ///< 创建该环境的模块名称，一般是函数的名称
 
     public:
         Environment();
@@ -34,11 +40,12 @@ namespace hdg {
         void setParent(Environment* parent);
 
         /**
-         * 给环境中的符号表设置符号
+         * @brief 给环境中的符号表设置符号
          * @param name      符号名字
          * @param value     符号值
          * @param mode      设置模式，0为父级模式，1为本地模式；默认为父级模式
          * */
+
         void setSymbol(const std::string& name, Object* value, int mode=0);
 
         std::string getFilePath();

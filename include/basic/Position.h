@@ -6,11 +6,13 @@
 #define HDG_POSITION_H
 
 #include <string>
+#include <sstream>
 
 namespace hdg {
 
     /**
-     * 
+     * 位置指示器
+     * @details     主要用于记录 Node 的位置。也用来追踪异常。
      * */
     class Position {
     public:
@@ -23,6 +25,7 @@ namespace hdg {
          *
          * @warning     该结构体内部的三个变量都是无符号长整型（unsigned long long），所以要格外注意类型转换造成的问题。
          * */
+
         struct Indicator{
             unsigned long long index;
             unsigned long long line;

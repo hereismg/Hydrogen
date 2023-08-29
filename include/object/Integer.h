@@ -8,7 +8,7 @@
 
 #include "Object.h"
 #include "Float.h"
-#include "../error/RuntimeError.h"
+#include "../error/ZeroDivisionError.h"
 
 namespace hdg {
 

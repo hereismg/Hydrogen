@@ -22,6 +22,9 @@ namespace hdg {
 
     protected:
         Environment* m_globalEnvironment;
+        std::vector<std::string> m_codeStack;
+
+        Lexer m_lexer;          ///> 词法分析器
 
     public:
         Interpreter();
@@ -29,7 +32,7 @@ namespace hdg {
 
         Environment* thisEnvironment();
 
-        std::string interpret(const std::string& fPath, std::string code, Mode mode = release);
+        std::string interpret(const std::string& fPath, const std::string& code, Mode mode = release);
 
     protected:
         void init();

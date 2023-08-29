@@ -91,6 +91,9 @@ namespace hdg {
         return nullptr;
     }
 
+    /**
+     * @details     括号运算符主要是用做对函数的实现。函数就是通过该方法实现的。
+     * */
     Object *Object::parenthesis(const std::vector<Object*>& list) {
         illegalOperator();
         return nullptr;

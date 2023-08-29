@@ -82,16 +82,18 @@ namespace hdg {
             try{
                 result = left->div(right);
             }
-            catch (int error){
+            catch (ZeroDivisionError& error){
                 delete left, right;
-                throw RuntimeError(
-                        "Division by zero",
-                        Position(
-                                m_position.getFilePath(),
-                                m_position.thisContext(),
-                                m_right->thisPosition()->getStart(),
-                                m_right->thisPosition()->getEnd())
-                        );
+                error.thisPosStack()->push_back(*m_right->thisPosition());
+                throw error;
+//                throw RuntimeError(
+//                        "Division by zero",
+//                        Position(
+//                                m_position.getFilePath(),
+//                                m_position.thisContext(),
+//                                m_right->thisPosition()->getStart(),
+//                                m_right->thisPosition()->getEnd())
+//                        );
             }
         }
         else if (m_oper.getType() == POW){

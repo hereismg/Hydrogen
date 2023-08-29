@@ -36,21 +36,36 @@ namespace hdg {
         return "CallNode";
     }
 
+    /**
+     * @details
+     * */
     Object *CallNode::interpret() {
+        /// 这里主要干了两件事情：\n\n
+        ///     1、解析被呼叫元素 call\n\n
+        ///     2、解析参数
         Object* obj = m_call->interpret();
         std::vector<Object*> objList;
         objList.reserve(m_list.size());
         for (auto & i : m_list) objList.push_back(i->interpret());
 
-        if (m_oper == LPAREN){
-            return obj->parenthesis(objList);
+        /// 此时开始运行parenthesis，并且监听异常。
+        try{
+            if (m_oper == LPAREN){
+                return obj->parenthesis(objList);
+            }
+            else{
+                throw RuntimeError(
+                        "Error",
+                        m_position
+                );
+            }
         }
-        else{
-            throw RuntimeError(
-                    "Error",
-                    m_position
-            );
+        catch (Error& error){
+//            std::cout << "!!!!!!!" << std::endl;
+            error.thisPosStack()->push_back(m_position);
+            throw error;
         }
+
     }
 
 } // hdg

@@ -32,7 +32,7 @@ namespace hdg {
     std::string Interpreter::interpret(const std::string& fPath, const std::string& code, Mode mode) {
         m_codeStack.emplace_back(code);
         try {
-            std::vector<Token> tokens = m_lexer.run(fPath, &m_codeStack[m_codeStack.size() - 1]);     ///> 注意，这里不是直接传入 code，而是先将code压入栈中，然后取栈中的code！！！
+            std::vector<Token> tokens = m_lexer.run(fPath, &m_codeStack.back());     ///> 注意，这里不是直接传入 code，而是先将code压入栈中，然后取栈中的code！！！
             if (mode == Mode::debug) std::cout << tokens << std::endl;                ///> 打印 tokens 列表
 
             Parser parser(tokens, m_globalEnvironment);

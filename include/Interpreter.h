@@ -7,6 +7,7 @@
 #define HDG_INTERPRETER_H
 
 #include <string>
+#include <list>
 #include "Parser.h"
 #include "Lexer.h"
 #include "node/Node.h"
@@ -22,7 +23,7 @@ namespace hdg {
 
     protected:
         Environment* m_globalEnvironment;
-        std::vector<std::string> m_codeStack;
+        std::list<std::string> m_codeStack;
 
         Lexer m_lexer;          ///> 词法分析器
 

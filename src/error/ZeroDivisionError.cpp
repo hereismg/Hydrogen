@@ -5,5 +5,7 @@
 #include "../../include/error/ZeroDivisionError.h"
 
 namespace hdg {
-    ZeroDivisionError::ZeroDivisionError(): RuntimeError("ZeroDivisionError") {}
+    ZeroDivisionError::ZeroDivisionError(): RuntimeError("ZeroDivisionError") {
+        m_detail = "Division by Zero.";
+    }
 } // hdg

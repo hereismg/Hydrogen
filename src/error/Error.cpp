@@ -2,6 +2,8 @@
 // Created by Magnesium on 2023/7/16.
 //
 
+#include <ranges>
+
 #include "../../include/error/Error.h"
 
 namespace hdg {
@@ -29,9 +31,10 @@ namespace hdg {
 
     std::string Error::toString() {
         std::stringstream information;
-        for (int i=m_posStack.size()-1; i>0; i--) information << m_posStack[i].toString() << std::endl;
-        information << m_name << ": " << m_detail << std::endl << std::endl;
-        information << m_posStack[0].toString();
+        for (auto & iter : m_posStack)
+            information << iter.toString() << std::endl;
+
+        information << m_name << ": " << m_detail << std::endl;
         return information.str();
     }
 

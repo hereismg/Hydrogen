@@ -13,6 +13,7 @@ var classhdg_1_1_integer =
     [ "lessThan", "classhdg_1_1_integer.html#a2901f0ec8064a5b2a5b281a2278e8d09", null ],
     [ "lessThanEquation", "classhdg_1_1_integer.html#a1e5305662e50a91141b0f4b0033f66ed", null ],
     [ "minus", "classhdg_1_1_integer.html#a91833370471541a50982218c95285d93", null ],
+    [ "mod", "classhdg_1_1_integer.html#a92f95b6ec805c6ce70837a2fcac05d30", null ],
     [ "mul", "classhdg_1_1_integer.html#a762a3705077456bb38c0ba404ef2897c", null ],
     [ "notEquation", "classhdg_1_1_integer.html#a003de7510ea0347ae878a931ec2532fa", null ],
     [ "notOperator", "classhdg_1_1_integer.html#adeffbc476b4ce40af983091657efec93", null ],

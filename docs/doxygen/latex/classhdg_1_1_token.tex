@@ -4,30 +4,70 @@
 
 {\ttfamily \#include $<$Token.\+h$>$}
 
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93}{Type}} \{ \newline
+\mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a744e8a063eac02cf51d66bb5b226eb06}{INT}}
+, \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a2fdcfeecf7a924dfd19d6386471b7f08}{FLOAT}}
+, \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93ae486587750f3f3d61894b9b034e88805}{STRING}}
+, \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a35b23d0278b3cd145c59b289d9b8f566}{IDENTIFIER}}
+, \newline
+\mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93abade00b05b3f24169f618a869c06e802}{KEYWORD}}
+, \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a146f379ae70e076e36b2fcffad09daca}{NE}}
+, \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a1f672edf4435a53c0fd492ac7687e1a0}{EE}}
+, \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a4fa15b7b18a6f867e8f67ad29d260f0a}{GT}}
+, \newline
+\mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93afdd315d65a7c748fa036328da36656bd}{LT}}
+, \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93aaef94b401120516225ddecebcf9d0201}{GTE}}
+, \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93ac39c923e0a9a09689e8cee30343b36f1}{LTE}}
+, \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93aa53fa2be93aa8f952115be0a72dc6107}{PLUS}}
+, \newline
+\mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a3ec47ecef05a50e2dbcd1538906f271c}{MINUS}}
+, \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a4d732e146cebeb338ed2e683fcd70bd2}{MUL}}
+, \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93aaa1aeca1a8ea7513aedfd38f75d22be9}{DIV}}
+, \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a4b869ad6ac7b7307d9672920933a1ecb}{MOD}}
+, \newline
+\mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93aa7b8742b23dd61cb0adaff9c0198a0d0}{POW}}
+, \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a3263fb5c169dbaaed405c7acd689f013}{LPAREN}}
+, \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93aabb609d4e0beced60f833224b7d30806}{RPAREN}}
+, \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93abd863f047e3e89a57a30439d13196f10}{LBRACKET}}
+, \newline
+\mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a2b1751f403fd2717ffdc9c0b85e7ece9}{RBRACKET}}
+, \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a558e88e553ba9803128104550d5af441}{LBRACE}}
+, \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a1a13719a1a447d2cb475d3b8a0d93df6}{RBRACE}}
+, \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a927deecebb077617e67d3e0b202486a9}{EQ}}
+, \newline
+\mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a97d0f8374d1ff4ede8992014bc32e4c6}{COLON}}
+, \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a8628903c568efe2b596c333d5b5df028}{COMMA}}
+, \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a01bca2355cbf33e9d52fc885d6419485}{EF}}
+, \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a48fea50631c44f4776e84f8a3adbe19a}{EL}}
+ \}
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classhdg_1_1_token_a0771e279721224109aefeb8d33d22e57}{Token}} ()
 \item 
-\mbox{\hyperlink{classhdg_1_1_token_a55367a89a682c1956c1f4a455ae10af8}{Token}} (\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} type, std\+::string value, const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position)
+\mbox{\hyperlink{classhdg_1_1_token_a16570f43ec6a0820eda8d86a0e209b06}{Token}} (\mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93}{Type}} type, std\+::string value, const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position)
 \item 
-\mbox{\hyperlink{classhdg_1_1_token_a72657d3fa6aaaf8f99cd92e37fc78f72}{Token}} (\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} type, std\+::string value)
+\mbox{\hyperlink{classhdg_1_1_token_a5b000966421c41bcd809c83c2646cf8c}{Token}} (\mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93}{Type}} type, std\+::string value)
 \item 
-\mbox{\hyperlink{classhdg_1_1_token_a32f43ffcb89c33a87c339ab0799e8def}{Token}} (\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} type)
+\mbox{\hyperlink{classhdg_1_1_token_a95ace20b25229ed4befc1d65534a630a}{Token}} (\mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93}{Type}} type)
 \item 
-\mbox{\hyperlink{classhdg_1_1_token_ad8023705ef40c19803de0109b2f2e4bb}{Token}} (\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} type, const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position)
+\mbox{\hyperlink{classhdg_1_1_token_a66e75c7c664ebf554fdfe91da7f215e1}{Token}} (\mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93}{Type}} type, const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position)
 \item 
 \mbox{\hyperlink{classhdg_1_1_token_a35f2f8619dd8d06281e96f6f6a3fce54}{Token}} (const \mbox{\hyperlink{classhdg_1_1_token}{Token}} \&tok)
 \item 
 \mbox{\hyperlink{classhdg_1_1_token_a18f1c6c2d8d1f7ef500f09158f4841c3}{\texorpdfstring{$\sim$}{\string~}\+Token}} ()
 \item 
-bool \mbox{\hyperlink{classhdg_1_1_token_aa147fa4c8ac7257266a7f58fa83b0b51}{match}} (\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} type, const std\+::string \&value)
+bool \mbox{\hyperlink{classhdg_1_1_token_afa144f670420c7dc2fbf8bd8880d2512}{match}} (\mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93}{Type}} type, const std\+::string \&value)
 \begin{DoxyCompactList}\small\item\em 用于匹配 \doxylink{classhdg_1_1_token}{Token} 的类型与值是否全都相同。 \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classhdg_1_1_token_a6df27fe12a77630a612d7fa002a55e45}{set\+Type}} (\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} type)
+void \mbox{\hyperlink{classhdg_1_1_token_a231416155174f4813fdce6c8d07d4b48}{set\+Type}} (\mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93}{Type}} type)
 \item 
 void \mbox{\hyperlink{classhdg_1_1_token_abb2ec86095e3edaa799da04f425eb347}{set\+Value}} (const std\+::string \&value)
 \item 
-\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} \mbox{\hyperlink{classhdg_1_1_token_a577428babf5ca707de3e0eed6ae8a7a7}{get\+Type}} ()
+\mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93}{Type}} \mbox{\hyperlink{classhdg_1_1_token_a0a5b712b285fabd93fbaded3bde09d58}{get\+Type}} ()
 \item 
 std\+::string \mbox{\hyperlink{classhdg_1_1_token_af84eb7139c648270e948f44f2dfa7acc}{get\+Value}} ()
 \item 
@@ -35,10 +75,15 @@ std\+::string \mbox{\hyperlink{classhdg_1_1_token_af84eb7139c648270e948f44f2dfa7
 \item 
 std\+::string \mbox{\hyperlink{classhdg_1_1_token_aa72f3cbee5d99b50e40d436865648413}{to\+String}} ()
 \end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::map$<$ \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93}{Type}}, std\+::string $>$ \mbox{\hyperlink{classhdg_1_1_token_afaa7a55ef294d1b006fabdf9b41def0a}{Type\+Name\+Map}}
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} \mbox{\hyperlink{classhdg_1_1_token_a1cc6d72722b609e2a95bf30fc0061d14}{m\+\_\+type}}
+\mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93}{Type}} \mbox{\hyperlink{classhdg_1_1_token_a984b44a0299976af58128e165b3eca20}{m\+\_\+type}}
 \item 
 std\+::string \mbox{\hyperlink{classhdg_1_1_token_afd73b684ca24c056d8e4d05bef957819}{m\+\_\+value}}
 \item 
@@ -53,6 +98,151 @@ bool \mbox{\hyperlink{classhdg_1_1_token_a30dfa1a5ffd48d30ce994dfd7c858c39}{oper
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93} 
+\index{hdg::Token@{hdg::Token}!Type@{Type}}
+\index{Type@{Type}!hdg::Token@{hdg::Token}}
+\doxysubsubsection{\texorpdfstring{Type}{Type}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93}{hdg\+::\+Token\+::\+Type}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INT@{INT}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!INT@{INT}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a744e8a063eac02cf51d66bb5b226eb06}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a744e8a063eac02cf51d66bb5b226eb06} 
+INT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FLOAT@{FLOAT}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!FLOAT@{FLOAT}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a2fdcfeecf7a924dfd19d6386471b7f08}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a2fdcfeecf7a924dfd19d6386471b7f08} 
+FLOAT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STRING@{STRING}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!STRING@{STRING}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93ae486587750f3f3d61894b9b034e88805}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93ae486587750f3f3d61894b9b034e88805} 
+STRING&\begin{quote}
+虽然名称为“float”，但实际上全都是双精度浮点型 \end{quote}
+\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{IDENTIFIER@{IDENTIFIER}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!IDENTIFIER@{IDENTIFIER}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a35b23d0278b3cd145c59b289d9b8f566}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a35b23d0278b3cd145c59b289d9b8f566} 
+IDENTIFIER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{KEYWORD@{KEYWORD}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!KEYWORD@{KEYWORD}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93abade00b05b3f24169f618a869c06e802}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93abade00b05b3f24169f618a869c06e802} 
+KEYWORD&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NE@{NE}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!NE@{NE}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a146f379ae70e076e36b2fcffad09daca}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a146f379ae70e076e36b2fcffad09daca} 
+NE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EE@{EE}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!EE@{EE}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a1f672edf4435a53c0fd492ac7687e1a0}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a1f672edf4435a53c0fd492ac7687e1a0} 
+EE&\begin{quote}
+不等于号“!=” \end{quote}
+\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GT@{GT}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!GT@{GT}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a4fa15b7b18a6f867e8f67ad29d260f0a}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a4fa15b7b18a6f867e8f67ad29d260f0a} 
+GT&\begin{quote}
+逻辑表达式的等于号“==” \end{quote}
+\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LT@{LT}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!LT@{LT}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93afdd315d65a7c748fa036328da36656bd}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93afdd315d65a7c748fa036328da36656bd} 
+LT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GTE@{GTE}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!GTE@{GTE}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93aaef94b401120516225ddecebcf9d0201}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93aaef94b401120516225ddecebcf9d0201} 
+GTE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LTE@{LTE}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!LTE@{LTE}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93ac39c923e0a9a09689e8cee30343b36f1}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93ac39c923e0a9a09689e8cee30343b36f1} 
+LTE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PLUS@{PLUS}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!PLUS@{PLUS}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93aa53fa2be93aa8f952115be0a72dc6107}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93aa53fa2be93aa8f952115be0a72dc6107} 
+PLUS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MINUS@{MINUS}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!MINUS@{MINUS}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a3ec47ecef05a50e2dbcd1538906f271c}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a3ec47ecef05a50e2dbcd1538906f271c} 
+MINUS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MUL@{MUL}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!MUL@{MUL}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a4d732e146cebeb338ed2e683fcd70bd2}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a4d732e146cebeb338ed2e683fcd70bd2} 
+MUL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DIV@{DIV}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!DIV@{DIV}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93aaa1aeca1a8ea7513aedfd38f75d22be9}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93aaa1aeca1a8ea7513aedfd38f75d22be9} 
+DIV&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MOD@{MOD}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!MOD@{MOD}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a4b869ad6ac7b7307d9672920933a1ecb}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a4b869ad6ac7b7307d9672920933a1ecb} 
+MOD&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{POW@{POW}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!POW@{POW}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93aa7b8742b23dd61cb0adaff9c0198a0d0}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93aa7b8742b23dd61cb0adaff9c0198a0d0} 
+POW&\begin{quote}
+百分号”“，默认为求余符号 \end{quote}
+\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LPAREN@{LPAREN}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!LPAREN@{LPAREN}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a3263fb5c169dbaaed405c7acd689f013}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a3263fb5c169dbaaed405c7acd689f013} 
+LPAREN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RPAREN@{RPAREN}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!RPAREN@{RPAREN}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93aabb609d4e0beced60f833224b7d30806}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93aabb609d4e0beced60f833224b7d30806} 
+RPAREN&\begin{quote}
+左圆括号 \end{quote}
+\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LBRACKET@{LBRACKET}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!LBRACKET@{LBRACKET}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93abd863f047e3e89a57a30439d13196f10}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93abd863f047e3e89a57a30439d13196f10} 
+LBRACKET&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RBRACKET@{RBRACKET}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!RBRACKET@{RBRACKET}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a2b1751f403fd2717ffdc9c0b85e7ece9}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a2b1751f403fd2717ffdc9c0b85e7ece9} 
+RBRACKET&\begin{quote}
+左方括号 \end{quote}
+\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LBRACE@{LBRACE}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!LBRACE@{LBRACE}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a558e88e553ba9803128104550d5af441}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a558e88e553ba9803128104550d5af441} 
+LBRACE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RBRACE@{RBRACE}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!RBRACE@{RBRACE}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a1a13719a1a447d2cb475d3b8a0d93df6}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a1a13719a1a447d2cb475d3b8a0d93df6} 
+RBRACE&\begin{quote}
+左花括号 \end{quote}
+\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EQ@{EQ}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!EQ@{EQ}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a927deecebb077617e67d3e0b202486a9}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a927deecebb077617e67d3e0b202486a9} 
+EQ&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COLON@{COLON}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!COLON@{COLON}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a97d0f8374d1ff4ede8992014bc32e4c6}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a97d0f8374d1ff4ede8992014bc32e4c6} 
+COLON&\begin{quote}
+赋值语句的等于号“=” \end{quote}
+\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COMMA@{COMMA}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!COMMA@{COMMA}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a8628903c568efe2b596c333d5b5df028}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a8628903c568efe2b596c333d5b5df028} 
+COMMA&\begin{quote}
+”\+:“ \end{quote}
+\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EF@{EF}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!EF@{EF}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a01bca2355cbf33e9d52fc885d6419485}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a01bca2355cbf33e9d52fc885d6419485} 
+EF&\begin{quote}
+”,“ \end{quote}
+\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EL@{EL}!hdg::Token@{hdg::Token}}\index{hdg::Token@{hdg::Token}!EL@{EL}}}\Hypertarget{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a48fea50631c44f4776e84f8a3adbe19a}\label{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93a48fea50631c44f4776e84f8a3adbe19a} 
+EL&\begin{quote}
+end of file \end{quote}
+\\
+\hline
+
+\end{DoxyEnumFields}
+
+
 \doxysubsection{Constructor \& Destructor Documentation}
 \Hypertarget{classhdg_1_1_token_a0771e279721224109aefeb8d33d22e57}\label{classhdg_1_1_token_a0771e279721224109aefeb8d33d22e57} 
 \index{hdg::Token@{hdg::Token}!Token@{Token}}
@@ -60,29 +250,29 @@ bool \mbox{\hyperlink{classhdg_1_1_token_a30dfa1a5ffd48d30ce994dfd7c858c39}{oper
 \doxysubsubsection{\texorpdfstring{Token()}{Token()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
 {\footnotesize\ttfamily hdg\+::\+Token\+::\+Token (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\Hypertarget{classhdg_1_1_token_a55367a89a682c1956c1f4a455ae10af8}\label{classhdg_1_1_token_a55367a89a682c1956c1f4a455ae10af8} 
+\Hypertarget{classhdg_1_1_token_a16570f43ec6a0820eda8d86a0e209b06}\label{classhdg_1_1_token_a16570f43ec6a0820eda8d86a0e209b06} 
 \index{hdg::Token@{hdg::Token}!Token@{Token}}
 \index{Token@{Token}!hdg::Token@{hdg::Token}}
 \doxysubsubsection{\texorpdfstring{Token()}{Token()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
-{\footnotesize\ttfamily hdg\+::\+Token\+::\+Token (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}}}]{type,  }\item[{std\+::string}]{value,  }\item[{const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&}]{position }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily hdg\+::\+Token\+::\+Token (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93}{Type}}}]{type,  }\item[{std\+::string}]{value,  }\item[{const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&}]{position }\end{DoxyParamCaption})}
 
-\Hypertarget{classhdg_1_1_token_a72657d3fa6aaaf8f99cd92e37fc78f72}\label{classhdg_1_1_token_a72657d3fa6aaaf8f99cd92e37fc78f72} 
+\Hypertarget{classhdg_1_1_token_a5b000966421c41bcd809c83c2646cf8c}\label{classhdg_1_1_token_a5b000966421c41bcd809c83c2646cf8c} 
 \index{hdg::Token@{hdg::Token}!Token@{Token}}
 \index{Token@{Token}!hdg::Token@{hdg::Token}}
 \doxysubsubsection{\texorpdfstring{Token()}{Token()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
-{\footnotesize\ttfamily hdg\+::\+Token\+::\+Token (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}}}]{type,  }\item[{std\+::string}]{value }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily hdg\+::\+Token\+::\+Token (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93}{Type}}}]{type,  }\item[{std\+::string}]{value }\end{DoxyParamCaption})}
 
-\Hypertarget{classhdg_1_1_token_a32f43ffcb89c33a87c339ab0799e8def}\label{classhdg_1_1_token_a32f43ffcb89c33a87c339ab0799e8def} 
+\Hypertarget{classhdg_1_1_token_a95ace20b25229ed4befc1d65534a630a}\label{classhdg_1_1_token_a95ace20b25229ed4befc1d65534a630a} 
 \index{hdg::Token@{hdg::Token}!Token@{Token}}
 \index{Token@{Token}!hdg::Token@{hdg::Token}}
 \doxysubsubsection{\texorpdfstring{Token()}{Token()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
-{\footnotesize\ttfamily hdg\+::\+Token\+::\+Token (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}}}]{type }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily hdg\+::\+Token\+::\+Token (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93}{Type}}}]{type }\end{DoxyParamCaption})}
 
-\Hypertarget{classhdg_1_1_token_ad8023705ef40c19803de0109b2f2e4bb}\label{classhdg_1_1_token_ad8023705ef40c19803de0109b2f2e4bb} 
+\Hypertarget{classhdg_1_1_token_a66e75c7c664ebf554fdfe91da7f215e1}\label{classhdg_1_1_token_a66e75c7c664ebf554fdfe91da7f215e1} 
 \index{hdg::Token@{hdg::Token}!Token@{Token}}
 \index{Token@{Token}!hdg::Token@{hdg::Token}}
 \doxysubsubsection{\texorpdfstring{Token()}{Token()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
-{\footnotesize\ttfamily hdg\+::\+Token\+::\+Token (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}}}]{type,  }\item[{const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&}]{position }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily hdg\+::\+Token\+::\+Token (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93}{Type}}}]{type,  }\item[{const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&}]{position }\end{DoxyParamCaption})}
 
 \Hypertarget{classhdg_1_1_token_a35f2f8619dd8d06281e96f6f6a3fce54}\label{classhdg_1_1_token_a35f2f8619dd8d06281e96f6f6a3fce54} 
 \index{hdg::Token@{hdg::Token}!Token@{Token}}
@@ -99,11 +289,11 @@ bool \mbox{\hyperlink{classhdg_1_1_token_a30dfa1a5ffd48d30ce994dfd7c858c39}{oper
 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classhdg_1_1_token_a577428babf5ca707de3e0eed6ae8a7a7}\label{classhdg_1_1_token_a577428babf5ca707de3e0eed6ae8a7a7} 
+\Hypertarget{classhdg_1_1_token_a0a5b712b285fabd93fbaded3bde09d58}\label{classhdg_1_1_token_a0a5b712b285fabd93fbaded3bde09d58} 
 \index{hdg::Token@{hdg::Token}!getType@{getType}}
 \index{getType@{getType}!hdg::Token@{hdg::Token}}
 \doxysubsubsection{\texorpdfstring{getType()}{getType()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} hdg\+::\+Token\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93}{Token\+::\+Type}} hdg\+::\+Token\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 \Hypertarget{classhdg_1_1_token_af84eb7139c648270e948f44f2dfa7acc}\label{classhdg_1_1_token_af84eb7139c648270e948f44f2dfa7acc} 
 \index{hdg::Token@{hdg::Token}!getValue@{getValue}}
@@ -111,11 +301,11 @@ bool \mbox{\hyperlink{classhdg_1_1_token_a30dfa1a5ffd48d30ce994dfd7c858c39}{oper
 \doxysubsubsection{\texorpdfstring{getValue()}{getValue()}}
 {\footnotesize\ttfamily std\+::string hdg\+::\+Token\+::get\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\Hypertarget{classhdg_1_1_token_aa147fa4c8ac7257266a7f58fa83b0b51}\label{classhdg_1_1_token_aa147fa4c8ac7257266a7f58fa83b0b51} 
+\Hypertarget{classhdg_1_1_token_afa144f670420c7dc2fbf8bd8880d2512}\label{classhdg_1_1_token_afa144f670420c7dc2fbf8bd8880d2512} 
 \index{hdg::Token@{hdg::Token}!match@{match}}
 \index{match@{match}!hdg::Token@{hdg::Token}}
 \doxysubsubsection{\texorpdfstring{match()}{match()}}
-{\footnotesize\ttfamily bool hdg\+::\+Token\+::match (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}}}]{type,  }\item[{const std\+::string \&}]{value }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool hdg\+::\+Token\+::match (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93}{Type}}}]{type,  }\item[{const std\+::string \&}]{value }\end{DoxyParamCaption})}
 
 
 
@@ -136,11 +326,11 @@ bool \mbox{\hyperlink{classhdg_1_1_token_a30dfa1a5ffd48d30ce994dfd7c858c39}{oper
 
 cpp里的注释。 
 \end{DoxyNote}
-\Hypertarget{classhdg_1_1_token_a6df27fe12a77630a612d7fa002a55e45}\label{classhdg_1_1_token_a6df27fe12a77630a612d7fa002a55e45} 
+\Hypertarget{classhdg_1_1_token_a231416155174f4813fdce6c8d07d4b48}\label{classhdg_1_1_token_a231416155174f4813fdce6c8d07d4b48} 
 \index{hdg::Token@{hdg::Token}!setType@{setType}}
 \index{setType@{setType}!hdg::Token@{hdg::Token}}
 \doxysubsubsection{\texorpdfstring{setType()}{setType()}}
-{\footnotesize\ttfamily void hdg\+::\+Token\+::set\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}}}]{type }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void hdg\+::\+Token\+::set\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93}{Type}}}]{type }\end{DoxyParamCaption})}
 
 \Hypertarget{classhdg_1_1_token_abb2ec86095e3edaa799da04f425eb347}\label{classhdg_1_1_token_abb2ec86095e3edaa799da04f425eb347} 
 \index{hdg::Token@{hdg::Token}!setValue@{setValue}}
@@ -184,15 +374,21 @@ cpp里的注释。
 \doxysubsubsection{\texorpdfstring{m\_position}{m\_position}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_position}{Position}} hdg\+::\+Token\+::m\+\_\+position\hspace{0.3cm}{\ttfamily [protected]}}
 
-\Hypertarget{classhdg_1_1_token_a1cc6d72722b609e2a95bf30fc0061d14}\label{classhdg_1_1_token_a1cc6d72722b609e2a95bf30fc0061d14} 
+\Hypertarget{classhdg_1_1_token_a984b44a0299976af58128e165b3eca20}\label{classhdg_1_1_token_a984b44a0299976af58128e165b3eca20} 
 \index{hdg::Token@{hdg::Token}!m\_type@{m\_type}}
 \index{m\_type@{m\_type}!hdg::Token@{hdg::Token}}
 \doxysubsubsection{\texorpdfstring{m\_type}{m\_type}}
-{\footnotesize\ttfamily \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} hdg\+::\+Token\+::m\+\_\+type\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93}{Type}} hdg\+::\+Token\+::m\+\_\+type\hspace{0.3cm}{\ttfamily [protected]}}
 
 \Hypertarget{classhdg_1_1_token_afd73b684ca24c056d8e4d05bef957819}\label{classhdg_1_1_token_afd73b684ca24c056d8e4d05bef957819} 
 \index{hdg::Token@{hdg::Token}!m\_value@{m\_value}}
 \index{m\_value@{m\_value}!hdg::Token@{hdg::Token}}
 \doxysubsubsection{\texorpdfstring{m\_value}{m\_value}}
 {\footnotesize\ttfamily std\+::string hdg\+::\+Token\+::m\+\_\+value\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_token_afaa7a55ef294d1b006fabdf9b41def0a}\label{classhdg_1_1_token_afaa7a55ef294d1b006fabdf9b41def0a} 
+\index{hdg::Token@{hdg::Token}!TypeNameMap@{TypeNameMap}}
+\index{TypeNameMap@{TypeNameMap}!hdg::Token@{hdg::Token}}
+\doxysubsubsection{\texorpdfstring{TypeNameMap}{TypeNameMap}}
+{\footnotesize\ttfamily std\+::map$<$ \mbox{\hyperlink{classhdg_1_1_token_a24b3da419c22d6010d83fdc8b6277f93}{Token\+::\+Type}}, std\+::string $>$ hdg\+::\+Token\+::\+Type\+Name\+Map\hspace{0.3cm}{\ttfamily [static]}}
 

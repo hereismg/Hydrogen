@@ -18,7 +18,7 @@ var annotated_dup =
       [ "List", "classhdg_1_1_list.html", null ],
       [ "Node", "classhdg_1_1_node.html", "classhdg_1_1_node" ],
       [ "None", "classhdg_1_1_none.html", "classhdg_1_1_none" ],
-      [ "NotImplementedError", "classhdg_1_1_not_implemented_error.html", null ],
+      [ "NotImplementedError", "classhdg_1_1_not_implemented_error.html", "classhdg_1_1_not_implemented_error" ],
       [ "NumObjNode", "classhdg_1_1_num_obj_node.html", "classhdg_1_1_num_obj_node" ],
       [ "ObjAccessNode", "classhdg_1_1_obj_access_node.html", "classhdg_1_1_obj_access_node" ],
       [ "ObjAssignNode", "classhdg_1_1_obj_assign_node.html", "classhdg_1_1_obj_assign_node" ],

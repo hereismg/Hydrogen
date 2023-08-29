@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['rbrace_0',['RBRACE',['../namespacehdg.html#a8e782b93fb966ac4f9d6006b416444a1a6c2885e29931f86583323170cea9e07a',1,'hdg']]],
-  ['rbracket_1',['RBRACKET',['../namespacehdg.html#a8e782b93fb966ac4f9d6006b416444a1a08fb6cb2c5ccca7226e1f772ce770a6d',1,'hdg']]],
+  ['rbrace_0',['RBRACE',['../classhdg_1_1_token.html#a24b3da419c22d6010d83fdc8b6277f93a1a13719a1a447d2cb475d3b8a0d93df6',1,'hdg::Token']]],
+  ['rbracket_1',['RBRACKET',['../classhdg_1_1_token.html#a24b3da419c22d6010d83fdc8b6277f93a2b1751f403fd2717ffdc9c0b85e7ece9',1,'hdg::Token']]],
   ['release_2',['release',['../classhdg_1_1_interpreter.html#aa417142a6f2202cfb0881ba8ee22f409ad1573190343ac3e34b8886153a975f63',1,'hdg::Interpreter']]],
-  ['rparen_3',['RPAREN',['../namespacehdg.html#a8e782b93fb966ac4f9d6006b416444a1ae8606dd1fe0314be15838fcdb3f47906',1,'hdg']]]
+  ['rparen_3',['RPAREN',['../classhdg_1_1_token.html#a24b3da419c22d6010d83fdc8b6277f93aabb609d4e0beced60f833224b7d30806',1,'hdg::Token']]]
 ];

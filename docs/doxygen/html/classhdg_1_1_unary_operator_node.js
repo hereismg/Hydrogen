@@ -1,7 +1,7 @@
 var classhdg_1_1_unary_operator_node =
 [
-    [ "UnaryOperatorNode", "classhdg_1_1_unary_operator_node.html#aa02cd3b687a5aa6d5472fdab44152960", null ],
-    [ "UnaryOperatorNode", "classhdg_1_1_unary_operator_node.html#a39023bbf412fdcae2128190d4b5fb53f", null ],
+    [ "UnaryOperatorNode", "classhdg_1_1_unary_operator_node.html#a0a828f2ac4efd8bf66312399f45b5ca4", null ],
+    [ "UnaryOperatorNode", "classhdg_1_1_unary_operator_node.html#a36b5795167ea99d79165531579f8dffd", null ],
     [ "~UnaryOperatorNode", "classhdg_1_1_unary_operator_node.html#a0cc3fdc156894cdeb64303ef510894c2", null ],
     [ "getObject", "classhdg_1_1_unary_operator_node.html#a73b9f4eb944ba6a08f6b1a64b80ae0ef", null ],
     [ "getOperator", "classhdg_1_1_unary_operator_node.html#af62c0a4190d0cf3c5d49c09d6b8b9961", null ],

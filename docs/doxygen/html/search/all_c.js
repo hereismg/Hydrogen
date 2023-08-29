@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['ne_0',['NE',['../namespacehdg.html#a8e782b93fb966ac4f9d6006b416444a1a2bba9b04bae1093fc3a1fd7944088098',1,'hdg']]],
+  ['ne_0',['NE',['../classhdg_1_1_token.html#a24b3da419c22d6010d83fdc8b6277f93a146f379ae70e076e36b2fcffad09daca',1,'hdg::Token']]],
   ['node_1',['node',['../classhdg_1_1_node.html',1,'hdg::Node'],['../classhdg_1_1_node.html#a50473c6b50f3a6c8e8ebb7327617dfce',1,'hdg::Node::Node()'],['../classhdg_1_1_node.html#a629d0b488519d193e4c9e10614741187',1,'hdg::Node::Node(const Position &amp;position)'],['../classhdg_1_1_node.html#a63a9e032a412b58ad3854deba6e80f91',1,'hdg::Node::Node(const Position &amp;position, Environment *environment)']]],
   ['node_2ecpp_2',['Node.cpp',['../_node_8cpp.html',1,'']]],
   ['node_2eh_3',['Node.h',['../_node_8h.html',1,'']]],
@@ -8,7 +8,7 @@ var searchData=
   ['none_2ecpp_5',['None.cpp',['../_none_8cpp.html',1,'']]],
   ['none_2eh_6',['None.h',['../_none_8h.html',1,'']]],
   ['notequation_7',['notequation',['../classhdg_1_1_float.html#a370aba69929b213c537f18fa918a1c3f',1,'hdg::Float::notEquation()'],['../classhdg_1_1_integer.html#a003de7510ea0347ae878a931ec2532fa',1,'hdg::Integer::notEquation()'],['../classhdg_1_1_object.html#a7e06109b04871f0ca95d2a015c642bda',1,'hdg::Object::notEquation()']]],
-  ['notimplementederror_8',['NotImplementedError',['../classhdg_1_1_not_implemented_error.html',1,'hdg']]],
+  ['notimplementederror_8',['notimplementederror',['../classhdg_1_1_not_implemented_error.html',1,'hdg::NotImplementedError'],['../classhdg_1_1_not_implemented_error.html#a80bc6f5ce533354464e29210b97cebe9',1,'hdg::NotImplementedError::NotImplementedError()']]],
   ['notimplementederror_2ecpp_9',['NotImplementedError.cpp',['../_not_implemented_error_8cpp.html',1,'']]],
   ['notimplementederror_2eh_10',['NotImplementedError.h',['../_not_implemented_error_8h.html',1,'']]],
   ['notoperator_11',['notoperator',['../classhdg_1_1_float.html#a90bd482de6ec53533b805568ccb77f5d',1,'hdg::Float::notOperator()'],['../classhdg_1_1_integer.html#adeffbc476b4ce40af983091657efec93',1,'hdg::Integer::notOperator()'],['../classhdg_1_1_none.html#aea6ebb00dd88a3872990c7f1aa620b5d',1,'hdg::None::notOperator()'],['../classhdg_1_1_object.html#af94b05a75b07c5f7e04c01867157bcd7',1,'hdg::Object::notOperator()']]],

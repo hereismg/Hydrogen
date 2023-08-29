@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 727.272705
+%%BoundingBox: 0 0 500 666.666687
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,12 +19,12 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 0.687500 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 0.750000 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
 /yspacing 0 def
-/rows 12 def
+/rows 11 def
 /cols 2 def
 /scalefactor 0 def
 /boxfont /Times-Roman findfont fontheight scalefont def
@@ -178,7 +178,6 @@ boxfont setfont
 (hdg::CallNode) cw
 (hdg::ForNode) cw
 (hdg::IfNode) cw
-(hdg::NumObjNode) cw
 (hdg::ObjAccessNode) cw
 (hdg::ObjAssignNode) cw
 (hdg::ObjectNode) cw
@@ -196,12 +195,11 @@ boundx scalefactor div boundy scalefactor div scale
 
 % ----- classes -----
 
- (hdg::Node) 0.000000 11.000000 box
- (hdg::BinaryOperatorNode) 1.000000 10.000000 box
- (hdg::CallNode) 1.000000 9.000000 box
- (hdg::ForNode) 1.000000 8.000000 box
- (hdg::IfNode) 1.000000 7.000000 box
- (hdg::NumObjNode) 1.000000 6.000000 box
+ (hdg::Node) 0.000000 10.000000 box
+ (hdg::BinaryOperatorNode) 1.000000 9.000000 box
+ (hdg::CallNode) 1.000000 8.000000 box
+ (hdg::ForNode) 1.000000 7.000000 box
+ (hdg::IfNode) 1.000000 6.000000 box
  (hdg::ObjAccessNode) 1.000000 5.000000 box
  (hdg::ObjAssignNode) 1.000000 4.000000 box
  (hdg::ObjectNode) 1.000000 3.000000 box
@@ -213,9 +211,7 @@ boundx scalefactor div boundy scalefactor div scale
 % ----- relations -----
 
 solid
-1 0.000000 10.250000 out
-solid
-0 0.000000 10.500000 hedge
+1 0.000000 9.250000 out
 solid
 0 0.000000 9.500000 hedge
 solid
@@ -237,4 +233,4 @@ solid
 solid
 0 0.000000 0.500000 hedge
 solid
-0.000000 11.000000 0.500000 vedge
+0.000000 10.000000 0.500000 vedge

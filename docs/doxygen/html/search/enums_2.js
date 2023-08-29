@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['tokentype_0',['TokenType',['../namespacehdg.html#a8e782b93fb966ac4f9d6006b416444a1',1,'hdg']]]
+  ['type_0',['Type',['../classhdg_1_1_token.html#a24b3da419c22d6010d83fdc8b6277f93',1,'hdg::Token']]]
 ];

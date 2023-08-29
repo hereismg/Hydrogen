@@ -1,7 +1,8 @@
 var classhdg_1_1_error =
 [
     [ "Error", "classhdg_1_1_error.html#aef566b0791e355d2bae63907ed85a779", null ],
-    [ "Error", "classhdg_1_1_error.html#a662ca345d538d646dc4c3bd227974492", null ],
+    [ "Error", "classhdg_1_1_error.html#a29110f6fe97a25bbceb75fa34b3b7653", null ],
+    [ "Error", "classhdg_1_1_error.html#ab4f2715677eb9fb1dfd8e1288f0f699f", null ],
     [ "Error", "classhdg_1_1_error.html#a383cc58f21b7d31bafb480cc6656e8e1", null ],
     [ "setDetail", "classhdg_1_1_error.html#a50404246b15108bb0b671826565f87a4", null ],
     [ "setName", "classhdg_1_1_error.html#a6aa2e5bd26a7b725e9b4bf2b79cfb781", null ],

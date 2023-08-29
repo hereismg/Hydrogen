@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['keyword_0',['KEYWORD',['../namespacehdg.html#a8e782b93fb966ac4f9d6006b416444a1a469290ac8057965cb09f417ffcb25fdf',1,'hdg']]]
+  ['keyword_0',['KEYWORD',['../classhdg_1_1_token.html#a24b3da419c22d6010d83fdc8b6277f93abade00b05b3f24169f618a869c06e802',1,'hdg::Token']]]
 ];

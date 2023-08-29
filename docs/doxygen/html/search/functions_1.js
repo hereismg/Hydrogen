@@ -1,7 +1,7 @@
 var searchData=
 [
   ['binaryoperator_0',['binaryOperator',['../classhdg_1_1_parser.html#aa4d23b86079f88058c7c08830ea409b6',1,'hdg::Parser']]],
-  ['binaryoperatornode_1',['binaryoperatornode',['../classhdg_1_1_binary_operator_node.html#a0fde4d5b90f392e7000b8aca62e853ef',1,'hdg::BinaryOperatorNode::BinaryOperatorNode(const Token &amp;oper, Node *left, Node *right, const Position &amp;position)'],['../classhdg_1_1_binary_operator_node.html#a6270da3b1c3acf0074d9c5525e00c177',1,'hdg::BinaryOperatorNode::BinaryOperatorNode(TokenType oper, Node *left, Node *right, const Position &amp;position, Environment *environment)']]],
+  ['binaryoperatornode_1',['binaryoperatornode',['../classhdg_1_1_binary_operator_node.html#a0fde4d5b90f392e7000b8aca62e853ef',1,'hdg::BinaryOperatorNode::BinaryOperatorNode(const Token &amp;oper, Node *left, Node *right, const Position &amp;position)'],['../classhdg_1_1_binary_operator_node.html#ae418e5ba4b2d71305827b99926e06279',1,'hdg::BinaryOperatorNode::BinaryOperatorNode(Token::Type oper, Node *left, Node *right, const Position &amp;position, Environment *environment)']]],
   ['braces_2',['braces',['../classhdg_1_1_object.html#a6ab14d3234533a659d63b00f36f98eda',1,'hdg::Object']]],
   ['brackets_3',['brackets',['../classhdg_1_1_object.html#a7f57446be38bd40d121eb9f127fded94',1,'hdg::Object']]],
   ['buildequation_4',['buildEquation',['../classhdg_1_1_lexer.html#ab2616658d58cbe15d7de9c74b91ebe39',1,'hdg::Lexer']]],

@@ -18,6 +18,7 @@ var classhdg_1_1_object =
     [ "lessThan", "classhdg_1_1_object.html#a9ac2bbc27c55bdf9b0aa64397326730e", null ],
     [ "lessThanEquation", "classhdg_1_1_object.html#a45a7ed17714d98d1cb3faec4bc05ac4f", null ],
     [ "minus", "classhdg_1_1_object.html#a094676c48e931b4489c6417abf27e02a", null ],
+    [ "mod", "classhdg_1_1_object.html#a77702e8866ad45031ff12ffbbd0df637", null ],
     [ "mul", "classhdg_1_1_object.html#abeeda64b997b7e50293c8dfc0fdf6825", null ],
     [ "notEquation", "classhdg_1_1_object.html#a7e06109b04871f0ca95d2a015c642bda", null ],
     [ "notOperator", "classhdg_1_1_object.html#af94b05a75b07c5f7e04c01867157bcd7", null ],

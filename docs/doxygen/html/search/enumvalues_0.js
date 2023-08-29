@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['colon_0',['COLON',['../namespacehdg.html#a8e782b93fb966ac4f9d6006b416444a1aff8fa14b18888d5777c2c8cb59df6a9c',1,'hdg']]],
-  ['comma_1',['COMMA',['../namespacehdg.html#a8e782b93fb966ac4f9d6006b416444a1afd5bad3f86efe1b1ab8a2e6201eccba9',1,'hdg']]]
+  ['colon_0',['COLON',['../classhdg_1_1_token.html#a24b3da419c22d6010d83fdc8b6277f93a97d0f8374d1ff4ede8992014bc32e4c6',1,'hdg::Token']]],
+  ['comma_1',['COMMA',['../classhdg_1_1_token.html#a24b3da419c22d6010d83fdc8b6277f93a8628903c568efe2b596c333d5b5df028',1,'hdg::Token']]]
 ];

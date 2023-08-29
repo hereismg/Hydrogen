@@ -7,6 +7,7 @@ var hierarchy =
         [ "hdg::IllegalCharError", "classhdg_1_1_illegal_char_error.html", null ],
         [ "hdg::InvalidSyntaxError", "classhdg_1_1_invalid_syntax_error.html", null ],
         [ "hdg::RuntimeError", "classhdg_1_1_runtime_error.html", [
+          [ "hdg::NotImplementedError", "classhdg_1_1_not_implemented_error.html", null ],
           [ "hdg::ZeroDivisionError", "classhdg_1_1_zero_division_error.html", null ]
         ] ]
       ] ]
@@ -20,18 +21,17 @@ var hierarchy =
       [ "hdg::CallNode", "classhdg_1_1_call_node.html", null ],
       [ "hdg::ForNode", "classhdg_1_1_for_node.html", null ],
       [ "hdg::IfNode", "classhdg_1_1_if_node.html", null ],
-      [ "hdg::NumObjNode", "classhdg_1_1_num_obj_node.html", null ],
       [ "hdg::ObjAccessNode", "classhdg_1_1_obj_access_node.html", null ],
       [ "hdg::ObjAssignNode", "classhdg_1_1_obj_assign_node.html", null ],
       [ "hdg::ObjectNode", "classhdg_1_1_object_node.html", [
         [ "hdg::FuncObjNode", "classhdg_1_1_func_obj_node.html", null ],
+        [ "hdg::NumObjNode", "classhdg_1_1_num_obj_node.html", null ],
         [ "hdg::StrObjNode", "classhdg_1_1_str_obj_node.html", null ]
       ] ],
       [ "hdg::StatementsNode", "classhdg_1_1_statements_node.html", null ],
       [ "hdg::UnaryOperatorNode", "classhdg_1_1_unary_operator_node.html", null ],
       [ "hdg::WhileNode", "classhdg_1_1_while_node.html", null ]
     ] ],
-    [ "hdg::NotImplementedError", "classhdg_1_1_not_implemented_error.html", null ],
     [ "hdg::Object", "classhdg_1_1_object.html", [
       [ "hdg::Float", "classhdg_1_1_float.html", null ],
       [ "hdg::Function", "classhdg_1_1_function.html", null ],

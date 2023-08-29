@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ne_0',['NE',['../namespacehdg.html#a8e782b93fb966ac4f9d6006b416444a1a2bba9b04bae1093fc3a1fd7944088098',1,'hdg']]]
+  ['ne_0',['NE',['../classhdg_1_1_token.html#a24b3da419c22d6010d83fdc8b6277f93a146f379ae70e076e36b2fcffad09daca',1,'hdg::Token']]]
 ];

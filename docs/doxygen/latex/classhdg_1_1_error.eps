@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 175.438599
+%%BoundingBox: 0 0 500 121.212120
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,13 +19,13 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 2.850000 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 4.125000 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
 /yspacing 0 def
 /rows 4 def
-/cols 3 def
+/cols 4 def
 /scalefactor 0 def
 /boxfont /Times-Roman findfont fontheight scalefont def
 
@@ -178,6 +178,7 @@ boxfont setfont
 (hdg::IllegalCharError) cw
 (hdg::InvalidSyntaxError) cw
 (hdg::RuntimeError) cw
+(hdg::NotImplementedError) cw
 (hdg::ZeroDivisionError) cw
 /boxwidth boxwidth marginwidth 2 mul add def
 /xspacing boxwidth distx add def
@@ -195,7 +196,8 @@ boundx scalefactor div boundy scalefactor div scale
  (hdg::IllegalCharError) 0.000000 1.000000 box
  (hdg::InvalidSyntaxError) 1.000000 1.000000 box
  (hdg::RuntimeError) 2.000000 1.000000 box
- (hdg::ZeroDivisionError) 2.000000 0.000000 box
+ (hdg::NotImplementedError) 1.500000 0.000000 box
+ (hdg::ZeroDivisionError) 2.500000 0.000000 box
 
 % ----- relations -----
 
@@ -216,4 +218,8 @@ solid
 solid
 1 2.000000 0.250000 out
 solid
-0 2.000000 0.750000 in
+1.500000 2.500000 1.000000 conn
+solid
+0 1.500000 0.750000 in
+solid
+0 2.500000 0.750000 in

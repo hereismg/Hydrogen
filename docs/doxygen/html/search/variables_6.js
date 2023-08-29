@@ -3,7 +3,7 @@ var searchData=
   ['m_5fargs_0',['m_args',['../classhdg_1_1_func_obj_node.html#ab53ef2dee1be2e2935cfe44cb4ab1ead',1,'hdg::FuncObjNode::m_args'],['../classhdg_1_1_function.html#a457358b2945995751a9c93e19fcaf72f',1,'hdg::Function::m_args']]],
   ['m_5fbody_1',['m_body',['../classhdg_1_1_func_obj_node.html#aaa209844185d6b8bd53aee195460a10e',1,'hdg::FuncObjNode::m_body'],['../classhdg_1_1_function.html#acd3ddd612c6aa59b5e9522f550e767ec',1,'hdg::Function::m_body']]],
   ['m_5fcall_2',['m_call',['../classhdg_1_1_call_node.html#a6c05e57c9662c9fce1b39c488517bca1',1,'hdg::CallNode']]],
-  ['m_5fclass_3',['m_class',['../classhdg_1_1_num_obj_node.html#a7a69fb4725808d0ed5115a88e9b6ecca',1,'hdg::NumObjNode::m_class'],['../classhdg_1_1_object_node.html#a43f1f9454decd1c29ac65f259c5a88fa',1,'hdg::ObjectNode::m_class'],['../classhdg_1_1_object.html#a39d1faf396ff4bef9b12655891c6e4ec',1,'hdg::Object::m_class']]],
+  ['m_5fclass_3',['m_class',['../classhdg_1_1_object_node.html#a43f1f9454decd1c29ac65f259c5a88fa',1,'hdg::ObjectNode::m_class'],['../classhdg_1_1_object.html#a39d1faf396ff4bef9b12655891c6e4ec',1,'hdg::Object::m_class']]],
   ['m_5fcode_4',['m_code',['../classhdg_1_1_lexer.html#a1429d500fa702f16145e81db1f22706c',1,'hdg::Lexer']]],
   ['m_5fcodestack_5',['m_codeStack',['../classhdg_1_1_interpreter.html#a7065daca8cab37b0ed83ab86f07294b1',1,'hdg::Interpreter']]],
   ['m_5fcondition_6',['m_condition',['../classhdg_1_1_while_node.html#a32a268d050c40a348ec7202547bd35cc',1,'hdg::WhileNode']]],
@@ -26,7 +26,7 @@ var searchData=
   ['m_5fmodulename_23',['m_moduleName',['../classhdg_1_1_environment.html#a7060f9c734930b602f8e1b0e824bd91a',1,'hdg::Environment']]],
   ['m_5fname_24',['m_name',['../classhdg_1_1_error.html#a0d5348d537268cc719326a965f95752b',1,'hdg::Error::m_name'],['../classhdg_1_1_obj_access_node.html#a43c0e5e174a8e4e9f07ce091df2589de',1,'hdg::ObjAccessNode::m_name'],['../classhdg_1_1_obj_assign_node.html#a559dd6817842786734d4f7331e98d921',1,'hdg::ObjAssignNode::m_name'],['../classhdg_1_1_func_obj_node.html#ac934add25786ee1828d4b7efc34d89e3',1,'hdg::FuncObjNode::m_name'],['../classhdg_1_1_function.html#a405e16ed95b8b717bfac4ea289fa29d5',1,'hdg::Function::m_name']]],
   ['m_5fobj_25',['m_obj',['../classhdg_1_1_unary_operator_node.html#a69aa044b0033dbfe408adb2ce7ee0f07',1,'hdg::UnaryOperatorNode']]],
-  ['m_5foper_26',['m_oper',['../classhdg_1_1_binary_operator_node.html#aa4da2a7f71ecd4ec3e4f1c100913dd06',1,'hdg::BinaryOperatorNode::m_oper'],['../classhdg_1_1_call_node.html#a6b5e59d1e93ebb89692bed4ed89bb103',1,'hdg::CallNode::m_oper'],['../classhdg_1_1_unary_operator_node.html#a3f12e8c94b43c4b44fc85812be708b45',1,'hdg::UnaryOperatorNode::m_oper']]],
+  ['m_5foper_26',['m_oper',['../classhdg_1_1_binary_operator_node.html#aa4da2a7f71ecd4ec3e4f1c100913dd06',1,'hdg::BinaryOperatorNode::m_oper'],['../classhdg_1_1_call_node.html#afab2498f1721f0311b7508aaa15d8efa',1,'hdg::CallNode::m_oper'],['../classhdg_1_1_unary_operator_node.html#a3f12e8c94b43c4b44fc85812be708b45',1,'hdg::UnaryOperatorNode::m_oper']]],
   ['m_5fparent_27',['m_parent',['../classhdg_1_1_environment.html#aa87efa02814239a73d220e2cc533e285',1,'hdg::Environment']]],
   ['m_5fpos_28',['m_pos',['../classhdg_1_1_lexer.html#a056ae60f466617d8e994616516a9f012',1,'hdg::Lexer']]],
   ['m_5fposition_29',['m_position',['../classhdg_1_1_token.html#aa03977c3dac907b6cdd2e096d36ae56a',1,'hdg::Token::m_position'],['../classhdg_1_1_node.html#a56dc5bce438d6f5aa3e4840ec04c5c4e',1,'hdg::Node::m_position'],['../classhdg_1_1_object.html#aff6b6da7527dff11790b8c839327ab2d',1,'hdg::Object::m_position']]],
@@ -38,6 +38,6 @@ var searchData=
   ['m_5fsymboltable_35',['m_symbolTable',['../classhdg_1_1_environment.html#a99a6cc3dba8617ae0dbc1814d8e22708',1,'hdg::Environment']]],
   ['m_5fto_36',['m_to',['../classhdg_1_1_for_node.html#a8af0fedbee99b65cfe8e7614e3beb398',1,'hdg::ForNode']]],
   ['m_5ftokens_37',['m_tokens',['../classhdg_1_1_lexer.html#a25fb252caec72fc69c39a67a1d166bca',1,'hdg::Lexer::m_tokens'],['../classhdg_1_1_parser.html#a4c43d79ce50bc774eb0cbaebf60d81c0',1,'hdg::Parser::m_tokens']]],
-  ['m_5ftype_38',['m_type',['../classhdg_1_1_token.html#a1cc6d72722b609e2a95bf30fc0061d14',1,'hdg::Token']]],
+  ['m_5ftype_38',['m_type',['../classhdg_1_1_token.html#a984b44a0299976af58128e165b3eca20',1,'hdg::Token']]],
   ['m_5fvalue_39',['m_value',['../classhdg_1_1_token.html#afd73b684ca24c056d8e4d05bef957819',1,'hdg::Token::m_value'],['../classhdg_1_1_num_obj_node.html#ae409ee6c1af8d3f43cb0e041f7c26303',1,'hdg::NumObjNode::m_value'],['../classhdg_1_1_str_obj_node.html#ac60dee0989f4852ff2932540301795b1',1,'hdg::StrObjNode::m_value'],['../classhdg_1_1_float.html#ae9adc1e29057b06839d7d5e8ab036057',1,'hdg::Float::m_value'],['../classhdg_1_1_integer.html#a25b4791f9b44b92df457e34bdaddabf3',1,'hdg::Integer::m_value'],['../classhdg_1_1_string.html#a887e0f6398523535f503a155128114e4',1,'hdg::String::m_value']]]
 ];

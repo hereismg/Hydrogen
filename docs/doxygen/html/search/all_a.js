@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['lbrace_0',['LBRACE',['../namespacehdg.html#a8e782b93fb966ac4f9d6006b416444a1a2665145bf9f07023b5fc66cb499f2b9c',1,'hdg']]],
-  ['lbracket_1',['LBRACKET',['../namespacehdg.html#a8e782b93fb966ac4f9d6006b416444a1a7facc0fd54100d735ed52038ad5aa463',1,'hdg']]],
+  ['lbrace_0',['LBRACE',['../classhdg_1_1_token.html#a24b3da419c22d6010d83fdc8b6277f93a558e88e553ba9803128104550d5af441',1,'hdg::Token']]],
+  ['lbracket_1',['LBRACKET',['../classhdg_1_1_token.html#a24b3da419c22d6010d83fdc8b6277f93abd863f047e3e89a57a30439d13196f10',1,'hdg::Token']]],
   ['legalchar_2',['LegalChar',['../namespacehdg.html#af4e516e72fe6edc775660088c94b65a1',1,'hdg']]],
   ['lessthan_3',['lessthan',['../classhdg_1_1_float.html#a584e29431bf094333d847c43bdc592ba',1,'hdg::Float::lessThan()'],['../classhdg_1_1_integer.html#a2901f0ec8064a5b2a5b281a2278e8d09',1,'hdg::Integer::lessThan()'],['../classhdg_1_1_object.html#a9ac2bbc27c55bdf9b0aa64397326730e',1,'hdg::Object::lessThan()']]],
   ['lessthanequation_4',['lessthanequation',['../classhdg_1_1_float.html#a401406ed59cc6aff88a12fea8e8892d0',1,'hdg::Float::lessThanEquation()'],['../classhdg_1_1_integer.html#a1e5305662e50a91141b0f4b0033f66ed',1,'hdg::Integer::lessThanEquation()'],['../classhdg_1_1_object.html#a45a7ed17714d98d1cb3faec4bc05ac4f',1,'hdg::Object::lessThanEquation()']]],
@@ -13,7 +13,7 @@ var searchData=
   ['list_2ecpp_10',['List.cpp',['../_list_8cpp.html',1,'']]],
   ['list_2eh_11',['List.h',['../_list_8h.html',1,'']]],
   ['lowercase_12',['LOWERCASE',['../namespacehdg.html#af4e516e72fe6edc775660088c94b65a1ab98d15f9c8290b499d0047f83cda9b10',1,'hdg']]],
-  ['lparen_13',['LPAREN',['../namespacehdg.html#a8e782b93fb966ac4f9d6006b416444a1aa6839d4813849cadf29f6f9fe78ef19f',1,'hdg']]],
-  ['lt_14',['LT',['../namespacehdg.html#a8e782b93fb966ac4f9d6006b416444a1af6d61be133399868842fa63e5f63e59c',1,'hdg']]],
-  ['lte_15',['LTE',['../namespacehdg.html#a8e782b93fb966ac4f9d6006b416444a1abdf3fb0c4cdca2f5717e98f99b45c275',1,'hdg']]]
+  ['lparen_13',['LPAREN',['../classhdg_1_1_token.html#a24b3da419c22d6010d83fdc8b6277f93a3263fb5c169dbaaed405c7acd689f013',1,'hdg::Token']]],
+  ['lt_14',['LT',['../classhdg_1_1_token.html#a24b3da419c22d6010d83fdc8b6277f93afdd315d65a7c748fa036328da36656bd',1,'hdg::Token']]],
+  ['lte_15',['LTE',['../classhdg_1_1_token.html#a24b3da419c22d6010d83fdc8b6277f93ac39c923e0a9a09689e8cee30343b36f1',1,'hdg::Token']]]
 ];

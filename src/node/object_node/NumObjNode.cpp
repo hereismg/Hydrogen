@@ -6,15 +6,15 @@
 
 namespace hdg {
     NumObjNode::NumObjNode(long long value, const Position& position):
-            Node(Position(position)), m_value({.i = value}), m_class("Integer"){}
+        ObjectNode("Integer", position, nullptr), m_value({.i = value}){}
 
     NumObjNode::NumObjNode(float value, const Position& position):
-            Node(position), m_value({.f = value}), m_class("Float"){}
-
-    NumObjNode::~NumObjNode() = default;
+        ObjectNode("Float", position, nullptr), m_value({.f = value}){}
 
     NumObjNode::NumObjNode(double value, const Position& position):
-            Node(position), m_value({.f = value}), m_class("Float"){}
+        ObjectNode("Float", position, nullptr), m_value({.f = value}){}
+
+    NumObjNode::~NumObjNode() = default;
 
 
     std::string NumObjNode::toString() {
@@ -25,7 +25,7 @@ namespace hdg {
             return std::to_string(m_value.f);
         }
         else{
-            throw -1;
+            std::cout << "NumObjNode::toString: Unknown class type." << std::endl;
         }
     }
 
@@ -37,7 +37,7 @@ namespace hdg {
             return new Float(m_value.f, m_position);
         }
         else{
-            throw -1;
+            std::cout << "NumObjNode::interpret: Unknown class type." << std::endl;
         }
     }
 } // hdg

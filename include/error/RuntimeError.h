@@ -19,10 +19,11 @@ namespace hdg {
     class RuntimeError: public Error{
     public:
         RuntimeError();
+        explicit RuntimeError(std::string detail);
         RuntimeError(std::string detail, const Position& position);
 
     protected:
-        RuntimeError(std::string name);
+        RuntimeError(std::string name, std::string detail, const Position& position);
     };
 
 } // hdg

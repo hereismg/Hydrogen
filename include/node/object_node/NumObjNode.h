@@ -11,13 +11,12 @@
 
 namespace hdg {
 
-    class NumObjNode: public Node{
+    class NumObjNode: public ObjectNode{
     protected:
         union{
             long long i;
             double f;
         }m_value;
-        std::string m_class;
 
     public:
         NumObjNode(long long value, const Position& position);

@@ -9,7 +9,9 @@
 
 namespace hdg {
 
-    class NotImplementedError{
+    class NotImplementedError: public RuntimeError{
+    public:
+        NotImplementedError();
     };
 
 } // hdg

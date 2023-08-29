@@ -5,4 +5,8 @@
 #include "../../include/error/NotImplementedError.h"
 
 namespace hdg {
+    NotImplementedError::NotImplementedError() {
+        m_name = "NotImplementedError";
+        m_detail = "not implemented error.";
+    }
 } // hdg

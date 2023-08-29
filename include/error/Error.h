@@ -26,7 +26,8 @@ namespace hdg {
 
     public:
         Error();
-        explicit Error(std::string name);
+        explicit Error(std::string detail);
+        Error(std::string name, std::string detail);
         Error(std::string name, std::string detail, const Position& position);
 
         void setName(const std::string& name);

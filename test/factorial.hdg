@@ -8,3 +8,5 @@ for i from 1 to n{
 
 // 输出
 print(result)
+
+function gcd(a, b): if b == 0: a else: gcd(b, a % b)

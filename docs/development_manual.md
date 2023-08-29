@@ -72,8 +72,8 @@
 
 ```CFG
 
-expr        : EL* identifier eq expr
-            : EL* comp-expr ("and"|"or" comp-expr)*
+expr        : identifier eq expr
+            : comp-expr ("and"|"or" comp-expr)*
 
 comp-expr   : "not" comp-expr
             : arith-expr (ee|gt|lt|gte|lte arith-expr)*
@@ -115,7 +115,7 @@ func-expr   : "function" identifier
               rparen
               ((colon expr) | statements)
               
-statements  : lbrace EL* expr (EL* expr?)* rbrace
+statements  : lbrace (EL* expr?)* rbrace
 ```
 
 function add(a, b): a+b

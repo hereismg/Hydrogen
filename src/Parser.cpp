@@ -33,7 +33,6 @@ namespace hdg {
     }
 
     Node* Parser::expr(Environment* environment) {
-        while(m_currentToken->getType() == Token::EL) advance();
         if (Token::IDENTIFIER == m_currentToken->getType()){
             std::string name = m_currentToken->getValue();
             Position pos(*m_currentToken->thisPosition());
@@ -471,24 +470,20 @@ namespace hdg {
     }
 
     Node *Parser::statements(Environment *environment) {
-        if (m_currentToken->getType() == Token::LBRACE){
-            auto* stats = new StatementsNode(*m_currentToken->thisPosition(), environment);
+        ///? 这里是否要加上一行 if (m_currentToken.getType() == LPAREN) ？
 
-            while(m_currentToken->getType() == Token::EL || m_currentToken->getType() == Token::LBRACE) advance();
-            while (m_currentToken->getType() != Token::RBRACE){
-                Node* node = expr(environment);
-                stats->append(node);
+        auto* stats = new StatementsNode(*m_currentToken->thisPosition(), environment);
+        advance();
 
-                while(m_currentToken->getType() == Token::EL)advance();
-            }
-            stats->thisPosition()->setEnd(m_currentToken->thisPosition()->getEnd());
-            advance();
-
-            return stats;
+        while (m_currentToken->getType() != Token::RBRACE){
+            while (m_currentToken->getType() == Token::EL) advance();       ///> 去除多余的换行符
+            Node* node = expr(environment);
+            stats->append(node);
         }
-        else{
-            return expr(environment);
-        }
+        stats->thisPosition()->setEnd(m_currentToken->thisPosition()->getEnd());
+        advance();
+
+        return stats;
     }
 
     Node *Parser::binaryOperator(Environment* environment, const std::set<Token, std::less<>>&opers, std::function<Node*(Environment* envir)> funA, std::function<Node*(Environment* envir)> funB) {

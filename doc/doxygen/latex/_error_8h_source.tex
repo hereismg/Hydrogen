@@ -11,29 +11,34 @@
 \DoxyCodeLine{00007\ }
 \DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <iostream>}}
 \DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <exception>}}
-\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <utility>}}
-\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <sstream>}}
-\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}../basic/Position.h"{}}}
-\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}../basic/Environment.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}../basic/Position.h"{}}}
 \DoxyCodeLine{00014\ }
-\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacehdg}{hdg}}\ \{}
-\DoxyCodeLine{00016\ }
-\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhdg_1_1_error}{Error}}:\ \textcolor{keyword}{public}\ std::exception\{}
-\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{protected}:}
-\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_error_a0d5348d537268cc719326a965f95752b}{m\_name}};}
-\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_error_af042623dd820bbb31d00c185e194c1c1}{m\_details}};}
-\DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\ \mbox{\hyperlink{classhdg_1_1_error_a92afb5a38c363127fdb4216533eba041}{m\_position}};}
-\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ \mbox{\hyperlink{classhdg_1_1_error_a0938bbe26aa3cb45dbc5260cae2e50af}{m\_environment}}\{\};}
-\DoxyCodeLine{00024\ }
-\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_error_aef566b0791e355d2bae63907ed85a779}{Error}}();}
-\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_error_aef566b0791e355d2bae63907ed85a779}{Error}}(std::string\ name,\ std::string\ details,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\&\ position);}
-\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classhdg_1_1_error_aec8dbff89d5a683cbf078b01623e9967}{toString}}();}
-\DoxyCodeLine{00029\ \ \ \ \ \};}
-\DoxyCodeLine{00030\ }
-\DoxyCodeLine{00031\ \}\ \textcolor{comment}{//\ hdg}}
-\DoxyCodeLine{00032\ }
-\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//HDG\_ERROR\_H}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacehdg}{hdg}}\ \{}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhdg_1_1_error}{Error}}:\ \textcolor{keyword}{public}\ std::exception\{}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_error_a0d5348d537268cc719326a965f95752b}{m\_name}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_error_ada696c9f94f65c6e200a94a9d69c850e}{m\_detail}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ std::vector<Position>\ \mbox{\hyperlink{classhdg_1_1_error_a9b12bef7f3c5260bae2f5c9ef4d2597e}{m\_posStack}};\ \ \ }
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_error_aef566b0791e355d2bae63907ed85a779}{Error}}();}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classhdg_1_1_error_aef566b0791e355d2bae63907ed85a779}{Error}}(std::string\ name);}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_error_aef566b0791e355d2bae63907ed85a779}{Error}}(std::string\ name,\ std::string\ detail,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\&\ position);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_error_a6aa2e5bd26a7b725e9b4bf2b79cfb781}{setName}}(\textcolor{keyword}{const}\ std::string\&\ name);}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_error_a50404246b15108bb0b671826565f87a4}{setDetail}}(\textcolor{keyword}{const}\ std::string\&\ detail);}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ std::vector<Position>*\ \mbox{\hyperlink{classhdg_1_1_error_a9e53391531b875e8db5cb25ff7d3bf64}{thisPosStack}}();}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classhdg_1_1_error_aec8dbff89d5a683cbf078b01623e9967}{toString}}();}
+\DoxyCodeLine{00037\ \ \ \ \ \};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \}\ \textcolor{comment}{//\ hdg}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//HDG\_ERROR\_H}}
 
 \end{DoxyCode}

@@ -1,14 +1,17 @@
 var hierarchy =
 [
+    [ "这里是class", "class_xE8_xBF_x99_xE9_x87_x8C_xE6_x98_xAFclass.html", null ],
     [ "hdg::Environment", "classhdg_1_1_environment.html", null ],
     [ "std::exception", null, [
       [ "hdg::Error", "classhdg_1_1_error.html", [
         [ "hdg::IllegalCharError", "classhdg_1_1_illegal_char_error.html", null ],
         [ "hdg::InvalidSyntaxError", "classhdg_1_1_invalid_syntax_error.html", null ],
-        [ "hdg::RuntimeError", "classhdg_1_1_runtime_error.html", null ]
+        [ "hdg::RuntimeError", "classhdg_1_1_runtime_error.html", [
+          [ "hdg::ZeroDivisionError", "classhdg_1_1_zero_division_error.html", null ]
+        ] ]
       ] ]
     ] ],
-    [ "hdg::Indicator", "structhdg_1_1_indicator.html", null ],
+    [ "hdg::Position::Indicator", "structhdg_1_1_position_1_1_indicator.html", null ],
     [ "hdg::Interpreter", "classhdg_1_1_interpreter.html", null ],
     [ "hdg::Lexer", "classhdg_1_1_lexer.html", null ],
     [ "hdg::List", "classhdg_1_1_list.html", null ],
@@ -32,9 +35,8 @@ var hierarchy =
     [ "hdg::Object", "classhdg_1_1_object.html", [
       [ "hdg::Float", "classhdg_1_1_float.html", null ],
       [ "hdg::Function", "classhdg_1_1_function.html", null ],
-      [ "hdg::Integer", "classhdg_1_1_integer.html", [
-        [ "hdg::None", "classhdg_1_1_none.html", null ]
-      ] ],
+      [ "hdg::Integer", "classhdg_1_1_integer.html", null ],
+      [ "hdg::None", "classhdg_1_1_none.html", null ],
       [ "hdg::String", "classhdg_1_1_string.html", null ]
     ] ],
     [ "hdg::Parser", "classhdg_1_1_parser.html", null ],

@@ -2,6 +2,11 @@
 \hypertarget{classhdg_1_1_call_node}{}\label{classhdg_1_1_call_node}\index{hdg::CallNode@{hdg::CallNode}}
 
 
+呼叫节点。用于圆括号、方括号等等的使用。  
+
+
+
+
 {\ttfamily \#include $<$Call\+Node.\+h$>$}
 
 Inheritance diagram for hdg\+::Call\+Node\+:\begin{figure}[H]
@@ -14,12 +19,12 @@ Inheritance diagram for hdg\+::Call\+Node\+:\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classhdg_1_1_call_node_a7a4106178eb9785e277a737bd16360fb}{Call\+Node}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em 呼叫类型 \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classhdg_1_1_call_node_a22d7a6357970c8f4e0ffb22070627c49}{Call\+Node}} (const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position, \mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
 \item 
-\mbox{\hyperlink{classhdg_1_1_call_node_a86fa022f2ffebd576e370d44d3beefa5}{Call\+Node}} (\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}call, std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} $>$list, \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} oper, const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position, \mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
+\mbox{\hyperlink{classhdg_1_1_call_node_af994940c5a63dee72237ced22223172c}{Call\+Node}} (\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}call, std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} $>$ list, \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} oper, const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position, \mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}environment)
 \item 
-\mbox{\hyperlink{classhdg_1_1_call_node_acdd44d553803640961d018fa0185ab10}{\texorpdfstring{$\sim$}{\string~}\+Call\+Node}} ()
+\mbox{\hyperlink{classhdg_1_1_call_node_a5871c8e9395348fc2611e0d2a5e6c59c}{\texorpdfstring{$\sim$}{\string~}\+Call\+Node}} () override
 \item 
 void \mbox{\hyperlink{classhdg_1_1_call_node_ada9cfccd126c1e41f6daf19bdbe2f4fa}{add\+Node}} (\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}node)
 \item 
@@ -49,12 +54,12 @@ virtual \mbox{\hyperlink{classhdg_1_1_node_a7addc8f6e57fbb3d68b8b7d38fd2c145}{\t
 \doxysubsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_call_node_a6c05e57c9662c9fce1b39c488517bca1}{m\+\_\+call}}
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_call_node_a6c05e57c9662c9fce1b39c488517bca1}{m\+\_\+call}} \{nullptr\}
 \item 
 std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classhdg_1_1_call_node_a3a8e67b5861e379b7ba74439828ebb32}{m\+\_\+list}}
-\item 
-\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} \mbox{\hyperlink{classhdg_1_1_call_node_a6b5e59d1e93ebb89692bed4ed89bb103}{m\+\_\+oper}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em 被呼叫对象 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} \mbox{\hyperlink{classhdg_1_1_call_node_a6b5e59d1e93ebb89692bed4ed89bb103}{m\+\_\+oper}} \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1aa6839d4813849cadf29f6f9fe78ef19f}{Token\+Type\+::\+LPAREN}}\}
+\begin{DoxyCompactList}\small\item\em 参数列表 \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classhdg_1_1_node}{hdg\+::\+Node}}}
 \begin{DoxyCompactItemize}
 \item 
@@ -64,6 +69,9 @@ std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\as
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+呼叫节点。用于圆括号、方括号等等的使用。 
+
 \doxysubsection{Constructor \& Destructor Documentation}
 \Hypertarget{classhdg_1_1_call_node_a7a4106178eb9785e277a737bd16360fb}\label{classhdg_1_1_call_node_a7a4106178eb9785e277a737bd16360fb} 
 \index{hdg::CallNode@{hdg::CallNode}!CallNode@{CallNode}}
@@ -71,23 +79,27 @@ std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\as
 \doxysubsubsection{\texorpdfstring{CallNode()}{CallNode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily hdg\+::\+Call\+Node\+::\+Call\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
 
+
+
+呼叫类型 
+
 \Hypertarget{classhdg_1_1_call_node_a22d7a6357970c8f4e0ffb22070627c49}\label{classhdg_1_1_call_node_a22d7a6357970c8f4e0ffb22070627c49} 
 \index{hdg::CallNode@{hdg::CallNode}!CallNode@{CallNode}}
 \index{CallNode@{CallNode}!hdg::CallNode@{hdg::CallNode}}
 \doxysubsubsection{\texorpdfstring{CallNode()}{CallNode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
 {\footnotesize\ttfamily hdg\+::\+Call\+Node\+::\+Call\+Node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&}]{position,  }\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{environment }\end{DoxyParamCaption})}
 
-\Hypertarget{classhdg_1_1_call_node_a86fa022f2ffebd576e370d44d3beefa5}\label{classhdg_1_1_call_node_a86fa022f2ffebd576e370d44d3beefa5} 
+\Hypertarget{classhdg_1_1_call_node_af994940c5a63dee72237ced22223172c}\label{classhdg_1_1_call_node_af994940c5a63dee72237ced22223172c} 
 \index{hdg::CallNode@{hdg::CallNode}!CallNode@{CallNode}}
 \index{CallNode@{CallNode}!hdg::CallNode@{hdg::CallNode}}
 \doxysubsubsection{\texorpdfstring{CallNode()}{CallNode()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily hdg\+::\+Call\+Node\+::\+Call\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*}}]{call,  }\item[{std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} $>$}]{list,  }\item[{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}}}]{oper,  }\item[{const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&}]{position,  }\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{environment }\end{DoxyParamCaption})}
 
-\Hypertarget{classhdg_1_1_call_node_acdd44d553803640961d018fa0185ab10}\label{classhdg_1_1_call_node_acdd44d553803640961d018fa0185ab10} 
+\Hypertarget{classhdg_1_1_call_node_a5871c8e9395348fc2611e0d2a5e6c59c}\label{classhdg_1_1_call_node_a5871c8e9395348fc2611e0d2a5e6c59c} 
 \index{hdg::CallNode@{hdg::CallNode}!````~CallNode@{\texorpdfstring{$\sim$}{\string~}CallNode}}
 \index{````~CallNode@{\texorpdfstring{$\sim$}{\string~}CallNode}!hdg::CallNode@{hdg::CallNode}}
 \doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}CallNode()}{\string~CallNode()}}
-{\footnotesize\ttfamily hdg\+::\+Call\+Node\+::\texorpdfstring{$\sim$}{\string~}\+Call\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily hdg\+::\+Call\+Node\+::\texorpdfstring{$\sim$}{\string~}\+Call\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
 
 
 
@@ -104,7 +116,13 @@ std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\as
 \doxysubsubsection{\texorpdfstring{interpret()}{interpret()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*} hdg\+::\+Call\+Node\+::interpret (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
+这里主要干了两件事情：~\newline
+~\newline
+ 1、解析被呼叫元素 call~\newline
+~\newline
+ 2、解析参数
 
+此时开始运行parenthesis，并且监听异常。
 
 Implements \mbox{\hyperlink{classhdg_1_1_node_ad54f0d90c2d216075c4b90f5975c9a42}{hdg\+::\+Node}}.
 
@@ -137,7 +155,7 @@ Implements \mbox{\hyperlink{classhdg_1_1_node_a562c3c9807e382b651622f254a08c119}
 \index{hdg::CallNode@{hdg::CallNode}!m\_call@{m\_call}}
 \index{m\_call@{m\_call}!hdg::CallNode@{hdg::CallNode}}
 \doxysubsubsection{\texorpdfstring{m\_call}{m\_call}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}}\texorpdfstring{$\ast$}{*} hdg\+::\+Call\+Node\+::m\+\_\+call\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}}\texorpdfstring{$\ast$}{*} hdg\+::\+Call\+Node\+::m\+\_\+call \{nullptr\}\hspace{0.3cm}{\ttfamily [protected]}}
 
 \Hypertarget{classhdg_1_1_call_node_a3a8e67b5861e379b7ba74439828ebb32}\label{classhdg_1_1_call_node_a3a8e67b5861e379b7ba74439828ebb32} 
 \index{hdg::CallNode@{hdg::CallNode}!m\_list@{m\_list}}
@@ -145,9 +163,17 @@ Implements \mbox{\hyperlink{classhdg_1_1_node_a562c3c9807e382b651622f254a08c119}
 \doxysubsubsection{\texorpdfstring{m\_list}{m\_list}}
 {\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classhdg_1_1_node}{Node}}\texorpdfstring{$\ast$}{*}$>$ hdg\+::\+Call\+Node\+::m\+\_\+list\hspace{0.3cm}{\ttfamily [protected]}}
 
+
+
+被呼叫对象 
+
 \Hypertarget{classhdg_1_1_call_node_a6b5e59d1e93ebb89692bed4ed89bb103}\label{classhdg_1_1_call_node_a6b5e59d1e93ebb89692bed4ed89bb103} 
 \index{hdg::CallNode@{hdg::CallNode}!m\_oper@{m\_oper}}
 \index{m\_oper@{m\_oper}!hdg::CallNode@{hdg::CallNode}}
 \doxysubsubsection{\texorpdfstring{m\_oper}{m\_oper}}
-{\footnotesize\ttfamily \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} hdg\+::\+Call\+Node\+::m\+\_\+oper\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Type}} hdg\+::\+Call\+Node\+::m\+\_\+oper \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1aa6839d4813849cadf29f6f9fe78ef19f}{Token\+Type\+::\+LPAREN}}\}\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+参数列表 
 

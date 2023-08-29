@@ -2,12 +2,17 @@
 \hypertarget{classhdg_1_1_lexer}{}\label{classhdg_1_1_lexer}\index{hdg::Lexer@{hdg::Lexer}}
 
 
+词法分析器  
+
+
+
+
 {\ttfamily \#include $<$Lexer.\+h$>$}
 
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classhdg_1_1_lexer_aca09ce9f50611aa4787f25c89cce9792}{Lexer}} (std\+::string f\+Path, std\+::string \texorpdfstring{$\ast$}{*}code)
+\mbox{\hyperlink{classhdg_1_1_lexer_a85c3e8ca57f7318cd45ed8eceb5f54b1}{Lexer}} ()
 \item 
 std\+::string \mbox{\hyperlink{classhdg_1_1_lexer_aa8b884c1316540174f59cdf366335a59}{get\+File\+Path}} ()
 \item 
@@ -15,10 +20,12 @@ std\+::string \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_lexer_adc
 \item 
 std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_token}{Token}} $>$ \& \mbox{\hyperlink{classhdg_1_1_lexer_ab33f5a4bcfe32f9205cc9b290de30b8e}{get\+Tokens}} ()
 \item 
-void \mbox{\hyperlink{classhdg_1_1_lexer_aab5da4f388e6eee605ebe1c04fb4b25c}{run}} ()
+std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_token}{Token}} $>$ \mbox{\hyperlink{classhdg_1_1_lexer_aaa185f8aee125847cb61e9c9ab1b3316}{run}} (const std\+::string \&f\+Path, std\+::string \texorpdfstring{$\ast$}{*}code)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classhdg_1_1_lexer_ad7b8b9d2794482b0002ae7279f0013d7}{init}} ()
 \item 
 void \mbox{\hyperlink{classhdg_1_1_lexer_ab30b9df4245b8ad2dcab9c6e6b11a813}{advance}} ()
 \item 
@@ -39,22 +46,30 @@ void \mbox{\hyperlink{classhdg_1_1_lexer_ae8b953e28dc0a316270a9675b0750c5b}{buil
 \item 
 std\+::string \mbox{\hyperlink{classhdg_1_1_lexer_a4e36502619b5c301cd775710c2b16b00}{m\+\_\+f\+Path}}
 \item 
-std\+::string \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_lexer_a1429d500fa702f16145e81db1f22706c}{m\+\_\+code}}
+char \mbox{\hyperlink{classhdg_1_1_lexer_a4f62639338851a38f79c3121b52bdf70}{m\+\_\+current\+Char}} \{0\}
+\item 
+\mbox{\hyperlink{structhdg_1_1_position_1_1_indicator}{Position\+::\+Indicator}} \mbox{\hyperlink{classhdg_1_1_lexer_a056ae60f466617d8e994616516a9f012}{m\+\_\+pos}}
+\item 
+std\+::string \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_lexer_a1429d500fa702f16145e81db1f22706c}{m\+\_\+code}} \{nullptr\}
 \item 
 std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_token}{Token}} $>$ \mbox{\hyperlink{classhdg_1_1_lexer_a25fb252caec72fc69c39a67a1d166bca}{m\+\_\+tokens}}
-\item 
-char \mbox{\hyperlink{classhdg_1_1_lexer_a4f62639338851a38f79c3121b52bdf70}{m\+\_\+current\+Char}}
-\item 
-\mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}} \mbox{\hyperlink{classhdg_1_1_lexer_a083a7b690b5994d747e888095d68daae}{m\+\_\+pos}}
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+词法分析器 
+
+所有传入 \doxylink{classhdg_1_1_interpreter}{Interpreter} 的源代码首先都要传入到该类中进行解释，将文本数据加工为 toknes 列表。 并且记录相对行号列号。 \begin{DoxyAttention}{Attention}
+词法分析器不存储源代码具体是什么，只记录已经读取过多少行代码。所以，每次调用 run 函数，都要重置 m\+\_\+pos 
+\end{DoxyAttention}
+
+
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{classhdg_1_1_lexer_aca09ce9f50611aa4787f25c89cce9792}\label{classhdg_1_1_lexer_aca09ce9f50611aa4787f25c89cce9792} 
+\Hypertarget{classhdg_1_1_lexer_a85c3e8ca57f7318cd45ed8eceb5f54b1}\label{classhdg_1_1_lexer_a85c3e8ca57f7318cd45ed8eceb5f54b1} 
 \index{hdg::Lexer@{hdg::Lexer}!Lexer@{Lexer}}
 \index{Lexer@{Lexer}!hdg::Lexer@{hdg::Lexer}}
 \doxysubsubsection{\texorpdfstring{Lexer()}{Lexer()}}
-{\footnotesize\ttfamily hdg\+::\+Lexer\+::\+Lexer (\begin{DoxyParamCaption}\item[{std\+::string}]{f\+Path,  }\item[{std\+::string \texorpdfstring{$\ast$}{*}}]{code }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+{\footnotesize\ttfamily hdg\+::\+Lexer\+::\+Lexer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -113,11 +128,19 @@ char \mbox{\hyperlink{classhdg_1_1_lexer_a4f62639338851a38f79c3121b52bdf70}{m\+\
 \doxysubsubsection{\texorpdfstring{getTokens()}{getTokens()}}
 {\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_token}{Token}} $>$ \& hdg\+::\+Lexer\+::get\+Tokens (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\Hypertarget{classhdg_1_1_lexer_aab5da4f388e6eee605ebe1c04fb4b25c}\label{classhdg_1_1_lexer_aab5da4f388e6eee605ebe1c04fb4b25c} 
+\Hypertarget{classhdg_1_1_lexer_ad7b8b9d2794482b0002ae7279f0013d7}\label{classhdg_1_1_lexer_ad7b8b9d2794482b0002ae7279f0013d7} 
+\index{hdg::Lexer@{hdg::Lexer}!init@{init}}
+\index{init@{init}!hdg::Lexer@{hdg::Lexer}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void hdg\+::\+Lexer\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+初始化函数，运行函数时，会重置 m\+\_\+pos 方法，并且重置 m\+\_\+current\+Cahr. \begin{quote}
+注意，这里不是初始化为1，而是自增一位。这是为了能够记录行数 \end{quote}
+\Hypertarget{classhdg_1_1_lexer_aaa185f8aee125847cb61e9c9ab1b3316}\label{classhdg_1_1_lexer_aaa185f8aee125847cb61e9c9ab1b3316} 
 \index{hdg::Lexer@{hdg::Lexer}!run@{run}}
 \index{run@{run}!hdg::Lexer@{hdg::Lexer}}
 \doxysubsubsection{\texorpdfstring{run()}{run()}}
-{\footnotesize\ttfamily void hdg\+::\+Lexer\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_token}{Token}} $>$ hdg\+::\+Lexer\+::run (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{f\+Path,  }\item[{std\+::string \texorpdfstring{$\ast$}{*}}]{code }\end{DoxyParamCaption})}
 
 \Hypertarget{classhdg_1_1_lexer_adc85f6dd72b21bbb96df3f220c7a7e35}\label{classhdg_1_1_lexer_adc85f6dd72b21bbb96df3f220c7a7e35} 
 \index{hdg::Lexer@{hdg::Lexer}!thisText@{thisText}}
@@ -132,13 +155,13 @@ char \mbox{\hyperlink{classhdg_1_1_lexer_a4f62639338851a38f79c3121b52bdf70}{m\+\
 \index{hdg::Lexer@{hdg::Lexer}!m\_code@{m\_code}}
 \index{m\_code@{m\_code}!hdg::Lexer@{hdg::Lexer}}
 \doxysubsubsection{\texorpdfstring{m\_code}{m\_code}}
-{\footnotesize\ttfamily std\+::string\texorpdfstring{$\ast$}{*} hdg\+::\+Lexer\+::m\+\_\+code\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily std\+::string\texorpdfstring{$\ast$}{*} hdg\+::\+Lexer\+::m\+\_\+code \{nullptr\}\hspace{0.3cm}{\ttfamily [protected]}}
 
 \Hypertarget{classhdg_1_1_lexer_a4f62639338851a38f79c3121b52bdf70}\label{classhdg_1_1_lexer_a4f62639338851a38f79c3121b52bdf70} 
 \index{hdg::Lexer@{hdg::Lexer}!m\_currentChar@{m\_currentChar}}
 \index{m\_currentChar@{m\_currentChar}!hdg::Lexer@{hdg::Lexer}}
 \doxysubsubsection{\texorpdfstring{m\_currentChar}{m\_currentChar}}
-{\footnotesize\ttfamily char hdg\+::\+Lexer\+::m\+\_\+current\+Char\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily char hdg\+::\+Lexer\+::m\+\_\+current\+Char \{0\}\hspace{0.3cm}{\ttfamily [protected]}}
 
 \Hypertarget{classhdg_1_1_lexer_a4e36502619b5c301cd775710c2b16b00}\label{classhdg_1_1_lexer_a4e36502619b5c301cd775710c2b16b00} 
 \index{hdg::Lexer@{hdg::Lexer}!m\_fPath@{m\_fPath}}
@@ -146,11 +169,11 @@ char \mbox{\hyperlink{classhdg_1_1_lexer_a4f62639338851a38f79c3121b52bdf70}{m\+\
 \doxysubsubsection{\texorpdfstring{m\_fPath}{m\_fPath}}
 {\footnotesize\ttfamily std\+::string hdg\+::\+Lexer\+::m\+\_\+f\+Path\hspace{0.3cm}{\ttfamily [protected]}}
 
-\Hypertarget{classhdg_1_1_lexer_a083a7b690b5994d747e888095d68daae}\label{classhdg_1_1_lexer_a083a7b690b5994d747e888095d68daae} 
+\Hypertarget{classhdg_1_1_lexer_a056ae60f466617d8e994616516a9f012}\label{classhdg_1_1_lexer_a056ae60f466617d8e994616516a9f012} 
 \index{hdg::Lexer@{hdg::Lexer}!m\_pos@{m\_pos}}
 \index{m\_pos@{m\_pos}!hdg::Lexer@{hdg::Lexer}}
 \doxysubsubsection{\texorpdfstring{m\_pos}{m\_pos}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}} hdg\+::\+Lexer\+::m\+\_\+pos\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structhdg_1_1_position_1_1_indicator}{Position\+::\+Indicator}} hdg\+::\+Lexer\+::m\+\_\+pos\hspace{0.3cm}{\ttfamily [protected]}}
 
 \Hypertarget{classhdg_1_1_lexer_a25fb252caec72fc69c39a67a1d166bca}\label{classhdg_1_1_lexer_a25fb252caec72fc69c39a67a1d166bca} 
 \index{hdg::Lexer@{hdg::Lexer}!m\_tokens@{m\_tokens}}

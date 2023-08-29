@@ -10,7 +10,6 @@ var namespacehdg =
     [ "Function", "classhdg_1_1_function.html", "classhdg_1_1_function" ],
     [ "IfNode", "classhdg_1_1_if_node.html", "classhdg_1_1_if_node" ],
     [ "IllegalCharError", "classhdg_1_1_illegal_char_error.html", "classhdg_1_1_illegal_char_error" ],
-    [ "Indicator", "structhdg_1_1_indicator.html", "structhdg_1_1_indicator" ],
     [ "Integer", "classhdg_1_1_integer.html", "classhdg_1_1_integer" ],
     [ "Interpreter", "classhdg_1_1_interpreter.html", "classhdg_1_1_interpreter" ],
     [ "InvalidSyntaxError", "classhdg_1_1_invalid_syntax_error.html", "classhdg_1_1_invalid_syntax_error" ],
@@ -34,6 +33,7 @@ var namespacehdg =
     [ "Token", "classhdg_1_1_token.html", "classhdg_1_1_token" ],
     [ "UnaryOperatorNode", "classhdg_1_1_unary_operator_node.html", "classhdg_1_1_unary_operator_node" ],
     [ "WhileNode", "classhdg_1_1_while_node.html", "classhdg_1_1_while_node" ],
+    [ "ZeroDivisionError", "classhdg_1_1_zero_division_error.html", "classhdg_1_1_zero_division_error" ],
     [ "SymbolTable", "namespacehdg.html#a76ed6539696e98b83c88d516c64a0250", null ],
     [ "LegalChar", "namespacehdg.html#af4e516e72fe6edc775660088c94b65a1", [
       [ "ILLEGAL", "namespacehdg.html#af4e516e72fe6edc775660088c94b65a1aa541ccedcbb94e989056939d31aa2673", null ],
@@ -41,10 +41,6 @@ var namespacehdg =
       [ "LOWERCASE", "namespacehdg.html#af4e516e72fe6edc775660088c94b65a1ab98d15f9c8290b499d0047f83cda9b10", null ],
       [ "UPPERCASE", "namespacehdg.html#af4e516e72fe6edc775660088c94b65a1a3ea2e0dc1c1b200d7d15c5fc93118a6e", null ],
       [ "UNDERLINE", "namespacehdg.html#af4e516e72fe6edc775660088c94b65a1ad81b142de45e9330d22a19295416f309", null ]
-    ] ],
-    [ "Mode", "namespacehdg.html#a5607e634578288231046fe59484159eb", [
-      [ "debug", "namespacehdg.html#a5607e634578288231046fe59484159eba3d1e88c276df3486210bd69cac3172d7", null ],
-      [ "release", "namespacehdg.html#a5607e634578288231046fe59484159eba6fef1415eedb4f9b6e6ea8a25f01a9c0", null ]
     ] ],
     [ "TokenType", "namespacehdg.html#a8e782b93fb966ac4f9d6006b416444a1", [
       [ "INT", "namespacehdg.html#a8e782b93fb966ac4f9d6006b416444a1a3bb15b754d10301685de058edb411eb5", null ],

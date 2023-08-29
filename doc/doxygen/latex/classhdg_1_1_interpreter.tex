@@ -4,15 +4,26 @@
 
 {\ttfamily \#include $<$Interpreter.\+h$>$}
 
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classhdg_1_1_interpreter_aa417142a6f2202cfb0881ba8ee22f409}{Mode}} \{ \mbox{\hyperlink{classhdg_1_1_interpreter_aa417142a6f2202cfb0881ba8ee22f409a431dcba593f0077e7ba223195f7058a9}{debug}}
+, \mbox{\hyperlink{classhdg_1_1_interpreter_aa417142a6f2202cfb0881ba8ee22f409ad1573190343ac3e34b8886153a975f63}{release}}
+ \}
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classhdg_1_1_interpreter_a58677786eefb07a9cea712eae034b20c}{Interpreter}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em \begin{quote}
+词法分析器 \end{quote}
+\end{DoxyCompactList}\item 
 \mbox{\hyperlink{classhdg_1_1_interpreter_a4758167a87276295e23dc13209bdd2fc}{\texorpdfstring{$\sim$}{\string~}\+Interpreter}} ()
 \item 
-std\+::string \mbox{\hyperlink{classhdg_1_1_interpreter_a0495701bf3a36d43e7766adf4221c782}{interpret}} (const std\+::string \&f\+Path, std\+::string code, \mbox{\hyperlink{namespacehdg_a5607e634578288231046fe59484159eb}{Mode}} mode=\mbox{\hyperlink{namespacehdg_a5607e634578288231046fe59484159eba6fef1415eedb4f9b6e6ea8a25f01a9c0}{release}})
-\begin{DoxyCompactList}\small\item\em \+: 解释程序主要分为三个过程： -\/-\/-\/-\/---\texorpdfstring{$>$}{>} 词法分析（\+Lexer） -\/-\/-\/-\/-\/-\/---\texorpdfstring{$>$}{>} 语法分析（\+Parser） -\/-\/-\/-\/---\texorpdfstring{$>$}{>} 解释运行（\+Interpreter）-\/-\/-\/-\/-\/-\/---\texorpdfstring{$>$}{>} 源代码 token列表 语法树 解释结果 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_interpreter_acd43bb1896257235e16bd96fea649ce4}{this\+Environment}} ()
+\item 
+std\+::string \mbox{\hyperlink{classhdg_1_1_interpreter_ae761a363c854d29d559793194d1db67f}{interpret}} (const std\+::string \&f\+Path, const std\+::string \&code, \mbox{\hyperlink{classhdg_1_1_interpreter_aa417142a6f2202cfb0881ba8ee22f409}{Mode}} mode=\mbox{\hyperlink{classhdg_1_1_interpreter_aa417142a6f2202cfb0881ba8ee22f409ad1573190343ac3e34b8886153a975f63}{release}})
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -22,7 +33,30 @@ void \mbox{\hyperlink{classhdg_1_1_interpreter_a43f4d27cbbd27c03b6dbb424a92931e2
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_interpreter_ab22f340778cbb44feb885a7d70994521}{m\+\_\+global\+Environment}}
+\item 
+std\+::list$<$ std\+::string $>$ \mbox{\hyperlink{classhdg_1_1_interpreter_a7065daca8cab37b0ed83ab86f07294b1}{m\+\_\+code\+Stack}}
+\item 
+\mbox{\hyperlink{classhdg_1_1_lexer}{Lexer}} \mbox{\hyperlink{classhdg_1_1_interpreter_ae7d49cccfeeb2d4dccfcf2970afdc115}{m\+\_\+lexer}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classhdg_1_1_interpreter_aa417142a6f2202cfb0881ba8ee22f409}\label{classhdg_1_1_interpreter_aa417142a6f2202cfb0881ba8ee22f409} 
+\index{hdg::Interpreter@{hdg::Interpreter}!Mode@{Mode}}
+\index{Mode@{Mode}!hdg::Interpreter@{hdg::Interpreter}}
+\doxysubsubsection{\texorpdfstring{Mode}{Mode}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classhdg_1_1_interpreter_aa417142a6f2202cfb0881ba8ee22f409}{hdg\+::\+Interpreter\+::\+Mode}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{debug@{debug}!hdg::Interpreter@{hdg::Interpreter}}\index{hdg::Interpreter@{hdg::Interpreter}!debug@{debug}}}\Hypertarget{classhdg_1_1_interpreter_aa417142a6f2202cfb0881ba8ee22f409a431dcba593f0077e7ba223195f7058a9}\label{classhdg_1_1_interpreter_aa417142a6f2202cfb0881ba8ee22f409a431dcba593f0077e7ba223195f7058a9} 
+debug&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{release@{release}!hdg::Interpreter@{hdg::Interpreter}}\index{hdg::Interpreter@{hdg::Interpreter}!release@{release}}}\Hypertarget{classhdg_1_1_interpreter_aa417142a6f2202cfb0881ba8ee22f409ad1573190343ac3e34b8886153a975f63}\label{classhdg_1_1_interpreter_aa417142a6f2202cfb0881ba8ee22f409ad1573190343ac3e34b8886153a975f63} 
+release&\\
+\hline
+
+\end{DoxyEnumFields}
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
@@ -31,6 +65,12 @@ void \mbox{\hyperlink{classhdg_1_1_interpreter_a43f4d27cbbd27c03b6dbb424a92931e2
 \index{Interpreter@{Interpreter}!hdg::Interpreter@{hdg::Interpreter}}
 \doxysubsubsection{\texorpdfstring{Interpreter()}{Interpreter()}}
 {\footnotesize\ttfamily hdg\+::\+Interpreter\+::\+Interpreter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\begin{quote}
+词法分析器 \end{quote}
+
 
 \Hypertarget{classhdg_1_1_interpreter_a4758167a87276295e23dc13209bdd2fc}\label{classhdg_1_1_interpreter_a4758167a87276295e23dc13209bdd2fc} 
 \index{hdg::Interpreter@{hdg::Interpreter}!````~Interpreter@{\texorpdfstring{$\sim$}{\string~}Interpreter}}
@@ -47,22 +87,46 @@ void \mbox{\hyperlink{classhdg_1_1_interpreter_a43f4d27cbbd27c03b6dbb424a92931e2
 \doxysubsubsection{\texorpdfstring{init()}{init()}}
 {\footnotesize\ttfamily void hdg\+::\+Interpreter\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
-\Hypertarget{classhdg_1_1_interpreter_a0495701bf3a36d43e7766adf4221c782}\label{classhdg_1_1_interpreter_a0495701bf3a36d43e7766adf4221c782} 
+\Hypertarget{classhdg_1_1_interpreter_ae761a363c854d29d559793194d1db67f}\label{classhdg_1_1_interpreter_ae761a363c854d29d559793194d1db67f} 
 \index{hdg::Interpreter@{hdg::Interpreter}!interpret@{interpret}}
 \index{interpret@{interpret}!hdg::Interpreter@{hdg::Interpreter}}
 \doxysubsubsection{\texorpdfstring{interpret()}{interpret()}}
-{\footnotesize\ttfamily std\+::string hdg\+::\+Interpreter\+::interpret (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{f\+Path,  }\item[{std\+::string}]{code,  }\item[{\mbox{\hyperlink{namespacehdg_a5607e634578288231046fe59484159eb}{Mode}}}]{mode = {\ttfamily \mbox{\hyperlink{namespacehdg_a5607e634578288231046fe59484159eba6fef1415eedb4f9b6e6ea8a25f01a9c0}{release}}} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily std\+::string hdg\+::\+Interpreter\+::interpret (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{f\+Path,  }\item[{const std\+::string \&}]{code,  }\item[{\mbox{\hyperlink{classhdg_1_1_interpreter_aa417142a6f2202cfb0881ba8ee22f409}{Mode}}}]{mode = {\ttfamily \mbox{\hyperlink{classhdg_1_1_interpreter_aa417142a6f2202cfb0881ba8ee22f409ad1573190343ac3e34b8886153a975f63}{release}}} }\end{DoxyParamCaption})}
+
+\begin{quote}
+注意，这里不是直接传入 code，而是先将code压入栈中，然后取栈中的code！！！ \end{quote}
 
 
+\begin{quote}
+打印 tokens 列表 \end{quote}
 
-\+: 解释程序主要分为三个过程： -\/-\/-\/-\/---\texorpdfstring{$>$}{>} 词法分析（\+Lexer） -\/-\/-\/-\/-\/-\/---\texorpdfstring{$>$}{>} 语法分析（\+Parser） -\/-\/-\/-\/---\texorpdfstring{$>$}{>} 解释运行（\+Interpreter）-\/-\/-\/-\/-\/-\/---\texorpdfstring{$>$}{>} 源代码 token列表 语法树 解释结果 
 
-debug 模式会打印出中间过程的 token列表 与 语法树 
+\begin{quote}
+打印语法树 \end{quote}
+\Hypertarget{classhdg_1_1_interpreter_acd43bb1896257235e16bd96fea649ce4}\label{classhdg_1_1_interpreter_acd43bb1896257235e16bd96fea649ce4} 
+\index{hdg::Interpreter@{hdg::Interpreter}!thisEnvironment@{thisEnvironment}}
+\index{thisEnvironment@{thisEnvironment}!hdg::Interpreter@{hdg::Interpreter}}
+\doxysubsubsection{\texorpdfstring{thisEnvironment()}{thisEnvironment()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*} hdg\+::\+Interpreter\+::this\+Environment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
 
 \doxysubsection{Member Data Documentation}
+\Hypertarget{classhdg_1_1_interpreter_a7065daca8cab37b0ed83ab86f07294b1}\label{classhdg_1_1_interpreter_a7065daca8cab37b0ed83ab86f07294b1} 
+\index{hdg::Interpreter@{hdg::Interpreter}!m\_codeStack@{m\_codeStack}}
+\index{m\_codeStack@{m\_codeStack}!hdg::Interpreter@{hdg::Interpreter}}
+\doxysubsubsection{\texorpdfstring{m\_codeStack}{m\_codeStack}}
+{\footnotesize\ttfamily std\+::list$<$std\+::string$>$ hdg\+::\+Interpreter\+::m\+\_\+code\+Stack\hspace{0.3cm}{\ttfamily [protected]}}
+
 \Hypertarget{classhdg_1_1_interpreter_ab22f340778cbb44feb885a7d70994521}\label{classhdg_1_1_interpreter_ab22f340778cbb44feb885a7d70994521} 
 \index{hdg::Interpreter@{hdg::Interpreter}!m\_globalEnvironment@{m\_globalEnvironment}}
 \index{m\_globalEnvironment@{m\_globalEnvironment}!hdg::Interpreter@{hdg::Interpreter}}
 \doxysubsubsection{\texorpdfstring{m\_globalEnvironment}{m\_globalEnvironment}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}\texorpdfstring{$\ast$}{*} hdg\+::\+Interpreter\+::m\+\_\+global\+Environment\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classhdg_1_1_interpreter_ae7d49cccfeeb2d4dccfcf2970afdc115}\label{classhdg_1_1_interpreter_ae7d49cccfeeb2d4dccfcf2970afdc115} 
+\index{hdg::Interpreter@{hdg::Interpreter}!m\_lexer@{m\_lexer}}
+\index{m\_lexer@{m\_lexer}!hdg::Interpreter@{hdg::Interpreter}}
+\doxysubsubsection{\texorpdfstring{m\_lexer}{m\_lexer}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_lexer}{Lexer}} hdg\+::\+Interpreter\+::m\+\_\+lexer\hspace{0.3cm}{\ttfamily [protected]}}
 

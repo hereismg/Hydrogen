@@ -20,7 +20,7 @@ Inheritance diagram for hdg\+::Function\+:\begin{figure}[H]
 \mbox{\hyperlink{classhdg_1_1_function_a274339a10c74940c7e0841dc4ee4e898}{\texorpdfstring{$\sim$}{\string~}\+Function}} () override
 \item 
 \mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_function_a7e05bcfa55f1c86706f0962705ba7a8c}{parenthesis}} (const std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*} $>$ \&list) override
-\item 
+\begin{DoxyCompactList}\small\item\em 括号运算符 \end{DoxyCompactList}\item 
 std\+::string \mbox{\hyperlink{classhdg_1_1_function_a6c1cd16c46e5fc0f1a2312ac64205e7b}{to\+String}} () override
 \item 
 \mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_function_ab3396686fc3a146eb85e5684566f2fa8}{copy}} () override
@@ -29,7 +29,9 @@ std\+::string \mbox{\hyperlink{classhdg_1_1_function_a6c1cd16c46e5fc0f1a2312ac64
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classhdg_1_1_object_a586c8dd8b52c5a9e6372628e3eb0adda}{Object}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em \begin{quote}
+记录该对象定义的位置 \end{quote}
+\end{DoxyCompactList}\item 
 \mbox{\hyperlink{classhdg_1_1_object_a6188b294e6349d5b8db587a4d6d49382}{Object}} (std\+::string class\+Name)
 \item 
 \mbox{\hyperlink{classhdg_1_1_object_aa72fb1dfa43776753aa20af8f5e76a0e}{Object}} (std\+::string class\+Name, const \mbox{\hyperlink{classhdg_1_1_position}{Position}} \&position)
@@ -81,9 +83,9 @@ std\+::string \mbox{\hyperlink{classhdg_1_1_function_a405e16ed95b8b717bfac4ea289
 \item 
 std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_obj_assign_node}{Obj\+Assign\+Node}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classhdg_1_1_function_a457358b2945995751a9c93e19fcaf72f}{m\+\_\+args}}
 \item 
-\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_function_a8d185d4f3a35503c02391a6fb8b7160f}{m\+\_\+environment}}
+\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_function_a8d185d4f3a35503c02391a6fb8b7160f}{m\+\_\+environment}} \{nullptr\}
 \item 
-\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_function_acd3ddd612c6aa59b5e9522f550e767ec}{m\+\_\+body}}
+\mbox{\hyperlink{classhdg_1_1_node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_function_acd3ddd612c6aa59b5e9522f550e767ec}{m\+\_\+body}} \{nullptr\}
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classhdg_1_1_object}{hdg\+::\+Object}}}
 \begin{DoxyCompactItemize}
@@ -91,7 +93,9 @@ std\+::vector$<$ \mbox{\hyperlink{classhdg_1_1_obj_assign_node}{Obj\+Assign\+Nod
 std\+::string \mbox{\hyperlink{classhdg_1_1_object_a39d1faf396ff4bef9b12655891c6e4ec}{m\+\_\+class}}
 \item 
 \mbox{\hyperlink{classhdg_1_1_position}{Position}} \mbox{\hyperlink{classhdg_1_1_object_aff6b6da7527dff11790b8c839327ab2d}{m\+\_\+position}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \begin{quote}
+这里传入该对象实例的类名，用于强制类型转化 \end{quote}
+\end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
@@ -134,6 +138,15 @@ Implements \mbox{\hyperlink{classhdg_1_1_object_aca54a60782be268abfa55bc0548d4f1
 
 
 
+括号运算符 
+
+\begin{DoxyItemize}
+\item 
+\begin{DoxyItemize}
+\item list 参数列表。
+\end{DoxyItemize}\end{DoxyItemize}
+括号运算符主要是用做对函数的实现。函数就是通过该方法实现的。 
+
 Reimplemented from \mbox{\hyperlink{classhdg_1_1_object_aa5ff8d1a2101f17cadf814d6684fa592}{hdg\+::\+Object}}.
 
 \Hypertarget{classhdg_1_1_function_a6c1cd16c46e5fc0f1a2312ac64205e7b}\label{classhdg_1_1_function_a6c1cd16c46e5fc0f1a2312ac64205e7b} 
@@ -159,13 +172,13 @@ Implements \mbox{\hyperlink{classhdg_1_1_object_a0786053d1aaff08b77075f3e38dd259
 \index{hdg::Function@{hdg::Function}!m\_body@{m\_body}}
 \index{m\_body@{m\_body}!hdg::Function@{hdg::Function}}
 \doxysubsubsection{\texorpdfstring{m\_body}{m\_body}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}}\texorpdfstring{$\ast$}{*} hdg\+::\+Function\+::m\+\_\+body\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_node}{Node}}\texorpdfstring{$\ast$}{*} hdg\+::\+Function\+::m\+\_\+body \{nullptr\}\hspace{0.3cm}{\ttfamily [protected]}}
 
 \Hypertarget{classhdg_1_1_function_a8d185d4f3a35503c02391a6fb8b7160f}\label{classhdg_1_1_function_a8d185d4f3a35503c02391a6fb8b7160f} 
 \index{hdg::Function@{hdg::Function}!m\_environment@{m\_environment}}
 \index{m\_environment@{m\_environment}!hdg::Function@{hdg::Function}}
 \doxysubsubsection{\texorpdfstring{m\_environment}{m\_environment}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}\texorpdfstring{$\ast$}{*} hdg\+::\+Function\+::m\+\_\+environment\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}\texorpdfstring{$\ast$}{*} hdg\+::\+Function\+::m\+\_\+environment \{nullptr\}\hspace{0.3cm}{\ttfamily [protected]}}
 
 \Hypertarget{classhdg_1_1_function_a405e16ed95b8b717bfac4ea289fa29d5}\label{classhdg_1_1_function_a405e16ed95b8b717bfac4ea289fa29d5} 
 \index{hdg::Function@{hdg::Function}!m\_name@{m\_name}}

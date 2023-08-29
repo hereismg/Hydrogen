@@ -2,30 +2,33 @@
 \hypertarget{classhdg_1_1_environment}{}\label{classhdg_1_1_environment}\index{hdg::Environment@{hdg::Environment}}
 
 
+环境。主要用来存储符号、模块名称等信息。  
+
+
+
+
 {\ttfamily \#include $<$Environment.\+h$>$}
 
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classhdg_1_1_environment_a838151c0a779382e419a1f02d0f103d4}{Environment}} (std\+::string name, \mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}parent)
+\mbox{\hyperlink{classhdg_1_1_environment_ad401fef7019e0c731be9bd4ace0b7cd1}{Environment}} ()
+\item 
+\mbox{\hyperlink{classhdg_1_1_environment_a3b7303fa148c1ba4cd82ed51228ff8b0}{Environment}} (\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}parent, std\+::string f\+Path, std\+::string module\+Name)
 \item 
 \mbox{\hyperlink{classhdg_1_1_environment_a384b02a8157020127512610201acc687}{\texorpdfstring{$\sim$}{\string~}\+Environment}} ()
 \item 
-void \mbox{\hyperlink{classhdg_1_1_environment_a94a9d4e31c353b415fab86be188c4b33}{set\+Name}} (std\+::string name)
+void \mbox{\hyperlink{classhdg_1_1_environment_a04ce4c6fb65acbcbba64d428f065bb2b}{set\+File\+Path}} (const std\+::string \&f\+Path)
+\item 
+void \mbox{\hyperlink{classhdg_1_1_environment_a8a5a3cf57040fe2d949fe8b7864f1cca}{set\+Module\+Name}} (const std\+::string \&module\+Name)
 \item 
 void \mbox{\hyperlink{classhdg_1_1_environment_a91dfd4d0faf81e1497e2c5a4a7ddf82e}{set\+Parent}} (\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}parent)
 \item 
-void \mbox{\hyperlink{classhdg_1_1_environment_a6d9a7063793074831c89b6826f48ff9f}{set\+Symbol}} (const std\+::string \&name, \mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*}value)
+void \mbox{\hyperlink{classhdg_1_1_environment_a33d9657175748c0512f7bc940e586e94}{set\+Symbol}} (const std\+::string \&name, \mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*}value, int mode=0)
+\begin{DoxyCompactList}\small\item\em 给环境中的符号表设置符号 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classhdg_1_1_environment_aed0b43f5c10690a60c30e61ce71dff94}{get\+File\+Path}} ()
 \item 
-void \mbox{\hyperlink{classhdg_1_1_environment_a235025021cb503eb31dc498e2514f284}{set\+Local\+Symbol}} (const std\+::string \&name, \mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*}value)
-\item 
-void \mbox{\hyperlink{classhdg_1_1_environment_a724e9a53e41badbc194e522279cd8af6}{set\+Symbol}} (const std\+::string \&name, const \mbox{\hyperlink{classhdg_1_1_integer}{Integer}} \&value)
-\item 
-void \mbox{\hyperlink{classhdg_1_1_environment_ad195f3322fe80784c3957488e06929d1}{set\+Symbol}} (std\+::initializer\+\_\+list$<$ std\+::pair$<$ std\+::string, const \mbox{\hyperlink{classhdg_1_1_integer}{Integer}} \& $>$ $>$ list)
-\item 
-void \mbox{\hyperlink{classhdg_1_1_environment_a9bfd9720d0c0ecce2389d83fdebcd5dc}{set\+Symbol}} (const std\+::string \&name, const \mbox{\hyperlink{classhdg_1_1_float}{Float}} \&value)
-\item 
-std\+::string \mbox{\hyperlink{classhdg_1_1_environment_a3d8ad17fa051bc921cf01b3a801d2313}{get\+Name}} ()
+std\+::string \mbox{\hyperlink{classhdg_1_1_environment_a1be44aeee82ca3c61ed6e96f00b28852}{get\+Module\+Name}} ()
 \item 
 \mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_environment_a52849c70851aa4d4179ab48947aa7abe}{get\+Parent}} ()
 \item 
@@ -34,20 +37,33 @@ std\+::string \mbox{\hyperlink{classhdg_1_1_environment_a3d8ad17fa051bc921cf01b3
 \doxysubsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::string \mbox{\hyperlink{classhdg_1_1_environment_abed26d79e757af9c2d9987bebc8de78b}{m\+\_\+name}}
-\item 
-\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_environment_aa87efa02814239a73d220e2cc533e285}{m\+\_\+parent}}
+\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_environment_aa87efa02814239a73d220e2cc533e285}{m\+\_\+parent}} \{nullptr\}
 \item 
 \mbox{\hyperlink{namespacehdg_a76ed6539696e98b83c88d516c64a0250}{Symbol\+Table}} \mbox{\hyperlink{classhdg_1_1_environment_a99a6cc3dba8617ae0dbc1814d8e22708}{m\+\_\+symbol\+Table}}
-\end{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classhdg_1_1_environment_ad33975d86b3ff14cd74f4bc8641e730f}{m\+\_\+f\+Path}}
+\begin{DoxyCompactList}\small\item\em 创建该环境的代码的文件目录 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classhdg_1_1_environment_a7060f9c734930b602f8e1b0e824bd91a}{m\+\_\+module\+Name}}
+\begin{DoxyCompactList}\small\item\em 创建该环境的模块名称，一般是函数的名称 \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+环境。主要用来存储符号、模块名称等信息。 
+
+信息这里式信息是 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{classhdg_1_1_environment_a838151c0a779382e419a1f02d0f103d4}\label{classhdg_1_1_environment_a838151c0a779382e419a1f02d0f103d4} 
+\Hypertarget{classhdg_1_1_environment_ad401fef7019e0c731be9bd4ace0b7cd1}\label{classhdg_1_1_environment_ad401fef7019e0c731be9bd4ace0b7cd1} 
 \index{hdg::Environment@{hdg::Environment}!Environment@{Environment}}
 \index{Environment@{Environment}!hdg::Environment@{hdg::Environment}}
-\doxysubsubsection{\texorpdfstring{Environment()}{Environment()}}
-{\footnotesize\ttfamily hdg\+::\+Environment\+::\+Environment (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{parent }\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{Environment()}{Environment()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily hdg\+::\+Environment\+::\+Environment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classhdg_1_1_environment_a3b7303fa148c1ba4cd82ed51228ff8b0}\label{classhdg_1_1_environment_a3b7303fa148c1ba4cd82ed51228ff8b0} 
+\index{hdg::Environment@{hdg::Environment}!Environment@{Environment}}
+\index{Environment@{Environment}!hdg::Environment@{hdg::Environment}}
+\doxysubsubsection{\texorpdfstring{Environment()}{Environment()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily hdg\+::\+Environment\+::\+Environment (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{parent,  }\item[{std\+::string}]{f\+Path,  }\item[{std\+::string}]{module\+Name }\end{DoxyParamCaption})}
 
 \Hypertarget{classhdg_1_1_environment_a384b02a8157020127512610201acc687}\label{classhdg_1_1_environment_a384b02a8157020127512610201acc687} 
 \index{hdg::Environment@{hdg::Environment}!````~Environment@{\texorpdfstring{$\sim$}{\string~}Environment}}
@@ -58,11 +74,17 @@ std\+::string \mbox{\hyperlink{classhdg_1_1_environment_abed26d79e757af9c2d9987b
 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classhdg_1_1_environment_a3d8ad17fa051bc921cf01b3a801d2313}\label{classhdg_1_1_environment_a3d8ad17fa051bc921cf01b3a801d2313} 
-\index{hdg::Environment@{hdg::Environment}!getName@{getName}}
-\index{getName@{getName}!hdg::Environment@{hdg::Environment}}
-\doxysubsubsection{\texorpdfstring{getName()}{getName()}}
-{\footnotesize\ttfamily std\+::string hdg\+::\+Environment\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\Hypertarget{classhdg_1_1_environment_aed0b43f5c10690a60c30e61ce71dff94}\label{classhdg_1_1_environment_aed0b43f5c10690a60c30e61ce71dff94} 
+\index{hdg::Environment@{hdg::Environment}!getFilePath@{getFilePath}}
+\index{getFilePath@{getFilePath}!hdg::Environment@{hdg::Environment}}
+\doxysubsubsection{\texorpdfstring{getFilePath()}{getFilePath()}}
+{\footnotesize\ttfamily std\+::string hdg\+::\+Environment\+::get\+File\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classhdg_1_1_environment_a1be44aeee82ca3c61ed6e96f00b28852}\label{classhdg_1_1_environment_a1be44aeee82ca3c61ed6e96f00b28852} 
+\index{hdg::Environment@{hdg::Environment}!getModuleName@{getModuleName}}
+\index{getModuleName@{getModuleName}!hdg::Environment@{hdg::Environment}}
+\doxysubsubsection{\texorpdfstring{getModuleName()}{getModuleName()}}
+{\footnotesize\ttfamily std\+::string hdg\+::\+Environment\+::get\+Module\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 \Hypertarget{classhdg_1_1_environment_a52849c70851aa4d4179ab48947aa7abe}\label{classhdg_1_1_environment_a52849c70851aa4d4179ab48947aa7abe} 
 \index{hdg::Environment@{hdg::Environment}!getParent@{getParent}}
@@ -76,17 +98,17 @@ std\+::string \mbox{\hyperlink{classhdg_1_1_environment_abed26d79e757af9c2d9987b
 \doxysubsubsection{\texorpdfstring{getSymbol()}{getSymbol()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*} hdg\+::\+Environment\+::get\+Symbol (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})}
 
-\Hypertarget{classhdg_1_1_environment_a235025021cb503eb31dc498e2514f284}\label{classhdg_1_1_environment_a235025021cb503eb31dc498e2514f284} 
-\index{hdg::Environment@{hdg::Environment}!setLocalSymbol@{setLocalSymbol}}
-\index{setLocalSymbol@{setLocalSymbol}!hdg::Environment@{hdg::Environment}}
-\doxysubsubsection{\texorpdfstring{setLocalSymbol()}{setLocalSymbol()}}
-{\footnotesize\ttfamily void hdg\+::\+Environment\+::set\+Local\+Symbol (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{\mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*}}]{value }\end{DoxyParamCaption})}
+\Hypertarget{classhdg_1_1_environment_a04ce4c6fb65acbcbba64d428f065bb2b}\label{classhdg_1_1_environment_a04ce4c6fb65acbcbba64d428f065bb2b} 
+\index{hdg::Environment@{hdg::Environment}!setFilePath@{setFilePath}}
+\index{setFilePath@{setFilePath}!hdg::Environment@{hdg::Environment}}
+\doxysubsubsection{\texorpdfstring{setFilePath()}{setFilePath()}}
+{\footnotesize\ttfamily void hdg\+::\+Environment\+::set\+File\+Path (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{f\+Path }\end{DoxyParamCaption})}
 
-\Hypertarget{classhdg_1_1_environment_a94a9d4e31c353b415fab86be188c4b33}\label{classhdg_1_1_environment_a94a9d4e31c353b415fab86be188c4b33} 
-\index{hdg::Environment@{hdg::Environment}!setName@{setName}}
-\index{setName@{setName}!hdg::Environment@{hdg::Environment}}
-\doxysubsubsection{\texorpdfstring{setName()}{setName()}}
-{\footnotesize\ttfamily void hdg\+::\+Environment\+::set\+Name (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption})}
+\Hypertarget{classhdg_1_1_environment_a8a5a3cf57040fe2d949fe8b7864f1cca}\label{classhdg_1_1_environment_a8a5a3cf57040fe2d949fe8b7864f1cca} 
+\index{hdg::Environment@{hdg::Environment}!setModuleName@{setModuleName}}
+\index{setModuleName@{setModuleName}!hdg::Environment@{hdg::Environment}}
+\doxysubsubsection{\texorpdfstring{setModuleName()}{setModuleName()}}
+{\footnotesize\ttfamily void hdg\+::\+Environment\+::set\+Module\+Name (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{module\+Name }\end{DoxyParamCaption})}
 
 \Hypertarget{classhdg_1_1_environment_a91dfd4d0faf81e1497e2c5a4a7ddf82e}\label{classhdg_1_1_environment_a91dfd4d0faf81e1497e2c5a4a7ddf82e} 
 \index{hdg::Environment@{hdg::Environment}!setParent@{setParent}}
@@ -94,44 +116,53 @@ std\+::string \mbox{\hyperlink{classhdg_1_1_environment_abed26d79e757af9c2d9987b
 \doxysubsubsection{\texorpdfstring{setParent()}{setParent()}}
 {\footnotesize\ttfamily void hdg\+::\+Environment\+::set\+Parent (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhdg_1_1_environment}{Environment}} \texorpdfstring{$\ast$}{*}}]{parent }\end{DoxyParamCaption})}
 
-\Hypertarget{classhdg_1_1_environment_a9bfd9720d0c0ecce2389d83fdebcd5dc}\label{classhdg_1_1_environment_a9bfd9720d0c0ecce2389d83fdebcd5dc} 
+\Hypertarget{classhdg_1_1_environment_a33d9657175748c0512f7bc940e586e94}\label{classhdg_1_1_environment_a33d9657175748c0512f7bc940e586e94} 
 \index{hdg::Environment@{hdg::Environment}!setSymbol@{setSymbol}}
 \index{setSymbol@{setSymbol}!hdg::Environment@{hdg::Environment}}
-\doxysubsubsection{\texorpdfstring{setSymbol()}{setSymbol()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily void hdg\+::\+Environment\+::set\+Symbol (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{const \mbox{\hyperlink{classhdg_1_1_float}{Float}} \&}]{value }\end{DoxyParamCaption})}
-
-\Hypertarget{classhdg_1_1_environment_a724e9a53e41badbc194e522279cd8af6}\label{classhdg_1_1_environment_a724e9a53e41badbc194e522279cd8af6} 
-\index{hdg::Environment@{hdg::Environment}!setSymbol@{setSymbol}}
-\index{setSymbol@{setSymbol}!hdg::Environment@{hdg::Environment}}
-\doxysubsubsection{\texorpdfstring{setSymbol()}{setSymbol()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily void hdg\+::\+Environment\+::set\+Symbol (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{const \mbox{\hyperlink{classhdg_1_1_integer}{Integer}} \&}]{value }\end{DoxyParamCaption})}
-
-\Hypertarget{classhdg_1_1_environment_a6d9a7063793074831c89b6826f48ff9f}\label{classhdg_1_1_environment_a6d9a7063793074831c89b6826f48ff9f} 
-\index{hdg::Environment@{hdg::Environment}!setSymbol@{setSymbol}}
-\index{setSymbol@{setSymbol}!hdg::Environment@{hdg::Environment}}
-\doxysubsubsection{\texorpdfstring{setSymbol()}{setSymbol()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily void hdg\+::\+Environment\+::set\+Symbol (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{\mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*}}]{value }\end{DoxyParamCaption})}
-
-\Hypertarget{classhdg_1_1_environment_ad195f3322fe80784c3957488e06929d1}\label{classhdg_1_1_environment_ad195f3322fe80784c3957488e06929d1} 
-\index{hdg::Environment@{hdg::Environment}!setSymbol@{setSymbol}}
-\index{setSymbol@{setSymbol}!hdg::Environment@{hdg::Environment}}
-\doxysubsubsection{\texorpdfstring{setSymbol()}{setSymbol()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily void hdg\+::\+Environment\+::set\+Symbol (\begin{DoxyParamCaption}\item[{std\+::initializer\+\_\+list$<$ std\+::pair$<$ std\+::string, const \mbox{\hyperlink{classhdg_1_1_integer}{Integer}} \& $>$ $>$}]{list }\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{setSymbol()}{setSymbol()}}
+{\footnotesize\ttfamily void hdg\+::\+Environment\+::set\+Symbol (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{\mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*}}]{value,  }\item[{int}]{mode = {\ttfamily 0} }\end{DoxyParamCaption})}
 
 
+
+给环境中的符号表设置符号 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & 符号名字 \\
+\hline
+{\em value} & 符号值 \\
+\hline
+{\em mode} & 设置模式，0为父级模式，1为本地模式；默认为父级模式\\
+\hline
+\end{DoxyParams}
+目前来说，该函数存在两种模式，一种是父级模式（值为“0”），在该模式中， 优先寻找父级环境中是否存在相同名称的符号，若存在，则替换父级中的符号； 另一种是本地模式（值为“1”），在该模式中，直接对本地环境的符号表进行符号操作。 
 
 \doxysubsection{Member Data Documentation}
-\Hypertarget{classhdg_1_1_environment_abed26d79e757af9c2d9987bebc8de78b}\label{classhdg_1_1_environment_abed26d79e757af9c2d9987bebc8de78b} 
-\index{hdg::Environment@{hdg::Environment}!m\_name@{m\_name}}
-\index{m\_name@{m\_name}!hdg::Environment@{hdg::Environment}}
-\doxysubsubsection{\texorpdfstring{m\_name}{m\_name}}
-{\footnotesize\ttfamily std\+::string hdg\+::\+Environment\+::m\+\_\+name\hspace{0.3cm}{\ttfamily [protected]}}
+\Hypertarget{classhdg_1_1_environment_ad33975d86b3ff14cd74f4bc8641e730f}\label{classhdg_1_1_environment_ad33975d86b3ff14cd74f4bc8641e730f} 
+\index{hdg::Environment@{hdg::Environment}!m\_fPath@{m\_fPath}}
+\index{m\_fPath@{m\_fPath}!hdg::Environment@{hdg::Environment}}
+\doxysubsubsection{\texorpdfstring{m\_fPath}{m\_fPath}}
+{\footnotesize\ttfamily std\+::string hdg\+::\+Environment\+::m\+\_\+f\+Path\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+创建该环境的代码的文件目录 
+
+\Hypertarget{classhdg_1_1_environment_a7060f9c734930b602f8e1b0e824bd91a}\label{classhdg_1_1_environment_a7060f9c734930b602f8e1b0e824bd91a} 
+\index{hdg::Environment@{hdg::Environment}!m\_moduleName@{m\_moduleName}}
+\index{m\_moduleName@{m\_moduleName}!hdg::Environment@{hdg::Environment}}
+\doxysubsubsection{\texorpdfstring{m\_moduleName}{m\_moduleName}}
+{\footnotesize\ttfamily std\+::string hdg\+::\+Environment\+::m\+\_\+module\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+创建该环境的模块名称，一般是函数的名称 
 
 \Hypertarget{classhdg_1_1_environment_aa87efa02814239a73d220e2cc533e285}\label{classhdg_1_1_environment_aa87efa02814239a73d220e2cc533e285} 
 \index{hdg::Environment@{hdg::Environment}!m\_parent@{m\_parent}}
 \index{m\_parent@{m\_parent}!hdg::Environment@{hdg::Environment}}
 \doxysubsubsection{\texorpdfstring{m\_parent}{m\_parent}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}\texorpdfstring{$\ast$}{*} hdg\+::\+Environment\+::m\+\_\+parent\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}\texorpdfstring{$\ast$}{*} hdg\+::\+Environment\+::m\+\_\+parent \{nullptr\}\hspace{0.3cm}{\ttfamily [protected]}}
 
 \Hypertarget{classhdg_1_1_environment_a99a6cc3dba8617ae0dbc1814d8e22708}\label{classhdg_1_1_environment_a99a6cc3dba8617ae0dbc1814d8e22708} 
 \index{hdg::Environment@{hdg::Environment}!m\_symbolTable@{m\_symbolTable}}

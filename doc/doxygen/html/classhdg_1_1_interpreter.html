@@ -97,6 +97,7 @@ $(document).ready(function(){initNavTree('classhdg_1_1_interpreter.html',''); in
 
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
@@ -107,15 +108,27 @@ $(document).ready(function(){initNavTree('classhdg_1_1_interpreter.html',''); in
 
 <p><code>#include &lt;<a class="el" href="_interpreter_8h_source.html">Interpreter.h</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:aa417142a6f2202cfb0881ba8ee22f409" id="r_aa417142a6f2202cfb0881ba8ee22f409"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhdg_1_1_interpreter.html#aa417142a6f2202cfb0881ba8ee22f409">Mode</a> { <a class="el" href="classhdg_1_1_interpreter.html#aa417142a6f2202cfb0881ba8ee22f409a431dcba593f0077e7ba223195f7058a9">debug</a>
+, <a class="el" href="classhdg_1_1_interpreter.html#aa417142a6f2202cfb0881ba8ee22f409ad1573190343ac3e34b8886153a975f63">release</a>
+ }</td></tr>
+<tr class="separator:aa417142a6f2202cfb0881ba8ee22f409"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a58677786eefb07a9cea712eae034b20c" id="r_a58677786eefb07a9cea712eae034b20c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhdg_1_1_interpreter.html#a58677786eefb07a9cea712eae034b20c">Interpreter</a> ()</td></tr>
+<tr class="memdesc:a58677786eefb07a9cea712eae034b20c"><td class="mdescLeft">&#160;</td><td class="mdescRight"><blockquote class="doxtable">
+<p>&zwj;词法分析器 </p>
+</blockquote>
+ <br /></td></tr>
 <tr class="separator:a58677786eefb07a9cea712eae034b20c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4758167a87276295e23dc13209bdd2fc" id="r_a4758167a87276295e23dc13209bdd2fc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhdg_1_1_interpreter.html#a4758167a87276295e23dc13209bdd2fc">~Interpreter</a> ()</td></tr>
 <tr class="separator:a4758167a87276295e23dc13209bdd2fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0495701bf3a36d43e7766adf4221c782" id="r_a0495701bf3a36d43e7766adf4221c782"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhdg_1_1_interpreter.html#a0495701bf3a36d43e7766adf4221c782">interpret</a> (const std::string &amp;fPath, std::string code, <a class="el" href="namespacehdg.html#a5607e634578288231046fe59484159eb">Mode</a> mode=<a class="el" href="namespacehdg.html#a5607e634578288231046fe59484159eba6fef1415eedb4f9b6e6ea8a25f01a9c0">release</a>)</td></tr>
-<tr class="memdesc:a0495701bf3a36d43e7766adf4221c782"><td class="mdescLeft">&#160;</td><td class="mdescRight">: 解释程序主要分为三个过程： ----&mdash;&gt; 词法分析（Lexer） ------&mdash;&gt; 语法分析（Parser） ----&mdash;&gt; 解释运行（Interpreter）------&mdash;&gt; 源代码 token列表 语法树 解释结果  <br /></td></tr>
-<tr class="separator:a0495701bf3a36d43e7766adf4221c782"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd43bb1896257235e16bd96fea649ce4" id="r_acd43bb1896257235e16bd96fea649ce4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhdg_1_1_environment.html">Environment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhdg_1_1_interpreter.html#acd43bb1896257235e16bd96fea649ce4">thisEnvironment</a> ()</td></tr>
+<tr class="separator:acd43bb1896257235e16bd96fea649ce4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae761a363c854d29d559793194d1db67f" id="r_ae761a363c854d29d559793194d1db67f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhdg_1_1_interpreter.html#ae761a363c854d29d559793194d1db67f">interpret</a> (const std::string &amp;fPath, const std::string &amp;code, <a class="el" href="classhdg_1_1_interpreter.html#aa417142a6f2202cfb0881ba8ee22f409">Mode</a> mode=<a class="el" href="classhdg_1_1_interpreter.html#aa417142a6f2202cfb0881ba8ee22f409ad1573190343ac3e34b8886153a975f63">release</a>)</td></tr>
+<tr class="separator:ae761a363c854d29d559793194d1db67f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -126,7 +139,30 @@ Protected Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ab22f340778cbb44feb885a7d70994521" id="r_ab22f340778cbb44feb885a7d70994521"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhdg_1_1_environment.html">Environment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhdg_1_1_interpreter.html#ab22f340778cbb44feb885a7d70994521">m_globalEnvironment</a></td></tr>
 <tr class="separator:ab22f340778cbb44feb885a7d70994521"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7065daca8cab37b0ed83ab86f07294b1" id="r_a7065daca8cab37b0ed83ab86f07294b1"><td class="memItemLeft" align="right" valign="top">std::list&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhdg_1_1_interpreter.html#a7065daca8cab37b0ed83ab86f07294b1">m_codeStack</a></td></tr>
+<tr class="separator:a7065daca8cab37b0ed83ab86f07294b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7d49cccfeeb2d4dccfcf2970afdc115" id="r_ae7d49cccfeeb2d4dccfcf2970afdc115"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhdg_1_1_lexer.html">Lexer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhdg_1_1_interpreter.html#ae7d49cccfeeb2d4dccfcf2970afdc115">m_lexer</a></td></tr>
+<tr class="separator:ae7d49cccfeeb2d4dccfcf2970afdc115"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="aa417142a6f2202cfb0881ba8ee22f409" name="aa417142a6f2202cfb0881ba8ee22f409"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa417142a6f2202cfb0881ba8ee22f409">&#9670;&#160;</a></span>Mode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classhdg_1_1_interpreter.html#aa417142a6f2202cfb0881ba8ee22f409">hdg::Interpreter::Mode</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa417142a6f2202cfb0881ba8ee22f409a431dcba593f0077e7ba223195f7058a9" name="aa417142a6f2202cfb0881ba8ee22f409a431dcba593f0077e7ba223195f7058a9"></a>debug&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aa417142a6f2202cfb0881ba8ee22f409ad1573190343ac3e34b8886153a975f63" name="aa417142a6f2202cfb0881ba8ee22f409ad1573190343ac3e34b8886153a975f63"></a>release&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a58677786eefb07a9cea712eae034b20c" name="a58677786eefb07a9cea712eae034b20c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a58677786eefb07a9cea712eae034b20c">&#9670;&#160;</a></span>Interpreter()</h2>
@@ -142,6 +178,11 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p><blockquote class="doxtable">
+<p>&zwj;词法分析器 </p>
+</blockquote>
+</p>
 
 </div>
 </div>
@@ -196,8 +237,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a0495701bf3a36d43e7766adf4221c782" name="a0495701bf3a36d43e7766adf4221c782"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0495701bf3a36d43e7766adf4221c782">&#9670;&#160;</a></span>interpret()</h2>
+<a id="ae761a363c854d29d559793194d1db67f" name="ae761a363c854d29d559793194d1db67f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae761a363c854d29d559793194d1db67f">&#9670;&#160;</a></span>interpret()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -211,14 +252,14 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>code</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacehdg.html#a5607e634578288231046fe59484159eb">Mode</a>&#160;</td>
-          <td class="paramname"><em>mode</em> = <code><a class="el" href="namespacehdg.html#a5607e634578288231046fe59484159eba6fef1415eedb4f9b6e6ea8a25f01a9c0">release</a></code>&#160;</td>
+          <td class="paramtype"><a class="el" href="classhdg_1_1_interpreter.html#aa417142a6f2202cfb0881ba8ee22f409">Mode</a>&#160;</td>
+          <td class="paramname"><em>mode</em> = <code><a class="el" href="classhdg_1_1_interpreter.html#aa417142a6f2202cfb0881ba8ee22f409ad1573190343ac3e34b8886153a975f63">release</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -227,13 +268,58 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<blockquote class="doxtable">
+<p>&zwj;注意，这里不是直接传入 code，而是先将code压入栈中，然后取栈中的code！！！ </p>
+</blockquote>
+<blockquote class="doxtable">
+<p>&zwj;打印 tokens 列表 </p>
+</blockquote>
+<blockquote class="doxtable">
+<p>&zwj;打印语法树 </p>
+</blockquote>
 
-<p>: 解释程序主要分为三个过程： ----&mdash;&gt; 词法分析（Lexer） ------&mdash;&gt; 语法分析（Parser） ----&mdash;&gt; 解释运行（Interpreter）------&mdash;&gt; 源代码 token列表 语法树 解释结果 </p>
-<p>debug 模式会打印出中间过程的 token列表 与 语法树 </p>
+</div>
+</div>
+<a id="acd43bb1896257235e16bd96fea649ce4" name="acd43bb1896257235e16bd96fea649ce4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd43bb1896257235e16bd96fea649ce4">&#9670;&#160;</a></span>thisEnvironment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhdg_1_1_environment.html">Environment</a> * hdg::Interpreter::thisEnvironment </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a7065daca8cab37b0ed83ab86f07294b1" name="a7065daca8cab37b0ed83ab86f07294b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7065daca8cab37b0ed83ab86f07294b1">&#9670;&#160;</a></span>m_codeStack</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::list&lt;std::string&gt; hdg::Interpreter::m_codeStack</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ab22f340778cbb44feb885a7d70994521" name="ab22f340778cbb44feb885a7d70994521"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab22f340778cbb44feb885a7d70994521">&#9670;&#160;</a></span>m_globalEnvironment</h2>
 
@@ -245,6 +331,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classhdg_1_1_environment.html">Environment</a>* hdg::Interpreter::m_globalEnvironment</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae7d49cccfeeb2d4dccfcf2970afdc115" name="ae7d49cccfeeb2d4dccfcf2970afdc115"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7d49cccfeeb2d4dccfcf2970afdc115">&#9670;&#160;</a></span>m_lexer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhdg_1_1_lexer.html">Lexer</a> hdg::Interpreter::m_lexer</td>
         </tr>
       </table>
   </td>

@@ -11,33 +11,40 @@
 \DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ HDG\_INTERPRETER\_H}}
 \DoxyCodeLine{00008\ }
 \DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <string>}}
-\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_parser_8h}{Parser.h}}"{}}}
-\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_lexer_8h}{Lexer.h}}"{}}}
-\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_node_8h}{node/Node.h}}"{}}}
-\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_environment_8h}{basic/Environment.h}}"{}}}
-\DoxyCodeLine{00014\ }
-\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacehdg}{hdg}}\ \{}
-\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{namespacehdg_a5607e634578288231046fe59484159eb}{Mode}}\{}
-\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a5607e634578288231046fe59484159eba3d1e88c276df3486210bd69cac3172d7}{debug}},}
-\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a5607e634578288231046fe59484159eba6fef1415eedb4f9b6e6ea8a25f01a9c0}{release}},}
-\DoxyCodeLine{00019\ \ \ \ \ \};}
-\DoxyCodeLine{00020\ }
-\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhdg_1_1_interpreter}{Interpreter}}\ \{}
-\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{protected}:}
-\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ \mbox{\hyperlink{classhdg_1_1_interpreter_ab22f340778cbb44feb885a7d70994521}{m\_globalEnvironment}};}
-\DoxyCodeLine{00024\ }
-\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_interpreter_a58677786eefb07a9cea712eae034b20c}{Interpreter}}();}
-\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_interpreter_a4758167a87276295e23dc13209bdd2fc}{\string~Interpreter}}();}
-\DoxyCodeLine{00028\ }
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_interpreter_a0495701bf3a36d43e7766adf4221c782}{interpret}}(\textcolor{keyword}{const}\ std::string\&\ fPath,\ std::string\ code,\ \mbox{\hyperlink{namespacehdg_a5607e634578288231046fe59484159eb}{Mode}}\ mode\ =\ \mbox{\hyperlink{namespacehdg_a5607e634578288231046fe59484159eba6fef1415eedb4f9b6e6ea8a25f01a9c0}{release}});}
-\DoxyCodeLine{00038\ }
-\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{protected}:}
-\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_interpreter_a43f4d27cbbd27c03b6dbb424a92931e2}{init}}();}
-\DoxyCodeLine{00041\ \ \ \ \ \};}
-\DoxyCodeLine{00042\ }
-\DoxyCodeLine{00043\ \}\ \textcolor{comment}{//\ hdg}}
-\DoxyCodeLine{00044\ }
-\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//HDG\_INTERPRETER\_H}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <list>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_parser_8h}{Parser.h}}"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_lexer_8h}{Lexer.h}}"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_node_8h}{node/Node.h}}"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_environment_8h}{basic/Environment.h}}"{}}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacehdg}{hdg}}\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhdg_1_1_interpreter}{Interpreter}}\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{classhdg_1_1_interpreter_aa417142a6f2202cfb0881ba8ee22f409}{Mode}}\{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_interpreter_aa417142a6f2202cfb0881ba8ee22f409a431dcba593f0077e7ba223195f7058a9}{debug}},}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_interpreter_aa417142a6f2202cfb0881ba8ee22f409ad1573190343ac3e34b8886153a975f63}{release}},}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ \mbox{\hyperlink{classhdg_1_1_interpreter_ab22f340778cbb44feb885a7d70994521}{m\_globalEnvironment}};}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ std::list<std::string>\ \mbox{\hyperlink{classhdg_1_1_interpreter_a7065daca8cab37b0ed83ab86f07294b1}{m\_codeStack}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_lexer}{Lexer}}\ \mbox{\hyperlink{classhdg_1_1_interpreter_ae7d49cccfeeb2d4dccfcf2970afdc115}{m\_lexer}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_interpreter_a58677786eefb07a9cea712eae034b20c}{Interpreter}}();}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_interpreter_a4758167a87276295e23dc13209bdd2fc}{\string~Interpreter}}();}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}*\ \mbox{\hyperlink{classhdg_1_1_interpreter_acd43bb1896257235e16bd96fea649ce4}{thisEnvironment}}();}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_interpreter_ae761a363c854d29d559793194d1db67f}{interpret}}(\textcolor{keyword}{const}\ std::string\&\ fPath,\ \textcolor{keyword}{const}\ std::string\&\ code,\ \mbox{\hyperlink{classhdg_1_1_interpreter_aa417142a6f2202cfb0881ba8ee22f409}{Mode}}\ mode\ =\ \mbox{\hyperlink{classhdg_1_1_interpreter_aa417142a6f2202cfb0881ba8ee22f409ad1573190343ac3e34b8886153a975f63}{release}});}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_interpreter_a43f4d27cbbd27c03b6dbb424a92931e2}{init}}();}
+\DoxyCodeLine{00040\ \ \ \ \ \};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \}\ \textcolor{comment}{//\ hdg}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//HDG\_INTERPRETER\_H}}
 
 \end{DoxyCode}

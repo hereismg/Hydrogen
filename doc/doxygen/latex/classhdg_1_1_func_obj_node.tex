@@ -25,9 +25,9 @@ void \mbox{\hyperlink{classhdg_1_1_func_obj_node_a3f2447c19639223e206564daf52234
 \item 
 void \mbox{\hyperlink{classhdg_1_1_func_obj_node_aa6d31ed512551eaf1529104d46ade63f}{set\+Name}} (const std\+::string \&name)
 \item 
-std\+::string \mbox{\hyperlink{classhdg_1_1_func_obj_node_a26c56e6fb61343fbd1f9596c91fb5366}{to\+String}} ()
+std\+::string \mbox{\hyperlink{classhdg_1_1_func_obj_node_ae053cf41fdef4e0572ecaa4443a23c85}{to\+String}} () override
 \item 
-\mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_func_obj_node_a4543d3fd8756c39c08d8982116d7113c}{interpret}} ()
+\mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classhdg_1_1_func_obj_node_acb3062daeec4e59ee51de03c2a807c0f}{interpret}} () override
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classhdg_1_1_object_node}{hdg\+::\+Object\+Node}}}
 \begin{DoxyCompactItemize}
@@ -101,15 +101,18 @@ std\+::string \mbox{\hyperlink{classhdg_1_1_object_node_a43f1f9454decd1c29ac65f2
 \doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}FuncObjNode()}{\string~FuncObjNode()}}
 {\footnotesize\ttfamily hdg\+::\+Func\+Obj\+Node\+::\texorpdfstring{$\sim$}{\string~}\+Func\+Obj\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
 
-
+Fun\+Obj\+Node类的主要功能是构建函数对象。在构建过程中，需要函数环境和函数体以及参数变量。 函数环境、函数体和参数变量直接传入新创建的对象中。 故这些数据的生存周期由新创建的对象控制，\+Func\+Obj\+Node不负责管理。 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classhdg_1_1_func_obj_node_a4543d3fd8756c39c08d8982116d7113c}\label{classhdg_1_1_func_obj_node_a4543d3fd8756c39c08d8982116d7113c} 
+\Hypertarget{classhdg_1_1_func_obj_node_acb3062daeec4e59ee51de03c2a807c0f}\label{classhdg_1_1_func_obj_node_acb3062daeec4e59ee51de03c2a807c0f} 
 \index{hdg::FuncObjNode@{hdg::FuncObjNode}!interpret@{interpret}}
 \index{interpret@{interpret}!hdg::FuncObjNode@{hdg::FuncObjNode}}
 \doxysubsubsection{\texorpdfstring{interpret()}{interpret()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*} hdg\+::\+Func\+Obj\+Node\+::interpret (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhdg_1_1_object}{Object}} \texorpdfstring{$\ast$}{*} hdg\+::\+Func\+Obj\+Node\+::interpret (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
+这里的 interpret 函数更像是“组装”，将已有的数据组装成一个完整的函数。 \begin{DoxyNote}{Note}
+记得更新环境的文件路径和模块名称。 
+\end{DoxyNote}
 
 
 Implements \mbox{\hyperlink{classhdg_1_1_object_node_acb95342eb930bd6eb8aa4cb25a67cc39}{hdg\+::\+Object\+Node}}.
@@ -132,11 +135,11 @@ Implements \mbox{\hyperlink{classhdg_1_1_object_node_acb95342eb930bd6eb8aa4cb25a
 \doxysubsubsection{\texorpdfstring{setName()}{setName()}}
 {\footnotesize\ttfamily void hdg\+::\+Func\+Obj\+Node\+::set\+Name (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})}
 
-\Hypertarget{classhdg_1_1_func_obj_node_a26c56e6fb61343fbd1f9596c91fb5366}\label{classhdg_1_1_func_obj_node_a26c56e6fb61343fbd1f9596c91fb5366} 
+\Hypertarget{classhdg_1_1_func_obj_node_ae053cf41fdef4e0572ecaa4443a23c85}\label{classhdg_1_1_func_obj_node_ae053cf41fdef4e0572ecaa4443a23c85} 
 \index{hdg::FuncObjNode@{hdg::FuncObjNode}!toString@{toString}}
 \index{toString@{toString}!hdg::FuncObjNode@{hdg::FuncObjNode}}
 \doxysubsubsection{\texorpdfstring{toString()}{toString()}}
-{\footnotesize\ttfamily std\+::string hdg\+::\+Func\+Obj\+Node\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily std\+::string hdg\+::\+Func\+Obj\+Node\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 

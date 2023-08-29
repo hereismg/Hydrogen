@@ -11,7 +11,6 @@ var annotated_dup =
       [ "Function", "classhdg_1_1_function.html", "classhdg_1_1_function" ],
       [ "IfNode", "classhdg_1_1_if_node.html", "classhdg_1_1_if_node" ],
       [ "IllegalCharError", "classhdg_1_1_illegal_char_error.html", "classhdg_1_1_illegal_char_error" ],
-      [ "Indicator", "structhdg_1_1_indicator.html", "structhdg_1_1_indicator" ],
       [ "Integer", "classhdg_1_1_integer.html", "classhdg_1_1_integer" ],
       [ "Interpreter", "classhdg_1_1_interpreter.html", "classhdg_1_1_interpreter" ],
       [ "InvalidSyntaxError", "classhdg_1_1_invalid_syntax_error.html", "classhdg_1_1_invalid_syntax_error" ],
@@ -34,6 +33,8 @@ var annotated_dup =
       [ "StrObjNode", "classhdg_1_1_str_obj_node.html", "classhdg_1_1_str_obj_node" ],
       [ "Token", "classhdg_1_1_token.html", "classhdg_1_1_token" ],
       [ "UnaryOperatorNode", "classhdg_1_1_unary_operator_node.html", "classhdg_1_1_unary_operator_node" ],
-      [ "WhileNode", "classhdg_1_1_while_node.html", "classhdg_1_1_while_node" ]
-    ] ]
+      [ "WhileNode", "classhdg_1_1_while_node.html", "classhdg_1_1_while_node" ],
+      [ "ZeroDivisionError", "classhdg_1_1_zero_division_error.html", "classhdg_1_1_zero_division_error" ]
+    ] ],
+    [ "这里是class", "class_xE8_xBF_x99_xE9_x87_x8C_xE6_x98_xAFclass.html", null ]
 ];

@@ -104,6 +104,9 @@ $(document).ready(function(){initNavTree('classhdg_1_1_error.html',''); initResi
 </div><!--header-->
 <div class="contents">
 
+<p>异常顶级类  
+ <a href="classhdg_1_1_error.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_error_8h_source.html">Error.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for hdg::Error:</div>
@@ -113,16 +116,29 @@ Inheritance diagram for hdg::Error:</div>
   <map id="hdg::Error_map" name="hdg::Error_map">
 <area href="classhdg_1_1_illegal_char_error.html" alt="hdg::IllegalCharError" shape="rect" coords="0,112,144,136"/>
 <area href="classhdg_1_1_invalid_syntax_error.html" alt="hdg::InvalidSyntaxError" shape="rect" coords="154,112,298,136"/>
-<area href="classhdg_1_1_runtime_error.html" alt="hdg::RuntimeError" shape="rect" coords="308,112,452,136"/>
+<area href="classhdg_1_1_runtime_error.html" title="运行时异常" alt="hdg::RuntimeError" shape="rect" coords="308,112,452,136"/>
+<area href="classhdg_1_1_zero_division_error.html" alt="hdg::ZeroDivisionError" shape="rect" coords="308,168,452,192"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aef566b0791e355d2bae63907ed85a779" id="r_aef566b0791e355d2bae63907ed85a779"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhdg_1_1_error.html#aef566b0791e355d2bae63907ed85a779">Error</a> ()</td></tr>
+<tr class="memdesc:aef566b0791e355d2bae63907ed85a779"><td class="mdescLeft">&#160;</td><td class="mdescRight"><blockquote class="doxtable">
+<p>&zwj;异常标记栈。该栈回存放全部的异常位置 </p>
+</blockquote>
+ <br /></td></tr>
 <tr class="separator:aef566b0791e355d2bae63907ed85a779"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a325e4b9570b782c2185bf7ac2f4485b7" id="r_a325e4b9570b782c2185bf7ac2f4485b7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhdg_1_1_error.html#a325e4b9570b782c2185bf7ac2f4485b7">Error</a> (std::string name, std::string details, const <a class="el" href="classhdg_1_1_position.html">Position</a> &amp;position)</td></tr>
-<tr class="separator:a325e4b9570b782c2185bf7ac2f4485b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a662ca345d538d646dc4c3bd227974492" id="r_a662ca345d538d646dc4c3bd227974492"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhdg_1_1_error.html#a662ca345d538d646dc4c3bd227974492">Error</a> (std::string name)</td></tr>
+<tr class="separator:a662ca345d538d646dc4c3bd227974492"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a383cc58f21b7d31bafb480cc6656e8e1" id="r_a383cc58f21b7d31bafb480cc6656e8e1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhdg_1_1_error.html#a383cc58f21b7d31bafb480cc6656e8e1">Error</a> (std::string name, std::string detail, const <a class="el" href="classhdg_1_1_position.html">Position</a> &amp;position)</td></tr>
+<tr class="separator:a383cc58f21b7d31bafb480cc6656e8e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aa2e5bd26a7b725e9b4bf2b79cfb781" id="r_a6aa2e5bd26a7b725e9b4bf2b79cfb781"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhdg_1_1_error.html#a6aa2e5bd26a7b725e9b4bf2b79cfb781">setName</a> (const std::string &amp;name)</td></tr>
+<tr class="separator:a6aa2e5bd26a7b725e9b4bf2b79cfb781"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50404246b15108bb0b671826565f87a4" id="r_a50404246b15108bb0b671826565f87a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhdg_1_1_error.html#a50404246b15108bb0b671826565f87a4">setDetail</a> (const std::string &amp;detail)</td></tr>
+<tr class="separator:a50404246b15108bb0b671826565f87a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e53391531b875e8db5cb25ff7d3bf64" id="r_a9e53391531b875e8db5cb25ff7d3bf64"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classhdg_1_1_position.html">Position</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhdg_1_1_error.html#a9e53391531b875e8db5cb25ff7d3bf64">thisPosStack</a> ()</td></tr>
+<tr class="separator:a9e53391531b875e8db5cb25ff7d3bf64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec8dbff89d5a683cbf078b01623e9967" id="r_aec8dbff89d5a683cbf078b01623e9967"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhdg_1_1_error.html#aec8dbff89d5a683cbf078b01623e9967">toString</a> ()</td></tr>
 <tr class="separator:aec8dbff89d5a683cbf078b01623e9967"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -130,16 +146,24 @@ Public Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a0d5348d537268cc719326a965f95752b" id="r_a0d5348d537268cc719326a965f95752b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhdg_1_1_error.html#a0d5348d537268cc719326a965f95752b">m_name</a></td></tr>
 <tr class="separator:a0d5348d537268cc719326a965f95752b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af042623dd820bbb31d00c185e194c1c1" id="r_af042623dd820bbb31d00c185e194c1c1"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhdg_1_1_error.html#af042623dd820bbb31d00c185e194c1c1">m_details</a></td></tr>
-<tr class="separator:af042623dd820bbb31d00c185e194c1c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92afb5a38c363127fdb4216533eba041" id="r_a92afb5a38c363127fdb4216533eba041"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhdg_1_1_position.html">Position</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhdg_1_1_error.html#a92afb5a38c363127fdb4216533eba041">m_position</a></td></tr>
-<tr class="separator:a92afb5a38c363127fdb4216533eba041"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0938bbe26aa3cb45dbc5260cae2e50af" id="r_a0938bbe26aa3cb45dbc5260cae2e50af"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhdg_1_1_environment.html">Environment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhdg_1_1_error.html#a0938bbe26aa3cb45dbc5260cae2e50af">m_environment</a> {}</td></tr>
-<tr class="separator:a0938bbe26aa3cb45dbc5260cae2e50af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada696c9f94f65c6e200a94a9d69c850e" id="r_ada696c9f94f65c6e200a94a9d69c850e"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhdg_1_1_error.html#ada696c9f94f65c6e200a94a9d69c850e">m_detail</a></td></tr>
+<tr class="memdesc:ada696c9f94f65c6e200a94a9d69c850e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><blockquote class="doxtable">
+<p>&zwj;异常的名字 </p>
+</blockquote>
+ <br /></td></tr>
+<tr class="separator:ada696c9f94f65c6e200a94a9d69c850e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b12bef7f3c5260bae2f5c9ef4d2597e" id="r_a9b12bef7f3c5260bae2f5c9ef4d2597e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classhdg_1_1_position.html">Position</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhdg_1_1_error.html#a9b12bef7f3c5260bae2f5c9ef4d2597e">m_posStack</a></td></tr>
+<tr class="memdesc:a9b12bef7f3c5260bae2f5c9ef4d2597e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><blockquote class="doxtable">
+<p>&zwj;异常的信息 </p>
+</blockquote>
+ <br /></td></tr>
+<tr class="separator:a9b12bef7f3c5260bae2f5c9ef4d2597e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>异常顶级类 </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aef566b0791e355d2bae63907ed85a779" name="aef566b0791e355d2bae63907ed85a779"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef566b0791e355d2bae63907ed85a779">&#9670;&#160;</a></span>Error() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aef566b0791e355d2bae63907ed85a779">&#9670;&#160;</a></span>Error() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -161,10 +185,41 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p><blockquote class="doxtable">
+<p>&zwj;异常标记栈。该栈回存放全部的异常位置 </p>
+</blockquote>
+</p>
+
 </div>
 </div>
-<a id="a325e4b9570b782c2185bf7ac2f4485b7" name="a325e4b9570b782c2185bf7ac2f4485b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a325e4b9570b782c2185bf7ac2f4485b7">&#9670;&#160;</a></span>Error() <span class="overload">[2/2]</span></h2>
+<a id="a662ca345d538d646dc4c3bd227974492" name="a662ca345d538d646dc4c3bd227974492"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a662ca345d538d646dc4c3bd227974492">&#9670;&#160;</a></span>Error() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">hdg::Error::Error </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a383cc58f21b7d31bafb480cc6656e8e1" name="a383cc58f21b7d31bafb480cc6656e8e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a383cc58f21b7d31bafb480cc6656e8e1">&#9670;&#160;</a></span>Error() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -179,7 +234,7 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>details</em>, </td>
+          <td class="paramname"><em>detail</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -198,6 +253,59 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a50404246b15108bb0b671826565f87a4" name="a50404246b15108bb0b671826565f87a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50404246b15108bb0b671826565f87a4">&#9670;&#160;</a></span>setDetail()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void hdg::Error::setDetail </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>detail</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6aa2e5bd26a7b725e9b4bf2b79cfb781" name="a6aa2e5bd26a7b725e9b4bf2b79cfb781"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6aa2e5bd26a7b725e9b4bf2b79cfb781">&#9670;&#160;</a></span>setName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void hdg::Error::setName </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9e53391531b875e8db5cb25ff7d3bf64" name="a9e53391531b875e8db5cb25ff7d3bf64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e53391531b875e8db5cb25ff7d3bf64">&#9670;&#160;</a></span>thisPosStack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="classhdg_1_1_position.html">Position</a> &gt; * hdg::Error::thisPosStack </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aec8dbff89d5a683cbf078b01623e9967" name="aec8dbff89d5a683cbf078b01623e9967"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aec8dbff89d5a683cbf078b01623e9967">&#9670;&#160;</a></span>toString()</h2>
 
@@ -224,8 +332,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="af042623dd820bbb31d00c185e194c1c1" name="af042623dd820bbb31d00c185e194c1c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af042623dd820bbb31d00c185e194c1c1">&#9670;&#160;</a></span>m_details</h2>
+<a id="ada696c9f94f65c6e200a94a9d69c850e" name="ada696c9f94f65c6e200a94a9d69c850e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada696c9f94f65c6e200a94a9d69c850e">&#9670;&#160;</a></span>m_detail</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -234,7 +342,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string hdg::Error::m_details</td>
+          <td class="memname">std::string hdg::Error::m_detail</td>
         </tr>
       </table>
   </td>
@@ -244,27 +352,10 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="a0938bbe26aa3cb45dbc5260cae2e50af" name="a0938bbe26aa3cb45dbc5260cae2e50af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0938bbe26aa3cb45dbc5260cae2e50af">&#9670;&#160;</a></span>m_environment</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classhdg_1_1_environment.html">Environment</a>* hdg::Error::m_environment {}</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p><blockquote class="doxtable">
+<p>&zwj;异常的名字 </p>
+</blockquote>
+</p>
 
 </div>
 </div>
@@ -290,8 +381,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a92afb5a38c363127fdb4216533eba041" name="a92afb5a38c363127fdb4216533eba041"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a92afb5a38c363127fdb4216533eba041">&#9670;&#160;</a></span>m_position</h2>
+<a id="a9b12bef7f3c5260bae2f5c9ef4d2597e" name="a9b12bef7f3c5260bae2f5c9ef4d2597e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b12bef7f3c5260bae2f5c9ef4d2597e">&#9670;&#160;</a></span>m_posStack</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -300,7 +391,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhdg_1_1_position.html">Position</a> hdg::Error::m_position</td>
+          <td class="memname">std::vector&lt;<a class="el" href="classhdg_1_1_position.html">Position</a>&gt; hdg::Error::m_posStack</td>
         </tr>
       </table>
   </td>
@@ -309,6 +400,11 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p><blockquote class="doxtable">
+<p>&zwj;异常的信息 </p>
+</blockquote>
+</p>
 
 </div>
 </div>

@@ -6,11 +6,11 @@
 class \mbox{\hyperlink{classhdg_1_1_binary_operator_node}{Binary\+Operator\+Node}}
 \item 
 class \mbox{\hyperlink{classhdg_1_1_call_node}{Call\+Node}}
-\item 
+\begin{DoxyCompactList}\small\item\em 呼叫节点。用于圆括号、方括号等等的使用。 \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classhdg_1_1_environment}{Environment}}
-\item 
+\begin{DoxyCompactList}\small\item\em 环境。主要用来存储符号、模块名称等信息。 \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classhdg_1_1_error}{Error}}
-\item 
+\begin{DoxyCompactList}\small\item\em 异常顶级类 \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classhdg_1_1_float}{Float}}
 \item 
 class \mbox{\hyperlink{classhdg_1_1_for_node}{For\+Node}}
@@ -23,8 +23,6 @@ class \mbox{\hyperlink{classhdg_1_1_if_node}{If\+Node}}
 \item 
 class \mbox{\hyperlink{classhdg_1_1_illegal_char_error}{Illegal\+Char\+Error}}
 \item 
-struct \mbox{\hyperlink{structhdg_1_1_indicator}{Indicator}}
-\item 
 class \mbox{\hyperlink{classhdg_1_1_integer}{Integer}}
 \item 
 class \mbox{\hyperlink{classhdg_1_1_interpreter}{Interpreter}}
@@ -32,7 +30,7 @@ class \mbox{\hyperlink{classhdg_1_1_interpreter}{Interpreter}}
 class \mbox{\hyperlink{classhdg_1_1_invalid_syntax_error}{Invalid\+Syntax\+Error}}
 \item 
 class \mbox{\hyperlink{classhdg_1_1_lexer}{Lexer}}
-\item 
+\begin{DoxyCompactList}\small\item\em 词法分析器 \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classhdg_1_1_list}{List}}
 \item 
 class \mbox{\hyperlink{classhdg_1_1_node}{Node}}
@@ -54,11 +52,11 @@ class \mbox{\hyperlink{classhdg_1_1_object_node}{Object\+Node}}
 class \mbox{\hyperlink{classhdg_1_1_parser}{Parser}}
 \item 
 class \mbox{\hyperlink{classhdg_1_1_position}{Position}}
-\item 
+\begin{DoxyCompactList}\small\item\em 位置指示器 \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classhdg_1_1_runtime_error}{Runtime\+Error}}
-\item 
+\begin{DoxyCompactList}\small\item\em 运行时异常 \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classhdg_1_1_shell}{Shell}}
-\item 
+\begin{DoxyCompactList}\small\item\em \doxylink{classhdg_1_1_shell}{Shell} 是整个海琛解释器的起点 \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classhdg_1_1_statements_node}{Statements\+Node}}
 \item 
 class \mbox{\hyperlink{classhdg_1_1_string}{String}}
@@ -70,6 +68,8 @@ class \mbox{\hyperlink{classhdg_1_1_token}{Token}}
 class \mbox{\hyperlink{classhdg_1_1_unary_operator_node}{Unary\+Operator\+Node}}
 \item 
 class \mbox{\hyperlink{classhdg_1_1_while_node}{While\+Node}}
+\item 
+class \mbox{\hyperlink{classhdg_1_1_zero_division_error}{Zero\+Division\+Error}}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
@@ -113,10 +113,6 @@ enum \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Token\+Typ
 \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1afd5bad3f86efe1b1ab8a2e6201eccba9}{COMMA}}
 , \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a39aef76943593ee964dc01ad87e77978}{EF}}
 , \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a328cd568e5f70f8cf5df06c3f2f2503a}{EL}}
- \}
-\item 
-enum \mbox{\hyperlink{namespacehdg_a5607e634578288231046fe59484159eb}{Mode}} \{ \mbox{\hyperlink{namespacehdg_a5607e634578288231046fe59484159eba3d1e88c276df3486210bd69cac3172d7}{debug}}
-, \mbox{\hyperlink{namespacehdg_a5607e634578288231046fe59484159eba6fef1415eedb4f9b6e6ea8a25f01a9c0}{release}}
  \}
 \item 
 enum \mbox{\hyperlink{namespacehdg_af4e516e72fe6edc775660088c94b65a1}{Legal\+Char}} \{ \newline
@@ -185,22 +181,6 @@ UPPERCASE&\\
 
 \raisebox{\heightof{T}}[0pt][0pt]{\index{UNDERLINE@{UNDERLINE}!hdg@{hdg}}\index{hdg@{hdg}!UNDERLINE@{UNDERLINE}}}\Hypertarget{namespacehdg_af4e516e72fe6edc775660088c94b65a1ad81b142de45e9330d22a19295416f309}\label{namespacehdg_af4e516e72fe6edc775660088c94b65a1ad81b142de45e9330d22a19295416f309} 
 UNDERLINE&\\
-\hline
-
-\end{DoxyEnumFields}
-\Hypertarget{namespacehdg_a5607e634578288231046fe59484159eb}\label{namespacehdg_a5607e634578288231046fe59484159eb} 
-\index{hdg@{hdg}!Mode@{Mode}}
-\index{Mode@{Mode}!hdg@{hdg}}
-\doxysubsubsection{\texorpdfstring{Mode}{Mode}}
-{\footnotesize\ttfamily enum \mbox{\hyperlink{namespacehdg_a5607e634578288231046fe59484159eb}{hdg\+::\+Mode}}}
-
-\begin{DoxyEnumFields}{Enumerator}
-\raisebox{\heightof{T}}[0pt][0pt]{\index{debug@{debug}!hdg@{hdg}}\index{hdg@{hdg}!debug@{debug}}}\Hypertarget{namespacehdg_a5607e634578288231046fe59484159eba3d1e88c276df3486210bd69cac3172d7}\label{namespacehdg_a5607e634578288231046fe59484159eba3d1e88c276df3486210bd69cac3172d7} 
-debug&\\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{release@{release}!hdg@{hdg}}\index{hdg@{hdg}!release@{release}}}\Hypertarget{namespacehdg_a5607e634578288231046fe59484159eba6fef1415eedb4f9b6e6ea8a25f01a9c0}\label{namespacehdg_a5607e634578288231046fe59484159eba6fef1415eedb4f9b6e6ea8a25f01a9c0} 
-release&\\
 \hline
 
 \end{DoxyEnumFields}

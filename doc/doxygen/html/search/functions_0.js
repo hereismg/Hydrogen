@@ -6,6 +6,5 @@ var searchData=
   ['andoperator_3',['andoperator',['../classhdg_1_1_float.html#a9487a2f477244c419f1607f3752ea5d8',1,'hdg::Float::andOperator()'],['../classhdg_1_1_integer.html#a40ae08c35392fde133702a8a99ec6797',1,'hdg::Integer::andOperator()'],['../classhdg_1_1_object.html#a19670ada028d2c201ab43ad1188e0acd',1,'hdg::Object::andOperator()']]],
   ['append_4',['append',['../classhdg_1_1_statements_node.html#ab41c4a535ce2c22093fc3e278650a6c5',1,'hdg::StatementsNode']]],
   ['arithexpr_5',['arithExpr',['../classhdg_1_1_parser.html#a0b7584b8a9fb11bd2a0f7b1e26d04a7f',1,'hdg::Parser']]],
-  ['arrow_6',['arrow',['../classhdg_1_1_position.html#acf354a16622580358e7808ffc9bd4c14',1,'hdg::Position']]],
-  ['atom_7',['atom',['../classhdg_1_1_parser.html#a96dd4f92e90cc120d1d2a84443cb1d7b',1,'hdg::Parser']]]
+  ['atom_6',['atom',['../classhdg_1_1_parser.html#a96dd4f92e90cc120d1d2a84443cb1d7b',1,'hdg::Parser']]]
 ];

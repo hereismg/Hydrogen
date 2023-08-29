@@ -1,8 +1,7 @@
-function add(a, b){
-    a+b
+function factorial(){
+    result=1;
+    for i from 1 to 10: result = result*i;
+    result;
 }
 
-num1 = 1
-num2 = 2
-
-add(num1, num2)
+factorial()

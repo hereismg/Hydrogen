@@ -33,6 +33,10 @@ namespace hdg {
     }
 
     Node *Parser::statements(Environment *environment) {
+        if (m_currentToken->getType() == Token::EL || m_currentToken->getType() == Token::EF){
+            return nullptr;
+        }
+
         ///? 这里是否要加上一行 if (m_currentToken.getType() == LPAREN) ？
         auto* stats = new StatementsNode(*m_currentToken->thisPosition(), environment);
 
@@ -40,8 +44,12 @@ namespace hdg {
             advance();
 
             while (m_currentToken->getType() != Token::RBRACE){
-                while (m_currentToken->getType() == Token::EL) advance();       ///> 去除多余的换行符
+                if (m_currentToken->getType() == Token::EL) {
+                    advance();       ///> 去除多余的换行符
+                    continue;
+                }
                 Node* node = expr(environment);
+                if (node == nullptr) continue;
                 stats->append(node);
             }
             stats->thisPosition()->setEnd(m_currentToken->thisPosition()->getEnd());
@@ -49,7 +57,10 @@ namespace hdg {
         }
         else {
             while (m_currentToken->getType() != Token::EF){
-                while (m_currentToken->getType() == Token::EL) advance();       ///> 去除多余的换行符
+                if (m_currentToken->getType() == Token::EL) {
+                    advance();       ///> 去除多余的换行符
+                    continue;
+                }
                 Node* node = expr(environment);
                 stats->append(node);
             }

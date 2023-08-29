@@ -14,7 +14,7 @@ namespace hdg {
      *              除此之外，如果输入文件路径，那么 Shell 会直接解析文件里的代码；否则直接进入到命令行。
      * */
 
-    [[noreturn]] void Shell::exe(int argc, char* argv[]) {
+    void Shell::exe(int argc, char* argv[]) {
 
         /// 读取传入的参数，并且解析传入的参数。
         int pos = 1;
@@ -45,7 +45,8 @@ namespace hdg {
             interpreter.thisEnvironment()->setFilePath(m_fPath);
             interpreter.thisEnvironment()->setModuleName("global");
             code = input(m_fPath);
-            interpreter.interpret(m_fPath, code, m_mode);
+            std::cout << interpreter.interpret(m_fPath, code, m_mode) << std::endl;
+            return;
         }
     }
 

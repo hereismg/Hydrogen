@@ -10,14 +10,14 @@
 \DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ HDG\_TOKEN\_H}}
 \DoxyCodeLine{00007\ }
 \DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string>}}
-\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <TypeNameMap>}}
 \DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <utility>}}
 \DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <iostream>}}
 \DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_position_8h}{Position.h}}"{}}}
 \DoxyCodeLine{00013\ }
 \DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacehdg}{hdg}}\ \{}
 \DoxyCodeLine{00015\ }
-\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{TokenType}}\{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Type}}\{}
 \DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a3bb15b754d10301685de058edb411eb5}{INT}},}
 \DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1afed4e51ce8166d18edaa557d3e3b2cf3}{FLOAT}},\ \ \ \ \ \ }
 \DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a71dbcdc850c86155c2b5a10cede6296c}{STRING}},}
@@ -52,7 +52,7 @@
 \DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a328cd568e5f70f8cf5df06c3f2f2503a}{EL}},\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ end\ of\ line\ 有两种表达字符：“;”\ and\ “\(\backslash\)n”}}
 \DoxyCodeLine{00049\ \ \ \ \ \};}
 \DoxyCodeLine{00050\ }
-\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{static}\ std::map<TokenType,\ std::string>\ \mbox{\hyperlink{namespacehdg_abceca39548a4a6a54198ec993570ebdc}{tokenTypeName}}\ =\ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{static}\ std::TypeNameMap<Type,\ std::string>\ \mbox{\hyperlink{namespacehdg_abceca39548a4a6a54198ec993570ebdc}{TypeNameMap}}\ =\ \{}
 \DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a3bb15b754d10301685de058edb411eb5}{INT}},\ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}INT"{}}\},}
 \DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1afed4e51ce8166d18edaa557d3e3b2cf3}{FLOAT}},\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}FLOAT"{}}\},}
 \DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \{\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1a71dbcdc850c86155c2b5a10cede6296c}{STRING}},\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}STRING"{}}\},}
@@ -87,24 +87,24 @@
 \DoxyCodeLine{00085\ \ \ \ \ \};}
 \DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classhdg_1_1_token}{Token}}\ \{}
 \DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{protected}:}
-\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{TokenType}}\ \mbox{\hyperlink{classhdg_1_1_token_a1cc6d72722b609e2a95bf30fc0061d14}{m\_type}};}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Type}}\ \mbox{\hyperlink{classhdg_1_1_token_a1cc6d72722b609e2a95bf30fc0061d14}{m\_type}};}
 \DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_token_afd73b684ca24c056d8e4d05bef957819}{m\_value}};}
 \DoxyCodeLine{00090\ }
 \DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\ \mbox{\hyperlink{classhdg_1_1_token_aa03977c3dac907b6cdd2e096d36ae56a}{m\_position}};}
 \DoxyCodeLine{00092\ }
 \DoxyCodeLine{00093\ \ \ \ \ \textcolor{keyword}{public}:}
 \DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_token_a0771e279721224109aefeb8d33d22e57}{Token}}();}
-\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_token_a0771e279721224109aefeb8d33d22e57}{Token}}(\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{TokenType}}\ type,\ std::string\ value,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\&\ position);}
-\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_token_a0771e279721224109aefeb8d33d22e57}{Token}}(\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{TokenType}}\ type,\ std::string\ value);}
-\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_token_a0771e279721224109aefeb8d33d22e57}{Token}}(\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{TokenType}}\ type);}
-\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_token_a0771e279721224109aefeb8d33d22e57}{Token}}(\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{TokenType}}\ type,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\&\ position);}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_token_a0771e279721224109aefeb8d33d22e57}{Token}}(\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Type}}\ type,\ std::string\ value,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\&\ position);}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_token_a0771e279721224109aefeb8d33d22e57}{Token}}(\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Type}}\ type,\ std::string\ value);}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_token_a0771e279721224109aefeb8d33d22e57}{Token}}(\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Type}}\ type);}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_token_a0771e279721224109aefeb8d33d22e57}{Token}}(\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Type}}\ type,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_position}{Position}}\&\ position);}
 \DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_token_a35f2f8619dd8d06281e96f6f6a3fce54}{Token}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classhdg_1_1_token}{Token}}\&\ tok);}
 \DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_token_a18f1c6c2d8d1f7ef500f09158f4841c3}{\string~Token}}();}
 \DoxyCodeLine{00101\ }
-\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classhdg_1_1_token_aa147fa4c8ac7257266a7f58fa83b0b51}{match}}(\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{TokenType}}\ type,\ \textcolor{keyword}{const}\ std::string\&\ value);}
-\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_token_a6df27fe12a77630a612d7fa002a55e45}{setType}}(\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{TokenType}}\ type);}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classhdg_1_1_token_aa147fa4c8ac7257266a7f58fa83b0b51}{match}}(\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Type}}\ type,\ \textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_token_a6df27fe12a77630a612d7fa002a55e45}{setType}}(\mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Type}}\ type);}
 \DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classhdg_1_1_token_abb2ec86095e3edaa799da04f425eb347}{setValue}}(\textcolor{keyword}{const}\ std::string\&\ value);}
-\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{TokenType}}\ \mbox{\hyperlink{classhdg_1_1_token_a577428babf5ca707de3e0eed6ae8a7a7}{getType}}();}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacehdg_a8e782b93fb966ac4f9d6006b416444a1}{Type}}\ \mbox{\hyperlink{classhdg_1_1_token_a577428babf5ca707de3e0eed6ae8a7a7}{getType}}();}
 \DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_token_af84eb7139c648270e948f44f2dfa7acc}{getValue}}();}
 \DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classhdg_1_1_position}{Position}}*\ \mbox{\hyperlink{classhdg_1_1_token_ab3c9848df72dec4501c15c3a19be4d7a}{thisPosition}}();}
 \DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classhdg_1_1_token_aa72f3cbee5d99b50e40d436865648413}{toString}}();}

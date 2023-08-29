@@ -95,59 +95,59 @@ namespace hdg {
                 buildString();
             }
             else if (m_currentChar == '\n' || m_currentChar == ';'){
-                m_tokens.emplace_back(EL, std::to_string(m_currentChar), Position(m_fPath, m_code, m_pos));
+                m_tokens.emplace_back(Token::EL, std::to_string(m_currentChar), Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == '+'){
-                m_tokens.emplace_back(PLUS, Position(m_fPath, m_code, m_pos));
+                m_tokens.emplace_back(Token::PLUS, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == '-'){
-                m_tokens.emplace_back(MINUS, Position(m_fPath, m_code, m_pos));
+                m_tokens.emplace_back(Token::MINUS, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == '*'){
-                m_tokens.emplace_back(MUL , Position(m_fPath, m_code, m_pos));
+                m_tokens.emplace_back(Token::MUL , Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == '/'){
-                m_tokens.emplace_back(DIV, Position(m_fPath, m_code, m_pos));
+                m_tokens.emplace_back(Token::DIV, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == '^'){
-                m_tokens.emplace_back(POW, Position(m_fPath, m_code, m_pos));
+                m_tokens.emplace_back(Token::POW, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == '('){
-                m_tokens.emplace_back(LPAREN, Position(m_fPath, m_code, m_pos));
+                m_tokens.emplace_back(Token::LPAREN, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == ')'){
-                m_tokens.emplace_back(RPAREN, Position(m_fPath, m_code, m_pos));
+                m_tokens.emplace_back(Token::RPAREN, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == '['){
-                m_tokens.emplace_back(RBRACKET, Position(m_fPath, m_code, m_pos));
+                m_tokens.emplace_back(Token::RBRACKET, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == ']'){
-                m_tokens.emplace_back(LBRACKET, Position(m_fPath, m_code, m_pos));
+                m_tokens.emplace_back(Token::LBRACKET, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == '{'){
-                m_tokens.emplace_back(LBRACE, Position(m_fPath, m_code, m_pos));
+                m_tokens.emplace_back(Token::LBRACE, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == '}'){
-                m_tokens.emplace_back(RBRACE, Position(m_fPath, m_code, m_pos));
+                m_tokens.emplace_back(Token::RBRACE, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == ':'){
-                m_tokens.emplace_back(COLON, Position(m_fPath, m_code, m_pos));
+                m_tokens.emplace_back(Token::COLON, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else if (m_currentChar == ','){
-                m_tokens.emplace_back(COMMA, Position(m_fPath, m_code, m_pos));
+                m_tokens.emplace_back(Token::COMMA, Position(m_fPath, m_code, m_pos));
                 advance();
             }
             else{
@@ -157,7 +157,7 @@ namespace hdg {
                         );
             }
         }
-        m_tokens.emplace_back(EF, Position(m_fPath, m_code, m_pos));
+        m_tokens.emplace_back(Token::EF, Position(m_fPath, m_code, m_pos));
 
         return m_tokens;
     }
@@ -165,12 +165,12 @@ namespace hdg {
     void Lexer::buildNumber() {
         Position::Indicator posStart = m_pos;
         int counter = 0;
-        TokenType type = INT;
+        Token::Type type = Token::INT;
 
         while(m_pos.index < m_code->length() && (whatIsThis(m_currentChar) == LegalChar::DIGITAL || m_currentChar == '.')) {
             if (m_currentChar == '.') {
                 if (counter==1) break;
-                type = FLOAT;
+                type = Token::FLOAT;
                 counter++;
             }
             advance();
@@ -185,12 +185,12 @@ namespace hdg {
 
     void Lexer::buildGreaterThan() {
         Position::Indicator posStart = m_pos;
-        TokenType type = GT;
+        Token::Type type = Token::GT;
 
         advance();
 
         if (m_pos.index < m_code->length() && m_currentChar == '='){
-            type = GTE;
+            type = Token::GTE;
             advance();
         }
 
@@ -199,12 +199,12 @@ namespace hdg {
 
     void Lexer::buildLessThan() {
         Position::Indicator posStart = m_pos;
-        TokenType type = LT;
+        Token::Type type = Token::LT;
 
         advance();
 
         if (m_pos.index < m_code->length() && m_currentChar == '='){
-            type = LTE;
+            type = Token::LTE;
             advance();
         }
 
@@ -213,12 +213,12 @@ namespace hdg {
 
     void Lexer::buildEquation() {
         Position::Indicator posStart = m_pos;
-        TokenType type = EQ;
+        Token::Type type = Token::EQ;
 
         advance();
 
         if (m_pos.index < m_code->length() && m_currentChar == '='){
-            type = EE;
+            type = Token::EE;
             advance();
         }
 
@@ -227,7 +227,7 @@ namespace hdg {
 
     void Lexer::buildIdentifier() {
         Position::Indicator posStart = m_pos;
-        TokenType type = IDENTIFIER;
+        Token::Type type = Token::IDENTIFIER;
 
         advance();
 
@@ -237,7 +237,7 @@ namespace hdg {
 
         std::string value = m_code->substr(posStart.index, m_pos.index - posStart.index);
 
-        if (keywordSet.find(value) != keywordSet.end()) type = KEYWORD;
+        if (keywordSet.find(value) != keywordSet.end()) type = Token::KEYWORD;
 
         m_tokens.emplace_back(type, value, Position(m_fPath, m_code, posStart, m_pos));
     }
@@ -272,7 +272,7 @@ namespace hdg {
         advance();
         pos.setEnd(m_pos);
 
-        m_tokens.emplace_back(STRING, str, pos);
+        m_tokens.emplace_back(Token::STRING, str, pos);
     }
 
 } // hdg

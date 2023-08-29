@@ -10,7 +10,7 @@ namespace hdg {
     }
 
     void Parser::advance() {
-        if (m_currentToken->getType() != EF) m_currentToken++;
+        if (m_currentToken->getType() != Token::EF) m_currentToken++;
     }
 
     void Parser::retreat() {
@@ -22,7 +22,7 @@ namespace hdg {
 
         Node* result = expr(m_environment);
 
-        if (m_currentToken->getType() != EF){
+        if (m_currentToken->getType() != Token::EF){
             throw InvalidSyntaxError(
                     "Expected '+', '-', '*', '/' or '^'.",
                     *m_currentToken->thisPosition()
@@ -33,13 +33,13 @@ namespace hdg {
     }
 
     Node* Parser::expr(Environment* environment) {
-        while(m_currentToken->getType() == EL) advance();
-        if (TokenType::IDENTIFIER == m_currentToken->getType()){
+        while(m_currentToken->getType() == Token::EL) advance();
+        if (Token::IDENTIFIER == m_currentToken->getType()){
             std::string name = m_currentToken->getValue();
             Position pos(*m_currentToken->thisPosition());
             advance();
 
-            if (m_currentToken->getType() == TokenType::EQ){
+            if (m_currentToken->getType() == Token::EQ){
                 advance();
 
                 Node* obj = expr(environment);
@@ -54,13 +54,13 @@ namespace hdg {
 
         return binaryOperator(
                 environment,
-            std::set<Token, std::less<>>{{KEYWORD, "or"}, {KEYWORD, "and"}},
+            std::set<Token, std::less<>>{{Token::KEYWORD, "or"}, {Token::KEYWORD, "and"}},
             [this](Environment* e){return this->compExpr(e);}
         );
     }
 
     Node *Parser::compExpr(Environment* environment) {
-        if (m_currentToken->match(KEYWORD, "not")){
+        if (m_currentToken->match(Token::KEYWORD, "not")){
             Token token(*m_currentToken);
             advance();
             Node* obj = compExpr(environment);
@@ -71,14 +71,14 @@ namespace hdg {
         }
         return binaryOperator(
                 environment,
-                std::set<Token, std::less<>>{{EE}, {GT}, {LT}, {GTE}, {LTE}},
+                std::set<Token, std::less<>>{{Token::EE}, {Token::GT}, {Token::LT}, {Token::GTE}, {Token::LTE}},
                 [this](Environment* e){return this->arithExpr(e);});
     }
 
     Node *Parser::arithExpr(Environment* environment) {
         return binaryOperator(
                 environment,
-                std::set<Token, std::less<>>{{PLUS}, {MINUS}},
+                std::set<Token, std::less<>>{{Token::PLUS}, {Token::MINUS}},
                 [this](Environment* e){return this->term(e);}
         );
     }
@@ -86,16 +86,16 @@ namespace hdg {
     Node *Parser::term(Environment* environment) {
         return binaryOperator(
                 environment,
-                std::set<Token, std::less<>>{{MUL}, {DIV}},
+                std::set<Token, std::less<>>{{Token::MUL}, {Token::DIV}},
                 [this](Environment* e){return this->factor(e);}
                 );
     }
 
     Node *Parser::factor(Environment* environment) {
-        if (m_currentToken->getType() == PLUS || m_currentToken->getType() == MINUS){
+        if (m_currentToken->getType() == Token::PLUS || m_currentToken->getType() == Token::MINUS){
             return unaryOperator(
                     environment,
-                    std::set<Token, std::less<>>{{PLUS}, {MINUS}},
+                    std::set<Token, std::less<>>{{Token::PLUS}, {Token::MINUS}},
                     [this](Environment* e){return this->factor(e);}
                     );
         }else{
@@ -106,7 +106,7 @@ namespace hdg {
     Node *Parser::power(Environment* environment) {
         return binaryOperator(
                 environment,
-                std::set<Token, std::less<>>{{POW}},
+                std::set<Token, std::less<>>{{Token::POW}},
                 [this](Environment* e){return this->call(e);},
                 [this](Environment* e){return this->factor(e);}
                 );
@@ -115,16 +115,16 @@ namespace hdg {
     Node *Parser::call(Environment *environment) {
         Node* node = atom(environment);
 
-        if (m_currentToken->getType() == LPAREN){
+        if (m_currentToken->getType() == Token::LPAREN){
             auto* callNode = new CallNode(*node->thisPosition(), environment);
             advance();
 
-            while (m_currentToken->getType() != RPAREN){
+            while (m_currentToken->getType() != Token::RPAREN){
                 callNode->addNode(expr(environment));
 
-                if (m_currentToken->getType() == COMMA){
+                if (m_currentToken->getType() == Token::COMMA){
                     advance();
-                    if (m_currentToken->getType()==RPAREN){
+                    if (m_currentToken->getType()==Token::RPAREN){
                         throw InvalidSyntaxError(
                                 "Expected int, float, plus, minus.",
                                 *m_currentToken->thisPosition()
@@ -133,9 +133,9 @@ namespace hdg {
                 }
             }
 
-            if (m_currentToken->getType() == RPAREN){
+            if (m_currentToken->getType() == Token::RPAREN){
                 callNode->setCall(node);
-                callNode->setOperator(LPAREN);
+                callNode->setOperator(Token::LPAREN);
                 callNode->thisPosition()->setEnd(m_currentToken->thisPosition()->getEnd());
                 advance();
                 return callNode;
@@ -152,26 +152,26 @@ namespace hdg {
     }
 
     Node *Parser::atom(Environment *environment) {
-        if (m_currentToken->getType() == INT){
+        if (m_currentToken->getType() == Token::INT){
             Node *node = new NumObjNode((long long)std::atoi(m_currentToken->getValue().c_str()), *m_currentToken->thisPosition());
             advance();
             return node;
         }
-        else if (m_currentToken->getType() == FLOAT){
+        else if (m_currentToken->getType() == Token::FLOAT){
             Node* node = new NumObjNode((double)std::atof(m_currentToken->getValue().c_str()), *m_currentToken->thisPosition());
             advance();
             return node;
         }
-        else if (m_currentToken->getType() == STRING){
+        else if (m_currentToken->getType() == Token::STRING){
             Node* node = new StrObjNode(m_currentToken->getValue(), *m_currentToken->thisPosition(), environment);
             advance();
             return node;
         }
-        else if (m_currentToken->getType() == LPAREN){
+        else if (m_currentToken->getType() == Token::LPAREN){
             advance();
             Node* node = expr(environment);
 
-            if (m_currentToken->getType() != RPAREN){
+            if (m_currentToken->getType() != Token::RPAREN){
                 throw InvalidSyntaxError(
                         "Expected ')'.",
                         *m_currentToken->thisPosition());
@@ -181,7 +181,7 @@ namespace hdg {
 
             return node;
         }
-        else if (m_currentToken->getType() == TokenType::IDENTIFIER){
+        else if (m_currentToken->getType() == Token::IDENTIFIER){
             Node* node = new ObjAccessNode(
                     m_currentToken->getValue(),
                     *m_currentToken->thisPosition(),
@@ -191,16 +191,16 @@ namespace hdg {
             advance();
             return node;
         }
-        else if (m_currentToken->match(KEYWORD, "if")){
+        else if (m_currentToken->match(Token::KEYWORD, "if")){
             return ifExpr(environment);
         }
-        else if (m_currentToken->match(KEYWORD, "for")){
+        else if (m_currentToken->match(Token::KEYWORD, "for")){
             return forExpr(environment);
         }
-        else if (m_currentToken->match(KEYWORD, "while")){
+        else if (m_currentToken->match(Token::KEYWORD, "while")){
             return whileExpr(environment);
         }
-        else if (m_currentToken->match(KEYWORD, "function")){
+        else if (m_currentToken->match(Token::KEYWORD, "function")){
             return funcExpr(environment);
         }
         else {
@@ -220,11 +220,11 @@ namespace hdg {
                 m_environment);
         Node *condition, *expression;
 
-        while(m_currentToken != m_tokens.end() && (m_currentToken->match(KEYWORD, "if") || m_currentToken->match(KEYWORD, "elif"))){
+        while(m_currentToken != m_tokens.end() && (m_currentToken->match(Token::KEYWORD, "if") || m_currentToken->match(Token::KEYWORD, "elif"))){
             advance();
             condition = expr(ifNode->thisEnvironment());
 
-            if (m_currentToken->getType() != COLON){
+            if (m_currentToken->getType() != Token::COLON){
                 throw InvalidSyntaxError(
                         "Expected ':'.",
                         *m_currentToken->thisPosition()
@@ -236,9 +236,9 @@ namespace hdg {
             ifNode->addBranch(condition, expression);
         }
 
-        if (m_currentToken != m_tokens.end() && m_currentToken->match(KEYWORD, "else")){
+        if (m_currentToken != m_tokens.end() && m_currentToken->match(Token::KEYWORD, "else")){
             advance();
-            if (m_currentToken->getType() != COLON){
+            if (m_currentToken->getType() != Token::COLON){
                 throw InvalidSyntaxError(
                         "Expected ':'.",
                         *m_currentToken->thisPosition()
@@ -254,32 +254,32 @@ namespace hdg {
 
     Node *Parser::forExpr(Environment* environment) {
         Position position(*m_currentToken->thisPosition());
-        Token index(IDENTIFIER);
+        Token index(Token::IDENTIFIER);
         auto* forNode = new ForNode(index, 0, -1, 1, nullptr, *m_currentToken->thisPosition(), environment);
 
-        if (m_currentToken->match(KEYWORD, "for")) advance();
+        if (m_currentToken->match(Token::KEYWORD, "for")) advance();
 
-        if (m_currentToken->getType() == IDENTIFIER) forNode->setIndex({IDENTIFIER, m_currentToken->getValue()});
+        if (m_currentToken->getType() == Token::IDENTIFIER) forNode->setIndex({Token::IDENTIFIER, m_currentToken->getValue()});
         else throw InvalidSyntaxError(
                 "Expected identifier.",
                 *m_currentToken->thisPosition()
                 );
         advance();
 
-        if (m_currentToken->match(KEYWORD, "from")){
+        if (m_currentToken->match(Token::KEYWORD, "from")){
             advance();
 
             int flag = 1;
-            if (m_currentToken->getType() ==PLUS){
+            if (m_currentToken->getType() == Token::PLUS){
                 advance();
             }
-            if (m_currentToken->getType() == MINUS) {
+            if (m_currentToken->getType() == Token::MINUS) {
                 flag = -1;
                 advance();
             }
 
 
-            if (m_currentToken->getType() != INT){
+            if (m_currentToken->getType() != Token::INT){
                 throw InvalidSyntaxError(
                         "Expected int.",
                         *m_currentToken->thisPosition()
@@ -290,19 +290,19 @@ namespace hdg {
             advance();
         }
 
-        if (m_currentToken->match(KEYWORD, "to")){
+        if (m_currentToken->match(Token::KEYWORD, "to")){
             advance();
             int flag = 1;
 
-            if (m_currentToken->getType() ==PLUS){
+            if (m_currentToken->getType() == Token::PLUS){
                 advance();
             }
-            if (m_currentToken->getType() == MINUS) {
+            if (m_currentToken->getType() == Token::MINUS) {
                 flag = -1;
                 advance();
             }
 
-            if (m_currentToken->getType() != INT){
+            if (m_currentToken->getType() != Token::INT){
                 throw InvalidSyntaxError(
                         "Expected int.",
                         *m_currentToken->thisPosition()
@@ -319,20 +319,20 @@ namespace hdg {
                     );
         }
 
-        if (m_currentToken->match(KEYWORD, "step")){
+        if (m_currentToken->match(Token::KEYWORD, "step")){
             advance();
             int flag = 1;
 
-            if (m_currentToken->getType() ==PLUS){
+            if (m_currentToken->getType() == Token::PLUS){
                 advance();
             }
-            if (m_currentToken->getType() == MINUS) {
+            if (m_currentToken->getType() == Token::MINUS) {
                 flag = -1;
                 advance();
             }
 
 
-            if (m_currentToken->getType() != INT){
+            if (m_currentToken->getType() != Token::INT){
                 throw InvalidSyntaxError(
                         "Expected int.",
                         *m_currentToken->thisPosition()
@@ -343,7 +343,7 @@ namespace hdg {
             advance();
         }
 
-        if (m_currentToken->getType() != COLON){
+        if (m_currentToken->getType() != Token::COLON){
             throw InvalidSyntaxError(
                     "Expected ':'.",
                     *m_currentToken->thisPosition()
@@ -363,11 +363,11 @@ namespace hdg {
         node = new WhileNode(nullptr, nullptr, *m_currentToken->thisPosition(), environment);
         Node *condition, *expression;
 
-        if (m_currentToken->match(KEYWORD, "while")) advance();
+        if (m_currentToken->match(Token::KEYWORD, "while")) advance();
 
         condition = expr(node->thisEnvironment());
 
-        if (m_currentToken->getType() != COLON){
+        if (m_currentToken->getType() != Token::COLON){
             throw InvalidSyntaxError(
                     "Expected ':'.",
                     *m_currentToken->thisPosition()
@@ -389,7 +389,7 @@ namespace hdg {
         func->thisPosition()->setStart(m_currentToken->thisPosition()->getStart());
         advance();
 
-        if (m_currentToken->getType() == IDENTIFIER){
+        if (m_currentToken->getType() == Token::IDENTIFIER){
             name = *m_currentToken;
             advance();
         }else{
@@ -399,7 +399,7 @@ namespace hdg {
             );
         }
 
-        if (m_currentToken->getType() == LPAREN){
+        if (m_currentToken->getType() == Token::LPAREN){
             advance();
         }else{
             throw InvalidSyntaxError(
@@ -408,22 +408,22 @@ namespace hdg {
             );
         }
 
-        while (m_tokens.end() != m_currentToken && m_currentToken->getType() == IDENTIFIER){
+        while (m_tokens.end() != m_currentToken && m_currentToken->getType() == Token::IDENTIFIER){
             Position pos(*m_currentToken->thisPosition());
             std::string argName = m_currentToken->getValue();
             Node* argExpr = nullptr;
             advance();
 
-            if (m_currentToken->getType() == EQ){
+            if (m_currentToken->getType() == Token::EQ){
                 advance();
                 argExpr = expr(func->thisEnvironment());
                 pos.setEnd(argExpr->thisPosition()->getEnd());
             }
             func->setArg(new ObjAssignNode(argName, argExpr, pos, func->thisEnvironment()));
 
-            if (m_currentToken->getType() == COMMA) {
+            if (m_currentToken->getType() == Token::COMMA) {
                 advance();
-                if (m_currentToken->getType()!=IDENTIFIER)
+                if (m_currentToken->getType()!=Token::IDENTIFIER)
                     throw InvalidSyntaxError(
                             "Expected identifier.",
                             *m_currentToken->thisPosition()
@@ -435,7 +435,7 @@ namespace hdg {
             }
         }
 
-        if (m_currentToken->getType() == RPAREN){
+        if (m_currentToken->getType() == Token::RPAREN){
             advance();
         }else{
             throw InvalidSyntaxError(
@@ -444,7 +444,7 @@ namespace hdg {
             );
         }
 
-        if (m_currentToken->getType() == COLON){
+        if (m_currentToken->getType() == Token::COLON){
             advance();
 
             Node* body = expr(func->thisEnvironment());
@@ -454,7 +454,7 @@ namespace hdg {
 
             return new ObjAssignNode(name.getValue(), func, *func->thisPosition(), environment);
         }
-        else if (m_currentToken->getType() == LBRACE){
+        else if (m_currentToken->getType() == Token::LBRACE){
             Environment* e = func->thisEnvironment();
             Node* body = statements(e);
             func->thisPosition()->setEnd(body->thisPosition()->getEnd());
@@ -472,15 +472,15 @@ namespace hdg {
     }
 
     Node *Parser::statements(Environment *environment) {
-        if (m_currentToken->getType() == LBRACE){
+        if (m_currentToken->getType() == Token::LBRACE){
             auto* stats = new StatementsNode(*m_currentToken->thisPosition(), environment);
 
-            while(m_currentToken->getType() == EL || m_currentToken->getType() == LBRACE) advance();
-            while (m_currentToken->getType() != RBRACE){
+            while(m_currentToken->getType() == Token::EL || m_currentToken->getType() == Token::LBRACE) advance();
+            while (m_currentToken->getType() != Token::RBRACE){
                 Node* node = expr(environment);
                 stats->append(node);
 
-                while(m_currentToken->getType() == EL)advance();
+                while(m_currentToken->getType() == Token::EL)advance();
             }
             stats->thisPosition()->setEnd(m_currentToken->thisPosition()->getEnd());
             advance();

@@ -17,16 +17,16 @@ namespace hdg {
     protected:
         Node* m_call{nullptr};                  /// 被呼叫对象
         std::vector<Node*> m_list;              /// 参数列表
-        TokenType m_oper{TokenType::LPAREN};    /// 呼叫类型
+        Token::Type m_oper{Token::LPAREN};      /// 呼叫类型
 
     public:
         CallNode();
         CallNode(const Position& position, Environment* environment);
-        CallNode(Node* call, std::vector<Node*> list, TokenType oper, const Position& position, Environment* environment);
+        CallNode(Node* call, std::vector<Node*> list, Token::Type oper, const Position& position, Environment* environment);
         ~CallNode() override;
 
         void addNode(Node* node);
-        void setOperator(TokenType oper);
+        void setOperator(Token::Type oper);
         void setCall(Node* call);
 
         std::string toString() override;

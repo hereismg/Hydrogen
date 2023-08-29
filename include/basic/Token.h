@@ -13,89 +13,57 @@
 
 namespace hdg {
 
-    enum TokenType{
-        INT,
-        FLOAT,      /// 虽然名称为“float”，但实际上全都是双精度浮点型
-        STRING,
-        IDENTIFIER,
-        KEYWORD,
-
-        NE,         /// 不等于号“!=”
-        EE,         /// 逻辑表达式的等于号“==”
-        GT,
-        LT,
-        GTE,
-        LTE,
-
-        PLUS,
-        MINUS,
-        MUL,
-        DIV,
-        POW,
-
-        LPAREN,     /// 左圆括号
-        RPAREN,
-        LBRACKET,   /// 左方括号
-        RBRACKET,
-        LBRACE,     /// 左花括号
-        RBRACE,
-        EQ,         /// 赋值语句的等于号“=”
-
-        COLON,
-        COMMA,
-
-        EF,
-        EL,         // end of line 有两种表达字符：“;” and “\n”
-    };
-
-    /**
-     * */
-    static std::map<TokenType, std::string> tokenTypeName = {
-            {INT,           "INT"},
-            {FLOAT,         "FLOAT"},
-            {STRING,        "STRING"},
-            {IDENTIFIER,    "IDENTIFIER"},
-            {KEYWORD,       "KEYWORD"},
-
-            {EE,            "EE"},
-            {GT,            "GT"},
-            {LT,            "LT"},
-            {GTE,           "GTE"},
-            {LTE,           "LTE"},
-
-            {PLUS,          "PLUS"},
-            {MINUS,         "MINUS"},
-            {MUL,           "MUL"},
-            {DIV,           "DIV"},
-            {POW,           "POW"},
-
-            {LPAREN,        "LPAREN"},
-            {RPAREN,        "RPAREN"},
-            {LBRACKET,      "LBRACKET"},
-            {RBRACKET,      "RBRACKET"},
-            {LBRACE,        "LBRACE"},
-            {RBRACE,        "RBRACE"},
-            {EQ,            "EQ"},
-
-            {COLON,         "COLON"},
-            {COMMA,         "COMMA"},
-
-            {EF,            "EF"},          /// EOF   end of file    由于EOF是C++中的关键字，所以这里用EF代替
-            {EL,            "EL"},          /// EOL   end of line    意为“一行的末尾”，这里使用“EL”是为了和上面的”EF“统一表达语言
-    };
     class Token {
+    public:
+        enum Type{
+            INT,
+            FLOAT,      ///> 虽然名称为“float”，但实际上全都是双精度浮点型
+            STRING,
+            IDENTIFIER,
+            KEYWORD,
+
+            NE,         ///> 不等于号“!=”
+            EE,         ///> 逻辑表达式的等于号“==”
+            GT,
+            LT,
+            GTE,
+            LTE,
+
+            PLUS,
+            MINUS,
+            MUL,
+            DIV,
+            POW,
+
+            LPAREN,     ///> 左圆括号
+            RPAREN,
+            LBRACKET,   ///> 左方括号
+            RBRACKET,
+            LBRACE,     ///> 左花括号
+            RBRACE,
+            EQ,         ///> 赋值语句的等于号“=”
+
+
+            COLON,      ///> ”:“
+            COMMA,      ///> ”,“
+
+            EF,         ///> end of file
+            EL,         ///> end of line 有两种表达字符：“;” and “\n”
+        };
+        static std::map<Type, std::string> TypeNameMap;
+
     protected:
-        TokenType m_type;
+        Type m_type;
         std::string m_value;
 
         Position m_position;
 
     public:
         Token();
-        Token(TokenType type, std::string value, const Position& position);
-        Token(TokenType type, std::string value);
-        Token(TokenType type);
-        Token(TokenType type, const Position& position);
+        Token(Type type, std::string value, const Position& position);
+        Token(Type type, std::string value);
+        Token(Type type);
+        Token(Type type, const Position& position);
         Token(const Token& tok);
         ~Token();
 
@@ -106,10 +74,10 @@ namespace hdg {
          * @return 返回一个布尔值。
          * @note 必须当种类和值全部匹配的时候才会返回 True。
          * */
-        bool match(TokenType type, const std::string& value);
-        void setType(TokenType type);
+        bool match(Type type, const std::string& value);
+        void setType(Type type);
         void setValue(const std::string& value);
-        TokenType getType();
+        Type getType();
         std::string getValue();
         Position* thisPosition();
         std::string toString();

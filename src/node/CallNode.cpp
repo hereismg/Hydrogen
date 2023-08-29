@@ -7,7 +7,7 @@
 namespace hdg {
     CallNode::CallNode() = default;
 
-    CallNode::CallNode(Node* call, std::vector<Node *> list, TokenType oper, const Position &position,
+    CallNode::CallNode(Node* call, std::vector<Node *> list, Token::Type oper, const Position &position,
                        Environment *environment):
        Node(position, environment), m_call(call), m_list(std::move(list)), m_oper(oper){}
 
@@ -24,7 +24,7 @@ namespace hdg {
         m_list.push_back(node);
     }
 
-    void CallNode::setOperator(TokenType oper) {
+    void CallNode::setOperator(Token::Type oper) {
         m_oper = oper;
     }
 
@@ -50,7 +50,7 @@ namespace hdg {
 
         /// 此时开始运行parenthesis，并且监听异常。
         try{
-            if (m_oper == LPAREN){
+            if (m_oper == Token::LPAREN){
                 return obj->parenthesis(objList);
             }
             else{

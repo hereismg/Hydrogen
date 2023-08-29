@@ -10,7 +10,7 @@ namespace hdg {
         Node(position), m_oper(oper), m_left(left), m_right(right){
     }
 
-    BinaryOperatorNode::BinaryOperatorNode(TokenType oper, Node *left, Node *right, const Position& position, Environment* environment):
+    BinaryOperatorNode::BinaryOperatorNode(Token::Type oper, Node *left, Node *right, const Position& position, Environment* environment):
         Node(position, environment), m_oper(oper), m_left(left), m_right(right){
     }
 
@@ -45,9 +45,9 @@ namespace hdg {
 
     std::string BinaryOperatorNode::toString() {
         if (m_left == nullptr && m_right == nullptr){
-            return tokenTypeName[m_oper.getType()];
+            return Token::TypeNameMap[m_oper.getType()];
         }else{
-            return "(" + m_left->toString() + ", " + tokenTypeName[m_oper.getType()] + ", " + m_right->toString() + ")";
+            return "(" + m_left->toString() + ", " + Token::TypeNameMap[m_oper.getType()] + ", " + m_right->toString() + ")";
         }
     }
 
@@ -69,16 +69,16 @@ namespace hdg {
 
         Object* result = nullptr;
 
-        if (m_oper.getType() == PLUS){
+        if (m_oper.getType() == Token::PLUS){
             result = left->plus(right);
         }
-        else if (m_oper.getType() == MINUS){
+        else if (m_oper.getType() == Token::MINUS){
             result = left->minus(right);
         }
-        else if (m_oper.getType() == MUL){
+        else if (m_oper.getType() == Token::MUL){
             result = left->mul(right);
         }
-        else if (m_oper.getType() == DIV){
+        else if (m_oper.getType() == Token::DIV){
             try{
                 result = left->div(right);
             }
@@ -96,31 +96,31 @@ namespace hdg {
 //                        );
             }
         }
-        else if (m_oper.getType() == POW){
+        else if (m_oper.getType() == Token::POW){
             result = left->pow(right);
         }
-        else if (m_oper.getType() == EE){
+        else if (m_oper.getType() == Token::EE){
             result = left->equation(right);
         }
-        else if (m_oper.getType() == NE){
+        else if (m_oper.getType() == Token::NE){
             result  = left->notEquation(right);
         }
-        else if (m_oper.getType() == GT){
+        else if (m_oper.getType() == Token::GT){
             result = left->greaterThan(right);
         }
-        else if (m_oper.getType() == LT){
+        else if (m_oper.getType() == Token::LT){
             result = left->lessThan(right);
         }
-        else if (m_oper.getType() == GTE){
+        else if (m_oper.getType() == Token::GTE){
             result = left->greaterThanEquation(right);
         }
-        else if (m_oper.getType() == LTE){
+        else if (m_oper.getType() == Token::LTE){
             result = left->lessThanEquation(right);
         }
-        else if (m_oper.match(KEYWORD, "and")){
+        else if (m_oper.match(Token::KEYWORD, "and")){
             result = left->andOperator(right);
         }
-        else if (m_oper.match(KEYWORD, "or")){
+        else if (m_oper.match(Token::KEYWORD, "or")){
             result = left->orOperator(right);
         }
 

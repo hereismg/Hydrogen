@@ -19,7 +19,7 @@ namespace hdg {
         Node* m_obj;
 
     public:
-        UnaryOperatorNode(TokenType oper, Node* obj, const Position& position, Environment* environment);
+        UnaryOperatorNode(Token::Type oper, Node* obj, const Position& position, Environment* environment);
         UnaryOperatorNode(Token oper, Node* obj, const Position& position, Environment* environment);
         ~UnaryOperatorNode() override;
 

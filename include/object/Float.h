@@ -12,6 +12,10 @@
 
 namespace hdg {
 
+    /**
+     * @brief       浮点型。
+     * */
+
     class Float: public Object {
     private:
         double m_value;

@@ -12,10 +12,7 @@ namespace hdg {
     BinaryOperatorNode::BinaryOperatorNode(Token::Type oper, Node *left, Node *right, const Position& position, Environment* environment):
         Node(position, environment), m_oper(oper), m_left(left), m_right(right){}
 
-    BinaryOperatorNode::~BinaryOperatorNode() {
-        delete m_left;
-        delete m_right;
-    }
+    BinaryOperatorNode::~BinaryOperatorNode() = default;
 
     void BinaryOperatorNode::setOperator(const Token& oper){
         m_oper = oper;

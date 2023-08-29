@@ -1,9 +1,5 @@
 // 目标是将 a 上的盘子全部移动到 c 盘上
-function solution(layer, a, b, c){
-    print(a + "->" + b)
-    solution(layer-1, a, c, b)
-    print(b + "->" + c)
-}
+function solution(layer, a, b, c, result){result = result + a + "->" + b + "\n";solution(layer-1, a, c, b, result);result = result + b + "->" + c + "\n"}
 
-layer = input()
-solution(2, "x", "y", "z")
+result = ""
+solution(2, "x", "y", "z", result)

@@ -10,3 +10,4 @@ for i from 1 to n{
 print(result)
 
 function gcd(a, b): if b == 0: a else: gcd(b, a % b)
+function factorial(){result=1; for i from 1 to 10: result = result*i; result}

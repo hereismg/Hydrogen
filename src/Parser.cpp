@@ -20,7 +20,7 @@ namespace hdg {
     Node* Parser::run() {
         if (m_tokens.empty())return nullptr;
 
-        Node* result = expr(m_environment);
+        Node* result = statements(m_environment);
 
         if (m_currentToken->getType() != Token::EF){
             throw InvalidSyntaxError(
@@ -30,6 +30,34 @@ namespace hdg {
         }
 
         return result;
+    }
+
+    Node *Parser::statements(Environment *environment) {
+        ///? 这里是否要加上一行 if (m_currentToken.getType() == LPAREN) ？
+        auto* stats = new StatementsNode(*m_currentToken->thisPosition(), environment);
+
+        if (m_currentToken->getType() == Token::LBRACE){
+            advance();
+
+            while (m_currentToken->getType() != Token::RBRACE){
+                while (m_currentToken->getType() == Token::EL) advance();       ///> 去除多余的换行符
+                Node* node = expr(environment);
+                stats->append(node);
+            }
+            stats->thisPosition()->setEnd(m_currentToken->thisPosition()->getEnd());
+            advance();
+        }
+        else {
+            while (m_currentToken->getType() != Token::EF){
+                while (m_currentToken->getType() == Token::EL) advance();       ///> 去除多余的换行符
+                Node* node = expr(environment);
+                stats->append(node);
+            }
+            stats->thisPosition()->setEnd(m_currentToken->thisPosition()->getEnd());
+            advance();
+        }
+
+        return stats;
     }
 
     Node* Parser::expr(Environment* environment) {
@@ -467,23 +495,6 @@ namespace hdg {
                     *m_currentToken->thisPosition()
                     );
         }
-    }
-
-    Node *Parser::statements(Environment *environment) {
-        ///? 这里是否要加上一行 if (m_currentToken.getType() == LPAREN) ？
-
-        auto* stats = new StatementsNode(*m_currentToken->thisPosition(), environment);
-        advance();
-
-        while (m_currentToken->getType() != Token::RBRACE){
-            while (m_currentToken->getType() == Token::EL) advance();       ///> 去除多余的换行符
-            Node* node = expr(environment);
-            stats->append(node);
-        }
-        stats->thisPosition()->setEnd(m_currentToken->thisPosition()->getEnd());
-        advance();
-
-        return stats;
     }
 
     Node *Parser::binaryOperator(Environment* environment, const std::set<Token, std::less<>>&opers, std::function<Node*(Environment* envir)> funA, std::function<Node*(Environment* envir)> funB) {

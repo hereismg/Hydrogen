@@ -12,9 +12,10 @@ namespace hdg {
     UnaryOperatorNode::UnaryOperatorNode(const Token& oper, Node *obj, const Position &position, Environment* environment):
         Node(position, environment), m_oper(oper), m_obj(obj){}
 
-    UnaryOperatorNode::~UnaryOperatorNode() {
-        delete m_obj;
-    }
+    UnaryOperatorNode::~UnaryOperatorNode() = default;
+//    {
+//        delete m_obj;
+//    }
 
     void UnaryOperatorNode::setOperator(const Token& oper){
         this->m_oper = oper;

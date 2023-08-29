@@ -11,9 +11,10 @@ namespace hdg {
         Node(position, environment), m_name(std::move(name)), m_expr(obj){
     }
 
-    ObjAssignNode::~ObjAssignNode() {
-        delete m_expr;
-    }
+    ObjAssignNode::~ObjAssignNode() = default;
+//    {
+//        delete m_expr;
+//    }
 
     void ObjAssignNode::setExpr(Node *expr) {
         m_expr = expr;

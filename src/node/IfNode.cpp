@@ -9,12 +9,13 @@ namespace hdg {
         Node(position, new Environment(parent, parent->getFilePath(), parent->getModuleName())),
         elseExpression(nullptr){}
 
-    IfNode::~IfNode() {
-        delete m_environment;
-        for (auto i: conditions) delete i;
-        for (auto i: expressions) delete i;
-        delete elseExpression;
-    }
+    IfNode::~IfNode() = default;
+//    {
+//        delete m_environment;
+//        for (auto i: conditions) delete i;
+//        for (auto i: expressions) delete i;
+//        delete elseExpression;
+//    }
 
     void IfNode::addBranch(Node *condition, Node *expression) {
         if (condition == nullptr){

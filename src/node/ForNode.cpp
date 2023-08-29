@@ -14,10 +14,11 @@ namespace hdg {
             Node(position, new Environment(parent, parent->getFilePath(), parent->getModuleName())),
             m_index(index), m_from(from), m_to(to), m_step(step), m_expr(expr){}
 
-    ForNode::~ForNode() {
-        delete m_environment;
-        delete m_expr;
-    }
+    ForNode::~ForNode() = default;
+//    {
+//        delete m_environment;
+//        delete m_expr;
+//    }
 
     void ForNode::setIndex(const Token &index) {
         m_index = index;

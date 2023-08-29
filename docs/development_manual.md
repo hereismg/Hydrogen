@@ -71,6 +71,7 @@
 ## 上下文无关文法
 
 ```CFG
+statements  : (EL* expr?)* EF|RBRACE
 
 expr        : identifier eq expr
             : comp-expr ("and"|"or" comp-expr)*
@@ -102,10 +103,10 @@ if-expr     : expr "if" expr (else expr)?
               ("else" expr)?
             : "if" lparen expr rparen
               
-
 for-expr    : "for" identifier (from int)? to int (step int)? colon expr
 
 while-expr  : "while" expr colon expr
+            : "while" expr 
 
 func-expr   : "function" identifier 
               lparen 
@@ -113,9 +114,7 @@ func-expr   : "function" identifier
                       (comma identifier (eq expr)?)*
                   )?
               rparen
-              ((colon expr) | statements)
-              
-statements  : lbrace (EL* expr?)* rbrace
+              ((colon expr) | lbrace statements rbrace)
 ```
 
 function add(a, b): a+b

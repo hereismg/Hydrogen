@@ -21,7 +21,7 @@ namespace hdg {
     }
 
     Object *StatementsNode::interpret() {
-        Object* result;
+        Object* result = nullptr;
         for (auto i: m_statements){
             result = i->interpret();
         }

@@ -87,5 +87,7 @@ namespace hdg {
     }
 
 
-
+    Position::Indicator::Indicator(unsigned long long int index, unsigned long long int line,
+                                   unsigned long long int col) :
+                                   index(index), line(line), col(col){}
 } // hdg

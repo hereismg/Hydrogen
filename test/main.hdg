@@ -1,7 +1,1 @@
-function factorial(){
-    result=1;
-    for i from 1 to 10: result = result*i;
-    result;
-}
-
-factorial()
+1

@@ -26,10 +26,12 @@ namespace hdg {
          * @warning     该结构体内部的三个变量都是无符号长整型（unsigned long long），所以要格外注意类型转换造成的问题。
          * */
 
-        struct Indicator{
+        class Indicator{
+        public:
             unsigned long long index;
             unsigned long long line;
             unsigned long long col;
+            Indicator(unsigned long long index, unsigned long long line, unsigned long long col);
         };
 
     protected:

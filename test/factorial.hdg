@@ -1,3 +1,13 @@
+function add(a, b){
+    a+b
+}
+
+num1 = 5
+num2 = 2
+
+add(num1, num2)
+
+
 // 输入
 n = input()
 result = 1
@@ -13,14 +23,7 @@ function gcd(a, b): if b == 0: a else: gcd(b, a % b)
 
 function factorial(){result=1; for i from 1 to 10: result = result*i; result}
 
-function add(a, b){
-    a*b;
-}
 
-num1 = 5
-num2 = 2
-
-add(num1, num2)
 
 
 function factorial(){
@@ -30,3 +33,16 @@ function factorial(){
 }
 
 factorial()
+
+
+
+function outFun(a){
+    function inFun(b){
+        a + b
+    }
+    inFun
+}
+
+add = outFun(4)
+add(5)
+

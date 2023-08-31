@@ -235,7 +235,7 @@ namespace hdg {
 
         advance();
 
-        while(m_pos.index < m_code->size() && (whatIsThis(m_currentChar, LegalChar::DIGITAL | LegalChar::UPPERCASE | LegalChar::LOWERCASE))){
+        while(m_pos.index < m_code->size() && (whatIsThis(m_currentChar, LegalChar::DIGITAL | LegalChar::UPPERCASE | LegalChar::LOWERCASE | LegalChar::UNDERLINE))){
             advance();
         }
 

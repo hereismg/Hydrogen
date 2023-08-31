@@ -12,7 +12,7 @@ namespace hdg {
     Interpreter::~Interpreter() = default;
 
     void Interpreter::init() {
-        m_globalEnvironment->setSymbol("hydrogen", new String("Hello, Hydrogen_v0.2.2!"));      // todo 修改版本号
+        m_globalEnvironment->setSymbol("hydrogen", new String("Hello, Hydrogen_v0.3.0!"));
         m_globalEnvironment->setSymbol("null", new Integer(0));
         m_globalEnvironment->setSymbol("true", new Integer(1));
         m_globalEnvironment->setSymbol("false", new Integer(0));

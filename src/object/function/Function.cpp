@@ -26,7 +26,7 @@ namespace hdg {
 
 
         for (int i=0; i<m_args.size(); i++){
-            m_environment->setSymbol(m_args[i]->getName(), list[i], 1);
+            m_environment->setSymbol(m_args[i]->getName(), list[i], Environment::Mode::LOCAL);
         }
 
         Object* result = m_body->interpret();

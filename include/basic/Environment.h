@@ -24,6 +24,10 @@ namespace hdg {
     class Environment {
     public:
         typedef std::map<std::string, Object*> SymbolTable;
+        enum Mode{
+            GLOBAL,
+            LOCAL
+        };
 
     protected:
         Environment* m_parent{nullptr};
@@ -48,7 +52,7 @@ namespace hdg {
          * @param mode      设置模式，0为父级模式，1为本地模式；默认为父级模式
          * */
 
-        void setSymbol(const std::string& name, Object* value, int mode=0);
+        void setSymbol(const std::string& name, Object* value, Mode mode=GLOBAL);
 
         std::string getFilePath();
         std::string getModuleName();

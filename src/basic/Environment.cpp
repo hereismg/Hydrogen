@@ -36,8 +36,8 @@ namespace hdg {
      *          另一种是本地模式（值为“1”），在该模式中，直接对本地环境的符号表进行符号操作。
      * */
 
-    void Environment::setSymbol(const std::string &name, Object *value, int mode) {
-        if (mode == 0){
+    void Environment::setSymbol(const std::string &name, Object *value, Mode mode) {
+        if (mode == Mode::GLOBAL){
             Environment* iter = this;
             std::stack<Environment*> stack;
             while (iter != nullptr) {

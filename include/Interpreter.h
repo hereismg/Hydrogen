@@ -33,7 +33,7 @@ namespace hdg {
 
         Environment* thisEnvironment();
 
-        std::string interpret(const std::string& fPath, const std::string& code, Mode mode = release);
+        std::string interpret(const std::string& fPath, const std::string& code, Interpreter::Mode mode = release);
 
     protected:
         void init();

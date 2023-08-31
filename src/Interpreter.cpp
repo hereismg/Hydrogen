@@ -29,7 +29,7 @@ namespace hdg {
      *
      * debug 模式会打印出中间过程的 token列表 与 语法树
      * */
-    std::string Interpreter::interpret(const std::string& fPath, const std::string& code, Mode mode) {
+    std::string Interpreter::interpret(const std::string& fPath, const std::string& code, Interpreter::Mode mode) {
         m_codeStack.emplace_back(code);
         try {
             std::vector<Token> tokens = m_lexer.run(fPath, &m_codeStack.back());     ///> 注意，这里不是直接传入 code，而是先将code压入栈中，然后取栈中的code！！！

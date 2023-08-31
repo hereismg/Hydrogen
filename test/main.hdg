@@ -1,1 +1,11 @@
-1
+function fun(){
+    while true{
+
+    }
+    if true{
+
+    }
+    else{
+
+    }
+}

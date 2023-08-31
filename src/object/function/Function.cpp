@@ -2,7 +2,7 @@
 // Created by Magnesium on 2023/8/4.
 //
 
-#include "../../include/object/Function.h"
+#include "../../../include/object/function/Function.h"
 
 namespace hdg {
     Function::Function() = default;
@@ -24,6 +24,7 @@ namespace hdg {
 //            std::string detail =
 //                    m_name + "() takes " + std::to_string(m_args.size()) + " positional arguments but " +
 //                    std::to_string(list.size()) + " were given.";
+            throw RuntimeError("too few arg.", m_position);
             return new None;
 //            throw RuntimeError("too many args.", m_position);
         }

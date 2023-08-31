@@ -9,7 +9,7 @@
 #include "ObjectNode.h"
 #include "../ObjAssignNode.h"
 #include "../../object/None.h"
-#include "../../object/Function.h"
+#include "../../object/function/Function.h"
 
 namespace hdg {
 

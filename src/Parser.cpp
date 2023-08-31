@@ -256,35 +256,34 @@ namespace hdg {
         auto *ifNode = new IfNode(
                 Position(*m_currentToken->thisPosition()),
                 environment);
-        Node *condition, *expression;
+        Node *condition;
 
         while(m_currentToken != m_tokens.end() && (m_currentToken->match(Token::KEYWORD, "if") || m_currentToken->match(Token::KEYWORD, "elif"))){
             advance();
             condition = expr(ifNode->thisEnvironment());
 
-            if (m_currentToken->getType() != Token::COLON){
-                throw InvalidSyntaxError(
-                        "Expected ':'.",
-                        *m_currentToken->thisPosition()
-                        );
-            }
-            advance();
+//            if (m_currentToken->getType() != Token::COLON){
+//                throw InvalidSyntaxError(
+//                        "Expected ':'.",
+//                        *m_currentToken->thisPosition()
+//                        );
+//            }
+//            advance();
 
-            expression = expr(ifNode->thisEnvironment());
-            ifNode->addBranch(condition, expression);
+            ifNode->addBranch(condition, core(ifNode->thisEnvironment()));
         }
 
         if (m_currentToken != m_tokens.end() && m_currentToken->match(Token::KEYWORD, "else")){
             advance();
-            if (m_currentToken->getType() != Token::COLON){
-                throw InvalidSyntaxError(
-                        "Expected ':'.",
-                        *m_currentToken->thisPosition()
-                );
-            }
-            advance();
+//            if (m_currentToken->getType() != Token::COLON){
+//                throw InvalidSyntaxError(
+//                        "Expected ':'.",
+//                        *m_currentToken->thisPosition()
+//                );
+//            }
+//            advance();
 
-            ifNode->addBranch(nullptr, expr(ifNode->thisEnvironment()));
+            ifNode->addBranch(nullptr, core(ifNode->thisEnvironment()));
         }
 
         return ifNode;
@@ -388,9 +387,9 @@ namespace hdg {
         }
         advance();
 
-        Node* node = expr(forNode->thisEnvironment());
-        forNode->setExpr(node);
-        forNode->thisPosition()->setEnd(node->thisPosition()->getEnd());
+        Node* body = core(forNode->thisEnvironment());
+        forNode->setExpr(body);
+        forNode->thisPosition()->setEnd(body->thisPosition()->getEnd());
 
         return forNode;
     }
@@ -398,24 +397,16 @@ namespace hdg {
     Node *Parser::whileExpr(Environment *environment) {
         WhileNode *node;
         node = new WhileNode(nullptr, nullptr, *m_currentToken->thisPosition(), environment);
-        Node *condition, *expression;
+        Node *condition, *body;
 
         if (m_currentToken->match(Token::KEYWORD, "while")) advance();
 
         condition = expr(node->thisEnvironment());
 
-        if (m_currentToken->getType() != Token::COLON){
-            throw InvalidSyntaxError(
-                    "Expected ':'.",
-                    *m_currentToken->thisPosition()
-            );
-        }
-        advance();
-
-        expression = expr(node->thisEnvironment());
-        node->thisPosition()->setEnd(expression->thisPosition()->getEnd());
+        body = core(node->thisEnvironment());
+        node->thisPosition()->setEnd(body->thisPosition()->getEnd());
         node->setCondition(condition);
-        node->setExpression(expression);
+        node->setExpression(body);
         return node;
     }
 
@@ -481,30 +472,56 @@ namespace hdg {
             );
         }
 
+        Node* body = core(func->thisEnvironment());
+        func->setBody(body);
+        func->thisPosition()->setEnd(body->thisPosition()->getEnd());
+        func->setName(name.getValue());
+        return new ObjAssignNode(name.getValue(), func, *func->thisPosition(), environment);
+//
+//        if (m_currentToken->getType() == Token::COLON){
+//            advance();
+//
+//            Node* body = expr(func->thisEnvironment());
+//            func->setBody(body);
+//            func->thisPosition()->setEnd(body->thisPosition()->getEnd());
+//            func->setName(name.getValue());
+//
+//            return new ObjAssignNode(name.getValue(), func, *func->thisPosition(), environment);
+//        }
+//        else if (m_currentToken->getType() == Token::LBRACE){
+//            Environment* e = func->thisEnvironment();
+//            Node* body = statements(e);
+//            func->thisPosition()->setEnd(body->thisPosition()->getEnd());
+//            func->setBody(body);
+//            func->setName(name.getValue());
+//
+//            return new ObjAssignNode(name.getValue(), func, *func->thisPosition(), environment);
+//        }
+//        else{
+//            throw InvalidSyntaxError(
+//                    "Expected ':'",
+//                    *m_currentToken->thisPosition()
+//                    );
+//        }
+    }
+
+    Node *Parser::core(Environment *environment) {
         if (m_currentToken->getType() == Token::COLON){
             advance();
-
-            Node* body = expr(func->thisEnvironment());
-            func->setBody(body);
-            func->thisPosition()->setEnd(body->thisPosition()->getEnd());
-            func->setName(name.getValue());
-
-            return new ObjAssignNode(name.getValue(), func, *func->thisPosition(), environment);
+            Node* body = expr(environment);
+            return body;
         }
-        else if (m_currentToken->getType() == Token::LBRACE){
-            Environment* e = func->thisEnvironment();
-            Node* body = statements(e);
-            func->thisPosition()->setEnd(body->thisPosition()->getEnd());
-            func->setBody(body);
-            func->setName(name.getValue());
 
-            return new ObjAssignNode(name.getValue(), func, *func->thisPosition(), environment);
+        ///> 是否要 advance 跳过LBRACE？
+        else if (m_currentToken->getType() == Token::LBRACE){
+            Node* body = statements(environment);
+            return body;
         }
         else{
             throw InvalidSyntaxError(
-                    "Expected ':'",
+                    "Expected ':' or '{'",
                     *m_currentToken->thisPosition()
-                    );
+            );
         }
     }
 

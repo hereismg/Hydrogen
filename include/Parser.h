@@ -56,6 +56,7 @@ namespace hdg {
         Node* whileExpr(Environment* environment);
         Node* funcExpr(Environment* environment);
         Node* statements(Environment* environment);
+        Node* core(Environment* environment);
 
         Node* binaryOperator(
                 Environment* environment,

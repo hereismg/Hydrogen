@@ -6,11 +6,11 @@
 #define HDG_FUNCTION_H
 
 #include <sstream>
-#include "../basic/Environment.h"
-#include "../node/Node.h"
-#include "../node/ObjAssignNode.h"
-#include "../object/None.h"
-#include "Object.h"
+#include "../../basic/Environment.h"
+#include "../../node/Node.h"
+#include "../../node/ObjAssignNode.h"
+#include "../None.h"
+#include "../Object.h"
 
 namespace hdg {
 

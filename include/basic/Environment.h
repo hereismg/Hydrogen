@@ -14,7 +14,6 @@
 #include "../object/Float.h"
 
 namespace hdg {
-    typedef std::map<std::string, Object*> SymbolTable;
 
     /**
      * @brief       环境。主要用来存储符号、模块名称等信息。
@@ -23,6 +22,9 @@ namespace hdg {
      * */
 
     class Environment {
+    public:
+        typedef std::map<std::string, Object*> SymbolTable;
+
     protected:
         Environment* m_parent{nullptr};
         SymbolTable m_symbolTable;

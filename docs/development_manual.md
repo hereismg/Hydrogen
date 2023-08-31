@@ -97,16 +97,18 @@ atom        : identifier|int|float|string
             : while-expr
             : func-expr
 
-if-expr     : expr "if" expr (else expr)?
-            : "if" expr colon expr 
-              ("elif" expr colon expr)*
-              ("else" expr)?
-            : "if" lparen expr rparen
-              
-for-expr    : "for" identifier (from int)? to int (step int)? colon expr
+if-expr     : expr "if" expr (else core)?
+            : "if" expr core
+              ("elif" expr core)*
+              ("else" core)?
 
-while-expr  : "while" expr colon expr
-            : "while" expr 
+for-expr    : "for" identifier 
+              (from int)? 
+              to int 
+              (step int)? 
+              core
+
+while-expr  : "while" expr core
 
 func-expr   : "function" identifier 
               lparen 
@@ -114,7 +116,9 @@ func-expr   : "function" identifier
                       (comma identifier (eq expr)?)*
                   )?
               rparen
-              ((colon expr) | lbrace statements rbrace)
+              core
+
+core       : (colon expr) | (lbrace statements rbrace)
 ```
 
 function add(a, b): a+b

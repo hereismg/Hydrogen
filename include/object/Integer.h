@@ -17,6 +17,7 @@ namespace hdg {
         long long m_value;
 
     public:
+
         explicit Integer(long long value);
         Integer(long long value, const Position& position);
 

@@ -1,11 +1,12 @@
-function fun(){
-    while true{
+sum = 0
 
-    }
-    if true{
-
-    }
-    else{
-
+for i to 10{
+    if i%2 == 0 {
+        temp = 0
+        while temp<i{
+            sum = sum+temp
+        }
     }
 }
+
+sum

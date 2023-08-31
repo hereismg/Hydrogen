@@ -261,28 +261,11 @@ namespace hdg {
         while(m_currentToken != m_tokens.end() && (m_currentToken->match(Token::KEYWORD, "if") || m_currentToken->match(Token::KEYWORD, "elif"))){
             advance();
             condition = expr(ifNode->thisEnvironment());
-
-//            if (m_currentToken->getType() != Token::COLON){
-//                throw InvalidSyntaxError(
-//                        "Expected ':'.",
-//                        *m_currentToken->thisPosition()
-//                        );
-//            }
-//            advance();
-
             ifNode->addBranch(condition, core(ifNode->thisEnvironment()));
         }
 
         if (m_currentToken != m_tokens.end() && m_currentToken->match(Token::KEYWORD, "else")){
             advance();
-//            if (m_currentToken->getType() != Token::COLON){
-//                throw InvalidSyntaxError(
-//                        "Expected ':'.",
-//                        *m_currentToken->thisPosition()
-//                );
-//            }
-//            advance();
-
             ifNode->addBranch(nullptr, core(ifNode->thisEnvironment()));
         }
 
@@ -296,13 +279,19 @@ namespace hdg {
 
         if (m_currentToken->match(Token::KEYWORD, "for")) advance();
 
-        if (m_currentToken->getType() == Token::IDENTIFIER) forNode->setIndex({Token::IDENTIFIER, m_currentToken->getValue()});
-        else throw InvalidSyntaxError(
+        /// 读取 标识符
+        if (m_currentToken->getType() == Token::IDENTIFIER) {
+            forNode->setIndex({Token::IDENTIFIER, m_currentToken->getValue()});
+            advance();
+        }
+        else {
+            throw InvalidSyntaxError(
                 "Expected identifier.",
                 *m_currentToken->thisPosition()
                 );
-        advance();
+        }
 
+        /// 读取 初始值
         if (m_currentToken->match(Token::KEYWORD, "from")){
             advance();
 
@@ -327,6 +316,7 @@ namespace hdg {
             advance();
         }
 
+        /// 读取 终止值
         if (m_currentToken->match(Token::KEYWORD, "to")){
             advance();
             int flag = 1;
@@ -355,6 +345,7 @@ namespace hdg {
                     );
         }
 
+        /// 读取 步长
         if (m_currentToken->match(Token::KEYWORD, "step")){
             advance();
             int flag = 1;
@@ -379,14 +370,8 @@ namespace hdg {
             advance();
         }
 
-        if (m_currentToken->getType() != Token::COLON){
-            throw InvalidSyntaxError(
-                    "Expected ':'.",
-                    *m_currentToken->thisPosition()
-                    );
-        }
-        advance();
 
+        /// 构建 for 节点
         Node* body = core(forNode->thisEnvironment());
         forNode->setExpr(body);
         forNode->thisPosition()->setEnd(body->thisPosition()->getEnd());
@@ -477,32 +462,6 @@ namespace hdg {
         func->thisPosition()->setEnd(body->thisPosition()->getEnd());
         func->setName(name.getValue());
         return new ObjAssignNode(name.getValue(), func, *func->thisPosition(), environment);
-//
-//        if (m_currentToken->getType() == Token::COLON){
-//            advance();
-//
-//            Node* body = expr(func->thisEnvironment());
-//            func->setBody(body);
-//            func->thisPosition()->setEnd(body->thisPosition()->getEnd());
-//            func->setName(name.getValue());
-//
-//            return new ObjAssignNode(name.getValue(), func, *func->thisPosition(), environment);
-//        }
-//        else if (m_currentToken->getType() == Token::LBRACE){
-//            Environment* e = func->thisEnvironment();
-//            Node* body = statements(e);
-//            func->thisPosition()->setEnd(body->thisPosition()->getEnd());
-//            func->setBody(body);
-//            func->setName(name.getValue());
-//
-//            return new ObjAssignNode(name.getValue(), func, *func->thisPosition(), environment);
-//        }
-//        else{
-//            throw InvalidSyntaxError(
-//                    "Expected ':'",
-//                    *m_currentToken->thisPosition()
-//                    );
-//        }
     }
 
     Node *Parser::core(Environment *environment) {

@@ -34,7 +34,7 @@ namespace hdg {
 
     std::string Error::toString() {
         std::stringstream information;
-        for (auto & iter : m_posStack)
+        for (auto & iter : std::ranges::reverse_view(m_posStack))
             information << iter.toString() << std::endl;
 
         information << m_name << ": " << m_detail << std::endl;

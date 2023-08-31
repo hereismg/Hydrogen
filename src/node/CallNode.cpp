@@ -58,7 +58,6 @@ namespace hdg {
             }
         }
         catch (Error& error){
-//            std::cout << "!!!!!!!" << std::endl;
             error.thisPosStack()->push_back(m_position);
             throw error;
         }

@@ -13,20 +13,15 @@ namespace hdg {
     Function::~Function() = default;
 
     Object *Function::parenthesis(const std::vector<Object*>& list) {
-        if (m_args.size() > list.size()){
-//            std::stringstream detail;
-//            detail << 1;
-            throw RuntimeError("too many arg.", m_position);
-//            detail << "() missing " << std::to_string(m_args.size()-list.size()) << " required positional argument.";
-            return new None;
-//            throw RuntimeError("too few args.", m_position);
-        }else if (m_args.size() < list.size()){
-//            std::string detail =
-//                    m_name + "() takes " + std::to_string(m_args.size()) + " positional arguments but " +
-//                    std::to_string(list.size()) + " were given.";
-            throw RuntimeError("too few arg.", m_position);
-            return new None;
-//            throw RuntimeError("too many args.", m_position);
+        if (m_args.size() != list.size()){
+            std::stringstream detail;
+            detail << m_name << "(): " <<  std::to_string(m_args.size());
+
+            if (m_args.size()<=1) detail << " argument required, ";
+            else detail << " arguments required, ";
+
+            detail << "but " << std::to_string(list.size()) << " received.";
+            throw RuntimeError(detail.str());
         }
 
 

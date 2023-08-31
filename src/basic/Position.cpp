@@ -82,7 +82,10 @@ namespace hdg {
             return head.str()+body;
         }
         else{
-            return "m_start.line != m_end.line!!!";
+            unsigned long long right = m_start.index;
+            while(right < m_context->size() && (*m_context)[right]!='\n')right++;
+            std::cout << "Error!" << std::endl;
+            return m_context->substr(m_start.index, right);
         }
     }
 

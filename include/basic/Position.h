@@ -6,6 +6,7 @@
 #define HDG_POSITION_H
 
 #include <string>
+#include <iostream>
 #include <sstream>
 
 namespace hdg {

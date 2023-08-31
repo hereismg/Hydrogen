@@ -1,12 +1,9 @@
-sum = 0
-
-for i to 10{
-    if i%2 == 0 {
-        temp = 0
-        while temp<i{
-            sum = sum+temp
-        }
-    }
+function add(b){
+    a+b
 }
 
-sum
+function fun_div(a, b){
+    a / add(a, b)
+}
+
+fun_div(1, 2)

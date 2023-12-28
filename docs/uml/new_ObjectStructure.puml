@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class BaseObject
+
+abstract class BuiltInObject
+class Object
+BaseObject <|-- Object
+BaseObject <|-- BuiltInObject
+
+abstract class BaseFunction{
+    std::string m_name
+    Environment* m_environment
+}
+class Float
+class Integer
+class List
+class None
+class String
+BuiltInObject <|-- BaseFunction
+BuiltInObject <|-- Float
+BuiltInObject <|-- Integer
+BuiltInObject <|-- List
+BuiltInObject <|-- None
+BuiltInObject <|-- String
+
+abstract class BuiltInFunction{
+    std::vector<ObjAssignNode*> m_args
+}
+class Function{
+    std::vector<ObjAssignNode*> m_args
+    Node* m_body;
+}
+
+BaseFunction <|-- BuiltInFunction
+BaseFunction <|-- Function
+
+@enduml

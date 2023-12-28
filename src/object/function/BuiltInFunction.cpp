@@ -5,18 +5,27 @@
 #include "../../../include/object/function/BuiltInFunction.h"
 
 namespace hdg {
-//    BuiltInFunction::BuiltInFunction() = default;
+//    BuiltInFunction::BuiltInFunction() {
+//        m_fun = [this]()->Object*{
+//            std::string text;
+//            std::cin >> text;
+//            return new String(text);
+//        };
+//    };
 
-//    BuiltInFunction::BuiltInFunction(std::string name,
-//                                     Environment *parent,
-//                                     std::function<Object *(const std::vector<Object *>)> fun):
-//                                     m_fun(std::move(fun)){
-//
-//    }
+    BuiltInFunction::BuiltInFunction(std::function<Object*(const std::vector<Object*> &)> fun):
+        m_fun(std::move(fun)){}
 
-    Object *BuiltInFunction::print(const std::vector<Object *> &list) {
-        std::cout << list[0]->toString() << std::endl;
-//        return None;
+    Object *BuiltInFunction::parenthesis(const std::vector<Object *> &list) {
+        return m_fun(list);
+    }
+
+    std::string BuiltInFunction::toString() {
+        return "<BuiltInFunction>";
+    }
+
+    Object *BuiltInFunction::copy() {
+        return this;
     }
 
     BuiltInFunction::~BuiltInFunction() = default;

@@ -17,6 +17,12 @@ namespace hdg {
         m_globalEnvironment->setSymbol("true", new Integer(1));
         m_globalEnvironment->setSymbol("false", new Integer(0));
         m_globalEnvironment->setSymbol("None", new None());
+        auto fun = [this](const std::vector<Object*> &list)->Object*{
+            std::string text;
+            std::getline(std::cin, text);
+            return new String(text);
+        };
+        m_globalEnvironment->setSymbol("input", new BuiltInFunction(fun));
     }
 
     Environment *Interpreter::thisEnvironment() {

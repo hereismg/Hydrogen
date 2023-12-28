@@ -7,21 +7,23 @@
 
 #include <functional>
 #include "BaseFunction.h"
+#include "../String.h"
 
 namespace hdg {
 
-    class BuiltInFunction: BaseFunction {
+    class BuiltInFunction: public BaseFunction {
     protected:
-        std::function<Object*(const std::vector<Object*>)> m_fun;
+        std::function<Object*(const std::vector<Object*> &)> m_fun;
 
     public:
         BuiltInFunction();
-        BuiltInFunction(std::string name, Environment* parent, std::function<Object*(const std::vector<Object*>)> fun);
+        explicit BuiltInFunction(std::function<Object*(const std::vector<Object*> &)> fun);
         ~BuiltInFunction() override;
 
-        Object * parenthesis(const std::vector<Object *> &list);
+        Object * parenthesis(const std::vector<Object *> &list) override;
 
-        static Object* print(const std::vector<Object *> &list);
+        std::string toString() override;
+        Object* copy() override;
     };
 
 } // hdg

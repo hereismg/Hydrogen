@@ -11,10 +11,11 @@
 #include "../../node/ObjAssignNode.h"
 #include "../None.h"
 #include "../Object.h"
+#include "BaseFunction.h"
 
 namespace hdg {
 
-    class Function: public Object{
+    class Function: public BaseFunction{
     protected:
         std::string m_name;
         std::vector<ObjAssignNode*> m_args;
@@ -22,7 +23,6 @@ namespace hdg {
 
         Node* m_body{nullptr};
     public:
-        Function();
         Function(std::string name, std::vector<ObjAssignNode*>args, Environment* environment, Node* body, const Position& position);
         ~Function() override;
 

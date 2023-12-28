@@ -12,6 +12,7 @@
 #include "Lexer.h"
 #include "node/Node.h"
 #include "basic/Environment.h"
+#include "object/function/BuiltInFunction.h"
 
 namespace hdg {
     class Interpreter {

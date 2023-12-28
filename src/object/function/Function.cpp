@@ -5,10 +5,8 @@
 #include "../../../include/object/function/Function.h"
 
 namespace hdg {
-    Function::Function() = default;
-
     Function::Function(std::string name, std::vector<ObjAssignNode*>args, Environment* environment, Node* body, const Position& position):
-        Object("Function", position), m_name(std::move(name)), m_args(std::move(args)), m_environment(environment), m_body(body){}
+        m_name(std::move(name)), m_args(std::move(args)), m_environment(environment), m_body(body){}
 
     Function::~Function() = default;
 
@@ -23,7 +21,6 @@ namespace hdg {
             detail << "but " << std::to_string(list.size()) << " received.";
             throw RuntimeError(detail.str());
         }
-
 
         for (int i=0; i<m_args.size(); i++){
             m_environment->setSymbol(m_args[i]->getName(), list[i], Environment::Mode::LOCAL);

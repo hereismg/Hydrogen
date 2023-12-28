@@ -6,18 +6,19 @@
 #define HDG_BASEFUNCTION_H
 
 #include "../Object.h"
+#include "../../node/ObjAssignNode.h"
 #include "../../basic/Environment.h"
 
 namespace hdg {
 
     class BaseFunction: public Object{
     protected:
-        std::string m_name;
-        Environment* m_environment{nullptr};
+        std::vector<ObjAssignNode*> m_args;
 
     public:
-        BaseFunction(std::string name, Environment* parent);
-        ~BaseFunction() override;
+        BaseFunction() = default;
+        explicit BaseFunction(const Position& position);
+        ~BaseFunction() override = default;
     };
 
 } // hdg

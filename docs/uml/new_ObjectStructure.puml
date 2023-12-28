@@ -9,8 +9,7 @@ BaseObject <|-- Object
 BaseObject <|-- BuiltInObject
 
 abstract class BaseFunction{
-    std::string m_name
-    Environment* m_environment
+    std::vector<ObjAssignNode*> m_args
 }
 class Float
 class Integer
@@ -25,10 +24,9 @@ BuiltInObject <|-- None
 BuiltInObject <|-- String
 
 abstract class BuiltInFunction{
-    std::vector<ObjAssignNode*> m_args
+    function
 }
 class Function{
-    std::vector<ObjAssignNode*> m_args
     Node* m_body;
 }
 

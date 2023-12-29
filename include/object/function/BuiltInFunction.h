@@ -16,7 +16,7 @@ namespace hdg {
         std::function<Object*(const std::vector<Object*> &)> m_fun;
 
     public:
-        BuiltInFunction();
+//        BuiltInFunction();
         explicit BuiltInFunction(std::function<Object*(const std::vector<Object*> &)> fun);
         ~BuiltInFunction() override;
 

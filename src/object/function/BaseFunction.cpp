@@ -6,5 +6,5 @@
 
 namespace hdg {
     BaseFunction::BaseFunction(const Position& position):
-        Object("Function", position){}
+        Object("BaseFunction", position){}
 } // hdg

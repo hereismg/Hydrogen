@@ -5,9 +5,13 @@
 #include "../../include/object/String.h"
 
 namespace hdg {
-    String::String(): Object("String"){};
+    String::String(){
+        setClass("String");
+    };
 
-    String::String(std::string value) : Object("String"), m_value(std::move(value)) {}
+    String::String(std::string value): m_value(std::move(value)) {
+        setClass("String");
+    }
 
     String::String(std::string value, const Position& position):
         Object("String", position), m_value(std::move(value)){}

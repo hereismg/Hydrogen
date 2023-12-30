@@ -5,10 +5,13 @@
 #ifndef HDG_LIST_H
 #define HDG_LIST_H
 
+#include "Object.h"
+
 namespace hdg {
 
-    class List {
-
+    class List: public Object{
+    public:
+        List();
     };
 
 } // hdg

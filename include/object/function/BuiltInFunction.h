@@ -16,12 +16,13 @@ namespace hdg {
         std::function<Object*(const std::vector<Object*> &)> m_fun;
 
     public:
-//        BuiltInFunction();
+        BuiltInFunction();
         explicit BuiltInFunction(std::function<Object*(const std::vector<Object*> &)> fun);
         ~BuiltInFunction() override;
 
-        Object * parenthesis(const std::vector<Object *> &list) override;
+        void setFun(std::function<Object*(const std::vector<Object*> &)> fun);
 
+        Object * parenthesis(const std::vector<Object *> &list) override;
         std::string toString() override;
         Object* copy() override;
     };

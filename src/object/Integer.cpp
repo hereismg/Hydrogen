@@ -5,8 +5,9 @@
 #include "../../include/object/Integer.h"
 
 namespace hdg {
-    Integer::Integer(long long value):
-        Object("Integer"), m_value(value) {}
+    Integer::Integer(long long value): m_value(value) {
+        setClass("Integer");
+    }
 
     Integer::Integer(long long int value, const Position &position):
         Object("Integer", position), m_value(value){}

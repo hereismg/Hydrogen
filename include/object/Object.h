@@ -2,7 +2,6 @@
 // Created by Magnesium on 2023/7/25.
 //
 
-
 #ifndef HDG_OBJECT_H
 #define HDG_OBJECT_H
 
@@ -28,11 +27,10 @@ namespace hdg {
 
     public:
         Object();
-        explicit Object(std::string className);
         Object(std::string className, const Position& position);
-
         virtual ~Object();
 
+        void setClass(std::string className);
         std::string getClass();
 
         virtual Object* plus(Object* other);

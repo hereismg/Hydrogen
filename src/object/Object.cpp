@@ -7,13 +7,14 @@
 
 namespace hdg {
 
-    Object::Object(): m_class("Object"){};
-
-    Object::Object(std::string className):
-        m_class(std::move(className)) {}
+    Object::Object(): m_class("Object"){}
 
     Object::Object(std::string className, const Position &position):
         m_class(std::move(className)), m_position(position){}
+
+    void Object::setClass(std::string className){
+        m_class = std::move(className);
+    }
 
     std::string Object::getClass() {
         return m_class;

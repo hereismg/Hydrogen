@@ -5,7 +5,7 @@
 #include "../../include/object/None.h"
 
 namespace hdg {
-    None::None(): Object("None"){
+    None::None(){
         m_class = "None";
     }
 

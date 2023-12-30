@@ -5,12 +5,14 @@
 #include "../../include/object/Float.h"
 
 namespace hdg {
-    Float::Float(float value):
-        Object("Float"), m_value(value) {}
+    Float::Float(float value): m_value(value) {
+        setClass("Float");
+    }
 
 
-    Float::Float(double value):
-        Object("Float"), m_value(value) {}
+    Float::Float(double value): m_value(value) {
+        setClass("Float");
+    }
 
     Float::Float(double value, const Position &position):
         Object("Float", position), m_value(value){}

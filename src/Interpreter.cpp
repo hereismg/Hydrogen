@@ -13,6 +13,7 @@ namespace hdg {
 
     void Interpreter::init() {
         m_globalEnvironment->setSymbol("hydrogen", new String("Hello, Hydrogen_v0.3.0!"));
+        m_globalEnvironment->setSymbol("whania", new String("Whania, the dragon wolf, is here!"));
         m_globalEnvironment->setSymbol("null", new Integer(0));
         m_globalEnvironment->setSymbol("true", new Integer(1));
         m_globalEnvironment->setSymbol("false", new Integer(0));
@@ -28,6 +29,13 @@ namespace hdg {
                 [this](const std::vector<Object*> &list)->Object*{
                     std::cout << list[0]->toString() << std::endl;
                     return new None;
+                }));
+        m_globalEnvironment->setSymbol("parseInt", new BuiltInFunction(
+                [this](const std::vector<Object*> &list)->Object*{
+                    char * success;
+                    std::string arg = list[0]->toString();
+                    if(list[0]->getClass() == "String") arg = arg.substr(1, arg.length() - 2);
+                    return new Integer(std::strtoll(arg.c_str(), &success, 10));
                 }));
         m_globalEnvironment->setSymbol("append", new BuiltInFunction(
                 [this](const std::vector<Object*> &list)->Object*{

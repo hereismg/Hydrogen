@@ -41,7 +41,7 @@ namespace hdg {
     }
 
     /**
-     * @details     初始化函数，运行函数时，会重置 m_pos 方法，并且重置 m_currentCahr.
+     * @details     初始化函数，运行函数时，会重置 m_pos 方法，并且重置 m_currentChar.
      * */
     void Lexer::init(){
         m_pos.index = 0;

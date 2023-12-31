@@ -20,25 +20,30 @@ namespace hdg {
         m_globalEnvironment->setSymbol("None", new None());
 
         m_globalEnvironment->setSymbol("input", new BuiltInFunction(
-        [this](const std::vector<Object*> &list)->Object*{
+        [this](const std::vector<Object*> &args)->Object*{
                 std::string text;
                 std::getline(std::cin, text);
                 return new String(text);
         }));
         m_globalEnvironment->setSymbol("print", new BuiltInFunction(
-                [this](const std::vector<Object*> &list)->Object*{
-                    std::cout << list[0]->toString() << std::endl;
+                [this](const std::vector<Object*> &args)->Object*{
+                    std::cout << args[0]->toString() << std::endl;
                     return new None;
                 }));
         m_globalEnvironment->setSymbol("parseInt", new BuiltInFunction(
-                [this](const std::vector<Object*> &list)->Object*{
+                [this](const std::vector<Object*> &args)->Object*{
                     char * success;
-                    std::string arg = list[0]->toString();
-                    if(list[0]->getClass() == "String") arg = arg.substr(1, arg.length() - 2);
+                    std::string arg = args[0]->toString();
+                    if(args[0]->getClass() == "String") arg = arg.substr(1, arg.length() - 2);
                     return new Integer(std::strtoll(arg.c_str(), &success, 10));
                 }));
         m_globalEnvironment->setSymbol("append", new BuiltInFunction(
-                [this](const std::vector<Object*> &list)->Object*{
+                [this](const std::vector<Object*> &args)->Object*{
+                    return new None;
+                }));
+        m_globalEnvironment->setSymbol("type", new BuiltInFunction(
+                [this](const std::vector<Object*> &args)->Object*{
+                    std::cout << args[0]->getClass() << std::endl;
                     return new None;
                 }));
     }

@@ -37,7 +37,7 @@ namespace hdg {
     }
 
     std::string String::toString() {
-        return "\"" + m_value + "\"";
+        return m_value;
     }
 
     Object* String::copy() {

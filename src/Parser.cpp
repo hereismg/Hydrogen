@@ -189,8 +189,21 @@ namespace hdg {
         }
     }
 
+    /**
+     * @details     该函数是各种语句的入口。
+     * */
     Node *Parser::atom(Environment *environment) {
-        if (m_currentToken->getType() == Token::INT){
+         if (m_currentToken->getType() == Token::IDENTIFIER){
+            Node* node = new ObjAccessNode(
+                    m_currentToken->getValue(),
+                    *m_currentToken->thisPosition(),
+                    environment
+            );
+
+            advance();
+            return node;
+        }
+        else if (m_currentToken->getType() == Token::INT){
             Node *node = new NumObjNode((long long)std::atoi(m_currentToken->getValue().c_str()), *m_currentToken->thisPosition());
             advance();
             return node;
@@ -209,24 +222,11 @@ namespace hdg {
             advance();
             Node* node = expr(environment);
 
-            if (m_currentToken->getType() != Token::RPAREN){
-                throw InvalidSyntaxError(
+            if (m_currentToken->getType() != Token::RPAREN) throw InvalidSyntaxError(
                         "Expected ')'.",
                         *m_currentToken->thisPosition());
-            }else{
-                advance();
-            }
-
-            return node;
-        }
-        else if (m_currentToken->getType() == Token::IDENTIFIER){
-            Node* node = new ObjAccessNode(
-                    m_currentToken->getValue(),
-                    *m_currentToken->thisPosition(),
-                    environment
-            );
-
             advance();
+
             return node;
         }
         else if (m_currentToken->match(Token::KEYWORD, "if")){
@@ -243,10 +243,9 @@ namespace hdg {
         }
         else {
             throw InvalidSyntaxError(
-                    "Expected identifier, int, float, '+', '-' or '('.",
+                    "Unknown syntax.",
                     *m_currentToken->thisPosition());
         }
-
     }
 
     /*

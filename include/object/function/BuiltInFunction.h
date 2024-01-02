@@ -14,6 +14,7 @@ namespace hdg {
     class BuiltInFunction: public BaseFunction {
     protected:
         std::function<Object*(const std::vector<Object*> &)> m_fun;
+        int m_argsCounter;
 
     public:
         BuiltInFunction();
@@ -22,7 +23,7 @@ namespace hdg {
 
         void setFun(std::function<Object*(const std::vector<Object*> &)> fun);
 
-        Object * parenthesis(const std::vector<Object *> &list) override;
+        Object * parenthesis(const std::vector<Object *> &args) override;
         std::string toString() override;
         Object* copy() override;
     };

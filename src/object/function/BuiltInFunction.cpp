@@ -20,8 +20,8 @@ namespace hdg {
         m_fun = std::move(fun);
     }
 
-    Object *BuiltInFunction::parenthesis(const std::vector<Object *> &list) {
-        return m_fun(list);
+    Object *BuiltInFunction::parenthesis(const std::vector<Object *> &args) {
+        return m_fun(args);
     }
 
     std::string BuiltInFunction::toString() {

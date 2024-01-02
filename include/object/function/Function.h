@@ -18,7 +18,6 @@ namespace hdg {
     class Function: public BaseFunction{
     protected:
         std::string m_name;
-        std::vector<ObjAssignNode*> m_args;
         Environment* m_environment{nullptr};
 
         Node* m_body{nullptr};
@@ -27,7 +26,7 @@ namespace hdg {
         Function(std::string name, std::vector<ObjAssignNode*>args, Environment* environment, Node* body, const Position& position);
         ~Function() override;
 
-        Object* parenthesis(const std::vector<Object*>& list) override;
+        Object* parenthesis(const std::vector<Object*>& args) override;
 
         std::string toString() override;
         Object* copy() override;

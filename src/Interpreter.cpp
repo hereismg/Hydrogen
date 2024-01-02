@@ -20,11 +20,11 @@ namespace hdg {
         m_globalEnvironment->setSymbol("None", new None());
 
         m_globalEnvironment->setSymbol("input", new BuiltInFunction(
-        [this](const std::vector<Object*> &args)->Object*{
-                std::string text;
-                std::getline(std::cin, text);
-                return new String(text);
-        }));
+                [this](const std::vector<Object*> &args)->Object*{
+                        std::string text;
+                        std::getline(std::cin, text);
+                        return new String(text);
+                }));
         m_globalEnvironment->setSymbol("print", new BuiltInFunction(
                 [this](const std::vector<Object*> &args)->Object*{
                     std::cout << args[0]->toString() << std::endl;

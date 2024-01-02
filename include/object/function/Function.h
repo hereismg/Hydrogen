@@ -23,6 +23,7 @@ namespace hdg {
 
         Node* m_body{nullptr};
     public:
+        Function();
         Function(std::string name, std::vector<ObjAssignNode*>args, Environment* environment, Node* body, const Position& position);
         ~Function() override;
 

@@ -43,8 +43,7 @@ namespace hdg {
                 }));
         m_globalEnvironment->setSymbol("type", new BuiltInFunction(
                 [this](const std::vector<Object*> &args)->Object*{
-                    std::cout << args[0]->getClass() << std::endl;
-                    return new None;
+                    return new String(args[0]->getClass());
                 }));
     }
 

@@ -5,8 +5,14 @@
 #include "../../../include/object/function/Function.h"
 
 namespace hdg {
+    Function::Function() {
+        setClass("Function");
+    }
+
     Function::Function(std::string name, std::vector<ObjAssignNode*>args, Environment* environment, Node* body, const Position& position):
-        m_name(std::move(name)), m_args(std::move(args)), m_environment(environment), m_body(body){}
+        m_name(std::move(name)), m_args(std::move(args)), m_environment(environment), m_body(body){
+        setClass("Function");
+    }
 
     Function::~Function() = default;
 

@@ -10,7 +10,9 @@ namespace hdg {
     }
 
     BuiltInFunction::BuiltInFunction(std::function<Object*(const std::vector<Object*> &)> fun):
-        m_fun(std::move(fun)){}
+        m_fun(std::move(fun)){
+        setClass("BuiltInFunction");
+    }
 
     BuiltInFunction::~BuiltInFunction() = default;
 

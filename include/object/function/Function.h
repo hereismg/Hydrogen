@@ -17,10 +17,9 @@ namespace hdg {
 
     class Function: public BaseFunction{
     protected:
-        std::string m_name;
         Environment* m_environment{nullptr};
-
         Node* m_body{nullptr};
+
     public:
         Function();
         Function(std::string name, std::vector<ObjAssignNode*>args, Environment* environment, Node* body, const Position& position);

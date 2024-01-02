@@ -10,24 +10,16 @@ namespace hdg {
     }
 
     Function::Function(std::string name, std::vector<ObjAssignNode*>args, Environment* environment, Node* body, const Position& position):
-        m_name(std::move(name)), m_environment(environment), m_body(body){
+            m_environment(environment), m_body(body){
         setClass("Function");
         m_args = std::move(args);
+        m_funName = std::move(name);
     }
 
     Function::~Function() = default;
 
     Object *Function::parenthesis(const std::vector<Object*>& args) {
-        if (m_args.size() != args.size()){
-            std::stringstream detail;
-            detail << m_name << "(): " <<  std::to_string(m_args.size());
-
-            if (m_args.size()<=1) detail << " argument required, ";
-            else detail << " arguments required, ";
-
-            detail << "but " << std::to_string(args.size()) << " received.";
-            throw RuntimeError(detail.str());
-        }
+        checkArgs(args);
 
         for (int i=0; i<m_args.size(); i++){
             m_environment->setSymbol(m_args[i]->getName(), args[i], Environment::Mode::LOCAL);
@@ -38,7 +30,7 @@ namespace hdg {
     }
 
     std::string Function::toString() {
-        return "<" + m_name + ">";
+        return "<" + m_funName + ">";
     }
 
     Object *Function::copy() {

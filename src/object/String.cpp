@@ -22,6 +22,14 @@ namespace hdg {
         return m_value;
     }
 
+    Object *String::equation(Object *other) {
+        if (other->getClass() == "String"){
+            return new Integer(m_value == ((String*)other)->getValue());
+        }
+        illegalOperator();
+        return nullptr;
+    }
+
     Object *String::plus(Object *other) {
         if (other->getClass() == "String"){
             std::string value = m_value + ((String*)other)->getValue();

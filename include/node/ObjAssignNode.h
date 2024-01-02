@@ -17,6 +17,7 @@ namespace hdg {
 
     public:
         ObjAssignNode();
+        ObjAssignNode(std::string name, Node* obj);
         ObjAssignNode(std::string name, Node* obj, const Position& position, Environment* environment);
         ~ObjAssignNode() override;
 

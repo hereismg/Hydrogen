@@ -6,6 +6,7 @@
 #define HDG_STRING_H
 
 #include "Object.h"
+#include "Integer.h"
 
 namespace hdg {
 
@@ -22,6 +23,7 @@ namespace hdg {
         std::string getValue();
 
         Object* plus(Object* other) override;
+        Object* equation(Object* other) override;
         bool isTrue() override;
 
         std::string toString() override;

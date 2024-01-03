@@ -1,0 +1,32 @@
+"""
+请编写一个猜数字游戏。谜底为0~1000之间的一个数字。
+每次回答一个数字以后，程序回答是大了还是小了。
+每局游戏结束后，询问玩家是否重新开始游戏。
+"""
+
+println("欢迎来到猜数字游戏！")
+println("我已经准备好了，开始猜数字吧！")
+
+flag = true
+while(flag){
+    answer = 789
+
+    result = true
+    while(result){
+        print("请输入一个数字：")
+        guess = parseInt(input())
+
+        if guess > answer {
+            println("数字太大了！")
+        }elif guess < answer {
+            println("数字太小了！")
+        }else{
+            println("恭喜你猜对了！")
+            result = false
+        }
+    }
+
+    print("你是否继续游戏？(y/n)")
+    reply = input()
+    if reply == "n" : flag = false
+}

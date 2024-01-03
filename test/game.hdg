@@ -1,0 +1,26 @@
+"""
+Alice先手和Bob后手玩游戏：给定一个非负整数n，轮到谁操作前数字为0，谁获胜。已知n，并且两个玩家都是高玩，求获胜者名。
+
+对于当前玩家，选择以下操作之一：
+1：n := [n / 2]
+2：n := n - 1
+题目来源：@WxyDZDgn
+"""
+
+function fun(n, op) {
+	if n == 0 {
+		1
+	} else {
+		a = 1 - fun(n - 1, 1 - op)
+		b = 1 - fun(n / 2, 1 - op)
+		if a > b: a else: b
+	}
+}
+
+n = parseInt(input())
+
+if (fun(n, 0) == 1){
+    print("Alice")
+}else{
+    print("Bob")
+}

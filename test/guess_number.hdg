@@ -9,21 +9,23 @@ println("我已经准备好了，开始猜数字吧！")
 
 flag = true
 while(flag){
-    answer = 789
+    answer = rand()
 
     result = true
+    counter = 0
     while(result){
         print("请输入一个数字：")
         guess = parseInt(input())
 
         if guess > answer {
-            println("数字太大了！")
+            println("System: 数字太大了！")
         }elif guess < answer {
-            println("数字太小了！")
+            println("System: 数字太小了！")
         }else{
-            println("恭喜你猜对了！")
+            println("System: 恭喜你猜对了！")
             result = false
         }
+        counter = counter + 1
     }
 
     print("你是否继续游戏？(y/n)")

@@ -46,6 +46,10 @@ namespace hdg {
                 [this](const std::vector<Object*> &args)->Object*{
                     return new String(args[0]->getClass());
                 }, "type", {"object"}));
+        m_globalEnvironment->setSymbol("rand", new BuiltInFunction(
+                [this](const std::vector<Object*> &args)->Object*{
+                    return new Integer(rand() % 1000);
+                }, "rand"));
     }
 
     Environment *Interpreter::thisEnvironment() {

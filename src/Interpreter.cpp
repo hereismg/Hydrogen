@@ -27,14 +27,19 @@ namespace hdg {
                 }, "input"));
         m_globalEnvironment->setSymbol("print", new BuiltInFunction(
                 [this](const std::vector<Object*> &args)->Object*{
-                    std::cout << args[0]->toString() << std::endl;
+                    std::cout << args[0]->toString();
                     return new None;
                 }, "print", {"object"}));
+        m_globalEnvironment->setSymbol("println", new BuiltInFunction(
+                [this](const std::vector<Object*> &args)->Object*{
+                    std::cout << args[0]->toString() << std::endl;
+                    return new None;
+                }, "println", {"object"}));
         m_globalEnvironment->setSymbol("parseInt", new BuiltInFunction(
                 [this](const std::vector<Object*> &args)->Object*{
                     char * success;
                     std::string arg = args[0]->toString();
-                    if(args[0]->getClass() == "String") arg = arg.substr(1, arg.length() - 2);
+//                    if(args[0]->getClass() == "String") arg = arg.substr(1, arg.length() - 2);
                     return new Integer(std::strtoll(arg.c_str(), &success, 10));
                 }, "parseInt",{"number"}));
         m_globalEnvironment->setSymbol("type", new BuiltInFunction(

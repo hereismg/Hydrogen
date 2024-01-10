@@ -58,6 +58,10 @@ namespace hdg {
                     }
                     return nullptr;
                 }, "len", {"list"}));
+        m_globalEnvironment->setSymbol("list", new BuiltInFunction(
+                [this](const std::vector<Object*> &args)->Object*{
+                    return new List;
+                }, "list"));
     }
 
     Environment *Interpreter::thisEnvironment() {

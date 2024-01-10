@@ -14,7 +14,18 @@ namespace hdg {
     }
 
     std::string List::toString() {
-        return "List";
+        std::stringstream context;
+        context << "[";
+
+        if (!m_list.empty()){
+            for (int i=0; i<m_list.size()-1; i++){
+                context << m_list[i]->toString() << ", ";
+            }
+            context << (*m_list.rbegin())->toString();
+        }
+        context << "]";
+
+        return context.str();
     }
 
     Object *List::plus(Object *other) {
@@ -29,6 +40,10 @@ namespace hdg {
         }
         illegalOperator();
         return nullptr;
+    }
+
+    Object *List::brackets(const std::vector<Object *> &args) {
+        return Object::brackets(args);
     }
 
     bool List::isTrue() {

@@ -8,6 +8,7 @@
 #include "Object.h"
 #include "Integer.h"
 #include <vector>
+#include <sstream>
 
 namespace hdg {
 
@@ -38,6 +39,8 @@ namespace hdg {
 //        Object* andOperator(Object* other) override;
 //        Object* orOperator(Object* other) override;
 //        Object* notOperator() override;
+
+        Object* brackets(const std::vector<Object*>& args) override;
 
         bool isTrue() override;
         std::string toString() override;

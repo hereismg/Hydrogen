@@ -54,7 +54,7 @@ namespace hdg {
         /**
          * @brief       括号运算符
          * @arg
-         *      - list  参数列表。
+         *      - args  参数列表。
          * */
         virtual Object* parenthesis(const std::vector<Object*>& args);
         virtual Object* brackets(const std::vector<Object*>& args);

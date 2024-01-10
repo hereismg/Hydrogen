@@ -17,7 +17,7 @@ namespace hdg {
     protected:
         Node* m_call{nullptr};                  /// 被呼叫对象
         std::vector<Node*> m_list;              /// 参数列表
-        Token::Type m_oper{Token::LPAREN};      /// 呼叫类型
+        Token::Type m_oper;                     /// 呼叫类型
 
     public:
         CallNode();

@@ -100,17 +100,17 @@ namespace hdg {
     /**
      * @details     括号运算符主要是用做对函数的实现。函数就是通过该方法实现的。
      * */
-    Object *Object::parenthesis(const std::vector<Object*>& list) {
+    Object *Object::parenthesis(const std::vector<Object*>& args) {
         illegalOperator();
         return nullptr;
     }
 
-    Object *Object::brackets(Object *other) {
+    Object *Object::brackets(const std::vector<Object*>& args) {
         illegalOperator();
         return nullptr;
     }
 
-    Object *Object::braces(const std::vector<Object*>& list) {
+    Object *Object::braces(const std::vector<Object*>& args) {
         illegalOperator();
         return nullptr;
     }

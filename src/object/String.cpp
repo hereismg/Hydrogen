@@ -30,6 +30,15 @@ namespace hdg {
         return nullptr;
     }
 
+    Object *String::div(Object *other) {
+        if (other->getClass() == "String"){
+
+        }else{
+            illegalOperator();
+            return nullptr;
+        }
+    }
+
     Object *String::plus(Object *other) {
         if (other->getClass() == "String"){
             std::string value = m_value + ((String*)other)->getValue();

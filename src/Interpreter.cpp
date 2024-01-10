@@ -3,6 +3,7 @@
 //
 
 #include "../include/Interpreter.h"
+#include "../include/object/List.h"
 
 namespace hdg {
 
@@ -50,6 +51,13 @@ namespace hdg {
                 [this](const std::vector<Object*> &args)->Object*{
                     return new Integer(rand() % 1000);
                 }, "rand"));
+        m_globalEnvironment->setSymbol("len", new BuiltInFunction(
+                [this](const std::vector<Object*> &args)->Object*{
+                    if (args[0]->getClass() == "List"){
+                        return new Integer(((List*)args[0])->getValue().size());
+                    }
+                    return nullptr;
+                }, "len", {"list"}));
     }
 
     Environment *Interpreter::thisEnvironment() {

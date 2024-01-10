@@ -56,9 +56,9 @@ namespace hdg {
          * @arg
          *      - list  参数列表。
          * */
-        virtual Object* parenthesis(const std::vector<Object*>& list);
-        virtual Object* brackets(Object* other);
-        virtual Object* braces(const std::vector<Object*>& list);
+        virtual Object* parenthesis(const std::vector<Object*>& args);
+        virtual Object* brackets(const std::vector<Object*>& args);
+        virtual Object* braces(const std::vector<Object*>& args);
 
         virtual bool isTrue();
         virtual void illegalOperator();

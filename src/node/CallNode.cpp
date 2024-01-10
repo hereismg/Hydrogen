@@ -50,6 +50,9 @@ namespace hdg {
             if (m_oper == Token::LPAREN){
                 return obj->parenthesis(objList);
             }
+            else if (m_oper == Token::LBRACKET){
+                return obj->brackets(objList);
+            }
             else{
                 throw RuntimeError(
                         "Error",

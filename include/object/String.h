@@ -23,6 +23,7 @@ namespace hdg {
         std::string getValue();
 
         Object* plus(Object* other) override;
+        Object* div(Object* other) override;
         Object* equation(Object* other) override;
         bool isTrue() override;
 

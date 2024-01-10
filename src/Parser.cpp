@@ -152,40 +152,62 @@ namespace hdg {
 
     Node *Parser::call(Environment *environment) {
         Node* node = atom(environment);
+        Token::Type lOper = m_currentToken->getType(), rOper;
+        std::string errorDetail;
 
-        if (m_currentToken->getType() == Token::LPAREN){
-            auto* callNode = new CallNode(*node->thisPosition(), environment);
-            advance();
 
-            while (m_currentToken->getType() != Token::RPAREN){
-                callNode->addNode(expr(environment));
+        // 这里要检查当前的 token 是否是下面的几种。
+        // 若是，则进行下一步操作；若不是，则直接返回 node 节点。
+        switch (lOper){
+            case Token::LPAREN:
+                rOper = Token::RPAREN;
+                errorDetail = "Expected ')'.";
+                break;
+            case Token::LBRACE:
+                rOper = Token::RBRACE;
+                errorDetail = "Expected '}'.";
+                break;
+            case Token::LBRACKET:
+                rOper = Token::RBRACKET;
+                errorDetail = "Expected ']'.";
+                break;
+            default:
+                return node;
+        }
 
-                if (m_currentToken->getType() == Token::COMMA){
-                    advance();
-                    if (m_currentToken->getType()==Token::RPAREN){
-                        throw InvalidSyntaxError(
-                                "Expected int, float, plus, minus.",
-                                *m_currentToken->thisPosition()
-                                );
-                    }
+        // 若当前字符串是上面三种字符串，才进行下一步检测，同时 currentToken向后移动一格
+        advance();
+
+        /*
+         * 下面的代码将要进行 callNode 节点的构建。
+         * */
+
+        auto* callNode = new CallNode(*node->thisPosition(), environment);
+        while (m_currentToken->getType() != rOper){
+            callNode->addNode(expr(environment));
+
+            if (m_currentToken->getType() == Token::COMMA){
+                advance();
+                if (m_currentToken->getType() == rOper){
+                    throw InvalidSyntaxError(
+                            "Expected int, float, plus, minus etc.",
+                            *m_currentToken->thisPosition()
+                            );
                 }
             }
-
-            if (m_currentToken->getType() == Token::RPAREN){
-                callNode->setCall(node);
-                callNode->setOperator(Token::LPAREN);
-                callNode->thisPosition()->setEnd(m_currentToken->thisPosition()->getEnd());
-                advance();
-                return callNode;
-            }else{
-                throw InvalidSyntaxError(
-                        "Expected ')'.",
-                        *m_currentToken->thisPosition()
-                        );
-            }
         }
-        else{
-            return node;
+
+        if (m_currentToken->getType() == rOper){
+            callNode->setCall(node);
+            callNode->setOperator(lOper);
+            callNode->thisPosition()->setEnd(m_currentToken->thisPosition()->getEnd());
+            advance();
+            return callNode;
+        }else{
+            throw InvalidSyntaxError(
+                    errorDetail,
+                    *m_currentToken->thisPosition()
+                    );
         }
     }
 
@@ -193,7 +215,7 @@ namespace hdg {
      * @details     该函数是各种语句的入口。
      * */
     Node *Parser::atom(Environment *environment) {
-         if (m_currentToken->getType() == Token::IDENTIFIER){
+        if (m_currentToken->getType() == Token::IDENTIFIER){
             Node* node = new ObjAccessNode(
                     m_currentToken->getValue(),
                     *m_currentToken->thisPosition(),

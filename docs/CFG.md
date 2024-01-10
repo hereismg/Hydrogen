@@ -17,6 +17,7 @@ factor      : (plus|minus) factor
 power       : call (pow factor)*
 
 call        : atom (LPAREN (expr (COMMA expr)*)? RPAREN)?
+		   : atom (LBRACKET (expr (COMMA expr)*)? RBRACKET)?
 
 atom        : identifier|int|float|string
             : lparen expr rparen

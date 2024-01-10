@@ -26,16 +26,19 @@ namespace hdg {
                         std::getline(std::cin, text);
                         return new String(text);
                 }, "input"));
+
         m_globalEnvironment->setSymbol("print", new BuiltInFunction(
                 [this](const std::vector<Object*> &args)->Object*{
                     std::cout << args[0]->toString();
                     return new None;
                 }, "print", {"object"}));
+
         m_globalEnvironment->setSymbol("println", new BuiltInFunction(
                 [this](const std::vector<Object*> &args)->Object*{
                     std::cout << args[0]->toString() << std::endl;
                     return new None;
                 }, "println", {"object"}));
+
         m_globalEnvironment->setSymbol("parseInt", new BuiltInFunction(
                 [this](const std::vector<Object*> &args)->Object*{
                     char * success;
@@ -43,14 +46,17 @@ namespace hdg {
 //                    if(args[0]->getClass() == "String") arg = arg.substr(1, arg.length() - 2);
                     return new Integer(std::strtoll(arg.c_str(), &success, 10));
                 }, "parseInt",{"number"}));
+
         m_globalEnvironment->setSymbol("type", new BuiltInFunction(
                 [this](const std::vector<Object*> &args)->Object*{
                     return new String(args[0]->getClass());
                 }, "type", {"object"}));
+
         m_globalEnvironment->setSymbol("rand", new BuiltInFunction(
                 [this](const std::vector<Object*> &args)->Object*{
                     return new Integer(rand() % 1000);
                 }, "rand"));
+
         m_globalEnvironment->setSymbol("len", new BuiltInFunction(
                 [this](const std::vector<Object*> &args)->Object*{
                     if (args[0]->getClass() == "List"){
@@ -58,6 +64,7 @@ namespace hdg {
                     }
                     return nullptr;
                 }, "len", {"list"}));
+
         m_globalEnvironment->setSymbol("list", new BuiltInFunction(
                 [this](const std::vector<Object*> &args)->Object*{
                     return new List;

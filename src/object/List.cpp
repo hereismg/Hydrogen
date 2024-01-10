@@ -43,7 +43,14 @@ namespace hdg {
     }
 
     Object *List::brackets(const std::vector<Object *> &args) {
-        return Object::brackets(args);
+        if (args.size() == 1 && args[0]->getClass() == "Integer"){
+            long long index = ((Integer*)args[0])->getValue();
+            if (index < m_list.size()){
+                return m_list[index];
+            }
+        }
+        illegalOperator();
+        return nullptr;
     }
 
     bool List::isTrue() {

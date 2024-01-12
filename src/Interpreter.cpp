@@ -69,6 +69,17 @@ namespace hdg {
                 [this](const std::vector<Object*> &args)->Object*{
                     return new List;
                 }, "list"));
+
+        m_globalEnvironment->setSymbol("gcd", new BuiltInFunction(
+                [this](const std::vector<Object*> &args)->Object*{
+                    long long x1 = ((Integer*)args[0])->getValue(), x2 = ((Integer*)args[1])->getValue();
+                    while(x2) {
+                        long long temp = x2;
+                        x2 = x1 % x2;
+                        x1 = temp;
+                    }
+                    return new Integer(x1);
+                }, "gcd", {"x1", "x2"}));
     }
 
     Environment *Interpreter::thisEnvironment() {

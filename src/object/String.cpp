@@ -3,6 +3,7 @@
 //
 
 #include "../../include/object/String.h"
+#include "../../include/object/List.h"
 
 namespace hdg {
     String::String(){
@@ -32,7 +33,16 @@ namespace hdg {
 
     Object *String::div(Object *other) {
         if (other->getClass() == "String"){
-
+            std::vector<Object*> result;
+            std::string ori = m_value, spl = ((String*)other)->getValue();
+            auto end = ori.find(spl);
+            while (end != -1) {
+                result.push_back(new String(ori.substr(0, end)));
+                ori.erase(ori.begin(), ori.begin() + (int)end + 1);
+                end = ori.find(spl);
+            }
+            result.push_back(new String(ori.substr(0, end)));
+            return new List(result);
         }else{
             illegalOperator();
             return nullptr;

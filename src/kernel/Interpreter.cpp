@@ -2,8 +2,8 @@
 // Created by Magnesium on 2023/7/21.
 //
 
-#include "../include/Interpreter.h"
-#include "../include/object/List.h"
+#include "../../include/Interpreter.h"
+#include "../../include/object/List.h"
 
 namespace hdg {
 

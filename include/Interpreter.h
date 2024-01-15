@@ -36,6 +36,10 @@ namespace hdg {
 
         Environment* thisEnvironment();
 
+        /**
+         * 传入 hdg 代码，解释器对其解释并运行，返回一个字符串
+         * @param fPath 代码的原文件
+         * */
         std::string interpret(const std::string& fPath, const std::string& code, Interpreter::Mode mode = release);
 
     protected:

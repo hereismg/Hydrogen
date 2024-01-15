@@ -2,7 +2,7 @@
 // Created by Magnesium on 2023/7/11.
 //
 
-#include "../../include/Lexer.h"
+#include "../../include/kernel/Lexer.h"
 
 namespace hdg {
 

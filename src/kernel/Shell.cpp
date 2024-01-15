@@ -2,7 +2,7 @@
 // Created by Magnesium on 2023/7/14.
 //
 
-#include "../../include/Shell.h"
+#include "../../include/kernel/Shell.h"
 
 namespace hdg {
     Shell::Shell(): m_mode(Interpreter::Mode::release) {}

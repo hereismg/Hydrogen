@@ -11,10 +11,10 @@
 #include <cmath>
 #include "Parser.h"
 #include "Lexer.h"
-#include "node/Node.h"
-#include "basic/Environment.h"
-#include "object/function/BuiltInFunction.h"
-#include "object/Float.h"
+#include "../node/Node.h"
+#include "../basic/Environment.h"
+#include "../object/function/BuiltInFunction.h"
+#include "../object/Float.h"
 
 namespace hdg {
     class Interpreter {

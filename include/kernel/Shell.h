@@ -12,8 +12,8 @@
 #include "Lexer.h"
 #include "Parser.h"
 #include "Interpreter.h"
-#include "error/IllegalCharError.h"
-#include "basic/Environment.h"
+#include "../error/IllegalCharError.h"
+#include "../basic/Environment.h"
 
 namespace hdg {
 

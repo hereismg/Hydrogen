@@ -10,8 +10,8 @@
 #include <iostream>
 #include <utility>
 #include <set>
-#include "basic/Token.h"
-#include "error/IllegalCharError.h"
+#include "../basic/Token.h"
+#include "../error/IllegalCharError.h"
 
 namespace hdg {
     static std::set<std::string> keywordSet = {

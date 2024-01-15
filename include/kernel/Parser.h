@@ -11,22 +11,22 @@
 #include <functional>
 #include <set>
 #include <iostream>
-#include "basic/Token.h"
-#include "basic/Environment.h"
-#include "node/Node.h"
-#include "node/BinaryOperatorNode.h"
-#include "node/UnaryOperatorNode.h"
-#include "node/object_node/NumObjNode.h"
-#include "node/ObjAssignNode.h"
-#include "node/ObjAccessNode.h"
-#include "node/object_node/FuncObjNode.h"
-#include "node/object_node/StrObjNode.h"
-#include "node/IfNode.h"
-#include "node/ForNode.h"
-#include "node/WhileNode.h"
-#include "node/CallNode.h"
-#include "node/StatementsNode.h"
-#include "error/InvalidSyntaxError.h"
+#include "../basic/Token.h"
+#include "../basic/Environment.h"
+#include "../node/Node.h"
+#include "../node/BinaryOperatorNode.h"
+#include "../node/UnaryOperatorNode.h"
+#include "../node/object_node/NumObjNode.h"
+#include "../node/ObjAssignNode.h"
+#include "../node/ObjAccessNode.h"
+#include "../node/object_node/FuncObjNode.h"
+#include "../node/object_node/StrObjNode.h"
+#include "../node/IfNode.h"
+#include "../node/ForNode.h"
+#include "../node/WhileNode.h"
+#include "../node/CallNode.h"
+#include "../node/StatementsNode.h"
+#include "../error/InvalidSyntaxError.h"
 
 namespace hdg {
     class Parser {

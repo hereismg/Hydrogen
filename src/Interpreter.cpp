@@ -60,7 +60,7 @@ namespace hdg {
         m_globalEnvironment->setSymbol("len", new BuiltInFunction(
                 [this](const std::vector<Object*> &args)->Object*{
                     if (args[0]->getClass() == "List"){
-                        return new Integer(((List*)args[0])->getValue().size());
+                        return new Integer((long long)((List*)args[0])->getValue().size());
                     }
                     return nullptr;
                 }, "len", {"list"}));

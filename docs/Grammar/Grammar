@@ -16,7 +16,7 @@ factor      : (plus|minus) factor
 power       : call (pow factor)*
 
 call        : atom (LPAREN (expr (COMMA expr)*)? RPAREN)?
-		   : atom (LBRACKET (expr (COMMA expr)*)? RBRACKET)?
+		    : atom (LBRACKET (expr (COMMA expr)*)? RBRACKET)?
 
 atom        : identifier|int|float|string
             : lparen expr rparen
@@ -24,6 +24,9 @@ atom        : identifier|int|float|string
             : for-expr
             : while-expr
             : func-expr
+            : return-expr
+            : "break"
+            : "continue"
 
 if-expr     : expr "if" expr (else core)?
             : "if" expr core
@@ -45,5 +48,7 @@ func-expr   : "function" identifier
                   )?
               rparen
               core
+
+return-expr : "return" expr
 
 core       : (colon expr) | (lbrace statements rbrace)

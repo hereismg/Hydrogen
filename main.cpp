@@ -1,4 +1,4 @@
-#include "../include/kernel/Shell.h"
+#include "include/kernel/Shell.h"
 
 int main(int argc, char* argv[]) {
     hdg::Shell shell;

@@ -9,4 +9,10 @@ set(LIBRARY_OUTPUT_PATH ${EXECUTABLE_OUTPUT_PATH})
 file(GLOB_RECURSE SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 file(GLOB_RECURSE INCLUDES ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h)
 
-add_executable(hdg ${CMAKE_CURRENT_SOURCE_DIR}/res/info.o ${SOURCES} ${INCLUDES})
+add_executable(hdg main.cpp ${CMAKE_CURRENT_SOURCE_DIR}/res/info.o ${SOURCES} ${INCLUDES})
+add_library(libhdg SHARED ${SOURCES} ${INCLUDES})
+target_include_directories(hdg PUBLIC )
+
+# 添加测试框架
+enable_testing()
+add_subdirectory(tests)

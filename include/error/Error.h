@@ -11,6 +11,7 @@
 #include <utility>
 #include <sstream>
 #include "../basic/Position.h"
+#include <ranges>
 
 
 namespace hdg {

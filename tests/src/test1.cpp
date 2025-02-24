@@ -3,11 +3,12 @@
 ////
 //
 
-#include <gtest/gtest.h>
-#include <Token.h>
+#include "gtest/gtest.h"
+#include "Token.h"
 
 // Demonstrate some basic assertions.
 TEST(HelloTest, BasicAssertions) {
+    hdg::Position position;
     // Expect two strings not to be equal.
     EXPECT_STRNE("hello", "world");
     // Expect equality.

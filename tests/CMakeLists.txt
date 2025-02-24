@@ -1,10 +1,31 @@
+set(CTEST_BINARY_DIRECTORY ${PROJECT_SOURCE_DIR}/tests/build)
 
-add_executable(Test1 test1.cpp)
-target_include_directories(Test1 PUBLIC ../include/basic ../include/kernel)
-target_link_libraries(Test1 PUBLIC libhdg)
-add_test(NAME test1 COMMAND Test1)
-
-add_executable(Test2 test2.cpp)
-target_include_directories(Test2 PUBLIC ../include/basic ../include/kernel)
-target_link_libraries(Test2 PUBLIC libhdg)
-add_test(NAME test2 COMMAND Test2)
+file(GLOB TEST_CASE ${PROJECT_SOURCE_DIR}/tests/*.cpp)
+foreach (test_src ${TEST_CASE})
+    get_filename_component(test_name ${test_src} NAME_WE)
+    add_executable(${test_name} ${test_src})
+    target_include_directories(
+            ${test_name}
+            PUBLIC
+            "./gtest/googletest/include"
+            "./gtest/googlemock/include"
+            "${PROJECT_SOURCE_DIR}/include/basic"
+#            "${PROJECT_SOURCE_DIR}/include/error"
+#            "${PROJECT_SOURCE_DIR}/include/kernel"
+#            "${PROJECT_SOURCE_DIR}/include/node"
+#            "${PROJECT_SOURCE_DIR}/include/object"
+    )
+    target_link_directories(
+            ${test_name}
+            PUBLIC
+            "./gtest/build/lib"
+            "${PROJECT_SOURCE_DIR}/bin"
+    )
+    target_link_libraries(
+            ${test_name}
+            PUBLIC
+            "gtest" "gtest_main" "gmock" "gmock_main"
+    )
+#    target_link_libraries(${test_name} PRIVATE libhdg)
+    add_test(NAME ${test_name} COMMAND ${test_name})
+endforeach ()

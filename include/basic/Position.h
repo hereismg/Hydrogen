@@ -29,10 +29,10 @@ namespace hdg {
 
         class Indicator{
         public:
-            unsigned long long index;
-            unsigned long long line;
-            unsigned long long col;
-            Indicator(unsigned long long index, unsigned long long line, unsigned long long col);
+            size_t index;
+            size_t line;
+            size_t col;
+            Indicator(size_t index, size_t line, size_t col);
         };
 
     protected:

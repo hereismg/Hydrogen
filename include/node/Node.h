@@ -16,7 +16,7 @@ namespace hdg {
     class Node {
     protected:
         Position m_position;
-        Environment* m_environment;
+        Environment* m_environment{};
 
     public:
         Node();

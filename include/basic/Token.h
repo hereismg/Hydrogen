@@ -45,8 +45,8 @@ namespace hdg {
             EQ,         ///> 赋值语句的等于号“=”
 
 
-            COLON,      ///> ”:“
-            COMMA,      ///> ”,“
+            COLON,      ///> “:”
+            COMMA,      ///> “,”
 
             EF,         ///> end of file
             EL,         ///> end of line 有两种表达字符：“;” and “\n”

@@ -10,7 +10,7 @@
 #include <cmath>
 #include <functional>
 #include "../basic/Position.h"
-#include "../error/RuntimeError.h"
+#include "../basic/Error.h"
 
 namespace hdg {
 

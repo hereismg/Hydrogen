@@ -7,7 +7,6 @@
 #define HDG_FLOAT_H
 
 #include <iostream>
-#include "Object.h"
 #include "Integer.h"
 
 namespace hdg {

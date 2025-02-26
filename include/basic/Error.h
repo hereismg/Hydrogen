@@ -10,9 +10,8 @@
 #include <vector>
 #include <utility>
 #include <sstream>
-#include "../basic/Position.h"
 #include <ranges>
-
+#include "../basic/Position.h"
 
 namespace hdg {
 
@@ -36,6 +35,42 @@ namespace hdg {
         std::vector<Position>* thisPosStack();
 
         virtual std::string toString();
+    };
+
+    class IllegalCharError: public Error{
+    public:
+        IllegalCharError(std::string details, const Position& position);
+    };
+
+    class InvalidSyntaxError: public Error{
+    public:
+        InvalidSyntaxError(std::string details, const Position& position);
+    };
+
+    /**
+     * @brief       运行时异常
+     * @details
+     * */
+
+    class RuntimeError: public Error{
+    public:
+        RuntimeError();
+        explicit RuntimeError(std::string detail);
+        RuntimeError(std::string detail, const Position& position);
+
+    protected:
+        RuntimeError(std::string name, std::string detail, const Position& position);
+    };
+
+
+    class NotImplementedError: public RuntimeError{
+    public:
+        NotImplementedError();
+    };
+
+    class ZeroDivisionError: public RuntimeError{
+    public:
+        ZeroDivisionError();
     };
 
 } // hdg

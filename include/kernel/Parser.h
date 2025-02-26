@@ -13,6 +13,7 @@
 #include <iostream>
 #include "../basic/Token.h"
 #include "../basic/Environment.h"
+#include "../basic/Error.h"
 #include "../node/Node.h"
 #include "../node/BinaryOperatorNode.h"
 #include "../node/UnaryOperatorNode.h"
@@ -26,7 +27,6 @@
 #include "../node/WhileNode.h"
 #include "../node/CallNode.h"
 #include "../node/StatementsNode.h"
-#include "../error/InvalidSyntaxError.h"
 
 namespace hdg {
     class Parser {

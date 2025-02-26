@@ -10,7 +10,7 @@
 #include <utility>
 #include "Node.h"
 #include "../basic/Token.h"
-#include "../error/RuntimeError.h"
+#include "../basic/Error.h"
 
 namespace hdg {
 

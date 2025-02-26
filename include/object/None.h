@@ -5,7 +5,6 @@
 #ifndef HDG_NONE_H
 #define HDG_NONE_H
 
-#include "Object.h"
 #include "Integer.h"
 
 namespace hdg {

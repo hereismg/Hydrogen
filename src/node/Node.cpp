@@ -24,8 +24,4 @@ namespace hdg {
     Environment *Node::thisEnvironment() {
         return m_environment;
     }
-
-    Object *Node::accept(AbstractNodeVisitor visitor) {
-        return nullptr;
-    }
 } // hdg

@@ -11,7 +11,7 @@
 #include <utility>
 #include <set>
 #include "../basic/Token.h"
-#include "../error/IllegalCharError.h"
+#include "../basic/Error.h"
 
 namespace hdg {
     static std::set<std::string> keywordSet = {

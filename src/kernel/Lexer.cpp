@@ -3,6 +3,7 @@
 //
 
 #include "../../include/kernel/Lexer.h"
+#include "../../include/basic/Error.h"
 
 namespace hdg {
 

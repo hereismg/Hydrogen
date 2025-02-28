@@ -6,12 +6,9 @@
 #define HDG_LEXER_H
 
 #include <string>
-#include <vector>
-#include <iostream>
-#include <utility>
 #include <set>
+#include <vector>
 #include "../basic/Token.h"
-#include "../basic/Error.h"
 
 namespace hdg {
     static std::set<std::string> keywordSet = {

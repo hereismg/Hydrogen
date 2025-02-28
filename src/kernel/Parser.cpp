@@ -2,8 +2,18 @@
 // Created by Magnesium on 2023/7/16.
 //
 
+#include <set>
+
 #include "../../include/kernel/Parser.h"
 #include "../../include/node/CallNode.h"
+#include "../../include/node/StatementsNode.h"
+#include "../../include/node/ObjAssignNode.h"
+#include "../../include/node/UnaryOperatorNode.h"
+#include "../../include/node/ObjAccessNode.h"
+#include "../../include/node/IfNode.h"
+#include "../../include/node/ForNode.h"
+#include "../../include/node/WhileNode.h"
+#include "../../include/node/BinaryOperatorNode.h"
 
 namespace hdg {
     Parser::Parser(std::vector<Token> tokens, Environment* environment):

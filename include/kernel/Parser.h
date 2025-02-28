@@ -7,23 +7,8 @@
 #define HDG_PARSER_H
 
 #include <vector>
-#include <utility>
-#include <functional>
-#include <set>
-#include <iostream>
 #include "../basic/Token.h"
-#include "../basic/Environment.h"
-#include "../basic/Error.h"
 #include "../node/Node.h"
-#include "../node/BinaryOperatorNode.h"
-#include "../node/UnaryOperatorNode.h"
-#include "../node/ObjectNode.h"
-#include "../node/ObjAssignNode.h"
-#include "../node/ObjAccessNode.h"
-#include "../node/IfNode.h"
-#include "../node/ForNode.h"
-#include "../node/WhileNode.h"
-#include "../node/StatementsNode.h"
 
 namespace hdg {
     class Parser {

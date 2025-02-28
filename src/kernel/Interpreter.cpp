@@ -3,9 +3,12 @@
 //
 
 #include "../../include/kernel/Interpreter.h"
-#include "../../include/object/List.h"
 
 namespace hdg {
+
+//    void DefaultInterpreter::interpret(Code *code, Environment *environment) {
+//        std::string str = code->getstring();
+//    }
 
     Interpreter::Interpreter(): m_globalEnvironment(new Environment) {
         init();

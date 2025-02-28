@@ -9,6 +9,7 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <cstring   >
 #include "Lexer.h"
 #include "Parser.h"
 #include "Interpreter.h"
@@ -16,6 +17,35 @@
 #include "../basic/Environment.h"
 
 namespace hdg {
+    void hydrogen(int argc, char* argv[]);
+
+    class ShellModel{
+    protected:
+        Interpreter m_interpreter;
+
+    public:
+        ShellModel() = default;
+        ~ShellModel() = default;
+        void run(const std::string& code);
+    };
+
+
+    class ShellView{
+    public:
+        std::string input();
+    };
+
+
+    class ShellController{
+    protected:
+        ShellModel m_model;
+        ShellView m_view;
+    public:
+        ShellController() = default;
+
+        [[noreturn]] void run();
+
+    };
 
     /**
      * Shell 是整个海琛解释器的起点
@@ -24,6 +54,9 @@ namespace hdg {
     protected:
         Interpreter::Mode m_mode;
         std::string m_fPath;
+
+        Environment m_root;
+        Interpreter m_interpreter;
 
     public:
         Shell();

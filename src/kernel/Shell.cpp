@@ -5,6 +5,25 @@
 #include "../../include/kernel/Shell.h"
 
 namespace hdg {
+    void hydrogen(int argc, char* argv[]){
+        std::string fPath;
+
+        if (argc == 0){
+            ShellController shell;
+            shell.run();
+        }
+        else if (argc > 1){
+            for (int i=1; i<argc; i++){
+                if (strcmp(argv[i], "-g") == 0){
+
+                }
+                else{
+                    fPath = argv[i];
+                }
+            }
+        }
+    }
+
     Shell::Shell(): m_mode(Interpreter::Mode::release) {}
 
     /**
@@ -53,8 +72,23 @@ namespace hdg {
     std::string Shell::input() {
         std::string text;
 
-        std::cout << "hydrogen > ";
-        std::getline(std::cin, text);
+        std::cout << ">>> ";
+
+        int stk = 0;
+        while(true){
+            std::string temp;
+            std::getline(std::cin, temp);
+            if (temp.empty()) continue;
+
+            for (char i : temp){
+                if (i == '{') stk ++;
+                else if (i == '}') stk --;
+            }
+
+            text += temp + '\n';
+
+            if (stk <= 0) break;
+        }
 
         return text;
     }
@@ -73,5 +107,41 @@ namespace hdg {
         std::stringstream buffer;
         buffer << file.rdbuf();
         return buffer.str();
+    }
+
+
+    void ShellModel::run(const std::string &code) {
+        m_interpreter.interpret("<stdin>", code);
+    }
+
+    std::string ShellView::input() {
+        std::string text;
+
+        std::cout << ">>> ";
+
+        int stk = 0;
+        while(true){
+            std::string temp;
+            std::getline(std::cin, temp);
+            if (temp.empty()) continue;
+
+            for (char i : temp){
+                if (i == '{') stk ++;
+                else if (i == '}') stk --;
+            }
+
+            text += temp + '\n';
+
+            if (stk <= 0) break;
+        }
+
+        return text;
+    }
+
+    [[noreturn]] void ShellController::run() {
+        while(true){
+            std::string code = m_view.input();
+            m_model.run(code);
+        }
     }
 } // hdg

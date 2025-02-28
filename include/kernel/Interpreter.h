@@ -15,8 +15,11 @@
 #include "../basic/Environment.h"
 #include "../object/function/BuiltInFunction.h"
 #include "../object/Float.h"
+#include "../object/List.h"
+#include "../basic/Code.h"
 
 namespace hdg {
+
     class Interpreter {
     public:
         enum Mode{

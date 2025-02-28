@@ -6,7 +6,7 @@
 #define HDG_OBJASSIGNNODE_H
 
 #include "Node.h"
-#include "object_node/ObjectNode.h"
+#include "ObjectNode.h"
 
 namespace hdg {
 

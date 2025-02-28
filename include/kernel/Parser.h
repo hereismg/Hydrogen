@@ -23,7 +23,6 @@
 #include "../node/IfNode.h"
 #include "../node/ForNode.h"
 #include "../node/WhileNode.h"
-#include "../node/CallNode.h"
 #include "../node/StatementsNode.h"
 
 namespace hdg {

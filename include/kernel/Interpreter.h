@@ -9,14 +9,8 @@
 #include <string>
 #include <list>
 #include <cmath>
-#include "Parser.h"
-#include "Lexer.h"
-#include "../node/Node.h"
 #include "../basic/Environment.h"
-#include "../object/function/BuiltInFunction.h"
-#include "../object/Float.h"
-#include "../object/List.h"
-#include "../basic/Code.h"
+#include "Lexer.h"
 
 namespace hdg {
 

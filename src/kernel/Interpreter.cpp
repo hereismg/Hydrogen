@@ -3,6 +3,9 @@
 //
 
 #include "../../include/kernel/Interpreter.h"
+#include "../../include/kernel/Parser.h"
+#include "../../include/object/Function.h"
+#include "../../include/object/List.h"
 
 namespace hdg {
 

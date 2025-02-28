@@ -3,6 +3,7 @@
 //
 
 #include "../../include/kernel/Parser.h"
+#include "../../include/node/CallNode.h"
 
 namespace hdg {
     Parser::Parser(std::vector<Token> tokens, Environment* environment):

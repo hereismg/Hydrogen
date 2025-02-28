@@ -3,7 +3,7 @@
 //
 
 #include "../../include/node/ObjectNode.h"
-#include "../../include/object/function/Function.h"
+#include "../../include/object/Function.h"
 
 namespace hdg {
     ObjectNode::ObjectNode() = default;

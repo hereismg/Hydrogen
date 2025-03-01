@@ -8,9 +8,12 @@
 #include <string>
 #include <set>
 #include <vector>
+#include <tuple>
+#include <functional>
 #include "../basic/Token.h"
 
 namespace hdg {
+
     static std::set<std::string> keywordSet = {
             "not",
             "and",
@@ -59,76 +62,79 @@ namespace hdg {
         IDENT,
         INT_CONST,
 
-        JUDGER,
-        ACCEPT,
-        ERROR,
+        END,
 
-        END         // 最后一个类型必须是 END
+        ACCEPT,
+        ERROR,      // 最后一个类型必须是 ERROR
     };
 
     class StatusMachine;
 
-    class Status{
+    class AbstractStatus{
     protected:
-        typedef std::pair<int, StatusType> Edge;
+        typedef std::tuple<int, StatusType, std::function<bool(char)>> Edge;
         StatusMachine *m_machine;
-        std::vector<Edge> m_map;
+        std::vector<Edge> m_edges;
 
     public:
-        explicit Status(StatusMachine* machine);
-        ~Status() = default;
+        explicit AbstractStatus(StatusMachine* machine);
+        ~AbstractStatus() = default;
+
+        void addEdge(int c, StatusType type, const std::function<bool(char)>& cond = nullptr);
         void accept(char cur);
     };
 
-    class StartStatus: public Status{
+    class StartStatus: public AbstractStatus{
     public:
         explicit StartStatus(StatusMachine* machine);
     };
 
-    class KeywordStatus: public Status{
+    class KeywordStatus: public AbstractStatus{
+    protected:
+        std::set<std::string> keywordSet;
+
     public:
         explicit KeywordStatus(StatusMachine* machine);
     };
 
-    class IdentStatus: public Status{
+    class IdentStatus: public AbstractStatus{
     public:
         explicit IdentStatus(StatusMachine* machine);
-
     };
 
-    class IntConstStatus: public Status{
+    class IntConstStatus: public AbstractStatus{
     public:
         explicit IntConstStatus(StatusMachine* machine);
-
     };
 
-    class ErrorStatus: public Status{
+    class ErrorStatus: public AbstractStatus{
     public:
         explicit ErrorStatus(StatusMachine* machine);
     };
 
-    class JudgerStatus: public Status{
+    class AcceptStatus: public AbstractStatus{
     public:
-        explicit JudgerStatus(StatusMachine* machine);
+        explicit AcceptStatus(StatusMachine* machine);
     };
 
     class StatusMachine{
     protected:
         int m_lastStatus;
-        int m_cur;
-        std::vector<Status*> m_list;
+        int m_currStatus;
+        std::vector<AbstractStatus*> m_list;
+
+        std::string m_tokenVal;
 
     public:
         StatusMachine();
         ~StatusMachine();
 
+        std::string getTokenVal();
         void move(StatusType target);
 
-        void accept(char c){
-            m_list[m_cur]->accept(c);
-        }
-
+        std::tuple<int, StatusType> accept(char c);
     };
+
 
     /**
      * @brief       词法分析器

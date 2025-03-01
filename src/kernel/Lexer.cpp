@@ -27,34 +27,110 @@ namespace hdg {
         return what & target;
     }
 
-    Status::Status(StatusMachine *machine): m_machine(machine) {}
+    AbstractStatus::AbstractStatus(StatusMachine *machine): m_machine(machine) {}
 
-    void Status::accept(char cur) {
+    void AbstractStatus::accept(char cur) {
         int type = whatIsThis(cur);
 
-        for (auto & e : m_map){
-            if (type | e.first) m_machine->move(e.second);
+        for (auto & e : m_edges){
+            bool cond = true;
+            auto condFun = std::get<2>(e);
+            if (condFun != nullptr) cond = condFun(cur);
+
+            if (type & std::get<0>(e) && cond) m_machine->move(std::get<1>(e));
         }
     }
 
-    StartStatus::StartStatus(StatusMachine *machine) : Status(machine) {
-        m_map.emplace_back(LOWERCASE | UPPERCASE, KEYWORD);
-        m_map.emplace_back(UNDERLINE,             IDENT);
-        m_map.emplace_back(DIGITAL,               INT_CONST);
-        m_map.emplace_back(BLANK,                 START);
+    void AbstractStatus::addEdge(int c, StatusType type, const std::function<bool(char)>& cond) {
+        m_edges.emplace_back(c, type, cond);
     }
 
-    KeywordStatus::KeywordStatus(StatusMachine *machine) : Status(machine) {
-        m_map.emplace_back(LOWERCASE | UPPERCASE, KEYWORD);
-        m_map.emplace_back(DIGITAL | UNDERLINE, IDENT);
+    StartStatus::StartStatus(StatusMachine *machine) : AbstractStatus(machine) {
+        addEdge(LOWERCASE | UPPERCASE, KEYWORD);
+        addEdge(UNDERLINE,             IDENT);
+        addEdge(DIGITAL,               INT_CONST);
+        addEdge(BLANK,                 START);
     }
 
-    IdentStatus::IdentStatus(hdg::StatusMachine *machine): Status(machine) {
-        m_map.emplace_back(DIGITAL | LOWERCASE | UPPERCASE | UNDERLINE, IDENT);
+    KeywordStatus::KeywordStatus(StatusMachine *machine) : AbstractStatus(machine) {
+        keywordSet.insert({
+            "not",
+            "and",
+            "or",
+
+            "if",
+            "elif",
+            "else",
+
+            "for",
+            "from",
+            "to",
+            "step",
+            "while",
+
+            "function",
+        });
+
+        addEdge(LOWERCASE | UPPERCASE, KEYWORD);
+        addEdge(DIGITAL | UNDERLINE, IDENT);
+        addEdge(BLANK, ACCEPT, [this](char c){
+            auto txt  = this->m_machine->getTokenVal();
+            if(keywordSet.find(txt) == keywordSet.end()){
+                m_machine->move(IDENT);
+            }
+            return true;
+        });
     }
 
-    IntConstStatus::IntConstStatus(hdg::StatusMachine *machine): Status(machine) {
+    IdentStatus::IdentStatus(hdg::StatusMachine *machine): AbstractStatus(machine) {
+        addEdge(DIGITAL | LOWERCASE | UPPERCASE | UNDERLINE, IDENT);
+        addEdge(BLANK, ACCEPT);
+    }
 
+    IntConstStatus::IntConstStatus(hdg::StatusMachine *machine): AbstractStatus(machine) {
+        addEdge(DIGITAL, INT_CONST);
+        addEdge(BLANK, ACCEPT);
+        addEdge(OTHER, ERROR);
+    }
+
+    ErrorStatus::ErrorStatus(hdg::StatusMachine *machine): AbstractStatus(machine) {
+
+    }
+
+    AcceptStatus::AcceptStatus(StatusMachine *machine) : AbstractStatus(machine) {
+
+    }
+
+    StatusMachine::StatusMachine(): m_lastStatus(0), m_currStatus(0), m_list(StatusType::ERROR, nullptr){
+        m_list[START]     = new StartStatus(this);
+        m_list[KEYWORD]   = new KeywordStatus(this);
+        m_list[IDENT]     = new IdentStatus(this);
+        m_list[INT_CONST] = new IntConstStatus(this);
+    }
+
+    StatusMachine::~StatusMachine() {
+        for (auto i: m_list){
+            delete i;
+        }
+    }
+
+    std::string StatusMachine::getTokenVal() {
+        return m_tokenVal;
+    }
+
+    void StatusMachine::move(StatusType target) {
+        m_lastStatus = m_currStatus;
+        m_currStatus = target;
+    }
+
+    std::tuple<int, StatusType> StatusMachine::accept(char c) {
+        m_list[m_currStatus]->accept(c);
+
+        if (m_currStatus == ACCEPT){
+            return std::make_tuple(1, (StatusType)m_lastStatus);
+        }else{
+            return std::make_tuple(0, (StatusType)m_currStatus);
+        }
     }
 
     std::ostream& operator<<(std::ostream& out, std::vector<Token>& tokens) {
@@ -103,24 +179,6 @@ namespace hdg {
 
     std::string* Lexer::thisText() {
         return m_code;
-    }
-
-    StatusMachine::StatusMachine():m_lastStatus(0), m_cur(0), m_list(StatusType::END, nullptr){
-        m_list[START]     = new StartStatus(this);
-//        m_list[KEYWORD]   = new KeywordStatus(this);
-//        m_list[IDENT]     = new IdentStatus(this);
-//        m_list[INT_CONST] = new IntConstStatus(this);
-    }
-
-    void StatusMachine::move(StatusType target) {
-        m_lastStatus = m_cur;
-        m_cur = target;
-    }
-
-    StatusMachine::~StatusMachine() {
-        for (auto i: m_list){
-            delete i;
-        }
     }
 
     std::vector<Token> Lexer::run(const std::string& fPath, std::string* code) {

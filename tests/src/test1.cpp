@@ -20,3 +20,14 @@ TEST(HelloTest, BasicAssertions) {
         EXPECT_EQ(actual_res[i].getType(), expected_res[i].getType());
     }
 }
+
+TEST(MAINTEST, TestWhatIsThis){
+    int actual_res_1 = whatIsThis('a');
+    EXPECT_EQ(actual_res_1, LegalChar::HEX_DIGITAL | LegalChar::LOWERCASE);
+
+    int actual_res_2 = whatIsThis('A');
+    EXPECT_EQ(actual_res_2, LegalChar::HEX_DIGITAL | LegalChar::UPPERCASE);
+
+    int actual_res_3 = whatIsThis('_');
+    EXPECT_EQ(actual_res_3, LegalChar::UNDERLINE);
+}

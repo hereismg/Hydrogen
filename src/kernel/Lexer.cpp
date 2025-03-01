@@ -7,17 +7,54 @@
 
 namespace hdg {
 
-    LegalChar whatIsThis(char c){
-        if (c>='0' && c<='9') return LegalChar::DIGITAL;
-        else if (c>='a' && c<='z') return LegalChar::LOWERCASE;
-        else if (c>='A' && c <='Z') return LegalChar::UPPERCASE;
-        else if (c=='_') return LegalChar::UNDERLINE;
-        else return LegalChar::ILLEGAL;
+    int whatIsThis(char c){
+        int res = 0;
+
+        if (c>='0' && c<='9')    res |= DIGITAL;
+        if (c>='0' && c<='9' ||
+            c>='a' && c<='f' ||
+            c>='A' && c<='F')    res |= HEX_DIGITAL;
+        if (c>='a' && c<='z')    res |= LOWERCASE;
+        if (c>='A' && c<='Z')    res |= UPPERCASE;
+        if (c=='_')              res |= UNDERLINE;
+        if (c==' ')              res |= BLANK;
+
+        return res;
     }
 
     bool whatIsThis(char c, int target){
-        LegalChar what = whatIsThis(c);
+        int what = whatIsThis(c);
         return what & target;
+    }
+
+    Status::Status(StatusMachine *machine): m_machine(machine) {}
+
+    void Status::accept(char cur) {
+        int type = whatIsThis(cur);
+
+        for (auto & e : m_map){
+            if (type | e.first) m_machine->move(e.second);
+        }
+    }
+
+    StartStatus::StartStatus(StatusMachine *machine) : Status(machine) {
+        m_map.emplace_back(LOWERCASE | UPPERCASE, KEYWORD);
+        m_map.emplace_back(UNDERLINE,             IDENT);
+        m_map.emplace_back(DIGITAL,               INT_CONST);
+        m_map.emplace_back(BLANK,                 START);
+    }
+
+    KeywordStatus::KeywordStatus(StatusMachine *machine) : Status(machine) {
+        m_map.emplace_back(LOWERCASE | UPPERCASE, KEYWORD);
+        m_map.emplace_back(DIGITAL | UNDERLINE, IDENT);
+    }
+
+    IdentStatus::IdentStatus(hdg::StatusMachine *machine): Status(machine) {
+        m_map.emplace_back(DIGITAL | LOWERCASE | UPPERCASE | UNDERLINE, IDENT);
+    }
+
+    IntConstStatus::IntConstStatus(hdg::StatusMachine *machine): Status(machine) {
+
     }
 
     std::ostream& operator<<(std::ostream& out, std::vector<Token>& tokens) {
@@ -66,6 +103,24 @@ namespace hdg {
 
     std::string* Lexer::thisText() {
         return m_code;
+    }
+
+    StatusMachine::StatusMachine():m_lastStatus(0), m_cur(0), m_list(StatusType::END, nullptr){
+        m_list[START]     = new StartStatus(this);
+//        m_list[KEYWORD]   = new KeywordStatus(this);
+//        m_list[IDENT]     = new IdentStatus(this);
+//        m_list[INT_CONST] = new IntConstStatus(this);
+    }
+
+    void StatusMachine::move(StatusType target) {
+        m_lastStatus = m_cur;
+        m_cur = target;
+    }
+
+    StatusMachine::~StatusMachine() {
+        for (auto i: m_list){
+            delete i;
+        }
     }
 
     std::vector<Token> Lexer::run(const std::string& fPath, std::string* code) {

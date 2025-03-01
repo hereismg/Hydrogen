@@ -30,16 +30,105 @@ namespace hdg {
     };
 
     enum LegalChar{
-        ILLEGAL = 0,
-        DIGITAL = 1,
-        LOWERCASE = 2,
-        UPPERCASE = 4,
-        UNDERLINE = 8
+        OTHER       = 0,
+        DIGITAL     = 1,
+        HEX_DIGITAL = 2,
+        LOWERCASE   = 4,
+        UPPERCASE   = 8,
+        UNDERLINE   = 16,
+        BLANK       = 32,
     };
 
-    LegalChar whatIsThis(char c);
+    /**
+     * @details 从低位到高位，分别代表：
+     *          DIGIT     ::= '0' | '1' | ... | '9'
+     *          HEX_DIGIT ::= DIGIT |
+     *                        'a'   | ... | 'f' |
+     *                        'A'   | ... | 'F'
+     *          LOWERCASE ::= 'a' | 'b' | ... | 'z'
+     *          UPPERCASE ::= 'A' | 'B' | ... | 'Z'
+     *          UNDERLINE ::= '_'
+     * */
+    int whatIsThis(char c);
     bool whatIsThis(char c, int target);
     std::ostream& operator<<(std::ostream& out, std::vector<Token>& tokens);
+
+    enum StatusType{
+        START,      // 第一个类型必须是 START
+        KEYWORD,
+        IDENT,
+        INT_CONST,
+
+        JUDGER,
+        ACCEPT,
+        ERROR,
+
+        END         // 最后一个类型必须是 END
+    };
+
+    class StatusMachine;
+
+    class Status{
+    protected:
+        typedef std::pair<int, StatusType> Edge;
+        StatusMachine *m_machine;
+        std::vector<Edge> m_map;
+
+    public:
+        explicit Status(StatusMachine* machine);
+        ~Status() = default;
+        void accept(char cur);
+    };
+
+    class StartStatus: public Status{
+    public:
+        explicit StartStatus(StatusMachine* machine);
+    };
+
+    class KeywordStatus: public Status{
+    public:
+        explicit KeywordStatus(StatusMachine* machine);
+    };
+
+    class IdentStatus: public Status{
+    public:
+        explicit IdentStatus(StatusMachine* machine);
+
+    };
+
+    class IntConstStatus: public Status{
+    public:
+        explicit IntConstStatus(StatusMachine* machine);
+
+    };
+
+    class ErrorStatus: public Status{
+    public:
+        explicit ErrorStatus(StatusMachine* machine);
+    };
+
+    class JudgerStatus: public Status{
+    public:
+        explicit JudgerStatus(StatusMachine* machine);
+    };
+
+    class StatusMachine{
+    protected:
+        int m_lastStatus;
+        int m_cur;
+        std::vector<Status*> m_list;
+
+    public:
+        StatusMachine();
+        ~StatusMachine();
+
+        void move(StatusType target);
+
+        void accept(char c){
+            m_list[m_cur]->accept(c);
+        }
+
+    };
 
     /**
      * @brief       词法分析器

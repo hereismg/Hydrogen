@@ -4,6 +4,7 @@
 
 #include "../../include/kernel/Lexer.h"
 #include "../../include/basic/Error.h"
+#include <cassert>
 
 namespace hdg {
 
@@ -106,6 +107,9 @@ namespace hdg {
         m_list[KEYWORD]   = new KeywordStatus(this);
         m_list[IDENT]     = new IdentStatus(this);
         m_list[INT_CONST] = new IntConstStatus(this);
+
+        m_list[ACCEPT]    = new AcceptStatus(this);
+        m_list[ERROR]     = new AcceptStatus(this);
     }
 
     StatusMachine::~StatusMachine() {
@@ -124,9 +128,12 @@ namespace hdg {
     }
 
     std::tuple<int, StatusType> StatusMachine::accept(char c) {
+        assert(m_list[m_currStatus] != nullptr);
         m_list[m_currStatus]->accept(c);
 
         if (m_currStatus == ACCEPT){
+            m_currStatus = START;
+            m_tokenVal.clear();
             return std::make_tuple(1, (StatusType)m_lastStatus);
         }else{
             return std::make_tuple(0, (StatusType)m_currStatus);

@@ -9,7 +9,7 @@
 using namespace hdg;
 
 // Demonstrate some basic assertions.
-TEST(HelloTest, BasicAssertions) {
+TEST(FirstSuit, BasicAssertions) {
     Lexer lexer;
 
     std::string code = "a + b = a";
@@ -21,7 +21,7 @@ TEST(HelloTest, BasicAssertions) {
     }
 }
 
-TEST(MAINTEST, TestWhatIsThis){
+TEST(FirstSuit, TestWhatIsThis){
     int actual_res_1 = whatIsThis('a');
     EXPECT_EQ(actual_res_1, LegalChar::HEX_DIGITAL | LegalChar::LOWERCASE);
 
@@ -32,9 +32,9 @@ TEST(MAINTEST, TestWhatIsThis){
     EXPECT_EQ(actual_res_3, LegalChar::UNDERLINE);
 }
 
-TEST(MyStatusMachine, TESTStatusMachine){
+TEST(FirstSuit, TESTStatusMachine){
     StatusMachine machine;
-    std::string code = "a 123";
+    std::string code = "a 123 ";
 
     std::vector<StatusType> actual_res;
     for (char i : code){
@@ -44,8 +44,29 @@ TEST(MyStatusMachine, TESTStatusMachine){
         }
     }
 
-    std::vector<StatusType> expected_res = {StatusType::KEYWORD, StatusType::INT_CONST};
+    std::vector<StatusType> expected_res = {StatusType::IDENT, StatusType::INT_CONST};
 
+    EXPECT_EQ(actual_res.size(), expected_res.size());
+    for (int i=0; i<actual_res.size(); i++){
+        EXPECT_EQ(actual_res[i], expected_res[i]);
+    }
+}
+
+TEST(FirstSuit, TESTStatusMachine2){
+    StatusMachine machine;
+    std::string code = "a 123 while _a ";
+
+    std::vector<StatusType> actual_res;
+    for (char i : code){
+        auto res = machine.accept(i);
+        if (std::get<0>(res) == 1){
+            actual_res.push_back(std::get<1>(res));
+        }
+    }
+
+    std::vector<StatusType> expected_res = {StatusType::IDENT, StatusType::INT_CONST, StatusType::KEYWORD, StatusType::IDENT};
+
+    ASSERT_EQ(actual_res.size(), expected_res.size());
     for (int i=0; i<actual_res.size(); i++){
         EXPECT_EQ(actual_res[i], expected_res[i]);
     }

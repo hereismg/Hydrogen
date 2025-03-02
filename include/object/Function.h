@@ -5,8 +5,6 @@
 #ifndef HDG_FUNCTION_H
 #define HDG_FUNCTION_H
 
-#include <sstream>
-#include "Object.h"
 #include "../node/ObjAssignNode.h"
 
 

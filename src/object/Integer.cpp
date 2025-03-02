@@ -3,6 +3,7 @@
 //
 
 #include "../../include/object/Integer.h"
+#include "../../include/object/Float.h"
 
 namespace hdg {
     Integer::Integer(long long value): m_value(value) {

@@ -7,8 +7,6 @@
 #define HDG_INTEGER_H
 
 #include "Object.h"
-#include "Float.h"
-#include "../basic/Error.h"
 
 namespace hdg {
 

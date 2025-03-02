@@ -3,6 +3,7 @@
 //
 
 #include "../../include/object/List.h"
+#include "../../include/object/Integer.h"
 
 namespace hdg {
     List::List() {

@@ -6,9 +6,6 @@
 #define HDG_LIST_H
 
 #include "Object.h"
-#include "Integer.h"
-#include <vector>
-#include <sstream>
 
 namespace hdg {
 

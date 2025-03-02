@@ -6,7 +6,6 @@
 #define HDG_STRING_H
 
 #include "Object.h"
-#include "Integer.h"
 
 namespace hdg {
 

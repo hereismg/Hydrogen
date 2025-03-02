@@ -12,7 +12,6 @@ foreach(test_src ${TEST_CASE})
             "${GOOGLE_TEST_DIR}/googletest/include"
             "${GOOGLE_TEST_DIR}/googlemock/include"
             "${PROJECT_SOURCE_DIR}/include/basic"
-            "${PROJECT_SOURCE_DIR}/include/error"
             "${PROJECT_SOURCE_DIR}/include/kernel"
             "${PROJECT_SOURCE_DIR}/include/node"
 #            "${PROJECT_SOURCE_DIR}/include/object"
@@ -26,7 +25,7 @@ foreach(test_src ${TEST_CASE})
     target_link_libraries(
             ${test_name}
             PUBLIC
-            "gtest" "gtest_main" "gmock" "gmock_main"
+            "gtest" "gtest_main"
     )
     target_link_libraries(${test_name} PRIVATE libhdg)
     add_test(NAME ${test_name} COMMAND ${test_name})

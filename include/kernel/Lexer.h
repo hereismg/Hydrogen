@@ -10,6 +10,7 @@
 #include <vector>
 #include <tuple>
 #include <functional>
+#include <memory>
 #include "../basic/Token.h"
 
 namespace hdg {
@@ -83,7 +84,7 @@ namespace hdg {
         ~AbstractStatus() = default;
 
         void addEdge(int c, StatusType type, const std::function<bool(char)>& cond = nullptr);
-        void accept(char cur);
+        virtual bool accept(char cur);
     };
 
     class StartStatus: public AbstractStatus{
@@ -112,11 +113,13 @@ namespace hdg {
     class ErrorStatus: public AbstractStatus{
     public:
         explicit ErrorStatus(StatusMachine* machine);
+        bool accept(char cur) override;
     };
 
     class AcceptStatus: public AbstractStatus{
     public:
         explicit AcceptStatus(StatusMachine* machine);
+        bool accept(char cur) override;
     };
 
     class StatusMachine{
@@ -127,15 +130,27 @@ namespace hdg {
 
         char m_currChar;
         std::string m_tokenVal;
+        std::shared_ptr<StatusType> m_token;
 
     public:
         StatusMachine();
         ~StatusMachine();
 
+        void setCurrToken(StatusType type);
+
         std::string getTokenVal();
+        StatusType getLastStatus();
+        void init();
         void move(StatusType target);
 
-        std::tuple<int, StatusType> accept(char c);
+        /**
+         * @details:
+         * 状态机的主要工作如下：
+         * 首先更新状态机的 m_currChar，方便操作。
+         * 其次，调用当前状态的 accept 方法，传入字符
+         * 状态发生改变以后，若返回值为 true，则说明不需要传入新的字符串，再进入到下一个状态中
+         * */
+        std::shared_ptr<StatusType> accept(char c);
     };
 
 

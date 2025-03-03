@@ -39,8 +39,8 @@ TEST(FirstSuit, TESTStatusMachine){
     std::vector<StatusType> actual_res;
     for (char i : code){
         auto res = machine.accept(i);
-        if (std::get<0>(res) == 1){
-            actual_res.push_back(std::get<1>(res));
+        if (res != nullptr){
+            actual_res.push_back(*res);
         }
     }
 
@@ -59,8 +59,8 @@ TEST(FirstSuit, TESTStatusMachine2){
     std::vector<StatusType> actual_res;
     for (char i : code){
         auto res = machine.accept(i);
-        if (std::get<0>(res) == 1){
-            actual_res.push_back(std::get<1>(res));
+        if (res != nullptr){
+            actual_res.push_back(*res);
         }
     }
 

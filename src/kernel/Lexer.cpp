@@ -30,7 +30,11 @@ namespace hdg {
 
     AbstractStatus::AbstractStatus(StatusMachine *machine): m_machine(machine) {}
 
-    void AbstractStatus::accept(char cur) {
+    void AbstractStatus::addEdge(int c, StatusType type, const std::function<bool(char)>& cond) {
+        m_edges.emplace_back(c, type, cond);
+    }
+
+    bool AbstractStatus::accept(char cur) {
         int type = whatIsThis(cur);
 
         // 遍历当前节点的邻居节点
@@ -41,13 +45,19 @@ namespace hdg {
 
             if (type & std::get<0>(e) && cond) {
                 m_machine->move(std::get<1>(e));
-                return;
+
+                if (std::get<1>(e) == StatusType::ERROR ||
+                    std::get<1>(e) == StatusType::ACCEPT)
+                {
+                    return true;
+                }else {
+                    return false;
+                }
             }
         }
-    }
 
-    void AbstractStatus::addEdge(int c, StatusType type, const std::function<bool(char)>& cond) {
-        m_edges.emplace_back(c, type, cond);
+        // 若程序来到此处，则说明当前状态有无法处理的字符类型，必须要处理！
+        assert(false);
     }
 
     StartStatus::StartStatus(StatusMachine *machine) : AbstractStatus(machine) {
@@ -98,15 +108,40 @@ namespace hdg {
         addEdge(OTHER, StatusType::ERROR);
     }
 
-    ErrorStatus::ErrorStatus(hdg::StatusMachine *machine): AbstractStatus(machine) {
+    ErrorStatus::ErrorStatus(hdg::StatusMachine *machine): AbstractStatus(machine) {}
 
+    bool ErrorStatus::accept(char cur) {
+        auto lastStatus = m_machine->getLastStatus();
+
+        if (lastStatus == StatusType::INT_CONST){
+            throw IllegalCharError(
+                    "Expect digital.",
+                    Position()
+            );
+        }else{
+            // 若程序在此处，则说明有某种异常没有处理！
+            assert(false);
+        }
+
+        return true;
     }
+
 
     AcceptStatus::AcceptStatus(StatusMachine *machine) : AbstractStatus(machine) {
 
     }
 
-    StatusMachine::StatusMachine(): m_lastStatus(StatusType::START), m_currStatus(StatusType::START), m_list(static_cast<int>(StatusType::ERROR), nullptr){
+    bool AcceptStatus::accept(char cur) {
+        m_machine->setCurrToken(m_machine->getLastStatus());
+        return false;
+    }
+
+    StatusMachine::StatusMachine():
+    m_lastStatus(StatusType::START),
+    m_currStatus(StatusType::START),
+    m_list(static_cast<int>(StatusType::ERROR), nullptr),
+    m_currChar(' ')
+    {
         m_list[static_cast<int>(StatusType::START)]     = new StartStatus(this);
         m_list[static_cast<int>(StatusType::KEYWORD)]   = new KeywordStatus(this);
         m_list[static_cast<int>(StatusType::IDENT)]     = new IdentStatus(this);
@@ -132,20 +167,39 @@ namespace hdg {
         m_currStatus = target;
     }
 
-    std::tuple<int, StatusType> StatusMachine::accept(char c) {
+    std::shared_ptr<StatusType> StatusMachine::accept(char c) {
+        // 状态机的主要工作如下：
+        // 首先更新状态机的 m_currChar，方便操作。
+        // 其次，调用当前状态的 accept 方法，传入字符
+        // 状态发生改变以后，若返回值为 true，则说明不需要传入新的字符串，再进入到下一个状态中
         assert(m_list[static_cast<int>(m_currStatus)] != nullptr);
-
         m_currChar = c;
+        while(m_list[static_cast<int>(m_currStatus)]->accept(c));
 
-        m_list[static_cast<int>(m_currStatus)]->accept(c);
-
-        if (m_currStatus == StatusType::ACCEPT){
-            m_currStatus = StatusType::START;
-            m_tokenVal.clear();
-            return std::make_tuple(1, m_lastStatus);
-        }else{
-            return std::make_tuple(0, m_currStatus);
+        // 若生成了新的 Token，那么先保存新生成的 Token，在初始化状态机，最后返回新 Token
+        if (m_token == nullptr) {
+            return nullptr;
         }
+        else {
+            auto temp = m_token;
+            init();
+            return temp;
+        }
+    }
+
+    StatusType StatusMachine::getLastStatus() {
+        return m_lastStatus;
+    }
+
+    void StatusMachine::init() {
+        m_tokenVal.clear();
+        m_currStatus = StatusType::START;
+        m_lastStatus = StatusType::START;
+        m_token = nullptr;
+    }
+
+    void StatusMachine::setCurrToken(StatusType type) {
+        m_token = std::make_shared<StatusType>(type);
     }
 
     std::ostream& operator<<(std::ostream& out, std::vector<Token>& tokens) {

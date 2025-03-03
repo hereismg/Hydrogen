@@ -33,12 +33,16 @@ namespace hdg {
     void AbstractStatus::accept(char cur) {
         int type = whatIsThis(cur);
 
+        // 遍历当前节点的邻居节点
         for (auto & e : m_edges){
             bool cond = true;
             auto condFun = std::get<2>(e);
             if (condFun != nullptr) cond = condFun(cur);
 
-            if (type & std::get<0>(e) && cond) m_machine->move(std::get<1>(e));
+            if (type & std::get<0>(e) && cond) {
+                m_machine->move(std::get<1>(e));
+                return;
+            }
         }
     }
 
@@ -47,10 +51,10 @@ namespace hdg {
     }
 
     StartStatus::StartStatus(StatusMachine *machine) : AbstractStatus(machine) {
-        addEdge(LOWERCASE | UPPERCASE, KEYWORD);
-        addEdge(UNDERLINE,             IDENT);
-        addEdge(DIGITAL,               INT_CONST);
-        addEdge(BLANK,                 START);
+        addEdge(LOWERCASE | UPPERCASE, StatusType::KEYWORD);
+        addEdge(UNDERLINE,             StatusType::IDENT);
+        addEdge(DIGITAL,               StatusType::INT_CONST);
+        addEdge(BLANK,                 StatusType::START);
     }
 
     KeywordStatus::KeywordStatus(StatusMachine *machine) : AbstractStatus(machine) {
@@ -72,26 +76,26 @@ namespace hdg {
             "function",
         });
 
-        addEdge(LOWERCASE | UPPERCASE, KEYWORD);
-        addEdge(DIGITAL | UNDERLINE, IDENT);
-        addEdge(BLANK, ACCEPT, [this](char c){
+        addEdge(LOWERCASE | UPPERCASE, StatusType::KEYWORD);
+        addEdge(DIGITAL | UNDERLINE, StatusType::IDENT);
+        addEdge(BLANK, StatusType::ACCEPT, [this](char c){
             auto txt  = this->m_machine->getTokenVal();
             if(keywordSet.find(txt) == keywordSet.end()){
-                m_machine->move(IDENT);
+                m_machine->move(StatusType::IDENT);
             }
             return true;
         });
     }
 
     IdentStatus::IdentStatus(hdg::StatusMachine *machine): AbstractStatus(machine) {
-        addEdge(DIGITAL | LOWERCASE | UPPERCASE | UNDERLINE, IDENT);
-        addEdge(BLANK, ACCEPT);
+        addEdge(DIGITAL | LOWERCASE | UPPERCASE | UNDERLINE, StatusType::IDENT);
+        addEdge(BLANK, StatusType::ACCEPT);
     }
 
     IntConstStatus::IntConstStatus(hdg::StatusMachine *machine): AbstractStatus(machine) {
-        addEdge(DIGITAL, INT_CONST);
-        addEdge(BLANK, ACCEPT);
-        addEdge(OTHER, ERROR);
+        addEdge(DIGITAL, StatusType::INT_CONST);
+        addEdge(BLANK, StatusType::ACCEPT);
+        addEdge(OTHER, StatusType::ERROR);
     }
 
     ErrorStatus::ErrorStatus(hdg::StatusMachine *machine): AbstractStatus(machine) {
@@ -102,14 +106,14 @@ namespace hdg {
 
     }
 
-    StatusMachine::StatusMachine(): m_lastStatus(0), m_currStatus(0), m_list(StatusType::ERROR, nullptr){
-        m_list[START]     = new StartStatus(this);
-        m_list[KEYWORD]   = new KeywordStatus(this);
-        m_list[IDENT]     = new IdentStatus(this);
-        m_list[INT_CONST] = new IntConstStatus(this);
+    StatusMachine::StatusMachine(): m_lastStatus(StatusType::START), m_currStatus(StatusType::START), m_list(static_cast<int>(StatusType::ERROR), nullptr){
+        m_list[static_cast<int>(StatusType::START)]     = new StartStatus(this);
+        m_list[static_cast<int>(StatusType::KEYWORD)]   = new KeywordStatus(this);
+        m_list[static_cast<int>(StatusType::IDENT)]     = new IdentStatus(this);
+        m_list[static_cast<int>(StatusType::INT_CONST)] = new IntConstStatus(this);
 
-        m_list[ACCEPT]    = new AcceptStatus(this);
-        m_list[ERROR]     = new AcceptStatus(this);
+        m_list[static_cast<int>(StatusType::ACCEPT)]    = new AcceptStatus(this);
+        m_list[static_cast<int>(StatusType::ERROR)]     = new AcceptStatus(this);
     }
 
     StatusMachine::~StatusMachine() {
@@ -123,20 +127,24 @@ namespace hdg {
     }
 
     void StatusMachine::move(StatusType target) {
+        m_tokenVal.push_back(m_currChar);
         m_lastStatus = m_currStatus;
         m_currStatus = target;
     }
 
     std::tuple<int, StatusType> StatusMachine::accept(char c) {
-        assert(m_list[m_currStatus] != nullptr);
-        m_list[m_currStatus]->accept(c);
+        assert(m_list[static_cast<int>(m_currStatus)] != nullptr);
 
-        if (m_currStatus == ACCEPT){
-            m_currStatus = START;
+        m_currChar = c;
+
+        m_list[static_cast<int>(m_currStatus)]->accept(c);
+
+        if (m_currStatus == StatusType::ACCEPT){
+            m_currStatus = StatusType::START;
             m_tokenVal.clear();
-            return std::make_tuple(1, (StatusType)m_lastStatus);
+            return std::make_tuple(1, m_lastStatus);
         }else{
-            return std::make_tuple(0, (StatusType)m_currStatus);
+            return std::make_tuple(0, m_currStatus);
         }
     }
 

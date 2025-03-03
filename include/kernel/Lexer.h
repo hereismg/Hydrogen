@@ -56,7 +56,7 @@ namespace hdg {
     bool whatIsThis(char c, int target);
     std::ostream& operator<<(std::ostream& out, std::vector<Token>& tokens);
 
-    enum StatusType{
+    enum class StatusType: int{
         START,      // 第一个类型必须是 START
         KEYWORD,
         IDENT,
@@ -65,8 +65,10 @@ namespace hdg {
         END,
 
         ACCEPT,
-        ERROR,      // 最后一个类型必须是 ERROR
+        ERROR = 16,      // 最后一个类型必须是 ERROR，这里设定最多只能有 16 种状态
     };
+    static_assert(static_cast<int>(StatusType::START) == 0);
+    static_assert(static_cast<int>(StatusType::ERROR) == 16);
 
     class StatusMachine;
 
@@ -119,10 +121,11 @@ namespace hdg {
 
     class StatusMachine{
     protected:
-        int m_lastStatus;
-        int m_currStatus;
+        StatusType m_lastStatus;
+        StatusType m_currStatus;
         std::vector<AbstractStatus*> m_list;
 
+        char m_currChar;
         std::string m_tokenVal;
 
     public:

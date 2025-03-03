@@ -72,7 +72,7 @@ Expr        -> Identifier Eq Expr
 表达式
 
 ```ebnf
-expr        : IDNET '=' expr
+expr        : IDENT '=' expr
             : comp-expr (("&&" | "||") comp-expr)*
 
 comp-expr   : '!' comp-expr

@@ -12,6 +12,8 @@
 #include <tuple>
 
 namespace hdg_lexer {
+
+
     using uint64 = unsigned long long;
     using uint32 = unsigned int;
 
@@ -27,6 +29,7 @@ namespace hdg_lexer {
         UPPERCASE   = 1 << 3,
         UNDERLINE   = 1 << 4,
         BLANK       = 1 << 5,
+        BRACKET     = 1 << 6,
     };
 
     constexpr CharType operator|(CharType a, CharType b){
@@ -62,6 +65,7 @@ namespace hdg_lexer {
         KEYWORD,
         IDENT,
         INT_CONST,
+        BRACKET,
 
         END,
 
@@ -71,20 +75,30 @@ namespace hdg_lexer {
     static_assert(static_cast<int>(StateType::START) == 0);
     static_assert(static_cast<int>(StateType::ERROR) == 16);
 
+    using Event = char;
+
     class StateMachine;
 
+
+
+    /**
+     * 抽象状态
+     * */
     class AbstractState{
     protected:
         typedef std::tuple<CharType, StateType, std::function<bool(char)>> Edge;
         StateMachine *m_machine;
         std::vector<Edge> m_edges;
+        bool m_autoNext;
 
     public:
         explicit AbstractState(StateMachine* machine);
         ~AbstractState() = default;
 
         void addEdge(CharType c, StateType type, const std::function<bool(char)>& cond = nullptr);
+        virtual StateType getNextState(Event event);
         virtual bool accept(char cur);
+        bool isAutoNext();
     };
 
     class StartState: public AbstractState{
@@ -110,6 +124,18 @@ namespace hdg_lexer {
         explicit IntConstState(StateMachine* machine);
     };
 
+    class OperState: public AbstractState{
+    public:
+        explicit OperState(StateMachine* machine);
+        bool accept(char cur) override;
+    };
+
+    class BracketState: public AbstractState{
+    public:
+        explicit BracketState(StateMachine* machine);
+        StateType getNextState(Event event) override;
+    };
+
     class ErrorState: public AbstractState{
     public:
         explicit ErrorState(StateMachine* machine);
@@ -122,6 +148,9 @@ namespace hdg_lexer {
         bool accept(char cur) override;
     };
 
+    /**
+     * 自动机管理
+     * */
     class StateMachine{
     protected:
         StateType m_lastState;
@@ -150,7 +179,7 @@ namespace hdg_lexer {
          * 其次，调用当前状态的 accept 方法，传入字符
          * 状态发生改变以后，若返回值为 true，则说明不需要传入新的字符串，再进入到下一个状态中
          * */
-        std::shared_ptr<StateType> accept(char c);
+        std::shared_ptr<StateType> update(char c);
     };
 
 

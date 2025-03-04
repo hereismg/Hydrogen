@@ -71,39 +71,19 @@ TEST(Test_CharType, _6){
     }
 }
 
-TEST(Test_StateMachine, _1){
+class Test_StateMachine_P: public testing::TestWithParam<std::tuple<std::string, std::vector<StateType>>>{};
+TEST_P(Test_StateMachine_P, _1){
+    auto [code, expected_res] = GetParam();
+
     StateMachine machine;
-    std::string code = "a 123 ";
 
     std::vector<StateType> actual_res;
     for (char i : code){
-        auto res = machine.accept(i);
+        auto res = machine.update(i);
         if (res != nullptr){
             actual_res.push_back(*res);
         }
     }
-
-    std::vector<StateType> expected_res = {StateType::IDENT, StateType::INT_CONST};
-
-    EXPECT_EQ(actual_res.size(), expected_res.size());
-    for (int i=0; i<actual_res.size(); i++){
-        EXPECT_EQ(actual_res[i], expected_res[i]);
-    }
-}
-
-TEST(Test_StateMachine, _2){
-    StateMachine machine;
-    std::string code = "a 123 while _a ";
-
-    std::vector<StateType> actual_res;
-    for (char i : code){
-        auto res = machine.accept(i);
-        if (res != nullptr){
-            actual_res.push_back(*res);
-        }
-    }
-
-    std::vector<StateType> expected_res = {StateType::IDENT, StateType::INT_CONST, StateType::KEYWORD, StateType::IDENT};
 
     ASSERT_EQ(actual_res.size(), expected_res.size());
     for (int i=0; i<actual_res.size(); i++){
@@ -111,3 +91,17 @@ TEST(Test_StateMachine, _2){
     }
 }
 
+INSTANTIATE_TEST_SUITE_P(Test_StateMachine, Test_StateMachine_P, testing::Values(
+    std::tuple<std::string, std::vector<StateType>>{
+            "{}123 ",
+            {StateType::BRACKET, StateType::BRACKET, StateType::INT_CONST}
+    },
+    std::tuple<std::string, std::vector<StateType>>{
+            "a 123 while _a ",
+            {StateType::IDENT, StateType::INT_CONST, StateType::KEYWORD, StateType::IDENT}
+    },
+    std::tuple<std::string, std::vector<StateType>>{
+            "a 123 ",
+            {StateType::IDENT, StateType::INT_CONST}
+    }
+));

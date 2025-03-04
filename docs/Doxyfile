@@ -880,7 +880,7 @@ WARN_IF_INCOMPLETE_DOC = YES
 WARN_NO_PARAMDOC       = NO
 
 # If WARN_IF_UNDOC_ENUM_VAL option is set to YES, doxygen will warn about
-# undocumented enumeration values. If set to NO, doxygen will accept
+# undocumented enumeration values. If set to NO, doxygen will update
 # undocumented enumeration values. If EXTRACT_ALL is set to YES then this flag
 # will automatically be disabled.
 # The default value is: NO.

@@ -6,7 +6,7 @@
 #include <set>
 #include "../../include/kernel/NewLexer.h"
 #include "../../include/basic/Position.h"
-#include "../../include/basic//Error.h"
+#include "../../include/basic/Error.h"
 
 
 namespace hdg_lexer {
@@ -19,6 +19,7 @@ namespace hdg_lexer {
         if (static_cast<uint64>(state & CharType::UPPERCASE))   show += "UPPERCASE | ";
         if (static_cast<uint64>(state & CharType::UNDERLINE))   show += "UNDERLINE | ";
         if (static_cast<uint64>(state & CharType::BLANK))       show += "BLANK | ";
+        if (static_cast<uint64>(state & CharType::BRACKET))     show += "BRACKET | ";
 
         if (show.empty()) show += "OTHER";
         else {
@@ -32,22 +33,47 @@ namespace hdg_lexer {
         auto res = CharType::OTHER;
 
         if (c>='0' && c<='9')    res |= CharType::DIGITAL;
+
         if (c>='0' && c<='9' ||
             c>='a' && c<='f' ||
-            c>='A' && c<='F')    res |= CharType::HEX_DIGITAL;
+            c>='A' && c<='F'   ) res |= CharType::HEX_DIGITAL;
+
         if (c>='a' && c<='z')    res |= CharType::LOWERCASE;
+
         if (c>='A' && c<='Z')    res |= CharType::UPPERCASE;
+
         if (c=='_')              res |= CharType::UNDERLINE;
+
         if (c==' ')              res |= CharType::BLANK;
+
+        if (c=='{' || c=='}' ||
+            c=='[' || c==']' ||
+            c=='(' || c==')'   ) res |= CharType::BRACKET;
 
         return res;
     }
 
 
-    AbstractState::AbstractState(StateMachine *machine): m_machine(machine) {}
+    AbstractState::AbstractState(StateMachine *machine): m_machine(machine), m_autoNext(false) {}
 
     void AbstractState::addEdge(CharType c, StateType type, const std::function<bool(char)>& cond) {
         m_edges.emplace_back(c, type, cond);
+    }
+
+    StateType AbstractState::getNextState(Event event){
+        auto type = getCharType(event);
+
+        for (auto &[condChar, target, condFun]: m_edges){
+            bool cond = true;
+            if (condFun != nullptr) cond = condFun(event);
+
+            if(static_cast<uint64>(type & condChar) && cond){
+                return target;
+            }
+        }
+
+        // 若程序来到此处，则说明当前状态有无法处理的字符类型，必须要处理！
+        assert(false);
     }
 
     bool AbstractState::accept(char cur) {
@@ -73,11 +99,18 @@ namespace hdg_lexer {
         assert(false);
     }
 
+    bool AbstractState::isAutoNext() {
+        return m_autoNext;
+    }
+
+
     StartState::StartState(StateMachine *machine) : AbstractState(machine) {
         addEdge(CharType::LOWERCASE | CharType::UPPERCASE, StateType::KEYWORD);
         addEdge(CharType::UNDERLINE, StateType::IDENT);
-        addEdge(CharType::DIGITAL, StateType::INT_CONST);
-        addEdge(CharType::BLANK, StateType::START);
+        addEdge(CharType::DIGITAL,   StateType::INT_CONST);
+        addEdge(CharType::BLANK,     StateType::START);
+        addEdge(CharType::BRACKET,   StateType::BRACKET);
+        addEdge(CharType::OTHER,     StateType::ERROR);
     }
 
     KeywordState::KeywordState(StateMachine *machine) : AbstractState(machine) {
@@ -108,11 +141,13 @@ namespace hdg_lexer {
             }
             return true;
         });
+        addEdge(CharType::OTHER, StateType::ERROR);
     }
 
     IdentState::IdentState(StateMachine *machine): AbstractState(machine) {
         addEdge(CharType::DIGITAL | CharType::LOWERCASE | CharType::UPPERCASE | CharType::UNDERLINE, StateType::IDENT);
         addEdge(CharType::BLANK, StateType::ACCEPT);
+        addEdge(CharType::OTHER, StateType::ERROR);
     }
 
     IntConstState::IntConstState(StateMachine *machine): AbstractState(machine) {
@@ -120,6 +155,23 @@ namespace hdg_lexer {
         addEdge(CharType::BLANK, StateType::ACCEPT);
         addEdge(CharType::OTHER, StateType::ERROR);
     }
+
+    OperState::OperState(StateMachine *machine) : AbstractState(machine) {
+
+    }
+
+    bool OperState::accept(char cur) {
+        return AbstractState::accept(cur);
+    }
+
+    BracketState::BracketState(StateMachine *machine) : AbstractState(machine) {
+        m_autoNext = true;
+    }
+
+    StateType BracketState::getNextState(Event event) {
+        return StateType::ACCEPT;
+    }
+
 
     ErrorState::ErrorState(StateMachine *machine): AbstractState(machine) {}
 
@@ -159,6 +211,7 @@ namespace hdg_lexer {
         m_list[static_cast<int>(StateType::KEYWORD)]   = new KeywordState(this);
         m_list[static_cast<int>(StateType::IDENT)]     = new IdentState(this);
         m_list[static_cast<int>(StateType::INT_CONST)] = new IntConstState(this);
+        m_list[static_cast<int>(StateType::BRACKET)]   = new BracketState(this);
 
         m_list[static_cast<int>(StateType::ACCEPT)]    = new AcceptState(this);
         m_list[static_cast<int>(StateType::ERROR)]     = new AcceptState(this);
@@ -180,24 +233,32 @@ namespace hdg_lexer {
         m_currState = target;
     }
 
-    std::shared_ptr<StateType> StateMachine::accept(char c) {
+    std::shared_ptr<StateType> StateMachine::update(char c) {
         // 状态机的主要工作如下：
         // 首先更新状态机的 m_currChar，方便操作。
         // 其次，调用当前状态的 accept 方法，传入字符
         // 状态发生改变以后，若返回值为 true，则说明不需要传入新的字符串，再进入到下一个状态中
         assert(m_list[static_cast<int>(m_currState)] != nullptr);
-        m_currChar = c;
-        while(m_list[static_cast<int>(m_currState)]->accept(c));
 
-        // 若生成了新的 Token，那么先保存新生成的 Token，在初始化状态机，最后返回新 Token
-        if (m_token == nullptr) {
-            return nullptr;
+        m_currChar = c;
+
+
+        do{
+            auto nextState = m_list[static_cast<int>(m_currState)]->getNextState(c);
+
+            m_tokenVal.push_back(c);
+            m_lastState = m_currState;
+            m_currState = nextState;
+
+            if (m_currState == StateType::ACCEPT){
+                auto token = m_lastState;
+                init();
+                return std::make_shared<StateType>(token);
+            }
         }
-        else {
-            auto temp = m_token;
-            init();
-            return temp;
-        }
+        while(m_list[static_cast<uint64>(m_currState)]->isAutoNext());
+
+        return nullptr;
     }
 
     StateType StateMachine::getLastState() {

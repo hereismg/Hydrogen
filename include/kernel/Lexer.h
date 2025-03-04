@@ -43,6 +43,7 @@ namespace hdg {
         BLANK       = 32,
     };
 
+
     /**
      * @details 从低位到高位，分别代表：
      *          DIGIT     ::= '0' | '1' | ... | '9'

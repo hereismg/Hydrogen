@@ -22,7 +22,8 @@ namespace hdg_lexer {
         if (static_cast<uint64>(state & CharType::UPPERCASE))   show += "UPPERCASE | ";
         if (static_cast<uint64>(state & CharType::UNDERLINE))   show += "UNDERLINE | ";
         if (static_cast<uint64>(state & CharType::BLANK))       show += "BLANK | ";
-        if (static_cast<uint64>(state & CharType::BRACKET_C)) show += "BRACKET | ";
+        if (static_cast<uint64>(state & CharType::BRACKET_C))   show += "BRACKET_C | ";
+        if (static_cast<uint64>(state & CharType::OPERATOR_C))  show += "OPERATOR_C | ";
 
         if (show.empty()) show += "OTHER";
         else {
@@ -52,6 +53,10 @@ namespace hdg_lexer {
         if (c=='{' || c=='}' ||
             c=='[' || c==']' ||
             c=='(' || c==')'   ) res |= CharType::BRACKET_C;
+
+        if (c=='>' || c=='<' || c=='=' || c=='|' || c=='&' ||
+            c=='+' || c=='-' || c=='*' || c=='/' || c=='^' ||
+            c=='!')              res |= CharType::OPERATOR_C;
 
         return res;
     }
@@ -103,41 +108,18 @@ namespace hdg_lexer {
         assert(false);
     }
 
-//    bool AbstractState::accept(char cur) {
-//        auto type = getCharType(cur);
-//
-//        // 遍历当前节点的邻居节点
-//        for (auto & [condChar, target, condFun] : m_edges){
-//            bool cond = true;
-//            if (condFun != nullptr) cond = condFun(cur);
-//            if (static_cast<int>(type & condChar) && cond) {
-//                m_machine->move(target);
-//
-//                if (target == StateType::ERROR || target == StateType::ACCEPT) {
-//                    return true;
-//                }
-//                else {
-//                    return false;
-//                }
-//            }
-//        }
-//
-//        // 若程序来到此处，则说明当前状态有无法处理的字符类型，必须要处理！
-//        assert(false);
-//    }
-
     bool AbstractState::isAutoNext() const {
         return m_autoNext;
     }
 
-
     StartState::StartState() {
         addEdge(CharType::LOWERCASE | CharType::UPPERCASE, StateType::KEYWORD);
-        addEdge(CharType::UNDERLINE, StateType::IDENT);
-        addEdge(CharType::DIGITAL,   StateType::INT_CONST);
-        addEdge(CharType::BLANK,     StateType::START);
-        addEdge(CharType::BRACKET_C, StateType::BRACKET_S);
-        addEdge(CharType::OTHER,     StateType::ERROR);
+        addEdge(CharType::UNDERLINE,  StateType::IDENT);
+        addEdge(CharType::DIGITAL,    StateType::INT_CONST);
+        addEdge(CharType::BLANK,      StateType::START);
+        addEdge(CharType::BRACKET_C,  StateType::BRACKET_S);
+        addEdge(CharType::OPERATOR_C, StateType::OPERATOR_S);
+        addEdge(CharType::ANY,        StateType::ERROR);
     }
 
     KeywordState::KeywordState() {
@@ -161,33 +143,32 @@ namespace hdg_lexer {
 
         addEdge(CharType::LOWERCASE | CharType::UPPERCASE, StateType::KEYWORD);
         addEdge(CharType::DIGITAL | CharType::UNDERLINE, StateType::IDENT);
-        addEdge(CharType::BLANK, StateType::ACCEPT, [this](const Event& event){
+        addEdge(CharType::ANY, StateType::ACCEPT, [this](const Event& event){
             auto txt  = event.m_sender->getTokenVal();
             if(keywordSet.find(txt) == keywordSet.end()){
                 event.m_sender->move(StateType::IDENT);
             }
             return true;
         });
-        addEdge(CharType::OTHER, StateType::ERROR);
+//        addEdge(CharType::OTHER, StateType::ERROR);
     }
 
     IdentState::IdentState(){
         addEdge(CharType::DIGITAL | CharType::LOWERCASE | CharType::UPPERCASE | CharType::UNDERLINE, StateType::IDENT);
         addEdge(CharType::BLANK, StateType::ACCEPT);
-        addEdge(CharType::OTHER, StateType::ERROR);
+        addEdge(CharType::ANY, StateType::ERROR);
     }
 
     IntConstState::IntConstState() {
         addEdge(CharType::DIGITAL, StateType::INT_CONST);
         addEdge(CharType::BLANK, StateType::ACCEPT);
-        addEdge(CharType::OTHER, StateType::ERROR);
+        addEdge(CharType::ANY, StateType::ERROR);
     }
 
-    OperState::OperState() = default;
+    OperState::OperState() {
 
-//    bool OperState::accept(char cur) {
-//        return AbstractState::accept(cur);
-//    }
+//        addEdge(CharType::)
+    };
 
     BracketState::BracketState() {
         m_autoNext = true;
@@ -216,50 +197,11 @@ namespace hdg_lexer {
         }
     }
 
-//    bool ErrorState::accept(char cur) {
-//        auto lastState = m_machine->getLastState();
-//
-//        if (lastState == StateType::INT_CONST){
-//            throw hdg::IllegalCharError(
-//                    "Expect digital.",
-//                    hdg::Position()
-//            );
-//        }else{
-//            // 若程序在此处，则说明有某种异常没有处理！
-//            assert(false);
-//        }
-//
-//        return true;
-//    }
-
-
     AcceptState::AcceptState() = default;
 
     StateType AcceptState::getNextState(const Event& event) {
         return AbstractState::getNextState(event);
     }
-
-//    bool AcceptState::accept(char cur) {
-//        m_machine->setCurrToken(m_machine->getLastState());
-//        return false;
-//    }
-
-//    StateMachine::StateMachine():
-//            m_lastState(StateType::START),
-//            m_currState(StateType::START),
-//            m_list(static_cast<int>(StateType::ERROR) + 1, nullptr),
-//            m_currChar(' ')
-//    {
-//        m_list[static_cast<int>(StateType::START)]     = std::make_shared<StartState>();
-//        m_list[static_cast<int>(StateType::KEYWORD)]   = std::make_shared<KeywordState>();
-//        m_list[static_cast<int>(StateType::IDENT)]     = std::make_shared<IdentState>();
-//        m_list[static_cast<int>(StateType::INT_CONST)] = std::make_shared<IntConstState>();
-//        m_list[static_cast<int>(StateType::BRACKET_S)] = std::make_shared<BracketState>();
-//
-//        m_list[static_cast<int>(StateType::ACCEPT)]    = std::make_shared<AcceptState>();
-//        m_list[static_cast<int>(StateType::ERROR)]     = std::make_shared<ErrorState>();
-//    }
-
 
     std::shared_ptr<StateMachine> StateMachine::buildStateMachine() {
         auto machine = std::make_shared<StateMachine>(StateMachineKey());
@@ -270,11 +212,12 @@ namespace hdg_lexer {
 
         auto &list = machine->m_list;
         list.resize(static_cast<int>(StateType::ERROR) + 1, nullptr);
-        list[static_cast<int>(StateType::START)]     = std::make_shared<StartState>();
-        list[static_cast<int>(StateType::KEYWORD)]   = std::make_shared<KeywordState>();
-        list[static_cast<int>(StateType::IDENT)]     = std::make_shared<IdentState>();
-        list[static_cast<int>(StateType::INT_CONST)] = std::make_shared<IntConstState>();
-        list[static_cast<int>(StateType::BRACKET_S)] = std::make_shared<BracketState>();
+        list[static_cast<int>(StateType::START)]      = std::make_shared<StartState>();
+        list[static_cast<int>(StateType::KEYWORD)]    = std::make_shared<KeywordState>();
+        list[static_cast<int>(StateType::IDENT)]      = std::make_shared<IdentState>();
+        list[static_cast<int>(StateType::INT_CONST)]  = std::make_shared<IntConstState>();
+        list[static_cast<int>(StateType::BRACKET_S)]  = std::make_shared<BracketState>();
+        list[static_cast<int>(StateType::OPERATOR_S)] = std::make_shared<OperState>();
 
         list[static_cast<int>(StateType::ACCEPT)]    = std::make_shared<AcceptState>();
         list[static_cast<int>(StateType::ERROR)]     = std::make_shared<ErrorState>();
@@ -287,17 +230,21 @@ namespace hdg_lexer {
     }
 
     void StateMachine::move(StateType target) {
-        m_tokenVal.push_back(m_currChar);
+        Event event(m_currChar, shared_from_this());
+        m_list[static_cast<int>(m_currState)]->onExit(event);
         m_lastState = m_currState;
         m_currState = target;
+        m_list[static_cast<int>(m_currState)]->onEnter(event);
     }
 
-    std::shared_ptr<StateType> StateMachine::update(char c) {
+    std::vector<Token> StateMachine::update(char c) {
         // 状态机的主要工作如下：
         // 首先更新状态机的 m_currChar，方便操作。
         // 其次，调用当前状态的 accept 方法，传入字符
         // 状态发生改变以后，若返回值为 true，则说明不需要传入新的字符串，再进入到下一个状态中
         assert(m_list[static_cast<int>(m_currState)] != nullptr);
+
+        std::vector<Token> res;
 
         m_currChar = c;
 
@@ -305,19 +252,22 @@ namespace hdg_lexer {
         do{
             auto nextState = m_list[static_cast<int>(m_currState)]->getNextState(event);
 
-            m_tokenVal.push_back(c);
-            m_lastState = m_currState;
-            m_currState = nextState;
+            move(nextState);
 
             if (m_currState == StateType::ACCEPT){
-                auto token = m_lastState;
+                // 在这里构建新 token
+                res.emplace_back(m_lastState, m_tokenVal);
                 init();
-                return std::make_shared<StateType>(token);
+                continue;
             }
+
+//            if (m_currChar==' ') continue;
+//            else m_tokenVal.push_back(m_currChar);
+            m_tokenVal.push_back(m_currChar);
         }
         while(m_list[static_cast<uint64>(m_currState)]->isAutoNext());
 
-        return nullptr;
+        return res;
     }
 
     StateType StateMachine::getLastState() {
@@ -328,90 +278,7 @@ namespace hdg_lexer {
         m_tokenVal.clear();
         m_currState = StateType::START;
         m_lastState = StateType::START;
-        m_token = nullptr;
     }
 
-    void StateMachine::setCurrToken(StateType type) {
-        m_token = std::make_shared<StateType>(type);
-    }
-
-
-//    std::shared_ptr<BaseState> BaseState::getNextState(const Event& event){
-//        // 遍历当前节点的所有边
-//        for (const auto& [target, condChar, condFun] : transitions) {
-//            bool cond = true;
-//            if (condFun) cond &= condFun(event);
-//            char currentCharType = std::get<std::string>(event)[0];
-//            if (static_cast<uint64>(getCharType(currentCharType) & condChar) && cond){
-//                return target;
-//            }
-//        }
-//
-//        // 若没有任何一条边满足条件，那么返回空值
-//        return nullptr;
-//    }
-//
-//    void BaseState::addTransition(const std::shared_ptr<BaseState>& target, CharType condChar, Condition condFun){
-//        transitions.emplace_back(target, condChar, std::move(condFun));
-//    }
-//
-//    void StateMachine::registerState(const std::string &name, std::shared_ptr<BaseState> state) {
-//        states[name] = std::move(state);
-//    }
-//
-//    void StateMachine::handleEvent(const Event &event) {
-//        auto nextState = currentState->getNextState(event);
-//        if (nextState) {
-//            lastState = currentState;
-//            currentState = nextState;
-//        }
-//
-//        if (typeid(currentState) == AcceptState){
-//
-//        }
-//    }
-//
-//
-//    std::shared_ptr<StateMachine> StateMachine::buildDefaultMachine(){
-//        auto machine = std::make_shared<StateMachine>();
-//        machine->states.resize(static_cast<int>(StatesType::ERROR) + 1);
-//
-//        // 注册状态
-//        machine->states[static_cast<int>(StatesType::KEYWORD)]   = std::make_shared<KeywordState>();
-//        machine->states[static_cast<int>(StatesType::IDENT)]     = std::make_shared<IdentState>();
-//        machine->states[static_cast<int>(StatesType::INT_CONST)] = std::make_shared<IdentState>();
-//        machine->states[static_cast<int>(StatesType::ACCEPT)]    = std::make_shared<AcceptState>();
-//        machine->states[static_cast<int>(StatesType::ERROR)]     = std::make_shared<ErrorState>();
-//
-//        keyword->addTransition(keyword, CharType::LOWERCASE);
-//        keyword->addTransition(ident,   CharType::DIGITAL | CharType::UPPERCASE | CharType::UNDERLINE);
-//        keyword->addTransition(accept,  CharType::BLANK, [](const Event& event){
-//            std::set<std::string> keywords = {
-//                    "not",
-//                    "and",
-//                    "or",
-//
-//                    "if",
-//                    "elif",
-//                    "else",
-//
-//                    "for",
-//                    "from",
-//                    "to",
-//                    "step",
-//                    "while",
-//
-//                    "function",
-//            };
-//            return true;
-//        });
-//        keyword->addTransition(error,   CharType::OTHER);
-//
-//        return machine;
-//    }
-//
-//    std::string KeywordState::getType() {
-//        return TYPE;
-//    }
 
 } // hdg

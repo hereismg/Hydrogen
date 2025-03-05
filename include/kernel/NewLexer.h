@@ -24,7 +24,11 @@ namespace hdg_lexer {
         UPPERCASE   = 1 << 3,
         UNDERLINE   = 1 << 4,
         BLANK       = 1 << 5,
-        BRACKET_C     = 1 << 6,
+        BRACKET_C   = 1 << 6,
+        OPERATOR_C  = 1 << 7,
+
+        // 代表任意字符
+        ANY         = ~(uint64)0
     };
 
     constexpr CharType operator|(CharType a, CharType b){
@@ -61,6 +65,7 @@ namespace hdg_lexer {
         IDENT,
         INT_CONST,
         BRACKET_S,
+        OPERATOR_S,
 
         END,
 
@@ -115,6 +120,9 @@ namespace hdg_lexer {
         void               addEdge(CharType condChar, StateType type, const CondFun& condFun = nullptr);
         virtual StateType  getNextState(const Event& event);
         [[nodiscard]] bool isAutoNext() const;
+
+        virtual void onEnter(const Event& event){};
+        virtual void onExit(const Event& event){};
 //        virtual bool accept(char cur);
     };
 
@@ -144,7 +152,6 @@ namespace hdg_lexer {
     class OperState: public AbstractState{
     public:
         explicit OperState();
-//        bool accept(char cur) override;
     };
 
     class BracketState: public AbstractState{
@@ -157,14 +164,19 @@ namespace hdg_lexer {
     public:
         explicit ErrorState();
         StateType getNextState(const Event& event) override;
-//        bool accept(char cur) override;
     };
 
+    /**
+     * “接受”状态的语义：
+     * 当自动机处于当前状态时，意味着程序应该要打包一个新 Token 并压入到 res 数组中
+     * 再判断传入的字符是否是空格或者其他分隔符：
+     * 如果是分隔符，那么结束判断
+     * 否则，再进行一次状态转移
+     * */
     class AcceptState: public AbstractState{
     public:
         explicit AcceptState();
         StateType getNextState(const Event& event) override;
-//        bool accept(char cur) override;
     };
 
     /**
@@ -178,7 +190,6 @@ namespace hdg_lexer {
 
         char m_currChar;
         std::string m_tokenVal;
-        std::shared_ptr<StateType> m_token;
         struct StateMachineKey {
             friend class StateMachine;
             StateMachineKey() = default;
@@ -190,8 +201,6 @@ namespace hdg_lexer {
     public:
         StateMachine(StateMachineKey){};
         static std::shared_ptr<StateMachine> buildStateMachine();
-
-        void setCurrToken(StateType type);
 
         std::string getTokenVal();
         StateType getLastState();
@@ -205,129 +214,8 @@ namespace hdg_lexer {
          * 其次，调用当前状态的 accept 方法，传入字符
          * 状态发生改变以后，若返回值为 true，则说明不需要传入新的字符串，再进入到下一个状态中
          * */
-        std::shared_ptr<StateType> update(char c);
+        std::vector<Token> update(char c);
     };
-
-
-//    class BaseState;
-//
-//    class StateMachine;
-//
-//    using Event = std::variant<int, std::string>;
-//
-//    enum class StateType: uint32{
-//        START,      // 第一个类型必须是 START
-//        KEYWORD,
-//        IDENT,
-//        INT_CONST,
-//
-//        END,
-//
-//        ACCEPT,
-//        ERROR = 32,      // 最后一个类型必须是 ERROR，这里设定最多只能有 32 种状态
-//    };
-//
-//    /**
-//     * 状态基类
-//     * 在该类中，本身不存储 StateMachine 类，只在必要的时候传入方法，然后进行相应的逻辑
-//     * 因此，在状态类中，只存储对应的“边”，然后利用“事件”的概念判断应该要转移到哪个状态中
-//     * 注意：改变状态机的状态应该由 StateMachine 执行
-//     * */
-//    class BaseState{
-//    public:
-//        constexpr static const std::string TYPE = "BaseState";
-//
-//    protected:
-//        using Condition = std::function<bool(const Event&)>;
-//        std::vector<std::tuple<std::shared_ptr<BaseState>, CharType, Condition>> transitions;
-//
-//    public:
-//        ~BaseState() = default;
-//
-//        virtual std::string getType() = 0;
-//
-//        [[nodiscard]] std::shared_ptr<BaseState> getNextState(const Event& event);
-//
-//        void addTransition(StateType target, CharType condChar, Condition condFun = nullptr);
-//
-//        virtual void onEnter(StateMachine&){};
-//        virtual void onExit(StateMachine&){};
-//        virtual void onUpdate(StateMachine&){};
-//    };
-//
-//    /**
-//     * 状态机管理类
-//     * */
-//    class StateMachine{
-//    private:
-//        std::vector<std::shared_ptr<BaseState>> states;
-//
-//        std::string currentTokenVal;
-//        std::shared_ptr<BaseState> currentState;
-//        std::shared_ptr<BaseState> lastState;
-//
-//    public:
-//        StateMachine() = default; // 想办法将该方法私有化
-//
-//        void registerState(const std::string& name, std::shared_ptr<BaseState> state);
-//
-//        void initialize(const std::string& initialState);
-//
-//        void update();
-//
-//        void handleEvent(const Event& event);
-//
-//        static std::shared_ptr<StateMachine> buildDefaultMachine();
-//    };
-//
-//    /**
-//     * “关键字”状态
-//     * */
-//    class KeywordState: public BaseState{
-//    public:
-//        constexpr static const std::string TYPE = "KEYWORD";
-//        std::string getType() override;
-//    };
-//
-//    /**
-//     * “标识符”状态
-//     * */
-//    class IdentState: public BaseState{
-//    public:
-//        constexpr static const std::string TYPE = "IdentState";
-//
-//        std::string getType() override;
-//    };
-//
-//    /**
-//     * “数字常量”状态
-//     * */
-//    class IntConstState: public BaseState{
-//    public:
-//        constexpr static const std::string TYPE = "IntConstState";
-//        std::string getType() override;
-//
-//    };
-//
-//    /**
-//     * “异常”状态
-//     * */
-//    class ErrorState: public BaseState{
-//    public:
-//        constexpr static const std::string TYPE = "ErrorState";
-//        std::string getType() override;
-//
-//    };
-//
-//    /**
-// * “接受”状态
-// * */
-//    class AcceptState: public BaseState{
-//    public:
-//        constexpr static const std::string TYPE = "AcceptState";
-//        std::string getType() override;
-//
-//    };
 
 } // hdg
 

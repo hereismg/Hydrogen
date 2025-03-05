@@ -54,51 +54,57 @@ func-expr   : "function" identifier
 return-expr : "return" expr
 
 core       : (colon expr) | (lbrace statements rbrace)
-
-
-Expr        -> Identifier Eq Expr
-             |
 ```
 
 ## 一、文法
 
 海琛语言的文法采用扩展的 Backus 范式（EBNF，Extended Backus-Naur Form）表示，其中：
 
-- 符号 `(...)?` 表示括号内包含的内容是可选项；
-- 符号 `(...)+` 表示括号内包含的内容是可重复 1 次或多次的项；
-- 符号 `(...)*` 表示括号内包含的内容是可重复 0 次或多次的项；
-- 全大写的记号是关键字
+- 符号 `[...]` 表示括号内包含的内容是可选项；
+- 符号 `{...}` 表示括号内包含的内容是可重复 0 次或多次的项；
+- 全大写的记号是**终结符**
 
 表达式
 
+```mermaid
+graph TD
+    Start --> parseExpression
+    parseExpression --> parseTerm
+    parseTerm --> parseFactor
+    parseFactor --> |"("| parseExpression
+    parseFactor --> |Number| parseNumber
+    parseExpression --> |"+-"| parseTerm
+    parseTerm --> |"*/"| parseFactor
+```
+
+
+
 ```ebnf
-expr        : IDENT '=' expr
-            : comp-expr (("&&" | "||") comp-expr)*
-
-comp-expr   : '!' comp-expr
-            : arith-expr (ee|gt|lt|gte|lte arith-expr)*
-
-arith-expr  : term (plus|minus term)*
-
-term        : factor (mul|div|mod factor)*
-
-factor      : (plus|minus) factor
-            : power
-
-power       : call (pow factor)*
+ArithExpr : Term ('+' | '-' Term)*
+Term      : Factor ('*' | '/' Factor)*
+Factor    : IntConst
+          : '(' ArithExpr ')'
 ```
 
 ## 二、终结符
 
+#### 0. CharType
+
+这里定义了各种字符类型，对应于程序中的枚举类：`CharType`
+
 ```ebnf
-LOWERCASE ::= 'a' | 'b' | ... | 'z'
-UPPERCASE ::= 'A' | 'B' | ... | 'Z'
-HEX_DIGIT ::= DIGIT | 
-              'a' | ... | 'f' | 
-              'A' | ... | 'F'
-DIGIT     ::= '0' | '1' | ... | '9'
-UNDERLINE ::= '_'
-BLANK     ::= ' '
+LOWERCASE  ::= 'a' | 'b' | ... | 'z'
+UPPERCASE  ::= 'A' | 'B' | ... | 'Z'
+HEX_DIGIT  ::= DIGIT | 
+               'a'   | ... | 'f' | 
+               'A'   | ... | 'F'
+DIGIT      ::= '0' | '1' | ... | '9'
+UNDERLINE  ::= '_'
+BLANK      ::= ' '
+OPERATOR_C ::= '>' | '<' | '=' | '&' | '|' | 
+			  '+' | '-' | '*' | '/' | '^' |
+			  '!' |
+QUOT_C     ::= '"'
 ```
 
 
@@ -128,12 +134,12 @@ FLOAT_CONST ::= ('+' | '-')? DIGIT+ '.' DIGIT+
 #### 4. 字符串常量 `STR_CONST`
 
 ```ebnf
-STR_CONST ::= '"' 任意字符 '"' 
+STR_CONST ::= '"' 任意字符 '"'
 ```
 **注意：这里没有考虑转义的情况。**
 
 
-#### 5. 运算符 `OPERATOR`
+#### 5. 运算符 `OPERATOR_T`
 
 ```ebnf
 OPERATOR ::= '+'  | '-'  | '*'  | '/'  | '^'  |
@@ -142,10 +148,10 @@ OPERATOR ::= '+'  | '-'  | '*'  | '/'  | '^'  |
              '&&' | '||' | '!'
 ```
 
-#### 6. 括号 `BRACKET`
+#### 6. 括号 `BRACKET_T`
 
 ```ebnf
-BRACKET ::= '(' | ')' |
+BRACKET_C ::= '(' | ')' |
             '[' | ']' | 
             '{' | '}'
 ```

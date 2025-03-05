@@ -10,16 +10,11 @@
 #include <functional>
 #include <memory>
 #include <tuple>
+#include "../../include/basic/Position.h"
 
 namespace hdg_lexer {
-
-
     using uint64 = unsigned long long;
     using uint32 = unsigned int;
-
-    class Token{
-
-    };
 
     enum class CharType: uint64{
         OTHER       = 0,
@@ -29,7 +24,7 @@ namespace hdg_lexer {
         UPPERCASE   = 1 << 3,
         UNDERLINE   = 1 << 4,
         BLANK       = 1 << 5,
-        BRACKET     = 1 << 6,
+        BRACKET_C     = 1 << 6,
     };
 
     constexpr CharType operator|(CharType a, CharType b){
@@ -65,7 +60,7 @@ namespace hdg_lexer {
         KEYWORD,
         IDENT,
         INT_CONST,
-        BRACKET,
+        BRACKET_S,
 
         END,
 
@@ -75,35 +70,57 @@ namespace hdg_lexer {
     static_assert(static_cast<int>(StateType::START) == 0);
     static_assert(static_cast<int>(StateType::ERROR) == 16);
 
-    using Event = char;
+    class Token{
+    protected:
+        StateType     m_type;
+        std::string   m_val;
+        hdg::Position m_pos;
+
+    public:
+        Token(StateType type, std::string val);
+
+        [[nodiscard]] StateType   getType() const;
+        [[nodiscard]] std::string getVal()  const;
+
+        void setType(StateType type);
+        void setVal(const std::string& val);
+
+        std::string toString();
+    };
 
     class StateMachine;
 
-
+    class Event{
+    public:
+        const char m_currChar;
+        const std::shared_ptr<StateMachine>& m_sender;
+        Event(char currChar, const std::shared_ptr<StateMachine>& sender);
+    };
 
     /**
      * 抽象状态
      * */
     class AbstractState{
     protected:
-        typedef std::tuple<CharType, StateType, std::function<bool(char)>> Edge;
-        StateMachine *m_machine;
+        using CondFun = std::function<bool(const Event&)>;
+        typedef std::tuple<CharType, StateType, CondFun> Edge;
+//        StateMachine *m_machine;
         std::vector<Edge> m_edges;
         bool m_autoNext;
 
     public:
-        explicit AbstractState(StateMachine* machine);
+        explicit AbstractState();
         ~AbstractState() = default;
 
-        void addEdge(CharType c, StateType type, const std::function<bool(char)>& cond = nullptr);
-        virtual StateType getNextState(Event event);
-        virtual bool accept(char cur);
-        bool isAutoNext();
+        void               addEdge(CharType condChar, StateType type, const CondFun& condFun = nullptr);
+        virtual StateType  getNextState(const Event& event);
+        [[nodiscard]] bool isAutoNext() const;
+//        virtual bool accept(char cur);
     };
 
     class StartState: public AbstractState{
     public:
-        explicit StartState(StateMachine* machine);
+        explicit StartState();
     };
 
     class KeywordState: public AbstractState{
@@ -111,59 +128,68 @@ namespace hdg_lexer {
         std::set<std::string> keywordSet;
 
     public:
-        explicit KeywordState(StateMachine* machine);
+        explicit KeywordState();
     };
 
     class IdentState: public AbstractState{
     public:
-        explicit IdentState(StateMachine* machine);
+        explicit IdentState();
     };
 
     class IntConstState: public AbstractState{
     public:
-        explicit IntConstState(StateMachine* machine);
+        explicit IntConstState();
     };
 
     class OperState: public AbstractState{
     public:
-        explicit OperState(StateMachine* machine);
-        bool accept(char cur) override;
+        explicit OperState();
+//        bool accept(char cur) override;
     };
 
     class BracketState: public AbstractState{
     public:
-        explicit BracketState(StateMachine* machine);
-        StateType getNextState(Event event) override;
+        explicit BracketState();
+        StateType getNextState(const Event& event) override;
     };
 
     class ErrorState: public AbstractState{
     public:
-        explicit ErrorState(StateMachine* machine);
-        bool accept(char cur) override;
+        explicit ErrorState();
+        StateType getNextState(const Event& event) override;
+//        bool accept(char cur) override;
     };
 
     class AcceptState: public AbstractState{
     public:
-        explicit AcceptState(StateMachine* machine);
-        bool accept(char cur) override;
+        explicit AcceptState();
+        StateType getNextState(const Event& event) override;
+//        bool accept(char cur) override;
     };
 
     /**
      * 自动机管理
      * */
-    class StateMachine{
+    class StateMachine: public std::enable_shared_from_this<StateMachine>{
     protected:
         StateType m_lastState;
         StateType m_currState;
-        std::vector<AbstractState*> m_list;
+        std::vector<std::shared_ptr<AbstractState>> m_list;
 
         char m_currChar;
         std::string m_tokenVal;
         std::shared_ptr<StateType> m_token;
+        struct StateMachineKey {
+            friend class StateMachine;
+            StateMachineKey() = default;
+        };
+
+    private:
+        StateMachine() = default;
 
     public:
-        StateMachine();
-        ~StateMachine();
+        StateMachine(StateMachineKey){};
+        static std::shared_ptr<StateMachine> buildStateMachine();
 
         void setCurrToken(StateType type);
 

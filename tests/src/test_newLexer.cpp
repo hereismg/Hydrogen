@@ -75,11 +75,11 @@ class Test_StateMachine_P: public testing::TestWithParam<std::tuple<std::string,
 TEST_P(Test_StateMachine_P, _1){
     auto [code, expected_res] = GetParam();
 
-    StateMachine machine;
+    auto machine = StateMachine::buildStateMachine();
 
     std::vector<StateType> actual_res;
     for (char i : code){
-        auto res = machine.update(i);
+        auto res = machine->update(i);
         if (res != nullptr){
             actual_res.push_back(*res);
         }
@@ -94,7 +94,7 @@ TEST_P(Test_StateMachine_P, _1){
 INSTANTIATE_TEST_SUITE_P(Test_StateMachine, Test_StateMachine_P, testing::Values(
     std::tuple<std::string, std::vector<StateType>>{
             "{}123 ",
-            {StateType::BRACKET, StateType::BRACKET, StateType::INT_CONST}
+            {StateType::BRACKET_S, StateType::BRACKET_S, StateType::INT_CONST}
     },
     std::tuple<std::string, std::vector<StateType>>{
             "a 123 while _a ",
@@ -105,3 +105,7 @@ INSTANTIATE_TEST_SUITE_P(Test_StateMachine, Test_StateMachine_P, testing::Values
             {StateType::IDENT, StateType::INT_CONST}
     }
 ));
+
+TEST(TestToken, _1){
+    auto tkn = Token(StateType::INT_CONST, "res");
+}

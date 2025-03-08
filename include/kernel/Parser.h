@@ -25,20 +25,20 @@ namespace hdg {
         void advance();
         void retreat();
 
-        Node* expr(Environment* environment);
-        Node* compExpr(Environment* environment);
-        Node* arithExpr(Environment* environment);
-        Node* term(Environment* environment);
-        Node* factor(Environment* environment);
-        Node* power(Environment* environment);
-        Node* call(Environment* environment);
-        Node* atom(Environment* environment);
-        Node* ifExpr(Environment* environment);
-        Node* forExpr(Environment* environment);
-        Node* whileExpr(Environment* environment);
-        Node* funcExpr(Environment* environment);
+        Node* expr      (Environment* environment);
+        Node* compExpr  (Environment* environment);
+        Node* arithExpr (Environment* environment);
+        Node* term      (Environment* environment);
+        Node* factor    (Environment* environment);
+        Node* power     (Environment* environment);
+        Node* call      (Environment* environment);
+        Node* atom      (Environment* environment);
+        Node* ifExpr    (Environment* environment);
+        Node* forExpr   (Environment* environment);
+        Node* whileExpr (Environment* environment);
+        Node* funcExpr  (Environment* environment);
         Node* statements(Environment* environment);
-        Node* core(Environment* environment);
+        Node* core      (Environment* environment);
 
         Node* binaryOperator(
                 Environment* environment,

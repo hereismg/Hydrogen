@@ -10,5 +10,4 @@
 cmake-*
 .idea
 bin
-tests/gtest
 build

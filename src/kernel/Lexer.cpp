@@ -350,7 +350,7 @@ namespace hdg {
     }
 
     void Lexer::buildNumber() {
-        Position::Indicator posStart = m_pos;
+        Indicator posStart = m_pos;
         int counter = 0;
         Token::Type type = Token::INT;
 
@@ -371,7 +371,7 @@ namespace hdg {
     }
 
     void Lexer::buildGreaterThan() {
-        Position::Indicator posStart = m_pos;
+        Indicator posStart = m_pos;
         Token::Type type = Token::GT;
 
         advance();
@@ -385,7 +385,7 @@ namespace hdg {
     }
 
     void Lexer::buildLessThan() {
-        Position::Indicator posStart = m_pos;
+        Indicator posStart = m_pos;
         Token::Type type = Token::LT;
 
         advance();
@@ -399,7 +399,7 @@ namespace hdg {
     }
 
     void Lexer::buildEquation() {
-        Position::Indicator posStart = m_pos;
+        Indicator posStart = m_pos;
         Token::Type type = Token::EQ;
 
         advance();
@@ -413,7 +413,7 @@ namespace hdg {
     }
 
     void Lexer::buildIdentifier() {
-        Position::Indicator posStart = m_pos;
+        Indicator posStart = m_pos;
         Token::Type type = Token::IDENTIFIER;
 
         advance();

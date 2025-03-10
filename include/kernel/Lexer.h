@@ -166,7 +166,7 @@ namespace hdg {
     protected:
         std::string m_fPath;
         char m_currentChar{0};
-        Position::Indicator m_pos;
+        Indicator m_pos;
 
         std::string* m_code{nullptr};
         std::vector<Token> m_tokens;

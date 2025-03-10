@@ -1,6 +1,8 @@
 #set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/tests/build)
+add_subdirectory(gtest-1.16)
+
 set(TEST_OUTPUT)
-set(GOOGLE_TEST_DIR ${PROJECT_SOURCE_DIR}/tests/gtest)
+set(GOOGLE_TEST_DIR "${CMAKE_CURRENT_LIST_DIR}/tests/gtest-1.16")
 
 file(GLOB_RECURSE TEST_CASE ${PROJECT_SOURCE_DIR}/tests/src/*.cpp)
 foreach(test_src ${TEST_CASE})

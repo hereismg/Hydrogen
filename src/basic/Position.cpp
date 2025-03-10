@@ -21,23 +21,23 @@ namespace hdg {
         m_end = position.m_end;
     }
 
-    void Position::setStart(unsigned long long index, unsigned long long line, unsigned long long col){
+    void Position::setStart(size_t index, size_t line, size_t col){
         m_start.index = index;
         m_start.line = line;
         m_start.col = col;
     }
 
-    void Position::setStart(const Position::Indicator &indicator) {
+    void Position::setStart(const Indicator &indicator) {
         setStart(indicator.index, indicator.line, indicator.col);
     }
 
-    void Position::setEnd(unsigned long long index, unsigned long long line, unsigned long long col) {
+    void Position::setEnd(size_t index, size_t line, size_t col) {
         m_end.index = index;
         m_end.line = line;
         m_end.col = col;
     }
 
-    void Position::setEnd(const Position::Indicator &indicator) {
+    void Position::setEnd(const Indicator &indicator) {
         setEnd(indicator.index, indicator.line, indicator.col);
     }
 
@@ -45,11 +45,11 @@ namespace hdg {
         return m_context;
     }
 
-    Position::Indicator Position::getStart(){
+    Indicator Position::getStart(){
         return m_start;
     }
 
-    Position::Indicator Position::getEnd() {
+    Indicator Position::getEnd() {
         return m_end;
     }
 
@@ -67,9 +67,9 @@ namespace hdg {
 
             /// 接下来构建 position 的核心部分，也就是具体的代码位置。
             std::string body = "    " + std::to_string(m_start.line) + " | ";
-            unsigned long long temp = body.size();
+            size_t temp = body.size();
 
-            unsigned long long left = 0, right = 0;
+            size_t left = 0, right = 0;
             left = m_start.index - m_start.col;
             for (right=m_end.index; right<m_context->size() && (*m_context)[right]!='\n'; right++);
             body += m_context->substr(left, right - left) + "\n";             /// @attention 这里的换行符一定要手动添加，而不是直接从原文中截取！！！
@@ -82,15 +82,13 @@ namespace hdg {
             return head.str()+body;
         }
         else{
-            unsigned long long right = m_start.index;
+            size_t right = m_start.index;
             while(right < m_context->size() && (*m_context)[right]!='\n')right++;
             std::cout << "Error!" << std::endl;
             return m_context->substr(m_start.index, right);
         }
     }
 
-
-    Position::Indicator::Indicator(unsigned long long int index, unsigned long long int line,
-                                   unsigned long long int col) :
+    Indicator::Indicator(size_t index, size_t line, size_t col): 
                                    index(index), line(line), col(col){}
 } // hdg

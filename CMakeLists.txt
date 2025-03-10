@@ -9,7 +9,7 @@ set(LIBRARY_OUTPUT_PATH ${EXECUTABLE_OUTPUT_PATH})
 
 file(GLOB_RECURSE SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 
-add_executable(hdg main.cpp ${CMAKE_CURRENT_SOURCE_DIR}/res/info.o ${SOURCES})
+add_executable(hdg main.cpp ${SOURCES})
 add_library(libhdg SHARED ${SOURCES})
 #target_include_directories(hdg PUBLIC include/basic include/error include/kernel include/node include/object)
 #target_include_directories(libhdg PUBLIC include/basic include/error include/kernel include/node include/object)

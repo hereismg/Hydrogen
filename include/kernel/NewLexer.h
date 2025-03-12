@@ -10,11 +10,17 @@
 #include <functional>
 #include <memory>
 #include <tuple>
+#include <sml.hpp>
 #include "../../include/basic/Position.h"
 
 namespace hdg_lexer {
+    namespace sml = boost::sml;
+        
     using uint64 = unsigned long long;
     using uint32 = unsigned int;
+    class LexerSM;
+    class Sender;
+    class Context;
 
     enum class CharType: uint64{
         OTHER       = 0,
@@ -26,6 +32,8 @@ namespace hdg_lexer {
         BLANK       = 1 << 5,
         BRACKET_C   = 1 << 6,
         OPERATOR_C  = 1 << 7,
+        QUOTE       = 1 << 8,
+        DOT         = 1 << 9,
 
         // 代表任意字符
         ANY         = ~(uint64)0
@@ -59,164 +67,285 @@ namespace hdg_lexer {
     CharType getCharType(char c);
 
 
-    enum class StateType: int{
-        START,      // 第一个类型必须是 START
+    // 定义事件，也就是“终结符”，状态机将根据终结符转移状态
+    // 事件中将会引用 Sender 对象，该对象中存储着 SM 的当前状态
+    class Event{
+    public:
+        char m_curChar{' '};
+        std::weak_ptr<Context> m_lexer;
+        explicit Event(std::weak_ptr<Context> ctx): m_lexer(std::move(ctx)){}
+    };
+
+    class Event_OTHER: public Event{
+    public:
+        explicit Event_OTHER(std::weak_ptr<Context> ctx): Event(std::move(ctx)){}
+    };
+    class Event_DIGITAL: public Event{
+    public:
+        explicit Event_DIGITAL(std::weak_ptr<Context> ctx): Event(std::move(ctx)){}
+    };
+    class Event_LOWERCASE: public Event{
+    public:
+        explicit Event_LOWERCASE(std::weak_ptr<Context> ctx): Event(std::move(ctx)){}
+    };
+    class Event_UPPERCASE: public Event{
+    public:
+        explicit Event_UPPERCASE(std::weak_ptr<Context> ctx): Event(std::move(ctx)){}
+    };
+    class Event_BLANK: public Event{
+    public:
+        explicit Event_BLANK(std::weak_ptr<Context> ctx): Event(std::move(ctx)){}
+    };
+    class Event_BRACKET: public Event{
+    public:
+        explicit Event_BRACKET(std::weak_ptr<Context> ctx): Event(std::move(ctx)){}
+    };
+    class Event_DOT: public Event{
+    public:
+        explicit Event_DOT(std::weak_ptr<Context> ctx): Event(std::move(ctx)){}
+    };
+    class Event_UNDERLINE: public Event{
+    public:
+        explicit Event_UNDERLINE(std::weak_ptr<Context> ctx): Event(std::move(ctx)){}
+    };
+    class Event_OPERATOR: public Event{
+    public:
+        explicit Event_OPERATOR(std::weak_ptr<Context> ctx): Event(std::move(ctx)){}
+    };
+
+
+    // 定义依赖
+    class Sender {
+    public:
+        std::string tokenVal;
+
+        template<class TMsg>
+        constexpr void send(const TMsg& msg) { std::printf("send: %d\n", msg.id); }
+    };
+
+    using namespace sml;
+    enum class TokenType: uint64{
         KEYWORD,
         IDENT,
         INT_CONST,
-        BRACKET_S,
-        OPERATOR_S,
-
-        END,
-
-        ACCEPT,
-        ERROR = 16,      // 最后一个类型必须是 ERROR，这里设定最多只能有 16 种状态
+        FLOAT_CONST,
+        BRACKET_T,
+        STR_CONST,
+        OPERATOR,
     };
-    static_assert(static_cast<int>(StateType::START) == 0);
-    static_assert(static_cast<int>(StateType::ERROR) == 16);
+
+    auto INIT        = "INIT"_s;
+    auto KEYWORD     = "KEYWORD"_s;
+    auto IDENT       = "IDENT"_s;
+    auto INT_CONST   = "INT_CONST"_s;
+    auto FLOAT_CONST = "FLOAT_CONST"_s;
+    auto OPERATOR    = "OPERATOR"_s;
+    auto ERROR       = "ERROR"_s;
+
 
     class Token{
-    protected:
-        StateType     m_type;
-        std::string   m_val;
-        hdg::Position m_pos;
-
     public:
-        Token(StateType type, std::string val);
+        TokenType m_type;
+        std::string m_val;
+        Token(TokenType type, std::string val): m_type(type), m_val(std::move(val)){}
 
-        [[nodiscard]] StateType   getType() const;
-        [[nodiscard]] std::string getVal()  const;
+        void setType(TokenType type){
+            m_type = type;
+        }
 
-        void setType(StateType type);
-        void setVal(const std::string& val);
+        void setVal(std::string val){
+            m_val = std::move(val);
+        }
 
-        std::string toString();
+        std::string getVal(){
+            return m_val;
+        }
+
+        TokenType getType(){
+            return m_type;
+        }
     };
 
-    class StateMachine;
+    class Context{
+        public:
+            std::string m_tokenVal;
+            std::string m_code;
+    
+            size_t m_ptr;
+            std::vector<Token> m_tokenArr;
+    
+            Context(std::string code):m_code(std::move(code)), m_ptr(0){}
+    
+            size_t size(){
+                return m_code.size();
+            }
 
-    class Event{
-    public:
-        const char m_currChar;
-        const std::shared_ptr<StateMachine>& m_sender;
-        Event(char currChar, const std::shared_ptr<StateMachine>& sender);
-    };
+            char getChar(){
+                assert(m_ptr < m_code.size());
+                char c = m_code[m_ptr];
+                return c;
+            }
 
-    /**
-     * 抽象状态
-     * */
-    class AbstractState{
-    protected:
-        using CondFun = std::function<bool(const Event&)>;
-        typedef std::tuple<CharType, StateType, CondFun> Edge;
-//        StateMachine *m_machine;
-        std::vector<Edge> m_edges;
-        bool m_autoNext;
+            auto getTokenArr(){
+                return m_tokenArr;
+            }
 
-    public:
-        explicit AbstractState();
-        ~AbstractState() = default;
-
-        void               addEdge(CharType condChar, StateType type, const CondFun& condFun = nullptr);
-        virtual StateType  getNextState(const Event& event);
-        [[nodiscard]] bool isAutoNext() const;
-
-        virtual void onEnter(const Event& event){};
-        virtual void onExit(const Event& event){};
-//        virtual bool accept(char cur);
-    };
-
-    class StartState: public AbstractState{
-    public:
-        explicit StartState();
-    };
-
-    class KeywordState: public AbstractState{
-    protected:
-        std::set<std::string> keywordSet;
-
-    public:
-        explicit KeywordState();
-    };
-
-    class IdentState: public AbstractState{
-    public:
-        explicit IdentState();
-    };
-
-    class IntConstState: public AbstractState{
-    public:
-        explicit IntConstState();
-    };
-
-    class OperState: public AbstractState{
-    public:
-        explicit OperState();
-    };
-
-    class BracketState: public AbstractState{
-    public:
-        explicit BracketState();
-        StateType getNextState(const Event& event) override;
-    };
-
-    class ErrorState: public AbstractState{
-    public:
-        explicit ErrorState();
-        StateType getNextState(const Event& event) override;
-    };
-
-    /**
-     * “接受”状态的语义：
-     * 当自动机处于当前状态时，意味着程序应该要打包一个新 Token 并压入到 res 数组中
-     * 再判断传入的字符是否是空格或者其他分隔符：
-     * 如果是分隔符，那么结束判断
-     * 否则，再进行一次状态转移
-     * */
-    class AcceptState: public AbstractState{
-    public:
-        explicit AcceptState();
-        StateType getNextState(const Event& event) override;
-    };
-
-    /**
-     * 自动机管理
-     * */
-    class StateMachine: public std::enable_shared_from_this<StateMachine>{
-    protected:
-        StateType m_lastState;
-        StateType m_currState;
-        std::vector<std::shared_ptr<AbstractState>> m_list;
-
-        char m_currChar;
-        std::string m_tokenVal;
-        struct StateMachineKey {
-            friend class StateMachine;
-            StateMachineKey() = default;
+            size_t getPtr(){
+                return m_ptr;
+            }
+    
+            std::string getTokenVal(){
+                return m_tokenVal;
+            }
+    
+            void pushChar2Token(){
+                m_tokenVal.push_back(m_code[m_ptr]);
+                ++ m_ptr;
+            }
+    
+            void ignoreChar(){
+                ++ m_ptr;
+            }
+    
+            void buildToken(TokenType type){
+                m_tokenArr.emplace_back(type, m_tokenVal);
+                m_tokenVal.clear();
+            }
+    
+            // void buildBraketToken(){
+            //     pushChar2Token();
+            //     buildToken();
+            // }
         };
 
-    private:
-        StateMachine() = default;
+    // guard 的定义必须在 event 之后！
+    constexpr auto isKeyword = [](const auto& event){
+        std::set<std::string> keywordSet = {
+                "not",
+                "and",
+                "or",
 
-    public:
-        StateMachine(StateMachineKey){};
-        static std::shared_ptr<StateMachine> buildStateMachine();
+                "if",
+                "elif",
+                "else",
 
-        std::string getTokenVal();
-        StateType getLastState();
-        void init();
-        void move(StateType target);
+                "for",
+                "from",
+                "to",
+                "step",
+                "while",
 
-        /**
-         * @details:
-         * 状态机的主要工作如下：
-         * 首先更新状态机的 m_currChar，方便操作。
-         * 其次，调用当前状态的 accept 方法，传入字符
-         * 状态发生改变以后，若返回值为 true，则说明不需要传入新的字符串，再进入到下一个状态中
-         * */
-        std::vector<Token> update(char c);
+                "function",
+        };
+        if (keywordSet.find(event.m_lexer.lock()->getTokenVal()) != keywordSet.end()) return true;
+        else return false;
     };
 
+//    constexpr auto isDigital = [](const auto& event){
+//        if (static_cast<int>(event.type & CharType::DIGITAL)) return true;
+//        else return false;
+//    };
+
+    // action
+    constexpr auto pushChar2Token = [](const auto& event) {
+        event.m_lexer.lock()->pushChar2Token();
+    };
+    constexpr auto throwError = [](const auto& event) {
+        assert(false);
+    };
+    // constexpr auto buildToken = [](const auto& event) {
+    //     event.m_lexer.lock()->buildToken();
+    // };
+    constexpr auto ignoreChar = [](const auto& event) {
+        event.m_lexer.lock()->ignoreChar();
+    };
+    constexpr auto buildBraketToken = [](const auto& event) {
+        event.m_lexer.lock()->pushChar2Token();
+        event.m_lexer.lock()->buildToken(TokenType::BRACKET_T);
+    };
+    constexpr auto buildKeywordToken = [](const auto& event) {
+        event.m_lexer.lock()->buildToken(TokenType::KEYWORD);
+    };
+    constexpr auto buildIdentToken = [](const auto& event) {
+        event.m_lexer.lock()->buildToken(TokenType::IDENT);
+    };
+    constexpr auto buildIntConstToken = [](const auto& event) {
+        event.m_lexer.lock()->buildToken(TokenType::INT_CONST);
+    };
+    constexpr auto buildFloatConstToken = [](const auto& event) {
+        event.m_lexer.lock()->buildToken(TokenType::FLOAT_CONST);
+    };
+    constexpr auto buildOperToken = [](const auto& event) {
+        event.m_lexer.lock()->buildToken(TokenType::OPERATOR);
+    };
+
+
+    // 定义状态机
+    struct LexerSM{
+        auto operator()() const{
+            using namespace sml;
+
+            return make_transition_table(
+                *INIT + event<Event_DIGITAL>   / pushChar2Token   = INT_CONST,
+                INIT  + event<Event_UPPERCASE> / pushChar2Token   = IDENT,
+                INIT  + event<Event_LOWERCASE> / pushChar2Token   = KEYWORD,
+                INIT  + event<Event_UNDERLINE> / pushChar2Token   = IDENT,
+                INIT  + event<Event_OPERATOR>  / pushChar2Token   = OPERATOR,
+                INIT  + event<Event_BRACKET>   / buildBraketToken = INIT,
+                INIT  + event<Event_BLANK>     / ignoreChar       = INIT,
+                INIT  + event<Event_OTHER>     / throwError       = ERROR,
+                INIT  + event<Event_DOT>       / throwError       = X,
+
+                KEYWORD + event<Event_DIGITAL>   / pushChar2Token = IDENT,
+                KEYWORD + event<Event_UPPERCASE> / pushChar2Token = IDENT,
+                KEYWORD + event<Event_LOWERCASE> / pushChar2Token = KEYWORD,
+                KEYWORD + event<Event_UNDERLINE> / pushChar2Token = IDENT,
+                KEYWORD + event<Event_BRACKET> [isKeyword] / buildKeywordToken = INIT,
+                KEYWORD + event<Event_BRACKET>             / buildIdentToken   = INIT,
+                KEYWORD + event<Event_BLANK> [isKeyword]   / buildKeywordToken = INIT,
+                KEYWORD + event<Event_BLANK>               / buildIdentToken   = INIT,
+                KEYWORD + event<Event_OTHER> [isKeyword]   / buildKeywordToken = INIT,
+                KEYWORD + event<Event_DOT>                 / throwError       = X,
+
+                IDENT + event<Event_UPPERCASE> / pushChar2Token  = IDENT,
+                IDENT + event<Event_DIGITAL>   / pushChar2Token  = IDENT,
+                IDENT + event<Event_LOWERCASE> / pushChar2Token  = IDENT,
+                IDENT + event<Event_UNDERLINE> / pushChar2Token  = IDENT,
+                IDENT + event<Event_BLANK>     / buildIdentToken = INIT,
+                IDENT + event<Event_DOT>       / buildIdentToken = INIT,
+
+                INT_CONST + event<Event_DIGITAL>   / pushChar2Token     = INT_CONST,
+                INT_CONST + event<Event_BLANK>     / buildIntConstToken = INIT,
+                INT_CONST + event<Event_BRACKET>   / buildIntConstToken = INIT,
+                INT_CONST + event<Event_DOT>       / pushChar2Token     = FLOAT_CONST,
+                INT_CONST + event<Event_OPERATOR>  / buildIntConstToken = INIT,
+                INT_CONST + event<Event_UPPERCASE> / throwError         = X,
+                INT_CONST + event<Event_LOWERCASE> / throwError         = X,
+
+                FLOAT_CONST + event<Event_DIGITAL>   / pushChar2Token       = FLOAT_CONST,
+                FLOAT_CONST + event<Event_BLANK>     / buildFloatConstToken = INIT,
+                FLOAT_CONST + event<Event_BRACKET>   / buildFloatConstToken = INIT,
+                FLOAT_CONST + event<Event_LOWERCASE> / throwError           = X,
+
+                OPERATOR + event<Event_OPERATOR> / pushChar2Token  = OPERATOR,
+                OPERATOR + event<Event_DIGITAL>  / buildOperToken  = INIT,
+                OPERATOR + event<Event_BRACKET>  / buildOperToken  = INIT
+                // INIT + event<UNDERLINE> / tran = IDENT,
+                // INIT + event<UNDERLINE> / tran = IDENT,
+                // INIT + event<OTHER> / tran = IDENT,
+
+                // KEYWORD + event<UPPERCASE>  / tran  = KEYWORD,
+                // KEYWORD + event<DIGITAL>    / tran  = IDENT,
+                // KEYWORD + event<DIGITAL>    / build = INIT
+            );
+        }
+    };
+
+    
+    bool sendEvent(char c, sml::sm<LexerSM>& sm, std::shared_ptr<Context>& ctx);
+
+
+    std::string debug_CurrentState(sml::sm<LexerSM> &s);
 } // hdg
 
 #endif //HDG_NEWLEXER_H

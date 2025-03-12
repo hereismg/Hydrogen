@@ -57,7 +57,7 @@ namespace hdg_lexer {
 
         if (c=='>' || c=='<' || c=='=' || c=='|' || c=='&' ||
             c=='+' || c=='-' || c=='*' || c=='/' || c=='^' ||
-            c=='!')              res |= CharType::OPERATOR_C;
+            c=='!' || c=='%')    res |= CharType::OPERATOR_C;
 
         if (c=='"')              res |= CharType::QUOTE;
 

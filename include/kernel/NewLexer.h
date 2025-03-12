@@ -149,21 +149,13 @@ namespace hdg_lexer {
         std::string m_val;
         Token(TokenType type, std::string val): m_type(type), m_val(std::move(val)){}
 
-        void setType(TokenType type){
-            m_type = type;
-        }
+        void setType(TokenType type);
 
-        void setVal(std::string val){
-            m_val = std::move(val);
-        }
+        void setVal(std::string val);
 
-        std::string getVal(){
-            return m_val;
-        }
+        std::string getVal();
 
-        TokenType getType(){
-            return m_type;
-        }
+        TokenType getType();
     };
 
     class Context{
@@ -211,11 +203,6 @@ namespace hdg_lexer {
                 m_tokenArr.emplace_back(type, m_tokenVal);
                 m_tokenVal.clear();
             }
-    
-            // void buildBraketToken(){
-            //     pushChar2Token();
-            //     buildToken();
-            // }
         };
 
     // guard 的定义必须在 event 之后！

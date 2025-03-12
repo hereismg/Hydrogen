@@ -76,7 +76,6 @@ TEST_P(Test_StateMachine_P, _1){
     }
 }
 
-using namespace hdg;
 INSTANTIATE_TEST_SUITE_P(TestSuit, Test_StateMachine_P, testing::Values(
     std::tuple<std::string, std::vector<Token>>{
             "{}123 ",
@@ -136,5 +135,5 @@ INSTANTIATE_TEST_SUITE_P(TestSuit, Test_StateMachine_P, testing::Values(
             {TokenType::FLOAT_CONST,  "12.2"},
             {TokenType::FLOAT_CONST,  "123"},
         }
-}
+    }
 ));

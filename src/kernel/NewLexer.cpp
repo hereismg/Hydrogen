@@ -7,6 +7,7 @@
 #include <utility>
 #include "../../include/kernel/NewLexer.h"
 #include "../../include/basic/Error.h"
+#include "NewLexer.h"
 
 
 namespace hdg_lexer {
@@ -65,7 +66,25 @@ namespace hdg_lexer {
         return res;
     }
 
-    bool sendEvent(char c, sml::sm<LexerSM>& sm, std::shared_ptr<Context>& ctx){
+    void Token::setType(TokenType type){
+        m_type = type;
+    }
+
+    void Token::setVal(std::string val){
+        m_val = std::move(val);
+    }
+
+    std::string Token::getVal(){
+        return m_val;
+    }
+
+    TokenType Token::getType(){
+        return m_type;
+    }
+
+
+    bool sendEvent(char c, sml::sm<LexerSM> &sm, std::shared_ptr<Context> &ctx)
+    {
         if (static_cast<int>(getCharType(c) & CharType::LOWERCASE)){
             return sm.process_event(Event_LOWERCASE(ctx));
         }

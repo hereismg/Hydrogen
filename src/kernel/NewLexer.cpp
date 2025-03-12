@@ -48,7 +48,8 @@ namespace hdg_lexer {
 
         if (c=='_')              res |= CharType::UNDERLINE;
 
-        if (c==' ' || c=='\t')   res |= CharType::BLANK;
+        if (c==' ' || c=='\t'||
+            c=='\n' )            res |= CharType::BLANK;
 
         if (c=='{' || c=='}' ||
             c=='[' || c==']' ||
@@ -96,6 +97,18 @@ namespace hdg_lexer {
 
     TokenType Token::getType(){
         return m_type;
+    }
+
+    bool Token::equal(const Token& other){
+        if(m_type == other.m_type &&
+           m_val  == other.m_val &&
+           m_pos.equal(other.m_pos))
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     Context::Context(std::string code): m_code(std::move(code)){}

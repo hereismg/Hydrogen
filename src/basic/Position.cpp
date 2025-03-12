@@ -45,7 +45,24 @@ namespace hdg {
         return m_context;
     }
 
-    Indicator Position::getStart(){
+    bool Position::equal(const Position &other) {
+        if (m_start.col   == other.m_start.col &&
+            m_start.line  == other.m_start.line &&
+            m_start.index == other.m_start.index &&
+
+            m_end.col     == other.m_end.col &&
+            m_end.line    == other.m_end.line &&
+            m_end.index   == other.m_end.index)
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    Indicator Position::getStart()
+    {
         return m_start;
     }
 

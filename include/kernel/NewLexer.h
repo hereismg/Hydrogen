@@ -144,25 +144,65 @@ namespace hdg_lexer {
     auto ERROR       = "ERROR"_s;
 
 
-    class Token{
+/**
+ * @class Token
+ * @brief 表示词法分析后生成的词法单元（Token），包含类型、值和位置信息
+ * 
+ * 该类用于存储词法分析器生成的词法单元信息，包含：
+ * - 令牌类型（如标识符、数字、运算符等）
+ * - 令牌在源代码中的实际字符串值
+ * - 令牌在源代码中的位置信息（用于错误提示和调试）
+ */
+class Token {
     protected:
-        TokenType     m_type;
-        std::string   m_val;
-        hdg::Position m_pos;
-
+        TokenType m_type;       ///< token 类型（枚举类型，如 IDEN、INT_CONST 等）
+        std::string m_val;      ///< token 在源代码中的实际字符串值
+        hdg::Position m_pos;    ///< token 在源代码中的位置信息（行号、列号等）
+     
     public:
+        /**
+         * @brief 默认构造函数，创建空 token
+         */
         Token();
+        
+        /**
+         * @brief 带参数的构造函数，创建指定类型的令牌
+         * @param type token 类型（TokenType 枚举值）
+         * @param val token 的字符串值
+         */
         Token(TokenType type, std::string val);
-
+     
+        /**
+         * @brief 获取位置信息的引用（允许外部修改位置信息）
+         * @return hdg::Position 的位置信息引用
+         */
         hdg::Position& thisPosition();
-
-        void setType(TokenType type);
-        void setVal(std::string val);
+     
+        // 设置方法组
+        void setType(TokenType type);  ///< 设置令牌类型
+        void setVal(std::string val);  ///< 设置令牌字符串值
+        
+        /**
+         * @brief 向 token 值末尾追加字符
+         * @param c 要追加的字符
+         * 用于词法分析时逐步构建令牌值（例如处理多字符运算符或长数字）
+         */
         void pushChar(char c);
+        
+        /// 重置 token 内容（类型设为默认，值清空，位置不重置）
         void clear();
-
-        std::string getVal();
-        TokenType   getType();
+     
+        // 访问方法组
+        std::string getVal();    ///< 获取令牌字符串值（const版本建议补充）
+        TokenType getType();     ///< 获取令牌类型（const版本建议补充）
+        
+        /**
+         * @brief 比较两个 token 是否相等
+         * @param other 要比较的另一个 token
+         * @return 当类型和值都相同时返回true
+         * @note 不比较位置信息，因为相同代码段可能生成多个位置不同的相同令牌
+         */
+        bool equal(const Token& other);
     };
 
 

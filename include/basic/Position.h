@@ -51,10 +51,12 @@ namespace hdg {
         void setEnd(size_t index, size_t line, size_t col);
         void setEnd(const Indicator& indicator);
 
-        Indicator getStart();
-        Indicator getEnd();
-        std::string getFilePath();
+        Indicator    getStart();
+        Indicator    getEnd();
+        std::string  getFilePath();
         std::string* thisContext();
+        
+        bool equal(const Position& other);
 
         std::string toString();
     };

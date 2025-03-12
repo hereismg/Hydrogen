@@ -7,7 +7,6 @@
 #include <utility>
 #include "../../include/kernel/NewLexer.h"
 #include "../../include/basic/Error.h"
-#include "NewLexer.h"
 
 
 namespace hdg_lexer {
@@ -66,12 +65,29 @@ namespace hdg_lexer {
         return res;
     }
 
+    Token::Token(): m_type(TokenType::NONE), m_val(""){}
+
+    Token::Token(TokenType type, std::string val): m_type(type), m_val(std::move(val)){}
+
+    hdg::Position& Token::thisPosition(){
+        return m_pos;
+    }
+
     void Token::setType(TokenType type){
         m_type = type;
     }
 
     void Token::setVal(std::string val){
         m_val = std::move(val);
+    }
+
+    void Token::pushChar(char c){
+        m_val.push_back(c);
+    }
+
+    void Token::clear(){
+        m_type = TokenType::NONE;
+        m_val.clear();
     }
 
     std::string Token::getVal(){
@@ -82,6 +98,64 @@ namespace hdg_lexer {
         return m_type;
     }
 
+    Context::Context(std::string code): m_code(std::move(code)){}
+
+    bool Context::advance(){
+        if (m_ptr.index >= m_code.size()) return false;
+        
+        ++ m_ptr.index;
+
+        if (m_code[m_ptr.index] == '\n'){
+            ++ m_ptr.line;
+            m_ptr.col = 1;
+        }
+        else{
+            ++ m_ptr.col;
+        }
+        return true;
+    }
+
+    size_t Context::size(){
+        return m_code.size();
+    }
+
+    char Context::getChar(){
+        assert(m_ptr.index < m_code.size());
+        char c = m_code[m_ptr.index];
+        return c;
+    }
+
+    void Context::pushChar2Token(){
+        if (m_curToken.getVal().empty()) m_curToken.thisPosition().setStart(m_ptr);
+
+        m_curToken.pushChar(m_code[m_ptr.index]);
+
+        advance();
+    }
+
+    void Context::buildToken(TokenType type){
+        // 开始构建 Token
+        m_curToken.setType(type);
+        m_curToken.thisPosition().setEnd(m_ptr);
+        
+        // 将 Token 压入列表中
+        m_tokenArr.push_back(m_curToken);
+
+        // 清空 Token
+        m_curToken.clear();
+    }
+
+    std::vector<Token> Context::getTokenArr(){
+        return m_tokenArr;
+    }
+
+    size_t Context::getPtr(){
+        return m_ptr.index;
+    }
+
+    std::string Context::getTokenVal(){
+        return m_curToken.getVal();
+    }
 
     bool sendEvent(char c, sml::sm<LexerSM> &sm, std::shared_ptr<Context> &ctx)
     {

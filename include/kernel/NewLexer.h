@@ -125,6 +125,7 @@ namespace hdg_lexer {
 
     using namespace sml;
     enum class TokenType: uint64{
+        NONE,
         KEYWORD,
         IDENT,
         INT_CONST,
@@ -144,66 +145,47 @@ namespace hdg_lexer {
 
 
     class Token{
+    protected:
+        TokenType     m_type;
+        std::string   m_val;
+        hdg::Position m_pos;
+
     public:
-        TokenType m_type;
-        std::string m_val;
-        Token(TokenType type, std::string val): m_type(type), m_val(std::move(val)){}
+        Token();
+        Token(TokenType type, std::string val);
+
+        hdg::Position& thisPosition();
 
         void setType(TokenType type);
-
         void setVal(std::string val);
+        void pushChar(char c);
+        void clear();
 
         std::string getVal();
-
-        TokenType getType();
+        TokenType   getType();
     };
 
+
     class Context{
-        public:
-            std::string m_tokenVal;
-            std::string m_code;
-    
-            size_t m_ptr;
-            std::vector<Token> m_tokenArr;
-    
-            Context(std::string code):m_code(std::move(code)), m_ptr(0){}
-    
-            size_t size(){
-                return m_code.size();
-            }
+    protected:
+        Token              m_curToken;
+        std::string        m_code;
+        hdg::Indicator     m_ptr;
+        std::vector<Token> m_tokenArr;
 
-            char getChar(){
-                assert(m_ptr < m_code.size());
-                char c = m_code[m_ptr];
-                return c;
-            }
+    public:
+        Context(std::string code);
 
-            auto getTokenArr(){
-                return m_tokenArr;
-            }
+        bool advance();
+        void pushChar2Token();
+        void buildToken(TokenType type);
 
-            size_t getPtr(){
-                return m_ptr;
-            }
-    
-            std::string getTokenVal(){
-                return m_tokenVal;
-            }
-    
-            void pushChar2Token(){
-                m_tokenVal.push_back(m_code[m_ptr]);
-                ++ m_ptr;
-            }
-    
-            void ignoreChar(){
-                ++ m_ptr;
-            }
-    
-            void buildToken(TokenType type){
-                m_tokenArr.emplace_back(type, m_tokenVal);
-                m_tokenVal.clear();
-            }
-        };
+        size_t      size();
+        char        getChar();
+        size_t      getPtr();
+        std::string getTokenVal();
+        std::vector<Token> getTokenArr();
+    };
 
     // guard 的定义必须在 event 之后！
     constexpr auto isKeyword = [](const auto& event){
@@ -244,7 +226,7 @@ namespace hdg_lexer {
     //     event.m_lexer.lock()->buildToken();
     // };
     constexpr auto ignoreChar = [](const auto& event) {
-        event.m_lexer.lock()->ignoreChar();
+        event.m_lexer.lock()->advance();
     };
     constexpr auto buildBraketToken = [](const auto& event) {
         event.m_lexer.lock()->pushChar2Token();

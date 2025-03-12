@@ -3,6 +3,7 @@
 //
 #include<gtest/gtest.h>
 #include<NewLexer.h>
+#include<sml.hpp>
 using namespace std;
 using namespace hdg_lexer;
 

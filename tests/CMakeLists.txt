@@ -13,6 +13,7 @@ foreach(test_src ${TEST_CASE})
             PUBLIC
             "${GOOGLE_TEST_DIR}/googletest/include"
             "${GOOGLE_TEST_DIR}/googlemock/include"
+            "${SML_INCLUDE_DIR}"
             "${PROJECT_SOURCE_DIR}/include/basic"
             "${PROJECT_SOURCE_DIR}/include/kernel"
             "${PROJECT_SOURCE_DIR}/include/node"

@@ -280,6 +280,7 @@ class Token {
         event.m_lexer.lock()->buildToken(TokenType::OPERATOR);
     };
     constexpr auto buildStrConstToken = [](const auto& event) {
+        event.m_lexer.lock()->advance();
         event.m_lexer.lock()->buildToken(TokenType::STR_CONST);
     };
 
@@ -295,7 +296,7 @@ class Token {
                 INIT  + event<Event_LOWERCASE> / pushChar2Token   = KEYWORD,
                 INIT  + event<Event_UNDERLINE> / pushChar2Token   = IDENT,
                 INIT  + event<Event_OPERATOR>  / pushChar2Token   = OPERATOR,
-                INIT  + event<Event_QUOTE>     / pushChar2Token   = STR_CONST,
+                INIT  + event<Event_QUOTE>     / ignoreChar       = STR_CONST,
                 INIT  + event<Event_BRACKET>   / buildBraketToken = INIT,
                 INIT  + event<Event_BLANK>     / ignoreChar       = INIT,
                 INIT  + event<Event_OTHER>     / throwError       = ERROR,
@@ -341,8 +342,11 @@ class Token {
                 STR_CONST + event<Event_UPPERCASE> / pushChar2Token     = STR_CONST,
                 STR_CONST + event<Event_LOWERCASE> / pushChar2Token     = STR_CONST,
                 STR_CONST + event<Event_UNDERLINE> / pushChar2Token     = STR_CONST,
-                STR_CONST + event<Event_OPERATOR>  / pushChar2Token     = STR_CONST
-
+                STR_CONST + event<Event_OPERATOR>  / pushChar2Token     = STR_CONST,
+                STR_CONST + event<Event_BRACKET>   / pushChar2Token     = STR_CONST,
+                STR_CONST + event<Event_BLANK>     / pushChar2Token     = STR_CONST,
+                STR_CONST + event<Event_OTHER>     / pushChar2Token     = STR_CONST,
+                STR_CONST + event<Event_DOT>       / pushChar2Token     = STR_CONST
             );
         }
     };

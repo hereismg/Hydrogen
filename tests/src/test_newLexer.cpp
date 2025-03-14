@@ -128,10 +128,18 @@ INSTANTIATE_TEST_SUITE_P(TestSuit, Test_StateMachine_P, testing::Values(
         }
     },
     std::tuple<std::string, std::vector<Token>>{
-        "12.2 123",
+        "12.2 123 ",
         {
-            {TokenType::FLOAT_CONST,  "12.2"},
-            {TokenType::FLOAT_CONST,  "123"},
+            {TokenType::FLOAT_CONST, "12.2"},
+            {TokenType::INT_CONST,   "123"},
+        }
+    },
+    std::tuple<std::string, std::vector<Token>>{
+        "\"123\" 123 \"海琛\" ",
+        {
+            {TokenType::STR_CONST,  "123"},
+            {TokenType::INT_CONST,  "123"},
+            {TokenType::STR_CONST,  "海琛"},
         }
     }
 ));

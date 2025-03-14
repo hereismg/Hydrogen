@@ -196,9 +196,11 @@ namespace hdg_lexer {
         else if (static_cast<int>(getCharType(c) & CharType::DOT)){
             return sm.process_event(Event_DOT(ctx));
         }
+        else if (static_cast<int>(getCharType(c) & CharType::QUOTE)){
+            return sm.process_event(Event_QUOTE(ctx));
+        }
         else{
-            // 程序不应该进行到此处！
-            assert(false);
+            return sm.process_event(Event_OTHER(ctx));
         }
     }
 
@@ -224,6 +226,9 @@ namespace hdg_lexer {
         }
         if (s.is(ERROR)) {
             return "ERROR";
+        }
+        if (s.is(STR_CONST)) {
+            return "STR_CONST";
         }
         return "UNKNOWN";
     }

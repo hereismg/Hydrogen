@@ -108,7 +108,10 @@ namespace hdg_lexer {
     public:
         explicit Event_OPERATOR(std::weak_ptr<Context> ctx): Event(std::move(ctx)){}
     };
-
+    class Event_QUOTE: public Event{
+    public:
+        explicit Event_QUOTE(std::weak_ptr<Context> ctx): Event(std::move(ctx)){}
+    };
 
     // 定义依赖
     class Sender {
@@ -136,6 +139,7 @@ namespace hdg_lexer {
     auto IDENT       = "IDENT"_s;
     auto INT_CONST   = "INT_CONST"_s;
     auto FLOAT_CONST = "FLOAT_CONST"_s;
+    auto STR_CONST   = "STR_CONST"_s;
     auto OPERATOR    = "OPERATOR"_s;
     auto ERROR       = "ERROR"_s;
 
@@ -275,6 +279,9 @@ class Token {
     constexpr auto buildOperToken = [](const auto& event) {
         event.m_lexer.lock()->buildToken(TokenType::OPERATOR);
     };
+    constexpr auto buildStrConstToken = [](const auto& event) {
+        event.m_lexer.lock()->buildToken(TokenType::STR_CONST);
+    };
 
 
     // 定义状态机
@@ -288,6 +295,7 @@ class Token {
                 INIT  + event<Event_LOWERCASE> / pushChar2Token   = KEYWORD,
                 INIT  + event<Event_UNDERLINE> / pushChar2Token   = IDENT,
                 INIT  + event<Event_OPERATOR>  / pushChar2Token   = OPERATOR,
+                INIT  + event<Event_QUOTE>     / pushChar2Token   = STR_CONST,
                 INIT  + event<Event_BRACKET>   / buildBraketToken = INIT,
                 INIT  + event<Event_BLANK>     / ignoreChar       = INIT,
                 INIT  + event<Event_OTHER>     / throwError       = ERROR,
@@ -312,12 +320,12 @@ class Token {
                 IDENT + event<Event_DOT>       / buildIdentToken = INIT,
 
                 INT_CONST + event<Event_DIGITAL>   / pushChar2Token     = INT_CONST,
-                INT_CONST + event<Event_BLANK>     / buildIntConstToken = INIT,
-                INT_CONST + event<Event_BRACKET>   / buildIntConstToken = INIT,
                 INT_CONST + event<Event_DOT>       / pushChar2Token     = FLOAT_CONST,
-                INT_CONST + event<Event_OPERATOR>  / buildIntConstToken = INIT,
                 INT_CONST + event<Event_UPPERCASE> / throwError         = X,
                 INT_CONST + event<Event_LOWERCASE> / throwError         = X,
+                INT_CONST + event<Event_BLANK>     / buildIntConstToken = INIT,
+                INT_CONST + event<Event_BRACKET>   / buildIntConstToken = INIT,
+                INT_CONST + event<Event_OPERATOR>  / buildIntConstToken = INIT,
 
                 FLOAT_CONST + event<Event_DIGITAL>   / pushChar2Token       = FLOAT_CONST,
                 FLOAT_CONST + event<Event_BLANK>     / buildFloatConstToken = INIT,
@@ -326,14 +334,15 @@ class Token {
 
                 OPERATOR + event<Event_OPERATOR> / pushChar2Token  = OPERATOR,
                 OPERATOR + event<Event_DIGITAL>  / buildOperToken  = INIT,
-                OPERATOR + event<Event_BRACKET>  / buildOperToken  = INIT
-                // INIT + event<UNDERLINE> / tran = IDENT,
-                // INIT + event<UNDERLINE> / tran = IDENT,
-                // INIT + event<OTHER> / tran = IDENT,
+                OPERATOR + event<Event_BRACKET>  / buildOperToken  = INIT,
+                
+                STR_CONST + event<Event_QUOTE>     / buildStrConstToken = INIT,
+                STR_CONST + event<Event_DIGITAL>   / pushChar2Token     = STR_CONST,
+                STR_CONST + event<Event_UPPERCASE> / pushChar2Token     = STR_CONST,
+                STR_CONST + event<Event_LOWERCASE> / pushChar2Token     = STR_CONST,
+                STR_CONST + event<Event_UNDERLINE> / pushChar2Token     = STR_CONST,
+                STR_CONST + event<Event_OPERATOR>  / pushChar2Token     = STR_CONST
 
-                // KEYWORD + event<UPPERCASE>  / tran  = KEYWORD,
-                // KEYWORD + event<DIGITAL>    / tran  = IDENT,
-                // KEYWORD + event<DIGITAL>    / build = INIT
             );
         }
     };

@@ -1,7 +1,3 @@
-//
-// Created by Magnesium on 2025/3/4.
-//
-
 #ifndef HDG_NEWLEXER_H
 #define HDG_NEWLEXER_H
 
@@ -250,11 +246,6 @@ class Token {
         else return false;
     };
 
-//    constexpr auto isDigital = [](const auto& event){
-//        if (static_cast<int>(event.type & CharType::DIGITAL)) return true;
-//        else return false;
-//    };
-
     // action
     constexpr auto pushChar2Token = [](const auto& event) {
         event.m_lexer.lock()->pushChar2Token();
@@ -262,9 +253,6 @@ class Token {
     constexpr auto throwError = [](const auto& event) {
         assert(false);
     };
-    // constexpr auto buildToken = [](const auto& event) {
-    //     event.m_lexer.lock()->buildToken();
-    // };
     constexpr auto ignoreChar = [](const auto& event) {
         event.m_lexer.lock()->advance();
     };

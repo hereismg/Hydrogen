@@ -1,6 +1,3 @@
-//
-// Created by Magnesium on 2025/3/4.
-//
 #include<gtest/gtest.h>
 #include<NewLexer.h>
 #include<sml.hpp>
@@ -140,12 +137,12 @@ INSTANTIATE_TEST_SUITE_P(TestSuit, Test_StateMachine_P, testing::Values(
 ));
 
 
-class Test_StateMachine_P_2: public testing::TestWithParam<std::tuple<
+class Test_SM_Position: public testing::TestWithParam<std::tuple<
     std::string, 
     std::vector<Token>, 
     std::vector<hdg::Position>
 >>{};
-TEST_P(Test_StateMachine_P_2, _1){
+TEST_P(Test_SM_Position, _1){
     using namespace sml;
 
     auto [code, expected_token, expected_pos] = GetParam();
@@ -166,6 +163,7 @@ TEST_P(Test_StateMachine_P_2, _1){
 
     auto actual = ctx.get()->getTokenArr();
 
+    ASSERT_EQ(actual.size(), expected_pos.size());
     for (int i=0; i<actual.size(); i++){
         EXPECT_EQ(actual[i].getType(), expected_token[i].getType());
         EXPECT_EQ(actual[i].getVal(),  expected_token[i].getVal());
@@ -180,7 +178,7 @@ hdg::Position buildPos(hdg::Indicator start, hdg::Indicator end){
     return pos;
 }
 
-INSTANTIATE_TEST_SUITE_P(TestSuit, Test_StateMachine_P_2, testing::Values(
+INSTANTIATE_TEST_SUITE_P(TestSuit, Test_SM_Position, testing::Values(
     std::tuple<std::string, std::vector<Token>, std::vector<hdg::Position>>{
         "{}123 ",
         {
@@ -207,6 +205,21 @@ INSTANTIATE_TEST_SUITE_P(TestSuit, Test_StateMachine_P_2, testing::Values(
             buildPos({1,1,2},{2,1,3}),
             buildPos({2,1,3},{5,1,6}),
             buildPos({6,2,1},{7,2,2})
+        }
+    },
+    std::tuple<std::string, std::vector<Token>, std::vector<hdg::Position>>{
+        "{ \n function \n 1}",
+        {
+            {TokenType::BRACKET_T , "{"},
+            {TokenType::KEYWORD   , "function"},
+            {TokenType::INT_CONST , "1"},
+            {TokenType::BRACKET_T , "}"}
+        },
+        {
+            buildPos({0,1,1} ,{1,1,2}),
+            buildPos({4,2,2} ,{12,2,10}),
+            buildPos({15,3,2},{16,3,3}),
+            buildPos({16,3,3},{17,3,4})
         }
     }
 ));

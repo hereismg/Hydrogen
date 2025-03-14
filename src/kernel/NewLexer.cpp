@@ -116,8 +116,6 @@ namespace hdg_lexer {
     bool Context::advance(){
         if (m_ptr.index >= m_code.size()) return false;
         
-        ++ m_ptr.index;
-
         if (m_code[m_ptr.index] == '\n'){
             ++ m_ptr.line;
             m_ptr.col = 1;
@@ -125,6 +123,8 @@ namespace hdg_lexer {
         else{
             ++ m_ptr.col;
         }
+        
+        ++ m_ptr.index;
         return true;
     }
 

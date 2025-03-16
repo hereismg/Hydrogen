@@ -7,6 +7,7 @@
 #include <memory>
 #include <tuple>
 #include <sml.hpp>
+#include <cassert>
 #include "../../include/basic/Position.h"
 
 namespace hdg_lexer {

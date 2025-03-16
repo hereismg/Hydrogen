@@ -111,7 +111,7 @@ namespace hdg {
 
 
     void ShellModel::run(const std::string &code) {
-        m_interpreter.interpret("<stdin>", code);
+        // m_interpreter.interpret("<stdin>", code);
     }
 
     std::string ShellView::input() {

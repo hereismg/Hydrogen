@@ -11,7 +11,7 @@
 #include <fstream>
 #include <cstring>
 #include "Lexer.h"
-#include "NewLexer.h"
+// #include "NewLexer.h"
 #include "Parser.h"
 #include "Interpreter.h"
 #include "../basic/Error.h"

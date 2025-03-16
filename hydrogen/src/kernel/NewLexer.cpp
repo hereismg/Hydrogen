@@ -2,7 +2,6 @@
 // Created by Magnesium on 2025/3/4.
 //
 
-#include <cassert>
 #include <set>
 #include <utility>
 #include "../../include/kernel/NewLexer.h"

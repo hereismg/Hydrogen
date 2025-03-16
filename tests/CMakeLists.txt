@@ -1,5 +1,4 @@
 #set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/tests/build)
-add_subdirectory(gtest-1.16)
 
 set(TEST_OUTPUT)
 set(GOOGLE_TEST_DIR "${CMAKE_CURRENT_LIST_DIR}/tests/gtest-1.16")
@@ -11,12 +10,11 @@ foreach(test_src ${TEST_CASE})
     target_include_directories(
             ${test_name}
             PUBLIC
-            "${GOOGLE_TEST_DIR}/googletest/include"
-            "${GOOGLE_TEST_DIR}/googlemock/include"
+            "${GTEST_INCLUDE_DIR}"
             "${SML_INCLUDE_DIR}"
-            "${PROJECT_SOURCE_DIR}/include/basic"
-            "${PROJECT_SOURCE_DIR}/include/kernel"
-            "${PROJECT_SOURCE_DIR}/include/node"
+            "${PROJECT_SOURCE_DIR}/hydrogen/include/basic"
+            "${PROJECT_SOURCE_DIR}/hydrogen/include/kernel"
+            "${PROJECT_SOURCE_DIR}/hydrogen/include/node"
 #            "${PROJECT_SOURCE_DIR}/include/object"
     )
     target_link_directories(

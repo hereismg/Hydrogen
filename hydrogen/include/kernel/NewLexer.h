@@ -8,7 +8,7 @@
 #include <tuple>
 #include <sml.hpp>
 #include <cassert>
-#include "../../include/basic/Position.h"
+#include "../basic/Position.h"
 
 namespace hdg_lexer {
     namespace sml = boost::sml;
@@ -135,15 +135,14 @@ namespace hdg_lexer {
         OPERATOR,
     };
 
-    auto INIT        = "INIT"_s;
-    auto KEYWORD     = "KEYWORD"_s;
-    auto IDENT       = "IDENT"_s;
-    auto INT_CONST   = "INT_CONST"_s;
-    auto FLOAT_CONST = "FLOAT_CONST"_s;
-    auto STR_CONST   = "STR_CONST"_s;
-    auto OPERATOR    = "OPERATOR"_s;
-    auto ERROR       = "ERROR"_s;
-
+    inline auto INIT        = "INIT"_s;
+    inline auto KEYWORD     = "KEYWORD"_s;
+    inline auto IDENT       = "IDENT"_s;
+    inline auto INT_CONST   = "INT_CONST"_s;
+    inline auto FLOAT_CONST = "FLOAT_CONST"_s;
+    inline auto STR_CONST   = "STR_CONST"_s;
+    inline auto OPERATOR    = "OPERATOR"_s;
+    inline auto ERROR       = "ERROR"_s;
 
     /**
      * @class Token

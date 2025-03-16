@@ -62,7 +62,7 @@ core       : (colon expr) | (lbrace statements rbrace)
 
 - 符号 `[...]` 表示括号内包含的内容是可选项；
 - 符号 `{...}` 表示括号内包含的内容是可重复 0 次或多次的项；
-- **终结符**：全大写的记号、由单引号 `'` 包含得字符串；
+- **终结符**：全大写的记号、由单引号 `'` 包含的字符串；
 
 表达式
 
@@ -81,23 +81,26 @@ graph TD
 
 ```C
 END : '\n' | '\r' | 'EOF' | ';'
+
 // 执行单元
 ExeUnit   : {Stmt | Def}
-LoopUnit  : 
+LoopUnit  : {LoopStmt}
 
 // 语句
+LoopStmt  : 'break' END
+          | 'continue' END
+          | Stmt
 Stmt      : IfStmt
           | WhileStmt
           | AssignStmt
           | 'return' [Expr] END
-          | 'break' END
           | Expr END
 IfStmt    : 'if' Expr '{' ExeUnit '}'
             {'elif' Expr '{' ExeUnit '}'}
             ['else' '{' ExeUnit '}']
-WhileStmt : 'while' Expr '{' ExeUnit '}'
-AssignStmt: 'var' IDENT ['=' Expr] END
-
+WhileStmt : 'while' Expr '{' LoopUnit '}'
+AssignStmt: IDENT ['=' (Expr | Array)] END
+Array     : '[' {Expr ','} ']'
 
 // 定义
 Def       : FuncDef
@@ -108,8 +111,8 @@ Params    : IDENT {',' IDENT}
 // 表达式
 Expr      : LogicExpr
 
-LogicExpr : CompExpr {('and' | 'or') CompExpr}
-          | 'not' CompExpr
+LogicExpr : ('not' LogicExpr)
+          | (CompExpr {('and' | 'or') CompExpr}) 
 CompExpr  : ArithExpr {('>' | '<' | '>=' | '<=' | '==') ArithExpr}
 
 ArithExpr : Term {('+' | '-') Term}
@@ -119,8 +122,11 @@ Power     : Primary {'^' Power}
 Primary   : INT_CONST
           | FLOAT_CONST
           | STR_CONST
+          | Call
           | IDENT
           | '(' Expr ')'
+Call      : (IDENT '(' Expr {',' Expr} ')' )
+          | (IDENT '[' Expr {',' Expr} ']')
 ```
 
 ## 二、终结符

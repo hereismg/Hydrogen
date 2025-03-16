@@ -62,7 +62,7 @@ core       : (colon expr) | (lbrace statements rbrace)
 
 - 符号 `[...]` 表示括号内包含的内容是可选项；
 - 符号 `{...}` 表示括号内包含的内容是可重复 0 次或多次的项；
-- 全大写的记号是**终结符**
+- **终结符**：全大写的记号、由单引号 `'` 包含得字符串；
 
 表达式
 
@@ -79,11 +79,45 @@ graph TD
 
 
 
-```ebnf
-ArithExpr : Term ('+' | '-' Term)*
-Term      : Factor ('*' | '/' Factor)*
-Factor    : IntConst
-          : '(' ArithExpr ')'
+```C
+// 执行单元
+ExeUnit   : {Stmt}
+
+// 语句
+Stmt      : IfStmt
+          : WhileStmt
+          : 'return' [Expr]
+          : 'break'
+IfStmt    : 'if' Expr '{' ExeUnit '}'
+            {'elif' Expr '{' ExeUnit '}'}
+            {'else' '{' '}'}
+WhileStmt : 'while' Expr '{' ExeUnit '}'
+
+
+// 定义
+Def       : VarDef
+          : FuncDef
+VarDef    : 'var' IDENT ['=' Expr]
+FuncDef   : 'func'  IDENT '(' 
+            [IDENT] {',' IDENT}
+           ')' '{' Stmt '}'
+
+
+// 表达式
+Expr      : CompExpr 
+          : LogicExpr
+
+LogicExpr : 'not' LogicExpr
+          : LogicExpr {'and' LogicExpr}
+CompExpr  : ArithExpr {'>' | '<' | '>=' | '<=' | '==' ArithExpr}
+
+ArithExpr : Term {'+' | '-' Term}
+Term      : Factor {'*' | '/' Factor}
+Factor    : {'+' | '-'} Power
+Power     : INT_CONST
+          : FLOAT_CONST
+          : STR_CONST
+          : '(' Expr ')'
 ```
 
 ## 二、终结符

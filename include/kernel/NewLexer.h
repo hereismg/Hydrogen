@@ -144,21 +144,21 @@ namespace hdg_lexer {
     auto ERROR       = "ERROR"_s;
 
 
-/**
- * @class Token
- * @brief 表示词法分析后生成的词法单元（Token），包含类型、值和位置信息
- * 
- * 该类用于存储词法分析器生成的词法单元信息，包含：
- * - 令牌类型（如标识符、数字、运算符等）
- * - 令牌在源代码中的实际字符串值
- * - 令牌在源代码中的位置信息（用于错误提示和调试）
- */
-class Token {
+    /**
+     * @class Token
+     * @brief 表示词法分析后生成的词法单元（Token），包含类型、值和位置信息
+     * 
+     * 该类用于存储词法分析器生成的词法单元信息，包含：
+     * - Token 类型（如标识符、数字、运算符等）
+     * - Token 在源代码中的实际字符串值
+     * - Token 在源代码中的位置信息（用于错误提示和调试）
+     */
+    class Token {
     protected:
-        TokenType m_type;       ///< token 类型（枚举类型，如 IDEN、INT_CONST 等）
-        std::string m_val;      ///< token 在源代码中的实际字符串值
-        hdg::Position m_pos;    ///< token 在源代码中的位置信息（行号、列号等）
-     
+        TokenType     m_type; ///< token 类型（枚举类型，如 IDEN、INT_CONST 等）
+        std::string   m_val;  ///< token 在源代码中的实际字符串值
+        hdg::Position m_pos;  ///< token 在源代码中的位置信息（行号、列号等）
+    
     public:
         /**
          * @brief 默认构造函数，创建空 token
@@ -168,7 +168,7 @@ class Token {
         /**
          * @brief 带参数的构造函数，创建指定类型的令牌
          * @param type token 类型（TokenType 枚举值）
-         * @param val token 的字符串值
+         * @param val  token 的字符串值
          */
         Token(TokenType type, std::string val);
      
@@ -356,6 +356,15 @@ class Token {
 
 
     std::string debug_CurrentState(sml::sm<LexerSM> &s);
+
+    // class Lexer{
+    // protected:
+    //     Sender s{},
+        
+    // public:
+    //     Lexer() = default;
+
+    // }
 } // hdg
 
 #endif //HDG_NEWLEXER_H

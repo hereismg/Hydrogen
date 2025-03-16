@@ -63,6 +63,12 @@
         "semaphore": "cpp",
         "stop_token": "cpp",
         "thread": "cpp",
-        "cassert": "cpp"
+        "cassert": "cpp",
+        "charconv": "cpp",
+        "chrono": "cpp",
+        "csignal": "cpp",
+        "unordered_set": "cpp",
+        "format": "cpp",
+        "iomanip": "cpp"
     }
 }

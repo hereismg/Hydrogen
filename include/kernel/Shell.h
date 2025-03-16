@@ -11,6 +11,7 @@
 #include <fstream>
 #include <cstring>
 #include "Lexer.h"
+#include "NewLexer.h"
 #include "Parser.h"
 #include "Interpreter.h"
 #include "../basic/Error.h"
@@ -21,7 +22,7 @@ namespace hdg {
 
     class ShellModel{
     protected:
-        Interpreter m_interpreter;
+        // std::list<File> fileArr;
 
     public:
         ShellModel() = default;

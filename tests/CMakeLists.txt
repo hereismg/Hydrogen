@@ -1,5 +1,5 @@
 #set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/tests/build)
-# add_subdirectory(gtest-1.16)
+add_subdirectory(gtest-1.16)
 
 set(TEST_OUTPUT)
 set(GOOGLE_TEST_DIR "${CMAKE_CURRENT_LIST_DIR}/tests/gtest-1.16")

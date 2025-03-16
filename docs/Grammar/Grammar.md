@@ -80,44 +80,47 @@ graph TD
 
 
 ```C
+END : '\n' | '\r' | 'EOF' | ';'
 // 执行单元
-ExeUnit   : {Stmt}
+ExeUnit   : {Stmt | Def}
+LoopUnit  : 
 
 // 语句
 Stmt      : IfStmt
-          : WhileStmt
-          : 'return' [Expr]
-          : 'break'
+          | WhileStmt
+          | AssignStmt
+          | 'return' [Expr] END
+          | 'break' END
+          | Expr END
 IfStmt    : 'if' Expr '{' ExeUnit '}'
             {'elif' Expr '{' ExeUnit '}'}
-            {'else' '{' '}'}
+            ['else' '{' ExeUnit '}']
 WhileStmt : 'while' Expr '{' ExeUnit '}'
+AssignStmt: 'var' IDENT ['=' Expr] END
 
 
 // 定义
-Def       : VarDef
-          : FuncDef
-VarDef    : 'var' IDENT ['=' Expr]
-FuncDef   : 'func'  IDENT '(' 
-            [IDENT] {',' IDENT}
-           ')' '{' Stmt '}'
+Def       : FuncDef
+FuncDef   : 'func'  IDENT '(' [Params] ')' '{' ExeUnit '}'
+Params    : IDENT {',' IDENT}
 
 
 // 表达式
-Expr      : CompExpr 
-          : LogicExpr
+Expr      : LogicExpr
 
-LogicExpr : 'not' LogicExpr
-          : LogicExpr {'and' LogicExpr}
-CompExpr  : ArithExpr {'>' | '<' | '>=' | '<=' | '==' ArithExpr}
+LogicExpr : CompExpr {('and' | 'or') CompExpr}
+          | 'not' CompExpr
+CompExpr  : ArithExpr {('>' | '<' | '>=' | '<=' | '==') ArithExpr}
 
-ArithExpr : Term {'+' | '-' Term}
-Term      : Factor {'*' | '/' Factor}
+ArithExpr : Term {('+' | '-') Term}
+Term      : Factor {('*' | '/') Factor}
 Factor    : {'+' | '-'} Power
-Power     : INT_CONST
-          : FLOAT_CONST
-          : STR_CONST
-          : '(' Expr ')'
+Power     : Primary {'^' Power}
+Primary   : INT_CONST
+          | FLOAT_CONST
+          | STR_CONST
+          | IDENT
+          | '(' Expr ')'
 ```
 
 ## 二、终结符
@@ -174,9 +177,7 @@ IDENT ::= (LOWERCASE | UPPERCASE | '_') (LOWERCASE | UPPERCASE | DIGIT | '_')*
 #### 3. 数值常量 `INT_CONST` `FLOAT_CONST`
 
 ```ebnf
-INT_CONST   ::= ('+' | '-')? DIGIT+                 # 十进制
-              | ('+' | '-')? '0x' HEX_DIGIT+        # 十六进制
-              | ('+' | '-')? '0b' ('0' | 'b')+      # 二进制
+INT_CONST   ::= ('+' | '-')? DIGIT+
 FLOAT_CONST ::= ('+' | '-')? DIGIT+ '.' DIGIT+
 ```
 
@@ -191,22 +192,22 @@ STR_CONST ::= '"' 任意字符 '"'
 #### 5. 运算符 `OPERATOR_T`
 
 ```ebnf
-OPERATOR ::= '+'  | '-'  | '*'  | '/'  | '^'  |
-             '+=' | '-=' | '*=' | '/=' |
-             '<'  | '<=' | '>'  | '>=' | '==' |
-             '&&' | '||' | '!'
+OPERATOR : '+'  | '-'  | '*'  | '/'  | '^'
+         | '+=' | '-=' | '*=' | '/='
+         | '<'  | '<=' | '>'  | '>=' | '=='
+         | '&&' | '||' | '!'
 ```
 
 #### 6. 括号 `BRACKET_T`
 
 ```ebnf
-BRACKET_C ::= '(' | ')' |
-            '[' | ']' | 
-            '{' | '}'
+BRACKET_C : '(' | ')'
+          | '[' | ']' 
+          | '{' | '}'
 ```
 
 #### 7. 结束符 `END`
 
 ```ebnf
-END ::= ''
+END ::= '\n' | '\r' | 'EOF' | ';'
 ```

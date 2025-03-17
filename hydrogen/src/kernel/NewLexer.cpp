@@ -158,7 +158,7 @@ namespace hdg_lexer {
     }
 
     std::vector<Token> Context::getTokenArr(){
-        return m_tokenArr;
+        return std::move(m_tokenArr);
     }
 
     size_t Context::getPtr(){
@@ -230,5 +230,21 @@ namespace hdg_lexer {
             return "STR_CONST";
         }
         return "UNKNOWN";
+    }
+
+    std::vector<Token> Lexer::run(const std::string& txt){
+        sm<LexerSM> sm{s};
+
+        auto ctx = std::make_shared<Context>(txt);
+
+        while(ctx.get()->getPtr() < ctx.get()->size()){
+            char c = ctx.get()->getChar();
+            bool res = sendEvent(c, sm, ctx);
+
+            // 某个状态的事件无法处理！
+            assert(res);
+        }
+
+        return ctx->getTokenArr();
     }
 } // hdg

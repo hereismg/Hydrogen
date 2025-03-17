@@ -1,6 +1,9 @@
 #include "../../include/kernel/NewParser.h"
 
-// std::unique_ptr<Node> Parser::run(const std::vector<Token>& tokens, std::weak_ptr<Environment> envir){
-//     if (tokens.empty()) return nullptr;
-// }
+namespace hdg_lexer{
+    std::unique_ptr<hdg::Node> Parser::run(const std::vector<Token>& tokens, std::weak_ptr<hdg::Environment> envir){
+        if (tokens.empty()) return nullptr;
+    }
+}
+
 

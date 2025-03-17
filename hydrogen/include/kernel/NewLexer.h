@@ -357,14 +357,14 @@ namespace hdg_lexer {
 
     std::string debug_CurrentState(sml::sm<LexerSM> &s);
 
-    // class Lexer{
-    // protected:
-    //     Sender s{},
-        
-    // public:
-    //     Lexer() = default;
+    class Lexer{
+    protected:
+        Sender s{};
 
-    // }
+    public:
+        Lexer() = default;
+        std::vector<Token> run(const std::string& txt);
+    };
 } // hdg
 
 #endif //HDG_NEWLEXER_H

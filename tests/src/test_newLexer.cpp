@@ -51,21 +51,8 @@ TEST_P(Test_StateMachine_P, _1){
 
     auto [code, expected] = GetParam();
 
-    Sender s{};
-    auto ctx = std::make_shared<Context>(code);
-
-    sm<LexerSM> sm{s};
-    ASSERT_EQ(sm.is(INIT), true);
-
-    while (ctx.get()->getPtr() < ctx.get()->size()){
-        char c1 = ctx.get()->getChar();
-        bool res = sendEvent(c1, sm, ctx);
-
-        // 某个状态的事件无法处理！
-        ASSERT_TRUE(res);
-    }
-
-    auto actual = ctx.get()->getTokenArr();
+    Lexer lexer;
+    auto actual = lexer.run(code);
 
     // 注意，这的判断不包含 pos 变量
     for (int i=0; i<actual.size(); i++){

@@ -2,7 +2,7 @@
 // Created by Magnesium on 2023/7/14.
 //
 
-#include "../../include/kernel/Shell.h"
+#include "../include/Shell.h"
 
 namespace hdg {
     void hydrogen(int argc, char* argv[]){

@@ -13,6 +13,7 @@ add_subdirectory("lib/gtest-1.16")
 set(GTEST_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/lib/gtest-1.16/googlemock" "${CMAKE_CURRENT_SOURCE_DIR}/lib/gtest-1.16/googletest")
 
 add_subdirectory(hydrogen)
+add_subdirectory(shell)
 
 file(GLOB_RECURSE SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 

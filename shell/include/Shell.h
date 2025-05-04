@@ -10,12 +10,12 @@
 #include <sstream>
 #include <fstream>
 #include <cstring>
-#include "Lexer.h"
+#include "../../hydrogen/include/kernel/Lexer.h"
 // #include "NewLexer.h"
-#include "Parser.h"
-#include "Interpreter.h"
-#include "../basic/Error.h"
-#include "../basic/Environment.h"
+#include "../../hydrogen/include/kernel/Parser.h"
+#include "../../hydrogen/include/kernel/Interpreter.h"
+#include "../../hydrogen/include/basic/Error.h"
+#include "../../hydrogen/include/basic/Environment.h"
 
 namespace hdg {
     void hydrogen(int argc, char* argv[]);

@@ -8,6 +8,7 @@
 #include <string>
 #include <cmath>
 #include <utility>
+#include <memory>
 #include "Node.h"
 #include "../basic/Token.h"
 #include "../basic/Error.h"
@@ -20,7 +21,11 @@ namespace hdg {
         Node* m_left;
         Node* m_right;
 
+        std::unique_ptr<Node> m_left_u;
+        std::unique_ptr<Node> m_right_u;
+
     public:
+        BinaryOperatorNode();
         BinaryOperatorNode(const Token& oper, Node* left, Node* right, const Position& position);
         BinaryOperatorNode(Token::Type oper, Node* left, Node* right, const Position& position, Environment* environment);
         ~BinaryOperatorNode() override;

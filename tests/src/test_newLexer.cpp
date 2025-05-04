@@ -80,9 +80,11 @@ INSTANTIATE_TEST_SUITE_P(TestSuit, Test_StateMachine_P, testing::Values(
         }
     },
     std::tuple<std::string, std::vector<Token>>{
-        "a123 ",
+        "a123 + 1 ",
         {
-            {TokenType::IDENT, "a123"}
+            {TokenType::IDENT    , "a123"},
+            {TokenType::OPERATOR , "+"},
+            {TokenType::INT_CONST, "1"}
         }
     },
     std::tuple<std::string, std::vector<Token>>{

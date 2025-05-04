@@ -3,60 +3,85 @@
 
 #include <set>
 #include <memory>
+#include <functional>
 
 #include "NewLexer.h"
 #include "../basic/Environment.h"
 #include "../node/Node.h"
+#include "../node/BinaryOperatorNode.h"
 
 namespace hdg_lexer{
-    
+    using wEnvir = std::weak_ptr<hdg::Environment>;
+    using uNode  = std::unique_ptr<hdg::Node>;
+
     class Parser {
     public:
-        std::unique_ptr<hdg::Node> run(const std::vector<Token>& tokens, std::weak_ptr<hdg::Environment> envir);
+        Parser(const std::vector<Token>& tokens, wEnvir envir);
+        uNode run();
 
     protected:
-        size_t ptr = 0;
-        void advance();
-        void retreat();
+        size_t m_ptr = 0;
+        std::vector<Token> m_tokens; // 也许可以用 std::span 优化
+
+        constexpr bool advance(){
+            if (m_ptr >= m_tokens.size()){
+                return false;
+            }
+            else{
+                ++ m_ptr;
+                return true;
+            }
+        }
+        
+        constexpr bool retreat(){
+            if (m_ptr <= 0) {
+                return false;
+            }
+            else{
+                -- m_ptr;
+                return true;
+            }
+        }
 
         // 执行单元
-        std::unique_ptr<hdg::Node> ExeUnit   (std::weak_ptr<hdg::Environment> envir);
-        std::unique_ptr<hdg::Node> LoopUnit  (std::weak_ptr<hdg::Environment> envir);
+        uNode ExeUnit   (wEnvir envir);
+        uNode LoopUnit  (wEnvir envir);
 
         // 语句
-        std::unique_ptr<hdg::Node> Stmt      (std::weak_ptr<hdg::Environment> envir);
-        std::unique_ptr<hdg::Node> LoopStmt  (std::weak_ptr<hdg::Environment> envir);
-        std::unique_ptr<hdg::Node> IfStmt    (std::weak_ptr<hdg::Environment> envir);
-        std::unique_ptr<hdg::Node> WhileStmt (std::weak_ptr<hdg::Environment> envir);
-        std::unique_ptr<hdg::Node> AssignStmt(std::weak_ptr<hdg::Environment> envir);
-        std::unique_ptr<hdg::Node> Array     (std::weak_ptr<hdg::Environment> envir);
+        uNode Stmt      (wEnvir envir);
+        uNode LoopStmt  (wEnvir envir);
+        uNode IfStmt    (wEnvir envir);
+        uNode WhileStmt (wEnvir envir);
+        uNode AssignStmt(wEnvir envir);
+        uNode Array     (wEnvir envir);
 
         // 定义
-        std::unique_ptr<hdg::Node> Def       (std::weak_ptr<hdg::Environment> envir);
-        std::unique_ptr<hdg::Node> FuncDef   (std::weak_ptr<hdg::Environment> envir);
-        std::unique_ptr<hdg::Node> Params    (std::weak_ptr<hdg::Environment> envir);
+        uNode Def       (wEnvir envir);
+        uNode FuncDef   (wEnvir envir);
+        uNode Params    (wEnvir envir);
 
         // 表达式
-        std::unique_ptr<hdg::Node> Expr      (std::weak_ptr<hdg::Environment> envir);
-        std::unique_ptr<hdg::Node> LogicExpr (std::weak_ptr<hdg::Environment> envir);
-        std::unique_ptr<hdg::Node> CompExpr  (std::weak_ptr<hdg::Environment> envir);
-        std::unique_ptr<hdg::Node> ArithExpr (std::weak_ptr<hdg::Environment> envir);
-        std::unique_ptr<hdg::Node> Term      (std::weak_ptr<hdg::Environment> envir);
-        std::unique_ptr<hdg::Node> Factor    (std::weak_ptr<hdg::Environment> envir);
-        std::unique_ptr<hdg::Node> Power     (std::weak_ptr<hdg::Environment> envir);
-        std::unique_ptr<hdg::Node> Primary   (std::weak_ptr<hdg::Environment> envir);
-        std::unique_ptr<hdg::Node> Call      (std::weak_ptr<hdg::Environment> envir);
+        uNode Expr      (wEnvir envir);
+        uNode LogicExpr (wEnvir envir);
+        uNode CompExpr  (wEnvir envir);
+        uNode ArithExpr (wEnvir envir);
+        uNode Term      (wEnvir envir);
+        uNode Factor    (wEnvir envir);
+        uNode Power     (wEnvir envir);
+        uNode Primary   (wEnvir envir);
+        uNode Call      (wEnvir envir);
 
-        std::unique_ptr<hdg::Node> binOper(
-            hdg::Environment* envir,
-            const std::set<Token, std::less<>>&opers,
-            std::function<hdg::Node*(hdg::Environment* envir)> funA,
-            std::function<hdg::Node*(hdg::Environment* envir)> funB=nullptr
+        // 可复用函数
+        uNode binOper(
+            wEnvir envir,
+            const std::vector<Token>& opers,
+            std::function<uNode(wEnvir envir)> funA,
+            std::function<uNode(wEnvir envir)> funB=nullptr
         );
-        std::shared_ptr<hdg::Node> unaryOper(
-            hdg::Environment* envir,
-            const std::set<Token, std::less<>>&opers,
-            std::function<hdg::Node*(hdg::Environment* envir)> fun
+        uNode unaryOper(
+            wEnvir envir,
+            const std::vector<Token>& opers,
+            std::function<uNode(wEnvir envir)> fun
         );
     };
 }

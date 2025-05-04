@@ -336,6 +336,7 @@ namespace hdg_lexer {
                 OPERATOR + event<Event_OPERATOR> / pushChar2Token  = OPERATOR,
                 OPERATOR + event<Event_DIGITAL>  / buildOperToken  = INIT,
                 OPERATOR + event<Event_BRACKET>  / buildOperToken  = INIT,
+                OPERATOR + event<Event_BLANK>    / buildOperToken  = INIT,
                 
                 STR_CONST + event<Event_QUOTE>     / buildStrConstToken = INIT,
                 STR_CONST + event<Event_DIGITAL>   / pushChar2Token     = STR_CONST,

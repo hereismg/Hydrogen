@@ -94,3 +94,4 @@ endfunction()
 
 hdg_append_test_with_file("src/test_newLexer.cpp")
 hdg_append_test_with_dir("src/parse")
+hdg_append_test_with_dir("src/lexer")

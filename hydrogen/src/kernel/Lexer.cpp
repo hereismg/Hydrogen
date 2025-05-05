@@ -182,7 +182,9 @@ namespace hdg {
         int counter = 0;
         Token::Type type = Token::INT;
 
-        while(m_pos.index < m_code->length() && (whatIsThis(m_currentChar) == LegalChar::DIGITAL || m_currentChar == '.')) {
+        while(m_pos.index < m_code->length() && 
+             ((whatIsThis(m_currentChar) & LegalChar::DIGITAL) || m_currentChar == '.')) 
+        {
             if (m_currentChar == '.') {
                 if (counter==1) break;
                 type = Token::FLOAT;

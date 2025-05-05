@@ -35,32 +35,32 @@ namespace hdg_lexer {
     CharType getCharType(char c){
         auto res = CharType::OTHER;
 
-        if (c>='0' && c<='9')    res |= CharType::DIGITAL;
+        if (c>='0' && c<='9')      res |= CharType::DIGITAL;
 
-        if (c>='0' && c<='9' ||
-            c>='a' && c<='f' ||
-            c>='A' && c<='F'   ) res |= CharType::HEX_DIGITAL;
+        if ((c>='0' && c<='9') ||
+            (c>='a' && c<='f') ||
+            (c>='A' && c<='F')   ) res |= CharType::HEX_DIGITAL;
 
-        if (c>='a' && c<='z')    res |= CharType::LOWERCASE;
+        if (c>='a' && c<='z')      res |= CharType::LOWERCASE;
 
-        if (c>='A' && c<='Z')    res |= CharType::UPPERCASE;
+        if (c>='A' && c<='Z')      res |= CharType::UPPERCASE;
 
-        if (c=='_')              res |= CharType::UNDERLINE;
+        if (c=='_')                res |= CharType::UNDERLINE;
 
         if (c==' ' || c=='\t'||
-            c=='\n' )            res |= CharType::BLANK;
+            c=='\n' )              res |= CharType::BLANK;
 
         if (c=='{' || c=='}' ||
             c=='[' || c==']' ||
-            c=='(' || c==')'   ) res |= CharType::BRACKET_C;
+            c=='(' || c==')'   )   res |= CharType::BRACKET_C;
 
         if (c=='>' || c=='<' || c=='=' || c=='|' || c=='&' ||
             c=='+' || c=='-' || c=='*' || c=='/' || c=='^' ||
-            c=='!' || c=='%')    res |= CharType::OPERATOR_C;
+            c=='!' || c=='%')      res |= CharType::OPERATOR_C;
 
-        if (c=='"')              res |= CharType::QUOTE;
+        if (c=='"')                res |= CharType::QUOTE;
 
-        if (c=='.')              res |= CharType::DOT;
+        if (c=='.')                res |= CharType::DOT;
 
         return res;
     }

@@ -12,9 +12,9 @@ namespace hdg {
         int res = 0;
 
         if (c>='0' && c<='9')    res |= DIGITAL;
-        if (c>='0' && c<='9' ||
-            c>='a' && c<='f' ||
-            c>='A' && c<='F')    res |= HEX_DIGITAL;
+        if ((c>='0' && c<='9') ||
+            (c>='a' && c<='f') ||
+            (c>='A' && c<='F'))  res |= HEX_DIGITAL;
         if (c>='a' && c<='z')    res |= LOWERCASE;
         if (c>='A' && c<='Z')    res |= UPPERCASE;
         if (c=='_')              res |= UNDERLINE;
@@ -34,7 +34,8 @@ namespace hdg {
         }else{
             out << "[";
 
-            for (int i=0; i<tokens.size()-1; i++) {
+            int64_t len = tokens.size();
+            for (int i=0; i < len-1; i++) {
                 out << tokens[i] << ", ";
             }
 

@@ -21,7 +21,7 @@ namespace hdg {
     Object *Function::parenthesis(const std::vector<Object*>& args) {
         checkArgs(args);
 
-        for (int i=0; i<m_args.size(); i++){
+        for (size_t i=0; i<m_args.size(); i++){
             m_environment->setSymbol(m_args[i]->getName(), args[i], Environment::Mode::LOCAL);
         }
 

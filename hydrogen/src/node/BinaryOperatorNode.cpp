@@ -112,13 +112,14 @@ namespace hdg {
             }
         }
         catch (ZeroDivisionError& error){
-            delete left, right;
+            delete left;
+            delete right;
             error.thisPosStack()->push_back(*m_right->thisPosition());
             throw error;
         }
 
 
-        delete left, right;
+        // delete left, right;
         return result;
     }
 } // hdg

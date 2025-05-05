@@ -45,6 +45,7 @@ namespace hdg {
         }
         else{
             std::cout << "NumObjNode::toString: Unknown class type." << std::endl;
+            exit(-1);
         }
     }
 
@@ -57,6 +58,7 @@ namespace hdg {
         }
         else{
             std::cout << "NumObjNode::interpret: Unknown class type." << std::endl;
+            exit(-1);
         }
     }
 

@@ -4,6 +4,8 @@
 
 #include "../../include/object/Float.h"
 
+#include <cassert>
+
 namespace hdg {
     Float::Float(float value): m_value(value) {
         setClass("Float");
@@ -30,6 +32,9 @@ namespace hdg {
             double result = m_value + (double)((Integer*)other)->getValue();
             return new Float(result);
         }
+        else{
+            assert(false);
+        }
     }
 
     Object *Float::minus(Object *other) {
@@ -40,6 +45,9 @@ namespace hdg {
         else if (other->getClass() == "Integer"){
             double result = m_value - (double)((Integer*)other)->getValue();
             return new Float(result);
+        }
+        else{
+            assert(false);
         }
     }
 
@@ -52,6 +60,9 @@ namespace hdg {
             double result = m_value * (double)((Integer*)other)->getValue();
             return new Float(result);
         }
+        else{
+            assert(false);
+        }
     }
 
     Object *Float::div(Object *other) {
@@ -62,6 +73,9 @@ namespace hdg {
         else if (other->getClass() == "Integer"){
             double result = m_value / (double)((Integer*)other)->getValue();
             return new Float(result);
+        }
+        else{
+            assert(false);
         }
     }
 
@@ -74,6 +88,9 @@ namespace hdg {
             double result = std::pow(m_value, (double)((Integer*)other)->getValue());
             return new Float(result);
         }
+        else{
+            assert(false);
+        }
     }
 
     Object *Float::equation(Object *other) {
@@ -84,6 +101,9 @@ namespace hdg {
         else if (other->getClass() == "Integer"){
             long long result = m_value == (double)((Integer*)other)->getValue();
             return new Integer(result);
+        }
+        else{
+            assert(false);
         }
     }
 
@@ -96,6 +116,9 @@ namespace hdg {
             long long result = m_value != (double)((Integer*)other)->getValue();
             return new Integer(result);
         }
+        else{
+            assert(false);
+        }
     }
 
     Object *Float::greaterThan(Object *other) {
@@ -106,6 +129,9 @@ namespace hdg {
         else if (other->getClass() == "Integer"){
             long long result = m_value > (double)((Integer*)other)->getValue();
             return new Integer(result);
+        }
+        else{
+            assert(false);
         }
     }
 
@@ -118,6 +144,9 @@ namespace hdg {
             long long result = m_value < (double)((Integer*)other)->getValue();
             return new Integer(result);
         }
+        else{
+            assert(false);
+        }
     }
 
     Object *Float::greaterThanEquation(Object *other) {
@@ -129,6 +158,9 @@ namespace hdg {
             long long result = m_value >= (double)((Integer*)other)->getValue();
             return new Integer(result);
         }
+        else{
+            assert(false);
+        }
     }
 
     Object *Float::lessThanEquation(Object *other) {
@@ -139,6 +171,9 @@ namespace hdg {
         else if (other->getClass() == "Integer"){
             long long result = m_value <= (double)((Integer*)other)->getValue();
             return new Integer(result);
+        }
+        else{
+            assert(false);
         }
     }
 
@@ -160,7 +195,7 @@ namespace hdg {
     std::string Float::toString() {
         std::string str = std::to_string(m_value);
 
-        unsigned long long i = str.length()-1;
+        int64_t i = (int64_t)str.length()-1;
         while(i>=0 && str[i]!='.' && str[i]=='0') i--;
 
         if (str[i]=='.'){

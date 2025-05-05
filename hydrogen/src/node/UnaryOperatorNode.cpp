@@ -56,6 +56,7 @@ namespace hdg {
         else if(m_oper.match(Token::KEYWORD, "not")){
             return  value->notOperator();
         }
+        exit(-1);
     }
 
 } // hdg

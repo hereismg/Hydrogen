@@ -36,7 +36,7 @@ namespace hdg {
         if (other->getClass() == "String"){
             std::vector<Object*> result;
             std::string ori = m_value, spl = ((String*)other)->getValue();
-            auto end = ori.find(spl);
+            int64_t end = ori.find(spl);
             while (end != -1) {
                 result.push_back(new String(ori.substr(0, end)));
                 ori.erase(ori.begin(), ori.begin() + (int)end + 1);

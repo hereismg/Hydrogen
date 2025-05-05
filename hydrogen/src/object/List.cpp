@@ -19,7 +19,7 @@ namespace hdg {
         context << "[";
 
         if (!m_list.empty()){
-            for (int i=0; i<m_list.size()-1; i++){
+            for (size_t i=0; i<m_list.size()-1; i++){
                 context << m_list[i]->toString() << ", ";
             }
             context << (*m_list.rbegin())->toString();
@@ -45,8 +45,8 @@ namespace hdg {
 
     Object *List::brackets(const std::vector<Object *> &args) {
         if (args.size() == 1 && args[0]->getClass() == "Integer"){
-            long long index = ((Integer*)args[0])->getValue();
-            if (index < m_list.size()){
+            int64_t index = ((Integer*)args[0])->getValue();
+            if (index < (int64_t)m_list.size()){
                 return m_list[index];
             }
         }

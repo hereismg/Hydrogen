@@ -12,5 +12,6 @@ target_compile_options(
     -Wall -Wextra
     -Werror
     -Wno-unused-parameter
+    -Wno-deprecated-copy
 )
 target_include_directories(libhdg PUBLIC "${SML_INCLUDE_DIR}")

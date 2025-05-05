@@ -32,7 +32,7 @@ namespace hdg {
         std::cout << "if" << std::endl;
         std::string result;
         result += "if " + conditions[0]->toString() + ": " + expressions[0]->toString() + " ";
-        for (int i=1; i<conditions.size(); i++){
+        for (size_t i=1; i<conditions.size(); i++){
             result += "elif " + conditions[i]->toString() + ": " + expressions[i]->toString() + " ";
         }
         if (elseExpression != nullptr){
@@ -42,7 +42,7 @@ namespace hdg {
     }
 
     Object *IfNode::interpret() {
-        for (int i=0; i<conditions.size(); i++){
+        for (size_t i=0; i<conditions.size(); i++){
             if (conditions[i]->interpret()->isTrue()){
                 return expressions[i]->interpret();
             }

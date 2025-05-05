@@ -157,6 +157,7 @@ namespace hdg {
         }
         else{
             illegalOperator();
+            return nullptr;
         }
     }
 

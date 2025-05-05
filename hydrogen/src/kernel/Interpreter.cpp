@@ -114,7 +114,8 @@ namespace hdg {
 
             std::string result = tree->interpret()->toString();
             return result;
-        }catch(Error &error){
+        }
+        catch (Error &error){
             return error.toString();
         }
     }

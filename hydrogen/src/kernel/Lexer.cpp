@@ -87,7 +87,7 @@ namespace hdg {
             if (m_currentChar == ' ' || m_currentChar == '\t'){
                 advance();
             }
-            else if (whatIsThis(m_currentChar) == LegalChar::DIGITAL){
+            else if (whatIsThis(m_currentChar) & LegalChar::DIGITAL){
                 buildNumber();
             }
             else if (whatIsThis(m_currentChar, LegalChar::UNDERLINE | LegalChar::UPPERCASE | LegalChar::LOWERCASE)){

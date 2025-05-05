@@ -22,7 +22,9 @@ int main(int argc, char *argv[]){
     }
 
     hdg::Interpreter interpreter;
-    interpreter.interpret(path, code_text);
+    auto res = interpreter.interpret(path, code_text);
+
+    std::cout << res << std::endl;
 
     return 0;
 }

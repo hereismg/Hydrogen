@@ -5,12 +5,8 @@
 #ifndef HDG_LEXER_H
 #define HDG_LEXER_H
 
-#include <string>
 #include <set>
 #include <vector>
-#include <tuple>
-#include <functional>
-#include <memory>
 #include "../basic/Token.h"
 
 namespace hdg {

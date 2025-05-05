@@ -2,9 +2,10 @@
 // Created by Magnesium on 2023/7/11.
 //
 
+#include <cassert>
+
 #include "../../include/kernel/Lexer.h"
 #include "../../include/basic/Error.h"
-#include <cassert>
 
 namespace hdg {
 

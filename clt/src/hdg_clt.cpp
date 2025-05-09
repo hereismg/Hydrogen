@@ -9,22 +9,32 @@ Option::Option(int argc, char *argv[]){
     assert(argc > 0);
     assert(argv[argc] == NULL);
 
+    // 设置默认值
+    m_isOutputLexerRes = false;
+
     // 第一个 opt 必须是 hdg 文件
-    if (argv[1]){
+    if (argv[1] = NULL){
         std::cout << "Please Entry File Path!" << std::endl;
     }
-    file_path = argv[1];
+    m_filePath = argv[1];
 
     // 接下来解析各种选项
     int ptr = 2;
     while(ptr < argc){
         if (strcmp(argv[ptr], "-l") == 0){
-            is_output_lexer_res = true;
+            m_isOutputLexerRes = true;
         }
         ptr ++;
     }
 }
 
+std::string Option::getFilePath(){
+    return m_filePath;
+}
+
+bool Option::isOutputLexerRes(){
+    return m_isOutputLexerRes;
+}
 
 int real_main(int argc, char *argv[]){
     if (argc < 2){

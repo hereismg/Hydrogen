@@ -7,10 +7,13 @@ class Option{
 public:
     Option(int argc, char *argv[]);
 
+    std::string getFilePath();
+    bool isOutputLexerRes();
+
 protected:
-    std::string file_path;
+    std::string m_filePath;
     
-    bool is_output_lexer_res;
+    bool m_isOutputLexerRes;
 };
 
 int real_main(int argc, char *argv[]);

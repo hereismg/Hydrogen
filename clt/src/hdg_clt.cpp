@@ -2,35 +2,28 @@
 #include <fstream>
 #include <cassert>
 #include <cstring>
+#include "hdg_clt.h"
 #include "../../hydrogen/include/kernel/Interpreter.h"
 
-class Option{
-public:
-    Option(int argc, char *argv[]){
-        assert(argc > 0);
-        assert(argv[argc] == NULL);
+Option::Option(int argc, char *argv[]){
+    assert(argc > 0);
+    assert(argv[argc] == NULL);
 
-        // 第一个 opt 必须是 hdg 文件
-        if (argv[1]){
-            std::cout << "Please Entry File Path!" << std::endl;
-        }
-        file_path = argv[1];
-
-        // 接下来解析各种选项
-        int ptr = 2;
-        while(ptr < argc){
-            if (strcmp(argv[ptr], "-l") == 0){
-                is_output_lexer_res = true;
-            }
-            ptr ++;
-        }
+    // 第一个 opt 必须是 hdg 文件
+    if (argv[1]){
+        std::cout << "Please Entry File Path!" << std::endl;
     }
+    file_path = argv[1];
 
-protected:
-    std::string file_path;
-    
-    bool is_output_lexer_res;
-};
+    // 接下来解析各种选项
+    int ptr = 2;
+    while(ptr < argc){
+        if (strcmp(argv[ptr], "-l") == 0){
+            is_output_lexer_res = true;
+        }
+        ptr ++;
+    }
+}
 
 
 int real_main(int argc, char *argv[]){

@@ -45,6 +45,7 @@ function(hdg_append_test_with_file file)
         "${PROJECT_SOURCE_DIR}/hydrogen/include/kernel"
         "${PROJECT_SOURCE_DIR}/hydrogen/include/node"
 #            "${PROJECT_SOURCE_DIR}/include/object"
+        "${PROJECT_SOURCE_DIR}/clt/src"
     )
     target_link_directories(
             ${name}
@@ -55,9 +56,15 @@ function(hdg_append_test_with_file file)
     target_link_libraries(
             ${name}
             PUBLIC
-            "gtest" "gtest_main"
+            "gtest"
+            "gtest_main"
     )
-    target_link_libraries(${name} PRIVATE libhdg)
+    target_link_libraries(
+        ${name} 
+        PRIVATE 
+        libhdg
+        hdg_clt_static
+    )
     add_test(NAME ${name} COMMAND ${name})
 endfunction()
 
@@ -95,3 +102,5 @@ endfunction()
 hdg_append_test_with_file("src/test_newLexer.cpp")
 hdg_append_test_with_dir("src/parse")
 hdg_append_test_with_dir("src/lexer")
+
+hdg_append_test_with_file("clt/test_option.cpp")

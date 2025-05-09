@@ -1,6 +1,12 @@
+add_library(
+    hdg_clt_static
+    STATIC
+    src/hdg_clt.cpp
+)
+target_link_libraries(hdg_clt_static PUBLIC libhdg)
+
 add_executable(
     hdg_clt
-    ./src/main.cpp
+    main.cpp
 )
-target_link_directories(hdg_clt PUBLIC ../bin)
-target_link_libraries(hdg_clt PUBLIC libhdg)
+target_link_libraries(hdg_clt PRIVATE hdg_clt_static)

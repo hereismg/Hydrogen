@@ -33,7 +33,7 @@ protected:
 };
 
 
-int main(int argc, char *argv[]){
+int real_main(int argc, char *argv[]){
     if (argc < 2){
         std::cout << "argc < 2!" << std::endl;
     }

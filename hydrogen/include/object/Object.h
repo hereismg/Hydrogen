@@ -6,7 +6,8 @@
 #define HDG_OBJECT_H
 
 #include <string>
-#include <functional>
+#include <vector>
+
 #include "../basic/Position.h"
 
 namespace hdg {

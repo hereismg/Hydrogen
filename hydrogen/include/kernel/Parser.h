@@ -6,7 +6,9 @@
 #ifndef HDG_PARSER_H
 #define HDG_PARSER_H
 
+#include <functional>
 #include <vector>
+
 #include "../basic/Token.h"
 #include "../node/Node.h"
 

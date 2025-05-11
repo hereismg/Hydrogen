@@ -1,4 +1,4 @@
-start ./game.hdg
+start ./game.hdg -l
 layout src
 b Lexer.cpp:86
 # c

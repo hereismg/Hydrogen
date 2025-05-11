@@ -86,7 +86,7 @@ END : '\n' | '\r' | 'EOF' | ';'
 ExeUnit   : {Stmt | Def}
 LoopUnit  : {LoopStmt}
 
-// 语句
+// 语句（一般指可修改自动机状态的代码。譬如 IfStmt，它可以修改状态机接下来要执行的语句，对于 AssignStmt 而言，则会往状态机中新增一个变量）
 LoopStmt  : 'break' END
           | 'continue' END
           | Stmt
@@ -102,7 +102,8 @@ WhileStmt : 'while' Expr '{' LoopUnit '}'
 AssignStmt: IDENT ['=' (Expr | Array)] END
 Array     : '[' {Expr ','} ']'
 
-// 定义
+
+// 定义（与语句相比，它本身不修改状态机的状态，它只告诉自动机，要怎么修改状态机）
 Def       : FuncDef
 FuncDef   : 'def'  IDENT '(' [Params] ')' '{' ExeUnit '}'
 Params    : IDENT {',' IDENT}

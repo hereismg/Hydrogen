@@ -1,10 +1,10 @@
 //
 // Created by Magnesium on 2023/7/25.
 //
+#include <cmath>
+#include <cassert>
 
 #include "../../include/object/Float.h"
-
-#include <cassert>
 
 namespace hdg {
     Float::Float(float value): m_value(value) {

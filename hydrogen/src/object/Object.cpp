@@ -2,7 +2,11 @@
 // Created by Magnesium on 2023/7/25.
 //
 
+#include <utility>
+#include <cmath>
+
 #include "../../include/object/Object.h"
+#include "../../include/basic/Error.h"
 
 
 namespace hdg {

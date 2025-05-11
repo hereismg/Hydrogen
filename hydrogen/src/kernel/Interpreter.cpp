@@ -7,6 +7,7 @@
 #include "../../include/object/Function.h"
 #include "../../include/object/List.h"
 #include "../../include/object/None.h"
+#include "../../include/basic/Error.h"
 
 namespace hdg {
 

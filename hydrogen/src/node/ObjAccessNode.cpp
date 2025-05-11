@@ -3,6 +3,7 @@
 //
 
 #include "../../include/node/ObjAccessNode.h"
+#include "../../include/basic/Error.h"
 
 namespace hdg {
     ObjAccessNode::ObjAccessNode(std::string name, const Position &position, Environment *environment):

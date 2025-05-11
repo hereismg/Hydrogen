@@ -2,8 +2,11 @@
 // Created by Magnesium on 2023/7/25.
 //
 
+#include <cmath>
+
 #include "../../include/object/Integer.h"
 #include "../../include/object/Float.h"
+#include "../../include/basic/Error.h"
 
 namespace hdg {
     Integer::Integer(long long value): m_value(value) {

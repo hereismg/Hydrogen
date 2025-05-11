@@ -6,11 +6,8 @@
 #define HDG_OBJECT_H
 
 #include <string>
-#include <utility>
-#include <cmath>
 #include <functional>
 #include "../basic/Position.h"
-#include "../basic/Error.h"
 
 namespace hdg {
 

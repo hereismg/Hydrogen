@@ -3,6 +3,7 @@
 //
 
 #include "../../include/node/CallNode.h"
+#include "../../include/basic/Error.h"
 
 namespace hdg {
     CallNode::CallNode() = default;

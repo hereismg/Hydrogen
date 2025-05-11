@@ -3,6 +3,7 @@
 //
 
 #include "../../include/object/Function.h"
+#include "../../include/basic/Error.h"
 
 namespace hdg {
     Function::Function() {

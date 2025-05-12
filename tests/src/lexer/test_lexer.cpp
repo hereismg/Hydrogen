@@ -58,3 +58,8 @@ TEST(test_Token, _1){
         cout << arr[i].toString() << endl;
     }
 }
+
+TEST(test_kv_toString, _1){
+    auto str = kv_toString("INT", 8, "2025", 128);
+    cout << str << endl;
+}

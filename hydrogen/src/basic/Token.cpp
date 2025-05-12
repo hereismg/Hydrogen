@@ -147,12 +147,39 @@ namespace hdg {
     }
 
     std::string kv_toString(const std::string& key, size_t keyShowLen, const std::string val, size_t valShowLen){
-        int max_buf = keyShowLen + 3 + valShowLen + 1;
-        char *buf = (char *)malloc(max_buf);
+        int buf_max = keyShowLen + 3 + valShowLen + 1;
+        char *buf = (char *)malloc(buf_max);
 
-        // 1. 构造中间的 “:”
+        int buf_ptr = 0;
 
-        
+        // 1. key
+        for (size_t i=0; i<keyShowLen; i++, buf_ptr++){
+            buf[buf_ptr] = key[i];
+        }
+
+        // 2. 分割
+        buf[buf_ptr++] = ' ';
+        buf[buf_ptr++] = ':';
+        buf[buf_ptr++] = ' ';
+
+        // 3. value
+        for (size_t i = 0; i<val.size(); i++, buf_ptr++){
+            switch (val[i]){
+            case '\n':
+                buf[buf_ptr] = '\\';
+                buf_ptr ++;
+                buf[buf_ptr] = 'n';
+                break;
+            case '\t':
+                buf[buf_ptr++] = '\\';
+                buf_ptr ++;
+                buf[buf_ptr] = 't';
+                break;
+            default:
+                buf[buf_ptr] = val[i];
+                break;
+            }
+        }
 
         std::string res(buf);
         free(buf);

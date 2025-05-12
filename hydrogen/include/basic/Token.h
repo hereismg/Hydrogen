@@ -88,6 +88,7 @@ namespace hdg {
     };
 
     bool operator<(const Token& left, const Token& right);
+    std::string kv_toString(const std::string& key, size_t keyShowLen, const std::string val, size_t valShowLen);
 } // hdg
 
 #endif //HDG_TOKEN_H

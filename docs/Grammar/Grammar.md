@@ -104,7 +104,7 @@ Array     : '[' {Expr ','} ']'
 
 // 定义
 Def       : FuncDef
-FuncDef   : 'func'  IDENT '(' [Params] ')' '{' ExeUnit '}'
+FuncDef   : 'def'  IDENT '(' [Params] ')' '{' ExeUnit '}'
 Params    : IDENT {',' IDENT}
 
 
@@ -127,6 +127,101 @@ Primary   : INT_CONST
           | '(' Expr ')'
 Call      : (IDENT '(' Expr {',' Expr} ')' )
           | (IDENT '[' Expr {',' Expr} ']')
+```
+
+案例代码
+
+```hdg
+def fun(a, b){
+    return a + b;
+}
+
+
+def Pig{
+    def init(num, other){
+        return 
+    }
+    return a + b;
+}
+
+# 
+# 
+# 
+
+state My{
+
+}
+```
+
+函数与对象合并在一起？
+
+状态机是个对象，当我们调用它时，就会执行里面的语句。
+状态机里的语句分为两种：产生新的对象；修改已有对象的值。
+如果你想要产生新的对象，你要遵循下面的语法：
+
+```hdg
+State    : [Assign | Stmt]
+
+# 修改已有的对象
+Stmt      : LoopStmt
+LoopStmt  : 'break' END
+          | 'continue' END
+          | BaseStmt
+BaseStmt  : IfStmt
+          | WhileStmt
+          | AssignStmt
+          | 'return' [Expr] END
+          | Expr END
+IfStmt    : 'if' Expr '{' ExeUnit '}'
+            {'elif' Expr '{' ExeUnit '}'}
+            ['else' '{' ExeUnit '}']
+WhileStmt : 'while' Expr '{' LoopUnit '}'
+
+# 产生新的对象
+Assign      : StateAssign
+            | ValAssign
+
+## 状态机
+StateAssign : 'def' IDENT ['(' [Params] ')'] '{' State '}'
+Params      : IDENT {',' IDENT}
+
+## 表达式对象
+ValAssign   : 'val' IDENT "=" Expr END\
+Expr      : LogicExpr
+
+LogicExpr : ('not' LogicExpr)
+          | (CompExpr {('and' | 'or') CompExpr}) 
+CompExpr  : ArithExpr {('>' | '<' | '>=' | '<=' | '==') ArithExpr}
+
+ArithExpr : Term {('+' | '-') Term}
+Term      : Factor {('*' | '/') Factor}
+Factor    : {'+' | '-'} Power
+Power     : Primary {'^' Power}
+Primary   : INT_CONST
+          | FLOAT_CONST
+          | STR_CONST
+          | Call
+          | IDENT
+          | '(' Expr ')'
+Call      : (IDENT '(' Expr {',' Expr} ')' )
+          | (IDENT '[' Expr {',' Expr} ']')
+```
+
+```hdg
+def Compile{
+    a = 1
+    b = 2
+
+    def init(){
+
+    }
+}
+
+c = obj_copy(Compile)
+
+Compile();
+
+MyState.a = 2;
 ```
 
 ## 二、终结符

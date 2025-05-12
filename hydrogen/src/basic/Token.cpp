@@ -98,53 +98,7 @@ namespace hdg {
     }
 
     std::string Token::toString() {
-        // std::string str;
-        // if (m_value.empty()){
-        //     str = TypeNameMap[m_type];
-        // }else{
-        //     str = TypeNameMap[m_type] + ":";
-        //     if (m_type == STRING){
-        //         str += "\"" + m_value + "\"";
-        //     }
-        //     else {
-        //         str += m_value;
-        //     }
-        // }
-
-        const int MAX_BUF = 128;
-        char buf[MAX_BUF+4] = "    " "    " " : ";
-        buf[MAX_BUF+3] = '.';
-        buf[MAX_BUF+2] = '.';
-        buf[MAX_BUF+1] = '.';
-        buf[MAX_BUF]   = '.';
-        // strcpy(buf, TypeNameMap[m_type].c_str());
-        // snprintf(buf, sizeof(buf), "%s \t: ", TypeNameMap[m_type].c_str());
-
-        auto typeStr = TypeNameMap[m_type];
-        for (size_t i = 0; i < 8 && i < typeStr.size(); i++){
-                buf[i] = typeStr[i];
-        }
-
-        int buf_ptr = 11;
-        for (size_t i = 0; i<m_value.size() && buf_ptr < MAX_BUF; i++, buf_ptr++){
-            switch (m_value[i]){
-            case '\n':
-                buf[buf_ptr] = '\\';
-                buf_ptr ++;
-                buf[buf_ptr] = 'n';
-                break;
-            case '\t':
-                buf[buf_ptr++] = '\\';
-                buf_ptr ++;
-                buf[buf_ptr] = 't';
-                break;
-            default:
-                buf[buf_ptr] = m_value[i];
-                break;
-            }
-        }
-
-        return std::string(buf);
+        return kv_toString(TypeNameMap[m_type].c_str(), 12, m_value, 128);
     }
 
     std::string kv_toString(const std::string& key, size_t keyShowLen, const std::string val, size_t valShowLen){
@@ -195,6 +149,11 @@ namespace hdg {
                 buf[buf_ptr] = '\\';
                 buf_ptr ++;
                 buf[buf_ptr] = 't';
+                break;
+            case '\0':
+                buf[buf_ptr] = '\\';
+                buf_ptr ++;
+                buf[buf_ptr] = '0';
                 break;
             default:
                 buf[buf_ptr] = val[i];

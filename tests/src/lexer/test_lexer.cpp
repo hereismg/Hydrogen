@@ -42,23 +42,6 @@ TEST(test_lexer, _2){
 }
 
 
-TEST(test_Token, _1){
-    vector<Token> arr(3);
-
-    arr[0].setType(Token::Type::INT);
-    arr[0].setValue("2025");
-
-    arr[1].setType(Token::Type::STRING);
-    arr[1].setValue("Hello World!\n");
-
-    arr[2].setType(Token::Type::STRING);
-    arr[1].setValue("1234567890\n");
-
-    for (int i=0; i<2; i++){
-        cout << arr[i].toString() << endl;
-    }
-}
-
 TEST(test_kv_toString, _1){
     {
         auto str = kv_toString("INT", 8, "2025", 128);
@@ -78,4 +61,19 @@ TEST(test_kv_toString, _2){
         cout << str << endl;
         ASSERT_EQ(str, "STRING   : Hello Wo...");
     }
+    {
+        auto str = kv_toString("STRING", 8, "\n\t\r\n\t\r", 8);
+        cout << str << endl;
+        ASSERT_EQ(str, "STRING   : \\n\\t\\r\\n...");
+    }
+    {
+        auto str = kv_toString("STRING", 8, "\n\t\r\n\t\r", 9);
+        cout << str << endl;
+        ASSERT_EQ(str, "STRING   : \\n\\t\\r\\n\\t..");
+    }
+    // {
+    //     auto str = kv_toString("IDENTIFIER", 8, "\n\t\r\n\t\r", 9);
+    //     cout << str << endl;
+    //     ASSERT_EQ(str, "IDENTIFI... : \\n\\t\\r\\n\\t..");
+    // }
 }

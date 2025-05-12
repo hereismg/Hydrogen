@@ -60,6 +60,22 @@ TEST(test_Token, _1){
 }
 
 TEST(test_kv_toString, _1){
-    auto str = kv_toString("INT", 8, "2025", 128);
-    cout << str << endl;
+    {
+        auto str = kv_toString("INT", 8, "2025", 128);
+        cout << str << endl;
+        ASSERT_EQ(str, "INT      : 2025");
+    }
+    {
+        auto str = kv_toString("STRING", 8, "Hello World!\tSecond!\r\n", 128);
+        cout << str << endl;
+        ASSERT_EQ(str, "STRING   : Hello World!\\tSecond!\\r\\n");
+    }
+}
+
+TEST(test_kv_toString, _2){
+    {
+        auto str = kv_toString("STRING", 8, "Hello World!", 8);
+        cout << str << endl;
+        ASSERT_EQ(str, "STRING   : Hello Wo...");
+    }
 }

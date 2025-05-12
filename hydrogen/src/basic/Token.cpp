@@ -3,6 +3,7 @@
 //
 
 #include <cstring>
+#include <cassert>
 
 #include "../../include/basic/Token.h"
 
@@ -147,14 +148,29 @@ namespace hdg {
     }
 
     std::string kv_toString(const std::string& key, size_t keyShowLen, const std::string val, size_t valShowLen){
-        int buf_max = keyShowLen + 3 + valShowLen + 1;
-        char *buf = (char *)malloc(buf_max);
+        assert(keyShowLen >= 4);
+        assert(valShowLen >= 4);
+
+        int buf_max = keyShowLen + 3 + valShowLen + 4;
+        char *buf = new char[buf_max]{'\0'};
+
+        // 0. 初始化
+        // 后面 5 个字符固定，因此，在第 3 步中，buf_max 需要减去 5
+        buf[buf_max-1] = '\0';
+        buf[buf_max-2] = '.';
+        buf[buf_max-3] = '.';
+        buf[buf_max-4] = '.';
+        buf[buf_max-5] = '\0';
 
         int buf_ptr = 0;
 
         // 1. key
         for (size_t i=0; i<keyShowLen; i++, buf_ptr++){
-            buf[buf_ptr] = key[i];
+            if (i < key.size()){
+                buf[buf_ptr] = key[i];
+            }else{
+                buf[buf_ptr] = ' ';
+            }
         }
 
         // 2. 分割
@@ -163,15 +179,20 @@ namespace hdg {
         buf[buf_ptr++] = ' ';
 
         // 3. value
-        for (size_t i = 0; i<val.size(); i++, buf_ptr++){
+        for (size_t i = 0; i<val.size() && buf_ptr < buf_max - 4; i++, buf_ptr++){
             switch (val[i]){
+            case '\r':
+                buf[buf_ptr] = '\\';
+                buf_ptr ++;
+                buf[buf_ptr] = 'r';
+                break;
             case '\n':
                 buf[buf_ptr] = '\\';
                 buf_ptr ++;
                 buf[buf_ptr] = 'n';
                 break;
             case '\t':
-                buf[buf_ptr++] = '\\';
+                buf[buf_ptr] = '\\';
                 buf_ptr ++;
                 buf[buf_ptr] = 't';
                 break;
@@ -182,7 +203,7 @@ namespace hdg {
         }
 
         std::string res(buf);
-        free(buf);
+        delete[] buf;
         return res;
     }
 

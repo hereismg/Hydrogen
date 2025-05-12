@@ -42,3 +42,19 @@ TEST(test_lexer, _2){
 }
 
 
+TEST(test_Token, _1){
+    vector<Token> arr(3);
+
+    arr[0].setType(Token::Type::INT);
+    arr[0].setValue("2025");
+
+    arr[1].setType(Token::Type::STRING);
+    arr[1].setValue("Hello World!\n");
+
+    arr[2].setType(Token::Type::STRING);
+    arr[1].setValue("1234567890\n");
+
+    for (int i=0; i<2; i++){
+        cout << arr[i].toString() << endl;
+    }
+}

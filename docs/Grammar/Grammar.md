@@ -212,18 +212,100 @@ Call      : (IDENT '(' Expr {',' Expr} ')' )
 def Compile{
     a = 1
     b = 2
+    c = 0
 
-    def init(){
-
+    def add(){
+        c = a + b
     }
+    def sub(){
+        c = b - a
+    }
+
+    add();
 }
 
-c = obj_copy(Compile)
+Compile()
+println(Compile.c) // 输出为 3
 
-Compile();
-
-MyState.a = 2;
+Compile.sub()
+println(Compile.c) // 输出为 1
 ```
+
+```hdg
+def Compile{
+    a = 1
+    b = 2
+    c = 0
+
+    def add(){
+        c = a + b
+    }
+    def sub(){
+        c = b - a
+    }
+
+    add();
+}
+
+Compile[3]()
+println(Compile.c) // 输出为 0
+
+Compile[0:3]()
+println(Compile.c) // 输出为 3
+```
+
+```hdg
+def Compile{
+    a = 1
+    b = 2
+    c = 0
+}
+
+Compile()
+println(Compile.c) // 输出为 0
+
+Compile[3].insert{
+    def add(){
+        c = a + b
+    }
+
+    add()
+}
+
+Compile()
+println(Compile.c) // 输出为 3
+```
+
+```
+def Compile{
+    a = 1
+    b = 2
+    c = 0
+    if (a > 1){
+        c = a + b
+    }
+    else {
+        c = a - b
+    }
+}
+Compile[3]
+```
+
+```
+def Animal{
+    a = 1
+    b = 2
+    c = 0
+    if (a > 1){
+        c = a + b
+    }
+    else {
+        c = a - b
+    }
+}
+Compile[3]
+```
+
 
 ## 二、终结符
 

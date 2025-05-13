@@ -247,7 +247,7 @@ def Compile{
     add();
 }
 
-Compile[3]()
+Compile[0:3]()
 println(Compile.c) // 输出为 0
 
 Compile[0:3]()
@@ -303,7 +303,11 @@ def Animal{
         c = a - b
     }
 }
-Compile[3]
+
+Animal2 = copy(Animal)
+
+Compile()
+println()
 ```
 
 

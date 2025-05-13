@@ -5,23 +5,44 @@
 
 class Option{
 public:
+    enum Mode{
+        Unknow,
+        Lexer,
+        Parser,
+        Interpreter
+    };
+
+public:
     Option(int argc, char *argv[]);
 
     std::string getFilePath();
-    bool isOutputLexerRes();
+    
+    Mode getOptMode();
+    
+    bool getOptVersion();
+    
+    bool getOptHelp();
 
 protected:
     std::string m_filePath;
-    
-    bool m_isOutputLexerRes;
+
+    // Global Options
+    bool m_optVersion;
+    bool m_optHelp;
+
+    // Options
+    Mode m_optMode;
 };
 
 /**
  * Usage: hdg_clt [Options] <file>
  * 
+ * Global Options:
+ *   1. [-v|--version]
+ *   2. [-h|--help]
+ * 
  * Options:
- *   1. -l | --lexer   生成词法分析的结果
- *   2. -p | --parser  生成语法分析的结果
+ *   1. [-m|--mode]=[lexer | parser | interpreter]
 */
 int real_main(int argc, char *argv[]);
 

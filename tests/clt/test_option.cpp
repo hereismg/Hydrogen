@@ -15,22 +15,22 @@ TEST(Test, _1){
     Option opt(argc, argv);
 
     ASSERT_EQ(opt.getFilePath(), string("main.hdg"));
-    ASSERT_EQ(opt.isOutputLexerRes(), false);
+    ASSERT_EQ(opt.getOptMode(),  Option::Mode::Interpreter);
 }
 
 TEST(Test, _2){
-    int argc = 2;
+    int argc = 3;
     char *argv[] = {
         const_cast<char*>("./hdg_clt"),
+        const_cast<char*>("-m=lexer"),
         const_cast<char*>("main.hdg"),
-        const_cast<char*>("-l"),
         NULL
     };
 
     Option opt(argc, argv);
 
     ASSERT_EQ(opt.getFilePath(), string("main.hdg"));
-    ASSERT_EQ(opt.isOutputLexerRes(), true);
+    ASSERT_EQ(opt.getOptMode(),  Option::Mode::Lexer);
 }
 
 // class IFileSystem {

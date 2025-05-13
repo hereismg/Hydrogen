@@ -5,35 +5,64 @@
 #include "hdg_clt.h"
 #include "../../hydrogen/include/kernel/Interpreter.h"
 
-Option::Option(int argc, char *argv[]){
+bool startsWith(const char * str, const char * prefix){
+    for (int i=0; str[i] != '\0' && prefix[i] != '\0'; i++){
+        if (str[i] != prefix[i]){
+            return false;
+        }
+    }
+    return true;
+}
+
+bool endWith(const char * str, const char * suffix){
+    int strLen = strlen(str);
+    int suffixLen = strlen(suffix);
+
+    for (int i=0; i < strLen && i < suffixLen; i++){
+        if (str[strLen - i - 1] != suffix[suffixLen - i - 1]){
+            return false;
+        }
+    }
+    return true;
+}
+
+Option::Option(int argc, char *argv[]) {
     assert(argc > 0);
     assert(argv[argc] == NULL);
 
-    // 设置默认值
-    m_isOutputLexerRes = false;
-
-    // 第一个 opt 必须是 hdg 文件
-    if (argv[1] = NULL){
-        std::cout << "Please Entry File Path!" << std::endl;
-    }
-    m_filePath = argv[1];
+    // 1. 设置默认值
+    m_optVersion = false;
+    m_optHelp    = false;
+    m_optMode    = Interpreter;
 
     // 接下来解析各种选项
-    int ptr = 2;
-    while(ptr < argc){
-        if (strcmp(argv[ptr], "-l") == 0){
-            m_isOutputLexerRes = true;
+
+    for (int ptr = 1; ptr < argc - 1; ptr ++) {
+        if (startsWith(argv[ptr], "-m") || startsWith(argv[ptr], "--mode")) {
+            if (endWith(argv[ptr], "lexer")) m_optMode = Lexer;
+            else if (endWith(argv[ptr], "parser")) m_optMode = Parser;
+            else if (endWith(argv[ptr], "interpreter")) m_optMode = Interpreter;
+            else m_optMode = Unknow;
         }
-        ptr ++;
     }
+
+    m_filePath = argv[argc-1];
 }
 
 std::string Option::getFilePath(){
     return m_filePath;
 }
 
-bool Option::isOutputLexerRes(){
-    return m_isOutputLexerRes;
+Option::Mode Option::getOptMode(){
+    return m_optMode;
+}
+
+bool Option::getOptHelp(){
+    return m_optHelp;
+}
+
+bool Option::getOptVersion(){
+    return m_optVersion;
 }
 
 int real_main(int argc, char *argv[]){

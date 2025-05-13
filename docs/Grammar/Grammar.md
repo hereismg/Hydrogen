@@ -250,7 +250,7 @@ def Compile{
 Compile[0:3]()
 println(Compile.c) // 输出为 0
 
-Compile[0:3]()
+Compile[3:6]()
 println(Compile.c) // 输出为 3
 ```
 

@@ -34,6 +34,7 @@ namespace hdg {
         }
         else{
             assert(false);
+            return nullptr;
         }
     }
 
@@ -48,6 +49,7 @@ namespace hdg {
         }
         else{
             assert(false);
+            return nullptr;
         }
     }
 
@@ -62,6 +64,7 @@ namespace hdg {
         }
         else{
             assert(false);
+            return nullptr;
         }
     }
 
@@ -76,6 +79,7 @@ namespace hdg {
         }
         else{
             assert(false);
+            return nullptr;
         }
     }
 
@@ -90,6 +94,7 @@ namespace hdg {
         }
         else{
             assert(false);
+            return nullptr;
         }
     }
 
@@ -104,6 +109,7 @@ namespace hdg {
         }
         else{
             assert(false);
+            return nullptr;
         }
     }
 
@@ -118,6 +124,7 @@ namespace hdg {
         }
         else{
             assert(false);
+            return nullptr;
         }
     }
 
@@ -132,6 +139,7 @@ namespace hdg {
         }
         else{
             assert(false);
+            return nullptr;
         }
     }
 
@@ -146,6 +154,7 @@ namespace hdg {
         }
         else{
             assert(false);
+            return nullptr;
         }
     }
 
@@ -160,6 +169,7 @@ namespace hdg {
         }
         else{
             assert(false);
+            return nullptr;
         }
     }
 
@@ -174,6 +184,7 @@ namespace hdg {
         }
         else{
             assert(false);
+            return nullptr;
         }
     }
 

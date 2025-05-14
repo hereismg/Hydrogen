@@ -167,4 +167,8 @@ namespace hdg {
         assert(false && "func 'interpret()' is deprecate!");
         return nullptr;
     }
+
+    void BinOperNode::accept(Visitor& visitor){
+        visitor.visitBinOperNode(*this);
+    }
 } // hdg

@@ -66,6 +66,7 @@ namespace hdg {
 
         virtual std::string toString();
         virtual Object* interpret();
+        virtual void accept(Visitor& visitor);
     };
 
 } // hdg

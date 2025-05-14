@@ -24,4 +24,8 @@ namespace hdg {
     Environment *Node::thisEnvironment() {
         return m_environment;
     }
+
+    void Node::accept(Visitor& visitor){
+        std::cout << "Node::accept() is not implement!" << std::endl;
+    }
 } // hdg

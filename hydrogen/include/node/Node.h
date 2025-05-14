@@ -11,7 +11,7 @@
 #include "../object/Object.h"
 #include "../basic/Position.h"
 #include "../basic/Environment.h"
-
+#include "visitor.h"
 
 namespace hdg {
     class Node {
@@ -30,9 +30,9 @@ namespace hdg {
 
         virtual std::string toString() = 0;
         virtual Object* interpret() = 0;
+        virtual void accept(Visitor& visitor); // TODO 这里设为纯虚函数
     };
 
-    
     typedef std::unique_ptr<Node> uNode;
 } // hdg
 

@@ -560,6 +560,25 @@ namespace hdg {
         return node;
     }
 
+    // uNode Parser::new_ArithExpr() {
+    //     Position pos;
+    //     pos.setStart(m_currentToken->thisPosition()->getStart());
+
+    //     uNode left = new_Primary();
+
+    //     if (m_currentToken->getType() != Token::Type::PLUS && m_currentToken->getType() != Token::Type::MINUS){
+    //         throw -1;
+    //     }
+    //     Token::Type oper = m_currentToken->getType();
+    //     advance();
+
+    //     uNode right = new_Primary();
+
+    //     pos.setEnd(m_currentToken->thisPosition()->getEnd());
+
+    //     return std::make_unique<BinaryOperatorNode>(oper, left, right, pos);
+    // }
+
     uNode Parser::new_Primary() {
         uNode node;
 

@@ -8,14 +8,11 @@
 
 #include <functional>
 #include <vector>
-#include <memory>
 
 #include "../basic/Token.h"
 #include "../node/Node.h"
 
 namespace hdg {
-    
-    typedef std::unique_ptr<Node> uNode;
 
     class Parser {
     protected:
@@ -58,12 +55,14 @@ namespace hdg {
                 std::function<Node*(Environment* envir)> fun
                 );
 
-        uNode new_ArithExpr();
-        uNode new_Factor();     // Factor  : {'+' | '-'} Primary
-        uNode new_Primary();    // Primary : INT_CONST
-                                //         | FLOAT_CONST
-                                //         | STR_CONST
-                                //         | IDENT
+        uNode new_ArithExpr();  // ArithExpr : Term {('+' | '-') Term}
+        uNode new_Term();       // Term      : Factor {('*' | '/') Factor}
+        uNode new_Factor();     // Factor    : {'+' | '-'} Primary
+        uNode new_Primary();    // Primary   : INT_CONST
+                                //           | FLOAT_CONST
+                                //           | STR_CONST
+                                //           | IDENT
+                                //           | '(' ArithExpr ')'
     };
 
 } // hdg

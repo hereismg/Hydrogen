@@ -8,7 +8,7 @@
 #include <string>
 #include <cmath>
 #include <utility>
-#include <memory>
+
 #include "Node.h"
 #include "../basic/Token.h"
 #include "../basic/Error.h"
@@ -39,6 +39,30 @@ namespace hdg {
 
         std::string toString() override;
         Object* interpret() override;
+    };
+
+    class BinOperNode: public Node{
+    protected:
+        Token m_oper;
+        uNode m_left;
+        uNode m_right;
+
+    public:
+        BinOperNode(Token oper, uNode&& left, uNode&& right);
+        
+        BinOperNode(const BinOperNode&) = delete;
+        BinOperNode& operator=(const BinOperNode&) = delete;
+        
+        BinOperNode(BinOperNode&&) noexcept = default;
+        BinOperNode& operator=(BinOperNode&&) noexcept = default;
+
+        void setOper(Token oper);
+        void setLeft(uNode&& new_left);
+        void setRight(uNode&& new_right);
+
+        const Token& getOper() const;
+        const Node* getLeft() const;
+        const Node* getRight() const;
     };
 
 } // hdg

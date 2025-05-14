@@ -4,6 +4,8 @@
 
 #include "../../include/node/BinaryOperatorNode.h"
 
+#include <cassert>
+
 namespace hdg {
 
     BinaryOperatorNode::BinaryOperatorNode(const Token& oper, Node *left, Node *right, const Position& position):
@@ -121,5 +123,38 @@ namespace hdg {
 
         // delete left, right;
         return result;
+    }
+
+    BinOperNode::BinOperNode(Token oper, uNode&& left, uNode&& right)
+        : m_oper(std::move(oper)),
+          m_left(std::move(left)),
+          m_right(std::move(right))
+    {
+        assert(left  != nullptr && "Left Child cannot be null!");
+        assert(right != nullptr && "Right Child cannot be null!");
+    }
+
+    inline void BinOperNode::setOper(Token oper){
+        m_oper = std::move(oper);
+    }
+
+    inline void BinOperNode::setLeft(uNode&& new_left){
+        m_left = std::move(new_left);
+    }
+
+    inline void BinOperNode::setRight(uNode&& new_right){
+        m_right = std::move(new_right);
+    }
+
+    inline const Token& BinOperNode::getOper() const{
+        return m_oper;
+    }
+
+    inline const Node* BinOperNode::getLeft() const{
+        return m_left.get();
+    }
+
+    inline const Node* BinOperNode::getRight() const{
+        return m_right.get();
     }
 } // hdg

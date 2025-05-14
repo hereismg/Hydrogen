@@ -145,3 +145,21 @@ TEST(test_Parser, new_Primary){
 
     ASSERT_EQ(num->getValue(), 1);
 }
+
+TEST(test_Parser, new_ArithExpr){
+    string code = "1 + 1";
+    string path = "<stdin>";
+    Lexer lexer;
+
+    std::vector<Token> tokens = lexer.run(path, &code);
+
+    Environment envir;
+
+    Parser parser(tokens, &envir);
+
+    uNode ast = parser.new_Primary();
+
+    Integer* num = (Integer*)ast->interpret();
+
+    ASSERT_EQ(num->getValue(), 2);
+}

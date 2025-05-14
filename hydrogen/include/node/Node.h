@@ -6,13 +6,14 @@
 #define HDG_NODE_H
 
 #include <string>
+#include <memory>
+
 #include "../object/Object.h"
 #include "../basic/Position.h"
 #include "../basic/Environment.h"
 
 
 namespace hdg {
-
     class Node {
     protected:
         Position m_position;
@@ -31,6 +32,8 @@ namespace hdg {
         virtual Object* interpret() = 0;
     };
 
+    
+    typedef std::unique_ptr<Node> uNode;
 } // hdg
 
 #endif //HDG_NODE_H

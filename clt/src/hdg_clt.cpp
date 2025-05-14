@@ -69,25 +69,39 @@ int real_main(int argc, char *argv[]){
     if (argc < 2){
         std::cout << "argc < 2!" << std::endl;
     }
-    std::string path(argv[1]);
+    Option opt(argc, argv);
 
-    std::ifstream codeFile(path);
+    // Golbal Opttion
 
+    // 解析文本
+    std::ifstream codeFile(opt.getFilePath());
     if (!codeFile.is_open()){
         std::cerr << "Can't open file!" << std::endl;
         return 1;
     }
-
     std::string codeText;
     std::string line;
     while (std::getline(codeFile, line)){
         codeText += line + "\n";
     }
+    
+    // 模式
+    auto mode = opt.getOptMode();
+    switch (mode){
+    case Option::Mode::Lexer:
+        break;
+    case Option::Mode::Parser:
+        break;
+    case Option::Mode::Interpreter:
+        hdg::Interpreter interpreter;
+        auto res = interpreter.interpret(opt.getFilePath(), codeText);
 
-    hdg::Interpreter interpreter;
-    auto res = interpreter.interpret(path, codeText);
+        std::cout << res << std::endl;
+        break;
+    default:
+        break;
+    }
 
-    std::cout << res << std::endl;
 
     return 0;
 }

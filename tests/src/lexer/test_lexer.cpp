@@ -159,6 +159,10 @@ TEST(test_Parser, new_ArithExpr){
 
     uNode ast = parser.new_Primary();
 
+    InterpreterVisitor visitor;
+
+    ast->accept(visitor);
+
     Integer* num = (Integer*)ast->interpret();
 
     ASSERT_EQ(num->getValue(), 2);

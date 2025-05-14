@@ -135,27 +135,27 @@ namespace hdg {
         assert(right != nullptr && "Right Child cannot be null!");
     }
 
-    inline void BinOperNode::setOper(Token oper){
+    void BinOperNode::setOper(Token oper){
         m_oper = std::move(oper);
     }
 
-    inline void BinOperNode::setLeft(uNode&& new_left){
+    void BinOperNode::setLeft(uNode&& new_left){
         m_left = std::move(new_left);
     }
 
-    inline void BinOperNode::setRight(uNode&& new_right){
+    void BinOperNode::setRight(uNode&& new_right){
         m_right = std::move(new_right);
     }
 
-    inline const Token& BinOperNode::getOper() const{
+    const Token& BinOperNode::getOper() const{
         return m_oper;
     }
 
-    inline const Node* BinOperNode::getLeft() const{
+    const Node* BinOperNode::getLeft() const{
         return m_left.get();
     }
 
-    inline const Node* BinOperNode::getRight() const{
+    const Node* BinOperNode::getRight() const{
         return m_right.get();
     }
 

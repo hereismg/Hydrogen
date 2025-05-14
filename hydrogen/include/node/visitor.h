@@ -2,6 +2,8 @@
 #define VISITOR_H
 
 namespace hdg{
+    class Object;
+
     class BinOperNode;
     class NumObjNode;
 
@@ -11,7 +13,10 @@ namespace hdg{
         virtual void visitNumObjNode(NumObjNode& node);
     };
 
-    class InterpreterVisitor{
+    class InterpreterVisitor: public Visitor{
+    protected:
+        Object* res;
+
     public:
         void visitBinOperNode(BinOperNode& node);
     };

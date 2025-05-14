@@ -108,4 +108,13 @@ namespace hdg {
 
     Indicator::Indicator(size_t index, size_t line, size_t col): 
                                    index(index), line(line), col(col){}
+    
+    Position Position::clone(){
+        return Position(
+            m_fPath,
+            m_context,
+            m_start,
+            m_end
+        );
+    }
 } // hdg

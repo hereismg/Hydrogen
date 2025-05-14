@@ -59,6 +59,7 @@ namespace hdg {
         bool equal(const Position& other);
 
         std::string toString();
+        Position clone();
     };
 
 } // hdg

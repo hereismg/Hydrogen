@@ -99,3 +99,25 @@ TEST(test_kv_toString, _2){
     //     ASSERT_EQ(str, "IDENTIFI... : \\n\\t\\r\\n\\t..");
     // }
 }
+
+TEST(test_Position, clone){
+    string fPath = "<stdin>";
+    string txt   = "a + b";
+    Indicator start(1, 2, 3);
+    Indicator end(2, 3, 4);
+
+    Position pos(
+        fPath,
+        &txt,
+        start,
+        end
+    );
+
+    Position copy = pos.clone();
+
+    copy.setStart({11, 22, 33});
+
+    ASSERT_EQ(pos.getStart().col,   start.col);
+    ASSERT_EQ(pos.getStart().index, start.index);
+    ASSERT_EQ(pos.getStart().line,  start.line);
+}

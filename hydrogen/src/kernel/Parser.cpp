@@ -560,4 +560,26 @@ namespace hdg {
         return node;
     }
 
+    uNode Parser::new_Primary() {
+        uNode node;
+
+        if (m_currentToken->getType() == Token::Type::INT){
+            long long val = std::stoll(m_currentToken->getValue().c_str());
+            auto pos = *m_currentToken->thisPosition();
+
+            node = std::make_unique<NumObjNode>(val, pos);
+        }
+        else if (m_currentToken->getType() == Token::Type::INT){
+            long long val = std::stoll(m_currentToken->getValue().c_str());
+            auto pos = *m_currentToken->thisPosition();
+
+            return std::make_unique<NumObjNode>(val, pos);
+        }
+        else{
+            throw -1;
+        }
+
+        advance();
+        return node;
+    }
 } // hdg

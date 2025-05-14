@@ -1,7 +1,13 @@
-#include<gtest/gtest.h>
-#include<Lexer.h>
-#include<sml.hpp>
-#include<memory>
+#include <memory>
+
+#include <sml.hpp>
+#include <gtest/gtest.h>
+
+#include <Lexer.h>
+#include <Environment.h>
+#include <Parser.h>
+#include <ObjectNode.h>
+
 using namespace std;
 using namespace hdg;
 
@@ -120,4 +126,22 @@ TEST(test_Position, clone){
     ASSERT_EQ(pos.getStart().col,   start.col);
     ASSERT_EQ(pos.getStart().index, start.index);
     ASSERT_EQ(pos.getStart().line,  start.line);
+}
+
+TEST(test_Parser, new_Primary){
+    string code = "1";
+    string path = "<stdin>";
+    Lexer lexer;
+
+    std::vector<Token> tokens = lexer.run(path, &code);
+
+    Environment envir;
+
+    Parser parser(tokens, &envir);
+
+    uNode ast = parser.new_Primary();
+
+    Integer* num = (Integer*)ast->interpret();
+
+    ASSERT_EQ(num->getValue(), 1);
 }

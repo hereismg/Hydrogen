@@ -569,8 +569,8 @@ namespace hdg {
 
             node = std::make_unique<NumObjNode>(val, pos);
         }
-        else if (m_currentToken->getType() == Token::Type::INT){
-            int64_t val = std::stoll(m_currentToken->getValue().c_str());
+        else if (m_currentToken->getType() == Token::Type::FLOAT){
+            double val = std::stod(m_currentToken->getValue().c_str());
             auto pos = *m_currentToken->thisPosition();
 
             return std::make_unique<NumObjNode>(val, pos);

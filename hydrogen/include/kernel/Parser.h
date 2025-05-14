@@ -27,7 +27,7 @@ namespace hdg {
         Parser(std::vector<Token> tokens, Environment* environment);
         Node* run();
 
-    protected:
+    public:
         void advance();
         void retreat();
 

@@ -8,13 +8,13 @@ Alice先手和Bob后手玩游戏：给定一个非负整数n，轮到谁操作�
 "
 
 function fun(n, op) {
-	if n == 0 {
-		1
-	} else {
-		a = 1 - fun(n - 1, 1 - op)
-		b = 1 - fun(n / 2, 1 - op)
-		if a > b: a else: b
-	}
+    if n == 0 {
+        1
+    } else {
+        a = 1 - fun(n - 1, 1 - op)
+        b = 1 - fun(n / 2, 1 - op)
+        if a > b: a else: b
+    }
 }
 
 n = parseInt(input())

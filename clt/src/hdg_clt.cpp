@@ -68,6 +68,7 @@ bool Option::getOptVersion(){
 int real_main(int argc, char *argv[]){
     if (argc < 2){
         std::cout << "argc < 2!" << std::endl;
+        return 1;
     }
     Option opt(argc, argv);
 

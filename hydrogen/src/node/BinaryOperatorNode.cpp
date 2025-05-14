@@ -125,8 +125,9 @@ namespace hdg {
         return result;
     }
 
-    BinOperNode::BinOperNode(Token oper, uNode&& left, uNode&& right)
-        : m_oper(std::move(oper)),
+    BinOperNode::BinOperNode(Token oper, uNode&& left, uNode&& right, Position pos)
+        : Node(pos),
+          m_oper(std::move(oper)),
           m_left(std::move(left)),
           m_right(std::move(right))
     {
@@ -156,5 +157,14 @@ namespace hdg {
 
     inline const Node* BinOperNode::getRight() const{
         return m_right.get();
+    }
+
+    std::string BinOperNode::toString(){
+        return "BinOperNode";
+    }
+
+    Object* BinOperNode::interpret(){
+        assert(false && "func 'interpret()' is deprecate!");
+        return nullptr;
     }
 } // hdg

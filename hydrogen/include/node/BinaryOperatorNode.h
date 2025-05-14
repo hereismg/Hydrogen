@@ -48,7 +48,7 @@ namespace hdg {
         uNode m_right;
 
     public:
-        BinOperNode(Token oper, uNode&& left, uNode&& right);
+        BinOperNode(Token oper, uNode&& left, uNode&& right, Position pos);
         
         BinOperNode(const BinOperNode&) = delete;
         BinOperNode& operator=(const BinOperNode&) = delete;
@@ -63,6 +63,9 @@ namespace hdg {
         const Token& getOper() const;
         const Node* getLeft() const;
         const Node* getRight() const;
+
+        virtual std::string toString();
+        virtual Object* interpret();
     };
 
 } // hdg

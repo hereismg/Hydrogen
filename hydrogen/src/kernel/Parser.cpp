@@ -560,24 +560,24 @@ namespace hdg {
         return node;
     }
 
-    // uNode Parser::new_ArithExpr() {
-    //     Position pos;
-    //     pos.setStart(m_currentToken->thisPosition()->getStart());
+    uNode Parser::new_ArithExpr() {
+        Position pos;
+        pos.setStart(m_currentToken->thisPosition()->getStart());
 
-    //     uNode left = new_Primary();
+        uNode left = new_Primary();
 
-    //     if (m_currentToken->getType() != Token::Type::PLUS && m_currentToken->getType() != Token::Type::MINUS){
-    //         throw -1;
-    //     }
-    //     Token::Type oper = m_currentToken->getType();
-    //     advance();
+        if (m_currentToken->getType() != Token::Type::PLUS && m_currentToken->getType() != Token::Type::MINUS){
+            throw -1;
+        }
+        Token::Type oper = m_currentToken->getType();
+        advance();
 
-    //     uNode right = new_Primary();
+        uNode right = new_Primary();
 
-    //     pos.setEnd(m_currentToken->thisPosition()->getEnd());
+        pos.setEnd(m_currentToken->thisPosition()->getEnd());
 
-    //     return std::make_unique<BinaryOperatorNode>(oper, left, right, pos);
-    // }
+        return std::make_unique<BinOperNode>(oper, std::move(left), std::move(right), pos);
+    }
 
     uNode Parser::new_Primary() {
         uNode node;

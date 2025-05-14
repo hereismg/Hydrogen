@@ -80,9 +80,9 @@ namespace hdg {
 
         m_globalEnvironment->setSymbol("gcd", new BuiltInFunction(
                 [this](const std::vector<Object*> &args)->Object*{
-                    long long x1 = ((Integer*)args[0])->getValue(), x2 = ((Integer*)args[1])->getValue();
+                    int64_t x1 = ((Integer*)args[0])->getValue(), x2 = ((Integer*)args[1])->getValue();
                     while(x2) {
-                        long long temp = x2;
+                        int64_t temp = x2;
                         x2 = x1 % x2;
                         x1 = temp;
                     }

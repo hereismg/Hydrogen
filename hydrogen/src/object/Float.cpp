@@ -100,11 +100,11 @@ namespace hdg {
 
     Object *Float::equation(Object *other) {
         if (other->getClass() == "Float"){
-            long long result = m_value == ((Float*)other)->m_value;
+            int64_t result = m_value == ((Float*)other)->m_value;
             return new Integer(result);
         }
         else if (other->getClass() == "Integer"){
-            long long result = m_value == (double)((Integer*)other)->getValue();
+            int64_t result = m_value == (double)((Integer*)other)->getValue();
             return new Integer(result);
         }
         else{
@@ -115,11 +115,11 @@ namespace hdg {
 
     Object* Float::notEquation(Object* other) {
         if (other->getClass() == "Float"){
-            long long result = m_value != ((Float*)other)->m_value;
+            int64_t result = m_value != ((Float*)other)->m_value;
             return new Integer(result);
         }
         else if (other->getClass() == "Integer"){
-            long long result = m_value != (double)((Integer*)other)->getValue();
+            int64_t result = m_value != (double)((Integer*)other)->getValue();
             return new Integer(result);
         }
         else{
@@ -130,11 +130,11 @@ namespace hdg {
 
     Object *Float::greaterThan(Object *other) {
         if (other->getClass() == "Float"){
-            long long result = m_value > ((Float*)other)->m_value;
+            int64_t result = m_value > ((Float*)other)->m_value;
             return new Integer(result);
         }
         else if (other->getClass() == "Integer"){
-            long long result = m_value > (double)((Integer*)other)->getValue();
+            int64_t result = m_value > (double)((Integer*)other)->getValue();
             return new Integer(result);
         }
         else{
@@ -145,11 +145,11 @@ namespace hdg {
 
     Object *Float::lessThan(Object *other) {
         if (other->getClass() == "Float"){
-            long long result = m_value < ((Float*)other)->m_value;
+            int64_t result = m_value < ((Float*)other)->m_value;
             return new Integer(result);
         }
         else if (other->getClass() == "Integer"){
-            long long result = m_value < (double)((Integer*)other)->getValue();
+            int64_t result = m_value < (double)((Integer*)other)->getValue();
             return new Integer(result);
         }
         else{
@@ -160,11 +160,11 @@ namespace hdg {
 
     Object *Float::greaterThanEquation(Object *other) {
         if (other->getClass() == "Float"){
-            long long result = m_value >= ((Float*)other)->m_value;
+            int64_t result = m_value >= ((Float*)other)->m_value;
             return new Integer(result);
         }
         else if (other->getClass() == "Integer"){
-            long long result = m_value >= (double)((Integer*)other)->getValue();
+            int64_t result = m_value >= (double)((Integer*)other)->getValue();
             return new Integer(result);
         }
         else{
@@ -175,11 +175,11 @@ namespace hdg {
 
     Object *Float::lessThanEquation(Object *other) {
         if (other->getClass() == "Float"){
-            long long result = m_value <= ((Float*)other)->m_value;
+            int64_t result = m_value <= ((Float*)other)->m_value;
             return new Integer(result);
         }
         else if (other->getClass() == "Integer"){
-            long long result = m_value <= (double)((Integer*)other)->getValue();
+            int64_t result = m_value <= (double)((Integer*)other)->getValue();
             return new Integer(result);
         }
         else{
@@ -189,17 +189,17 @@ namespace hdg {
     }
 
     Object *Float::andOperator(Object *other) {
-        long long result = isTrue() && other->isTrue();
+        int64_t result = isTrue() && other->isTrue();
         return new Integer(result);
     }
 
     Object *Float::orOperator(Object *other) {
-        long long result = isTrue() || other->isTrue();
+        int64_t result = isTrue() || other->isTrue();
         return new Integer(result);
     }
 
     Object *Float::notOperator() {
-        long long result = !isTrue();
+        int64_t result = !isTrue();
         return new Integer(result);
     }
 

@@ -40,7 +40,7 @@ namespace hdg {
 
         if (m_oper.getType() == Token::MINUS){
             if (value->getClass() == "Integer"){
-                long long num = -((Integer*)value)->getValue();
+                int64_t num = -((Integer*)value)->getValue();
                 delete value;
                 return new Integer(num);
             }

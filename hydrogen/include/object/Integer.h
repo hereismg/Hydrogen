@@ -12,15 +12,15 @@ namespace hdg {
 
     class Integer: public Object{
     private:
-        long long m_value;
+        int64_t m_value;
 
     public:
 
-        explicit Integer(long long value);
-        Integer(long long value, const Position& position);
+        explicit Integer(int64_t value);
+        Integer(int64_t value, const Position& position);
 
-        void setValue(long long value);
-        [[nodiscard]] long long getValue() const;
+        void setValue(int64_t value);
+        [[nodiscard]] int64_t getValue() const;
 
         Object* plus(Object* other) override;
         Object* minus(Object* other) override;

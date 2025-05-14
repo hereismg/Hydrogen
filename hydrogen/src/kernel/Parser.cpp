@@ -237,7 +237,7 @@ namespace hdg {
             return node;
         }
         else if (m_currentToken->getType() == Token::INT){
-            Node *node = new NumObjNode((long long)std::atoi(m_currentToken->getValue().c_str()), *m_currentToken->thisPosition());
+            Node *node = new NumObjNode((int64_t)std::atoi(m_currentToken->getValue().c_str()), *m_currentToken->thisPosition());
             advance();
             return node;
         }
@@ -564,13 +564,13 @@ namespace hdg {
         uNode node;
 
         if (m_currentToken->getType() == Token::Type::INT){
-            long long val = std::stoll(m_currentToken->getValue().c_str());
+            int64_t val = std::stoll(m_currentToken->getValue().c_str());
             auto pos = *m_currentToken->thisPosition();
 
             node = std::make_unique<NumObjNode>(val, pos);
         }
         else if (m_currentToken->getType() == Token::Type::INT){
-            long long val = std::stoll(m_currentToken->getValue().c_str());
+            int64_t val = std::stoll(m_currentToken->getValue().c_str());
             auto pos = *m_currentToken->thisPosition();
 
             return std::make_unique<NumObjNode>(val, pos);

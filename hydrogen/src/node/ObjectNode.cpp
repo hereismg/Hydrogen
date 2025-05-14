@@ -24,7 +24,7 @@ namespace hdg {
         return m_class;
     }
 
-    NumObjNode::NumObjNode(long long value, const Position& position):
+    NumObjNode::NumObjNode(int64_t value, const Position& position):
             ObjectNode("Integer", position, nullptr), m_value({.i = value}){}
 
     NumObjNode::NumObjNode(float value, const Position& position):

@@ -51,12 +51,12 @@ namespace hdg {
     class NumObjNode: public ObjectNode{
     protected:
         union{
-            long long i;
+            int64_t i;
             double f;
         }m_value;
 
     public:
-        NumObjNode(long long value, const Position& position);
+        NumObjNode(int64_t value, const Position& position);
         NumObjNode(float value, const Position& position);
         NumObjNode(double value, const Position& position);
         ~NumObjNode() override;

@@ -13,7 +13,7 @@
 namespace hdg_lexer {
     namespace sml = boost::sml;
         
-    using uint64 = unsigned long long;
+    using uint64 = unsigned int64_t;
     using uint32 = unsigned int;
     class LexerSM;
     class Sender;

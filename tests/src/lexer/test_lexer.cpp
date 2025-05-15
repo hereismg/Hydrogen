@@ -191,3 +191,43 @@ TEST(test_BinOperNode, _1) {
 
     ASSERT_EQ(res->getValue(), 7);
 }
+
+TEST(test_BinOperNode, _2) {
+    /*
+       BinOperNode(2)
+        /       \
+    Integer(3)   BinOperNode(1)
+                 /         \
+           Integer(1)       Integer(2)
+    */
+    uNode int1 = std::make_unique<IntNode>(5);
+    uNode int2 = std::make_unique<IntNode>(2);
+
+    Token plus1(Token::Type::PLUS);
+
+    uNode binOper1 = std::make_unique<BinOperNode>(
+        std::move(plus1),
+        std::move(int1),
+        std::move(int2)
+    );
+
+    uNode int3 = std::make_unique<IntNode>(3);
+
+    Token plus2(Token::Type::PLUS);
+
+    uNode binOper2 = std::make_unique<BinOperNode>(
+        std::move(plus2),
+        std::move(int3),
+        std::move(binOper1)
+    );
+
+    InterpreterVisitor visitor;
+
+    binOper2->accept(visitor);
+
+    ASSERT_EQ(typeid(*visitor.getResult().get()), typeid(Integer));
+
+    Integer* res = dynamic_cast<Integer*>(visitor.getResult().get());
+
+    ASSERT_EQ(res->getValue(), 10);
+}

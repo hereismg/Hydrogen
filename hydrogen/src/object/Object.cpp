@@ -2,10 +2,12 @@
 // Created by Magnesium on 2023/7/25.
 //
 
+#include "../../include/object/Object.h"
+
 #include <utility>
 #include <cmath>
+#include <cassert>
 
-#include "../../include/object/Object.h"
 #include "../../include/basic/Error.h"
 
 
@@ -99,6 +101,10 @@ namespace hdg {
     Object *Object::notOperator() {
         illegalOperator();
         return nullptr;
+    }
+
+    uObject Object::plus(uObject& other){
+        assert(false && "Object::plus error!");
     }
 
     /**

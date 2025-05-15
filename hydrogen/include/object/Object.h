@@ -12,6 +12,10 @@
 #include "../basic/Position.h"
 
 namespace hdg {
+    class Object; // TODO 可以从尝试创建个专门放置这种类型定义的文件，譬如叫 define.h
+    typedef std::unique_ptr<Object> uObject;
+    typedef std::shared_ptr<Object> sObject;
+    typedef std::weak_ptr<Object>   wObject;
 
     /**
      * @brief       顶级对象类。海琛语言中所有的对象都是该对象的子代。
@@ -50,6 +54,8 @@ namespace hdg {
         virtual Object* orOperator(Object* other);
         virtual Object* notOperator();
 
+        virtual uObject plus(uObject& other);
+
         /**
          * @brief       括号运算符
          * @arg
@@ -65,8 +71,6 @@ namespace hdg {
         virtual Object* copy() = 0;
     };
 
-    typedef std::unique_ptr<Object> uObject;
-    typedef std::weak_ptr<Object>   wObject;
 } // hdg
 
 #endif //HDG_OBJECT_H

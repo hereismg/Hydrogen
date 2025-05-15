@@ -184,4 +184,10 @@ TEST(test_BinOperNode, _1) {
     InterpreterVisitor visitor;
 
     expr->accept(visitor);
+
+    ASSERT_EQ(typeid(*visitor.getResult().get()), typeid(Integer));
+
+    Integer* res = dynamic_cast<Integer*>(visitor.getResult().get());
+
+    ASSERT_EQ(res->getValue(), 7);
 }

@@ -40,6 +40,8 @@ namespace hdg {
         Object* orOperator(Object* other) override;
         Object* notOperator() override;
 
+        uObject plus(uObject& other) override;
+
         bool isTrue() override;
         std::string toString() override;
         Object* copy() override;

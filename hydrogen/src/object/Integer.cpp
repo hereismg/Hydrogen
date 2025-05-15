@@ -1,10 +1,11 @@
 //
 // Created by Magnesium on 2023/7/25.
 //
+#include "../../include/object/Integer.h"
 
 #include <cmath>
+#include <cassert>
 
-#include "../../include/object/Integer.h"
 #include "../../include/object/Float.h"
 #include "../../include/basic/Error.h"
 
@@ -222,6 +223,18 @@ namespace hdg {
     Object *Integer::notOperator() {
         bool result = !isTrue();
         return new Integer(result);
+    }
+
+    uObject Integer::plus(uObject& other){
+        if (typeid(*other.get()) == typeid(Integer)){
+            Integer* other_int = dynamic_cast<Integer*>(other.get());
+            int64_t res = m_value + other_int->getValue();
+
+            return std::make_unique<Integer>(res);
+        }
+        else{
+            assert(false && "Error!");
+        }
     }
 
     std::string Integer::toString() {

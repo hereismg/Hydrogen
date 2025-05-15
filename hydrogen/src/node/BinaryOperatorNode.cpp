@@ -135,6 +135,15 @@ namespace hdg {
         assert(right != nullptr && "Right Child cannot be null!");
     }
 
+    BinOperNode::BinOperNode(Token oper, uNode&& left, uNode&& right)
+        : m_oper(std::move(oper)),
+          m_left(std::move(left)),
+          m_right(std::move(right))
+    {
+        assert(m_left  != nullptr && "Left Child cannot be null!");
+        assert(m_right != nullptr && "Right Child cannot be null!");
+    }
+
     void BinOperNode::setOper(Token oper){
         m_oper = std::move(oper);
     }

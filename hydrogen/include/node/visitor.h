@@ -21,6 +21,7 @@ namespace hdg{
 
     public:
         void visitBinOperNode(BinOperNode& node) override;
+        void visitIntNode(IntNode& node) override;
     };
 }
 

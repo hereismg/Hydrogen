@@ -130,9 +130,16 @@ namespace hdg {
         return new String(m_value, m_position);
     }
 
+    IntNode::IntNode(int64_t val)
+        : m_val(val)
+    {
+        m_class = "Integer"; // TODO 注意，这最好用 ObjectNode 直接构造，但因为 ObjectNode 的设计缺陷，暂时这样做。
+    }
+
     IntNode::IntNode(int64_t val, const Position& pos)
         : m_val(val)
     {
+        m_position = pos;
         m_class = "Integer"; // TODO 注意，这最好用 ObjectNode 直接构造，但因为 ObjectNode 的设计缺陷，暂时这样做。
     }
 

@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "../../include/node/BinaryOperatorNode.h"
+#include "../../include/node/ObjectNode.h"
 
 namespace hdg{
     void Visitor::visitBinOperNode(BinOperNode& node){
@@ -19,7 +20,13 @@ namespace hdg{
 
 
     void InterpreterVisitor::visitBinOperNode(BinOperNode& node){
-        node.getLeft();
+        // node.getLeft()->accept(*this);
+
+
         std::cout << "bin" << std::endl;
+    }
+
+    void InterpreterVisitor::visitIntNode(IntNode& node){
+
     }
 }

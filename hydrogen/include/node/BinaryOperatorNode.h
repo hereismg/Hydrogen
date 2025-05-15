@@ -48,8 +48,11 @@ namespace hdg {
         uNode m_right;
 
     public:
+        BinOperNode(Token oper, uNode&& left, uNode&& right);
         BinOperNode(Token oper, uNode&& left, uNode&& right, Position pos);
         
+        ~BinOperNode() = default;
+
         BinOperNode(const BinOperNode&) = delete;
         BinOperNode& operator=(const BinOperNode&) = delete;
         

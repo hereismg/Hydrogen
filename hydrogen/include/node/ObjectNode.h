@@ -85,6 +85,7 @@ namespace hdg {
         int64_t m_val;
 
     public:
+        explicit IntNode(int64_t val);
         IntNode(int64_t val, const Position& pos);
 
         IntNode(const IntNode&) = delete;

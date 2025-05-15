@@ -7,6 +7,7 @@
 #include <Environment.h>
 #include <Parser.h>
 #include <ObjectNode.h>
+#include <BinaryOperatorNode.h>
 
 using namespace std;
 using namespace hdg;
@@ -166,4 +167,21 @@ TEST(test_Parser, new_ArithExpr){
     Integer* num = (Integer*)ast->interpret();
 
     ASSERT_EQ(num->getValue(), 2);
+}
+
+TEST(test_BinOperNode, _1) {
+    uNode left = std::make_unique<IntNode>(5);
+    uNode right = std::make_unique<IntNode>(2);
+
+    Token plus(Token::Type::PLUS);
+
+    uNode expr = std::make_unique<BinOperNode>(
+        std::move(plus),
+        std::move(left),
+        std::move(right)
+    );
+
+    InterpreterVisitor visitor;
+
+    expr->accept(visitor);
 }

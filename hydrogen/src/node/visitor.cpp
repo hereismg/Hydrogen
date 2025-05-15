@@ -21,7 +21,11 @@ namespace hdg{
 
     void InterpreterVisitor::visitBinOperNode(BinOperNode& node){
         // node.getLeft()->accept(*this);
+        auto& left = node.getLeft();
+        left->accept(*this);
 
+        auto& right = node.getRight();
+        right->accept(*this);
 
         std::cout << "bin" << std::endl;
     }

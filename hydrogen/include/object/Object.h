@@ -7,6 +7,7 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 
 #include "../basic/Position.h"
 
@@ -63,6 +64,9 @@ namespace hdg {
         virtual std::string toString() = 0;
         virtual Object* copy() = 0;
     };
+
+    typedef std::unique_ptr<Object> uObject;
+    typedef std::weak_ptr<Object>   wObject;
 } // hdg
 
 #endif //HDG_OBJECT_H

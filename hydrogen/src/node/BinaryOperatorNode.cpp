@@ -160,12 +160,12 @@ namespace hdg {
         return m_oper;
     }
 
-    const Node* BinOperNode::getLeft() const{
-        return m_left.get();
+    uNode& BinOperNode::getLeft(){
+        return m_left;
     }
 
-    const Node* BinOperNode::getRight() const{
-        return m_right.get();
+    uNode& BinOperNode::getRight(){
+        return m_right;
     }
 
     std::string BinOperNode::toString(){
@@ -177,7 +177,7 @@ namespace hdg {
         return nullptr;
     }
 
-    void BinOperNode::accept(Visitor& visitor){
+    void BinOperNode::accept(Visitor& visitor) {
         visitor.visitBinOperNode(*this);
     }
 } // hdg

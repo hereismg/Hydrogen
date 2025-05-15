@@ -64,8 +64,8 @@ namespace hdg {
         void setRight(uNode&& new_right);
 
         const Token& getOper() const;
-        const Node* getLeft() const;
-        const Node* getRight() const;
+        uNode& getLeft();
+        uNode& getRight();
 
         virtual std::string toString();
         virtual Object* interpret();

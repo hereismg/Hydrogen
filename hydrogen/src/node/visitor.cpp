@@ -13,6 +13,11 @@ namespace hdg{
         std::cout << "Visitor::visitNumObjNode() is not implement!" << std::endl;
     }
 
+    void Visitor::visitIntNode(IntNode& node){
+        std::cout << "Visitor::visitIntNode() is not implement!" << std::endl;
+    }
+
+
     void InterpreterVisitor::visitBinOperNode(BinOperNode& node){
         node.getLeft();
         std::cout << "bin" << std::endl;

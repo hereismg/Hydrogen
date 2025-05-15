@@ -79,6 +79,27 @@ namespace hdg {
         std::string toString() override;
         Object* interpret() override;
     };
+
+    class IntNode: public ObjectNode{
+    protected:
+        int64_t m_val;
+
+    public:
+        IntNode(int64_t val, const Position& pos);
+
+        IntNode(const IntNode&) = delete;
+        IntNode& operator=(const IntNode&) = delete;
+
+        IntNode(IntNode&&) noexcept = default;
+        IntNode& operator=(IntNode&&) noexcept = default;
+
+        int64_t getValue();
+        void setValue(int64_t new_val);
+
+        std::string toString() override;
+        Object* interpret() override;
+        void accept(Visitor& visitor) override;
+    };
 } // hdg
 
 #endif //HDG_OBJECTNODE_H

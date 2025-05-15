@@ -6,11 +6,13 @@ namespace hdg{
 
     class BinOperNode;
     class NumObjNode;
-
+    class IntNode;
+    
     class Visitor{
     public:
         virtual void visitBinOperNode(BinOperNode& node);
         virtual void visitNumObjNode(NumObjNode& node);
+        virtual void visitIntNode(IntNode& node);
     };
 
     class InterpreterVisitor: public Visitor{
@@ -18,7 +20,7 @@ namespace hdg{
         Object* res;
 
     public:
-        void visitBinOperNode(BinOperNode& node);
+        void visitBinOperNode(BinOperNode& node) override;
     };
 }
 

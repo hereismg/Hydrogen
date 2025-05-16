@@ -394,3 +394,7 @@ TEST(test_BinOperNode, _7) {
 
     ASSERT_EQ(res->getValue(), 45);
 }
+
+TEST(test_AssignNode, _1){
+    
+}

@@ -2,6 +2,7 @@
 #define VISITOR_H
 
 #include "../object/Object.h"
+#include "../basic/Environment.h"
 
 namespace hdg{
     class BinOperNode;
@@ -24,6 +25,9 @@ namespace hdg{
     };
 
     class InterpreterVisitor: public Visitor{
+    protected:
+        Environment m_envir;
+
     public:
         void visitBinOperNode(BinOperNode& node) override;
         void visitIntNode(IntNode& node) override;

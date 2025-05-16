@@ -60,6 +60,18 @@ namespace hdg {
         Object* getSymbol(const std::string& name);
     };
 
+
+    class New_Environment{
+    protected:
+        std::map<std::string, uObject> m_table;
+
+    public:
+        New_Environment() = default;
+        
+        void setSymbol(const std::string& name, Object);
+
+    };
+
 } // hdg
 
 #endif //HDG_ENVIRONMENT_H

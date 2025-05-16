@@ -208,6 +208,84 @@ TEST(test_Parser, new_ArithExpr_2){
     ASSERT_EQ(int_ptr->getValue(), -1);
 }
 
+TEST(test_Parser, new_ArithExpr_3){
+    string code = "2 / 2 + 1 * 3";
+    string path = "<stdin>";
+    Lexer lexer;
+
+    std::vector<Token> tokens = lexer.run(path, &code);
+
+    Environment envir;
+
+    Parser parser(tokens, &envir);
+
+    uNode ast = parser.new_ArithExpr();
+
+    InterpreterVisitor visitor;
+
+    ast->accept(visitor);
+
+    Object* obj_ptr = visitor.getResult().get();
+
+    ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
+
+    Integer* int_ptr= dynamic_cast<Integer*>(obj_ptr);
+
+    ASSERT_EQ(int_ptr->getValue(), 4);
+}
+
+TEST(test_Parser, new_ArithExpr_4){
+    string code = "8 / 2 + (1) * 3";
+    string path = "<stdin>";
+    Lexer lexer;
+
+    std::vector<Token> tokens = lexer.run(path, &code);
+
+    Environment envir;
+
+    Parser parser(tokens, &envir);
+
+    uNode ast = parser.new_ArithExpr();
+
+    InterpreterVisitor visitor;
+
+    ast->accept(visitor);
+
+    Object* obj_ptr = visitor.getResult().get();
+
+    ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
+
+    Integer* int_ptr= dynamic_cast<Integer*>(obj_ptr);
+
+    ASSERT_EQ(int_ptr->getValue(), 7);
+}
+
+
+TEST(test_Parser, new_ArithExpr_5){
+    string code = "8 / (2 + 1) * 3";
+    string path = "<stdin>";
+    Lexer lexer;
+
+    std::vector<Token> tokens = lexer.run(path, &code);
+
+    Environment envir;
+
+    Parser parser(tokens, &envir);
+
+    uNode ast = parser.new_ArithExpr();
+
+    InterpreterVisitor visitor;
+
+    ast->accept(visitor);
+
+    Object* obj_ptr = visitor.getResult().get();
+
+    ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
+
+    Integer* int_ptr= dynamic_cast<Integer*>(obj_ptr);
+
+    ASSERT_EQ(int_ptr->getValue(), 6);
+}
 
 TEST(test_BinOperNode, _1) {
     uNode left = std::make_unique<IntNode>(5);

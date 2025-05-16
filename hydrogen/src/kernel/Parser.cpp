@@ -3,6 +3,7 @@
 //
 
 #include <set>
+#include <cassert>
 
 #include "../../include/kernel/Parser.h"
 #include "../../include/node/CallNode.h"
@@ -573,10 +574,37 @@ namespace hdg {
         Position pos;
         pos.setStart(m_currentToken->thisPosition()->getStart());
 
-        uNode left = new_Primary();
+        uNode left = new_Term();
 
         while (m_currentToken->getType() == Token::Type::PLUS || 
                m_currentToken->getType() == Token::Type::MINUS) 
+        {
+            Token::Type oper = m_currentToken->getType();
+            advance();
+
+            uNode right = new_Term();
+
+            pos.setEnd(m_currentToken->thisPosition()->getEnd());
+
+            left = std::make_unique<BinOperNode>(
+                oper, 
+                std::move(left),
+                std::move(right),
+                pos
+            );
+        }
+
+        return left;
+    }
+
+    uNode Parser::new_Term() {
+        Position pos;
+        pos.setStart(m_currentToken->thisPosition()->getStart());
+
+        uNode left = new_Primary();
+
+        while (m_currentToken->getType() == Token::Type::MUL || 
+               m_currentToken->getType() == Token::Type::DIV) 
         {
             Token::Type oper = m_currentToken->getType();
             advance();
@@ -599,23 +627,30 @@ namespace hdg {
     uNode Parser::new_Primary() {
         uNode node;
 
-        if (m_currentToken->getType() == Token::Type::INT){
-            int64_t val = std::stoll(m_currentToken->getValue().c_str());
-            auto pos = *m_currentToken->thisPosition();
+        switch (m_currentToken->getType()){
+            case Token::Type::INT:{
+                int64_t val = std::stoll(m_currentToken->getValue().c_str());
+                auto pos = *m_currentToken->thisPosition();
 
-            node = std::make_unique<IntNode>(val, pos);
+                node = std::make_unique<IntNode>(val, pos);
+                advance();
+                return node;
+            }
+            case Token::Type::LPAREN:{
+                auto pos = m_currentToken->thisPosition()->clone();
+                advance();
+
+                node = new_ArithExpr();
+
+                if (m_currentToken->getType() != Token::Type::RPAREN) {
+                    assert(false && "Throw Error! Expect ')'."); 
+                }
+                advance();
+                return node;
+            }
+            default:{
+                assert(false && "Throw Error! incorrect node");
+            }
         }
-        // else if (m_currentToken->getType() == Token::Type::FLOAT){
-        //     double val = std::stod(m_currentToken->getValue().c_str());
-        //     auto pos = *m_currentToken->thisPosition();
-
-        //     return std::make_unique<NumObjNode>(val, pos);
-        // }
-        else{
-            throw -1;
-        }
-
-        advance();
-        return node;
     }
 } // hdg

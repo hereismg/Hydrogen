@@ -36,11 +36,11 @@ namespace hdg {
             MOD,        ///> 百分号”%“，默认为求余符号
             POW,
 
-            LPAREN,     ///> 左圆括号
+            LPAREN,     ///> 左圆括号 ()
             RPAREN,
-            LBRACKET,   ///> 左方括号
+            LBRACKET,   ///> 左方括号 []
             RBRACKET,
-            LBRACE,     ///> 左花括号
+            LBRACE,     ///> 左花括号 {}
             RBRACE,
             EQ,         ///> 赋值语句的等于号“=”
 

@@ -65,9 +65,21 @@ bool Option::getOptVersion(){
     return m_optVersion;
 }
 
+void printUsage(){
+    std::cout << R"(Usage: hdg_clt [Global Options] [Options] <file>
+
+Global Options:
+  1. [-v|--version]
+  2. [-h|--help]
+ 
+Options:
+  1. [-m|--mode]=[lexer | parser | interpreter])" << std::endl;
+}
+
 int real_main(int argc, char *argv[]){
     if (argc < 2){
-        std::cout << "argc < 2!" << std::endl;
+        printUsage();
+        // std::cout << "argc < 2!" << std::endl;
         return 1;
     }
     Option opt(argc, argv);

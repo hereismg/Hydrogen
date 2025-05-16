@@ -34,6 +34,8 @@ protected:
     Mode m_optMode;
 };
 
+void printUsage();
+
 /**
  * Usage: hdg_clt [Options] <file>
  * 

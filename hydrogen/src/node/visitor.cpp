@@ -19,6 +19,10 @@ namespace hdg{
     void Visitor::visitIntNode(IntNode& node){
         std::cout << "Visitor::visitIntNode() is not implement!" << std::endl;
     }
+    
+    void Visitor::visitAssignNode(new_AssignNode& node){
+        std::cout << "Visitor::visitAssignNode() is not implement!" << std::endl;
+    }
 
     uObject& Visitor::getResult(){
         return m_res;

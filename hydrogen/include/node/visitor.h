@@ -7,6 +7,7 @@ namespace hdg{
     class BinOperNode;
     class NumObjNode;
     class IntNode;
+    class new_AssignNode;
     
     class Visitor{
     protected:
@@ -16,6 +17,7 @@ namespace hdg{
         virtual void visitBinOperNode(BinOperNode& node);
         virtual void visitNumObjNode(NumObjNode& node);
         virtual void visitIntNode(IntNode& node);
+        virtual void visitAssignNode(new_AssignNode& node);
 
         virtual uObject& getResult();
         virtual uObject  moveResult();

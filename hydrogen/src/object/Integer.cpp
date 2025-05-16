@@ -237,6 +237,42 @@ namespace hdg {
         }
     }
 
+    uObject Integer::minus(uObject& other){
+        if (typeid(*other.get()) == typeid(Integer)){
+            Integer* other_int = dynamic_cast<Integer*>(other.get());
+            int64_t res = m_value - other_int->getValue();
+
+            return std::make_unique<Integer>(res);
+        }
+        else{
+            assert(false && "Error!");
+        }
+    }
+
+    uObject Integer::mul(uObject& other){
+        if (typeid(*other.get()) == typeid(Integer)){
+            Integer* other_int = dynamic_cast<Integer*>(other.get());
+            int64_t res = m_value * other_int->getValue();
+
+            return std::make_unique<Integer>(res);
+        }
+        else{
+            assert(false && "Error!");
+        }
+    }
+
+    uObject Integer::div(uObject& other){
+        if (typeid(*other.get()) == typeid(Integer)){
+            Integer* other_int = dynamic_cast<Integer*>(other.get());
+            int64_t res = m_value / other_int->getValue();
+
+            return std::make_unique<Integer>(res);
+        }
+        else{
+            assert(false && "Error!");
+        }
+    }
+
     std::string Integer::toString() {
         return std::to_string(m_value);
     }

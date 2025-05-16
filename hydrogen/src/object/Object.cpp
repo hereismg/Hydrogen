@@ -107,6 +107,18 @@ namespace hdg {
         assert(false && "Object::plus error!");
     }
 
+    uObject Object::minus(uObject& other){
+        assert(false && "Object::plus error!");
+    }
+
+    uObject Object::mul(uObject& other){
+        assert(false && "Object::plus error!");
+    }
+
+    uObject Object::div(uObject& other){
+        assert(false && "Object::plus error!");
+    }
+
     /**
      * @details     括号运算符主要是用做对函数的实现。函数就是通过该方法实现的。
      * */

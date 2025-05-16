@@ -55,7 +55,9 @@ namespace hdg {
         virtual Object* notOperator();
 
         virtual uObject plus(uObject& other);
-
+        virtual uObject minus(uObject& other);
+        virtual uObject mul(uObject& other);
+        virtual uObject div(uObject& other);
         /**
          * @brief       括号运算符
          * @arg

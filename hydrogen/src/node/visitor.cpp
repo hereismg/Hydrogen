@@ -43,13 +43,13 @@ namespace hdg{
             m_res = left_val->plus(right_val);
         }
         else if (oper.getType() == Token::Type::MINUS){
-
+            m_res = left_val->minus(right_val);
         }
         else if (oper.getType() == Token::Type::MUL){
-
+            m_res = left_val->mul(right_val);
         }
         else if (oper.getType() == Token::Type::DIV){
-            
+            m_res = left_val->div(right_val);
         }
         else{
             assert(false && "Unknow Oper!");

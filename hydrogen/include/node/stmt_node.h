@@ -11,8 +11,8 @@ namespace hdg{
         uNode m_expr;
 
     public:
-        new_AssignNode(std::string name, uNode expr);
-        new_AssignNode(std::string name, uNode expr, const Position& pos);
+        new_AssignNode(std::string name, uNode&& expr);
+        new_AssignNode(std::string name, uNode&& expr, const Position& pos);
 
         std::string& getName();
         uNode& getExpr();

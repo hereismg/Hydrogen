@@ -3,14 +3,14 @@
 #include <cassert>
 
 namespace hdg{
-    new_AssignNode::new_AssignNode(std::string name, uNode expr)
+    new_AssignNode::new_AssignNode(std::string name, uNode&& expr)
         : m_name(std::move(m_name)), 
           m_expr(std::move(expr)) 
     {
         assert(expr==nullptr && "m_expr cannot is NULL!");
     }
 
-    new_AssignNode::new_AssignNode(std::string name, uNode expr, const Position& pos)
+    new_AssignNode::new_AssignNode(std::string name, uNode&& expr, const Position& pos)
         : Node(pos),
           m_name(std::move(m_name)), 
           m_expr(std::move(expr)) 

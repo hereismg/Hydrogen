@@ -601,7 +601,7 @@ namespace hdg {
         Position pos;
         pos.setStart(m_currentToken->thisPosition()->getStart());
 
-        uNode left = new_Primary();
+        uNode left = new_Factor();
 
         while (m_currentToken->getType() == Token::Type::MUL || 
                m_currentToken->getType() == Token::Type::DIV) 
@@ -609,7 +609,7 @@ namespace hdg {
             Token::Type oper = m_currentToken->getType();
             advance();
 
-            uNode right = new_Primary();
+            uNode right = new_Factor();
 
             pos.setEnd(m_currentToken->thisPosition()->getEnd());
 
@@ -623,6 +623,25 @@ namespace hdg {
 
         return left;
     }
+
+    uNode Parser::new_Factor() {
+        Position pos;
+        pos.setStart(m_currentToken->thisPosition()->getStart());
+
+        Token::Type oper = m_currentToken->getType();
+        switch(oper){
+            case Token::Type::PLUS: {
+                return new_Primary(); // hdgtodo: 增加对单目运算符的支持
+            }
+            case Token::Type::MINUS: {
+                return new_Primary();
+            }
+            default: {
+                return new_Primary();
+            }
+        }
+    }
+
 
     uNode Parser::new_Primary() {
         uNode node;

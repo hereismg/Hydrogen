@@ -156,7 +156,7 @@ TEST(test_Parser, new_Primary){
     ASSERT_EQ(int_ptr->getValue(), 1);
 }
 
-TEST(test_Parser, new_ArithExpr){
+TEST(test_Parser, new_ArithExpr){ // hdgTodo: 使用 TEST_P
     string code = "1 + 1";
     string path = "<stdin>";
     Lexer lexer;
@@ -181,6 +181,33 @@ TEST(test_Parser, new_ArithExpr){
 
     ASSERT_EQ(int_ptr->getValue(), 2);
 }
+
+TEST(test_Parser, new_ArithExpr_2){
+    string code = "1 + 1 - 3";
+    string path = "<stdin>";
+    Lexer lexer;
+
+    std::vector<Token> tokens = lexer.run(path, &code);
+
+    Environment envir;
+
+    Parser parser(tokens, &envir);
+
+    uNode ast = parser.new_ArithExpr();
+
+    InterpreterVisitor visitor;
+
+    ast->accept(visitor);
+
+    Object* obj_ptr = visitor.getResult().get();
+
+    ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
+
+    Integer* int_ptr= dynamic_cast<Integer*>(obj_ptr);
+
+    ASSERT_EQ(int_ptr->getValue(), -1);
+}
+
 
 TEST(test_BinOperNode, _1) {
     uNode left = std::make_unique<IntNode>(5);

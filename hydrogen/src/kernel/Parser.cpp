@@ -575,17 +575,25 @@ namespace hdg {
 
         uNode left = new_Primary();
 
-        if (m_currentToken->getType() != Token::Type::PLUS && m_currentToken->getType() != Token::Type::MINUS){
-            throw -1;
+        while (m_currentToken->getType() == Token::Type::PLUS || 
+               m_currentToken->getType() == Token::Type::MINUS) 
+        {
+            Token::Type oper = m_currentToken->getType();
+            advance();
+
+            uNode right = new_Primary();
+
+            pos.setEnd(m_currentToken->thisPosition()->getEnd());
+
+            left = std::make_unique<BinOperNode>(
+                oper, 
+                std::move(left),
+                std::move(right),
+                pos
+            );
         }
-        Token::Type oper = m_currentToken->getType();
-        advance();
 
-        uNode right = new_Primary();
-
-        pos.setEnd(m_currentToken->thisPosition()->getEnd());
-
-        return std::make_unique<BinOperNode>(oper, std::move(left), std::move(right), pos);
+        return left;
     }
 
     uNode Parser::new_Primary() {

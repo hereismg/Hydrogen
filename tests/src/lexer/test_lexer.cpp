@@ -143,9 +143,17 @@ TEST(test_Parser, new_Primary){
 
     uNode ast = parser.new_Primary();
 
-    Integer* num = (Integer*)ast->interpret();
+    InterpreterVisitor visitor;
 
-    ASSERT_EQ(num->getValue(), 1);
+    ast->accept(visitor);
+
+    Object* obj_ptr = visitor.getResult().get();
+
+    ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
+
+    Integer* int_ptr= dynamic_cast<Integer*>(obj_ptr);
+
+    ASSERT_EQ(int_ptr->getValue(), 1);
 }
 
 TEST(test_Parser, new_ArithExpr){
@@ -159,15 +167,19 @@ TEST(test_Parser, new_ArithExpr){
 
     Parser parser(tokens, &envir);
 
-    uNode ast = parser.new_Primary();
+    uNode ast = parser.new_ArithExpr();
 
     InterpreterVisitor visitor;
 
     ast->accept(visitor);
 
-    Integer* num = (Integer*)ast->interpret();
+    Object* obj_ptr = visitor.getResult().get();
 
-    // ASSERT_EQ(num->getValue(), 2);
+    ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
+
+    Integer* int_ptr= dynamic_cast<Integer*>(obj_ptr);
+
+    ASSERT_EQ(int_ptr->getValue(), 2);
 }
 
 TEST(test_BinOperNode, _1) {

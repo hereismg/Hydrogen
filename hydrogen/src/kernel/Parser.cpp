@@ -516,7 +516,12 @@ namespace hdg {
         }
     }
 
-    Node *Parser::binaryOperator(Environment* environment, const std::set<Token, std::less<>>&opers, std::function<Node*(Environment* envir)> funA, std::function<Node*(Environment* envir)> funB) {
+    Node *Parser::binaryOperator(
+        Environment* environment, 
+        const std::set<Token, std::less<>>&opers, 
+        std::function<Node*(Environment* envir)> funA, 
+        std::function<Node*(Environment* envir)> funB) 
+    {
         if (funB == nullptr) funB = funA;
         Node* left = funA(environment);
 
@@ -541,7 +546,11 @@ namespace hdg {
         return left;
     }
 
-    Node *Parser::unaryOperator(Environment* environment, const std::set<Token, std::less<>>&opers, std::function<Node*(Environment* envir)> fun) {
+    Node *Parser::unaryOperator(
+        Environment* environment, 
+        const std::set<Token, std::less<>>&opers, 
+        std::function<Node*(Environment* envir)> fun) 
+    {
         Node* node;
 
         Token oper(*m_currentToken);
@@ -586,14 +595,14 @@ namespace hdg {
             int64_t val = std::stoll(m_currentToken->getValue().c_str());
             auto pos = *m_currentToken->thisPosition();
 
-            node = std::make_unique<NumObjNode>(val, pos);
+            node = std::make_unique<IntNode>(val, pos);
         }
-        else if (m_currentToken->getType() == Token::Type::FLOAT){
-            double val = std::stod(m_currentToken->getValue().c_str());
-            auto pos = *m_currentToken->thisPosition();
+        // else if (m_currentToken->getType() == Token::Type::FLOAT){
+        //     double val = std::stod(m_currentToken->getValue().c_str());
+        //     auto pos = *m_currentToken->thisPosition();
 
-            return std::make_unique<NumObjNode>(val, pos);
-        }
+        //     return std::make_unique<NumObjNode>(val, pos);
+        // }
         else{
             throw -1;
         }

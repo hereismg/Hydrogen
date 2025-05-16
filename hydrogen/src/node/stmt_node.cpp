@@ -4,18 +4,18 @@
 
 namespace hdg{
     new_AssignNode::new_AssignNode(std::string name, uNode&& expr)
-        : m_name(std::move(m_name)), 
+        : m_name(std::move(name)), 
           m_expr(std::move(expr)) 
     {
-        assert(expr==nullptr && "m_expr cannot is NULL!");
+        assert(m_expr!=nullptr && "m_expr cannot is NULL!");
     }
 
     new_AssignNode::new_AssignNode(std::string name, uNode&& expr, const Position& pos)
         : Node(pos),
-          m_name(std::move(m_name)), 
+          m_name(std::move(name)), 
           m_expr(std::move(expr)) 
     {
-        assert(expr==nullptr && "m_expr cannot is NULL!");
+        assert(m_expr!=nullptr && "m_expr cannot is NULL!");
     }
 
     std::string& new_AssignNode::getName(){

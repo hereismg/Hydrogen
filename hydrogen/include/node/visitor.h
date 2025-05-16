@@ -13,6 +13,7 @@ namespace hdg{
     class Visitor{
     protected:
         uObject m_res;
+        New_Environment m_envir;
 
     public:
         virtual void visitBinOperNode(BinOperNode& node);
@@ -22,15 +23,17 @@ namespace hdg{
 
         virtual uObject& getResult();
         virtual uObject  moveResult();
+
+        virtual New_Environment& getEnvironment();
     };
 
     class InterpreterVisitor: public Visitor{
     protected:
-        Environment m_envir;
 
     public:
         void visitBinOperNode(BinOperNode& node) override;
         void visitIntNode(IntNode& node) override;
+        void visitAssignNode(new_AssignNode& node) override;
     };
 }
 

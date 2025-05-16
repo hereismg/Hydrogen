@@ -44,7 +44,7 @@ function(hdg_append_test_with_file file)
         "${PROJECT_SOURCE_DIR}/hydrogen/include/basic"
         "${PROJECT_SOURCE_DIR}/hydrogen/include/kernel"
         "${PROJECT_SOURCE_DIR}/hydrogen/include/node"
-#            "${PROJECT_SOURCE_DIR}/include/object"
+        "${PROJECT_SOURCE_DIR}/hydrogen/include/object"
         "${PROJECT_SOURCE_DIR}/clt/src"
     )
     target_link_directories(

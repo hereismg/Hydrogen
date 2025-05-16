@@ -68,8 +68,8 @@ namespace hdg {
     public:
         New_Environment() = default;
         
-        void setSymbol(const std::string& name, Object);
-
+        void setSymbol(const std::string& name, uObject&& obj);
+        uObject& getSymbol(const std::string& name);
     };
 
 } // hdg

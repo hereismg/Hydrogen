@@ -8,6 +8,7 @@
 #include <Parser.h>
 #include <ObjectNode.h>
 #include <BinaryOperatorNode.h>
+#include <stmt_node.h>
 
 using namespace std;
 using namespace hdg;
@@ -396,5 +397,21 @@ TEST(test_BinOperNode, _7) {
 }
 
 TEST(test_AssignNode, _1){
-    
+    uNode obj = std::make_unique<IntNode>(10);
+    std::string name = "num";
+
+    uNode assign = std::make_unique<new_AssignNode>(name, std::move(obj));
+
+    InterpreterVisitor visitor;
+
+    assign->accept(visitor);
+
+    auto& envir = visitor.getEnvironment();
+    Object* obj_ptr = envir.getSymbol(name).get();
+
+    ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
+
+    Integer* int_ptr = dynamic_cast<Integer*>(obj_ptr);
+
+    ASSERT_EQ(int_ptr->getValue(), 10);
 }

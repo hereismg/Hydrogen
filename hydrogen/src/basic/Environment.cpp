@@ -4,6 +4,8 @@
 
 #include "../../include/basic/Environment.h"
 
+#include <cassert>
+
 namespace hdg {
 
     Environment::Environment() = default;
@@ -80,4 +82,24 @@ namespace hdg {
         }
     }
 
+    void New_Environment::setSymbol(const std::string& name, uObject&& obj) {
+        m_table[name] = std::move(obj);
+    }
+
+    uObject& New_Environment::getSymbol(const std::string& name){
+        auto it = m_table.find(name);
+        
+        if (it == m_table.end()){
+            assert(false && "Error");
+        }
+        
+        return it->second;
+
+        // if (m_table.find(name) != m_table.end()){ // hdgTodo 这里是否要优化？
+        //     return m_table[name];
+        // }
+        // else {
+        //     assert(false && "unrefrence symbol!");
+        // }
+    }
 } // hdg

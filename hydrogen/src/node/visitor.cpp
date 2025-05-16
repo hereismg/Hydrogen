@@ -6,6 +6,7 @@
 
 #include "../../include/node/BinaryOperatorNode.h"
 #include "../../include/node/ObjectNode.h"
+#include "../../include/node/stmt_node.h"
 
 namespace hdg{
     void Visitor::visitBinOperNode(BinOperNode& node){
@@ -32,14 +33,20 @@ namespace hdg{
         return std::move(m_res);
     }
 
+    New_Environment& Visitor::getEnvironment(){
+        return m_envir;
+    }
+
     void InterpreterVisitor::visitBinOperNode(BinOperNode& node){
         auto& left = node.getLeft();
         left->accept(*this);
         auto left_val = moveResult();
+        assert(left_val != nullptr && "InterpreterVisitor::visitBinOperNode: left_val must be not null!");
 
         auto& right = node.getRight();
         right->accept(*this);
         auto right_val = moveResult();
+        assert(right_val != nullptr && "InterpreterVisitor::visitBinOperNode: right_val must be not null!");
 
         Token oper = node.getOper();
 
@@ -62,5 +69,16 @@ namespace hdg{
 
     void InterpreterVisitor::visitIntNode(IntNode& node){
         m_res = std::make_unique<Integer>(node.getValue());
+    }
+
+    void InterpreterVisitor::visitAssignNode(new_AssignNode& node) {
+        std::string& name = node.getName();
+
+        auto& expr = node.getExpr();
+        expr->accept(*this);
+        auto res = moveResult();
+        assert(res != nullptr);
+
+        this->m_envir.setSymbol(name, std::move(res));
     }
 }

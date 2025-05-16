@@ -99,21 +99,28 @@ int real_main(int argc, char *argv[]){
     }
     
     // 模式
-    // auto mode = opt.getOptMode();
-    // switch (mode){
-    // case Option::Mode::Lexer:
-    //     break;
-    // case Option::Mode::Parser:
-    //     break;
-    // case Option::Mode::Interpreter:
-    //     hdg::Interpreter interpreter;
-    //     auto res = interpreter.interpret(opt.getFilePath(), codeText);
+    auto mode = opt.getOptMode();
+    switch (mode){
+    case Option::Mode::Lexer:{
+        
+        break;
+    }
+    case Option::Mode::Parser:{
+        break;
+    }
+    case Option::Mode::Interpreter:{
 
-    //     std::cout << res << std::endl;
-    //     break;
-    // default:
-    //     break;
-    // }
+        hdg::Interpreter interpreter;
+        auto res = interpreter.interpret(opt.getFilePath(), codeText);
+        
+        std::cout << res << std::endl;
+        break;
+    }
+    default:{
+        
+        break;
+    }
+    }
 
 
     return 0;

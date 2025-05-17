@@ -113,21 +113,21 @@ int real_main(int argc, char *argv[]){
         break;
     }
     case Option::Mode::Interpreter:{
-        // hdg::Lexer lexer;
+        hdg::Lexer lexer;
 
-        // auto tokens = lexer.run("<stdin>", &codeText);
+        auto tokens = lexer.run("<stdin>", &codeText);
 
-        // hdg::Environment envir;
-        // hdg::Parser parser(tokens, &envir);
-        // hdg::uNode ast = parser.new_ExeUnit();
+        hdg::Environment envir;
+        hdg::Parser parser(tokens, &envir);
+        hdg::uNode ast = parser.new_ExeUnit();
 
-        // hdg::InterpreterVisitor visitor;
+        hdg::InterpreterVisitor visitor;
 
-        // ast->accept(visitor);
+        ast->accept(visitor);
 
-        // auto& res = visitor.getResult();
+        auto& res = visitor.getResult();
         
-        // std::cout << res->toString() << std::endl;
+        std::cout << res->toString() << std::endl;
 
         break;
     }

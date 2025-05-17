@@ -579,7 +579,13 @@ namespace hdg {
         advance();
 
         auto unit = std::make_unique<new_ExeUnitNode>();
-        while(m_currentToken->getType() != Token::Type::RBRACE){ // end of file
+        while(m_currentToken->getType() != Token::Type::RBRACE){ 
+            // end of file
+            if (m_currentToken->getType() == Token::Type::EL){
+                advance();
+                continue;
+            }
+
             uNode stmt;
 
             stmt = new_AssignStmt();
@@ -619,6 +625,7 @@ namespace hdg {
         advance();
 
         if (m_currentToken->getType() != Token::Type::EQ){
+            retreat();
             return nullptr;
         }
         advance();

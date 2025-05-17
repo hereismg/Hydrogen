@@ -342,3 +342,45 @@ TEST(test_ExeUnit, _1){
 
     ASSERT_EQ(int_ptr->getValue(), 1);
 }
+
+TEST(test_ExeUnit, _2){
+    string code = R"({
+    a = 1
+    b = 2
+}
+    )";
+    string path = "<stdin>";
+    Lexer lexer;
+
+    std::vector<Token> tokens = lexer.run(path, &code);
+
+    Environment envir2; // 这将来要弃用
+
+    Parser parser(tokens, &envir2);
+
+    uNode ast = parser.new_ExeUnit();
+
+    InterpreterVisitor visitor;
+
+    ast->accept(visitor);
+
+    auto& envir = visitor.getEnvironment();
+    {
+        Object* obj_ptr = envir.getSymbol("a").get();
+
+        ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
+
+        Integer* int_ptr = dynamic_cast<Integer*>(obj_ptr);
+
+        ASSERT_EQ(int_ptr->getValue(), 1);
+    }
+    {
+        Object* obj_ptr = envir.getSymbol("b").get();
+
+        ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
+
+        Integer* int_ptr = dynamic_cast<Integer*>(obj_ptr);
+
+        ASSERT_EQ(int_ptr->getValue(), 2);
+    }
+}

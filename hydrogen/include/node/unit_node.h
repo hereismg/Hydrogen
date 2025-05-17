@@ -22,6 +22,10 @@ namespace hdg{
         new_ExeUnitNode& operator=(new_ExeUnitNode&&) noexcept = default;
 
         std::vector<uNode>& getList();
+
+        virtual std::string toString();
+        virtual Object* interpret();
+        virtual void accept(Visitor& visitor);
     };
 }
 

@@ -82,7 +82,7 @@ function(hdg_append_test_with_dir dir)
         "${PROJECT_SOURCE_DIR}/hydrogen/include/basic"
         "${PROJECT_SOURCE_DIR}/hydrogen/include/kernel"
         "${PROJECT_SOURCE_DIR}/hydrogen/include/node"
-#            "${PROJECT_SOURCE_DIR}/include/object"
+        "${PROJECT_SOURCE_DIR}/hydrogen/include/object"
     )
     target_link_directories(
             ${test_name}
@@ -104,3 +104,4 @@ hdg_append_test_with_dir("src/parse")
 hdg_append_test_with_dir("src/lexer")
 
 hdg_append_test_with_file("clt/test_option.cpp")
+hdg_append_test_with_file("src/test_ast.cpp")

@@ -2,6 +2,9 @@
 
 #include <cassert>
 
+#include "../../include/node/visitor.h"
+
+
 namespace hdg{
     new_ExeUnitNode::new_ExeUnitNode(std::vector<uNode>&& list)
         : m_list(std::move(list))
@@ -13,5 +16,17 @@ namespace hdg{
 
     std::vector<uNode>& new_ExeUnitNode::getList(){
         return m_list;
+    }
+
+    std::string new_ExeUnitNode::toString(){
+        return "ExeUnitNode";
+    }
+
+    Object* new_ExeUnitNode::interpret(){
+        assert(false);
+    }
+
+    void new_ExeUnitNode::accept(Visitor& visitor){
+        visitor.visitExeUnitNode(*this);
     }
 }

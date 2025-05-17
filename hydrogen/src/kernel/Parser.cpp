@@ -15,6 +15,7 @@
 #include "../../include/node/ForNode.h"
 #include "../../include/node/WhileNode.h"
 #include "../../include/node/BinaryOperatorNode.h"
+#include "../../include/node/stmt_node.h"
 
 namespace hdg {
     Parser::Parser(std::vector<Token> tokens, Environment* environment):
@@ -570,6 +571,26 @@ namespace hdg {
         return node;
     }
 
+    uNode Parser::new_AssignStmt(){
+        Position pos = m_currentToken->thisPosition()->clone();
+
+        if (m_currentToken->getType() != Token::Type::IDENTIFIER){
+            return nullptr;
+        }
+
+        std::string name = m_currentToken->getValue();
+        advance();
+
+        if (m_currentToken->getType() != Token::Type::EQ){
+            return nullptr;
+        }
+        advance();
+        
+        uNode expr = new_ArithExpr();
+
+        return std::make_unique<new_AssignNode>(name, std::move(expr), pos);
+    }
+
     uNode Parser::new_ArithExpr() {
         Position pos;
         pos.setStart(m_currentToken->thisPosition()->getStart());
@@ -655,11 +676,15 @@ namespace hdg {
                 advance();
                 return node;
             }
+            case Token::Type::IDENTIFIER:{
+
+                return nullptr;
+            }
             case Token::Type::LPAREN:{
                 auto pos = m_currentToken->thisPosition()->clone();
                 advance();
 
-                node = new_ArithExpr();
+                node = new_ArithExpr(); assert(node != nullptr);
 
                 if (m_currentToken->getType() != Token::Type::RPAREN) {
                     assert(false && "Throw Error! Expect ')'."); 

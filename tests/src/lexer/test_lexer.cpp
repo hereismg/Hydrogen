@@ -532,3 +532,31 @@ TEST(test_AssignNode, _1){
 
     ASSERT_EQ(int_ptr->getValue(), 10);
 }
+
+
+TEST(test_AssignStmt, _1){
+    string code = "a = 1";
+    string path = "<stdin>";
+    Lexer lexer;
+
+    std::vector<Token> tokens = lexer.run(path, &code);
+
+    Environment envir2; // 这将来要弃用
+
+    Parser parser(tokens, &envir2);
+
+    uNode ast = parser.new_AssignStmt();
+
+    InterpreterVisitor visitor;
+
+    ast->accept(visitor);
+
+    auto& envir = visitor.getEnvironment();
+    Object* obj_ptr = envir.getSymbol("a").get();
+
+    ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
+
+    Integer* int_ptr = dynamic_cast<Integer*>(obj_ptr);
+
+    ASSERT_EQ(int_ptr->getValue(), 1);
+}

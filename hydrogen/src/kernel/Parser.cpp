@@ -571,6 +571,35 @@ namespace hdg {
         return node;
     }
 
+    // uNode Parser::new_ExeUnit(){
+    //     if (m_currentToken->getType() != Token::Type::LBRACE){
+    //         throw -1;
+    //     }
+    //     advance();
+
+    //     while(m_currentToken->getType() != Token::Type::RBRACE){ // end of file
+    //         uNode stmt;
+
+    //         stmt = new_AssignStmt();
+    //         if (stmt != nullptr){
+    //             while (m_currentToken->getType() == Token::Type::EL){
+    //                 advance();
+    //             }
+
+    //             continue;
+    //         }
+
+    //         stmt = new_ArithExpr();
+    //         if (stmt != nullptr){
+    //             while (m_currentToken->getType() == Token::Type::EL){
+    //                 advance();
+    //             }
+
+    //             continue;
+    //         }
+    //     }
+    // }
+
     uNode Parser::new_AssignStmt(){
         Position pos = m_currentToken->thisPosition()->clone();
 

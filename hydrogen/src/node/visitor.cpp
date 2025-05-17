@@ -7,6 +7,7 @@
 #include "../../include/node/BinaryOperatorNode.h"
 #include "../../include/node/ObjectNode.h"
 #include "../../include/node/stmt_node.h"
+#include "../../include/node/unit_node.h"
 
 namespace hdg{
     void Visitor::visitBinOperNode(BinOperNode& node){
@@ -23,6 +24,10 @@ namespace hdg{
     
     void Visitor::visitAssignNode(new_AssignNode& node){
         std::cout << "Visitor::visitAssignNode() is not implement!" << std::endl;
+    }
+
+    void Visitor::visitExeUnitNode(new_ExeUnitNode& node){
+        std::cout << "Visitor::visitExeUnitNode() is not implement!" << std::endl;
     }
 
     uObject& Visitor::getResult(){
@@ -80,5 +85,13 @@ namespace hdg{
         assert(res != nullptr);
 
         this->m_envir.setSymbol(name, std::move(res));
+    }
+
+    void InterpreterVisitor::visitExeUnitNode(new_ExeUnitNode& node){
+        auto& list = node.getList();
+        for (auto& stmt : list){
+            assert(stmt != nullptr);
+            stmt->accept(*this);
+        }
     }
 }

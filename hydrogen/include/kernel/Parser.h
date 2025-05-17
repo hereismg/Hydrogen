@@ -55,9 +55,10 @@ namespace hdg {
                 std::function<Node*(Environment* envir)> fun
                 );
 
-        uNode new_ExeUnit();    // ExeUnit    : { IfStmt }
-        uNode new_IfStmt();     // IfStmt     : 'if' Expr '{' ExeUnit '}'
-                                //              {'elif' Expr '{' ExeUnit '}'}
+        uNode new_ExeUnit();    // ExeUnit    : '{' { IfStmt | AssignStmt | Expr } '}'
+        uNode new_IfStmt();     // IfStmt     : 'if' Expr ExeUnit 
+                                //              {'elif' Expr ExeUnit }
+                                //              ['else' ExeUnit ]
         uNode new_AssignStmt(); // AssignStmt : IDENT '=' Expr
 
         uNode new_Expr();       // Expr       : ArithExpr

@@ -9,6 +9,7 @@ namespace hdg{
     class NumObjNode;
     class IntNode;
     class new_AssignNode;
+    class new_ExeUnitNode;
     
     class Visitor{
     protected:
@@ -20,6 +21,7 @@ namespace hdg{
         virtual void visitNumObjNode(NumObjNode& node);
         virtual void visitIntNode(IntNode& node);
         virtual void visitAssignNode(new_AssignNode& node);
+        virtual void visitExeUnitNode(new_ExeUnitNode& node);
 
         virtual uObject& getResult();
         virtual uObject  moveResult();
@@ -34,6 +36,7 @@ namespace hdg{
         void visitBinOperNode(BinOperNode& node) override;
         void visitIntNode(IntNode& node) override;
         void visitAssignNode(new_AssignNode& node) override;
+        void visitExeUnitNode(new_ExeUnitNode& node) override;
     };
 }
 

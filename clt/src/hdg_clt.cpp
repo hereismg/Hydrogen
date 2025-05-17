@@ -1,9 +1,13 @@
+#include "hdg_clt.h"
+
 #include <iostream>
 #include <fstream>
 #include <cassert>
 #include <cstring>
-#include "hdg_clt.h"
+
 #include "../../hydrogen/include/kernel/Interpreter.h"
+#include "../../hydrogen/include/kernel/Parser.h"
+#include "../../hydrogen/include/node/visitor.h"
 
 bool startsWith(const char * str, const char * prefix){
     for (int i=0; str[i] != '\0' && prefix[i] != '\0'; i++){
@@ -109,11 +113,22 @@ int real_main(int argc, char *argv[]){
         break;
     }
     case Option::Mode::Interpreter:{
+        // hdg::Lexer lexer;
 
-        hdg::Interpreter interpreter;
-        auto res = interpreter.interpret(opt.getFilePath(), codeText);
+        // auto tokens = lexer.run("<stdin>", &codeText);
+
+        // hdg::Environment envir;
+        // hdg::Parser parser(tokens, &envir);
+        // hdg::uNode ast = parser.new_ExeUnit();
+
+        // hdg::InterpreterVisitor visitor;
+
+        // ast->accept(visitor);
+
+        // auto& res = visitor.getResult();
         
-        std::cout << res << std::endl;
+        // std::cout << res->toString() << std::endl;
+
         break;
     }
     default:{

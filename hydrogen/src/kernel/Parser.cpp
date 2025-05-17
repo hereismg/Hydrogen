@@ -16,6 +16,7 @@
 #include "../../include/node/WhileNode.h"
 #include "../../include/node/BinaryOperatorNode.h"
 #include "../../include/node/stmt_node.h"
+#include "../../include/node/unit_node.h"
 
 namespace hdg {
     Parser::Parser(std::vector<Token> tokens, Environment* environment):
@@ -571,34 +572,41 @@ namespace hdg {
         return node;
     }
 
-    // uNode Parser::new_ExeUnit(){
-    //     if (m_currentToken->getType() != Token::Type::LBRACE){
-    //         throw -1;
-    //     }
-    //     advance();
+    uNode Parser::new_ExeUnit(){
+        if (m_currentToken->getType() != Token::Type::LBRACE){
+            throw -1;
+        }
+        advance();
 
-    //     while(m_currentToken->getType() != Token::Type::RBRACE){ // end of file
-    //         uNode stmt;
+        auto unit = std::make_unique<new_ExeUnitNode>();
+        while(m_currentToken->getType() != Token::Type::RBRACE){ // end of file
+            uNode stmt;
 
-    //         stmt = new_AssignStmt();
-    //         if (stmt != nullptr){
-    //             while (m_currentToken->getType() == Token::Type::EL){
-    //                 advance();
-    //             }
+            stmt = new_AssignStmt();
+            if (stmt != nullptr){
+                while (m_currentToken->getType() == Token::Type::EL){
+                    advance();
+                }
 
-    //             continue;
-    //         }
+                unit->getList().emplace_back(std::move(stmt));
+                continue;
+            }
 
-    //         stmt = new_ArithExpr();
-    //         if (stmt != nullptr){
-    //             while (m_currentToken->getType() == Token::Type::EL){
-    //                 advance();
-    //             }
+            stmt = new_ArithExpr();
+            if (stmt != nullptr){
+                while (m_currentToken->getType() == Token::Type::EL){
+                    advance();
+                }
 
-    //             continue;
-    //         }
-    //     }
-    // }
+                unit->getList().emplace_back(std::move(stmt));
+                continue;
+            }
+
+
+        }
+        
+        return unit;
+    }
 
     uNode Parser::new_AssignStmt(){
         Position pos = m_currentToken->thisPosition()->clone();

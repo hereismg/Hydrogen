@@ -56,14 +56,20 @@ namespace hdg {
                 );
 
         uNode new_ExeUnit();      // ExeUnit    : '{' { IfStmt | AssignStmt | Expr } '}'
+
         uNode new_IfStmt();       // IfStmt     : 'if' Expr ExeUnit 
                                   //              {'elif' Expr ExeUnit }
                                   //              ['else' ExeUnit ]
         uNode new_WhileStmt();    // WhileStmt  : 'while' Expr ExeUnit
         uNode new_AssignStmt();   // AssignStmt : IDENT '=' Expr
-  
+                                  //            : FuncDef
+
+        uNode new_FuncDef();      // FuncDef    : 'func' IDENT '(' Params ')' ExeUnit
+        uNode new_StateDef();     // StateDef   : 'sm' IDENT ['(' Params ')'] ExeUnit
+        uNode new_Params();       // Params     : [ IDENT { ',' IDENT } ]
+
         uNode new_Expr();         // Expr       : ArithExpr
-   
+
         uNode new_ArithExpr();    // ArithExpr  : Term {('+' | '-') Term}
         uNode new_Term();         // Term       : Factor {('*' | '/') Factor}
         uNode new_Factor();       // Factor     : {'+' | '-'} PostfixExpr

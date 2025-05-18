@@ -598,7 +598,7 @@ namespace hdg {
                 continue;
             }
 
-            stmt = new_ArithExpr();
+            stmt = new_IfStmt();
             if (stmt != nullptr){
                 while (m_currentToken->getType() == Token::Type::EL){
                     advance();
@@ -608,15 +608,47 @@ namespace hdg {
                 continue;
             }
 
+            stmt = new_Expr();
+            if (stmt != nullptr){
+                while (m_currentToken->getType() == Token::Type::EL){
+                    advance();
+                }
 
+                unit->getList().emplace_back(std::move(stmt));
+                continue;
+            }
         }
+        advance();
         
         return unit;
     }
 
-    // uNode Parser::new_IfStmt(){
-        
-    // }
+    uNode Parser::new_IfStmt(){
+        auto ifStmtNode = std::make_unique<new_IfStmtNode>();
+
+        if (!m_currentToken->match(Token::Type::KEYWORD, "if")) return nullptr;
+        advance();
+
+        // 'if' Expr ExeUnit
+        auto cond = new_Expr();
+        auto exeUnit = new_ExeUnit();
+        ifStmtNode->addBranch(std::move(cond), std::move(exeUnit));
+
+        // { 'elif' Expr ExeUnit }
+        while(m_currentToken->match(Token::Token::KEYWORD, "elif")){
+            cond = new_Expr();
+            exeUnit = new_ExeUnit();
+            ifStmtNode->addBranch(std::move(cond), std::move(exeUnit));
+        }
+
+        // ['else' ExeUnit ]
+        if (m_currentToken->match(Token::Type::KEYWORD, "else")){
+            exeUnit = new_ExeUnit();
+            ifStmtNode->addElseBranch(std::move(exeUnit));
+        }
+
+        return ifStmtNode;
+    }
 
     uNode Parser::new_AssignStmt(){
         Position pos = m_currentToken->thisPosition()->clone();
@@ -634,9 +666,13 @@ namespace hdg {
         }
         advance();
         
-        uNode expr = new_ArithExpr();
+        uNode expr = new_Expr();
 
         return std::make_unique<new_AssignNode>(name, std::move(expr), pos);
+    }
+
+    uNode Parser::new_Expr(){
+        return new_ArithExpr();
     }
 
     uNode Parser::new_ArithExpr() {
@@ -734,7 +770,7 @@ namespace hdg {
                 auto pos = m_currentToken->thisPosition()->clone();
                 advance();
 
-                node = new_ArithExpr(); assert(node != nullptr);
+                node = new_Expr(); assert(node != nullptr);
 
                 if (m_currentToken->getType() != Token::Type::RPAREN) {
                     assert(false && "Throw Error! Expect ')'."); 

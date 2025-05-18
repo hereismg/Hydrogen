@@ -312,58 +312,67 @@ TEST(test_ExeUnitNode, _1){
     }
 }
 
-uNode buildAssign_1(){
+
+TEST(test_IfStmtNode, _1){
+    /**
+     * if 1 {
+     *     a = 1
+     *     b = 2
+     * }
+     */
+    // a = 1
     uNode int_node1 = std::make_unique<IntNode>(1);
     std::string name1 = "a";
 
     uNode assign_node1 = std::make_unique<new_AssignNode>(name1, std::move(int_node1));
-    
-    return assign_node1;
+
+    // b = 2 + 3
+    uNode int_node2 = std::make_unique<IntNode>(2);
+    uNode int_node3 = std::make_unique<IntNode>(3);
+    uNode oper_node = std::make_unique<BinOperNode>(
+        Token(Token::Type::PLUS), 
+        std::move(int_node2),
+        std::move(int_node3)
+    );
+    std::string name2 = "b";
+    uNode assign_node2 = std::make_unique<new_AssignNode>(name2, std::move(oper_node));
+
+    // ExeUnitNode
+    std::unique_ptr<new_ExeUnitNode> unit_node = std::make_unique<new_ExeUnitNode>();
+    unit_node->getList().emplace_back(std::move(assign_node1));
+    unit_node->getList().emplace_back(std::move(assign_node2));
+
+    // cond1
+    uNode cond1 = std::make_unique<IntNode>(1);
+
+    // if stmt
+    auto ifStmt = std::make_unique<new_IfStmtNode>();
+
+    ifStmt->addBranch(std::move(cond1), std::move(unit_node));
+
+    InterpreterVisitor visitor;
+
+    ifStmt->accept(visitor);
+
+    // search symbol a, b
+    {
+        auto& envir = visitor.getEnvironment();
+        Object* obj_ptr = envir.getSymbol(name1).get();
+
+        ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
+
+        Integer* int_ptr = dynamic_cast<Integer*>(obj_ptr);
+
+        ASSERT_EQ(int_ptr->getValue(), 1);
+    }
+    {
+        auto& envir = visitor.getEnvironment();
+        Object* obj_ptr = envir.getSymbol(name2).get();
+
+        ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
+
+        Integer* int_ptr = dynamic_cast<Integer*>(obj_ptr);
+
+        ASSERT_EQ(int_ptr->getValue(), 5);
+    }
 }
-
-// TEST(test_ExeUnitNode, _1){
-//     // a = 1
-
-//     // b = 2 + 3
-//     uNode int_node2 = std::make_unique<IntNode>(2);
-//     uNode int_node3 = std::make_unique<IntNode>(3);
-//     uNode oper_node = std::make_unique<BinOperNode>(
-//         Token(Token::Type::PLUS), 
-//         std::move(int_node2),
-//         std::move(int_node3)
-//     );
-//     std::string name2 = "b";
-//     uNode assign_node2 = std::make_unique<new_AssignNode>(name2, std::move(oper_node));
-
-//     // ExeUnitNode
-//     std::unique_ptr<new_ExeUnitNode> unit_node = std::make_unique<new_ExeUnitNode>();
-//     unit_node->getList().emplace_back(std::move(assign_node1));
-//     unit_node->getList().emplace_back(std::move(assign_node2));
-
-
-//     InterpreterVisitor visitor;
-
-//     unit_node->accept(visitor);
-
-//     // search symbol a, b
-//     {
-//         auto& envir = visitor.getEnvironment();
-//         Object* obj_ptr = envir.getSymbol(name1).get();
-
-//         ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
-
-//         Integer* int_ptr = dynamic_cast<Integer*>(obj_ptr);
-
-//         ASSERT_EQ(int_ptr->getValue(), 1);
-//     }
-//     {
-//         auto& envir = visitor.getEnvironment();
-//         Object* obj_ptr = envir.getSymbol(name2).get();
-
-//         ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
-
-//         Integer* int_ptr = dynamic_cast<Integer*>(obj_ptr);
-
-//         ASSERT_EQ(int_ptr->getValue(), 5);
-//     }
-// }

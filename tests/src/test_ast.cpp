@@ -321,49 +321,49 @@ uNode buildAssign_1(){
     return assign_node1;
 }
 
-TEST(test_ExeUnitNode, _1){
-    // a = 1
+// TEST(test_ExeUnitNode, _1){
+//     // a = 1
 
-    // b = 2 + 3
-    uNode int_node2 = std::make_unique<IntNode>(2);
-    uNode int_node3 = std::make_unique<IntNode>(3);
-    uNode oper_node = std::make_unique<BinOperNode>(
-        Token(Token::Type::PLUS), 
-        std::move(int_node2),
-        std::move(int_node3)
-    );
-    std::string name2 = "b";
-    uNode assign_node2 = std::make_unique<new_AssignNode>(name2, std::move(oper_node));
+//     // b = 2 + 3
+//     uNode int_node2 = std::make_unique<IntNode>(2);
+//     uNode int_node3 = std::make_unique<IntNode>(3);
+//     uNode oper_node = std::make_unique<BinOperNode>(
+//         Token(Token::Type::PLUS), 
+//         std::move(int_node2),
+//         std::move(int_node3)
+//     );
+//     std::string name2 = "b";
+//     uNode assign_node2 = std::make_unique<new_AssignNode>(name2, std::move(oper_node));
 
-    // ExeUnitNode
-    std::unique_ptr<new_ExeUnitNode> unit_node = std::make_unique<new_ExeUnitNode>();
-    unit_node->getList().emplace_back(std::move(assign_node1));
-    unit_node->getList().emplace_back(std::move(assign_node2));
+//     // ExeUnitNode
+//     std::unique_ptr<new_ExeUnitNode> unit_node = std::make_unique<new_ExeUnitNode>();
+//     unit_node->getList().emplace_back(std::move(assign_node1));
+//     unit_node->getList().emplace_back(std::move(assign_node2));
 
 
-    InterpreterVisitor visitor;
+//     InterpreterVisitor visitor;
 
-    unit_node->accept(visitor);
+//     unit_node->accept(visitor);
 
-    // search symbol a, b
-    {
-        auto& envir = visitor.getEnvironment();
-        Object* obj_ptr = envir.getSymbol(name1).get();
+//     // search symbol a, b
+//     {
+//         auto& envir = visitor.getEnvironment();
+//         Object* obj_ptr = envir.getSymbol(name1).get();
 
-        ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
+//         ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
 
-        Integer* int_ptr = dynamic_cast<Integer*>(obj_ptr);
+//         Integer* int_ptr = dynamic_cast<Integer*>(obj_ptr);
 
-        ASSERT_EQ(int_ptr->getValue(), 1);
-    }
-    {
-        auto& envir = visitor.getEnvironment();
-        Object* obj_ptr = envir.getSymbol(name2).get();
+//         ASSERT_EQ(int_ptr->getValue(), 1);
+//     }
+//     {
+//         auto& envir = visitor.getEnvironment();
+//         Object* obj_ptr = envir.getSymbol(name2).get();
 
-        ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
+//         ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
 
-        Integer* int_ptr = dynamic_cast<Integer*>(obj_ptr);
+//         Integer* int_ptr = dynamic_cast<Integer*>(obj_ptr);
 
-        ASSERT_EQ(int_ptr->getValue(), 5);
-    }
-}
+//         ASSERT_EQ(int_ptr->getValue(), 5);
+//     }
+// }

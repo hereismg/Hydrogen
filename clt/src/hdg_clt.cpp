@@ -125,7 +125,7 @@ int real_main(int argc, char *argv[]){
 
         ast->accept(visitor);
 
-        auto& res = visitor.getResult();
+        auto res = visitor.getResult();
         
         std::cout << res->toString() << std::endl;
 

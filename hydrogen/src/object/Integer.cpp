@@ -225,48 +225,48 @@ namespace hdg {
         return new Integer(result);
     }
 
-    uObject Integer::plus(uObject& other){
+    sObject Integer::plus(sObject& other){
         if (typeid(*other.get()) == typeid(Integer)){
             Integer* other_int = dynamic_cast<Integer*>(other.get());
             int64_t res = m_value + other_int->getValue();
 
-            return std::make_unique<Integer>(res);
+            return std::make_shared<Integer>(res);
         }
         else{
             assert(false && "Error!");
         }
     }
 
-    uObject Integer::minus(uObject& other){
+    sObject Integer::minus(sObject& other){
         if (typeid(*other.get()) == typeid(Integer)){
             Integer* other_int = dynamic_cast<Integer*>(other.get());
             int64_t res = m_value - other_int->getValue();
 
-            return std::make_unique<Integer>(res);
+            return std::make_shared<Integer>(res);
         }
         else{
             assert(false && "Error!");
         }
     }
 
-    uObject Integer::mul(uObject& other){
+    sObject Integer::mul(sObject& other){
         if (typeid(*other.get()) == typeid(Integer)){
             Integer* other_int = dynamic_cast<Integer*>(other.get());
             int64_t res = m_value * other_int->getValue();
 
-            return std::make_unique<Integer>(res);
+            return std::make_shared<Integer>(res);
         }
         else{
             assert(false && "Error!");
         }
     }
 
-    uObject Integer::div(uObject& other){
+    sObject Integer::div(sObject& other){
         if (typeid(*other.get()) == typeid(Integer)){
             Integer* other_int = dynamic_cast<Integer*>(other.get());
             int64_t res = m_value / other_int->getValue();
 
-            return std::make_unique<Integer>(res);
+            return std::make_shared<Integer>(res);
         }
         else{
             assert(false && "Error!");

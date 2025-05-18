@@ -63,13 +63,13 @@ namespace hdg {
 
     class New_Environment{
     protected:
-        std::map<std::string, uObject> m_table;
+        std::map<std::string, sObject> m_table;
 
     public:
         New_Environment() = default;
         
-        void setSymbol(const std::string& name, uObject&& obj);
-        uObject& getSymbol(const std::string& name);
+        void setSymbol(const std::string& name, sObject obj);
+        sObject getSymbol(const std::string& name);
     };
 
 } // hdg

@@ -55,22 +55,28 @@ namespace hdg {
                 std::function<Node*(Environment* envir)> fun
                 );
 
-        uNode new_ExeUnit();    // ExeUnit    : '{' { IfStmt | AssignStmt | Expr } '}'
-        uNode new_IfStmt();     // IfStmt     : 'if' Expr ExeUnit 
-                                //              {'elif' Expr ExeUnit }
-                                //              ['else' ExeUnit ]
-        uNode new_AssignStmt(); // AssignStmt : IDENT '=' Expr
-
-        uNode new_Expr();       // Expr       : ArithExpr
- 
-        uNode new_ArithExpr();  // ArithExpr  : Term {('+' | '-') Term}
-        uNode new_Term();       // Term       : Factor {('*' | '/') Factor}
-        uNode new_Factor();     // Factor     : {'+' | '-'} Primary
-        uNode new_Primary();    // Primary    : INT_CONST
-                                //            | FLOAT_CONST
-                                //            | STR_CONST
-                                //            | IDENT
-                                //            | '(' ArithExpr ')'
+        uNode new_ExeUnit();      // ExeUnit    : '{' { IfStmt | AssignStmt | Expr } '}'
+        uNode new_IfStmt();       // IfStmt     : 'if' Expr ExeUnit 
+                                  //              {'elif' Expr ExeUnit }
+                                  //              ['else' ExeUnit ]
+        uNode new_AssignStmt();   // AssignStmt : IDENT '=' Expr
+  
+        uNode new_Expr();         // Expr       : ArithExpr
+   
+        uNode new_ArithExpr();    // ArithExpr  : Term {('+' | '-') Term}
+        uNode new_Term();         // Term       : Factor {('*' | '/') Factor}
+        uNode new_Factor();       // Factor     : {'+' | '-'} PostfixExpr
+        
+        uNode new_PostfixExpr();  // PostfixExpr: Primary
+                                  //            | PostfixExpr '(' ExprList ')'
+                                  //            | PostfixExpr '[' ExprList ']'
+                                  //            | PostfixExpr '.' IDENT '(' ExprList ')'
+        uNode new_Primary();      // Primary    : INT_CONST
+                                  //            | FLOAT_CONST
+                                  //            | STR_CONST
+                                  //            | IDENT
+                                  //            | '(' ArithExpr ')'
+                                  // ExprList   : [Expr {',' Expr}]
     };
 
 } // hdg

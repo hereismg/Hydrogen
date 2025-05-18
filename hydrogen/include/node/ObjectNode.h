@@ -101,6 +101,27 @@ namespace hdg {
         Object* interpret() override;
         void accept(Visitor& visitor) override;
     };
+
+    class IdentNode: public Node{
+    protected:
+        std::string m_ident;
+
+    public:
+        explicit IdentNode(std::string ident);
+        IdentNode(std::string ident, const Position& pos);
+
+        IdentNode(const IdentNode&) = delete;
+        IdentNode& operator=(const IdentNode&) = delete;
+        IdentNode(IdentNode&&) noexcept = default;
+        IdentNode& operator=(IdentNode&&) noexcept = default;
+
+        std::string& getIdent();
+        void setIdent(std::string new_ident);
+
+        std::string toString() override;
+        Object* interpret() override;
+        void accept(Visitor& visitor) override;
+    };
 } // hdg
 
 #endif //HDG_OBJECTNODE_H

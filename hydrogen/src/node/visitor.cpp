@@ -22,6 +22,10 @@ namespace hdg{
         std::cout << "Visitor::visitIntNode() is not implement!" << std::endl;
     }
     
+    void Visitor::visitIdentNode(IdentNode& node){
+        std::cout << "Visitor::visitIdentNode() is not implement!" << std::endl;
+    }
+    
     void Visitor::visitAssignNode(new_AssignNode& node){
         std::cout << "Visitor::visitAssignNode() is not implement!" << std::endl;
     }
@@ -30,11 +34,11 @@ namespace hdg{
         std::cout << "Visitor::visitExeUnitNode() is not implement!" << std::endl;
     }
 
-    uObject& Visitor::getResult(){
+    sObject Visitor::getResult(){
         return m_res;
     }
 
-    uObject Visitor::moveResult(){
+    sObject Visitor::moveResult(){
         return std::move(m_res);
     }
 
@@ -74,6 +78,11 @@ namespace hdg{
 
     void InterpreterVisitor::visitIntNode(IntNode& node){
         m_res = std::make_unique<Integer>(node.getValue());
+    }
+
+    void InterpreterVisitor::visitIdentNode(IdentNode& node){
+        auto obj = m_envir.getSymbol(node.getIdent());
+        m_res = std::move(obj);
     }
 
     void InterpreterVisitor::visitAssignNode(new_AssignNode& node) {

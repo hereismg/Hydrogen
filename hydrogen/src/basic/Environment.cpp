@@ -82,11 +82,11 @@ namespace hdg {
         }
     }
 
-    void New_Environment::setSymbol(const std::string& name, uObject&& obj) {
-        m_table[name] = std::move(obj);
+    void New_Environment::setSymbol(const std::string& name, sObject obj) {
+        m_table[name] = obj;
     }
 
-    uObject& New_Environment::getSymbol(const std::string& name){
+    sObject New_Environment::getSymbol(const std::string& name){
         auto it = m_table.find(name);
         
         if (it == m_table.end()){

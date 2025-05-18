@@ -162,4 +162,29 @@ namespace hdg {
     void IntNode::accept(Visitor& visitor){
         visitor.visitIntNode(*this);
     }
+
+    IdentNode::IdentNode(std::string ident) : m_ident(std::move(ident)){}
+
+    IdentNode::IdentNode(std::string ident, const Position& pos)
+        : Node(pos), m_ident(ident){}
+
+    std::string& IdentNode::getIdent(){
+        return m_ident;
+    }
+
+    void IdentNode::setIdent(std::string new_ident){
+        // m_ident = std::move(new_ident);
+    }
+
+    std::string IdentNode::toString(){
+        return "IDENT:" + m_ident;
+    }
+
+    Object* IdentNode::interpret(){
+        assert(false);
+    }
+
+    void IdentNode::accept(Visitor& visitor){
+        visitor.visitIdentNode(*this);
+    }
 } // hdg

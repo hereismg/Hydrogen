@@ -721,8 +721,10 @@ namespace hdg {
                 return node;
             }
             case Token::Type::IDENTIFIER:{
+                std::string name = m_currentToken->getValue();
+                advance();
 
-                return nullptr;
+                return std::make_unique<IdentNode>(name);
             }
             case Token::Type::LPAREN:{
                 auto pos = m_currentToken->thisPosition()->clone();

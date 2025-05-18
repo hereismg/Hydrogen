@@ -40,10 +40,10 @@ namespace hdg {
         Object* orOperator(Object* other) override;
         Object* notOperator() override;
 
-        uObject plus(uObject& other) override;
-        uObject minus(uObject& other) override;
-        uObject mul(uObject& other) override;
-        uObject div(uObject& other) override;
+        sObject plus(sObject& other) override;
+        sObject minus(sObject& other) override;
+        sObject mul(sObject& other) override;
+        sObject div(sObject& other) override;
 
         bool isTrue() override;
         std::string toString() override;

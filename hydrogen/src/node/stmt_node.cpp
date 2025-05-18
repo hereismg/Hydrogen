@@ -78,4 +78,38 @@ namespace hdg{
     void new_IfStmtNode::accept(Visitor& visitor){
         visitor.visitIfStmtNode(*this);
     }
+
+    new_WhileStmtNode::new_WhileStmtNode(uNode&& cond, uNode&& loopUnit)
+        : m_cond(std::move(cond)), m_loopUnit(std::move(loopUnit))
+    {
+        assert(m_cond != nullptr);
+        assert(m_loopUnit != nullptr);
+    }
+
+    new_WhileStmtNode::new_WhileStmtNode(uNode&& cond, uNode&& loopUnit, const Position& pos)
+        : Node(pos), m_cond(std::move(cond)), m_loopUnit(std::move(loopUnit))
+    {
+        assert(m_cond != nullptr);
+        assert(m_loopUnit != nullptr);
+    }
+
+    uNode& new_WhileStmtNode::getCond(){
+        return m_cond;
+    }
+
+    uNode& new_WhileStmtNode::getLoopUnit(){
+        return m_loopUnit;
+    }
+
+    std::string new_WhileStmtNode::toString(){
+        return "while";
+    }
+    
+    Object* new_WhileStmtNode::interpret(){
+        assert(false);
+    }
+
+    void new_WhileStmtNode::accept(Visitor& visitor){
+        visitor.visitWhileStmtNode(*this);
+    }
 }

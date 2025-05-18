@@ -493,3 +493,45 @@ TEST(test_IfStmt, _1){
         ASSERT_EQ(int_ptr->getValue(), 2);
     }
 }
+
+
+
+TEST(test_WhileStmt, _1){
+    string code = R"({
+    counter = 5
+    sum = 0
+    while counter {
+        sum = sum + counter
+        counter = counter - 1
+    }
+    sum
+}
+    )";
+    string path = "<stdin>";
+    Lexer lexer;
+
+    std::vector<Token> tokens = lexer.run(path, &code);
+
+    Environment envir2; // 这将来要弃用
+
+    Parser parser(tokens, &envir2);
+
+    uNode ast = parser.new_ExeUnit();
+
+    InterpreterVisitor visitor;
+
+    ast->accept(visitor);
+
+    auto& envir = visitor.getEnvironment();
+    {
+        Object* obj_ptr = visitor.getResult().get();
+
+        ASSERT_NE(obj_ptr, nullptr);
+
+        ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
+
+        Integer* int_ptr = dynamic_cast<Integer*>(obj_ptr);
+
+        ASSERT_EQ(int_ptr->getValue(), 15);
+    }
+}

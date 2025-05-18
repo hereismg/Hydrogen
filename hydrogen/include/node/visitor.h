@@ -12,6 +12,7 @@ namespace hdg{
     class new_ExeUnitNode;
     class IdentNode;
     class new_IfStmtNode;
+    class new_WhileStmtNode;
     
     class Visitor{
     protected:
@@ -26,6 +27,7 @@ namespace hdg{
         
         virtual void visitAssignNode(new_AssignNode& node);
         virtual void visitIfStmtNode(new_IfStmtNode& node);
+        virtual void visitWhileStmtNode(new_WhileStmtNode& node);
         virtual void visitExeUnitNode(new_ExeUnitNode& node);
 
         virtual sObject getResult();
@@ -44,6 +46,7 @@ namespace hdg{
 
         void visitAssignNode(new_AssignNode& node) override;
         void visitIfStmtNode(new_IfStmtNode& node) override;
+        void visitWhileStmtNode(new_WhileStmtNode& node) override;
         void visitExeUnitNode(new_ExeUnitNode& node) override;
     };
 }

@@ -45,6 +45,23 @@ namespace hdg{
         virtual Object* interpret();
         virtual void accept(Visitor& visitor);
     };
+
+    class new_WhileStmtNode: public Node{
+    protected:
+        uNode m_cond;
+        uNode m_loopUnit;
+    
+    public:
+        new_WhileStmtNode(uNode&& cond, uNode&& loopUnit);
+        new_WhileStmtNode(uNode&& cond, uNode&& loopUnit, const Position& pos);
+
+        uNode& getCond();
+        uNode& getLoopUnit();
+
+        virtual std::string toString();
+        virtual Object* interpret();
+        virtual void accept(Visitor& visitor);
+    };
 }
 
 #endif

@@ -59,6 +59,7 @@ namespace hdg {
         uNode new_IfStmt();       // IfStmt     : 'if' Expr ExeUnit 
                                   //              {'elif' Expr ExeUnit }
                                   //              ['else' ExeUnit ]
+        uNode new_WhileStmt();    // WhileStmt  : 'while' Expr ExeUnit
         uNode new_AssignStmt();   // AssignStmt : IDENT '=' Expr
   
         uNode new_Expr();         // Expr       : ArithExpr

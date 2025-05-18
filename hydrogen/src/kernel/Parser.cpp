@@ -608,6 +608,16 @@ namespace hdg {
                 continue;
             }
 
+            stmt = new_WhileStmt();
+            if (stmt != nullptr){
+                while (m_currentToken->getType() == Token::Type::EL){
+                    advance();
+                }
+
+                unit->getList().emplace_back(std::move(stmt));
+                continue;
+            }
+
             stmt = new_Expr();
             if (stmt != nullptr){
                 while (m_currentToken->getType() == Token::Type::EL){
@@ -627,6 +637,9 @@ namespace hdg {
         auto ifStmtNode = std::make_unique<new_IfStmtNode>();
 
         if (!m_currentToken->match(Token::Type::KEYWORD, "if")) return nullptr;
+
+        Position *pos = ifStmtNode->thisPosition();
+        pos->setStart(m_currentToken->thisPosition()->getStart());
         advance();
 
         // 'if' Expr ExeUnit
@@ -647,7 +660,26 @@ namespace hdg {
             ifStmtNode->addElseBranch(std::move(exeUnit));
         }
 
+        pos->setEnd(m_currentToken->thisPosition()->getEnd());
         return ifStmtNode;
+    }
+
+    uNode Parser::new_WhileStmt(){
+        if (!m_currentToken->match(Token::Type::KEYWORD, "while")) return nullptr;
+
+        Position pos;
+        pos.setStart(m_currentToken->thisPosition()->getStart());
+        advance();
+
+        uNode cond = new_Expr();
+
+        uNode loopUnit = new_ExeUnit(); // hdgtodo: 后面应该支持 break
+    
+        pos.setEnd(m_currentToken->thisPosition()->getEnd());
+        return std::make_unique<new_WhileStmtNode>(
+            std::move(cond), 
+            std::move(loopUnit)
+        );
     }
 
     uNode Parser::new_AssignStmt(){

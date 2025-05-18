@@ -34,6 +34,10 @@ namespace hdg{
         std::cout << "Visitor::visitIfStmtNode() is not implement!" << std::endl;
     }
 
+    void Visitor::visitWhileStmtNode(new_WhileStmtNode& node){
+        std::cout << "Visitor::visitWhileStmtNode() is not implement!" << std::endl;
+    }
+
     void Visitor::visitExeUnitNode(new_ExeUnitNode& node){
         std::cout << "Visitor::visitExeUnitNode() is not implement!" << std::endl;
     }
@@ -120,6 +124,22 @@ namespace hdg{
         }
     }
 
+    void InterpreterVisitor::visitWhileStmtNode(new_WhileStmtNode& node) {
+        auto& cond = node.getCond();
+        auto& loopUnit = node.getLoopUnit();
+
+        while(true){
+            cond->accept(*this);
+            auto obj = getResult();
+
+            if (obj->isTrue()){
+                loopUnit->accept(*this);
+            }
+            else{
+                break;
+            }
+        }
+    }
 
     void InterpreterVisitor::visitExeUnitNode(new_ExeUnitNode& node){
         auto& list = node.getList();

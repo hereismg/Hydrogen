@@ -45,4 +45,37 @@ namespace hdg{
     void new_AssignNode::accept(Visitor& visitor){
         visitor.visitAssignNode(*this);
     }
+
+    void new_IfStmtNode::addBranch(uNode&& cond, uNode&& exeUnit){
+        m_cond.emplace_back(std::move(cond));
+        m_exeUnit.emplace_back(std::move(exeUnit));
+    }
+
+    void new_IfStmtNode::addElseBranch(uNode&& exeUnit){
+        m_elseExeUnit = std::move(exeUnit);
+    }
+
+    std::vector<uNode>& new_IfStmtNode::getCond(){
+        return m_cond;
+    }
+
+    std::vector<uNode>& new_IfStmtNode::getExeUnit(){
+        return m_exeUnit;
+    }
+
+    uNode& new_IfStmtNode::getElseExeUnit(){
+        return m_elseExeUnit;
+    }
+
+    std::string new_IfStmtNode::toString(){
+        return "if";
+    }
+
+    Object* new_IfStmtNode::interpret(){
+        assert(false);
+    }
+
+    void new_IfStmtNode::accept(Visitor& visitor){
+        visitor.visitIfStmtNode(*this);
+    }
 }

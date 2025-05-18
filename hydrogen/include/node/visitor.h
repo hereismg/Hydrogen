@@ -11,6 +11,7 @@ namespace hdg{
     class new_AssignNode;
     class new_ExeUnitNode;
     class IdentNode;
+    class new_IfStmtNode;
     
     class Visitor{
     protected:
@@ -22,7 +23,9 @@ namespace hdg{
         virtual void visitNumObjNode(NumObjNode& node);
         virtual void visitIntNode(IntNode& node);
         virtual void visitIdentNode(IdentNode& node);
+        
         virtual void visitAssignNode(new_AssignNode& node);
+        virtual void visitIfStmtNode(new_IfStmtNode& node);
         virtual void visitExeUnitNode(new_ExeUnitNode& node);
 
         virtual sObject getResult();
@@ -38,7 +41,9 @@ namespace hdg{
         void visitBinOperNode(BinOperNode& node) override;
         void visitIntNode(IntNode& node) override;
         void visitIdentNode(IdentNode& node) override;
+
         void visitAssignNode(new_AssignNode& node) override;
+        void visitIfStmtNode(new_IfStmtNode& node) override;
         void visitExeUnitNode(new_ExeUnitNode& node) override;
     };
 }

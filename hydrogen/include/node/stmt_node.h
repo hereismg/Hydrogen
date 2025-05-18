@@ -24,6 +24,27 @@ namespace hdg{
         virtual Object* interpret();
         virtual void accept(Visitor& visitor);
     };
+
+    class new_IfStmtNode: public Node{
+    protected:
+        std::vector<uNode> m_cond;
+        std::vector<uNode> m_exeUnit;
+        uNode m_elseExeUnit;
+    
+    public:
+        new_IfStmtNode() = default;
+
+        void addBranch(uNode&& cond, uNode&& exeUnit);
+        void addElseBranch(uNode&& exeUnit);
+
+        std::vector<uNode>& getCond();
+        std::vector<uNode>& getExeUnit();
+        uNode& getElseExeUnit();
+
+        virtual std::string toString();
+        virtual Object* interpret();
+        virtual void accept(Visitor& visitor);
+    };
 }
 
 #endif

@@ -30,6 +30,10 @@ namespace hdg{
         std::cout << "Visitor::visitAssignNode() is not implement!" << std::endl;
     }
 
+    void Visitor::visitIfStmtNode(new_IfStmtNode& node){
+        std::cout << "Visitor::visitIfStmtNode() is not implement!" << std::endl;
+    }
+
     void Visitor::visitExeUnitNode(new_ExeUnitNode& node){
         std::cout << "Visitor::visitExeUnitNode() is not implement!" << std::endl;
     }
@@ -95,6 +99,27 @@ namespace hdg{
 
         this->m_envir.setSymbol(name, std::move(res));
     }
+
+    void InterpreterVisitor::visitIfStmtNode(new_IfStmtNode& node) {
+        auto& cond = node.getCond();
+        auto& exeUnit = node.getExeUnit();
+        assert(cond.size() == exeUnit.size());
+        auto& elseExeUnit = node.getElseExeUnit();
+
+        for (size_t i = 0; i < cond.size(); i++){
+            cond[i]->accept(*this);
+            auto obj = getResult();
+
+            if (obj->isTrue()){
+                exeUnit[i]->accept(*this);
+            }
+        }
+
+        if (elseExeUnit != nullptr){
+            elseExeUnit->accept(*this);
+        }
+    }
+
 
     void InterpreterVisitor::visitExeUnitNode(new_ExeUnitNode& node){
         auto& list = node.getList();

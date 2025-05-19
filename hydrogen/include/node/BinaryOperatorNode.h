@@ -73,7 +73,15 @@ namespace hdg {
     };
 
     class PostfixNode: public Node{
-        
+    protected:
+        std::vector<uNode> m_exprList;
+        Token::Type m_categroy;
+        std::string m_ident;
+
+    public:
+        PostfixNode();
+
+        std::vector<uNode> getExprList();
     };
 
 } // hdg

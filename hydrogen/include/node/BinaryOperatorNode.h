@@ -72,6 +72,10 @@ namespace hdg {
         virtual void accept(Visitor& visitor);
     };
 
+    class PostfixNode: public Node{
+        
+    };
+
 } // hdg
 
 #endif //HDG_BINARYOPERATORNODE_H

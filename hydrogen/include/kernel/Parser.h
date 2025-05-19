@@ -61,19 +61,20 @@ namespace hdg {
                                   //              {'elif' Expr ExeUnit }
                                   //              ['else' ExeUnit ]
         uNode new_WhileStmt();    // WhileStmt  : 'while' Expr ExeUnit
-        uNode new_AssignStmt();   // AssignStmt : IDENT '=' Expr
-                                  //            : FuncDef
 
-        uNode new_FuncDef();      // FuncDef    : 'func' IDENT '(' Params ')' ExeUnit
-        uNode new_StateDef();     // StateDef   : 'sm' IDENT ['(' Params ')'] ExeUnit
+        uNode new_AssignStmt();   // AssignStmt : ValBuild
+                                  //            | FuncDef
+                                  //            | StateDef
+        uNode new_ValBuild();     // ValBuild   : PostfixExpr '=' Expr
+                                  //            | PostfixExpr '=' '[' [Params] ']'
+        uNode new_FuncDef();      // FuncDef    : 'func' IDENT  '(' Params ')'  ExeUnit
+        uNode new_StateDef();     // StateDef   : 'sm'   IDENT ['(' Params ')'] ExeUnit
         uNode new_Params();       // Params     : [ IDENT { ',' IDENT } ]
 
         uNode new_Expr();         // Expr       : ArithExpr
-
         uNode new_ArithExpr();    // ArithExpr  : Term {('+' | '-') Term}
         uNode new_Term();         // Term       : Factor {('*' | '/') Factor}
         uNode new_Factor();       // Factor     : {'+' | '-'} PostfixExpr
-        
         uNode new_PostfixExpr();  // PostfixExpr: Primary
                                   //            | PostfixExpr '(' ExprList ')'
                                   //            | PostfixExpr '[' ExprList ']'

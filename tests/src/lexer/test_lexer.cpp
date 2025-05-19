@@ -306,8 +306,8 @@ TEST(test_AssignStmt, _1){
 
     ast->accept(visitor);
 
-    auto& envir = visitor.getEnvironment();
-    Object* obj_ptr = envir.getSymbol("a").get();
+    auto envir = visitor.getCurrentEnvir();
+    Object* obj_ptr = envir->getSymbol("a").get();
 
     ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
 
@@ -333,8 +333,8 @@ TEST(test_ExeUnit, _1){
 
     ast->accept(visitor);
 
-    auto& envir = visitor.getEnvironment();
-    Object* obj_ptr = envir.getSymbol("a").get();
+    auto envir = visitor.getCurrentEnvir();
+    Object* obj_ptr = envir->getSymbol("a").get();
 
     ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
 
@@ -364,9 +364,9 @@ TEST(test_ExeUnit, _2){
 
     ast->accept(visitor);
 
-    auto& envir = visitor.getEnvironment();
+    auto envir = visitor.getCurrentEnvir();
     {
-        Object* obj_ptr = envir.getSymbol("a").get();
+        Object* obj_ptr = envir->getSymbol("a").get();
 
         ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
 
@@ -375,7 +375,7 @@ TEST(test_ExeUnit, _2){
         ASSERT_EQ(int_ptr->getValue(), 1);
     }
     {
-        Object* obj_ptr = envir.getSymbol("b").get();
+        Object* obj_ptr = envir->getSymbol("b").get();
 
         ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
 
@@ -407,9 +407,9 @@ TEST(test_ExeUnit, _3){
 
     ast->accept(visitor);
 
-    auto& envir = visitor.getEnvironment();
+    auto envir = visitor.getCurrentEnvir();
     {
-        Object* obj_ptr = envir.getSymbol("a").get();
+        Object* obj_ptr = envir->getSymbol("a").get();
 
         ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
 
@@ -418,7 +418,7 @@ TEST(test_ExeUnit, _3){
         ASSERT_EQ(int_ptr->getValue(), 1);
     }
     {
-        Object* obj_ptr = envir.getSymbol("b").get();
+        Object* obj_ptr = envir->getSymbol("b").get();
 
         ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
 
@@ -462,9 +462,9 @@ TEST(test_IfStmt, _1){
 
     ast->accept(visitor);
 
-    auto& envir = visitor.getEnvironment();
+    auto envir = visitor.getCurrentEnvir();
     {
-        Object* obj_ptr = envir.getSymbol("a").get();
+        Object* obj_ptr = envir->getSymbol("a").get();
 
         ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
 
@@ -473,7 +473,7 @@ TEST(test_IfStmt, _1){
         ASSERT_EQ(int_ptr->getValue(), 1);
     }
     {
-        Object* obj_ptr = envir.getSymbol("b").get();
+        Object* obj_ptr = envir->getSymbol("b").get();
 
         ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
 
@@ -522,7 +522,7 @@ TEST(test_WhileStmt, _1){
 
     ast->accept(visitor);
 
-    auto& envir = visitor.getEnvironment();
+    auto envir = visitor.getCurrentEnvir();
     {
         Object* obj_ptr = visitor.getResult().get();
 

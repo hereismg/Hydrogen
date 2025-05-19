@@ -10,6 +10,7 @@
 #include <BinaryOperatorNode.h>
 #include <stmt_node.h>
 #include <unit_node.h>
+#include <Function.h>
 
 using namespace std;
 using namespace hdg;
@@ -250,8 +251,8 @@ TEST(test_AssignNode, _1){
 
     assign->accept(visitor);
 
-    auto& envir = visitor.getEnvironment();
-    Object* obj_ptr = envir.getSymbol(name).get();
+    auto envir = visitor.getCurrentEnvir();
+    Object* obj_ptr = envir->getSymbol(name).get();
 
     ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
 
@@ -291,8 +292,8 @@ TEST(test_ExeUnitNode, _1){
 
     // search symbol a, b
     {
-        auto& envir = visitor.getEnvironment();
-        Object* obj_ptr = envir.getSymbol(name1).get();
+        auto envir = visitor.getCurrentEnvir();
+        Object* obj_ptr = envir->getSymbol(name1).get();
 
         ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
 
@@ -301,8 +302,8 @@ TEST(test_ExeUnitNode, _1){
         ASSERT_EQ(int_ptr->getValue(), 1);
     }
     {
-        auto& envir = visitor.getEnvironment();
-        Object* obj_ptr = envir.getSymbol(name2).get();
+        auto envir = visitor.getCurrentEnvir();
+        Object* obj_ptr = envir->getSymbol(name2).get();
 
         ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
 
@@ -356,8 +357,8 @@ TEST(test_IfStmtNode, _1){
 
     // search symbol a, b
     {
-        auto& envir = visitor.getEnvironment();
-        Object* obj_ptr = envir.getSymbol(name1).get();
+        auto envir = visitor.getCurrentEnvir();
+        Object* obj_ptr = envir->getSymbol(name1).get();
 
         ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
 
@@ -366,8 +367,8 @@ TEST(test_IfStmtNode, _1){
         ASSERT_EQ(int_ptr->getValue(), 1);
     }
     {
-        auto& envir = visitor.getEnvironment();
-        Object* obj_ptr = envir.getSymbol(name2).get();
+        auto envir = visitor.getCurrentEnvir();
+        Object* obj_ptr = envir->getSymbol(name2).get();
 
         ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
 
@@ -375,4 +376,46 @@ TEST(test_IfStmtNode, _1){
 
         ASSERT_EQ(int_ptr->getValue(), 5);
     }
+}
+
+TEST(test_FuncObj, _1){
+    uNode int1 = std::make_unique<IntNode>(10);
+    uNode int2 = std::make_unique<IntNode>(2);
+
+    Token oper1(Token::Type::PLUS);
+
+    uNode binOper1 = std::make_unique<BinOperNode>(
+        std::move(oper1),
+        std::move(int1),
+        std::move(int2)
+    );
+
+    uNode int3 = std::make_unique<IntNode>(3);
+
+    Token oper2(Token::Type::MINUS);
+
+    uNode binOper2 = std::make_unique<BinOperNode>(
+        std::move(oper2),
+        std::move(binOper1),
+        std::move(int3)
+    );
+
+    uNode int4 = std::make_unique<IntNode>(5);
+
+    Token oper3(Token::Type::MUL);
+
+    uNode binOper3 = std::make_unique<BinOperNode>(
+        std::move(oper3),
+        std::move(int4),
+        std::move(binOper2)
+    );
+
+    // 函数的环境应该由函数自己维护
+    // visitor 和 envir 分离，因此 accept 应该要传入两个参数：visitor，envir
+    // 那么，该怎么考虑环境的父子级关系？
+
+    New_DefFunction(std::vector<std::string>(), std::move(binOper3));
+
+
+    InterpreterVisitor visitor;
 }

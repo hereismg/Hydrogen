@@ -10,6 +10,10 @@
 #include "../../include/node/unit_node.h"
 
 namespace hdg{
+    Visitor::Visitor(){
+        m_stack.emplace_back(new New_Environment);
+    }
+
     void Visitor::visitBinOperNode(BinOperNode& node){
         std::cout << "Visitor::visitBinOperNode() is not implement!" << std::endl;
     }
@@ -42,6 +46,10 @@ namespace hdg{
         std::cout << "Visitor::visitExeUnitNode() is not implement!" << std::endl;
     }
 
+    std::vector<std::shared_ptr<New_Environment>>& Visitor::getStack(){
+        return m_stack;
+    }
+
     sObject Visitor::getResult(){
         return m_res;
     }
@@ -50,8 +58,8 @@ namespace hdg{
         return std::move(m_res);
     }
 
-    New_Environment& Visitor::getEnvironment(){
-        return m_envir;
+    std::shared_ptr<New_Environment> Visitor::getCurrentEnvir(){
+        return m_stack.back();
     }
 
     void InterpreterVisitor::visitBinOperNode(BinOperNode& node){
@@ -89,7 +97,7 @@ namespace hdg{
     }
 
     void InterpreterVisitor::visitIdentNode(IdentNode& node){
-        auto obj = m_envir.getSymbol(node.getIdent());
+        auto obj = m_stack.back()->getSymbol(node.getIdent());
         m_res = std::move(obj);
     }
 
@@ -101,7 +109,7 @@ namespace hdg{
         auto res = moveResult();
         assert(res != nullptr);
 
-        this->m_envir.setSymbol(name, std::move(res));
+        m_stack.back()->setSymbol(name, std::move(res));
     }
 
     void InterpreterVisitor::visitIfStmtNode(new_IfStmtNode& node) {

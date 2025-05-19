@@ -17,9 +17,11 @@ namespace hdg{
     class Visitor{
     protected:
         sObject m_res;
-        New_Environment m_envir;
+        std::vector<std::shared_ptr<New_Environment>> m_stack;
 
     public:
+        Visitor();
+
         virtual void visitBinOperNode(BinOperNode& node);
         virtual void visitNumObjNode(NumObjNode& node);
         virtual void visitIntNode(IntNode& node);
@@ -30,10 +32,11 @@ namespace hdg{
         virtual void visitWhileStmtNode(new_WhileStmtNode& node);
         virtual void visitExeUnitNode(new_ExeUnitNode& node);
 
+        virtual std::vector<std::shared_ptr<New_Environment>>& getStack();
         virtual sObject getResult();
         virtual sObject moveResult();
 
-        virtual New_Environment& getEnvironment();
+        virtual std::shared_ptr<New_Environment> getCurrentEnvir();
     };
 
     class InterpreterVisitor: public Visitor{

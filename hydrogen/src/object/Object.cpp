@@ -127,7 +127,7 @@ namespace hdg {
         return nullptr;
     }
 
-    sObject Object::parenthesis(const std::vector<sObject>& args) {
+    sObject Object::parenthesis(const std::vector<sObject>& args, Visitor& visitor) {
         illegalOperator();
         return nullptr;
     }

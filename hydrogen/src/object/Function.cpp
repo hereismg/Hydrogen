@@ -7,6 +7,8 @@
 #include <cassert>
 
 #include "../../include/basic/Error.h"
+#include "../../include/node/visitor.h"
+#include "../../include/node/stmt_node.h"
 
 namespace hdg {
     Function::Function() {
@@ -97,7 +99,8 @@ namespace hdg {
         return true;
     }
 
-    New_BaseFunction::New_BaseFunction(std::vector<std::string> args): m_args(std::move(args)){}
+    New_BaseFunction::New_BaseFunction(std::vector<std::string> args)
+        : m_args(std::move(args)), m_envir(new New_Environment){}
     
     bool New_BaseFunction::checkArgs(const std::vector<sObject>& args){
         if (m_args.size() != args.size()){
@@ -114,8 +117,24 @@ namespace hdg {
         assert(m_body != nullptr);
     }
 
-    sObject New_DefFunction::parenthesis(const std::vector<sObject> &args){
+    sObject New_DefFunction::parenthesis(const std::vector<sObject> &args, Visitor& visitor){
+        checkArgs(args);
         
+        // 压栈
+        visitor.getStack().push_back(m_envir);
+
+        // 形参与实参
+        for (size_t i = 0; i<args.size(); i++){
+            // auto objNode = std::make_unique<ObjectNode>
+            auto assign = std::make_unique<new_AssignNode>(m_args[i], args[i]);
+            assign->accept(visitor);
+        }
+
+        // 执行体
+
+
+        // 弹栈
+        visitor.getStack().pop_back();
         return nullptr;
     }
 

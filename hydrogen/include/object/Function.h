@@ -6,6 +6,7 @@
 #define HDG_FUNCTION_H
 
 #include <functional>
+#include <memory>
 
 #include "../node/ObjAssignNode.h"
 #include "../node/Node.h"
@@ -74,6 +75,7 @@ namespace hdg {
     class New_BaseFunction: public Object{
     protected:
         std::vector<std::string> m_args;
+        std::shared_ptr<New_Environment> m_envir;
     
     public:
         New_BaseFunction(std::vector<std::string> args);
@@ -91,7 +93,7 @@ namespace hdg {
     public:
         New_DefFunction(std::vector<std::string> args, uNode&& body);
 
-        sObject parenthesis(const std::vector<sObject> &args) override;
+        sObject parenthesis(const std::vector<sObject> &args, Visitor& visitor) override;
 
         std::string toString() override;
         Object* copy() override;

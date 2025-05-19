@@ -3,6 +3,9 @@
 //
 
 #include "../../include/object/Function.h"
+
+#include <cassert>
+
 #include "../../include/basic/Error.h"
 
 namespace hdg {
@@ -94,4 +97,33 @@ namespace hdg {
         return true;
     }
 
+    New_BaseFunction::New_BaseFunction(std::vector<std::string> args): m_args(std::move(args)){}
+    
+    bool New_BaseFunction::checkArgs(const std::vector<sObject>& args){
+        if (m_args.size() != args.size()){
+            assert(false); // hdgftodo 构造异常信息
+        }
+        else{
+            return true;
+        }
+    }
+
+    New_DefFunction::New_DefFunction(std::vector<std::string> args, uNode&& body)
+        : New_BaseFunction(std::move(args)), m_body(std::move(body))
+    {
+        assert(m_body != nullptr);
+    }
+
+    sObject New_DefFunction::parenthesis(const std::vector<sObject> &args){
+        
+        return nullptr;
+    }
+
+    std::string New_DefFunction::toString(){
+        return "func";
+    }
+
+    Object* New_DefFunction::copy(){
+        assert(false);
+    }
 } // hdg

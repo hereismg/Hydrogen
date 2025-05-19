@@ -8,6 +8,7 @@
 #include <functional>
 
 #include "../node/ObjAssignNode.h"
+#include "../node/Node.h"
 
 
 namespace hdg {
@@ -66,6 +67,32 @@ namespace hdg {
         void setFun(std::function<Object*(const std::vector<Object*> &)> fun);
 
         Object * parenthesis(const std::vector<Object *> &args) override;
+        std::string toString() override;
+        Object* copy() override;
+    };
+
+    class New_BaseFunction: public Object{
+    protected:
+        std::vector<std::string> m_args;
+    
+    public:
+        New_BaseFunction(std::vector<std::string> args);
+
+        bool checkArgs(const std::vector<sObject> &args);
+        
+        virtual std::string toString() = 0;
+        virtual Object* copy() = 0;
+    };
+
+    class New_DefFunction: public New_BaseFunction{
+    protected:
+        uNode m_body;
+
+    public:
+        New_DefFunction(std::vector<std::string> args, uNode&& body);
+
+        sObject parenthesis(const std::vector<sObject> &args) override;
+
         std::string toString() override;
         Object* copy() override;
     };

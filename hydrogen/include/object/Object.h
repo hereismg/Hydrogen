@@ -58,6 +58,8 @@ namespace hdg {
         virtual sObject minus(sObject& other);
         virtual sObject mul(sObject& other);
         virtual sObject div(sObject& other);
+        virtual sObject parenthesis(const std::vector<sObject>& args);
+
         /**
          * @brief       括号运算符
          * @arg

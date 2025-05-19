@@ -127,6 +127,11 @@ namespace hdg {
         return nullptr;
     }
 
+    sObject Object::parenthesis(const std::vector<sObject>& args) {
+        illegalOperator();
+        return nullptr;
+    }
+
     Object *Object::brackets(const std::vector<Object*>& args) {
         illegalOperator();
         return nullptr;

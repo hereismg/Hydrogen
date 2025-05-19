@@ -12,6 +12,10 @@ namespace hdg{
     class new_IfStmtNode;
     class new_WhileStmtNode;
     class new_ExeUnitNode;
+    
+    class NumObjNode;
+    class IntNode;
+    class FuncObjNode;
 
     class Visitor;
     class InterpreterVisitor;

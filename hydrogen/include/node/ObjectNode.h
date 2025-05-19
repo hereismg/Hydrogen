@@ -36,8 +36,11 @@ namespace hdg {
         std::vector<ObjAssignNode*> m_args;
         Node* m_body{};
 
+        sObject m_funcObj;
+
     public:
         FuncObjNode();
+        FuncObjNode(sObject funcObj, const Position& pos);
         FuncObjNode(const Position& position, Environment* parent);
         ~FuncObjNode() override;
 
@@ -45,8 +48,11 @@ namespace hdg {
         void setBody(Node* body);
         void setName(const std::string& name);
 
+        sObject getObj();
+
         std::string toString() override;
         Object* interpret() override;
+        void accept(Visitor& visitor);
     };
 
     class NumObjNode: public ObjectNode{

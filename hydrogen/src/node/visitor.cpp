@@ -22,6 +22,10 @@ namespace hdg{
         std::cout << "Visitor::visitNumObjNode() is not implement!" << std::endl;
     }
 
+    void Visitor::visitFuncObjNode(FuncObjNode& node){
+        std::cout << "Visitor::visitFuncObjNode() is not implement!" << std::endl;
+    }
+
     void Visitor::visitIntNode(IntNode& node){
         std::cout << "Visitor::visitIntNode() is not implement!" << std::endl;
     }
@@ -93,7 +97,11 @@ namespace hdg{
     }
 
     void InterpreterVisitor::visitIntNode(IntNode& node){
-        m_res = std::make_unique<Integer>(node.getValue());
+        m_res = std::make_shared<Integer>(node.getValue());
+    }
+
+    void InterpreterVisitor::visitFuncObjNode(FuncObjNode& node){
+        m_res = node.getObj();
     }
 
     void InterpreterVisitor::visitIdentNode(IdentNode& node){

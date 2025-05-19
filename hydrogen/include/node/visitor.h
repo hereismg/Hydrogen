@@ -1,13 +1,13 @@
 #ifndef VISITOR_H
 #define VISITOR_H
 
+#include "../basic/define.h"
+
 #include "../object/Object.h"
 #include "../basic/Environment.h"
 
 namespace hdg{
     class BinOperNode;
-    class NumObjNode;
-    class IntNode;
     class new_AssignNode;
     class new_ExeUnitNode;
     class IdentNode;
@@ -25,6 +25,7 @@ namespace hdg{
         virtual void visitBinOperNode(BinOperNode& node);
         virtual void visitNumObjNode(NumObjNode& node);
         virtual void visitIntNode(IntNode& node);
+        virtual void visitFuncObjNode(FuncObjNode& node);
         virtual void visitIdentNode(IdentNode& node);
         
         virtual void visitAssignNode(new_AssignNode& node);
@@ -45,6 +46,7 @@ namespace hdg{
     public:
         void visitBinOperNode(BinOperNode& node) override;
         void visitIntNode(IntNode& node) override;
+        void visitFuncObjNode(FuncObjNode& node) override;
         void visitIdentNode(IdentNode& node) override;
 
         void visitAssignNode(new_AssignNode& node) override;

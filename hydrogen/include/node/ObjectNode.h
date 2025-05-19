@@ -11,6 +11,7 @@
 namespace hdg {
     class ObjAssignNode;
     class Function;
+    class New_BaseFunction;
 
     class ObjectNode: public Node{
     protected:
@@ -121,6 +122,11 @@ namespace hdg {
         std::string toString() override;
         Object* interpret() override;
         void accept(Visitor& visitor) override;
+    };
+
+    class New_FuncObjNode: public ObjectNode{
+    protected:
+        std::shared_ptr<New_BaseFunction> m_funcObj;
     };
 } // hdg
 

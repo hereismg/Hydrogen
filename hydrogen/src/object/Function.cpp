@@ -123,15 +123,13 @@ namespace hdg {
         // 压栈
         visitor.getStack().push_back(m_envir);
 
-        // 形参与实参
+        // 参数
         for (size_t i = 0; i<args.size(); i++){
-            // auto objNode = std::make_unique<ObjectNode>
-            auto assign = std::make_unique<new_AssignNode>(m_args[i], args[i]);
-            assign->accept(visitor);
+            visitor.getCurrentEnvir()->setSymbol(m_args[i], args[i]);
         }
 
         // 执行体
-
+        m_body->accept(visitor);
 
         // 弹栈
         visitor.getStack().pop_back();

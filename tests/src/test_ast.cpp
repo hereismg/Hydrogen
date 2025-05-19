@@ -419,3 +419,42 @@ TEST(test_FuncObj, _1){
 
     InterpreterVisitor visitor;
 }
+
+TEST(Base, FuncObj_1){
+    /**
+     * func add(a, b){
+     *      a + b
+     * }
+     */
+    std::vector<std::string> args_name = {"a", "b"};
+
+    auto identA = std::make_unique<IdentNode>(args_name[0]);
+    auto identB = std::make_unique<IdentNode>(args_name[1]);
+
+
+    auto oper = std::make_unique<BinOperNode>(
+        Token::Type::PLUS,
+        std::move(identA),
+        std::move(identB)
+    );
+
+    // 函数的环境应该由函数自己维护
+    // visitor 和 envir 分离，因此 accept 应该要传入两个参数：visitor，envir
+    // 那么，该怎么考虑环境的父子级关系？
+
+    New_DefFunction func(args_name, std::move(oper));
+
+    // 执行一次函数
+    InterpreterVisitor visitor;
+    auto num_1 = std::make_shared<Integer>(1);
+    auto num_2 = std::make_shared<Integer>(2);
+    func.parenthesis({num_1, num_2}, visitor);
+
+    auto res = visitor.getResult().get();
+    
+    ASSERT_EQ(typeid(*res), typeid(Integer));
+
+    Integer* int_ptr = dynamic_cast<Integer*>(res);
+
+    ASSERT_EQ(int_ptr->getValue(), 3);
+}

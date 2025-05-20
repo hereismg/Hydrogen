@@ -819,4 +819,26 @@ namespace hdg {
             }
         }
     }
+
+    std::vector<uNode> Parser::new_ExprList() {
+        std::vector<uNode> list;
+
+        while(true) {
+            uNode expr = new_Expr();
+
+            assert(expr != nullptr);
+
+            list.emplace_back(std::move(expr));
+
+            if (m_currentToken->getType() == Token::Type::COMMA) {
+                advance();
+                continue;
+            }
+            else{
+                break;
+            }
+        }
+
+        return list;
+    }
 } // hdg

@@ -198,4 +198,20 @@ namespace hdg {
     void IdentNode::accept(Visitor& visitor){
         visitor.visitIdentNode(*this);
     }
+
+    New_FuncObjNode::New_FuncObjNode(std::vector<std::string>&& args, uNode&& body, const Position& pos)
+        : ObjectNode("Function", pos, nullptr), m_args(std::move(args)), m_body(std::move(body))
+        {}
+
+    std::string New_FuncObjNode::toString(){
+        return "funcNode";
+    }
+
+    Object* New_FuncObjNode::interpret(){
+        assert(false);
+    }
+
+    void New_FuncObjNode::accept(Visitor& visitor){
+        // visitor.visitIdentNode(*this);
+    }
 } // hdg

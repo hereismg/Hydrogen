@@ -17,6 +17,8 @@
 #include "../../include/node/BinaryOperatorNode.h"
 #include "../../include/node/stmt_node.h"
 #include "../../include/node/unit_node.h"
+#include "../../include/node/ObjectNode.h"
+// #include "../../include//unit_node.h"
 
 namespace hdg {
     Parser::Parser(std::vector<Token> tokens, Environment* environment):
@@ -734,16 +736,34 @@ namespace hdg {
         return left;
     }
 
-    // uNode Parser::new_FuncDef(){
-    //     if (!m_currentToken->match(Token::Type::KEYWORD, "function")){
-    //         return nullptr;
-    //     }
-    //     advance();
+    uNode Parser::new_FuncDef(){ // hdgtodo: AST 的基本设计原则是：尽力保留原始的代码信息
+        if (!m_currentToken->match(Token::Type::KEYWORD, "function")){
+            return nullptr;
+        }
+        Position pos;
+        pos.setStart(m_currentToken->thisPosition()->getStart());
+        advance();
 
-    //     std::string ident = m_currentToken->getValue();
+        std::string ident = m_currentToken->getValue();
 
+        if (m_currentToken->getType() != Token::Type::LPAREN){
+            assert(false); // 应该抛出异常
+        }
+        advance();
 
-    // }
+        auto params = new_Params();
+
+        if (m_currentToken->getType() != Token::Type::RPAREN){
+            assert(false); // 应该抛出异常
+        }
+        advance();
+
+        auto unit = new_ExeUnit();
+
+        pos.setEnd(m_currentToken->thisPosition()->getEnd());
+        
+        return std::make_unique<New_FuncObjNode>(std::move(params), std::move(unit), pos);
+    }
 
     std::vector<std::string> Parser::new_Params(){
         std::vector<std::string> params;

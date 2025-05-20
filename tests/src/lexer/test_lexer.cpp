@@ -584,3 +584,24 @@ c
         ASSERT_EQ(params[i], expected[i]);     
     }
 }
+
+TEST(Smoke, funcDef_1){
+    string code = 
+R"(
+function add(a, b){
+    a + b
+}
+)";
+    string path = "<stdin>";
+    Lexer lexer;
+
+    std::vector<Token> tokens = lexer.run(path, &code);
+
+    Environment envir2; // 这将来要弃用
+
+    Parser parser(tokens, &envir2);
+
+    auto funcNode = parser.new_FuncDef();
+
+    
+}

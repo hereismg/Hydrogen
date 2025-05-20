@@ -132,7 +132,15 @@ namespace hdg {
 
     class New_FuncObjNode: public ObjectNode{
     protected:
-        std::shared_ptr<New_BaseFunction> m_funcObj;
+        std::vector<std::string> m_args;
+        uNode m_body;
+
+    public:
+        New_FuncObjNode(std::vector<std::string>&& args, uNode&& body, const Position& pos);
+
+        std::string toString() override;
+        Object* interpret() override;
+        void accept(Visitor& visitor) override;
     };
 } // hdg
 

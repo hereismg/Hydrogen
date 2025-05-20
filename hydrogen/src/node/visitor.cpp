@@ -42,6 +42,10 @@ namespace hdg{
         std::cout << "Visitor::visitAssignNode() is not implement!" << std::endl;
     }
 
+    void Visitor::visitFuncDefNode(New_FuncObjNode& node){
+        std::cout << "Visitor::visitFuncDefNode() is not implement!" << std::endl;
+    }
+
     void Visitor::visitIfStmtNode(new_IfStmtNode& node){
         std::cout << "Visitor::visitIfStmtNode() is not implement!" << std::endl;
     }
@@ -174,6 +178,10 @@ namespace hdg{
         assert(res != nullptr);
 
         m_stack.back()->setSymbol(name, std::move(res));
+    }
+
+    void InterpreterVisitor::visitFuncDefNode(New_FuncObjNode& node) {
+        // New
     }
 
     void InterpreterVisitor::visitIfStmtNode(new_IfStmtNode& node) {

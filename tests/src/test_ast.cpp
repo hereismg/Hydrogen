@@ -458,3 +458,58 @@ TEST(Base, FuncObj_1){
 
     ASSERT_EQ(int_ptr->getValue(), 3);
 }
+
+/**
+ * fn add(a, b){
+ *      a + b
+ * }
+ * 
+ * add(1, 2)
+ * 
+ * PostfixNode(LPAREN, IntNode(1), IntNode(2))
+*/
+
+TEST(Base, PostfixNode_1){
+    /**
+     * func add(a, b){
+     *      a + b
+     * }
+     */
+    std::vector<std::string> args_name = {"a", "b"};
+
+    auto identA = std::make_unique<IdentNode>(args_name[0]);
+    auto identB = std::make_unique<IdentNode>(args_name[1]);
+
+    auto oper = std::make_unique<BinOperNode>(
+        Token::Type::PLUS,
+        std::move(identA),
+        std::move(identB)
+    );
+
+    auto func = std::make_shared<New_DefFunction>(args_name, std::move(oper));
+
+    InterpreterVisitor visitor;
+    auto envir = visitor.getCurrentEnvir();
+    envir->setSymbol("add", func);
+    
+    // PostfixNode
+    std::vector<uNode> args;
+    args.emplace_back(std::make_unique<IntNode>(1));
+    args.emplace_back(std::make_unique<IntNode>(2));
+    auto postfix = std::make_unique<PostfixNode>(Token::Type::LPAREN, "add", std::move(args), Position());
+
+    // exe
+    postfix->accept(visitor);
+
+    // test
+    {
+        auto obj = visitor.getResult().get();
+
+        ASSERT_NE(obj, nullptr);
+        ASSERT_EQ(typeid(*obj), typeid(Integer));
+
+        Integer* int_ptr = dynamic_cast<Integer*>(obj);
+
+        ASSERT_EQ(int_ptr->getValue(), 3);
+    }
+}

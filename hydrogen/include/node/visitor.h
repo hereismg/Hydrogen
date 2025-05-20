@@ -23,6 +23,8 @@ namespace hdg{
         Visitor();
 
         virtual void visitBinOperNode(BinOperNode& node);
+        virtual void visitPostfixNode(PostfixNode& node);
+
         virtual void visitNumObjNode(NumObjNode& node);
         virtual void visitIntNode(IntNode& node);
         virtual void visitFuncObjNode(FuncObjNode& node);
@@ -45,6 +47,8 @@ namespace hdg{
 
     public:
         void visitBinOperNode(BinOperNode& node) override;
+        void visitPostfixNode(PostfixNode& node) override;
+
         void visitIntNode(IntNode& node) override;
         void visitFuncObjNode(FuncObjNode& node) override;
         void visitIdentNode(IdentNode& node) override;

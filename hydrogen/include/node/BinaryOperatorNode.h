@@ -8,6 +8,7 @@
 #include <string>
 #include <cmath>
 #include <utility>
+#include <cassert>
 
 #include "Node.h"
 #include "../basic/Token.h"
@@ -74,14 +75,23 @@ namespace hdg {
 
     class PostfixNode: public Node{
     protected:
-        std::vector<uNode> m_exprList;
-        Token::Type m_categroy;
+        Token::Type m_type;
+        uNode m_primary;
         std::string m_ident;
+        std::vector<uNode> m_exprList;
 
     public:
-        PostfixNode();
+        PostfixNode(Token::Type type, std::string ident, const Position& pos);
+        PostfixNode(Token::Type type, std::string ident, std::vector<uNode>&& exprList, const Position& pos);
 
-        std::vector<uNode> getExprList();
+        inline std::vector<uNode>& getExprList() { return m_exprList; }
+        inline uNode& getPrimary() { return m_primary; }
+        inline std::string getIdent() {return m_ident; }
+        inline Token::Type getType() { return m_type; }
+
+        virtual std::string toString();
+        virtual Object* interpret() { assert(false); }
+        virtual void accept(Visitor& visitor);
     };
 
 } // hdg

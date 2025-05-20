@@ -18,6 +18,10 @@ namespace hdg{
         std::cout << "Visitor::visitBinOperNode() is not implement!" << std::endl;
     }
 
+    void Visitor::visitPostfixNode(PostfixNode& node){
+        std::cout << "Visitor::visitPostfixNode() is not implement!" << std::endl;
+    }
+
     void Visitor::visitNumObjNode(NumObjNode& node){
         std::cout << "Visitor::visitNumObjNode() is not implement!" << std::endl;
     }
@@ -95,6 +99,58 @@ namespace hdg{
             assert(false && "Unknow Oper!");
         }
     }
+
+    void InterpreterVisitor::visitPostfixNode(PostfixNode& node){
+        sObject obj;
+        auto& primary = node.getPrimary();
+        auto  ident = node.getIdent(); // hdgtodo: 统一 get 、 move、this 三种访问对象变量的语义
+        if(primary != nullptr) {
+            primary->accept(*this);
+            obj = getResult();
+        }
+        else if (ident != ""){
+            obj = m_stack.back()->getSymbol(ident);
+        }
+        else {
+            assert(false);
+        }
+
+        auto  type = node.getType();
+        auto& exprList = node.getExprList();
+
+        switch (type){
+            case Token::Type::RPAREN :
+            case Token::Type::LPAREN : { 
+                // 圆括号 ()
+
+                // 2. 获得参数列表
+                std::vector<sObject> args(exprList.size(), nullptr);
+                for (size_t i = 0; i < exprList.size(); i++){
+                    exprList[i]->accept(*this);
+                    args[i] = getResult();
+                }
+
+                // 3. 传参，执行
+                obj->parenthesis(args, *this);
+                break;
+            }
+            case Token::Type::RBRACKET :
+            case Token::Type::LBRACKET : {
+                // 方括号 []
+                break;
+            }
+            case Token::Type::IDENTIFIER : {
+                // 变量
+                m_res = std::move(obj);
+                break;
+            }
+            default : {
+                assert(false); // hdgtodo: 这样应该 hdg 报错：非法的后缀表达式
+                break;
+            }
+        }
+    }
+
 
     void InterpreterVisitor::visitIntNode(IntNode& node){
         m_res = std::make_shared<Integer>(node.getValue());

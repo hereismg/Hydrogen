@@ -180,4 +180,44 @@ namespace hdg {
     void BinOperNode::accept(Visitor& visitor) {
         visitor.visitBinOperNode(*this);
     }
+
+    PostfixNode::PostfixNode(Token::Type type, std::string ident, const Position& pos)
+        : Node(pos),
+          m_type(type), 
+          m_primary(nullptr), 
+          m_ident(std::move(ident))
+        {}
+
+
+    PostfixNode::PostfixNode(Token::Type type, std::string ident, std::vector<uNode>&& exprList, const Position& pos)
+        : Node(pos),
+          m_type(type), 
+          m_primary(nullptr), 
+          m_ident(std::move(ident)),
+          m_exprList(std::move(exprList))
+        {}
+
+    // std::vector<uNode>& PostfixNode::getExprList(){
+    //     return m_exprList;
+    // }
+
+    // uNode& PostfixNode::getPrimary(){
+    //     return m_primary;
+    // }
+
+    // std::string PostfixNode::getIdent(){
+    //     return m_ident;
+    // }
+
+    // Token::Type PostfixNode::getType(){
+    //     return m_type;
+    // }
+
+    std::string PostfixNode::toString(){
+        return "PostFixNode"; // hdgtodo: 更完整的输出 PostfixNode 内容
+    }
+
+    void PostfixNode::accept(Visitor& visitor) {
+        visitor.visitPostfixNode(*this);
+    }
 } // hdg

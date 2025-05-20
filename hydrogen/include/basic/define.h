@@ -8,6 +8,8 @@ namespace hdg{
     typedef std::unique_ptr<Node> uNode;
 
     class BinOperNode;
+    class PostfixNode;
+
     class new_AssignNode;
     class new_IfStmtNode;
     class new_WhileStmtNode;

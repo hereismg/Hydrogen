@@ -69,7 +69,6 @@ namespace hdg {
                                             //            | PostfixExpr '=' '[' [Params] ']'
         uNode new_FuncDef();                // FuncDef    : 'func' IDENT  '(' Params ')'  ExeUnit
         uNode new_StateDef();               // StateDef   : 'sm'   IDENT ['(' Params ')'] ExeUnit
-        uNode new_Params();                 // Params     : [ IDENT { ',' IDENT } ]
                         
         uNode new_Expr();                   // Expr       : ArithExpr
         uNode new_ArithExpr();              // ArithExpr  : Term {('+' | '-') Term}
@@ -84,7 +83,9 @@ namespace hdg {
                                             //            | STR_CONST
                                             //            | IDENT
                                             //            | '(' ArithExpr ')'
-        std::vector<uNode> new_ExprList();  // ExprList   : [Expr {',' Expr}]
+        
+        std::vector<std::string> new_Params();  // Params     : [ IDENT { ',' IDENT } ]
+        std::vector<uNode> new_ExprList();      // ExprList   : [Expr {',' Expr}]
     };
 
 } // hdg

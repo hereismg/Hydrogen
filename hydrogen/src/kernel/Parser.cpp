@@ -734,6 +734,41 @@ namespace hdg {
         return left;
     }
 
+    // uNode Parser::new_FuncDef(){
+    //     if (!m_currentToken->match(Token::Type::KEYWORD, "function")){
+    //         return nullptr;
+    //     }
+    //     advance();
+
+    //     std::string ident = m_currentToken->getValue();
+
+
+    // }
+
+    std::vector<std::string> Parser::new_Params(){
+        std::vector<std::string> params;
+
+        while(true) {
+            if (m_currentToken->getType() == Token::Type::EL){
+                advance();
+                continue;
+            }
+
+            params.emplace_back(m_currentToken->getValue());
+            advance();
+
+            if (m_currentToken->getType() == Token::Type::COMMA){
+                advance();
+                continue;
+            }
+            else{
+                break;
+            }
+        }
+
+        return params;
+    }
+
     uNode Parser::new_Term() {
         Position pos;
         pos.setStart(m_currentToken->thisPosition()->getStart());

@@ -535,3 +535,52 @@ TEST(test_WhileStmt, _1){
         ASSERT_EQ(int_ptr->getValue(), 15);
     }
 }
+
+TEST(Smoke, params_1){
+    string code = R"(a, b, c)";
+    string path = "<stdin>";
+    Lexer lexer;
+
+    std::vector<Token> tokens = lexer.run(path, &code);
+
+    Environment envir2; // 这将来要弃用
+
+    Parser parser(tokens, &envir2);
+
+    auto params = parser.new_Params();
+
+    std::vector<std::string> expected = {"a", "b", "c"};
+
+    ASSERT_EQ(params.size(), expected.size());
+
+    for (size_t i = 0; i < expected.size(); i++){
+        ASSERT_EQ(params[i], expected[i]);     
+    }
+}
+
+TEST(Smoke, params_2){
+    string code = 
+R"(
+a, 
+b, 
+c
+)";
+    string path = "<stdin>";
+    Lexer lexer;
+
+    std::vector<Token> tokens = lexer.run(path, &code);
+
+    Environment envir2; // 这将来要弃用
+
+    Parser parser(tokens, &envir2);
+
+    auto params = parser.new_Params();
+
+    std::vector<std::string> expected = {"a", "b", "c"};
+
+    ASSERT_EQ(params.size(), expected.size());
+
+    for (size_t i = 0; i < expected.size(); i++){
+        ASSERT_EQ(params[i], expected[i]);     
+    }
+}

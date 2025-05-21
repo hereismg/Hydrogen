@@ -197,6 +197,16 @@ namespace hdg {
           m_exprList(std::move(exprList))
         {}
 
+    PostfixNode::PostfixNode(Token::Type type, uNode&& primary, std::vector<uNode>&& exprList, const Position& pos)
+        : Node(pos),
+          m_type(type), 
+          m_primary(std::move(primary)), 
+          m_ident(nullptr),
+          m_exprList(std::move(exprList))
+        {
+            assert(m_primary != nullptr);
+        }
+
     // std::vector<uNode>& PostfixNode::getExprList(){
     //     return m_exprList;
     // }

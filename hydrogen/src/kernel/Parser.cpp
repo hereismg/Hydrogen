@@ -861,20 +861,25 @@ namespace hdg {
 
     uNode Parser::new_PostfixExpr() {
         uNode primary = new_Primary();
+        assert(primary != nullptr);
 
         if (m_currentToken->getType() == Token::Type::LBRACE){
             advance();
-            
+
             auto params = new_Params();
 
             if (m_currentToken->getType() != Token::Type::RBRACE){
                 assert(false); // hdgtodo: 异常
             }
 
-            // return std::make_unique<PostfixNode>(Token::Type::LBRACE, ) 
+            return std::make_unique<PostfixNode>(
+                Token::Type::LBRACE, 
+                std::move(primary), 
+                std::move(params)
+            );
         }
 
-        return new_Primary();
+        return nullptr;
     }
 
 

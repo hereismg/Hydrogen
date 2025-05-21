@@ -83,6 +83,7 @@ namespace hdg {
     public:
         PostfixNode(Token::Type type, std::string ident, const Position& pos);
         PostfixNode(Token::Type type, std::string ident, std::vector<uNode>&& exprList, const Position& pos);
+        PostfixNode(Token::Type type, uNode&& primary, std::vector<uNode>&& exprList, const Position& pos);
 
         inline std::vector<uNode>& getExprList() { return m_exprList; }
         inline uNode& getPrimary() { return m_primary; }

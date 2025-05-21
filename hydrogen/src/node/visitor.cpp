@@ -108,7 +108,7 @@ namespace hdg{
     void InterpreterVisitor::visitPostfixNode(PostfixNode& node){ 
         sObject obj;
         auto& primary = node.getPrimary();
-        auto  ident = node.getIdent(); // hdgtodo: 统一 get 、 move、this 三种访问对象变量的语义
+        auto  ident   = node.getIdent(); // hdgtodo: 统一 get 、 move、this 三种访问对象变量的语义
         if(primary != nullptr) {
             primary->accept(*this);
             obj = getResult();

@@ -582,13 +582,12 @@ namespace hdg {
         advance();
 
         auto unit = std::make_unique<new_ExeUnitNode>();
-        while(m_currentToken->getType() != Token::Type::RBRACE){ 
+        while(m_currentToken->getType() != Token::Type::RBRACE){
             // end of file
             if (m_currentToken->getType() == Token::Type::EL){
                 advance();
                 continue;
             }
-
             uNode stmt;
 
             stmt = new_AssignStmt();
@@ -640,6 +639,7 @@ namespace hdg {
                 unit->getList().emplace_back(std::move(stmt));
                 continue;
             }
+             
         }
         advance();
         
@@ -776,6 +776,7 @@ namespace hdg {
             advance();
 
             uNode right = new_Term();
+            assert(right != nullptr);
 
             pos.setEnd(m_currentToken->thisPosition()->getEnd());
 
@@ -819,6 +820,7 @@ namespace hdg {
         pos.setStart(m_currentToken->thisPosition()->getStart());
 
         uNode left = new_Factor();
+        assert(left != nullptr);
 
         while (m_currentToken->getType() == Token::Type::MUL || 
                m_currentToken->getType() == Token::Type::DIV) 
@@ -866,25 +868,26 @@ namespace hdg {
         uNode primary = new_Primary();
         assert(primary != nullptr);
 
-        if (m_currentToken->getType() == Token::Type::LBRACE){
+        if (m_currentToken->getType() == Token::Type::LPAREN){
             advance();
 
             auto params = new_ExprList();
 
-            if (m_currentToken->getType() != Token::Type::RBRACE){
+            if (m_currentToken->getType() != Token::Type::RPAREN){
                 assert(false); // hdgtodo: 异常
             }
+            advance();
 
             pos.setEnd(m_currentToken->thisPosition()->getEnd());
             return std::make_unique<PostfixNode>(
-                Token::Type::LBRACE, 
+                Token::Type::LPAREN, 
                 std::move(primary), 
                 std::move(params), 
                 pos
             );
         }
 
-        return nullptr;
+        return primary;
     }
 
 

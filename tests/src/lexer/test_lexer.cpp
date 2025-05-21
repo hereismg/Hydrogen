@@ -438,7 +438,7 @@ TEST(test_ExeUnit, _3){
 }
 
 
-TEST(test_IfStmt, _1){
+TEST(Base, IfStmt_1){
     string code = R"({
     if 1 {
         a = 1
@@ -651,21 +651,21 @@ R"(
 
     Parser parser(tokens, &envir2);
 
-    // auto unit = parser.new_ExeUnit();
+    auto unit = parser.new_ExeUnit();
 
-    // ASSERT_NE(unit, nullptr);
+    ASSERT_NE(unit, nullptr);
 
-    // InterpreterVisitor visitor;
-    // unit->accept(visitor);
+    InterpreterVisitor visitor;
+    unit->accept(visitor);
 
-    // {
-    //     auto obj = visitor.getResult().get();
+    {
+        auto obj = visitor.getResult().get();
 
-    //     ASSERT_NE(obj, nullptr);
-    //     ASSERT_EQ(typeid(*obj), typeid(Integer));
+        ASSERT_NE(obj, nullptr);
+        ASSERT_EQ(typeid(*obj), typeid(Integer));
 
-    //     Integer* int_ptr = dynamic_cast<Integer*>(obj);
+        Integer* int_ptr = dynamic_cast<Integer*>(obj);
 
-    //     ASSERT_EQ(int_ptr->getValue(), 3);
-    // }
+        ASSERT_EQ(int_ptr->getValue(), 3);
+    }
 }

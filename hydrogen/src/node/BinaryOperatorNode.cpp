@@ -201,7 +201,7 @@ namespace hdg {
         : Node(pos),
           m_type(type), 
           m_primary(std::move(primary)), 
-          m_ident(nullptr),
+          m_ident(""),
           m_exprList(std::move(exprList))
         {
             assert(m_primary != nullptr);

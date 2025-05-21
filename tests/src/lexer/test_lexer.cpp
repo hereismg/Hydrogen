@@ -728,9 +728,9 @@ fun()
     }
 }
 
-class Function_TEST_P: public testing::TestWithParam<std::tuple<std::string, int64_t>>{};
+class Function_TEST_P: public testing::TestWithParam<std::tuple<int, std::string, int64_t>>{};
 TEST_P(Function_TEST_P, _1){
-    auto [code, expected_obj] = GetParam();
+    auto [counter, code, expected_obj] = GetParam();
 
     string path = "<stdin>";
     Lexer lexer;
@@ -759,8 +759,10 @@ TEST_P(Function_TEST_P, _1){
         ASSERT_EQ(int_ptr->getValue(), expected_obj);
     }
 }
+int counter = 0;
 INSTANTIATE_TEST_SUITE_P(Smoke, Function_TEST_P, testing::Values(
-std::tuple<std::string, int64_t>{
+std::tuple<int, std::string, int64_t>{
+counter ++,
 R"({
     function add(a, b){
             a + b
@@ -770,7 +772,8 @@ R"({
 3
 },
 
-std::tuple<std::string, int64_t>{
+std::tuple<int, std::string, int64_t>{
+counter ++,
 R"({
     sum = 0
     function fun(a) {

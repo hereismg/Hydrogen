@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cassert>
 #include <typeinfo>
+#include <ranges>
 
 #include "../../include/node/BinaryOperatorNode.h"
 #include "../../include/node/ObjectNode.h"
@@ -77,13 +78,15 @@ namespace hdg{
 
     void InterpreterVisitor::visitBinOperNode(BinOperNode& node){
         auto& left = node.getLeft();
+        assert(left != nullptr);
         left->accept(*this);
-        auto left_val = moveResult();
+        auto left_val = getResult();
         assert(left_val != nullptr && "InterpreterVisitor::visitBinOperNode: left_val must be not null!");
 
         auto& right = node.getRight();
+        assert(right != nullptr);
         right->accept(*this);
-        auto right_val = moveResult();
+        auto right_val = getResult();
         assert(right_val != nullptr && "InterpreterVisitor::visitBinOperNode: right_val must be not null!");
 
         Token oper = node.getOper();
@@ -166,7 +169,7 @@ namespace hdg{
     }
 
     void InterpreterVisitor::visitIdentNode(IdentNode& node){
-        for (auto envir : m_stack){
+        for (auto envir : m_stack | std::views::reverse){
 
             auto obj = envir->getSymbol(node.getIdent());
             if (obj != nullptr){

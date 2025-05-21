@@ -1,0 +1,12 @@
+{
+    function fun(a) {
+        function fun(a) {
+            a
+        }
+        if a {
+            a = a + fun(a - 1)
+        }
+        a
+    }
+    fun(5)
+}

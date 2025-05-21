@@ -800,6 +800,8 @@ namespace hdg {
                 continue;
             }
 
+            if (m_currentToken->getType() != Token::Type::IDENTIFIER) break;
+            
             params.emplace_back(m_currentToken->getValue());
             advance();
 
@@ -871,10 +873,10 @@ namespace hdg {
         if (m_currentToken->getType() == Token::Type::LPAREN){
             advance();
 
-            auto params = new_ExprList();
+            std::vector<uNode> params;
 
             if (m_currentToken->getType() != Token::Type::RPAREN){
-                assert(false); // hdgtodo: 异常
+                params = new_ExprList();                    
             }
             advance();
 

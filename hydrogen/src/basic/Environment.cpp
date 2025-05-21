@@ -90,7 +90,7 @@ namespace hdg {
         auto it = m_table.find(name);
         
         if (it == m_table.end()){
-            assert(false && "Error");
+            return nullptr;
         }
         
         return it->second;

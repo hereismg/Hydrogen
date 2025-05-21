@@ -585,6 +585,25 @@ c
     }
 }
 
+TEST(Smoke, params_3){
+    string code = 
+R"(
+
+)";
+    string path = "<stdin>";
+    Lexer lexer;
+
+    std::vector<Token> tokens = lexer.run(path, &code);
+
+    Environment envir2; // 这将来要弃用
+
+    Parser parser(tokens, &envir2);
+
+    auto params = parser.new_Params();
+
+    ASSERT_EQ(params.size(), 0);
+}
+
 TEST(Smoke, funcDef_1){
     string code = 
 R"(
@@ -667,5 +686,44 @@ R"(
         Integer* int_ptr = dynamic_cast<Integer*>(obj);
 
         ASSERT_EQ(int_ptr->getValue(), 3);
+    }
+}
+
+
+TEST(Smoke, funcDef_3){
+    string code = 
+R"(
+{
+function fun() {
+    10
+}
+fun()
+}
+)";
+    string path = "<stdin>";
+    Lexer lexer;
+
+    std::vector<Token> tokens = lexer.run(path, &code);
+
+    Environment envir2; // 这将来要弃用
+
+    Parser parser(tokens, &envir2);
+
+    auto unit = parser.new_ExeUnit();
+
+    ASSERT_NE(unit, nullptr);
+
+    InterpreterVisitor visitor;
+    unit->accept(visitor);
+
+    {
+        auto obj = visitor.getResult().get();
+
+        ASSERT_NE(obj, nullptr);
+        ASSERT_EQ(typeid(*obj), typeid(Integer));
+
+        Integer* int_ptr = dynamic_cast<Integer*>(obj);
+
+        ASSERT_EQ(int_ptr->getValue(), 10);
     }
 }

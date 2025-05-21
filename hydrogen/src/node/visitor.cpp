@@ -166,8 +166,16 @@ namespace hdg{
     }
 
     void InterpreterVisitor::visitIdentNode(IdentNode& node){
-        auto obj = m_stack.back()->getSymbol(node.getIdent());
-        m_res = std::move(obj);
+        for (auto envir : m_stack){
+
+            auto obj = envir->getSymbol(node.getIdent());
+            if (obj != nullptr){
+                m_res = std::move(obj);
+                return;
+            }
+        }
+
+        assert(false && "The symbol does not exist");
     }
 
     void InterpreterVisitor::visitAssignNode(new_AssignNode& node) {

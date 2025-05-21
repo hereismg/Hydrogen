@@ -727,3 +727,61 @@ fun()
         ASSERT_EQ(int_ptr->getValue(), 10);
     }
 }
+
+class Function_TEST_P: public testing::TestWithParam<std::tuple<std::string, int64_t>>{};
+TEST_P(Function_TEST_P, _1){
+    auto [code, expected_obj] = GetParam();
+
+    string path = "<stdin>";
+    Lexer lexer;
+
+    std::vector<Token> tokens = lexer.run(path, &code);
+
+    Environment envir2; // 这将来要弃用
+
+    Parser parser(tokens, &envir2);
+
+    auto unit = parser.new_ExeUnit();
+
+    ASSERT_NE(unit, nullptr);
+
+    InterpreterVisitor visitor;
+    unit->accept(visitor);
+
+    {
+        auto obj = visitor.getResult().get();
+
+        ASSERT_NE(obj, nullptr);
+        ASSERT_EQ(typeid(*obj), typeid(Integer));
+
+        Integer* int_ptr = dynamic_cast<Integer*>(obj);
+
+        ASSERT_EQ(int_ptr->getValue(), expected_obj);
+    }
+}
+INSTANTIATE_TEST_SUITE_P(Smoke, Function_TEST_P, testing::Values(
+std::tuple<std::string, int64_t>{
+R"({
+    function add(a, b){
+            a + b
+    }
+    add(1, 2)
+})",
+3
+},
+
+std::tuple<std::string, int64_t>{
+R"({
+    sum = 0
+    function fun(a) {
+        if a {
+            sum = sum + fun(a - 1)
+        }
+        a
+    }
+    fun(5)
+    sum
+})",
+10
+}
+));

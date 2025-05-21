@@ -575,6 +575,7 @@ namespace hdg {
     }
 
     uNode Parser::new_ExeUnit(){
+        while(m_currentToken->getType() == Token::Type::EL) advance();
         if (m_currentToken->getType() != Token::Type::LBRACE){
             throw -1;
         }
@@ -611,6 +612,16 @@ namespace hdg {
             }
 
             stmt = new_WhileStmt();
+            if (stmt != nullptr){
+                while (m_currentToken->getType() == Token::Type::EL){
+                    advance();
+                }
+
+                unit->getList().emplace_back(std::move(stmt));
+                continue;
+            }
+
+            stmt = new_FuncDef();
             if (stmt != nullptr){
                 while (m_currentToken->getType() == Token::Type::EL){
                     advance();
@@ -709,33 +720,6 @@ namespace hdg {
         return new_ArithExpr();
     }
 
-    uNode Parser::new_ArithExpr() {
-        Position pos;
-        pos.setStart(m_currentToken->thisPosition()->getStart());
-
-        uNode left = new_Term();
-
-        while (m_currentToken->getType() == Token::Type::PLUS || 
-               m_currentToken->getType() == Token::Type::MINUS) 
-        {
-            Token::Type oper = m_currentToken->getType();
-            advance();
-
-            uNode right = new_Term();
-
-            pos.setEnd(m_currentToken->thisPosition()->getEnd());
-
-            left = std::make_unique<BinOperNode>(
-                oper, 
-                std::move(left),
-                std::move(right),
-                pos
-            );
-        }
-
-        return left;
-    }
-
     // FuncDef    : 'func' IDENT  '(' Params ')'  ExeUnit
     uNode Parser::new_FuncDef(){ // hdgtodo: AST 的基本设计原则是：尽力保留原始的代码信息
         while (m_currentToken->getType() == Token::Type::EL) advance();
@@ -777,6 +761,33 @@ namespace hdg {
         uNode funNode = std::make_unique<New_FuncObjNode>(std::move(params), std::move(unit), pos);
 
         return std::make_unique<new_AssignNode>(ident, std::move(funNode), pos);
+    }
+
+    uNode Parser::new_ArithExpr() {
+        Position pos;
+        pos.setStart(m_currentToken->thisPosition()->getStart());
+
+        uNode left = new_Term();
+
+        while (m_currentToken->getType() == Token::Type::PLUS || 
+               m_currentToken->getType() == Token::Type::MINUS) 
+        {
+            Token::Type oper = m_currentToken->getType();
+            advance();
+
+            uNode right = new_Term();
+
+            pos.setEnd(m_currentToken->thisPosition()->getEnd());
+
+            left = std::make_unique<BinOperNode>(
+                oper, 
+                std::move(left),
+                std::move(right),
+                pos
+            );
+        }
+
+        return left;
     }
 
     std::vector<std::string> Parser::new_Params(){
@@ -837,20 +848,34 @@ namespace hdg {
         Token::Type oper = m_currentToken->getType();
         switch(oper){
             case Token::Type::PLUS: {
-                return new_Primary(); // hdgtodo: 增加对单目运算符的支持
+                return new_PostfixExpr(); // hdgtodo: 增加对单目运算符的支持
             }
             case Token::Type::MINUS: {
-                return new_Primary();
+                return new_PostfixExpr();
             }
             default: {
-                return new_Primary();
+                return new_PostfixExpr();
             }
         }
     }
 
-    // uNode new_PostfixExpr() {
+    uNode Parser::new_PostfixExpr() {
+        uNode primary = new_Primary();
 
-    // }
+        if (m_currentToken->getType() == Token::Type::LBRACE){
+            advance();
+            
+            auto params = new_Params();
+
+            if (m_currentToken->getType() != Token::Type::RBRACE){
+                assert(false); // hdgtodo: 异常
+            }
+
+            // return std::make_unique<PostfixNode>(Token::Type::LBRACE, ) 
+        }
+
+        return new_Primary();
+    }
 
 
     uNode Parser::new_Primary() {

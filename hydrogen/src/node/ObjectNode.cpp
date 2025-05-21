@@ -204,7 +204,7 @@ namespace hdg {
         {}
 
     std::string New_FuncObjNode::toString(){
-        return "funcNode";
+        return "New_FuncObjNode";
     }
 
     Object* New_FuncObjNode::interpret(){
@@ -212,6 +212,6 @@ namespace hdg {
     }
 
     void New_FuncObjNode::accept(Visitor& visitor){
-        // visitor.visitIdentNode(*this);
+        visitor.visitFuncDefNode(*this);
     }
 } // hdg

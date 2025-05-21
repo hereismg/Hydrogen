@@ -601,7 +601,33 @@ function add(a, b){
 
     Parser parser(tokens, &envir2);
 
-    auto funcNode = parser.new_FuncDef();
+    auto assignFunc = parser.new_FuncDef();
 
-    
+    ASSERT_NE(assignFunc, nullptr);
+
+    InterpreterVisitor visitor;
+    assignFunc->accept(visitor);
+
+    // 检查 add 是否存在
+    auto funObj = visitor.getCurrentEnvir()->getSymbol("add");
+    ASSERT_NE(funObj, nullptr);
+
+    // add(1, 2)
+    std::vector<uNode> args;
+    args.emplace_back(std::make_unique<IntNode>(1));
+    args.emplace_back(std::make_unique<IntNode>(2));
+    auto postfix = std::make_unique<PostfixNode>(Token::Type::LPAREN, "add", std::move(args), Position());
+
+    postfix->accept(visitor);
+
+    {
+        auto obj = visitor.getResult().get();
+
+        ASSERT_NE(obj, nullptr);
+        ASSERT_EQ(typeid(*obj), typeid(Integer));
+
+        Integer* int_ptr = dynamic_cast<Integer*>(obj);
+
+        ASSERT_EQ(int_ptr->getValue(), 3);
+    }
 }

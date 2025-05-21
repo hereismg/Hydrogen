@@ -8,6 +8,7 @@
 #include "../../include/node/ObjectNode.h"
 #include "../../include/node/stmt_node.h"
 #include "../../include/node/unit_node.h"
+#include "../../include/object/Function.h"
 
 namespace hdg{
     Visitor::Visitor(){
@@ -181,7 +182,10 @@ namespace hdg{
     }
 
     void InterpreterVisitor::visitFuncDefNode(New_FuncObjNode& node) {
-        // New
+        m_res = std::make_shared<New_DefFunction>(
+            node.getArgs(), 
+            node.moveBody()  // hdgtodo: 应该改成 clone，而不是移动所有权
+        );
     }
 
     void InterpreterVisitor::visitIfStmtNode(new_IfStmtNode& node) {

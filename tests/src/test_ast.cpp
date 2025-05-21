@@ -492,7 +492,8 @@ TEST(Base, PostfixNode_1){
     auto envir = visitor.getCurrentEnvir();
     envir->setSymbol("add", func);
     
-    // PostfixNode
+    // PostfixNode 
+    // add(1, 2)
     std::vector<uNode> args;
     args.emplace_back(std::make_unique<IntNode>(1));
     args.emplace_back(std::make_unique<IntNode>(2));

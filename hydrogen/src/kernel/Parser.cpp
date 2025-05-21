@@ -736,7 +736,11 @@ namespace hdg {
         return left;
     }
 
+    // FuncDef    : 'func' IDENT  '(' Params ')'  ExeUnit
     uNode Parser::new_FuncDef(){ // hdgtodo: AST 的基本设计原则是：尽力保留原始的代码信息
+        while (m_currentToken->getType() == Token::Type::EL) advance();
+
+        // 1. 关键字 'function'
         if (!m_currentToken->match(Token::Type::KEYWORD, "function")){
             return nullptr;
         }
@@ -744,8 +748,14 @@ namespace hdg {
         pos.setStart(m_currentToken->thisPosition()->getStart());
         advance();
 
+        // 2. 标识符 IDENT
+        if (m_currentToken->getType() != Token::Type::IDENTIFIER) {
+            assert(false); // 应该抛出异常
+        }
         std::string ident = m_currentToken->getValue();
+        advance();
 
+        // 3. 参数 '(' Params ')'
         if (m_currentToken->getType() != Token::Type::LPAREN){
             assert(false); // 应该抛出异常
         }
@@ -758,11 +768,15 @@ namespace hdg {
         }
         advance();
 
+        // 4. 函数的执行体 ExeUnit
         auto unit = new_ExeUnit();
 
+        // 5. 构建结点
         pos.setEnd(m_currentToken->thisPosition()->getEnd());
         
-        return std::make_unique<New_FuncObjNode>(std::move(params), std::move(unit), pos);
+        uNode funNode = std::make_unique<New_FuncObjNode>(std::move(params), std::move(unit), pos);
+
+        return std::make_unique<new_AssignNode>(ident, std::move(funNode), pos);
     }
 
     std::vector<std::string> Parser::new_Params(){

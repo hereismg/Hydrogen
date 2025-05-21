@@ -782,7 +782,20 @@ R"({
         }
         a
     }
-    fun(5)
+    sum = fun(5)
+    sum
+})",
+15
+},
+
+std::tuple<int, std::string, int64_t>{
+counter ++,
+R"({
+    function getNum(sum){
+        sum
+    }
+    sum = 5
+    sum = sum + getNum(sum)
     sum
 })",
 10

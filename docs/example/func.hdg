@@ -6,6 +6,6 @@
         }
         a
     }
-    fun(5)
+    sum = fun(5)
     sum
 }

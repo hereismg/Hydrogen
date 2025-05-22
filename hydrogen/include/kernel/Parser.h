@@ -55,34 +55,35 @@ namespace hdg {
                 std::function<Node*(Environment* envir)> fun
                 );
 
-        uNode new_ExeUnit();                // ExeUnit    : '{' { IfStmt | AssignStmt | Expr } '}'
+        uNode new_ExeUnit();        // ExeUnit    : '{' { IfStmt | AssignStmt | Expr } '}'
+        uNode new_IfStmt();         // IfStmt     : 'if' Expr ExeUnit 
+                                    //              {'elif' Expr ExeUnit }
+                                    //              ['else' ExeUnit ]
+        uNode new_WhileStmt();      // WhileStmt  : 'while' Expr ExeUnit
+        uNode new_AssignStmt();     // AssignStmt : ValBuild
+                                    //            | FuncDef
+                                    //            | StateDef
+        uNode new_ValBuild();       // ValBuild   : PostfixExpr '=' Expr
+                                    //            | PostfixExpr '=' '[' [Params] ']'
+        uNode new_FuncDef();        // FuncDef    : 'func' IDENT  '(' Params ')'  ExeUnit
+        uNode new_StateDef();       // StateDef   : 'sm'   IDENT ['(' Params ')'] ExeUnit
                         
-        uNode new_IfStmt();                 // IfStmt     : 'if' Expr ExeUnit 
-                                            //              {'elif' Expr ExeUnit }
-                                            //              ['else' ExeUnit ]
-        uNode new_WhileStmt();              // WhileStmt  : 'while' Expr ExeUnit
-                        
-        uNode new_AssignStmt();             // AssignStmt : ValBuild
-                                            //            | FuncDef
-                                            //            | StateDef
-        uNode new_ValBuild();               // ValBuild   : PostfixExpr '=' Expr
-                                            //            | PostfixExpr '=' '[' [Params] ']'
-        uNode new_FuncDef();                // FuncDef    : 'func' IDENT  '(' Params ')'  ExeUnit
-        uNode new_StateDef();               // StateDef   : 'sm'   IDENT ['(' Params ')'] ExeUnit
-                        
-        uNode new_Expr();                   // Expr       : ArithExpr
-        uNode new_ArithExpr();              // ArithExpr  : Term {('+' | '-') Term}
-        uNode new_Term();                   // Term       : Factor {('*' | '/') Factor}
-        uNode new_Factor();                 // Factor     : {'+' | '-'} PostfixExpr
-        uNode new_PostfixExpr();            // PostfixExpr: Primary
-                                            //            | PostfixExpr '(' ExprList ')'
-                                            //            | PostfixExpr '[' ExprList ']'
-                                            //            | PostfixExpr '.' IDENT '(' ExprList ')'
-        uNode new_Primary();                // Primary    : INT_CONST
-                                            //            | FLOAT_CONST
-                                            //            | STR_CONST
-                                            //            | IDENT
-                                            //            | '(' ArithExpr ')'
+        uNode new_Expr();           // Expr       : LogicExpr
+        uNode new_LogicExpr();      // LogicExpr  : ('not' LogicExpr)
+                                    //            | (CompExpr {('and' | 'or') CompExpr}) 
+        uNode new_CompExpr();       // CompExpr  : ArithExpr {('>' | '<' | '>=' | '<=' | '==') ArithExpr}
+        uNode new_ArithExpr();      // ArithExpr  : Term {('+' | '-') Term}
+        uNode new_Term();           // Term       : Factor {('*' | '/') Factor}
+        uNode new_Factor();         // Factor     : {'+' | '-'} PostfixExpr
+        uNode new_PostfixExpr();    // PostfixExpr: Primary
+                                    //            | PostfixExpr '(' ExprList ')'
+                                    //            | PostfixExpr '[' ExprList ']'
+                                    //            | PostfixExpr '.' IDENT '(' ExprList ')'
+        uNode new_Primary();        // Primary    : INT_CONST
+                                    //            | FLOAT_CONST
+                                    //            | STR_CONST
+                                    //            | IDENT
+                                    //            | '(' ArithExpr ')'
         
         std::vector<std::string> new_Params();  // Params     : [ IDENT { ',' IDENT } ]
         std::vector<uNode> new_ExprList();      // ExprList   : [Expr {',' Expr}]

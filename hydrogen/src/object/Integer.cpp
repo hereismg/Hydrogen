@@ -286,4 +286,9 @@ namespace hdg {
         else return false;
     }
 
+    sObject Integer::clone() {
+        return std::make_shared<Integer>(m_value);
+    }
+
+
 } // hdg

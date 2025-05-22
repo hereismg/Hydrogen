@@ -22,6 +22,19 @@ namespace hdg {
         void setValue(int64_t value);
         [[nodiscard]] int64_t getValue() const;
 
+        sObject plus(sObject& other) override;
+        sObject minus(sObject& other) override;
+        sObject mul(sObject& other) override;
+        sObject div(sObject& other) override;
+        bool isTrue() override;
+
+        std::string toString() override;
+        sObject clone() override;
+        
+        // ======================================
+        // 下面是弃用的方法
+        // ======================================
+
         Object* plus(Object* other) override;
         Object* minus(Object* other) override;
         Object* mul(Object* other) override;
@@ -39,14 +52,6 @@ namespace hdg {
         Object* andOperator(Object* other) override;
         Object* orOperator(Object* other) override;
         Object* notOperator() override;
-
-        sObject plus(sObject& other) override;
-        sObject minus(sObject& other) override;
-        sObject mul(sObject& other) override;
-        sObject div(sObject& other) override;
-
-        bool isTrue() override;
-        std::string toString() override;
         Object* copy() override;
     };
 

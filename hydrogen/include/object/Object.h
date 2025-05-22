@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <cassert>
 
 #include "../basic/Position.h"
 
@@ -37,6 +38,38 @@ namespace hdg {
         void setClass(std::string className);
         std::string getClass();
 
+        
+        virtual sObject plus(sObject& other);
+        virtual sObject minus(sObject& other);
+        virtual sObject mul(sObject& other);
+        virtual sObject div(sObject& other);
+        virtual sObject mod(sObject& other)  { assert(false); }
+        virtual sObject pow(sObject& other)  { assert(false); }
+        virtual bool    isTrue();
+
+        virtual sObject equation(sObject& other) { assert(false); }
+        virtual sObject notEquation(sObject& other) { assert(false); }
+        virtual sObject greaterThan(sObject& other) { assert(false); }
+        virtual sObject lessThan(sObject& other) { assert(false); }
+        virtual sObject greaterThanEquation(sObject& other) { assert(false); }
+        virtual sObject lessThanEquation(sObject& other) { assert(false); }
+
+        virtual sObject andOperator(sObject& other) { assert(false); }
+        virtual sObject orOperator(sObject& other) { assert(false); }
+        // virtual sObject notOperator();
+
+        virtual sObject parenthesis(const std::vector<sObject>& args, Visitor& visitor); // ()
+        virtual sObject brackets(const std::vector<sObject>& args) { assert(false); }    // []
+        virtual sObject braces(const std::vector<sObject>& args) { assert(false); }      // {}
+
+        virtual void illegalOperator();
+        virtual std::string toString() = 0;
+        virtual sObject clone() { assert(false); };
+
+        // ======================================
+        // 下面是弃用的方法
+        // ======================================
+
         virtual Object* plus(Object* other);
         virtual Object* minus(Object* other);
         virtual Object* mul(Object* other);
@@ -55,12 +88,6 @@ namespace hdg {
         virtual Object* orOperator(Object* other);
         virtual Object* notOperator();
 
-        virtual sObject plus(sObject& other);
-        virtual sObject minus(sObject& other);
-        virtual sObject mul(sObject& other);
-        virtual sObject div(sObject& other);
-        virtual sObject parenthesis(const std::vector<sObject>& args, Visitor& visitor);
-
         /**
          * @brief       括号运算符
          * @arg
@@ -70,9 +97,6 @@ namespace hdg {
         virtual Object* brackets(const std::vector<Object*>& args);
         virtual Object* braces(const std::vector<Object*>& args);
 
-        virtual bool isTrue();
-        virtual void illegalOperator();
-        virtual std::string toString() = 0;
         virtual Object* copy() = 0;
     };
 

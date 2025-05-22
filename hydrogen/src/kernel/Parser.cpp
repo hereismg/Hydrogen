@@ -716,10 +716,6 @@ namespace hdg {
         return std::make_unique<new_AssignNode>(name, std::move(expr), pos);
     }
 
-    uNode Parser::new_Expr(){
-        return new_ArithExpr();
-    }
-
     // FuncDef    : 'func' IDENT  '(' Params ')'  ExeUnit
     uNode Parser::new_FuncDef(){ // hdgtodo: AST 的基本设计原则是：尽力保留原始的代码信息
         while (m_currentToken->getType() == Token::Type::EL) advance();
@@ -762,6 +758,14 @@ namespace hdg {
 
         return std::make_unique<new_AssignNode>(ident, std::move(funNode), pos);
     }
+
+    uNode Parser::new_Expr(){
+        return new_ArithExpr();
+    }
+
+    // uNode Parser::new_CompExpr(){
+        
+    // }
 
     uNode Parser::new_ArithExpr() {
         Position pos;

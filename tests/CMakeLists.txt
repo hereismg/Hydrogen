@@ -105,3 +105,4 @@ hdg_append_test_with_dir("src/lexer")
 
 hdg_append_test_with_file("clt/test_option.cpp")
 hdg_append_test_with_file("src/test_ast.cpp")
+hdg_append_test_with_file("src/test_obj.cpp")

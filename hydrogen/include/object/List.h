@@ -17,7 +17,14 @@ namespace hdg {
         List();
         explicit List(const std::vector<Object*>& list);
 
+        bool isTrue() override;
         std::vector<Object*> getValue();
+
+        
+
+        // ======================================
+        // 下面是弃用的方法
+        // ======================================
 
         Object* plus(Object* other) override;
 //        Object* minus(Object* other) override;
@@ -39,7 +46,6 @@ namespace hdg {
 
         Object* brackets(const std::vector<Object*>& args) override;
 
-        bool isTrue() override;
         std::string toString() override;
         Object* copy() override;
     };

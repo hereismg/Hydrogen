@@ -9,6 +9,10 @@
 #include "Object.h"
 
 namespace hdg {
+    class Integer;
+    typedef std::unique_ptr<Integer> uInteger;
+    typedef std::shared_ptr<Integer> sInteger;
+    typedef std::weak_ptr<Integer>   wInteger;
 
     class Integer: public Object{
     private:
@@ -28,9 +32,17 @@ namespace hdg {
         sObject div(sObject& other) override;
         bool isTrue() override;
 
+        sObject equation(sObject& other) override;
+
         std::string toString() override;
         sObject clone() override;
-        
+
+        // static sInteger False() { return std::make_shared<Integer>(0); }
+        // static sInteger True() { return std::make_shared<Integer>(1); }
+
+        static sInteger False;
+        static sInteger True;
+
         // ======================================
         // 下面是弃用的方法
         // ======================================

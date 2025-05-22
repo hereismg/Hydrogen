@@ -273,6 +273,19 @@ namespace hdg {
         }
     }
 
+    sInteger Integer::True  = std::make_shared<Integer>(1);
+    sInteger Integer::False = std::make_shared<Integer>(0);
+
+    sObject Integer::equation(sObject& other) {
+        if (typeid(*other.get()) != typeid(Integer)) return Integer::False;
+
+        auto otherVal = dynamic_cast<Integer*>(other.get())->getValue();
+
+        if (otherVal != m_value) return Integer::False;
+
+        return Integer::True;
+    }
+
     std::string Integer::toString() {
         return std::to_string(m_value);
     }

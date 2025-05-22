@@ -10,9 +10,67 @@ namespace hdg {
         setClass("List");
     }
 
-    List::List(const std::vector<Object*> &list): m_list(list) {
+    List::List(size_t count, sObject obj) : m_list(count, obj){
         setClass("List");
     }
+
+    List::List(const std::vector<Object*> &list): m_list_old(list) {
+        setClass("List");
+    }
+
+    Object *List::plus(Object *other) {
+        List* list = (List*)copy();
+        list->m_list_old.push_back(other);
+        return list;
+    }
+
+    Object *List::equation(Object *other) {
+        if (other->getClass() == "List"){
+            return new Integer(m_list_old == ((List*)other)->m_list_old);
+        }
+        illegalOperator();
+        return nullptr;
+    }
+
+    Object *List::brackets(const std::vector<Object *> &args) {
+        if (args.size() == 1 && args[0]->getClass() == "Integer"){
+            int64_t index = ((Integer*)args[0])->getValue();
+            if (index < (int64_t)m_list_old.size()){
+                return m_list_old[index];
+            }
+        }
+        illegalOperator();
+        return nullptr;
+    }
+
+    sObject List::equation(sObject& other) {
+        if (typeid(*other.get()) != typeid(List)) return Integer::False;
+
+        auto& otherList = dynamic_cast<List*>(other.get())->getList();
+
+        if (m_list.size() != otherList.size()) return Integer::False;
+
+        for (size_t i = 0; i < m_list.size(); i++) {
+            if (!m_list[i]->equation(otherList[i])->isTrue()) {
+                return Integer::False;
+            }
+        }
+
+        return Integer::True;
+    }
+
+    bool List::isTrue() {
+        return !m_list_old.empty();
+    }
+
+    Object *List::copy() {
+        return new List(m_list_old);
+    }
+
+    std::vector<Object *> List::getValue() {
+        return m_list_old;
+    }
+
 
     std::string List::toString() {
         std::stringstream context;
@@ -29,42 +87,13 @@ namespace hdg {
         return context.str();
     }
 
-    Object *List::plus(Object *other) {
-        List* list = (List*)copy();
-        list->m_list.push_back(other);
-        return list;
-    }
+    sObject List::clone() {
+        auto newList = std::make_shared<List>(m_list.size(), nullptr);
 
-    Object *List::equation(Object *other) {
-        if (other->getClass() == "List"){
-            return new Integer(m_list == ((List*)other)->m_list);
+        for (size_t i = 0; i < m_list.size(); i++) {
+            newList->m_list[i] = m_list[i]->clone();
         }
-        illegalOperator();
-        return nullptr;
+
+        return newList;
     }
-
-    Object *List::brackets(const std::vector<Object *> &args) {
-        if (args.size() == 1 && args[0]->getClass() == "Integer"){
-            int64_t index = ((Integer*)args[0])->getValue();
-            if (index < (int64_t)m_list.size()){
-                return m_list[index];
-            }
-        }
-        illegalOperator();
-        return nullptr;
-    }
-
-    bool List::isTrue() {
-        return !m_list.empty();
-    }
-
-    Object *List::copy() {
-        return new List(m_list);
-    }
-
-    std::vector<Object *> List::getValue() {
-        return m_list;
-    }
-
-
 } // hdg

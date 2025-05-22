@@ -289,7 +289,7 @@ TEST(test_Parser, new_ArithExpr_5){
 }
 
 
-TEST(test_AssignStmt, _1){
+TEST(Smoke, AssignStmt_1){
     string code = "a = 1";
     string path = "<stdin>";
     Lexer lexer;
@@ -315,6 +315,51 @@ TEST(test_AssignStmt, _1){
 
     ASSERT_EQ(int_ptr->getValue(), 1);
 }
+
+class Test_Template: public testing::TestWithParam<std::tuple<int, std::string, int64_t>>{};
+TEST_P(Test_Template, AssignStmt_2){
+    auto [counter, code, expected_obj] = GetParam();
+
+    string path = "<stdin>";
+    Lexer lexer;
+
+    std::vector<Token> tokens = lexer.run(path, &code);
+
+    Environment envir2; // 这将来要弃用
+
+    Parser parser(tokens, &envir2);
+
+    auto unit = parser.new_ExeUnit();
+
+    ASSERT_NE(unit, nullptr);
+
+    InterpreterVisitor visitor;
+    unit->accept(visitor);
+
+    {
+        auto obj = visitor.getResult().get();
+
+        ASSERT_NE(obj, nullptr);
+        ASSERT_EQ(typeid(*obj), typeid(Integer));
+
+        Integer* int_ptr = dynamic_cast<Integer*>(obj);
+
+        ASSERT_EQ(int_ptr->getValue(), expected_obj);
+    }
+}
+
+INSTANTIATE_TEST_SUITE_P(Smoke, Test_Template, testing::Values(
+std::tuple<int, std::string, int64_t>{
+0,
+R"({
+    a = 1
+    b = a
+    a = 2
+    b
+})",
+1
+}
+));
 
 TEST(test_ExeUnit, _1){
     string code = "{a = 1; b = 2}";

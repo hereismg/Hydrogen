@@ -49,5 +49,22 @@ TEST(Smoke, Clone_1){
     myList->getList()[1] = make_shared<Integer>(10);
     myList->getList()[2] = make_shared<Integer>(10);
 
-    ASSERT_TRUE(myList->equation(listCopy)->isTrue());
+    ASSERT_FALSE(myList->equation(listCopy)->isTrue());
+}
+
+TEST(Smoke, Clone_2){
+    size_t count = 5;
+    auto myList = std::make_shared<List>(count, nullptr);
+    for (int i = 0; i < count; i++) {
+        myList->getList()[i] = make_shared<Integer>(i);
+    }
+
+    auto arr2di = std::make_shared<List>(count, nullptr);
+    for (int i = 0; i < count; i++) {
+        arr2di->getList()[i] = myList->clone();
+    }
+
+    // myList->getList()[0]
+
+    // for (int )
 }

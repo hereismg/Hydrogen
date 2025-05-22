@@ -799,5 +799,34 @@ R"({
     sum
 })",
 10
+},
+
+std::tuple<int, std::string, int64_t>{
+counter ++,
+R"({
+PLUS = 1
+MINE = 2
+
+function oper(oper) {
+    function plus(a, b){
+        a + b
+    }
+
+    function mine(a, b){
+        a - b
+    }
+    
+    if oper == PLUS {
+        plus
+    }
+    elif oper == MINE {
+        mine
+    }
+}
+
+myOper = oper(PLUS)
+myOper(1, 2)
+})",
+3
 }
 ));

@@ -1,7 +1,11 @@
 {
-a = 10
 function fun(a) {
-    a = a + 1
+    function fun(a) {
+        a
+    }
+    if a {
+        a = a + fun(a - 1)
+    }
     a
 }
 fun(5)

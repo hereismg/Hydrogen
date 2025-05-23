@@ -1,9 +1,0 @@
-{
-    function oper(){
-        function add(a, b){
-            a + b
-        }
-        add
-    }
-    oper()(1, 2)
-}

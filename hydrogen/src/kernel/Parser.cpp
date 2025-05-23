@@ -886,15 +886,16 @@ namespace hdg {
                 advance();
 
                 pos.setEnd(m_currentToken->thisPosition()->getEnd());
-                return std::make_unique<PostfixNode>(
+                primary = std::make_unique<PostfixNode>(
                     Token::Type::LPAREN, 
                     std::move(primary), 
                     std::move(params), 
                     pos
                 );
+                continue;
             }
             else{
-                break;
+                continue;
             }
         }
 

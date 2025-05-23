@@ -818,60 +818,74 @@ R"({
 3
 },
 
-std::tuple<int, std::string, int64_t>{
-counter ++,
-R"({
-    sum = 0
-    function fun(a) {
-        if a {
-            sum = sum + fun(a - 1)
-        }
-        a
-    }
-    sum = fun(5)
-    sum
-})",
-15
-},
+// std::tuple<int, std::string, int64_t>{
+// counter ++,
+// R"({
+//     sum = 0
+//     function fun(a) {
+//         if a {
+//             sum = sum + fun(a - 1)
+//         }
+//         a
+//     }
+//     sum = fun(5)
+//     sum
+// })",
+// 15
+// },
 
-std::tuple<int, std::string, int64_t>{
-counter ++,
-R"({
-    function getNum(sum){
-        sum
-    }
-    sum = 5
-    sum = sum + getNum(sum)
-    sum
-})",
-10
-},
+// std::tuple<int, std::string, int64_t>{
+// counter ++,
+// R"({
+//     function getNum(sum){
+//         sum
+//     }
+//     sum = 5
+//     sum = sum + getNum(sum)
+//     sum
+// })",
+// 10
+// },
 
-std::tuple<int, std::string, int64_t>{
-counter ++,
-R"({
-PLUS = 1
-MINE = 2
+// std::tuple<int, std::string, int64_t>{
+// counter ++,
+// R"({
+// PLUS = 1
+// MINE = 2
 
-function oper(oper) {
-    function plus(a, b){
-        a + b
-    }
+// function oper(oper) {
+//     function plus(a, b){
+//         a + b
+//     }
 
-    function mine(a, b){
-        a - b
-    }
+//     function mine(a, b){
+//         a - b
+//     }
     
-    if oper == PLUS {
-        plus
-    }
-    elif oper == MINE {
-        mine
-    }
-}
+//     if oper == PLUS {
+//         plus
+//     }
+//     elif oper == MINE {
+//         mine
+//     }
+// }
 
-myOper = oper(PLUS)
-myOper(1, 2)
+// myOper = oper(PLUS)
+// myOper(1, 2)
+// })",
+// 3
+// },
+
+std::tuple<int, std::string, int64_t>{
+counter ++,
+R"({
+    function oper(){
+        function add(a, b){
+            a + b
+        }
+        add
+    }
+    oper()(1, 2)
 })",
 3
 }

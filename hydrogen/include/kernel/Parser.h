@@ -86,7 +86,7 @@ namespace hdg {
                                     //               | '(' ArithExpr ')'
         
         std::vector<std::string> new_Params();  // Params     : [ IDENT { ',' IDENT } ]
-        std::vector<uNode> new_ExprList();      // ExprList   : [Expr {',' Expr}]
+        std::vector<uNode> new_ExprList();      // ExprList   : [ Expr  { ',' Expr  } ]
     };
 
 } // hdg

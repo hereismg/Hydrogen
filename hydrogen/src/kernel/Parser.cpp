@@ -892,10 +892,9 @@ namespace hdg {
                     std::move(params), 
                     pos
                 );
-                continue;
             }
             else{
-                continue;
+                break;
             }
         }
 

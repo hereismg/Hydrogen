@@ -3,6 +3,9 @@
 //
 
 #include "../../include/object/List.h"
+
+// #include <
+
 #include "../../include/object/Integer.h"
 
 namespace hdg {
@@ -99,5 +102,19 @@ namespace hdg {
         }
 
         return newList;
+    }
+
+    sObject List::brackets(const std::vector<sObject>& args) {
+        assert(args.size() == 1);
+
+        Object* obj = args[0].get();
+
+        assert(typeid(*obj) == typeid(Integer));
+
+        auto index = dynamic_cast<Integer*>(obj)->getValue();
+        
+        assert(index >= 0 && index < (int64_t)m_list.size());
+
+        return m_list[index];
     }
 } // hdg

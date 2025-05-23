@@ -82,3 +82,14 @@ TEST(Smoke, getClass_1) {
     auto obj3 = std::make_shared<String>();
     ASSERT_EQ(obj3->getClass(), "String");
 }
+
+
+TEST(Smoke, list_1) {
+    auto list = std::make_shared<List>();
+    list->getList().emplace_back(std::make_shared<Integer>(1));
+    list->getList().emplace_back(std::make_shared<Integer>(2));
+    list->getList().emplace_back(std::make_shared<Integer>(3));
+
+    auto obj = list->brackets({ std::make_shared<Integer>(1) });
+    ASSERT_TRUE(obj->equation(std::make_shared<Integer>(2))->isTrue());
+}

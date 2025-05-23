@@ -8,7 +8,8 @@ namespace hdg{
     class new_AssignNode : public Node{
     protected:
         std::string m_name;
-        uNode m_expr;
+        uNode m_lVal;
+        uNode m_rVal;
 
     public:
         new_AssignNode(std::string name, uNode&& expr);

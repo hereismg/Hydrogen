@@ -36,9 +36,7 @@ namespace hdg {
 
         std::string toString() override;
         sObject clone() override;
-
-        // static sInteger False() { return std::make_shared<Integer>(0); }
-        // static sInteger True() { return std::make_shared<Integer>(1); }
+        std::string getClass() override { return "Integer"; }
 
         static sInteger False;
         static sInteger True;

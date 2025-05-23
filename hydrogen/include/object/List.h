@@ -32,6 +32,7 @@ namespace hdg {
 
         std::string toString() override;
         sObject clone() override;
+        std::string getClass() override { return "List"; }
 
     // ======================================
     // 下面是弃用的方法

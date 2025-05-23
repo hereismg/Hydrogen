@@ -22,7 +22,7 @@ namespace hdg {
         m_class = std::move(className);
     }
 
-    std::string Object::getClass() {
+    std::string Object::getClass_old() {
         return m_class;
     }
 

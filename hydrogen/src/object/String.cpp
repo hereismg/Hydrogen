@@ -25,7 +25,7 @@ namespace hdg {
     }
 
     Object *String::equation(Object *other) {
-        if (other->getClass() == "String"){
+        if (other->getClass_old() == "String"){
             return new Integer(m_value == ((String*)other)->getValue());
         }
         illegalOperator();
@@ -33,7 +33,7 @@ namespace hdg {
     }
 
     Object *String::div(Object *other) {
-        if (other->getClass() == "String"){
+        if (other->getClass_old() == "String"){
             std::vector<Object*> result;
             std::string ori = m_value, spl = ((String*)other)->getValue();
             int64_t end = ori.find(spl);
@@ -51,7 +51,7 @@ namespace hdg {
     }
 
     Object *String::plus(Object *other) {
-        if (other->getClass() == "String"){
+        if (other->getClass_old() == "String"){
             std::string value = m_value + ((String*)other)->getValue();
             return new String(value, m_position);
         }else{

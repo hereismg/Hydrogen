@@ -57,7 +57,7 @@ namespace hdg {
 
         m_globalEnvironment->setSymbol("type", new BuiltInFunction(
                 [this](const std::vector<Object*> &args)->Object*{
-                    return new String(args[0]->getClass());
+                    return new String(args[0]->getClass_old());
                 }, "type", {"object"}));
 
         m_globalEnvironment->setSymbol("rand", new BuiltInFunction(
@@ -67,7 +67,7 @@ namespace hdg {
 
         m_globalEnvironment->setSymbol("len", new BuiltInFunction(
                 [this](const std::vector<Object*> &args)->Object*{
-                    if (args[0]->getClass() == "List"){
+                    if (args[0]->getClass_old() == "List"){
                         return new Integer(((List*)args[0])->getValue().size());
                     }
                     return nullptr;

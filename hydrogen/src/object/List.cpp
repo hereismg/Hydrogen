@@ -25,7 +25,7 @@ namespace hdg {
     }
 
     Object *List::equation(Object *other) {
-        if (other->getClass() == "List"){
+        if (other->getClass_old() == "List"){
             return new Integer(m_list_old == ((List*)other)->m_list_old);
         }
         illegalOperator();
@@ -33,7 +33,7 @@ namespace hdg {
     }
 
     Object *List::brackets(const std::vector<Object *> &args) {
-        if (args.size() == 1 && args[0]->getClass() == "Integer"){
+        if (args.size() == 1 && args[0]->getClass_old() == "Integer"){
             int64_t index = ((Integer*)args[0])->getValue();
             if (index < (int64_t)m_list_old.size()){
                 return m_list_old[index];

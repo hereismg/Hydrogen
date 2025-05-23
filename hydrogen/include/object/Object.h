@@ -35,10 +35,7 @@ namespace hdg {
         Object(std::string className, const Position& position);
         virtual ~Object();
 
-        void setClass(std::string className);
-        std::string getClass();
 
-        
         virtual sObject plus(sObject other);
         virtual sObject minus(sObject other);
         virtual sObject mul(sObject other);
@@ -63,12 +60,15 @@ namespace hdg {
         virtual sObject braces(const std::vector<sObject>& args) { assert(false); }      // {}
 
         virtual void illegalOperator();
-        virtual std::string toString() = 0;
         virtual sObject clone() { assert(false); };
+        virtual std::string toString() = 0;
+        virtual std::string getClass() { assert(false); }
 
         // ======================================
         // 下面是弃用的方法
         // ======================================
+        void setClass(std::string className);
+        std::string getClass_old();
 
         virtual Object* plus(Object* other);
         virtual Object* minus(Object* other);

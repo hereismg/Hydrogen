@@ -28,6 +28,7 @@ namespace hdg {
 
         std::string toString() override;
         Object* copy() override;
+        std::string getClass() override { return "String"; }
     };
 
 } // hdg

@@ -875,3 +875,22 @@ myOper(1, 2)
 3
 }
 ));
+
+
+/*
+add
+
+
+{
+    "type (Token::Type)": {
+
+    }
+    primary = ...
+    ident ...
+    exprList ...
+}
+
+add()
+add[]()
+
+*/

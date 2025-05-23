@@ -111,14 +111,14 @@ namespace hdg{
     void InterpreterVisitor::visitPostfixNode(PostfixNode& node){ 
         sObject obj;
         auto& primary = node.getPrimary();
-        auto  ident   = node.getIdent(); // hdgtodo: 统一 get 、 move、this 三种访问对象变量的语义
+        // auto  ident   = node.getIdent(); // hdgtodo: 统一 get 、 move、this 三种访问对象变量的语义
         if(primary != nullptr) {
             primary->accept(*this);
             obj = getResult();
         }
-        else if (ident != ""){
-            obj = m_stack.back()->getSymbol(ident);
-        }
+        // else if (ident != ""){
+        //     obj = m_stack.back()->getSymbol(ident);
+        // }
         else {
             assert(false);
         }
@@ -126,25 +126,31 @@ namespace hdg{
         auto  type = node.getType();
         auto& exprList = node.getExprList();
 
+        // 1. 获得参数列表
+        std::vector<sObject> args(exprList.size(), nullptr);
+        for (size_t i = 0; i < exprList.size(); i++){
+            exprList[i]->accept(*this);
+            args[i] = getResult();
+        }
+
         switch (type){
             case Token::Type::RPAREN :
             case Token::Type::LPAREN : { 
                 // 圆括号 ()
-
-                // 2. 获得参数列表
-                std::vector<sObject> args(exprList.size(), nullptr);
-                for (size_t i = 0; i < exprList.size(); i++){
-                    exprList[i]->accept(*this);
-                    args[i] = getResult();
-                }
-
-                // 3. 传参，执行
                 obj->parenthesis(args, *this);
                 break;
             }
             case Token::Type::RBRACKET :
             case Token::Type::LBRACKET : {
                 // 方括号 []
+                m_res = obj->brackets(args);
+                break;
+            }
+            case Token::Type::DOT : {
+                // 点号 .
+
+                
+
                 break;
             }
             case Token::Type::IDENTIFIER : {

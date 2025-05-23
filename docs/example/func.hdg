@@ -1,11 +1,9 @@
 {
-    sum = 0
-    function fun(a) {
-        if a {
-            sum = sum + fun(a - 1)
+    function oper(){
+        function add(a, b){
+            a + b
         }
-        a
+        add
     }
-    sum = fun(5)
-    sum
+    oper()(1, 2)
 }

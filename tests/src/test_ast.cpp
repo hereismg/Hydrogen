@@ -11,6 +11,7 @@
 #include <stmt_node.h>
 #include <unit_node.h>
 #include <Function.h>
+#include <List.h>
 
 using namespace std;
 using namespace hdg;
@@ -469,7 +470,7 @@ TEST(Base, FuncObj_1){
  * PostfixNode(LPAREN, IntNode(1), IntNode(2))
 */
 
-TEST(Base, PostfixNode_1){
+TEST(Smoke, PostfixNode_1){
     /**
      * func add(a, b){
      *      a + b
@@ -494,10 +495,11 @@ TEST(Base, PostfixNode_1){
     
     // PostfixNode 
     // add(1, 2)
+    auto ident = std::make_unique<IdentNode>("add");
     std::vector<uNode> args;
     args.emplace_back(std::make_unique<IntNode>(1));
     args.emplace_back(std::make_unique<IntNode>(2));
-    auto postfix = std::make_unique<PostfixNode>(Token::Type::LPAREN, "add", std::move(args), Position());
+    auto postfix = std::make_unique<PostfixNode>(Token::Type::LPAREN, std::move(ident), std::move(args), Position());
 
     // exe
     postfix->accept(visitor);
@@ -513,4 +515,30 @@ TEST(Base, PostfixNode_1){
 
         ASSERT_EQ(int_ptr->getValue(), 3);
     }
+}
+
+TEST(Smoke, PostfixNode_2) {
+    // 构造初始环境：list = [2025]
+    auto list = std::make_shared<List>();
+    list->getList().emplace_back(std::make_shared<Integer>(2025));
+
+    InterpreterVisitor visitor;
+    visitor.getCurrentEnvir()->setSymbol("list", list);
+
+    // 构造 PostfixNode：list[0]
+    auto ident = std::make_unique<IdentNode>("list");
+    std::vector<uNode> exprList;
+    exprList.emplace_back(std::make_unique<IntNode>(0));
+    auto postfix = std::make_unique<PostfixNode>(
+        Token::Type::LBRACKET,
+        std::move(ident),
+        std::move(exprList)
+    );
+
+    // 执行
+    postfix->accept(visitor);
+    auto res = visitor.getResult();
+
+    // 验证
+    ASSERT_TRUE(res->equation(std::make_shared<Integer>(2025))->isTrue());
 }

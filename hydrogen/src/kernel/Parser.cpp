@@ -874,23 +874,28 @@ namespace hdg {
         uNode primary = new_Primary();
         assert(primary != nullptr);
 
-        if (m_currentToken->getType() == Token::Type::LPAREN){
-            advance();
+        while(true){
+            if (m_currentToken->getType() == Token::Type::LPAREN){
+                advance();
 
-            std::vector<uNode> params;
+                std::vector<uNode> params;
 
-            if (m_currentToken->getType() != Token::Type::RPAREN){
-                params = new_ExprList();                    
+                if (m_currentToken->getType() != Token::Type::RPAREN){
+                    params = new_ExprList();                    
+                }
+                advance();
+
+                pos.setEnd(m_currentToken->thisPosition()->getEnd());
+                return std::make_unique<PostfixNode>(
+                    Token::Type::LPAREN, 
+                    std::move(primary), 
+                    std::move(params), 
+                    pos
+                );
             }
-            advance();
-
-            pos.setEnd(m_currentToken->thisPosition()->getEnd());
-            return std::make_unique<PostfixNode>(
-                Token::Type::LPAREN, 
-                std::move(primary), 
-                std::move(params), 
-                pos
-            );
+            else{
+                break;
+            }
         }
 
         return primary;

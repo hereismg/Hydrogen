@@ -680,7 +680,8 @@ function add(a, b){
     std::vector<uNode> args;
     args.emplace_back(std::make_unique<IntNode>(1));
     args.emplace_back(std::make_unique<IntNode>(2));
-    auto postfix = std::make_unique<PostfixNode>(Token::Type::LPAREN, "add", std::move(args), Position());
+    auto ident = std::make_unique<IdentNode>("add");
+    auto postfix = std::make_unique<PostfixNode>(Token::Type::LPAREN, std::move(ident), std::move(args), Position());
 
     postfix->accept(visitor);
 
@@ -891,6 +892,54 @@ add
 }
 
 add()
+add()()
 add[]()
 
+{
+    "__class__" : "PostfixNode",
+    "ident"     : "$nullptr",
+    "primary"   : {
+            "__class__" : "PostfixNode",
+            "ident"     : "add",
+            "primary"   : "$nullptr",
+            "type"      : "$Token::Type::RPAREN",
+        },
+    "type" : "$Token::Type::RPAREN",
+}
+
+{
+    "__class__" : "PostfixNode",
+    "type"      : "$Token::Type::RPAREN",
+    "primary"   : {
+            "__class__" : "PostfixNode",
+            "type"      : "$Token::Type::RPAREN",
+            "primary"   : {
+                "__class__" : "IdentNode",
+                "val"       : "add"
+            }
+        },
+}
+
+
+
+PostfixExpr   : Primary { PostfixSuffix }
+PostfixSuffix : '(' ExprList ')'
+              | '[' ExprList ']'
+              | '.' IDENT '(' ExprList ')'
+Primary       : INT_CONST          
+              | FLOAT_CONST        
+              | STR_CONST          
+              | IDENT              
+              | '(' ArithExpr ')'  
+
+
+           
+Primary    : INT_CONST          IntNode        Integer
+           | FLOAT_CONST        FloatNode      Float
+           | STR_CONST          StrNode        String
+           | IDENT              IdentNode      Object    在 Envri 中寻找该标识符
+           | '(' ArithExpr ')'  BinOperNode    Object    根据运算符计算
+
+INT_CONST | IDENT
+(INT_CONST | IDENT) | PostfixExpr '(' ExprList ')' | PostfixExpr '[' ExprList ']' | PostfixExpr '.' IDENT '(' ExprList ')'
 */

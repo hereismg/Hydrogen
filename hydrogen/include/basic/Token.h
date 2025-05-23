@@ -47,6 +47,7 @@ namespace hdg {
 
             COLON,      ///> “:”
             COMMA,      ///> “,”
+            DOT,        ///> "."
 
             EF,         ///> end of file
             EL,         ///> end of line 有两种表达字符：“;” and “\n”

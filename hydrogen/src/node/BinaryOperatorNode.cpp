@@ -181,25 +181,37 @@ namespace hdg {
         visitor.visitBinOperNode(*this);
     }
 
-    PostfixNode::PostfixNode(Token::Type type, std::string ident, const Position& pos)
-        : Node(pos),
-          m_type(type), 
-          m_primary(nullptr), 
-          m_ident(std::move(ident))
-        {}
+    // PostfixNode::PostfixNode(Token::Type type, std::string ident, const Position& pos)
+    //     : Node(pos),
+    //       m_type(type), 
+    //       m_primary(nullptr), 
+    //       m_ident(std::move(ident))
+    //     {}
 
 
-    PostfixNode::PostfixNode(Token::Type type, std::string ident, std::vector<uNode>&& exprList, const Position& pos)
+    PostfixNode::PostfixNode(Token::Type type, uNode&& primary, std::string ident, std::vector<uNode>&& exprList, const Position& pos)
         : Node(pos),
           m_type(type), 
-          m_primary(nullptr), 
+          m_primary(std::move(primary)), 
           m_ident(std::move(ident)),
           m_exprList(std::move(exprList))
-        {}
+        {
+            assert(m_primary != nullptr);
+            assert(m_ident != "");
+        }
 
     PostfixNode::PostfixNode(Token::Type type, uNode&& primary, std::vector<uNode>&& exprList, const Position& pos)
         : Node(pos),
           m_type(type), 
+          m_primary(std::move(primary)), 
+          m_ident(""),
+          m_exprList(std::move(exprList))
+        {
+            assert(m_primary != nullptr);
+        }
+
+    PostfixNode::PostfixNode(Token::Type type, uNode&& primary, std::vector<uNode>&& exprList)
+        : m_type(type), 
           m_primary(std::move(primary)), 
           m_ident(""),
           m_exprList(std::move(exprList))

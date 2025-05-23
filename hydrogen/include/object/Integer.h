@@ -26,13 +26,13 @@ namespace hdg {
         void setValue(int64_t value);
         [[nodiscard]] int64_t getValue() const;
 
-        sObject plus(sObject& other) override;
-        sObject minus(sObject& other) override;
-        sObject mul(sObject& other) override;
-        sObject div(sObject& other) override;
+        sObject plus(sObject other) override;
+        sObject minus(sObject other) override;
+        sObject mul(sObject other) override;
+        sObject div(sObject other) override;
         bool isTrue() override;
 
-        sObject equation(sObject& other) override;
+        sObject equation(sObject other) override;
 
         std::string toString() override;
         sObject clone() override;

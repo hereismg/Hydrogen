@@ -43,7 +43,7 @@ namespace hdg {
         return nullptr;
     }
 
-    sObject List::equation(sObject& other) {
+    sObject List::equation(sObject other) {
         if (typeid(*other.get()) != typeid(List)) return Integer::False;
 
         auto& otherList = dynamic_cast<List*>(other.get())->getList();

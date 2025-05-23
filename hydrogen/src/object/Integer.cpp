@@ -225,7 +225,7 @@ namespace hdg {
         return new Integer(result);
     }
 
-    sObject Integer::plus(sObject& other){
+    sObject Integer::plus(sObject other){
         if (typeid(*other.get()) == typeid(Integer)){
             Integer* other_int = dynamic_cast<Integer*>(other.get());
             int64_t res = m_value + other_int->getValue();
@@ -237,7 +237,7 @@ namespace hdg {
         }
     }
 
-    sObject Integer::minus(sObject& other){
+    sObject Integer::minus(sObject other){
         if (typeid(*other.get()) == typeid(Integer)){
             Integer* other_int = dynamic_cast<Integer*>(other.get());
             int64_t res = m_value - other_int->getValue();
@@ -249,7 +249,7 @@ namespace hdg {
         }
     }
 
-    sObject Integer::mul(sObject& other){
+    sObject Integer::mul(sObject other){
         if (typeid(*other.get()) == typeid(Integer)){
             Integer* other_int = dynamic_cast<Integer*>(other.get());
             int64_t res = m_value * other_int->getValue();
@@ -261,7 +261,7 @@ namespace hdg {
         }
     }
 
-    sObject Integer::div(sObject& other){
+    sObject Integer::div(sObject other){
         if (typeid(*other.get()) == typeid(Integer)){
             Integer* other_int = dynamic_cast<Integer*>(other.get());
             int64_t res = m_value / other_int->getValue();
@@ -276,7 +276,7 @@ namespace hdg {
     sInteger Integer::True  = std::make_shared<Integer>(1);
     sInteger Integer::False = std::make_shared<Integer>(0);
 
-    sObject Integer::equation(sObject& other) {
+    sObject Integer::equation(sObject other) {
         if (typeid(*other.get()) != typeid(Integer)) return Integer::False;
 
         auto otherVal = dynamic_cast<Integer*>(other.get())->getValue();

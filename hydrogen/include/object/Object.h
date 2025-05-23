@@ -39,23 +39,23 @@ namespace hdg {
         std::string getClass();
 
         
-        virtual sObject plus(sObject& other);
-        virtual sObject minus(sObject& other);
-        virtual sObject mul(sObject& other);
-        virtual sObject div(sObject& other);
-        virtual sObject mod(sObject& other)  { assert(false); }
-        virtual sObject pow(sObject& other)  { assert(false); }
+        virtual sObject plus(sObject other);
+        virtual sObject minus(sObject other);
+        virtual sObject mul(sObject other);
+        virtual sObject div(sObject other);
+        virtual sObject mod(sObject other)  { assert(false); }
+        virtual sObject pow(sObject other)  { assert(false); }
         virtual bool    isTrue();
 
-        virtual sObject equation(sObject& other) { assert(false); }
-        virtual sObject notEquation(sObject& other) { assert(false); }
-        virtual sObject greaterThan(sObject& other) { assert(false); }
-        virtual sObject lessThan(sObject& other) { assert(false); }
-        virtual sObject greaterThanEquation(sObject& other) { assert(false); }
-        virtual sObject lessThanEquation(sObject& other) { assert(false); }
+        virtual sObject equation(sObject other) { assert(false); }
+        virtual sObject notEquation(sObject other) { assert(false); }
+        virtual sObject greaterThan(sObject other) { assert(false); }
+        virtual sObject lessThan(sObject other) { assert(false); }
+        virtual sObject greaterThanEquation(sObject other) { assert(false); }
+        virtual sObject lessThanEquation(sObject other) { assert(false); }
 
-        virtual sObject andOperator(sObject& other) { assert(false); }
-        virtual sObject orOperator(sObject& other) { assert(false); }
+        virtual sObject andOperator(sObject other) { assert(false); }
+        virtual sObject orOperator(sObject other) { assert(false); }
         // virtual sObject notOperator();
 
         virtual sObject parenthesis(const std::vector<sObject>& args, Visitor& visitor); // ()

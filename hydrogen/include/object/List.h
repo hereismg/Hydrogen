@@ -23,7 +23,9 @@ namespace hdg {
 
         List(const List&) = delete;
 
-        sObject equation(sObject& other) override;
+        // sObject plus(sObject other) override;
+
+        sObject equation(sObject other) override;
 
         bool isTrue() override;
         std::vector<sObject>& getList() { return m_list; }

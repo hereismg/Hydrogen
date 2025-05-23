@@ -103,19 +103,19 @@ namespace hdg {
         return nullptr;
     }
 
-    sObject Object::plus(sObject& other){
+    sObject Object::plus(sObject other){
         assert(false && "Object::plus error!");
     }
 
-    sObject Object::minus(sObject& other){
+    sObject Object::minus(sObject other){
         assert(false && "Object::plus error!");
     }
 
-    sObject Object::mul(sObject& other){
+    sObject Object::mul(sObject other){
         assert(false && "Object::plus error!");
     }
 
-    sObject Object::div(sObject& other){
+    sObject Object::div(sObject other){
         assert(false && "Object::plus error!");
     }
 

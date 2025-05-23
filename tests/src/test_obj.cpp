@@ -64,6 +64,9 @@ TEST(Smoke, Clone_2){
         arr2di->getList()[i] = myList->clone();
     }
 
+    for (int i = 0; i < count; i++) {
+        // arr2di->getList()
+    }
     // myList->getList()[0]
 
     // for (int )

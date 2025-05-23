@@ -71,6 +71,10 @@ namespace hdg {
         return m_list_old;
     }
 
+    sObject List::plus(sObject other) {
+        m_list.emplace_back(other);
+        return shared_from_this();
+    }
 
     std::string List::toString() {
         std::stringstream context;

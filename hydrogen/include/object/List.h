@@ -23,7 +23,7 @@ namespace hdg {
 
         List(const List&) = delete;
 
-        // sObject plus(sObject other) override;
+        sObject plus(sObject other) override;
 
         sObject equation(sObject other) override;
 

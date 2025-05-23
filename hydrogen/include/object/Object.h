@@ -25,7 +25,7 @@ namespace hdg {
      * @class       这里是class
      * */
 
-    class Object {
+    class Object: public std::enable_shared_from_this<Object>{
     protected:
         std::string m_class;        ///> 这里传入该对象实例的类名，用于强制类型转化
         Position m_position;        ///> 记录该对象定义的位置

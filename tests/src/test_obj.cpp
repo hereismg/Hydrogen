@@ -71,3 +71,14 @@ TEST(Smoke, Clone_2){
 
     // for (int )
 }
+
+TEST(Smoke, getClass_1) {
+    auto obj1 = std::make_shared<Integer>(1);
+    ASSERT_EQ(obj1->getClass(), "Integer");
+
+    auto obj2 = std::make_shared<List>();
+    ASSERT_EQ(obj2->getClass(), "List");
+
+    auto obj3 = std::make_shared<String>();
+    ASSERT_EQ(obj3->getClass(), "String");
+}

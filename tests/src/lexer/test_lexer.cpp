@@ -931,6 +931,32 @@ R"({
     list[0](1, 2)
 })",
 3
+},
+
+// std::tuple<int, std::string, int64_t>{
+// counter ++,
+// R"({
+//     var list = [2, 3]
+//     function add(pair){
+//         var a = list[0]
+//         var b = list[1]
+//         list[0] = a + b
+//         list[1] = a - b
+//     }
+//     list[0] + list[1]
+// })",
+// 4
+// },
+
+std::tuple<int, std::string, int64_t>{
+counter ++,
+R"({
+    function add(pair){
+        pair[0] + pair[1]
+    }
+    add([1, 2])
+})",
+3
 }
 ));
 

@@ -2,10 +2,12 @@
 
 #include <cassert>
 
+#include "../../include/node/ObjectNode.h"
+
 namespace hdg{
     new_AssignNode::new_AssignNode(std::string name, uNode&& expr)
-        : m_name(std::move(name)), 
-        //   m_lVal(std::make_unique<IdentNode>(name)),
+        : m_name(name), 
+          m_lVal(std::make_unique<IdentNode>(name)),
           m_rVal(std::move(expr)) 
     {
         assert(m_rVal!=nullptr && "m_expr cannot is NULL!");
@@ -14,11 +16,18 @@ namespace hdg{
     new_AssignNode::new_AssignNode(std::string name, uNode&& expr, const Position& pos)
         : Node(pos),
           m_name(std::move(name)), 
-        //   m_lVal(new IdentNode(name)),
+          m_lVal(std::make_unique<IdentNode>(name)),
           m_rVal(std::move(expr)) 
     {
         assert(m_rVal!=nullptr && "m_expr cannot is NULL!");
     }
+
+    new_AssignNode::new_AssignNode(uNode&& lVal, uNode&& rVal)
+        : m_lVal(std::move(lVal)), m_rVal(std::move(rVal)) {}
+
+
+    new_AssignNode::new_AssignNode(uNode&& lVal, uNode&& rVal, const Position& pos)
+        : Node(pos), m_lVal(std::move(lVal)), m_rVal(std::move(rVal)) {}
 
     std::string& new_AssignNode::getName(){
         return m_name;
@@ -46,6 +55,31 @@ namespace hdg{
 
     void new_AssignNode::accept(Visitor& visitor){
         visitor.visitAssignNode(*this);
+    }
+
+    DefNode::DefNode(std::string name, uNode&& val)
+        : m_name(std::move(name)), m_val(std::move(val)) 
+    {
+        assert(m_val != nullptr);
+    }
+
+    
+    DefNode::DefNode(std::string name, uNode&& val, const Position& pos)
+        : Node(pos), m_name(std::move(name)), m_val(std::move(val)) 
+    {
+        assert(m_val != nullptr);
+    }
+
+    std::string DefNode::toString(){
+        return "AssignNode: " + m_name;
+    }
+
+    Object* DefNode::interpret(){
+        assert(false && "DefNode::interpret");
+    }
+
+    void DefNode::accept(Visitor& visitor){
+        visitor.visitDefNode(*this);
     }
 
     void new_IfStmtNode::addBranch(uNode&& cond, uNode&& exeUnit){

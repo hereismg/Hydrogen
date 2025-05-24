@@ -56,7 +56,7 @@ namespace hdg {
         // virtual sObject notOperator();
 
         virtual sObject parenthesis(const std::vector<sObject>& args, Visitor& visitor); // ()
-        virtual sObject brackets(const std::vector<sObject>& args) { assert(false); }    // []
+        virtual sObject brackets(const std::vector<sObject>& args, Visitor& visitor) { assert(false); }    // []
         virtual sObject braces(const std::vector<sObject>& args) { assert(false); }      // {}
 
         virtual void illegalOperator();

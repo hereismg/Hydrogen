@@ -12,7 +12,7 @@
 #include "../../include/object/Function.h"
 
 namespace hdg{
-    Visitor::Visitor(){
+    Visitor::Visitor(): m_lVal(nullptr){
         m_stack.emplace_back(new New_Environment);
     }
 
@@ -44,6 +44,11 @@ namespace hdg{
         std::cout << "Visitor::visitAssignNode() is not implement!" << std::endl;
     }
 
+    void Visitor::visitDefNode(DefNode& node){
+        std::cout << "Visitor::visitDefNode() is not implement!" << std::endl;
+    }
+
+
     void Visitor::visitFuncDefNode(New_FuncObjNode& node){
         std::cout << "Visitor::visitFuncDefNode() is not implement!" << std::endl;
     }
@@ -65,11 +70,11 @@ namespace hdg{
     }
 
     sObject Visitor::getResult(){
-        return m_res;
+        return m_rVal;
     }
 
     sObject Visitor::moveResult(){
-        return std::move(m_res);
+        return std::move(m_rVal);
     }
 
     std::shared_ptr<New_Environment> Visitor::getCurrentEnvir(){
@@ -92,16 +97,16 @@ namespace hdg{
         Token oper = node.getOper();
 
         if (oper.getType() == Token::Type::PLUS){
-            m_res = left_val->plus(right_val);
+            m_rVal = left_val->plus(right_val);
         }
         else if (oper.getType() == Token::Type::MINUS){
-            m_res = left_val->minus(right_val);
+            m_rVal = left_val->minus(right_val);
         }
         else if (oper.getType() == Token::Type::MUL){
-            m_res = left_val->mul(right_val);
+            m_rVal = left_val->mul(right_val);
         }
         else if (oper.getType() == Token::Type::DIV){
-            m_res = left_val->div(right_val);
+            m_rVal = left_val->div(right_val);
         }
         else{
             assert(false && "Unknow Oper!");
@@ -143,19 +148,17 @@ namespace hdg{
             case Token::Type::RBRACKET :
             case Token::Type::LBRACKET : {
                 // 方括号 []
-                m_res = obj->brackets(args);
+                m_rVal = obj->brackets(args, *this);
                 break;
             }
             case Token::Type::DOT : {
                 // 点号 .
 
-                
-
                 break;
             }
             case Token::Type::IDENTIFIER : {
                 // 变量
-                m_res = std::move(obj);
+                m_rVal = std::move(obj);
                 break;
             }
             default : {
@@ -167,19 +170,20 @@ namespace hdg{
 
 
     void InterpreterVisitor::visitIntNode(IntNode& node){
-        m_res = std::make_shared<Integer>(node.getValue());
+        m_rVal = std::make_shared<Integer>(node.getValue());
     }
 
     void InterpreterVisitor::visitFuncObjNode(FuncObjNode& node){
-        m_res = node.getObj();
+        m_rVal = node.getObj();
     }
 
     void InterpreterVisitor::visitIdentNode(IdentNode& node){
         for (auto envir : m_stack | std::views::reverse){
 
-            auto obj = envir->getSymbol(node.getIdent());
+            sObject* obj = envir->getSymbolPtr(node.getIdent());
             if (obj != nullptr){
-                m_res = std::move(obj);
+                m_rVal = *obj;
+                m_lVal = obj;
                 return;
             }
         }
@@ -196,10 +200,31 @@ namespace hdg{
         assert(res != nullptr);
 
         m_stack.back()->setSymbol(name, std::move(res));
+
+        // uNode& lValNode = node.getLVal();
+        // uNode& rValNode = node.getRVal();
+
+        // lValNode->accept(*this);
+        // sObject* lVal = getLVal();
+        // rValNode->accept(*this);
+        // sObject  rVal = getRVal();
+
+        // *lVal = rVal;
     }
 
-    void InterpreterVisitor::visitFuncDefNode(New_FuncObjNode& node) {
-        m_res = std::make_shared<New_DefFunction>(
+    void InterpreterVisitor::visitDefNode(DefNode& node) {
+        std::string name = node.getName();
+
+        uNode& val = node.getVal();
+        val->accept(*this);
+        sObject obj = getRVal();
+        assert(obj != nullptr);
+
+        m_stack.back()->setSymbol(name, obj);
+    }
+
+    void InterpreterVisitor::visitFuncDefNode(New_FuncObjNode& node) { // hdgtodo: 改名
+        m_rVal = std::make_shared<New_DefFunction>( 
             node.getArgs(), 
             node.moveBody()  // hdgtodo: 应该改成 clone，而不是移动所有权
         );

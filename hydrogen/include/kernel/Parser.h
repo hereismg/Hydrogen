@@ -65,6 +65,7 @@ namespace hdg {
                                     //               | StateDef
         uNode new_ValBuild();       // ValBuild      : PostfixExpr '=' Expr
                                     //               | PostfixExpr '=' '[' [Params] ']'
+        uNode new_VarDef();         // VarDef        : 'var'  IDENT '=' Expr
         uNode new_FuncDef();        // FuncDef       : 'func' IDENT  '(' Params ')'  ExeUnit
         uNode new_StateDef();       // StateDef      : 'sm'   IDENT ['(' Params ')'] ExeUnit
                         

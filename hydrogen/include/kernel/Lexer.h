@@ -27,6 +27,7 @@ namespace hdg {
             "while",
 
             "function",
+            "var",
     };
 
     enum LegalChar{

@@ -102,4 +102,22 @@ namespace hdg {
         //     assert(false && "unrefrence symbol!");
         // }
     }
+
+    
+    sObject* New_Environment::getSymbolPtr(const std::string& name){
+        auto it = m_table.find(name);
+        
+        if (it == m_table.end()){
+            return nullptr;
+        }
+        
+        return &(it->second);
+
+        // if (m_table.find(name) != m_table.end()){ // hdgTodo 这里是否要优化？
+        //     return m_table[name];
+        // }
+        // else {
+        //     assert(false && "unrefrence symbol!");
+        // }
+    }
 } // hdg

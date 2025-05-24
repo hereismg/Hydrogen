@@ -352,8 +352,8 @@ INSTANTIATE_TEST_SUITE_P(Smoke, Test_Template, testing::Values(
 std::tuple<int, std::string, int64_t>{
 0,
 R"({
-    a = 1
-    b = a
+    var a = 1
+    var b = a
     a = 2
     b
 })",
@@ -390,8 +390,8 @@ TEST(test_ExeUnit, _1){
 
 TEST(test_ExeUnit, _2){
     string code = R"({
-    a = 1
-    b = 2
+    var a = 1
+    var b = 2
 }
     )";
     string path = "<stdin>";
@@ -432,8 +432,8 @@ TEST(test_ExeUnit, _2){
 
 TEST(test_ExeUnit, _3){
     string code = R"({
-    a = 1
-    b = a + 3
+    var a = 1
+    var b = a + 3
     b
 }
     )";
@@ -543,8 +543,8 @@ TEST(Base, IfStmt_1){
 
 TEST(test_WhileStmt, _1){
     string code = R"({
-    counter = 5
-    sum = 0
+    var counter = 5
+    var sum = 0
     while counter {
         sum = sum + counter
         counter = counter - 1
@@ -811,7 +811,7 @@ std::tuple<int, std::string, int64_t>{
 counter ++,
 R"({
     function add(a, b){
-            a + b
+        a + b
     }
     add(1, 2)
 })",
@@ -888,6 +888,15 @@ R"({
     oper()(1, 2)
 })",
 3
+},
+
+std::tuple<int, std::string, int64_t>{
+counter ++,
+R"({
+    var a = 1
+    a
+})",
+1
 }
 ));
 
@@ -923,10 +932,10 @@ add[]()
 
 {
     "__class__" : "PostfixNode",
-    "type"      : "$Token::Type::RPAREN",
+    "type"      : "$Token::Type::LPAREN",   // ()
     "primary"   : {
             "__class__" : "PostfixNode",
-            "type"      : "$Token::Type::RPAREN",
+            "type"      : "$Token::Type::LPAREN",
             "primary"   : {
                 "__class__" : "IdentNode",
                 "val"       : "add"
@@ -934,6 +943,19 @@ add[]()
         },
 }
 
+getList()[0] = 1
+
+{
+    "__class__" : "AssignNode",
+    "lVal" : {
+        "__class__" : "PostfixNode",
+        "type" : "$Token::Type::LPAREN"   // ()
+    },
+    "rVal" : {
+        "__class__" : "IntNode",
+        "val" : 1,
+    }
+}
 
 
 PostfixExpr   : Primary { PostfixSuffix }

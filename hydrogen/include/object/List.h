@@ -27,7 +27,7 @@ namespace hdg {
 
         sObject equation(sObject other) override;
 
-        sObject brackets(const std::vector<sObject>& args) override;    // []
+        sObject brackets(const std::vector<sObject>& args, Visitor& visitor) override;    // []
 
         bool isTrue() override;
         std::vector<sObject>& getList() { return m_list; }

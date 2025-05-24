@@ -7,6 +7,7 @@
 // #include <
 
 #include "../../include/object/Integer.h"
+#include "../../include/node/visitor.h"
 
 namespace hdg {
     List::List() {
@@ -104,7 +105,7 @@ namespace hdg {
         return newList;
     }
 
-    sObject List::brackets(const std::vector<sObject>& args) {
+    sObject List::brackets(const std::vector<sObject>& args, Visitor& visitor) {
         assert(args.size() == 1);
 
         Object* obj = args[0].get();
@@ -114,6 +115,9 @@ namespace hdg {
         auto index = dynamic_cast<Integer*>(obj)->getValue();
         
         assert(index >= 0 && index < (int64_t)m_list.size());
+
+        visitor.setRVal(m_list[index]);
+        visitor.setLVal(&m_list[index]);
 
         return m_list[index];
     }

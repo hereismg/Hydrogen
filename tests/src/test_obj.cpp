@@ -90,6 +90,8 @@ TEST(Smoke, list_1) {
     list->getList().emplace_back(std::make_shared<Integer>(2));
     list->getList().emplace_back(std::make_shared<Integer>(3));
 
-    auto obj = list->brackets({ std::make_shared<Integer>(1) });
+    InterpreterVisitor visitor;
+
+    auto obj = list->brackets({ std::make_shared<Integer>(1) }, visitor);
     ASSERT_TRUE(obj->equation(std::make_shared<Integer>(2))->isTrue());
 }

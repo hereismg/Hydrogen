@@ -12,14 +12,37 @@ namespace hdg{
         uNode m_rVal;
 
     public:
-        new_AssignNode(std::string name, uNode&& expr);
-        new_AssignNode(std::string name, uNode&& expr, const Position& pos);
+        new_AssignNode(std::string name, uNode&& rVal);
+        new_AssignNode(std::string name, uNode&& rVal, const Position& pos);
+        new_AssignNode(uNode&& lVal, uNode&& rVal);
+        new_AssignNode(uNode&& lVal, uNode&& rVal, const Position& pos);
 
         std::string& getName();
         uNode& getExpr();
+        uNode& getLVal() { return m_lVal; }
+        uNode& getRVal() { return m_rVal; }
 
         void setName(std::string new_name);
         void setExpr(uNode&& new_expr);
+        void setLVal(uNode&& lVal) { m_lVal = std::move(lVal); }
+        void setRVal(uNode&& rVal) { m_rVal = std::move(rVal); }
+
+        virtual std::string toString();
+        virtual Object* interpret();
+        virtual void accept(Visitor& visitor);
+    };
+
+    class DefNode: public Node {
+    protected:
+        std::string m_name;
+        uNode m_val;
+
+    public:
+        DefNode(std::string name, uNode&& val);
+        DefNode(std::string name, uNode&& val, const Position& pos);
+
+        uNode& getVal() { return m_val; }
+        std::string getName() { return m_name; }
 
         virtual std::string toString();
         virtual Object* interpret();

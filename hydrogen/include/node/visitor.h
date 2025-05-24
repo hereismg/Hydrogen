@@ -14,10 +14,12 @@ namespace hdg{
     class new_IfStmtNode;
     class new_WhileStmtNode;
     class New_FuncObjNode;
+    class DefNode;
     
     class Visitor{
     protected:
-        sObject m_res;
+        sObject  m_rVal;
+        sObject* m_lVal;
         std::vector<std::shared_ptr<New_Environment>> m_stack;
 
     public:
@@ -32,11 +34,17 @@ namespace hdg{
         virtual void visitIdentNode(IdentNode& node);
         
         virtual void visitAssignNode(new_AssignNode& node);
+        virtual void visitDefNode(DefNode& node);
         virtual void visitFuncDefNode(New_FuncObjNode& node);
 
         virtual void visitIfStmtNode(new_IfStmtNode& node);
         virtual void visitWhileStmtNode(new_WhileStmtNode& node);
         virtual void visitExeUnitNode(new_ExeUnitNode& node);
+
+        virtual sObject  getRVal() { return m_rVal; }
+        virtual sObject* getLVal() { return m_lVal; }
+        virtual void setRVal(sObject  rVal) { m_rVal = rVal; }
+        virtual void setLVal(sObject* lVal) { m_lVal = lVal; }
 
         virtual std::vector<std::shared_ptr<New_Environment>>& getStack();
         virtual sObject getResult();
@@ -57,6 +65,7 @@ namespace hdg{
         void visitIdentNode(IdentNode& node) override;
 
         void visitAssignNode(new_AssignNode& node) override;
+        void visitDefNode(DefNode& node) override;
         void visitFuncDefNode(New_FuncObjNode& node) override;
 
         void visitIfStmtNode(new_IfStmtNode& node) override;

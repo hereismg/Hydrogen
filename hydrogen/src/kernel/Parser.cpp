@@ -630,6 +630,16 @@ namespace hdg {
                 continue;
             }
 
+            stmt = new_VarDef();
+            if (stmt != nullptr){
+                while (m_currentToken->getType() == Token::Type::EL){
+                    advance();
+                }
+
+                unit->getList().emplace_back(std::move(stmt));
+                continue;
+            }
+
             stmt = new_Expr();
             if (stmt != nullptr){
                 while (m_currentToken->getType() == Token::Type::EL){
@@ -720,6 +730,36 @@ namespace hdg {
         return nullptr;
     }
 
+    uNode Parser::new_VarDef() {
+        while (m_currentToken->getType() == Token::Type::EL) advance();
+        
+        // 1. 关键字 'var'
+        if (!m_currentToken->match(Token::Type::KEYWORD, "var")) return nullptr;
+        Position pos;
+        pos.setStart(m_currentToken->thisPosition()->getStart());
+        advance();
+
+        // 2. 标识符 IDENT
+        if (m_currentToken->getType() != Token::Type::IDENTIFIER) {
+            assert(false); // 应该抛出异常
+        }
+        std::string ident = m_currentToken->getValue();
+        advance();
+
+        // 3. 等于号 '='
+        if (m_currentToken->getType() != Token::Type::EQ) {
+            assert(false);
+        }
+        advance();
+
+        // 4. 表达式
+        uNode expr = new_Expr();
+
+        pos.setEnd(m_currentToken->thisPosition()->getEnd());
+
+        return std::make_unique<DefNode>(ident, std::move(expr), pos);
+    }
+
     // FuncDef    : 'func' IDENT  '(' Params ')'  ExeUnit
     uNode Parser::new_FuncDef(){ // hdgtodo: AST 的基本设计原则是：尽力保留原始的代码信息
         while (m_currentToken->getType() == Token::Type::EL) advance();
@@ -760,7 +800,7 @@ namespace hdg {
         
         uNode funNode = std::make_unique<New_FuncObjNode>(std::move(params), std::move(unit), pos);
 
-        return std::make_unique<new_AssignNode>(ident, std::move(funNode), pos);
+        return std::make_unique<DefNode>(ident, std::move(funNode), pos);
     }
 
     uNode Parser::new_Expr(){

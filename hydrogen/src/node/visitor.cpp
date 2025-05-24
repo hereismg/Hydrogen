@@ -189,7 +189,7 @@ namespace hdg{
         for (size_t i = 0; i < exprList.size(); i ++){
             exprList[i]->accept(*this);
             assert(m_rVal != nullptr);
-            objList.emplace_back(m_rVal);
+            objList[i] = m_rVal;
         }
 
         m_rVal = std::make_shared<List>(std::move(objList));

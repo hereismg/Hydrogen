@@ -71,7 +71,7 @@ namespace hdg {
                         
         uNode new_Expr();           // Expr          : LogicExpr
                                     //               | ListDefExpr
-        uNode new_ListDefExpr();    // ListExpr      : '[' [Expr] ']'
+        uNode new_ListExpr();       // ListExpr      : '[' [Expr] ']'
         uNode new_LogicExpr();      // LogicExpr     : ('not' LogicExpr)
                                     //               | (CompExpr {('and' | 'or') CompExpr}) 
         uNode new_CompExpr();       // CompExpr      : ArithExpr {('>' | '<' | '>=' | ' <=' | '==') ArithExpr}

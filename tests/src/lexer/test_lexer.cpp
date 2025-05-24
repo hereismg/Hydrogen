@@ -796,7 +796,7 @@ TEST_P(Function_TEST_P, _1){
     unit->accept(visitor);
 
     {
-        auto obj = visitor.getResult().get();
+        auto obj = visitor.getRVal().get();
 
         ASSERT_NE(obj, nullptr);
         ASSERT_EQ(typeid(*obj), typeid(Integer));
@@ -891,7 +891,6 @@ R"({
 3
 },
 
-
 std::tuple<int, std::string, int64_t>{
 counter ++,
 R"({
@@ -899,6 +898,39 @@ R"({
     a
 })",
 1
+},
+
+std::tuple<int, std::string, int64_t>{
+counter ++,
+R"({
+    var list = [1, 2]
+    list[0]
+})",
+1
+},
+
+std::tuple<int, std::string, int64_t>{
+counter ++,
+R"({
+    var list = [[1, 2], 3]
+    list[0][0]
+})",
+1
+},
+
+std::tuple<int, std::string, int64_t>{
+counter ++,
+R"({
+    function add(a, b){
+        a + b
+    }
+    function mine(a, b){
+        a - b
+    }
+    var list = [add, mine]
+    list[0](1, 2)
+})",
+3
 }
 ));
 

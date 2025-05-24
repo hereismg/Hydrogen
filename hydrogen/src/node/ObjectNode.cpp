@@ -235,7 +235,7 @@ namespace hdg {
     }
 
     std::string ListObjNode::toString(){
-        return "New_FuncObjNode";
+        return "ListObjNode";
     }
 
     Object* ListObjNode::interpret(){

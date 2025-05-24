@@ -804,7 +804,46 @@ namespace hdg {
     }
 
     uNode Parser::new_Expr(){
-        return new_ArithExpr();
+        uNode expr;
+
+        expr = new_ListExpr();
+        if (expr != nullptr) {
+            return expr;
+        }
+
+        expr = new_ArithExpr();
+        if (expr != nullptr) {
+            return expr;
+        }
+
+        assert(false);
+    }
+
+    uNode Parser::new_ListExpr(){
+        while (m_currentToken->getType() == Token::Type::EL) advance();
+        Position pos;
+        pos.setStart(m_currentToken->thisPosition()->getStart());
+
+        // 1. 左方括号 '['
+        if (m_currentToken->getType() != Token::Type::LBRACKET) return nullptr;
+        advance();
+        while (m_currentToken->getType() == Token::Type::EL) advance();
+
+        // 2. ExprArray
+        std::vector<uNode> arr;
+        if (m_currentToken->getType() != Token::Type::RBRACKET){
+            arr = new_ExprArray();
+        }
+
+        // 3. 右方括号 ']'
+        if (m_currentToken->getType() != Token::Type::RBRACKET) {
+            assert(false);
+        }
+        advance();
+
+        pos.setEnd(m_currentToken->thisPosition()->getEnd());
+
+        return std::make_unique<ListObjNode>(std::move(arr), pos);
     }
 
     // uNode Parser::new_CompExpr(){

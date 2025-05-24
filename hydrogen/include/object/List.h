@@ -19,6 +19,7 @@ namespace hdg {
 
     public:
         List();
+        List(std::vector<sObject>&& list);
         List(size_t count, sObject obj);
 
         List(const List&) = delete;

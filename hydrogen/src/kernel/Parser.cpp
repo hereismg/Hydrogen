@@ -925,7 +925,7 @@ namespace hdg {
                 std::vector<uNode> params;
 
                 if (m_currentToken->getType() != Token::Type::RPAREN){
-                    params = new_ExprList();                    
+                    params = new_ExprArray();                    
                 }
                 advance();
 
@@ -943,7 +943,7 @@ namespace hdg {
                 std::vector<uNode> params;
 
                 if (m_currentToken->getType() != Token::Type::RBRACKET){
-                    params = new_ExprList();                    
+                    params = new_ExprArray();                    
                 }
                 advance();
 
@@ -1000,7 +1000,7 @@ namespace hdg {
         }
     }
 
-    std::vector<uNode> Parser::new_ExprList() {
+    std::vector<uNode> Parser::new_ExprArray() {
         std::vector<uNode> list;
 
         while(true) {

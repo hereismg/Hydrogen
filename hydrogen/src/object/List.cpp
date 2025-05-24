@@ -13,6 +13,10 @@ namespace hdg {
     List::List() {
         setClass("List");
     }
+    
+    List::List(std::vector<sObject>&& list): m_list(std::move(list)) {
+        setClass("List");
+    }
 
     List::List(size_t count, sObject obj) : m_list(count, obj){
         setClass("List");

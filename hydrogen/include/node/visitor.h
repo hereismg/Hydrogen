@@ -15,6 +15,7 @@ namespace hdg{
     class new_WhileStmtNode;
     class New_FuncObjNode;
     class DefNode;
+    class ListObjNode;
     
     class Visitor{
     protected:
@@ -31,6 +32,7 @@ namespace hdg{
         virtual void visitNumObjNode(NumObjNode& node);
         virtual void visitIntNode(IntNode& node);
         virtual void visitFuncObjNode(FuncObjNode& node);
+        virtual void visitListObjNode(ListObjNode& node);
         virtual void visitIdentNode(IdentNode& node);
         
         virtual void visitAssignNode(new_AssignNode& node);
@@ -62,6 +64,7 @@ namespace hdg{
 
         void visitIntNode(IntNode& node) override;
         void visitFuncObjNode(FuncObjNode& node) override;
+        void visitListObjNode(ListObjNode& node) override;
         void visitIdentNode(IdentNode& node) override;
 
         void visitAssignNode(new_AssignNode& node) override;

@@ -145,6 +145,21 @@ namespace hdg {
         Object* interpret() override;
         void accept(Visitor& visitor) override;
     };
+
+    class ListObjNode: public ObjectNode {
+    protected:
+        std::vector<uNode> m_exprList;
+
+    public:
+        ListObjNode(std::vector<uNode>&& exprList);
+        ListObjNode(std::vector<uNode>&& exprList, const Position& pos);
+
+        std::vector<uNode>& getExprList() { return m_exprList; }
+
+        std::string toString() override;
+        Object* interpret() override;
+        void accept(Visitor& visitor) override;
+    };
 } // hdg
 
 #endif //HDG_OBJECTNODE_H

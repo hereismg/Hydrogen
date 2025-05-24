@@ -10,6 +10,7 @@
 #include "../../include/node/stmt_node.h"
 #include "../../include/node/unit_node.h"
 #include "../../include/object/Function.h"
+#include "../../include/object/List.h"
 
 namespace hdg{
     Visitor::Visitor(): m_lVal(nullptr){
@@ -30,6 +31,10 @@ namespace hdg{
 
     void Visitor::visitFuncObjNode(FuncObjNode& node){
         std::cout << "Visitor::visitFuncObjNode() is not implement!" << std::endl;
+    }
+
+    void Visitor::visitListObjNode(ListObjNode& node){
+        std::cout << "Visitor::visitListObjNode() is not implement!" << std::endl;
     }
 
     void Visitor::visitIntNode(IntNode& node){
@@ -175,6 +180,19 @@ namespace hdg{
 
     void InterpreterVisitor::visitFuncObjNode(FuncObjNode& node){
         m_rVal = node.getObj();
+    }
+
+    void InterpreterVisitor::visitListObjNode(ListObjNode& node){
+        std::vector<uNode>& exprList = node.getExprList();
+
+        std::vector<sObject> objList(exprList.size(), nullptr);
+        for (size_t i = 0; i < exprList.size(); i ++){
+            exprList[i]->accept(*this);
+            assert(m_rVal != nullptr);
+            objList.emplace_back(m_rVal);
+        }
+
+        m_rVal = std::make_shared<List>(std::move(objList));
     }
 
     void InterpreterVisitor::visitIdentNode(IdentNode& node){

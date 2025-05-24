@@ -242,11 +242,11 @@ TEST(test_BinOperNode, _7) {
     ASSERT_EQ(res->getValue(), 45);
 }
 
-TEST(test_AssignNode, _1){
+TEST(test_DefNode, _1){
     uNode obj = std::make_unique<IntNode>(10);
     std::string name = "num";
 
-    uNode assign = std::make_unique<new_AssignNode>(name, std::move(obj));
+    uNode assign = std::make_unique<DefNode>(name, std::move(obj));
 
     InterpreterVisitor visitor;
 
@@ -268,7 +268,7 @@ TEST(test_ExeUnitNode, _1){
     uNode int_node1 = std::make_unique<IntNode>(1);
     std::string name1 = "a";
 
-    uNode assign_node1 = std::make_unique<new_AssignNode>(name1, std::move(int_node1));
+    uNode assign_node1 = std::make_unique<DefNode>(name1, std::move(int_node1));
 
     // b = 2 + 3
     uNode int_node2 = std::make_unique<IntNode>(2);
@@ -279,7 +279,7 @@ TEST(test_ExeUnitNode, _1){
         std::move(int_node3)
     );
     std::string name2 = "b";
-    uNode assign_node2 = std::make_unique<new_AssignNode>(name2, std::move(oper_node));
+    uNode assign_node2 = std::make_unique<DefNode>(name2, std::move(oper_node));
 
     // ExeUnitNode
     std::unique_ptr<new_ExeUnitNode> unit_node = std::make_unique<new_ExeUnitNode>();
@@ -326,7 +326,7 @@ TEST(test_IfStmtNode, _1){
     uNode int_node1 = std::make_unique<IntNode>(1);
     std::string name1 = "a";
 
-    uNode assign_node1 = std::make_unique<new_AssignNode>(name1, std::move(int_node1));
+    uNode assign_node1 = std::make_unique<DefNode>(name1, std::move(int_node1));
 
     // b = 2 + 3
     uNode int_node2 = std::make_unique<IntNode>(2);
@@ -337,7 +337,7 @@ TEST(test_IfStmtNode, _1){
         std::move(int_node3)
     );
     std::string name2 = "b";
-    uNode assign_node2 = std::make_unique<new_AssignNode>(name2, std::move(oper_node));
+    uNode assign_node2 = std::make_unique<DefNode>(name2, std::move(oper_node));
 
     // ExeUnitNode
     std::unique_ptr<new_ExeUnitNode> unit_node = std::make_unique<new_ExeUnitNode>();
@@ -542,3 +542,29 @@ TEST(Smoke, PostfixNode_2) {
     // 验证
     ASSERT_TRUE(res->equation(std::make_shared<Integer>(2025))->isTrue());
 }
+
+// TEST(Smoke, ListObjNode_1) {
+//     // 构造初始环境：list = [2025]
+//     auto list = std::make_shared<List>();
+//     list->getList().emplace_back(std::make_shared<Integer>(2025));
+
+//     InterpreterVisitor visitor;
+//     visitor.getCurrentEnvir()->setSymbol("list", list);
+
+//     // 构造 PostfixNode：list[0]
+//     auto ident = std::make_unique<IdentNode>("list");
+//     std::vector<uNode> exprList;
+//     exprList.emplace_back(std::make_unique<IntNode>(0));
+//     auto postfix = std::make_unique<PostfixNode>(
+//         Token::Type::LBRACKET,
+//         std::move(ident),
+//         std::move(exprList)
+//     );
+
+//     // 执行
+//     postfix->accept(visitor);
+//     auto res = visitor.getResult();
+
+//     // 验证
+//     ASSERT_TRUE(res->equation(std::make_shared<Integer>(2025))->isTrue());
+// }

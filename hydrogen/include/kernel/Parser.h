@@ -70,6 +70,7 @@ namespace hdg {
         uNode new_StateDef();       // StateDef      : 'sm'   IDENT ['(' Params ')'] ExeUnit
                         
         uNode new_Expr();           // Expr          : LogicExpr
+                                    //               | ListDefExpr
         uNode new_ListDefExpr();    // ListExpr      : '[' [Expr] ']'
         uNode new_LogicExpr();      // LogicExpr     : ('not' LogicExpr)
                                     //               | (CompExpr {('and' | 'or') CompExpr}) 
@@ -88,7 +89,7 @@ namespace hdg {
                                     //               | '(' ArithExpr ')'
         
         std::vector<std::string> new_Params();  // Params     : [ IDENT { ',' IDENT } ]
-        std::vector<uNode> new_ExprList();      // ExprList   : [ Expr  { ',' Expr  } ]
+        std::vector<uNode> new_ExprArray();      // ExprList   : [ Expr  { ',' Expr  } ]
     };
 
 } // hdg

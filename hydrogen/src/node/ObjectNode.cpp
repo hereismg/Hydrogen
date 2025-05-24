@@ -221,4 +221,25 @@ namespace hdg {
     void New_FuncObjNode::accept(Visitor& visitor){
         visitor.visitFuncDefNode(*this);
     }
+
+    ListObjNode::ListObjNode(std::vector<uNode>&& exprList) 
+        : m_exprList(std::move(exprList))
+    {}
+        
+    ListObjNode::ListObjNode(std::vector<uNode>&& exprList, const Position& pos) 
+        : ObjectNode("ListObjNode", pos, nullptr), m_exprList(std::move(exprList))
+    {}
+    
+    void ListObjNode::accept(Visitor& visitor){
+        visitor.visitListObjNode(*this);
+    }
+
+    std::string ListObjNode::toString(){
+        return "New_FuncObjNode";
+    }
+
+    Object* ListObjNode::interpret(){
+        assert(false);
+    }
+
 } // hdg

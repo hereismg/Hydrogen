@@ -822,7 +822,7 @@ R"({
 // std::tuple<int, std::string, int64_t>{
 // counter ++,
 // R"({
-//     sum = 0
+//     var sum = 0
 //     function fun(a) {
 //         if a {
 //             sum = sum + fun(a - 1)
@@ -835,18 +835,18 @@ R"({
 // 15
 // },
 
-// std::tuple<int, std::string, int64_t>{
-// counter ++,
-// R"({
-//     function getNum(sum){
-//         sum
-//     }
-//     sum = 5
-//     sum = sum + getNum(sum)
-//     sum
-// })",
-// 10
-// },
+std::tuple<int, std::string, int64_t>{
+counter ++,
+R"({
+    function getNum(sum){
+        sum
+    }
+    var sum = 5
+    sum = sum + getNum(sum)
+    sum
+})",
+10
+},
 
 // std::tuple<int, std::string, int64_t>{
 // counter ++,
@@ -890,6 +890,7 @@ R"({
 })",
 3
 },
+
 
 std::tuple<int, std::string, int64_t>{
 counter ++,

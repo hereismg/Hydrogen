@@ -192,24 +192,24 @@ namespace hdg{
     }
 
     void InterpreterVisitor::visitAssignNode(new_AssignNode& node) {
-        std::string& name = node.getName();
+        // std::string& name = node.getName();
 
-        auto& expr = node.getExpr();
-        expr->accept(*this);
-        auto res = moveResult();
-        assert(res != nullptr);
+        // auto& expr = node.getExpr();
+        // expr->accept(*this);
+        // auto res = moveResult();
+        // assert(res != nullptr);
 
-        m_stack.back()->setSymbol(name, std::move(res));
+        // m_stack.back()->setSymbol(name, std::move(res));
 
-        // uNode& lValNode = node.getLVal();
-        // uNode& rValNode = node.getRVal();
+        uNode& lValNode = node.getLVal();
+        uNode& rValNode = node.getRVal();
 
-        // lValNode->accept(*this);
-        // sObject* lVal = getLVal();
-        // rValNode->accept(*this);
-        // sObject  rVal = getRVal();
+        lValNode->accept(*this);
+        sObject* lVal = getLVal();
+        rValNode->accept(*this);
+        sObject  rVal = getRVal();
 
-        // *lVal = rVal;
+        *lVal = rVal;
     }
 
     void InterpreterVisitor::visitDefNode(DefNode& node) {

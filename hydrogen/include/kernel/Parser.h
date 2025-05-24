@@ -65,11 +65,12 @@ namespace hdg {
                                     //               | StateDef
         uNode new_ValBuild();       // ValBuild      : PostfixExpr '=' Expr
                                     //               | PostfixExpr '=' '[' [Params] ']'
-        uNode new_VarDef();         // VarDef        : 'var'  IDENT '=' Expr
+        uNode new_VarDef();         // VarDef        : 'var'  IDENT '=' Expr | '[' [Params] ']' 
         uNode new_FuncDef();        // FuncDef       : 'func' IDENT  '(' Params ')'  ExeUnit
         uNode new_StateDef();       // StateDef      : 'sm'   IDENT ['(' Params ')'] ExeUnit
                         
         uNode new_Expr();           // Expr          : LogicExpr
+        uNode new_ListDefExpr();    // ListExpr      : '[' [Expr] ']'
         uNode new_LogicExpr();      // LogicExpr     : ('not' LogicExpr)
                                     //               | (CompExpr {('and' | 'or') CompExpr}) 
         uNode new_CompExpr();       // CompExpr      : ArithExpr {('>' | '<' | '>=' | ' <=' | '==') ArithExpr}

@@ -174,10 +174,17 @@ namespace hdg {
         visitor.visitIntNode(*this);
     }
 
-    IdentNode::IdentNode(std::string ident) : m_ident(std::move(ident)){}
+    IdentNode::IdentNode(std::string ident) 
+        : m_ident(std::move(ident))
+    {
+        assert(m_ident != "");
+    }
 
     IdentNode::IdentNode(std::string ident, const Position& pos)
-        : Node(pos), m_ident(ident){}
+        : Node(pos), m_ident(ident)
+    {
+        assert(m_ident != "");
+    }
 
     std::string& IdentNode::getIdent(){
         return m_ident;

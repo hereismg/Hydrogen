@@ -15,7 +15,7 @@ namespace hdg{
 
     new_AssignNode::new_AssignNode(std::string name, uNode&& expr, const Position& pos)
         : Node(pos),
-          m_name(std::move(name)), 
+          m_name(name), 
           m_lVal(std::make_unique<IdentNode>(name)),
           m_rVal(std::move(expr)) 
     {

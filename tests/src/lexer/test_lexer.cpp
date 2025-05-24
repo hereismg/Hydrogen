@@ -289,8 +289,8 @@ TEST(test_Parser, new_ArithExpr_5){
 }
 
 
-TEST(Smoke, AssignStmt_1){
-    string code = "a = 1";
+TEST(Smoke, VarDef_1){
+    string code = "var a = 1";
     string path = "<stdin>";
     Lexer lexer;
 
@@ -300,7 +300,8 @@ TEST(Smoke, AssignStmt_1){
 
     Parser parser(tokens, &envir2);
 
-    uNode ast = parser.new_AssignStmt();
+    uNode ast = parser.new_VarDef();
+    ASSERT_NE(ast, nullptr);
 
     InterpreterVisitor visitor;
 
@@ -362,7 +363,7 @@ R"({
 ));
 
 TEST(test_ExeUnit, _1){
-    string code = "{a = 1; b = 2}";
+    string code = "{var a = 1; var b = 2}";
     string path = "<stdin>";
     Lexer lexer;
 
@@ -486,8 +487,8 @@ TEST(test_ExeUnit, _3){
 TEST(Base, IfStmt_1){
     string code = R"({
     if 1 {
-        a = 1
-        b = a + 1
+        var a = 1
+        var b = a + 1
     }
     b
 }

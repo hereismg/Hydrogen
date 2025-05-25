@@ -29,6 +29,12 @@ namespace hdg {
         if (m_currentToken->getType() != Token::EF) m_currentToken++;
     }
 
+    void Parser::advanceAndEL() {
+        do {
+            advance();
+        } while(m_currentToken->getType() == Token::Type::EL);
+    }
+
     void Parser::retreat() {
         if (m_currentToken != m_tokens.begin()) m_currentToken--;
     }
@@ -659,26 +665,33 @@ namespace hdg {
     uNode Parser::new_IfStmt(){
         auto ifStmtNode = std::make_unique<new_IfStmtNode>();
 
+        // 'if' Expr ExeUnit
+        ignoreEL();
         if (!m_currentToken->match(Token::Type::KEYWORD, "if")) return nullptr;
 
         Position *pos = ifStmtNode->thisPosition();
         pos->setStart(m_currentToken->thisPosition()->getStart());
-        advance();
+        advanceAndEL();
 
-        // 'if' Expr ExeUnit
         auto cond = new_Expr();
         auto exeUnit = new_ExeUnit();
         ifStmtNode->addBranch(std::move(cond), std::move(exeUnit));
 
+
         // { 'elif' Expr ExeUnit }
+        ignoreEL();
         while(m_currentToken->match(Token::Token::KEYWORD, "elif")){
+            advance();
+            ignoreEL();
             cond = new_Expr();
             exeUnit = new_ExeUnit();
             ifStmtNode->addBranch(std::move(cond), std::move(exeUnit));
         }
 
         // ['else' ExeUnit ]
+        ignoreEL();
         if (m_currentToken->match(Token::Type::KEYWORD, "else")){
+            advanceAndEL();
             exeUnit = new_ExeUnit();
             ifStmtNode->addElseBranch(std::move(exeUnit));
         }

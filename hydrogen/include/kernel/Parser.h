@@ -26,6 +26,8 @@ namespace hdg {
 
     public:
         void advance();
+        void advanceAndEL();
+        void ignoreEL() { while(m_currentToken->getType() == Token::Type::EL) advance(); }
         void retreat();
 
         Node* expr      (Environment* environment);

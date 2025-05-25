@@ -14,9 +14,20 @@
 using namespace std;
 using namespace hdg;
 
-class Function_TEST_P: public testing::TestWithParam<std::tuple<int, std::string, int64_t>>{};
-TEST_P(Function_TEST_P, _1){
-    auto [counter, code, expected_obj] = GetParam();
+typedef enum {
+    Expr,
+    IfStmt,
+    ExeUnit
+} ParserType;
+class Interepreter_TEST_P: public testing::TestWithParam<std::tuple<
+    int,            // 序号
+    std::string,    // 代码
+    int64_t,        // 执行的结果
+    ParserType      // 执行函数
+>>{};
+
+TEST_P(Interepreter_TEST_P, _){
+    auto [counter, code, expected, parserType] = GetParam();
 
     string path = "<stdin>";
     Lexer lexer;
@@ -27,29 +38,130 @@ TEST_P(Function_TEST_P, _1){
 
     Parser parser(tokens, &envir2);
 
-    auto unit = parser.new_ExeUnit();
-
-    ASSERT_NE(unit, nullptr);
+    uNode root;
+    switch (parserType) {
+    case ParserType::Expr : 
+        root = parser.new_Expr();
+        break;
+    case ParserType::IfStmt :
+        root = parser.new_IfStmt();
+        break;
+    case ParserType::ExeUnit :
+        root = parser.new_ExeUnit();
+        break;
+    default:
+        ASSERT_TRUE(false);   
+    }
+    ASSERT_NE(root, nullptr);
 
     InterpreterVisitor visitor;
-    unit->accept(visitor);
+    root->accept(visitor);
 
-    {
-        auto obj = visitor.getRVal().get();
+    // 检测正确性，未使用 equation 方法
+    auto obj = visitor.getRVal().get();
 
-        ASSERT_NE(obj, nullptr);
-        ASSERT_EQ(typeid(*obj), typeid(Integer));
+    ASSERT_NE(obj, nullptr);
+    ASSERT_EQ(typeid(*obj), typeid(Integer));
 
-        Integer* int_ptr = dynamic_cast<Integer*>(obj);
+    Integer* int_ptr = dynamic_cast<Integer*>(obj);
 
-        ASSERT_EQ(int_ptr->getValue(), expected_obj);
-    }
+    ASSERT_EQ(int_ptr->getValue(), expected);
 }
 
 /**********************************************
- * Basic Arithmetic
+ * 1. Expr
  **********************************************/
 
-TEST(BasicArithmetic, _1){
-    cout << "Hello World!" << endl;
+INSTANTIATE_TEST_SUITE_P(Expr_Arithmetic, Interepreter_TEST_P, testing::Values(
+std::tuple<int, std::string, int64_t, ParserType>{
+0,
+"1 + 2",
+3,
+ParserType::Expr
+},
+
+std::tuple<int, std::string, int64_t, ParserType>{
+1,
+"1 + ( 2 + 3 ) * 4",
+21,
+ParserType::Expr
+},
+
+std::tuple<int, std::string, int64_t, ParserType>{
+2,
+"0 - 1",
+-1,
+ParserType::Expr
+},
+
+std::tuple<int, std::string, int64_t, ParserType>{
+3,
+"{var a = 1 var b = 2 a + b}",
+3,
+ParserType::ExeUnit
 }
+));
+
+
+/**********************************************
+ * 2. Execute Unit
+ **********************************************/
+
+/**********************************************
+ * 3. Variable
+ **********************************************/
+
+/**********************************************
+ * 4. Process Control
+ **********************************************/
+
+INSTANTIATE_TEST_SUITE_P(ProcessControl_IfStmt, Interepreter_TEST_P, testing::Values(
+std::tuple<int, std::string, int64_t, ParserType>{
+0,
+R"(
+if 1 + 1 {
+    10
+} else {
+    5
+}
+)",
+10,
+ParserType::IfStmt
+},
+
+std::tuple<int, std::string, int64_t, ParserType>{
+0,
+R"(
+if 
+1 + 1 
+{
+    10
+}
+else {
+    5
+}
+)",
+10,
+ParserType::IfStmt
+},
+
+std::tuple<int, std::string, int64_t, ParserType>{
+1,
+R"({
+var a = 1
+if a {
+    a
+}
+else {
+    a - 1
+}
+})",
+1,
+ParserType::ExeUnit
+}
+
+));
+
+/**********************************************
+ * 5. Function
+ **********************************************/

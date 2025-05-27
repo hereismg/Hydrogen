@@ -155,17 +155,13 @@ namespace hdg {
     void BinOperNode::setRight(uNode&& new_right){
         m_right = std::move(new_right);
     }
-
-    const Token& BinOperNode::getOper() const{
-        return m_oper;
-    }
-
-    uNode& BinOperNode::getLeft(){
-        return m_left;
-    }
-
-    uNode& BinOperNode::getRight(){
-        return m_right;
+    
+    nlohmann::json BinOperNode::toJSON() const {
+        nlohmann::json j{ {"__class__", "BinOperNode"} };
+        j["left"]  = m_left ->toJSON();
+        j["right"] = m_right->toJSON();
+        
+        return j;
     }
 
     std::string BinOperNode::toString(){

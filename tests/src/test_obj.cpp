@@ -30,7 +30,7 @@ TEST(NodeJSON, _1){
         std::move(right)
     );
 
-    cout << plus.toJSON().dump(4) << endl;
+    cout << expr->toJSON().dump(4) << endl;
 }
 
 TEST(Smoke, Equation_1) {

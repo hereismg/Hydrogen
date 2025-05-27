@@ -101,9 +101,10 @@ namespace hdg {
         IntNode(IntNode&&) noexcept = default;
         IntNode& operator=(IntNode&&) noexcept = default;
 
-        int64_t getValue();
+        int64_t getValue() const { return m_val; }
         void setValue(int64_t new_val);
 
+        nlohmann::json toJSON() const override;
         std::string toString() override;
         Object* interpret() override;
         void accept(Visitor& visitor) override;

@@ -154,16 +154,20 @@ namespace hdg {
         m_class = "Integer"; // TODO 注意，这最好用 ObjectNode 直接构造，但因为 ObjectNode 的设计缺陷，暂时这样做。
     }
 
-    int64_t IntNode::getValue(){
-        return m_val;
-    }
-
     void IntNode::setValue(int64_t new_val){
         m_val = new_val;
     }
 
     std::string IntNode::toString(){
         return std::to_string(m_val);
+    }
+
+    nlohmann::json IntNode::toJSON() const {
+        // nlohmann::json j{ {"__class__", "IntNode"} };
+        // j["val"] = m_val;
+        // return j;
+
+        return m_val;
     }
 
     Object* IntNode::interpret(){

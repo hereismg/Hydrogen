@@ -29,6 +29,7 @@ namespace hdg {
         Position* thisPosition();
         Environment* thisEnvironment();
 
+        virtual nlohmann::json toJSON() const { assert(false); }
         virtual std::string toString() = 0;
         virtual Object* interpret() = 0;
         virtual void accept(Visitor& visitor); // TODO 这里设为纯虚函数

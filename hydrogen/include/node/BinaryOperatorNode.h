@@ -65,9 +65,11 @@ namespace hdg {
         void setLeft(uNode&& new_left);
         void setRight(uNode&& new_right);
 
-        const Token& getOper() const;
-        uNode& getLeft();
-        uNode& getRight();
+        const Token& getOper() const { return m_oper; }
+        uNode& getLeft() { return m_left; }
+        uNode& getRight() { return m_right; }
+
+        nlohmann::json toJSON() const override;
 
         virtual std::string toString();
         virtual Object* interpret();
@@ -99,19 +101,5 @@ namespace hdg {
 
 } // hdg
 
-namespace nlohmann {
-    template<>
-    struct adl_serializer<hdg::BinOperNode> {
-        // 将 Person 转为 JSON
-        static void to_json(json& j, const hdg::BinOperNode& n) {
-            j = json{
-                {"__class__", "BinOperNode"}, 
-                {"oper", "Plus"}, 
-                {"left", "1"}, 
-                {"right", "2"}
-            };
-        }
-    };
-}
 
 #endif //HDG_BINARYOPERATORNODE_H

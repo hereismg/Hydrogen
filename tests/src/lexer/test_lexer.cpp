@@ -540,48 +540,6 @@ TEST(Base, IfStmt_1){
     }
 }
 
-
-
-TEST(test_WhileStmt, _1){
-    string code = R"({
-    var counter = 5
-    var sum = 0
-    while counter {
-        sum = sum + counter
-        counter = counter - 1
-    }
-    sum
-}
-    )";
-    string path = "<stdin>";
-    Lexer lexer;
-
-    std::vector<Token> tokens = lexer.run(path, &code);
-
-    Environment envir2; // 这将来要弃用
-
-    Parser parser(tokens, &envir2);
-
-    uNode ast = parser.new_ExeUnit();
-
-    InterpreterVisitor visitor;
-
-    ast->accept(visitor);
-
-    auto envir = visitor.getCurrentEnvir();
-    {
-        Object* obj_ptr = visitor.getResult().get();
-
-        ASSERT_NE(obj_ptr, nullptr);
-
-        ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
-
-        Integer* int_ptr = dynamic_cast<Integer*>(obj_ptr);
-
-        ASSERT_EQ(int_ptr->getValue(), 15);
-    }
-}
-
 TEST(Smoke, params_1){
     string code = R"(a, b, c)";
     string path = "<stdin>";
@@ -698,82 +656,7 @@ function add(a, b){
     }
 }
 
-TEST(Smoke, funcDef_2){
-    string code = 
-R"(
-{
-    function add(a, b){
-            a + b
-    }
-    add(1, 2)
-}
-)";
-    string path = "<stdin>";
-    Lexer lexer;
 
-    std::vector<Token> tokens = lexer.run(path, &code);
-
-    Environment envir2; // 这将来要弃用
-
-    Parser parser(tokens, &envir2);
-
-    auto unit = parser.new_ExeUnit();
-
-    ASSERT_NE(unit, nullptr);
-
-    InterpreterVisitor visitor;
-    unit->accept(visitor);
-
-    {
-        auto obj = visitor.getResult().get();
-
-        ASSERT_NE(obj, nullptr);
-        ASSERT_EQ(typeid(*obj), typeid(Integer));
-
-        Integer* int_ptr = dynamic_cast<Integer*>(obj);
-
-        ASSERT_EQ(int_ptr->getValue(), 3);
-    }
-}
-
-
-TEST(Smoke, funcDef_3){
-    string code = 
-R"(
-{
-function fun() {
-    10
-}
-fun()
-}
-)";
-    string path = "<stdin>";
-    Lexer lexer;
-
-    std::vector<Token> tokens = lexer.run(path, &code);
-
-    Environment envir2; // 这将来要弃用
-
-    Parser parser(tokens, &envir2);
-
-    auto unit = parser.new_ExeUnit();
-
-    ASSERT_NE(unit, nullptr);
-
-    InterpreterVisitor visitor;
-    unit->accept(visitor);
-
-    {
-        auto obj = visitor.getResult().get();
-
-        ASSERT_NE(obj, nullptr);
-        ASSERT_EQ(typeid(*obj), typeid(Integer));
-
-        Integer* int_ptr = dynamic_cast<Integer*>(obj);
-
-        ASSERT_EQ(int_ptr->getValue(), 10);
-    }
-}
 
 class Function_TEST_P: public testing::TestWithParam<std::tuple<int, std::string, int64_t>>{};
 TEST_P(Function_TEST_P, _1){
@@ -789,7 +672,7 @@ TEST_P(Function_TEST_P, _1){
     Parser parser(tokens, &envir2);
 
     auto unit = parser.new_ExeUnit();
-    cout << unit->toJSON().dump(4) << endl;
+    // cout << unit->toJSON().dump(4) << endl;
 
     ASSERT_NE(unit, nullptr);
 
@@ -812,17 +695,6 @@ INSTANTIATE_TEST_SUITE_P(Smoke, Function_TEST_P, testing::Values(
 std::tuple<int, std::string, int64_t>{
 counter ++,
 R"({
-    function add(a, b){
-        a + b
-    }
-    add(1, 2)
-})",
-3
-},
-
-std::tuple<int, std::string, int64_t>{
-counter ++,
-R"({
     var sum = 0
     function fun(a) {
         if a {
@@ -834,19 +706,6 @@ R"({
     sum
 })",
 15
-},
-
-std::tuple<int, std::string, int64_t>{
-counter ++,
-R"({
-    function getNum(sum){
-        sum
-    }
-    var sum = 5
-    sum = sum + getNum(sum)
-    sum
-})",
-10
 },
 
 // std::tuple<int, std::string, int64_t>{

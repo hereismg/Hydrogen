@@ -112,7 +112,7 @@ ParserType::ExeUnit
  **********************************************/
 
 
- 
+
 /**********************************************
  * 4. Process Control
  **********************************************/
@@ -160,10 +160,96 @@ else {
 })",
 1,
 ParserType::ExeUnit
+},
+
+std::tuple<int, std::string, int64_t, ParserType>{
+0527,
+R"({
+var a = 1
+if a {
+    var b = 2
+    if b - 2 {
+        1111
+    }
+    elif b - 1 {
+        2222
+    }
+    else {
+        3333
+    }
 }
+else {
+    a - 1
+}
+})",
+2222,
+ParserType::ExeUnit
+}
+));
+
+
+INSTANTIATE_TEST_SUITE_P(ProcessControl_WhileStmt, Interepreter_TEST_P, testing::Values(
+std::tuple<int, std::string, int64_t, ParserType>{
+111,
+R"({
+var sum = 0
+var counter = 5
+while counter {
+    sum = sum + counter
+    counter = counter - 1
+}
+sum
+})",
+15,
+ParserType::ExeUnit
+}
+
 
 ));
 
 /**********************************************
  * 5. Function
  **********************************************/
+
+INSTANTIATE_TEST_SUITE_P(Function, Interepreter_TEST_P, testing::Values(
+std::tuple<int, std::string, int64_t, ParserType>{
+111,
+R"({
+    function add(a, b){
+        a + b
+    }
+    add(1, 2)
+})",
+3,
+ParserType::ExeUnit
+},
+
+std::tuple<int, std::string, int64_t, ParserType>{
+2,
+R"({
+function fun() {
+    10
+}
+fun()
+})",
+10,
+ParserType::ExeUnit
+},
+
+std::tuple<int, std::string, int64_t, ParserType>{
+2,
+R"({
+    function getNum(sum){
+        sum
+    }
+    var sum = 5
+    sum = sum + getNum(sum)
+    sum
+})",
+10,
+ParserType::ExeUnit
+}
+
+
+));
+

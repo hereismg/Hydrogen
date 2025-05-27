@@ -136,7 +136,9 @@ namespace hdg{
             j["exeUnit"].push_back(n->toJSON());
         }
 
-        j["elseExeUnit"] = m_elseExeUnit->toJSON();
+        if (m_elseExeUnit != nullptr){
+            j["elseExeUnit"] = m_elseExeUnit->toJSON();
+        }
 
         return j;
     }

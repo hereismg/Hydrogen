@@ -159,6 +159,7 @@ namespace hdg {
 
         std::vector<uNode>& getExprList() { return m_exprList; }
 
+        nlohmann::json toJSON() const override;
         std::string toString() override;
         Object* interpret() override;
         void accept(Visitor& visitor) override;

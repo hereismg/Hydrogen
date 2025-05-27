@@ -260,6 +260,19 @@ namespace hdg {
         visitor.visitListObjNode(*this);
     }
 
+    nlohmann::json ListObjNode::toJSON() const {
+        nlohmann::json j = {{"__class__", "ListObjNode"}};
+        
+        j["exprList"] = nlohmann::json::array();
+
+        for (auto& n : m_exprList){
+            j["exprList"].push_back(n->toJSON());
+        }
+
+        return j;
+    }
+
+
     std::string ListObjNode::toString(){
         return "ListObjNode";
     }

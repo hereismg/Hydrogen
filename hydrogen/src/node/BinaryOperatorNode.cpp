@@ -234,6 +234,22 @@ namespace hdg {
     //     return m_type;
     // }
 
+    nlohmann::json PostfixNode::toJSON() const {
+        nlohmann::json j{
+            {"__class__", "PostfixNode"},
+            {"primary", m_primary->toJSON()},
+            {"ident", m_ident}
+        };
+
+        j["exprList"] = nlohmann::json::array();
+
+        for (auto& n : m_exprList) {
+            j["exprList"].push_back(n->toJSON());
+        }
+
+        return j;
+    }
+
     std::string PostfixNode::toString(){
         return "PostFixNode"; // hdgtodo: 更完整的输出 PostfixNode 内容
     }

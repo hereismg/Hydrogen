@@ -94,6 +94,7 @@ namespace hdg {
         inline std::string getIdent() {return m_ident; }
         inline Token::Type getType() { return m_type; }
 
+        nlohmann::json toJSON() const override;
         virtual std::string toString();
         virtual Object* interpret() { assert(false); }
         virtual void accept(Visitor& visitor);

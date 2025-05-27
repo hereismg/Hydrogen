@@ -820,21 +820,21 @@ R"({
 3
 },
 
-// std::tuple<int, std::string, int64_t>{
-// counter ++,
-// R"({
-//     var sum = 0
-//     function fun(a) {
-//         if a {
-//             sum = sum + fun(a - 1)
-//         }
-//         a
-//     }
-//     sum = fun(5)
-//     sum
-// })",
-// 15
-// },
+std::tuple<int, std::string, int64_t>{
+counter ++,
+R"({
+    var sum = 0
+    function fun(a) {
+        if a {
+            sum = sum + fun(a - 1)
+        }
+        a
+    }
+    sum = fun(5)
+    sum
+})",
+15
+},
 
 std::tuple<int, std::string, int64_t>{
 counter ++,

@@ -260,6 +260,7 @@ namespace hdg{
 
             if (obj->isTrue()){
                 exeUnit[i]->accept(*this);
+                return;
             }
         }
 

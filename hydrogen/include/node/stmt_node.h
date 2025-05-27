@@ -85,6 +85,7 @@ namespace hdg{
         uNode& getCond();
         uNode& getLoopUnit();
 
+        nlohmann::json toJSON() const override;
         virtual std::string toString();
         virtual Object* interpret();
         virtual void accept(Visitor& visitor);

@@ -143,6 +143,7 @@ namespace hdg {
         std::vector<std::string> getArgs() { return m_args; }
         uNode moveBody() { return std::move(m_body); }
 
+        nlohmann::json toJSON() const override;
         std::string toString() override;
         Object* interpret() override;
         void accept(Visitor& visitor) override;

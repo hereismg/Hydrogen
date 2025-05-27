@@ -175,6 +175,15 @@ namespace hdg{
         return m_loopUnit;
     }
 
+
+    nlohmann::json new_WhileStmtNode::toJSON() const {
+        return {
+            {"__class__", "WhileStmtNode"},
+            {"cond", m_cond->toJSON()},
+            {"loopUnit", m_loopUnit->toJSON()}
+        };
+    }
+
     std::string new_WhileStmtNode::toString(){
         return "while";
     }

@@ -221,6 +221,21 @@ namespace hdg {
         : ObjectNode("Function", pos, nullptr), m_args(std::move(args)), m_body(std::move(body))
         {}
 
+
+    nlohmann::json New_FuncObjNode::toJSON() const {
+        nlohmann::json j{{"__class__", "FuncObjNode"}};
+
+        j["args"] = nlohmann::json::array();
+
+        for (auto& s : m_args) {
+            j["args"].push_back(s);
+        }
+
+        j["body"] = m_body->toJSON();
+
+        return j;
+    }
+
     std::string New_FuncObjNode::toString(){
         return "New_FuncObjNode";
     }

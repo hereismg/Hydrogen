@@ -18,6 +18,19 @@ namespace hdg{
         return m_list;
     }
 
+    
+    nlohmann::json new_ExeUnitNode::toJSON() const {
+        nlohmann::json j{{"__class__", "ExeUnitNode"}};
+
+        j["list"] = nlohmann::json::array();
+
+        for (auto& n : m_list){
+            j["list"].push_back(n->toJSON());
+        }
+
+        return j;
+    }
+
     std::string new_ExeUnitNode::toString(){
         return "ExeUnitNode";
     }

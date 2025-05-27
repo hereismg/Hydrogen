@@ -45,6 +45,16 @@ namespace hdg{
         m_rVal = std::move(new_expr);
     }
 
+    nlohmann::json new_AssignNode::toJSON() const {
+        nlohmann::json j{{"__class__", "AssignNode"}};
+
+        return {
+            {"__class__", "AssignNode"},
+            {"lVal", m_lVal->toJSON()},
+            {"rVal", m_rVal->toJSON()}
+        };
+    }
+
     std::string new_AssignNode::toString(){
         return "AssignNode: " + m_name;
     }
@@ -68,6 +78,14 @@ namespace hdg{
         : Node(pos), m_name(std::move(name)), m_val(std::move(val)) 
     {
         assert(m_val != nullptr);
+    }
+
+    nlohmann::json DefNode::toJSON() const {
+        return {
+            {"__class__" , "DefNode"},
+            {"name", m_name},
+            {"val", m_val->toJSON()}
+        };
     }
 
     std::string DefNode::toString(){
@@ -101,6 +119,26 @@ namespace hdg{
 
     uNode& new_IfStmtNode::getElseExeUnit(){
         return m_elseExeUnit;
+    }
+
+    nlohmann::json new_IfStmtNode::toJSON() const {
+        nlohmann::json j{{"__class__", "IfStmtNode"}};
+
+        j["cond"] = nlohmann::json::array();
+
+        for (auto& n : m_cond) {
+            j["cond"].push_back(n->toJSON());
+        }
+
+        j["exeUnit"] = nlohmann::json::array();
+
+        for (auto& n : m_exeUnit) {
+            j["exeUnit"].push_back(n->toJSON());
+        }
+
+        j["elseExeUnit"] = m_elseExeUnit->toJSON();
+
+        return j;
     }
 
     std::string new_IfStmtNode::toString(){

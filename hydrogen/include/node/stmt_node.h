@@ -27,6 +27,7 @@ namespace hdg{
         void setLVal(uNode&& lVal) { m_lVal = std::move(lVal); }
         void setRVal(uNode&& rVal) { m_rVal = std::move(rVal); }
 
+        nlohmann::json toJSON() const override;
         virtual std::string toString();
         virtual Object* interpret();
         virtual void accept(Visitor& visitor);
@@ -44,6 +45,7 @@ namespace hdg{
         uNode& getVal() { return m_val; }
         std::string getName() { return m_name; }
 
+        nlohmann::json toJSON() const override;
         virtual std::string toString();
         virtual Object* interpret();
         virtual void accept(Visitor& visitor);
@@ -65,6 +67,7 @@ namespace hdg{
         std::vector<uNode>& getExeUnit();
         uNode& getElseExeUnit();
 
+        nlohmann::json toJSON() const override;
         virtual std::string toString();
         virtual Object* interpret();
         virtual void accept(Visitor& visitor);

@@ -789,6 +789,7 @@ TEST_P(Function_TEST_P, _1){
     Parser parser(tokens, &envir2);
 
     auto unit = parser.new_ExeUnit();
+    cout << unit->toJSON().dump(4) << endl;
 
     ASSERT_NE(unit, nullptr);
 

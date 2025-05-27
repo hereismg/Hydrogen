@@ -200,7 +200,7 @@ namespace hdg {
 
     nlohmann::json IdentNode::toJSON() const {
         return {
-            {"__class__", "__IdentNode"}, 
+            {"__class__", "IdentNode"}, 
             {"val", m_ident}
         };
     }

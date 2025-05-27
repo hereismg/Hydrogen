@@ -5,6 +5,7 @@ set(
     TEST_INCLUDE_DIR 
     "${GTEST_INCLUDE_DIR}"
     "${SML_INCLUDE_DIR}"
+    "${LIB_INCLUDE}"
     "${PROJECT_SOURCE_DIR}/hydrogen/include/basic"
     "${PROJECT_SOURCE_DIR}/hydrogen/include/kernel"
     "${PROJECT_SOURCE_DIR}/hydrogen/include/node"

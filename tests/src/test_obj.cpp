@@ -2,6 +2,7 @@
 
 #include <sml.hpp>
 #include <gtest/gtest.h>
+#include <nlohmann/json.hpp>
 
 #include <Lexer.h>
 #include <Environment.h>
@@ -16,6 +17,21 @@
 
 using namespace std;
 using namespace hdg;
+
+TEST(NodeJSON, _1){
+    uNode left = std::make_unique<IntNode>(5);
+    uNode right = std::make_unique<IntNode>(2);
+
+    Token plus(Token::Type::PLUS);
+
+    auto expr = std::make_unique<BinOperNode>(
+        std::move(plus),
+        std::move(left),
+        std::move(right)
+    );
+
+    cout << plus.toJSON().dump(4) << endl;
+}
 
 TEST(Smoke, Equation_1) {
     sInteger int1 = make_shared<Integer>(1);

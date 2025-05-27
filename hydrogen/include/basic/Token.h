@@ -9,10 +9,14 @@
 #include <map>
 #include <utility>
 #include <iostream>
+#include <nlohmann/json.hpp>
+
 #include "Position.h"
+
 
 namespace hdg {
 
+    
     class Token {
     public:
         enum Type{
@@ -52,7 +56,41 @@ namespace hdg {
             EF,         ///> end of file
             EL,         ///> end of line 有两种表达字符：“;” and “\n”
         };
-        static std::map<Type, std::string> TypeNameMap;
+
+        inline static std::map<Token::Type, std::string> TypeNameMap = {
+        {Token::INT,        "INT"},
+        {Token::FLOAT,      "FLOAT"},
+        {Token::STRING,     "STRING"},
+        {Token::IDENTIFIER, "IDENTIFIER"},
+        {Token::KEYWORD,    "KEYWORD"},
+
+        {Token::EE,         "EE"},
+        {Token::GT,         "GT"},
+        {Token::LT,         "LT"},
+        {Token::GTE,        "GTE"},
+        {Token::LTE,        "LTE"},
+
+        {Token::PLUS,       "PLUS"},
+        {Token::MINUS,      "MINUS"},
+        {Token::MUL,        "MUL"},
+        {Token::DIV,        "DIV"},
+        {Token::MOD,        "MOD"},
+        {Token::POW,        "POW"},
+
+        {Token::LPAREN,     "LPAREN"},
+        {Token::RPAREN,     "RPAREN"},
+        {Token::LBRACKET,   "LBRACKET"},
+        {Token::RBRACKET,   "RBRACKET"},
+        {Token::LBRACE,     "LBRACE"},
+        {Token::RBRACE,     "RBRACE"},
+        {Token::EQ,         "EQ"},
+
+        {Token::COLON,      "COLON"},
+        {Token::COMMA,      "COMMA"},
+
+        {Token::EF,         "EF"},          /// EOF   end of file    由于EOF是C++中的关键字，所以这里用EF代替
+        {Token::EL,         "EL"},          /// EOL   end of line    意为“一行的末尾”，这里使用“EL”是为了和上面的”EF“统一表达语言
+    };
 
     protected:
         Type m_type;
@@ -66,30 +104,53 @@ namespace hdg {
         Token(Type type, std::string value);
         Token(Type type);
         Token(Type type, const Position& position);
+
         Token(const Token& tok);
         ~Token();
 
-        /**
-         * 用于匹配 Token 的类型与值是否全都相同。
-         * @param type  记号类型种类。
-         * @param value 该记号类型的值。
-         * @return 返回一个布尔值。
-         * @note 必须当种类和值全部匹配的时候才会返回 True。
-         * */
-        bool match(Type type, const std::string& value);
-        void setType(Type type);
-        void setValue(const std::string& value);
-        Type getType();
-        std::string getValue();
-        Position* thisPosition();
-        std::string toString();
+        bool match(Type type, const std::string& value) const { return type == m_type && value == m_value; }
+        
+        void setType(Type type) { m_type = type; }
+        
+        void setValue(std::string value) { m_value = std::move(value); }
+        
+        Type getType() const { return m_type; }
+        
+        std::string getValue() const { return m_value; }
 
+        Position* thisPosition();
+
+        nlohmann::json toJSON() const;
+
+        std::string getClass() const { return "Token"; }
+
+        // mgtodo: 以下内容弃用
+
+        std::string toString();
         friend std::ostream& operator<<(std::ostream& out, Token& tok);
         friend bool operator<(const Token& a, const Token& b);
     };
 
+    // mgtodo: 以下内容弃用
     bool operator<(const Token& left, const Token& right);
     std::string kv_toString(const std::string& key, size_t keyShowLen, const std::string val, size_t valShowLen);
 } // hdg
+
+namespace nlohmann {
+    template<>
+    struct adl_serializer<hdg::Token> {
+        static void to_json(json& j, const hdg::Token& t) {
+            j = json{
+                {"__class__", t.getClass()}, 
+                {"type", hdg::Token::TypeNameMap[t.getType()]}, 
+                {"value", t.getValue()}  // mgtodo: 很多时候，Token 的 value 都是空的，那么这就看起来很冗余，优化这一点
+            };
+        }
+ 
+        // static void from_json(const json& j, hdg::Token& p) {
+        //     p.setType(j.at("type"));
+        // }
+    };
+}
 
 #endif //HDG_TOKEN_H

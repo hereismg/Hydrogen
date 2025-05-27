@@ -126,6 +126,7 @@ namespace hdg {
         std::string& getIdent();
         void setIdent(std::string new_ident);
 
+        nlohmann::json toJSON() const override;
         std::string toString() override;
         Object* interpret() override;
         void accept(Visitor& visitor) override;

@@ -198,6 +198,13 @@ namespace hdg {
         // m_ident = std::move(new_ident);
     }
 
+    nlohmann::json IdentNode::toJSON() const {
+        return {
+            {"__class__", "__IdentNode"}, 
+            {"val", m_ident}
+        };
+    }
+
     std::string IdentNode::toString(){
         return "IDENT:" + m_ident;
     }

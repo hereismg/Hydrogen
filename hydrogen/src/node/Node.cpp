@@ -28,4 +28,9 @@ namespace hdg {
     void Node::accept(Visitor& visitor){
         std::cout << "Node::accept() is not implement!" << std::endl;
     }
+
+    nlohmann::json Node::toJSON(){
+        std::cout << "Node::toJSON() is not implement!" << std::endl;
+        assert(false);
+    }
 } // hdg

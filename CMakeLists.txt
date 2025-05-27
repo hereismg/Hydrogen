@@ -11,6 +11,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(SML_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/lib/boost")
 add_subdirectory("lib/gtest-1.16")
 set(GTEST_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/lib/gtest-1.16/googlemock" "${CMAKE_CURRENT_SOURCE_DIR}/lib/gtest-1.16/googletest")
+set(LIB_INCLUDE "${CMAKE_CURRENT_SOURCE_DIR}/lib")
 
 add_subdirectory(hydrogen)
 add_subdirectory(shell)

@@ -9,6 +9,7 @@
 #include <cmath>
 #include <utility>
 #include <cassert>
+#include <nlohmann/json.hpp>
 
 #include "Node.h"
 #include "../basic/Token.h"
@@ -68,6 +69,7 @@ namespace hdg {
         uNode& getLeft();
         uNode& getRight();
 
+        nlohmann::json toJSON() override;
         virtual std::string toString();
         virtual Object* interpret();
         virtual void accept(Visitor& visitor);

@@ -7,6 +7,7 @@
 
 #include <string>
 #include <memory>
+#include <nlohmann/json.hpp>
 
 #include "../object/Object.h"
 #include "../basic/Position.h"
@@ -28,6 +29,7 @@ namespace hdg {
         Position* thisPosition();
         Environment* thisEnvironment();
 
+        virtual nlohmann::json toJSON();
         virtual std::string toString() = 0;
         virtual Object* interpret() = 0;
         virtual void accept(Visitor& visitor); // TODO 这里设为纯虚函数

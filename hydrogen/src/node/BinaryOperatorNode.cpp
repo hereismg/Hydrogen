@@ -169,6 +169,9 @@ namespace hdg {
     }
 
     std::string BinOperNode::toString(){
+        std::stringstream context;
+        // context << "{\n";
+
         return "BinOperNode";
     }
 

@@ -130,7 +130,7 @@ ParserType::IfStmt
 },
 
 std::tuple<int, std::string, int64_t, ParserType>{
-0,
+1,
 R"(
 if 
 1 + 1 
@@ -146,7 +146,7 @@ ParserType::IfStmt
 },
 
 std::tuple<int, std::string, int64_t, ParserType>{
-1,
+2,
 R"({
 var a = 1
 if a {

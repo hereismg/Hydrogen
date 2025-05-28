@@ -54,9 +54,39 @@ tuple<string, string, vector<Token>, Degree>{
 "a = 1",
 {
     {Token::IDENT , "a"},
-    {Token::EQ , ""},
-    {Token::INT , "1"},
-    {Token::EF , ""}
+    {Token::EQ    , "" },
+    {Token::INT   , "1"},
+    {Token::EF    , "" }
+},
+MID
+},
+
+tuple<string, string, vector<Token>, Degree>{
+"1",
+"a[1]",
+{
+    {Token::IDENT    , "a"},
+    {Token::LBRACKET , "" },
+    {Token::INT      , "1"},
+    {Token::RBRACKET , "" },
+    {Token::EF       , "" }
+},
+MID
+},
+
+tuple<string, string, vector<Token>, Degree>{
+"1",
+"var list = [1, 2]",
+{
+    {Token::KEYWORD  , "var" },
+    {Token::IDENT    , "list"},
+    {Token::EQ       , ""    },
+    {Token::LBRACKET , ""    },
+    {Token::INT      , "1"   },
+    {Token::COMMA    , ""    },
+    {Token::INT      , "2"   },
+    {Token::RBRACKET , ""    },
+    {Token::EF       , ""    }
 },
 MID
 }

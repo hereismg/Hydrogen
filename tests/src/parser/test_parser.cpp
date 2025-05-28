@@ -23,7 +23,7 @@ typedef enum {
 class Interepreter_TEST_P: public testing::TestWithParam<std::tuple<
     int,            // 序号
     std::string,    // 代码
-    int64_t,        // 执行的结果
+    int64_t,        // 预期结果
     ParserType      // 执行函数
 >>{};
 
@@ -35,7 +35,7 @@ TEST_P(Interepreter_TEST_P, _){
 
     std::vector<Token> tokens = lexer.run(path, &code);
 
-    Environment envir2; // 这将来要弃用
+    Environment envir2; // mgtodo: 这将来要弃用
 
     Parser parser(tokens, &envir2);
 
@@ -229,16 +229,16 @@ ParserType::ExeUnit
 
 
 INSTANTIATE_TEST_SUITE_P(LValAndRVal, Interepreter_TEST_P, testing::Values(
-// std::tuple<int, std::string, int64_t, ParserType>{
-// 52801,
-// R"({
-//     var list = [1, 2]
-//     list[0] = 3
-//     list[0]
-// })",
-// 3,
-// ParserType::ExeUnit
-// },
+std::tuple<int, std::string, int64_t, ParserType>{
+23425,
+R"({
+    var list = [1, 2]
+    list[0] = 3
+    list[0]
+})",
+3,
+ParserType::ExeUnit
+},
 
 std::tuple<int, std::string, int64_t, ParserType>{
 52801,

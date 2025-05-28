@@ -61,7 +61,7 @@ namespace hdg {
         {Token::INT,        "INT"},
         {Token::FLOAT,      "FLOAT"},
         {Token::STRING,     "STRING"},
-        {Token::IDENT, "IDENTIFIER"},
+        {Token::IDENT,      "IDENT"},
         {Token::KEYWORD,    "KEYWORD"},
 
         {Token::EE,         "EE"},

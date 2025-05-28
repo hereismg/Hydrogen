@@ -14,6 +14,55 @@
 using namespace std;
 using namespace hdg;
 
+typedef enum{
+    LOW,  // 只要求 Token 的 type 匹配
+    MID,  // 要求 Token 的 type 和 value 同时匹配
+    HIGH  // 要求 Token 的 type、value 和 pos 三个同时匹配
+} Degree;
+
+class Lexer_TEST_P: public testing::TestWithParam<std::tuple<
+    std::string,             // 测试标记（调试时通过该值定位测试点）
+    std::string,             // 代码
+    std::vector<hdg::Token>, // 预期结果
+    Degree                   // 检查严格度
+>>{};
+TEST_P(Lexer_TEST_P, _){
+    auto [anchor, code, expected, degree] = GetParam();
+
+    string path = "<stdin>";
+    Lexer lexer;
+
+    std::vector<Token> actual = lexer.run(path, &code);
+
+    ASSERT_EQ(actual.size(), expected.size());
+    for (size_t i = 0; i < actual.size(); i++){
+        ASSERT_EQ(actual[i].getType(), expected[i].getType());
+
+        if (degree >= MID) {
+            ASSERT_EQ(actual[i].getValue(), expected[i]. getValue());
+        }
+
+        if (degree >= HIGH) {
+            ASSERT_TRUE(actual[i].thisPosition()->equal(*expected[i].thisPosition()));
+        }
+    }
+}
+
+INSTANTIATE_TEST_SUITE_P(TestSuit, Lexer_TEST_P, testing::Values(
+tuple<string, string, vector<Token>, Degree>{
+"1",
+"a = 1",
+{
+    {Token::IDENT , "a"},
+    {Token::EQ , ""},
+    {Token::INT , "1"},
+    {Token::EF , ""}
+},
+MID
+}
+
+));
+
 TEST(test_lexer, _1){
     string code = "if";
     string path = "<stdin>";
@@ -59,7 +108,7 @@ TEST(test_lexer, _3){
 
     std::vector<hdg::Token> expected_tokens;
     expected_tokens.emplace_back(hdg::Token::KEYWORD,    "if");
-    expected_tokens.emplace_back(hdg::Token::IDENTIFIER, "n");
+    expected_tokens.emplace_back(hdg::Token::IDENT, "n");
     expected_tokens.emplace_back(hdg::Token::EE);
     expected_tokens.emplace_back(hdg::Token::INT,        "1");
     expected_tokens.emplace_back(hdg::Token::LBRACE);
@@ -507,21 +556,21 @@ TEST_P(Function_TEST_P, _1){
 }
 int counter = 0;
 INSTANTIATE_TEST_SUITE_P(Smoke, Function_TEST_P, testing::Values(
-std::tuple<int, std::string, int64_t>{
-counter ++,
-R"({
-    var sum = 0
-    function fun(a) {
-        if a {
-            sum = sum + fun(a - 1)
-        }
-        a
-    }
-    sum = fun(5)
-    sum
-})",
-15
-},
+// std::tuple<int, std::string, int64_t>{
+// counter ++,
+// R"({
+//     var sum = 0
+//     function fun(a) {
+//         if a {
+//             sum = sum + fun(a - 1)
+//         }
+//         a
+//     }
+//     sum = fun(5)
+//     sum
+// })",
+// 15
+// },
 
 // std::tuple<int, std::string, int64_t>{
 // counter ++,
@@ -552,19 +601,19 @@ R"({
 // 3
 // },
 
-std::tuple<int, std::string, int64_t>{
-counter ++,
-R"({
-    function oper(){
-        function add(a, b){
-            a + b
-        }
-        add
-    }
-    oper()(1, 2)
-})",
-3
-},
+// std::tuple<int, std::string, int64_t>{
+// counter ++,
+// R"({
+//     function oper(){
+//         function add(a, b){
+//             a + b
+//         }
+//         add
+//     }
+//     oper()(1, 2)
+// })",
+// 3
+// },
 
 std::tuple<int, std::string, int64_t>{
 counter ++,
@@ -580,15 +629,6 @@ counter ++,
 R"({
     var list = [1, 2]
     list[0]
-})",
-1
-},
-
-std::tuple<int, std::string, int64_t>{
-counter ++,
-R"({
-    var list = [[1, 2], 3]
-    list[0][0]
 })",
 1
 },

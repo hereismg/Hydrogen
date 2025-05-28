@@ -224,7 +224,35 @@ ParserType::ExeUnit
 ));
 
 /**********************************************
- * 5. Test Function
+ * Test 5. LVal and RVal
+ **********************************************/
+
+
+INSTANTIATE_TEST_SUITE_P(LValAndRVal, Interepreter_TEST_P, testing::Values(
+// std::tuple<int, std::string, int64_t, ParserType>{
+// 52801,
+// R"({
+//     var list = [1, 2]
+//     list[0] = 3
+//     list[0]
+// })",
+// 3,
+// ParserType::ExeUnit
+// },
+
+std::tuple<int, std::string, int64_t, ParserType>{
+52801,
+R"({
+    var list = [[1, 2], 3]
+    list[0][0]
+})",
+1, 
+ParserType::ExeUnit
+}
+));
+
+/**********************************************
+ * Test 6. Test Function
  **********************************************/
 
 INSTANTIATE_TEST_SUITE_P(Function, Interepreter_TEST_P, testing::Values(

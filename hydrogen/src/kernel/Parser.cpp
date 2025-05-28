@@ -94,7 +94,7 @@ namespace hdg {
     }
 
     Node* Parser::expr(Environment* environment) {
-        if (Token::IDENTIFIER == m_currentToken->getType()){
+        if (Token::IDENT == m_currentToken->getType()){
             std::string name = m_currentToken->getValue();
             Position pos(*m_currentToken->thisPosition());
             advance();
@@ -237,7 +237,7 @@ namespace hdg {
      * @details     该函数是各种语句的入口。
      * */
     Node *Parser::atom(Environment *environment) {
-        if (m_currentToken->getType() == Token::IDENTIFIER){
+        if (m_currentToken->getType() == Token::IDENT){
             Node* node = new ObjAccessNode(
                     m_currentToken->getValue(),
                     *m_currentToken->thisPosition(),
@@ -317,14 +317,14 @@ namespace hdg {
 
     Node *Parser::forExpr(Environment* environment) {
         Position position(*m_currentToken->thisPosition());
-        Token index(Token::IDENTIFIER);
+        Token index(Token::IDENT);
         auto* forNode = new ForNode(index, 0, -1, 1, nullptr, *m_currentToken->thisPosition(), environment);
 
         if (m_currentToken->match(Token::KEYWORD, "for")) advance();
 
         /// 读取 标识符
-        if (m_currentToken->getType() == Token::IDENTIFIER) {
-            forNode->setIndex({Token::IDENTIFIER, m_currentToken->getValue()});
+        if (m_currentToken->getType() == Token::IDENT) {
+            forNode->setIndex({Token::IDENT, m_currentToken->getValue()});
             advance();
         }
         else {
@@ -445,7 +445,7 @@ namespace hdg {
         func->thisPosition()->setStart(m_currentToken->thisPosition()->getStart());
         advance();
 
-        if (m_currentToken->getType() == Token::IDENTIFIER){
+        if (m_currentToken->getType() == Token::IDENT){
             name = *m_currentToken;
             advance();
         }else{
@@ -464,7 +464,7 @@ namespace hdg {
             );
         }
 
-        while (m_tokens.end() != m_currentToken && m_currentToken->getType() == Token::IDENTIFIER){
+        while (m_tokens.end() != m_currentToken && m_currentToken->getType() == Token::IDENT){
             Position pos(*m_currentToken->thisPosition());
             std::string argName = m_currentToken->getValue();
             Node* argExpr = nullptr;
@@ -479,7 +479,7 @@ namespace hdg {
 
             if (m_currentToken->getType() == Token::COMMA) {
                 advance();
-                if (m_currentToken->getType()!=Token::IDENTIFIER)
+                if (m_currentToken->getType()!=Token::IDENT)
                     throw InvalidSyntaxError(
                             "Expected identifier.",
                             *m_currentToken->thisPosition()
@@ -721,7 +721,7 @@ namespace hdg {
     uNode Parser::new_AssignStmt(){
         Position pos = m_currentToken->thisPosition()->clone();
 
-        if (m_currentToken->getType() != Token::Type::IDENTIFIER){
+        if (m_currentToken->getType() != Token::Type::IDENT){
             return nullptr;
         }
 
@@ -753,7 +753,7 @@ namespace hdg {
         advance();
 
         // 2. 标识符 IDENT
-        if (m_currentToken->getType() != Token::Type::IDENTIFIER) {
+        if (m_currentToken->getType() != Token::Type::IDENT) {
             assert(false); // 应该抛出异常
         }
         std::string ident = m_currentToken->getValue();
@@ -786,7 +786,7 @@ namespace hdg {
         advance();
 
         // 2. 标识符 IDENT
-        if (m_currentToken->getType() != Token::Type::IDENTIFIER) {
+        if (m_currentToken->getType() != Token::Type::IDENT) {
             assert(false); // 应该抛出异常
         }
         std::string ident = m_currentToken->getValue();
@@ -900,7 +900,7 @@ namespace hdg {
                 continue;
             }
 
-            if (m_currentToken->getType() != Token::Type::IDENTIFIER) break;
+            if (m_currentToken->getType() != Token::Type::IDENT) break;
             
             params.emplace_back(m_currentToken->getValue());
             advance();
@@ -1028,7 +1028,7 @@ namespace hdg {
                 advance();
                 return node;
             }
-            case Token::Type::IDENTIFIER:{
+            case Token::Type::IDENT:{
                 std::string name = m_currentToken->getValue();
                 advance();
 

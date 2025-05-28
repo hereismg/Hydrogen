@@ -28,7 +28,7 @@ TEST(HelloTest, SECOND){
 
     hdg::Lexer lexer;
     auto actual_res = lexer.run("<std>", &code);
-    std::vector<hdg::Token> expected_res = {hdg::Token::IDENTIFIER};
+    std::vector<hdg::Token> expected_res = {hdg::Token::IDENT};
     std::cout << expected_res << std::endl;
 
 

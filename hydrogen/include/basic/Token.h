@@ -23,7 +23,7 @@ namespace hdg {
             INT,
             FLOAT,      ///> 虽然名称为“float”，但实际上全都是双精度浮点型
             STRING,
-            IDENTIFIER,
+            IDENT,
             KEYWORD,
 
             NE,         ///> 不等于号“!=”
@@ -61,7 +61,7 @@ namespace hdg {
         {Token::INT,        "INT"},
         {Token::FLOAT,      "FLOAT"},
         {Token::STRING,     "STRING"},
-        {Token::IDENTIFIER, "IDENTIFIER"},
+        {Token::IDENT, "IDENTIFIER"},
         {Token::KEYWORD,    "KEYWORD"},
 
         {Token::EE,         "EE"},

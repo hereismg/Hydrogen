@@ -161,7 +161,7 @@ namespace hdg{
 
                 break;
             }
-            case Token::Type::IDENTIFIER : {
+            case Token::Type::IDENT : {
                 // 变量
                 m_rVal = std::move(obj);
                 break;

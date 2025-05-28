@@ -17,7 +17,8 @@ using namespace hdg;
 typedef enum {
     Expr,
     IfStmt,
-    ExeUnit
+    ExeUnit,
+    VarDef
 } ParserType;
 class Interepreter_TEST_P: public testing::TestWithParam<std::tuple<
     int,            // 序号
@@ -49,6 +50,9 @@ TEST_P(Interepreter_TEST_P, _){
     case ParserType::ExeUnit :
         root = parser.new_ExeUnit();
         break;
+    case ParserType::VarDef :
+        root = parser.new_VarDef();
+        break;
     default:
         ASSERT_TRUE(false);   
     }
@@ -69,7 +73,7 @@ TEST_P(Interepreter_TEST_P, _){
 }
 
 /**********************************************
- * 1. Expr
+ * Test 1. Expr
  **********************************************/
 
 INSTANTIATE_TEST_SUITE_P(Expr_Arithmetic, Interepreter_TEST_P, testing::Values(
@@ -95,6 +99,29 @@ ParserType::Expr
 },
 
 std::tuple<int, std::string, int64_t, ParserType>{
+2,
+"8 / (2 + 1) * 3",
+6,
+ParserType::Expr
+}
+));
+
+/**********************************************
+ * Test 3. Variable Def
+ **********************************************/
+
+INSTANTIATE_TEST_SUITE_P(VariableDef, Interepreter_TEST_P, testing::Values(
+std::tuple<int, std::string, int64_t, ParserType>{
+0,
+R"({
+var a = 1
+a
+})",
+1,
+ParserType::ExeUnit
+},
+
+std::tuple<int, std::string, int64_t, ParserType>{
 3,
 "{var a = 1 var b = 2 a + b}",
 3,
@@ -102,19 +129,8 @@ ParserType::ExeUnit
 }
 ));
 
-
 /**********************************************
- * 2. Execute Unit
- **********************************************/
-
-/**********************************************
- * 3. Variable
- **********************************************/
-
-
-
-/**********************************************
- * 4. Process Control
+ * Test 4. Process Control
  **********************************************/
 
 INSTANTIATE_TEST_SUITE_P(ProcessControl_IfStmt, Interepreter_TEST_P, testing::Values(
@@ -208,7 +224,7 @@ ParserType::ExeUnit
 ));
 
 /**********************************************
- * 5. Function
+ * 5. Test Function
  **********************************************/
 
 INSTANTIATE_TEST_SUITE_P(Function, Interepreter_TEST_P, testing::Values(

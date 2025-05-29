@@ -225,23 +225,6 @@ R"({
 })",
 3, 
 ParserType::ExeUnit
-},
-
-tuple<string, string, int64_t, ParserType>{
-"52801",
-R"({
-    var sum = 0
-    function fun(a) {
-        if a {
-            sum = sum + fun(a - 1)
-        }
-        a
-    }
-    sum = fun(5)
-    sum
-})",
-15, 
-ParserType::ExeUnit
 }
 
 ));
@@ -342,7 +325,7 @@ ParserType::ExeUnit
 ));
 
 /**********************************************
- * Test 6. Test Function
+ * Test 6. Function
  **********************************************/
 
 INSTANTIATE_TEST_SUITE_P(Function, Interepreter_TEST_P, testing::Values(
@@ -381,6 +364,23 @@ R"({
     sum
 })",
 10,
+ParserType::ExeUnit
+},
+
+tuple<string, string, int64_t, ParserType>{
+"52801",
+R"({
+    var sum = 0
+    function fun(a) {
+        if a {
+            sum = sum + fun(a - 1)
+        }
+        a
+    }
+    sum = fun(5)
+    sum
+})",
+15, 
 ParserType::ExeUnit
 }
 

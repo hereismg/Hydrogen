@@ -210,6 +210,38 @@ R"({
 })",
 3, 
 ParserType::ExeUnit
+},
+
+tuple<string, string, int64_t, ParserType>{
+"52801",
+R"({
+    function oper(){
+        function add(a, b){
+            a + b
+        }
+        add
+    }
+    oper()(1, 2)
+})",
+3, 
+ParserType::ExeUnit
+},
+
+tuple<string, string, int64_t, ParserType>{
+"52801",
+R"({
+    var sum = 0
+    function fun(a) {
+        if a {
+            sum = sum + fun(a - 1)
+        }
+        a
+    }
+    sum = fun(5)
+    sum
+})",
+15, 
+ParserType::ExeUnit
 }
 
 ));

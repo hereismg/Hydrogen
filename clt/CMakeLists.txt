@@ -5,14 +5,14 @@ add_library(
 )
 target_link_libraries(hdg_clt_static PUBLIC libhdg)
 
-# add_executable(
-#     hdg_clt
-#     main.cpp
-# )
+add_executable(
+    hdg_clt
+    main.cpp
+)
 
-# target_link_libraries(
-#     hdg_clt 
-#     PUBLIC 
-#     "hdg_clt_static"
-#     "libhdg"
-# )
+target_link_libraries(
+    hdg_clt 
+    PUBLIC 
+    "hdg_clt_static"
+    "libhdg"
+)

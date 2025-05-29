@@ -26,6 +26,10 @@ class Interepreter_TEST_P: public testing::TestWithParam<tuple<
     ParserType      // 执行函数
 >>{};
 
+std::string debug_json_dump(const nlohmann::json& j) {
+    return j.dump(4);  // 实际调用内联函数
+}
+
 TEST_P(Interepreter_TEST_P, _){
     auto [id, code, expected, parserType] = GetParam();
     // cout << id << endl;

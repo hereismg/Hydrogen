@@ -23,10 +23,10 @@ namespace hdg{
 
         std::vector<uNode>& getList();
 
-        nlohmann::json toJSON() const override;
-        virtual std::string toString();
-        virtual Object* interpret();
-        virtual void accept(Visitor& visitor);
+        virtual nlohmann::json toJSON() const override;
+        virtual std::string toString() override;
+        virtual Object* interpret() override;
+        virtual void accept(Visitor& visitor) override;
     };
 }
 

@@ -226,6 +226,7 @@ namespace hdg {
     }
 
     sObject Integer::plus(sObject other){
+        assert(other.get() != nullptr);
         if (typeid(*other.get()) == typeid(Integer)){
             Integer* other_int = dynamic_cast<Integer*>(other.get());
             int64_t res = m_value + other_int->getValue();
@@ -239,6 +240,7 @@ namespace hdg {
     }
 
     sObject Integer::minus(sObject other){
+        assert(other.get() != nullptr);
         if (typeid(*other.get()) == typeid(Integer)){
             Integer* other_int = dynamic_cast<Integer*>(other.get());
             int64_t res = m_value - other_int->getValue();
@@ -252,6 +254,7 @@ namespace hdg {
     }
 
     sObject Integer::mul(sObject other){
+        assert(other.get() != nullptr);
         if (typeid(*other.get()) == typeid(Integer)){
             Integer* other_int = dynamic_cast<Integer*>(other.get());
             int64_t res = m_value * other_int->getValue();
@@ -265,6 +268,7 @@ namespace hdg {
     }
 
     sObject Integer::div(sObject other){
+        assert(other.get() != nullptr);
         if (typeid(*other.get()) == typeid(Integer)){
             Integer* other_int = dynamic_cast<Integer*>(other.get());
             int64_t res = m_value / other_int->getValue();
@@ -281,6 +285,7 @@ namespace hdg {
     sInteger Integer::False = std::make_shared<Integer>(0);
 
     sObject Integer::equation(sObject other) {
+        assert(other.get() != nullptr);
         if (typeid(*other.get()) != typeid(Integer)) return Integer::False;
 
         auto otherVal = dynamic_cast<Integer*>(other.get())->getValue();

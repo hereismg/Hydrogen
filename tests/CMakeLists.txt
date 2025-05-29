@@ -29,9 +29,9 @@ set(
 function(hdg_append_test test_name)
     add_executable("${test_name}" ${ARGN})
 
-    target_link_directories    ("${test_name}" PRIVATE "${TEST_LINK_DIR}")
-    target_link_libraries      ("${test_name}" PRIVATE "${TEST_LINK_LIB}")
-    target_include_directories ("${test_name}" PRIVATE "${TEST_INCLUDE_DIR}")
+    target_link_directories    ("${test_name}" PUBLIC "${TEST_LINK_DIR}")
+    target_link_libraries      ("${test_name}" PUBLIC "${TEST_LINK_LIB}")
+    target_include_directories ("${test_name}" PUBLIC "${TEST_INCLUDE_DIR}")
 
     add_test(
         NAME "${test_name}" 
@@ -53,10 +53,10 @@ function(hdg_append_test_with_file file)
         PUBLIC
         "${GTEST_INCLUDE_DIR}"
         "${SML_INCLUDE_DIR}"
-        "${PROJECT_SOURCE_DIR}/hydrogen/include/basic"
-        "${PROJECT_SOURCE_DIR}/hydrogen/include/kernel"
-        "${PROJECT_SOURCE_DIR}/hydrogen/include/node"
-        "${PROJECT_SOURCE_DIR}/hydrogen/include/object"
+        "${PROJECT_SOURCE_DIR}/hydrogen/include"
+        # "${PROJECT_SOURCE_DIR}/hydrogen/include/kernel"
+        # "${PROJECT_SOURCE_DIR}/hydrogen/include/node"
+        # "${PROJECT_SOURCE_DIR}/hydrogen/include/object"
         "${PROJECT_SOURCE_DIR}/clt/src"
     )
     target_link_directories(
@@ -73,7 +73,7 @@ function(hdg_append_test_with_file file)
     )
     target_link_libraries(
         ${name} 
-        PRIVATE 
+        PUBLIC 
         libhdg
         hdg_clt_static
     )
@@ -98,7 +98,7 @@ function(hdg_append_test_with_dir dir)
             "${GOOGLE_TEST_DIR}/build/lib"
             "${LIBRARY_OUTPUT_PATH}"
     )
-    target_link_libraries(${test_name} PRIVATE "${TEST_LINK_LIB}")
+    target_link_libraries(${test_name} PUBLIC "${TEST_LINK_LIB}")
     add_test(NAME ${test_name} COMMAND ${test_name})
 endfunction()
 

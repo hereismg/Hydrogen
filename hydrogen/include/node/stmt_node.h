@@ -28,9 +28,9 @@ namespace hdg{
         void setRVal(uNode&& rVal) { m_rVal = std::move(rVal); }
 
         nlohmann::json toJSON() const override;
-        virtual std::string toString();
-        virtual Object* interpret();
-        virtual void accept(Visitor& visitor);
+        virtual std::string toString() override;
+        virtual Object* interpret() override;
+        virtual void accept(Visitor& visitor) override;
     };
 
     class DefNode: public Node {
@@ -46,9 +46,9 @@ namespace hdg{
         std::string getName() { return m_name; }
 
         nlohmann::json toJSON() const override;
-        virtual std::string toString();
-        virtual Object* interpret();
-        virtual void accept(Visitor& visitor);
+        virtual std::string toString() override;
+        virtual Object* interpret() override;
+        virtual void accept(Visitor& visitor) override;
     };
 
     class new_IfStmtNode: public Node{
@@ -68,9 +68,9 @@ namespace hdg{
         uNode& getElseExeUnit();
 
         nlohmann::json toJSON() const override;
-        virtual std::string toString();
-        virtual Object* interpret();
-        virtual void accept(Visitor& visitor);
+        virtual std::string toString() override;
+        virtual Object* interpret() override;
+        virtual void accept(Visitor& visitor) override;
     };
 
     class new_WhileStmtNode: public Node{
@@ -86,9 +86,9 @@ namespace hdg{
         uNode& getLoopUnit();
 
         nlohmann::json toJSON() const override;
-        virtual std::string toString();
-        virtual Object* interpret();
-        virtual void accept(Visitor& visitor);
+        virtual std::string toString() override;
+        virtual Object* interpret() override;
+        virtual void accept(Visitor& visitor) override;
     };
 }
 

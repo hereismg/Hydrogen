@@ -26,8 +26,8 @@ namespace hdg {
         void setClass(const std::string& className);
         std::string getClass();
 
-        virtual std::string toString() = 0;
-        virtual Object* interpret() = 0;
+        virtual std::string toString() override = 0;
+        virtual Object* interpret() override = 0;
     };
 
     class FuncObjNode: public ObjectNode {
@@ -50,9 +50,9 @@ namespace hdg {
 
         sObject getObj();
 
-        std::string toString() override;
-        Object* interpret() override;
-        void accept(Visitor& visitor);
+        virtual std::string toString() override;
+        virtual Object* interpret() override;
+        virtual void accept(Visitor& visitor) override;
     };
 
     class NumObjNode: public ObjectNode{
@@ -83,8 +83,8 @@ namespace hdg {
 
         void setValue(const std::string& value);
 
-        std::string toString() override;
-        Object* interpret() override;
+        virtual std::string toString() override;
+        virtual Object* interpret() override;
     };
 
     class IntNode: public ObjectNode{
@@ -104,10 +104,10 @@ namespace hdg {
         int64_t getValue() const { return m_val; }
         void setValue(int64_t new_val);
 
-        nlohmann::json toJSON() const override;
-        std::string toString() override;
-        Object* interpret() override;
-        void accept(Visitor& visitor) override;
+        virtual nlohmann::json toJSON() const override;
+        virtual std::string toString() override;
+        virtual Object* interpret() override;
+        virtual void accept(Visitor& visitor) override;
     };
 
     class IdentNode: public Node{
@@ -126,10 +126,10 @@ namespace hdg {
         std::string& getIdent();
         void setIdent(std::string new_ident);
 
-        nlohmann::json toJSON() const override;
-        std::string toString() override;
-        Object* interpret() override;
-        void accept(Visitor& visitor) override;
+        virtual nlohmann::json toJSON() const override;
+        virtual std::string toString() override;
+        virtual Object* interpret() override;
+        virtual void accept(Visitor& visitor) override;
     };
 
     class New_FuncObjNode: public ObjectNode{

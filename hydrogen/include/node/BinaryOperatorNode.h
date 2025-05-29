@@ -39,8 +39,8 @@ namespace hdg {
         Node* getLeft();
         Node* getRight();
 
-        std::string toString() override;
-        Object* interpret() override;
+        virtual std::string toString() override;
+        virtual Object* interpret() override;
     };
 
     class BinOperNode: public Node{
@@ -69,11 +69,11 @@ namespace hdg {
         uNode& getLeft() { return m_left; }
         uNode& getRight() { return m_right; }
 
-        nlohmann::json toJSON() const override;
+        virtual nlohmann::json toJSON() const override;
 
-        virtual std::string toString();
-        virtual Object* interpret();
-        virtual void accept(Visitor& visitor);
+        virtual std::string toString() override;
+        virtual Object* interpret() override;
+        virtual void accept(Visitor& visitor) override; 
     };
 
     class PostfixNode: public Node{
@@ -94,10 +94,10 @@ namespace hdg {
         inline std::string getIdent() {return m_ident; }
         inline Token::Type getType() { return m_type; }
 
-        nlohmann::json toJSON() const override;
-        virtual std::string toString();
-        virtual Object* interpret() { assert(false); return nullptr; }
-        virtual void accept(Visitor& visitor);
+        virtual nlohmann::json toJSON() const override;
+        virtual std::string toString() override;
+        virtual Object* interpret() override { assert(false); return nullptr; }
+        virtual void accept(Visitor& visitor) override;
     };
 
 } // hdg

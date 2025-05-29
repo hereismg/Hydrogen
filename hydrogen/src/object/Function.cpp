@@ -105,6 +105,7 @@ namespace hdg {
     bool New_BaseFunction::checkArgs(const std::vector<sObject>& args){
         if (m_args.size() != args.size()){
             assert(false); // hdgftodo 构造异常信息
+            return false;
         }
         else{
             return true;
@@ -142,5 +143,6 @@ namespace hdg {
 
     Object* New_DefFunction::copy(){
         assert(false);
+        return nullptr;
     }
 } // hdg

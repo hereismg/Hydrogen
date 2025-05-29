@@ -37,6 +37,7 @@ namespace hdg{
 
     Object* new_ExeUnitNode::interpret(){
         assert(false);
+        return nullptr;
     }
 
     void new_ExeUnitNode::accept(Visitor& visitor){

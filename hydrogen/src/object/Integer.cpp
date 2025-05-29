@@ -234,6 +234,7 @@ namespace hdg {
         }
         else{
             assert(false && "Error!");
+            return nullptr;
         }
     }
 
@@ -246,6 +247,7 @@ namespace hdg {
         }
         else{
             assert(false && "Error!");
+            return nullptr;
         }
     }
 
@@ -258,6 +260,7 @@ namespace hdg {
         }
         else{
             assert(false && "Error!");
+            return nullptr;
         }
     }
 
@@ -270,6 +273,7 @@ namespace hdg {
         }
         else{
             assert(false && "Error!");
+            return nullptr;
         }
     }
 

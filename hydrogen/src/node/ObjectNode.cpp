@@ -172,6 +172,7 @@ namespace hdg {
 
     Object* IntNode::interpret(){
         assert(false && "IntNode has been disabled!");
+        return nullptr;
     }
 
     void IntNode::accept(Visitor& visitor){
@@ -211,6 +212,7 @@ namespace hdg {
 
     Object* IdentNode::interpret(){
         assert(false);
+        return nullptr;
     }
 
     void IdentNode::accept(Visitor& visitor){
@@ -242,6 +244,7 @@ namespace hdg {
 
     Object* New_FuncObjNode::interpret(){
         assert(false);
+        return nullptr;
     }
 
     void New_FuncObjNode::accept(Visitor& visitor){
@@ -279,6 +282,7 @@ namespace hdg {
 
     Object* ListObjNode::interpret(){
         assert(false);
+        return nullptr;
     }
 
 } // hdg

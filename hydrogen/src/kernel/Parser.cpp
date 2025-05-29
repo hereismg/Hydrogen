@@ -836,6 +836,7 @@ namespace hdg {
         }
 
         assert(false);
+        return nullptr;
     }
 
     uNode Parser::new_ListExpr(){

@@ -61,6 +61,7 @@ namespace hdg{
 
     Object* new_AssignNode::interpret(){
         assert(false && "new_AssignNode::interpret");
+        return nullptr;
     }
 
     void new_AssignNode::accept(Visitor& visitor){
@@ -94,6 +95,7 @@ namespace hdg{
 
     Object* DefNode::interpret(){
         assert(false && "DefNode::interpret");
+        return nullptr;
     }
 
     void DefNode::accept(Visitor& visitor){
@@ -149,6 +151,7 @@ namespace hdg{
 
     Object* new_IfStmtNode::interpret(){
         assert(false);
+        return nullptr;
     }
 
     void new_IfStmtNode::accept(Visitor& visitor){
@@ -192,6 +195,7 @@ namespace hdg{
     
     Object* new_WhileStmtNode::interpret(){
         assert(false);
+        return nullptr;
     }
 
     void new_WhileStmtNode::accept(Visitor& visitor){

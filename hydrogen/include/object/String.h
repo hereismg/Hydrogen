@@ -5,6 +5,8 @@
 #ifndef HDG_STRING_H
 #define HDG_STRING_H
 
+#include <string>
+
 #include "Object.h"
 
 namespace hdg {

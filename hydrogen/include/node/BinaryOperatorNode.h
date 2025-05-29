@@ -96,7 +96,7 @@ namespace hdg {
 
         nlohmann::json toJSON() const override;
         virtual std::string toString();
-        virtual Object* interpret() { assert(false); }
+        virtual Object* interpret() { assert(false); return nullptr; }
         virtual void accept(Visitor& visitor);
     };
 

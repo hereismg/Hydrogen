@@ -1,5 +1,4 @@
 #include <gtest/gtest.h>
-#include <Lexer.h>
 #include <sml.hpp>
 #include <memory>
 

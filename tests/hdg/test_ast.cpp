@@ -3,15 +3,15 @@
 #include <sml.hpp>
 #include <gtest/gtest.h>
 
-#include <Lexer.h>
-#include <Environment.h>
-#include <Parser.h>
-#include <ObjectNode.h>
-#include <BinaryOperatorNode.h>
-#include <stmt_node.h>
-#include <unit_node.h>
-#include <Function.h>
-#include <List.h>
+#include <kernel/Lexer.h>
+#include <kernel/Parser.h> 
+#include <basic/Environment.h>
+#include <node/ObjectNode.h>
+#include <node/BinaryOperatorNode.h>
+#include <node/stmt_node.h>
+#include <node/unit_node.h>
+#include <object/Function.h>
+#include <object/List.h>
 
 using namespace std;
 using namespace hdg;

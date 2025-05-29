@@ -645,39 +645,6 @@ INSTANTIATE_TEST_SUITE_P(Smoke, Function_TEST_P, testing::Values(
 // 3
 // },
 
-std::tuple<int, std::string, int64_t>{
-counter ++,
-R"({
-    var a = 1
-    a
-})",
-1
-},
-
-std::tuple<int, std::string, int64_t>{
-counter ++,
-R"({
-    var list = [1, 2]
-    list[0]
-})",
-1
-},
-
-std::tuple<int, std::string, int64_t>{
-counter ++,
-R"({
-    function add(a, b){
-        a + b
-    }
-    function mine(a, b){
-        a - b
-    }
-    var list = [add, mine]
-    list[0](1, 2)
-})",
-3
-},
-
 // std::tuple<int, std::string, int64_t>{
 // counter ++,
 // R"({

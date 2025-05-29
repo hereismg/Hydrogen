@@ -166,8 +166,10 @@ R"({
 })",
 2025, // mgtodo: 是否会造成内存泄漏？
 ParserType::ExeUnit
-},
+}
+));
 
+INSTANTIATE_TEST_SUITE_P(LRValAndFunction, Interepreter_TEST_P, testing::Values(
 tuple<string, string, int64_t, ParserType>{
 "52801",
 R"({
@@ -180,7 +182,36 @@ R"({
 })",
 2025, 
 ParserType::ExeUnit
+},
+
+tuple<string, string, int64_t, ParserType>{
+"52801",
+R"({
+    function add(a, b){
+        a + b
+    }
+    function mine(a, b){
+        a - b
+    }
+    var list = [add, mine]
+    list[0](1, 2)
+})",
+3, 
+ParserType::ExeUnit
+},
+
+tuple<string, string, int64_t, ParserType>{
+"52801",
+R"({
+    function add(pair){
+        pair[0] + pair[1]
+    }
+    add([1, 2])
+})",
+3, 
+ParserType::ExeUnit
 }
+
 ));
 
 

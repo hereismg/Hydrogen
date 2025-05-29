@@ -596,13 +596,13 @@ namespace hdg {
             }
             uNode stmt;
 
-            stmt = new_AssignStmt();
-            if (stmt != nullptr){
+            auto resOpt = new_AssignStmt();
+            if (resOpt.has_value()){
                 while (m_currentToken->getType() == Token::Type::EL){
                     advance();
                 }
 
-                unit->getList().emplace_back(std::move(stmt));
+                unit->getList().emplace_back(std::move(resOpt.value()));
                 continue;
             }
 
@@ -718,30 +718,36 @@ namespace hdg {
         );
     }
 
-    uNode Parser::new_AssignStmt(){
-        Position pos = m_currentToken->thisPosition()->clone();
+    optional<uNode> Parser::new_AssignStmt(){
+        Position pos;
+        pos.setStart(m_currentToken->thisPosition()->getStart());
 
-        if (m_currentToken->getType() != Token::Type::IDENT){
-            return nullptr;
-        }
+        auto start = m_currentToken;
 
-        std::string name = m_currentToken->getValue();
-        advance();
+        // 1. lVal
+        auto resOpt = new_PostfixExpr();
+        if (!resOpt.has_value()) return std::nullopt;
+        uNode lVal = std::move(resOpt.value());
 
+        // 2. '='
         if (m_currentToken->getType() != Token::Type::EQ){
-            retreat();
-            return nullptr;
+            // retreat();
+            m_currentToken = start;
+            return std::nullopt;
         }
         advance();
         
-        uNode expr = new_Expr();
+        // 3. rVal
+        uNode rVal = new_Expr();
 
-        return std::make_unique<new_AssignNode>(name, std::move(expr), pos);
+        // 4 return
+        pos.setEnd(m_currentToken->thisPosition()->getEnd());
+        return std::make_unique<new_AssignNode>(std::move(lVal), std::move(rVal), pos);
     }
 
-    uNode Parser::new_ValBuild() {
-        return nullptr;
-    }
+    // uNode Parser::new_ValBuild() {
+    //     return nullptr;
+    // }
 
     uNode Parser::new_VarDef() {
         while (m_currentToken->getType() == Token::Type::EL) advance();

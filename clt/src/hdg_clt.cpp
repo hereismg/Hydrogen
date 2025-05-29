@@ -46,6 +46,7 @@ Option::Option(int argc, char *argv[]) {
             if (endWith(argv[ptr], "lexer")) m_optMode = Lexer;
             else if (endWith(argv[ptr], "parser")) m_optMode = Parser;
             else if (endWith(argv[ptr], "interpreter")) m_optMode = Interpreter;
+            else if (endWith(argv[ptr], "JSON")) m_optMode = JSON;
             else m_optMode = Unknow;
         }
     }
@@ -77,7 +78,7 @@ Global Options:
   2. [-h|--help]
  
 Options:
-  1. [-m|--mode]=[lexer | parser | interpreter])" << std::endl;
+  1. [-m|--mode]=[lexer | parser | interpreter | JSON])" << std::endl;
 }
 
 int real_main(int argc, char *argv[]){
@@ -128,6 +129,19 @@ int real_main(int argc, char *argv[]){
         auto res = visitor.getResult();
         
         std::cout << res->toString() << std::endl;
+
+        break;
+    }
+    case Option::Mode::JSON:{
+        hdg::Lexer lexer;
+
+        auto tokens = lexer.run("<stdin>", &codeText);
+
+        hdg::Environment envir;
+        hdg::Parser parser(tokens, &envir);
+        hdg::uNode ast = parser.new_ExeUnit();
+
+        std::cout << ast->toJSON().dump(4) << std::endl;
 
         break;
     }

@@ -9,7 +9,8 @@ public:
         Unknow,
         Lexer,
         Parser,
-        Interpreter
+        Interpreter,
+        JSON
     };
 
 public:

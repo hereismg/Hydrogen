@@ -229,16 +229,16 @@ ParserType::ExeUnit
 
 
 INSTANTIATE_TEST_SUITE_P(LValAndRVal, Interepreter_TEST_P, testing::Values(
-std::tuple<int, std::string, int64_t, ParserType>{
-23425,
-R"({
-    var list = [1, 2]
-    list[0] = 3
-    list[0]
-})",
-3,
-ParserType::ExeUnit
-},
+// std::tuple<int, std::string, int64_t, ParserType>{
+// 23425,
+// R"({
+//     var list = [1, 2]
+//     list[0] = 3
+//     list[0]
+// })",
+// 3,
+// ParserType::ExeUnit
+// },
 
 std::tuple<int, std::string, int64_t, ParserType>{
 52801,

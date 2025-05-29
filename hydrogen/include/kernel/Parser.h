@@ -8,11 +8,13 @@
 
 #include <functional>
 #include <vector>
+#include <optional>
 
 #include "../basic/Token.h"
 #include "../node/Node.h"
 
 namespace hdg {
+    using std::optional;
 
     class Parser {
     protected:
@@ -80,11 +82,11 @@ namespace hdg {
         uNode new_ArithExpr();      // ArithExpr     : Term {('+' | '-') Term}
         uNode new_Term();           // Term          : Factor {('*' | '/') Factor}
         uNode new_Factor();         // Factor        : {'+' | '-'} PostfixExpr
-        uNode new_PostfixExpr();    // PostfixExpr   : Primary { PostfixSuffix }
+        optional<uNode> new_PostfixExpr();    // PostfixExpr   : Primary { PostfixSuffix }
                                     // PostfixSuffix : '(' ExprList ')'
                                     //               | '[' ExprList ']'
                                     //               | '.' IDENT '(' ExprList ')'
-        uNode new_Primary();        // Primary       : INT_CONST
+        optional<uNode> new_Primary();        // Primary       : INT_CONST
                                     //               | FLOAT_CONST
                                     //               | STR_CONST
                                     //               | IDENT

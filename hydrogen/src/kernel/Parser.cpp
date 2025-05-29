@@ -952,26 +952,35 @@ namespace hdg {
         Token::Type oper = m_currentToken->getType();
         switch(oper){
             case Token::Type::PLUS: {
-                return new_PostfixExpr(); // hdgtodo: 增加对单目运算符的支持
+                auto resOpt = new_PostfixExpr();
+                if (!resOpt.has_value()) assert(false);
+                return std::move(resOpt.value()); // hdgtodo: 增加对单目运算符的支持
             }
             case Token::Type::MINUS: {
-                return new_PostfixExpr();
+                auto resOpt = new_PostfixExpr();
+                if (!resOpt.has_value()) assert(false);
+                return std::move(resOpt.value()); // hdgtodo: 增加对单目运算符的支持
             }
             default: {
-                return new_PostfixExpr();
+                auto resOpt = new_PostfixExpr();
+                if (!resOpt.has_value()) assert(false);
+                return std::move(resOpt.value()); // hdgtodo: 增加对单目运算符的支持
             }
         }
     }
 
-    uNode Parser::new_PostfixExpr() {
+    optional<uNode> Parser::new_PostfixExpr() {
         Position pos;
         pos.setStart(m_currentToken->thisPosition()->getStart());
 
-        uNode primary = new_Primary();
-        assert(primary != nullptr);
+        auto resOpt = new_Primary();
+        if (!resOpt.has_value()) return std::nullopt;
+        uNode primary = std::move(resOpt.value());
 
-        while(true){
-            if (m_currentToken->getType() == Token::Type::LPAREN){ // 圆括号 ()
+        bool flag = true;
+        while(flag){
+            switch (m_currentToken->getType()){
+            case Token::LPAREN : { // 圆括号 ()
                 advance();
 
                 std::vector<uNode> params;
@@ -988,8 +997,9 @@ namespace hdg {
                     std::move(params), 
                     pos
                 );
+                break;
             }
-            else if (m_currentToken->getType() == Token::Type::LBRACKET){ // 方括号 []
+            case Token::LBRACKET : { // 方括号 []
                 advance();
 
                 std::vector<uNode> params;
@@ -1006,9 +1016,12 @@ namespace hdg {
                     std::move(params), 
                     pos
                 );
-            }
-            else{
                 break;
+            }
+            default : {
+                flag = false;
+                break;
+            }
             }
         }
 
@@ -1016,7 +1029,7 @@ namespace hdg {
     }
 
 
-    uNode Parser::new_Primary() {
+    optional<uNode> Parser::new_Primary() {
         uNode node;
 
         switch (m_currentToken->getType()){
@@ -1047,7 +1060,7 @@ namespace hdg {
                 return node;
             }
             default:{
-                assert(false && "Throw Error! incorrect node");
+                 return std::nullopt;
             }
         }
     }

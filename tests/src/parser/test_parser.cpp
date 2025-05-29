@@ -20,7 +20,7 @@ typedef enum {
     ExeUnit,
     VarDef
 } ParserType;
-class Interepreter_TEST_P: public testing::TestWithParam<std::tuple<
+class Interepreter_TEST_P: public testing::TestWithParam<tuple<
     string,         // 标识符
     string,         // 代码
     int64_t,        // 预期结果
@@ -29,7 +29,7 @@ class Interepreter_TEST_P: public testing::TestWithParam<std::tuple<
 
 TEST_P(Interepreter_TEST_P, _){
     auto [id, code, expected, parserType] = GetParam();
-    cout << id << endl;
+    // cout << id << endl;
     string path = "<stdin>";
     Lexer lexer;
 
@@ -77,28 +77,28 @@ TEST_P(Interepreter_TEST_P, _){
  **********************************************/
 
 INSTANTIATE_TEST_SUITE_P(Expr_Arithmetic, Interepreter_TEST_P, testing::Values(
-std::tuple<string, std::string, int64_t, ParserType>{
+tuple<string, string, int64_t, ParserType>{
 "0",
 "1 + 2",
 3,
 ParserType::Expr
 },
 
-std::tuple<string, std::string, int64_t, ParserType>{
+tuple<string, string, int64_t, ParserType>{
 "1",
 "1 + ( 2 + 3 ) * 4",
 21,
 ParserType::Expr
 },
 
-std::tuple<string, std::string, int64_t, ParserType>{
+tuple<string, string, int64_t, ParserType>{
 "2",
 "0 - 1",
 -1,
 ParserType::Expr
 },
 
-std::tuple<string, std::string, int64_t, ParserType>{
+tuple<string, string, int64_t, ParserType>{
 "2",
 "8 / (2 + 1) * 3",
 6,
@@ -111,7 +111,7 @@ ParserType::Expr
  **********************************************/
 
 INSTANTIATE_TEST_SUITE_P(VariableDef, Interepreter_TEST_P, testing::Values(
-std::tuple<string, std::string, int64_t, ParserType>{
+tuple<string, string, int64_t, ParserType>{
 "1234",
 R"({
 var a = 1
@@ -121,7 +121,7 @@ a
 ParserType::ExeUnit
 },
 
-std::tuple<string, std::string, int64_t, ParserType>{
+tuple<string, string, int64_t, ParserType>{
 "3",
 "{var a = 1 var b = 2 a + b}",
 3,
@@ -136,7 +136,7 @@ ParserType::ExeUnit
 
 
 INSTANTIATE_TEST_SUITE_P(LValAndRVal, Interepreter_TEST_P, testing::Values(
-std::tuple<string, std::string, int64_t, ParserType>{
+tuple<string, string, int64_t, ParserType>{
 "LValAndRVal_0",
 R"({
     var list = [1, 2]
@@ -147,13 +147,38 @@ R"({
 ParserType::ExeUnit
 },
 
-std::tuple<string, std::string, int64_t, ParserType>{
+tuple<string, string, int64_t, ParserType>{
 "52801",
 R"({
     var list = [[1, 2], 3]
     list[0][0]
 })",
 1, 
+ParserType::ExeUnit
+},
+
+tuple<string, string, int64_t, ParserType>{
+"52801", 
+R"({
+    var list = [1, 2025]
+    list[0] = list
+    list[0][0][0][0][0][0][0][0][0][0][1]
+})",
+2025, // mgtodo: 是否会造成内存泄漏？
+ParserType::ExeUnit
+},
+
+tuple<string, string, int64_t, ParserType>{
+"52801",
+R"({
+    var list = [1, 2, 3]
+    function getList(){
+        list
+    }
+    getList()[1] = 2025
+    list[1]
+})",
+2025, 
 ParserType::ExeUnit
 }
 ));
@@ -164,7 +189,7 @@ ParserType::ExeUnit
  **********************************************/
 
 INSTANTIATE_TEST_SUITE_P(ProcessControl_IfStmt, Interepreter_TEST_P, testing::Values(
-std::tuple<string, std::string, int64_t, ParserType>{
+tuple<string, string, int64_t, ParserType>{
 "ProcessControl_IfStmt_0",
 R"(
 if 1 + 1 {
@@ -177,7 +202,7 @@ if 1 + 1 {
 ParserType::IfStmt
 },
 
-std::tuple<string, std::string, int64_t, ParserType>{
+tuple<string, string, int64_t, ParserType>{
 "1",
 R"(
 if 
@@ -193,7 +218,7 @@ else {
 ParserType::IfStmt
 },
 
-std::tuple<string, std::string, int64_t, ParserType>{
+tuple<string, string, int64_t, ParserType>{
 "2",
 R"({
 var a = 1
@@ -208,7 +233,7 @@ else {
 ParserType::ExeUnit
 },
 
-std::tuple<string, std::string, int64_t, ParserType>{
+tuple<string, string, int64_t, ParserType>{
 "0527",
 R"({
 var a = 1
@@ -235,7 +260,7 @@ ParserType::ExeUnit
 
 
 INSTANTIATE_TEST_SUITE_P(ProcessControl_WhileStmt, Interepreter_TEST_P, testing::Values(
-std::tuple<string, std::string, int64_t, ParserType>{
+tuple<string, string, int64_t, ParserType>{
 "ProcessControl_WhileStmt_0",
 R"({
 var sum = 0
@@ -258,7 +283,7 @@ ParserType::ExeUnit
  **********************************************/
 
 INSTANTIATE_TEST_SUITE_P(Function, Interepreter_TEST_P, testing::Values(
-std::tuple<string, std::string, int64_t, ParserType>{
+tuple<string, string, int64_t, ParserType>{
 "111",
 R"({
     function add(a, b){
@@ -270,7 +295,7 @@ R"({
 ParserType::ExeUnit
 },
 
-std::tuple<string, std::string, int64_t, ParserType>{
+tuple<string, string, int64_t, ParserType>{
 "2",
 R"({
 function fun() {
@@ -282,7 +307,7 @@ fun()
 ParserType::ExeUnit
 },
 
-std::tuple<string, std::string, int64_t, ParserType>{
+tuple<string, string, int64_t, ParserType>{
 "2",
 R"({
     function getNum(sum){

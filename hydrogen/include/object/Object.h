@@ -40,29 +40,29 @@ namespace hdg {
         virtual sObject minus(sObject other);
         virtual sObject mul(sObject other);
         virtual sObject div(sObject other);
-        virtual sObject mod(sObject other)  { assert(false); }
-        virtual sObject pow(sObject other)  { assert(false); }
+        virtual sObject mod(sObject other)  { assert(false); return nullptr; }
+        virtual sObject pow(sObject other)  { assert(false); return nullptr; }
         virtual bool    isTrue();
 
-        virtual sObject equation(sObject other) { assert(false); }
-        virtual sObject notEquation(sObject other) { assert(false); }
-        virtual sObject greaterThan(sObject other) { assert(false); }
-        virtual sObject lessThan(sObject other) { assert(false); }
-        virtual sObject greaterThanEquation(sObject other) { assert(false); }
-        virtual sObject lessThanEquation(sObject other) { assert(false); }
+        virtual sObject equation(sObject other) { assert(false); return nullptr; }
+        virtual sObject notEquation(sObject other) { assert(false); return nullptr; }
+        virtual sObject greaterThan(sObject other) { assert(false); return nullptr; }
+        virtual sObject lessThan(sObject other) { assert(false); return nullptr; }
+        virtual sObject greaterThanEquation(sObject other) { assert(false); return nullptr; }
+        virtual sObject lessThanEquation(sObject other) { assert(false); return nullptr; }
 
-        virtual sObject andOperator(sObject other) { assert(false); }
-        virtual sObject orOperator(sObject other) { assert(false); }
+        virtual sObject andOperator(sObject other) { assert(false); return nullptr; }
+        virtual sObject orOperator(sObject other) { assert(false); return nullptr; }
         // virtual sObject notOperator();
 
         virtual sObject parenthesis(const std::vector<sObject>& args, Visitor& visitor); // ()
-        virtual sObject brackets(const std::vector<sObject>& args, Visitor& visitor) { assert(false); }    // []
-        virtual sObject braces(const std::vector<sObject>& args) { assert(false); }      // {}
+        virtual sObject brackets(const std::vector<sObject>& args, Visitor& visitor) { assert(false); return nullptr; }    // []
+        virtual sObject braces(const std::vector<sObject>& args) { assert(false); return nullptr; }      // {}
 
         virtual void illegalOperator();
-        virtual sObject clone() { assert(false); };
+        virtual sObject clone() { assert(false); return nullptr; }
         virtual std::string toString() = 0;
-        virtual std::string getClass() { assert(false); }
+        virtual std::string getClass() { assert(false); return nullptr; }
 
         // ======================================
         // 下面是弃用的方法

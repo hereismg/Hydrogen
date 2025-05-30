@@ -438,8 +438,8 @@ function getPhone(){
 Animal(getAge)
 })",
 180,
- ParserType::ExeUnit
- }
+ParserType::ExeUnit
+}
 
 
 ));

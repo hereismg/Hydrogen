@@ -122,7 +122,7 @@ namespace hdg {
         checkArgs(args);
         
         // 压栈
-        visitor.getStack().push_back(m_envir);
+        visitor.getStack().push_back(std::make_shared<New_Environment>());
 
         // 参数
         for (size_t i = 0; i<args.size(); i++){

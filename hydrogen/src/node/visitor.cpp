@@ -90,13 +90,13 @@ namespace hdg{
         auto& left = node.getLeft();
         assert(left != nullptr);
         left->accept(*this);
-        auto left_val = getResult();
+        auto left_val = getRVal();
         assert(left_val != nullptr && "InterpreterVisitor::visitBinOperNode: left_val must be not null!");
 
         auto& right = node.getRight();
         assert(right != nullptr);
         right->accept(*this);
-        auto right_val = getResult();
+        auto right_val = getRVal();
         assert(right_val != nullptr && "InterpreterVisitor::visitBinOperNode: right_val must be not null!");
 
         Token oper = node.getOper();

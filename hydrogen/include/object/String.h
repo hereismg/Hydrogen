@@ -21,7 +21,17 @@ namespace hdg {
         String(std::string value, const Position& position);
         ~String() override;
 
-        std::string getValue();
+        std::string getValue() const { return m_value; };
+
+        sObject plus(sObject other) override;
+        sObject div(sObject other) override;
+        sObject equation(sObject other) override;
+
+        std::string getClass() override { return "String"; }
+
+        // ======================================
+        // 下面是弃用的方法
+        // ======================================
 
         Object* plus(Object* other) override;
         Object* div(Object* other) override;
@@ -30,7 +40,6 @@ namespace hdg {
 
         std::string toString() override;
         Object* copy() override;
-        std::string getClass() override { return "String"; }
     };
 
 } // hdg

@@ -21,9 +21,55 @@ namespace hdg {
 
     String::~String() = default;
 
-    std::string String::getValue() {
-        return m_value;
+    sObject String::plus(sObject other)
+    {
+        assert(other != nullptr);
+
+        if (typeid(*other.get()) == typeid(String))
+        {
+            String* otherStr = dynamic_cast<String*>(other.get());
+
+            return std::make_shared<String>(otherStr->getValue() + m_value);
+        }
+        else
+        {
+            assert(false);
+            return nullptr;
+        }
     }
+
+    sObject String::div(sObject other)
+    {
+        assert(other != nullptr);
+
+        if (typeid(other.get()) == typeid(String*))
+        {
+            std::vector<sObject> strList;
+                        String* otherStr = dynamic_cast<String*>(other.get());
+
+            std::string ori = m_value, sql = ((String*)other.get())->getValue();
+
+        }
+    }
+
+    sObject String::equation(sObject other)
+    {
+        assert(other != nullptr);
+
+        if (typeid(*other.get()) == typeid(String))
+        {
+            String* otherStr = dynamic_cast<String*>(other.get());
+
+            if (otherStr->getValue() == m_value) return Integer::True;
+            else return Integer::False;
+        }
+        else
+        {
+            assert(false);
+            return nullptr;
+        }
+    }
+
 
     Object *String::equation(Object *other) {
         if (other->getClass_old() == "String"){

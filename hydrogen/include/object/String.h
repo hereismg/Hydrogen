@@ -7,6 +7,7 @@
 
 #include <string>
 
+#include "List.h"
 #include "Object.h"
 
 namespace hdg {
@@ -28,6 +29,8 @@ namespace hdg {
         sObject equation(sObject other) override;
 
         std::string getClass() override { return "String"; }
+
+        static std::shared_ptr<List> buildStrList(const std::vector<);
 
         // ======================================
         // 下面是弃用的方法

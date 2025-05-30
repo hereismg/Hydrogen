@@ -1,17 +1,12 @@
 #include <memory>
 
-#include <sml.hpp>
 #include <gtest/gtest.h>
 #include <nlohmann/json.hpp>
 
 #include <kernel/Lexer.h>
 #include <kernel/Parser.h> 
-#include <basic/Environment.h>
 #include <node/ObjectNode.h>
 #include <node/BinaryOperatorNode.h>
-#include <node/stmt_node.h>
-#include <node/unit_node.h>
-#include <object/Function.h>
 #include <object/List.h>
 #include <object/Integer.h>
 
@@ -110,4 +105,21 @@ TEST(Smoke, list_1) {
 
     auto obj = list->brackets({ std::make_shared<Integer>(1) }, visitor);
     ASSERT_TRUE(obj->equation(std::make_shared<Integer>(2))->isTrue());
+}
+
+
+/**********************************************
+ * String
+ **********************************************/
+
+TEST(String, div_1)
+{
+    auto str = std::make_shared<String>("12 34 56");
+    auto split = std::make_shared<String>(" ");
+
+    auto actual_list = str->div(split);
+
+    ASSERT_NE(actual_list, nullptr);
+
+
 }

@@ -4,7 +4,6 @@
 
 #include "../../include/object/String.h"
 
-#include "../../include/object/List.h"
 #include "../../include/object/Integer.h"
 
 namespace hdg {
@@ -27,7 +26,7 @@ namespace hdg {
 
         if (typeid(*other.get()) == typeid(String))
         {
-            String* otherStr = dynamic_cast<String*>(other.get());
+            auto otherStr = dynamic_cast<String*>(other.get());
 
             return std::make_shared<String>(otherStr->getValue() + m_value);
         }
@@ -45,10 +44,23 @@ namespace hdg {
         if (typeid(other.get()) == typeid(String*))
         {
             std::vector<sObject> strList;
-                        String* otherStr = dynamic_cast<String*>(other.get());
+            auto otherStr = dynamic_cast<String*>(other.get());
 
-            std::string ori = m_value, sql = ((String*)other.get())->getValue();
+            std::string ori = m_value, sql = otherStr->getValue();
 
+            int64_t end = ori.find(sql);
+            while (end != -1)
+            {
+                strList.push_back(std::make_shared<String>(ori.substr(0, end)));
+                ori.erase(ori.begin(), ori.begin() + (int)end + 1);
+                end = ori.find(sql);
+            }
+            return std::make_shared<List>(std::move(strList));
+        }
+        else
+        {
+            assert(false);
+            return nullptr;
         }
     }
 

@@ -30,7 +30,7 @@ namespace hdg {
 
         std::string getClass() override { return "String"; }
 
-        static std::shared_ptr<List> buildStrList(const std::vector<);
+        static std::shared_ptr<List> buildStrList(const std::vector<std::string>& list);
 
         // ======================================
         // 下面是弃用的方法

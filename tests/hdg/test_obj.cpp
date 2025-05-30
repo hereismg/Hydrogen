@@ -112,6 +112,42 @@ TEST(Smoke, list_1) {
  * String
  **********************************************/
 
+TEST(String, equation_1){
+    auto str1 = std::make_shared<String>("1");
+    auto str2 = std::make_shared<String>("1");
+
+    ASSERT_TRUE(str1->equation(str2)->isTrue());
+}
+
+TEST(String, equation_2){
+    auto str1 = std::make_shared<String>("");
+    auto str2 = std::make_shared<String>("");
+
+    ASSERT_TRUE(str1->equation(str2)->isTrue());
+}
+
+TEST(String, plus_1){
+    auto str1 = std::make_shared<String>("1");
+    auto str2 = std::make_shared<String>("2");
+
+    auto actual = str1->plus(str2);
+
+    auto expected = std::make_shared<String>("12");
+
+    ASSERT_TRUE(actual->equation(expected)->isTrue());
+}
+
+TEST(String, plus_2){
+    auto str1 = std::make_shared<String>("");
+    auto str2 = std::make_shared<String>("");
+
+    auto actual = str1->plus(str2);
+
+    auto expected = std::make_shared<String>("");
+
+    ASSERT_TRUE(actual->equation(expected)->isTrue());
+}
+
 TEST(String, div_1)
 {
     auto str = std::make_shared<String>("12 34 56");
@@ -121,5 +157,41 @@ TEST(String, div_1)
 
     ASSERT_NE(actual_list, nullptr);
 
+    auto expected_list = String::buildStrList({
+        "12",
+        "34",
+        "56"
+    });
 
+    ASSERT_TRUE(actual_list->equation(expected_list)->isTrue());
+}
+
+TEST(String, div_2)
+{
+    auto str = std::make_shared<String>("12");
+    auto split = std::make_shared<String>(" ");
+
+    auto actual_list = str->div(split);
+
+    ASSERT_NE(actual_list, nullptr);
+
+    auto expected_list = String::buildStrList({
+        "12"
+    });
+
+    ASSERT_TRUE(actual_list->equation(expected_list)->isTrue());
+}
+
+TEST(String, div_3)
+{
+    auto str = std::make_shared<String>("1");
+    auto split = std::make_shared<String>("1");
+
+    auto actual_list = str->div(split);
+
+    ASSERT_NE(actual_list, nullptr);
+
+    auto expected_list = String::buildStrList({});
+
+    ASSERT_TRUE(actual_list->equation(expected_list)->isTrue());
 }

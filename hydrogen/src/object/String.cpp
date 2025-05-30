@@ -28,7 +28,7 @@ namespace hdg {
         {
             auto otherStr = dynamic_cast<String*>(other.get());
 
-            return std::make_shared<String>(otherStr->getValue() + m_value);
+            return std::make_shared<String>(m_value + otherStr->getValue());
         }
         else
         {
@@ -41,20 +41,22 @@ namespace hdg {
     {
         assert(other != nullptr);
 
-        if (typeid(other.get()) == typeid(String*))
+        if (typeid(*other.get()) == typeid(String))
         {
-            std::vector<sObject> strList;
             auto otherStr = dynamic_cast<String*>(other.get());
-
             std::string ori = m_value, sql = otherStr->getValue();
 
+            std::vector<sObject> strList;
             int64_t end = ori.find(sql);
             while (end != -1)
             {
-                strList.push_back(std::make_shared<String>(ori.substr(0, end)));
+                std::string temp = ori.substr(0, end);
+                if (temp != "") strList.push_back(std::make_shared<String>(temp));
                 ori.erase(ori.begin(), ori.begin() + (int)end + 1);
                 end = ori.find(sql);
             }
+            std::string temp = ori.substr(0, end);
+            if (temp != "") strList.push_back(std::make_shared<String>(ori.substr(0, end)));
             return std::make_shared<List>(std::move(strList));
         }
         else
@@ -107,6 +109,14 @@ namespace hdg {
             illegalOperator();
             return nullptr;
         }
+    }
+
+    std::shared_ptr<List> String::buildStrList(const std::vector<std::string>& list){
+        auto res = std::make_shared<List>();
+        for (auto& i : list){
+            res->getList().push_back(std::make_shared<String>(i));
+        }
+        return res;
     }
 
     Object *String::plus(Object *other) {

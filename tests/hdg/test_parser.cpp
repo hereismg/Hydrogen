@@ -410,12 +410,36 @@ R"({
         }
         a
     }
-    sum = fun(5)
+    fun(2)
     sum
 })",
-15, 
+1,
 ParserType::ExeUnit
+},
+
+tuple<string, string, int64_t, ParserType>{
+"52801",
+R"({
+function Animal(oper){
+    var age = 180
+    var phone = 123456789
+
+    oper()
 }
+
+function getAge(){
+    age
+}
+
+function getPhone(){
+    phone
+}
+
+Animal(getAge)
+})",
+180,
+ ParserType::ExeUnit
+ }
 
 
 ));

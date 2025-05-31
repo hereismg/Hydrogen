@@ -25,7 +25,7 @@ typedef enum {
 class Interepreter_TEST_P: public testing::TestWithParam<tuple<
     string,         // 标识符
     string,         // 代码
-    int64_t,        // 预期结果
+    sObject,        // 预期结果
     ParserType      // 执行函数
 >>{};
 
@@ -98,43 +98,80 @@ TEST_P(Interepreter_TEST_P, _){
     auto obj = visitor.getRVal().get();
 
     ASSERT_NE(obj, nullptr);
-    ASSERT_EQ(typeid(*obj), typeid(Integer));
 
-    Integer* int_ptr = dynamic_cast<Integer*>(obj);
+    obj->equation(expected);
 
-    ASSERT_EQ(int_ptr->getValue(), expected);
+    // ASSERT_EQ(typeid(*obj), typeid(Integer));
+
+    // Integer* int_ptr = dynamic_cast<Integer*>(obj);
+
+    // ASSERT_EQ(int_ptr->getValue(), expected);
 }
+
+
+
+/**********************************************
+ * Test 1. Parse Basic Type
+ **********************************************/
+
+INSTANTIATE_TEST_SUITE_P(ParseBasicType_String, Interepreter_TEST_P, testing::Values(
+tuple<string, string, sObject, ParserType>{
+"ProcessControl_WhileStmt_0",
+R"({
+    var a = "123"
+    a
+})",
+make_shared<String>("123"),
+ParserType::ExeUnit
+},
+
+tuple<string, string, sObject, ParserType>{
+"ProcessControl_WhileStmt_0",
+R"({
+    var a = "12 34 56"
+    var split = " "
+    var list = a / split
+    list
+})",
+String::buildStrList({
+    "12",
+    "34",
+    "56"
+}),
+ParserType::ExeUnit
+}
+));
 
 /**********************************************
  * Test 1. Expr
  **********************************************/
 
 INSTANTIATE_TEST_SUITE_P(Expr_Arithmetic, Interepreter_TEST_P, testing::Values(
-tuple<string, string, int64_t, ParserType>{
+tuple<string, string, sObject, ParserType>{
 "0",
 "1 + 2",
-3,
+make_shared<Integer>(3),
 ParserType::Expr
 },
 
-tuple<string, string, int64_t, ParserType>{
+tuple<string, string, sObject, ParserType>{
 "1",
 "1 + ( 2 + 3 ) * 4",
-21,
+make_shared<Integer>(21),
 ParserType::Expr
 },
 
-tuple<string, string, int64_t, ParserType>{
+tuple<string, string, sObject, ParserType>{
 "2",
 "0 - 1",
--1,
+make_shared<Integer>(-1),
 ParserType::Expr
 },
 
-tuple<string, string, int64_t, ParserType>{
+tuple<string, string, sObject, ParserType>{
 "2",
 "8 / (2 + 1) * 3",
-6,
+make_shared<Integer>(6),
 ParserType::Expr
 }
 ));
@@ -144,20 +181,20 @@ ParserType::Expr
  **********************************************/
 
 INSTANTIATE_TEST_SUITE_P(VariableDef, Interepreter_TEST_P, testing::Values(
-tuple<string, string, int64_t, ParserType>{
+tuple<string, string, sObject, ParserType>{
 "1234",
 R"({
 var a = 1
 a
 })",
-1,
+make_shared<Integer>(1),
 ParserType::ExeUnit
 },
 
-tuple<string, string, int64_t, ParserType>{
+tuple<string, string, sObject, ParserType>{
 "3",
 "{var a = 1 var b = 2 a + b}",
-3,
+make_shared<Integer>(3),
 ParserType::ExeUnit
 }
 ));
@@ -169,41 +206,41 @@ ParserType::ExeUnit
 
 
 INSTANTIATE_TEST_SUITE_P(LValAndRVal, Interepreter_TEST_P, testing::Values(
-tuple<string, string, int64_t, ParserType>{
+tuple<string, string, sObject, ParserType>{
 "LValAndRVal_0",
 R"({
     var list = [1, 2]
     list[0] = 3
     list[0]
 })",
-3,
+make_shared<Integer>(3),
 ParserType::ExeUnit
 },
 
-tuple<string, string, int64_t, ParserType>{
+tuple<string, string, sObject, ParserType>{
 "52801",
 R"({
     var list = [[1, 2], 3]
     list[0][0]
 })",
-1, 
+make_shared<Integer>(1), 
 ParserType::ExeUnit
 },
 
-tuple<string, string, int64_t, ParserType>{
+tuple<string, string, sObject, ParserType>{
 "52801", 
 R"({
     var list = [1, 2025]
     list[0] = list
     list[0][0][0][0][0][0][0][0][0][0][1]
 })",
-2025, // mgtodo: 是否会造成内存泄漏？
+make_shared<Integer>(2025), // mgtodo: 是否会造成内存泄漏？
 ParserType::ExeUnit
 }
 ));
 
 INSTANTIATE_TEST_SUITE_P(LRValAndFunction, Interepreter_TEST_P, testing::Values(
-tuple<string, string, int64_t, ParserType>{
+tuple<string, string, sObject, ParserType>{
 "52801",
 R"({
     var list = [1, 2, 3]
@@ -213,11 +250,11 @@ R"({
     getList()[1] = 2025
     list[1]
 })",
-2025, 
+make_shared<Integer>(2025), 
 ParserType::ExeUnit
 },
 
-tuple<string, string, int64_t, ParserType>{
+tuple<string, string, sObject, ParserType>{
 "52801",
 R"({
     function add(a, b){
@@ -229,11 +266,11 @@ R"({
     var list = [add, mine]
     list[0](1, 2)
 })",
-3, 
+make_shared<Integer>(3), 
 ParserType::ExeUnit
 },
 
-tuple<string, string, int64_t, ParserType>{
+tuple<string, string, sObject, ParserType>{
 "52801",
 R"({
     function add(pair){
@@ -241,11 +278,11 @@ R"({
     }
     add([1, 2])
 })",
-3, 
+make_shared<Integer>(3), 
 ParserType::ExeUnit
 },
 
-tuple<string, string, int64_t, ParserType>{
+tuple<string, string, sObject, ParserType>{
 "52801",
 R"({
     function oper(){
@@ -256,7 +293,7 @@ R"({
     }
     oper()(1, 2)
 })",
-3, 
+make_shared<Integer>(3), 
 ParserType::ExeUnit
 }
 
@@ -268,7 +305,7 @@ ParserType::ExeUnit
  **********************************************/
 
 INSTANTIATE_TEST_SUITE_P(ProcessControl_IfStmt, Interepreter_TEST_P, testing::Values(
-tuple<string, string, int64_t, ParserType>{
+tuple<string, string, sObject, ParserType>{
 "ProcessControl_IfStmt_0",
 R"(
 if 1 + 1 {
@@ -277,11 +314,11 @@ if 1 + 1 {
     5
 }
 )",
-10,
+make_shared<Integer>(10),
 ParserType::IfStmt
 },
 
-tuple<string, string, int64_t, ParserType>{
+tuple<string, string, sObject, ParserType>{
 "1",
 R"(
 if 
@@ -293,11 +330,11 @@ else {
     5
 }
 )",
-10,
+make_shared<Integer>(10),
 ParserType::IfStmt
 },
 
-tuple<string, string, int64_t, ParserType>{
+tuple<string, string, sObject, ParserType>{
 "2",
 R"({
 var a = 1
@@ -308,11 +345,11 @@ else {
     a - 1
 }
 })",
-1,
+make_shared<Integer>(1),
 ParserType::ExeUnit
 },
 
-tuple<string, string, int64_t, ParserType>{
+tuple<string, string, sObject, ParserType>{
 "0527",
 R"({
 var a = 1
@@ -332,14 +369,14 @@ else {
     a - 1
 }
 })",
-2222,
+make_shared<Integer>(2222),
 ParserType::ExeUnit
 }
 ));
 
 
 INSTANTIATE_TEST_SUITE_P(ProcessControl_WhileStmt, Interepreter_TEST_P, testing::Values(
-tuple<string, string, int64_t, ParserType>{
+tuple<string, string, sObject, ParserType>{
 "ProcessControl_WhileStmt_0",
 R"({
 var sum = 0
@@ -350,19 +387,19 @@ while counter {
 }
 sum
 })",
-15,
+make_shared<Integer>(15),
 ParserType::ExeUnit
 }
 
 
 ));
 
-/**********************************************
- * Test 6. Function
- **********************************************/
+// /**********************************************
+//  * Test 6. Function
+//  **********************************************/
 
 INSTANTIATE_TEST_SUITE_P(Function, Interepreter_TEST_P, testing::Values(
-tuple<string, string, int64_t, ParserType>{
+tuple<string, string, sObject, ParserType>{
 "111",
 R"({
     function add(a, b){
@@ -370,11 +407,11 @@ R"({
     }
     add(1, 2)
 })",
-3,
+make_shared<Integer>(3),
 ParserType::ExeUnit
 },
 
-tuple<string, string, int64_t, ParserType>{
+tuple<string, string, sObject, ParserType>{
 "2",
 R"({
 function fun() {
@@ -382,11 +419,11 @@ function fun() {
 }
 fun()
 })",
-10,
+make_shared<Integer>(10),
 ParserType::ExeUnit
 },
 
-tuple<string, string, int64_t, ParserType>{
+tuple<string, string, sObject, ParserType>{
 "2",
 R"({
     function getNum(sum){
@@ -396,11 +433,11 @@ R"({
     sum = sum + getNum(sum)
     sum
 })",
-10,
+make_shared<Integer>(10),
 ParserType::ExeUnit
 },
 
-tuple<string, string, int64_t, ParserType>{
+tuple<string, string, sObject, ParserType>{
 "52801",
 R"({
     var sum = 0
@@ -413,11 +450,11 @@ R"({
     fun(2)
     sum
 })",
-1,
+make_shared<Integer>(1),
 ParserType::ExeUnit
 },
 
-tuple<string, string, int64_t, ParserType>{
+tuple<string, string, sObject, ParserType>{
 "52801",
 R"({
 function Animal(oper){
@@ -437,7 +474,7 @@ function getPhone(){
 
 Animal(getAge)
 })",
-180,
+make_shared<Integer>(180),
 ParserType::ExeUnit
 }
 

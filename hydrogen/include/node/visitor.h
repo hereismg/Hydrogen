@@ -16,6 +16,7 @@ namespace hdg{
     class New_FuncObjNode;
     class DefNode;
     class ListObjNode;
+    class StrNode;
     
     class Visitor{
     protected:
@@ -31,6 +32,7 @@ namespace hdg{
 
         virtual void visitNumObjNode(NumObjNode& node);
         virtual void visitIntNode(IntNode& node);
+        virtual void visitStrNode(StrNode& node) { std::cout << "Visitor::visitStrNode() is not implement!" << std::endl; };
         virtual void visitFuncObjNode(FuncObjNode& node);
         virtual void visitListObjNode(ListObjNode& node);
         virtual void visitIdentNode(IdentNode& node);
@@ -63,6 +65,7 @@ namespace hdg{
         void visitPostfixNode(PostfixNode& node) override;
 
         void visitIntNode(IntNode& node) override;
+        void visitStrNode(StrNode& node) override;
         void visitFuncObjNode(FuncObjNode& node) override;
         void visitListObjNode(ListObjNode& node) override;
         void visitIdentNode(IdentNode& node) override;

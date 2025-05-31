@@ -72,19 +72,22 @@ namespace hdg {
         Object* interpret() override;
     };
 
-    class StrObjNode: public ObjectNode{
+    class StrNode: public ObjectNode{
     protected:
         std::string m_value;
 
     public:
-        StrObjNode();
-        StrObjNode(std::string value, const Position& position, Environment* environment);
-        ~StrObjNode() override;
+        StrNode();
+        StrNode(std::string value, const Position& pos);
+        StrNode(std::string value, const Position& position, Environment* environment);
+        ~StrNode() override;
 
         void setValue(const std::string& value);
+        std::string getValue()const { return m_value; }
 
         virtual std::string toString() override;
         virtual Object* interpret() override;
+        virtual void accept(Visitor& visitor) override;
     };
 
     class IntNode: public ObjectNode{

@@ -178,6 +178,10 @@ namespace hdg{
         m_rVal = std::make_shared<Integer>(node.getValue());
     }
 
+    void InterpreterVisitor::visitStrNode(StrNode& node){
+        m_rVal = std::make_shared<String>(node.getValue());
+    }
+
     void InterpreterVisitor::visitFuncObjNode(FuncObjNode& node){
         m_rVal = node.getObj();
     }

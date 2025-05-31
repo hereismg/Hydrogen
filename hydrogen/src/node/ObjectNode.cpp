@@ -120,25 +120,35 @@ namespace hdg {
         visitor.visitFuncObjNode(*this);
     }
 
-    StrObjNode::StrObjNode() {
+    StrNode::StrNode() {
         setClass("String");
     }
 
-    StrObjNode::StrObjNode(std::string value, const Position &position, Environment *environment) :
+    StrNode::StrNode(std::string val, const Position& pos):
+        ObjectNode("String", pos, nullptr), m_value(std::move(val))    
+    {
+        setClass("String");
+    }
+
+    StrNode::StrNode(std::string value, const Position &position, Environment *environment) :
             ObjectNode("String", position, environment), m_value(std::move(value)) {}
 
-    StrObjNode::~StrObjNode() = default;
+    StrNode::~StrNode() = default;
 
-    void StrObjNode::setValue(const std::string& value) {
+    void StrNode::setValue(const std::string& value) {
         m_value = value;
     }
 
-    std::string StrObjNode::toString() {
+    std::string StrNode::toString() {
         return "StrObjNode(\"" + m_value + "\"";
     }
 
-    Object *StrObjNode::interpret() {
+    Object *StrNode::interpret() {
         return new String(m_value, m_position);
+    }
+
+    void StrNode::accept(Visitor& visitor){
+        visitor.visitStrNode(*this);
     }
 
     IntNode::IntNode(int64_t val)

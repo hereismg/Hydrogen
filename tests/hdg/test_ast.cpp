@@ -16,6 +16,10 @@
 using namespace std;
 using namespace hdg;
 
+/**********************************************
+ * Test 1. BinOperNode
+ **********************************************/
+
 TEST(test_BinOperNode, _1) {
     uNode left = std::make_unique<IntNode>(5);
     uNode right = std::make_unique<IntNode>(2);
@@ -242,6 +246,11 @@ TEST(test_BinOperNode, _7) {
     ASSERT_EQ(res->getValue(), 45);
 }
 
+
+/**********************************************
+ * Test 2. DefNode
+ **********************************************/
+
 TEST(test_DefNode, _1){
     uNode obj = std::make_unique<IntNode>(10);
     std::string name = "num";
@@ -262,6 +271,10 @@ TEST(test_DefNode, _1){
     ASSERT_EQ(int_ptr->getValue(), 10);
 }
 
+
+/**********************************************
+ * Test 3. ExeUnitNode
+ **********************************************/
 
 TEST(test_ExeUnitNode, _1){
     // a = 1
@@ -314,6 +327,10 @@ TEST(test_ExeUnitNode, _1){
     }
 }
 
+
+/**********************************************
+ * Test 4. IfStmtNode
+ **********************************************/
 
 TEST(test_IfStmtNode, _1){
     /**
@@ -378,6 +395,11 @@ TEST(test_IfStmtNode, _1){
         ASSERT_EQ(int_ptr->getValue(), 5);
     }
 }
+
+
+/**********************************************
+ * Test 4. Function Obj
+ **********************************************/
 
 TEST(test_FuncObj, _1){
     uNode int1 = std::make_unique<IntNode>(10);
@@ -542,6 +564,8 @@ TEST(Smoke, PostfixNode_2) {
     // 验证
     ASSERT_TRUE(res->equation(std::make_shared<Integer>(2025))->isTrue());
 }
+
+
 
 // TEST(Smoke, ListObjNode_1) {
 //     // 构造初始环境：list = [2025]

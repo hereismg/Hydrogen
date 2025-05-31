@@ -258,7 +258,7 @@ namespace hdg {
             return node;
         }
         else if (m_currentToken->getType() == Token::STRING){
-            Node* node = new StrObjNode(m_currentToken->getValue(), *m_currentToken->thisPosition(), environment);
+            Node* node = new StrNode(m_currentToken->getValue(), *m_currentToken->thisPosition(), environment);
             advance();
             return node;
         }
@@ -1040,7 +1040,7 @@ namespace hdg {
         uNode node;
 
         switch (m_currentToken->getType()){
-            case Token::Type::INT:{
+            case Token::INT : {
                 int64_t val = std::stoll(m_currentToken->getValue().c_str());
                 auto pos = *m_currentToken->thisPosition();
 
@@ -1048,13 +1048,13 @@ namespace hdg {
                 advance();
                 return node;
             }
-            case Token::Type::IDENT:{
+            case Token::IDENT : {
                 std::string name = m_currentToken->getValue();
                 advance();
 
                 return std::make_unique<IdentNode>(name);
             }
-            case Token::Type::LPAREN:{
+            case Token::LPAREN : {
                 auto pos = m_currentToken->thisPosition()->clone();
                 advance();
 
@@ -1065,6 +1065,15 @@ namespace hdg {
                 }
                 advance();
                 return node;
+            }
+            case Token::STRING : {
+                Position pos;
+                pos.setStart(m_currentToken->thisPosition()->getStart());
+                std::string val = m_currentToken->getValue();
+                advance();
+
+                pos.setEnd(m_currentToken->thisPosition()->getEnd());
+                return std::make_unique<StrNode>(val, pos);
             }
             default:{
                  return std::nullopt;

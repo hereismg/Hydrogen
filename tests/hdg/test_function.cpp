@@ -91,6 +91,8 @@ TEST_P(Interepreter_TEST_P, _){
     }
     ASSERT_NE(root, nullptr);
 
+    cout << root->toJSON().dump(4) << endl;
+
     InterpreterVisitor visitor;
     root->accept(visitor);
 
@@ -112,9 +114,10 @@ INSTANTIATE_TEST_SUITE_P(ParseBasicType_String, Interepreter_TEST_P, testing::Va
 tuple<string, string, sObject, ParserType>{
 "ParseBasicType_String",
 R"({
-    var a = "123"
-    print()
-    a
+    var txt = input()
+    var arr = txt / " "
+    print(arr)
+    txt
 })",
 make_shared<String>("123"),
 ParserType::ExeUnit

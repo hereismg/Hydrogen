@@ -85,6 +85,8 @@ namespace hdg {
         void setValue(const std::string& value);
         std::string getValue()const { return m_value; }
 
+        virtual nlohmann::json toJSON() const override;
+        
         virtual std::string toString() override;
         virtual Object* interpret() override;
         virtual void accept(Visitor& visitor) override;

@@ -126,8 +126,22 @@ namespace hdg {
 
     std::shared_ptr<New_BuiltInFunction> New_BuiltInFunction::print_BIF(){
         auto fun = [](const std::vector<sObject> & args, Visitor & visitor)->sObject{
-                std::cout << "hello" << std::endl;
+                std::cout << args[0]->toString() << std::endl;
                 return nullptr;
+            };
+        
+        std::vector<std::string> args = { "obj" };
+        return std::make_shared<New_BuiltInFunction>(
+            std::move(fun), 
+            std::move(args)
+        );
+    }
+
+    std::shared_ptr<New_BuiltInFunction> New_BuiltInFunction::input_BIF(){
+        auto fun = [](const std::vector<sObject> & args, Visitor & visitor)->sObject{
+                std::string txt;
+                std::getline(std::cin, txt);
+                return std::make_shared<String>(txt);
             };
         
         std::vector<std::string> args = {};

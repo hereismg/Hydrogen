@@ -144,6 +144,45 @@ ParserType::ExeUnit
 tuple<string, string, sObject, ParserType>{
 "ParseBasicType_String",
 R"({
+    var a = "12 34 56" / " "
+    a
+})",
+String::buildStrList({
+    "12",
+    "34",
+    "56"
+}),
+ParserType::ExeUnit
+},
+
+tuple<string, string, sObject, ParserType>{ 
+"ParseBasicType_String",
+R"({
+    var a = "12 34 56 "
+    var list = a / " "
+    list
+})",
+String::buildStrList({
+    "12",
+    "34",
+    "56"// mgtodo 思考：这里不用再加一个空字符串吗？
+}),
+ParserType::ExeUnit
+},
+
+tuple<string, string, sObject, ParserType>{ 
+"ParseBasicType_String",
+R"({
+    var a = "12" + "34" + "56"
+    a
+})",
+std::make_shared<String>("123456"),
+ParserType::ExeUnit
+},
+
+tuple<string, string, sObject, ParserType>{
+"ParseBasicType_String",
+R"({
     var list = ["Hello World!"]
     list
 })",

@@ -102,10 +102,10 @@ namespace hdg {
     
         static std::shared_ptr<New_BuiltInFunction> print_BIF();
         static std::shared_ptr<New_BuiltInFunction> input_BIF();
-        static std::shared_ptr<New_BuiltInFunction> parseInt_BIF();
-        static std::shared_ptr<New_BuiltInFunction> len_BIF();
-        static std::shared_ptr<New_BuiltInFunction> gcd_BIF();
-        static std::shared_ptr<New_BuiltInFunction> rand_BIF();
+        // static std::shared_ptr<New_BuiltInFunction> parseInt_BIF();
+        // static std::shared_ptr<New_BuiltInFunction> len_BIF();
+        // static std::shared_ptr<New_BuiltInFunction> gcd_BIF();
+        // static std::shared_ptr<New_BuiltInFunction> rand_BIF();
     };
 
     class New_DefFunction: public New_BaseFunction{

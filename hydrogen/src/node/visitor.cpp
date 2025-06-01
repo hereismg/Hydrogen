@@ -17,6 +17,7 @@ namespace hdg{
         auto envir = std::make_shared<New_Environment>();
 
         envir->setSymbol("print", New_BuiltInFunction::print_BIF());
+        envir->setSymbol("input", New_BuiltInFunction::input_BIF());
 
         m_stack.emplace_back(envir);
     }

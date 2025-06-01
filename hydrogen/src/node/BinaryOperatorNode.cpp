@@ -159,6 +159,7 @@ namespace hdg {
     nlohmann::json BinOperNode::toJSON() const {
         nlohmann::json j{ {"__class__", "BinOperNode"} };
         j["left"]  = m_left ->toJSON();
+        j["oper"] = Token::TypeNameMap[m_oper.getType()];
         j["right"] = m_right->toJSON();
         
         return j;

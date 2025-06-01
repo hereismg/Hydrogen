@@ -135,6 +135,10 @@ namespace hdg {
 
     StrNode::~StrNode() = default;
 
+    nlohmann::json StrNode::toJSON() const {
+        return m_value;
+    }
+
     void StrNode::setValue(const std::string& value) {
         m_value = value;
     }

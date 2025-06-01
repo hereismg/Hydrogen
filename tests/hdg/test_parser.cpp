@@ -116,7 +116,7 @@ TEST_P(Interepreter_TEST_P, _){
 
 INSTANTIATE_TEST_SUITE_P(ParseBasicType_String, Interepreter_TEST_P, testing::Values(
 tuple<string, string, sObject, ParserType>{
-"ProcessControl_WhileStmt_0",
+"ParseBasicType_String",
 R"({
     var a = "123"
     a
@@ -126,7 +126,7 @@ ParserType::ExeUnit
 },
 
 tuple<string, string, sObject, ParserType>{
-"ProcessControl_WhileStmt_0",
+"ParseBasicType_String",
 R"({
     var a = "12 34 56"
     var split = " "
@@ -137,6 +137,18 @@ String::buildStrList({
     "12",
     "34",
     "56"
+}),
+ParserType::ExeUnit
+},
+
+tuple<string, string, sObject, ParserType>{
+"ParseBasicType_String",
+R"({
+    var list = ["Hello World!"]
+    list
+})",
+String::buildStrList({
+    "Hello World!"
 }),
 ParserType::ExeUnit
 }
@@ -291,6 +303,7 @@ R"({
         }
         add
     }
+    
     oper()(1, 2)
 })",
 make_shared<Integer>(3), 

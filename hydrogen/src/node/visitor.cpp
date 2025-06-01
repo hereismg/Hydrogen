@@ -14,7 +14,11 @@
 
 namespace hdg{
     Visitor::Visitor(): m_lVal(nullptr){
-        m_stack.emplace_back(new New_Environment);
+        auto envir = std::make_shared<New_Environment>();
+
+        envir->setSymbol("print", New_BuiltInFunction::print_BIF());
+
+        m_stack.emplace_back(envir);
     }
 
     void Visitor::visitBinOperNode(BinOperNode& node){

@@ -48,6 +48,11 @@ hdg_append_test(
 )
 
 hdg_append_test(
+    "test_function" 
+    "hdg/test_function.cpp"
+)
+
+hdg_append_test(
     "test_lexer"
     "hdg/test_lexer.cpp"
 )

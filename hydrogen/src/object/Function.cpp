@@ -112,6 +112,31 @@ namespace hdg {
         }
     }
 
+    New_BuiltInFunction::New_BuiltInFunction(FuncInterface&& fun, std::vector<std::string>&& args)
+        : m_fun(std::move(fun)),
+          New_BaseFunction(std::move(args))
+    {
+        assert(m_fun != nullptr);
+    }
+
+    sObject New_BuiltInFunction::parenthesis(const std::vector<sObject> &args, Visitor& visitor){
+        checkArgs(args);
+        return m_fun(args, visitor);
+    }
+
+    std::shared_ptr<New_BuiltInFunction> New_BuiltInFunction::print_BIF(){
+        auto fun = [](const std::vector<sObject> & args, Visitor & visitor)->sObject{
+                std::cout << "hello" << std::endl;
+                return nullptr;
+            };
+        
+        std::vector<std::string> args = {};
+        return std::make_shared<New_BuiltInFunction>(
+            std::move(fun), 
+            std::move(args)
+        );
+    }
+    
     New_DefFunction::New_DefFunction(std::vector<std::string> args, uNode&& body)
         : New_BaseFunction(std::move(args)), m_body(std::move(body))
     {

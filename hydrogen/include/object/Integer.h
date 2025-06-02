@@ -33,6 +33,12 @@ namespace hdg {
         bool isTrue() override;
 
         sObject equation(sObject other) override;
+        sObject notEquation(sObject other) override;
+        sObject greaterThan(sObject other) override;
+        sObject lessThan(sObject other) override;
+        sObject greaterThanEquation(sObject other) override;
+        sObject lessThanEquation(sObject other) override;
+
 
         std::string toString() override;
         sObject clone() override;

@@ -99,13 +99,7 @@ TEST_P(Interepreter_TEST_P, _){
 
     ASSERT_NE(obj, nullptr);
 
-    obj->equation(expected);
-
-    // ASSERT_EQ(typeid(*obj), typeid(Integer));
-
-    // Integer* int_ptr = dynamic_cast<Integer*>(obj);
-
-    // ASSERT_EQ(int_ptr->getValue(), expected);
+    ASSERT_TRUE(obj->equation(expected)->isTrue());
 }
 
 
@@ -223,6 +217,44 @@ tuple<string, string, sObject, ParserType>{
 "2",
 "8 / (2 + 1) * 3",
 make_shared<Integer>(6),
+ParserType::Expr
+}
+));
+
+INSTANTIATE_TEST_SUITE_P(Expr_CompExpr, Interepreter_TEST_P, testing::Values(
+tuple<string, string, sObject, ParserType>{
+"0",
+"1 > 2",
+Integer::False,
+ParserType::Expr
+},
+
+tuple<string, string, sObject, ParserType>{
+"0",
+"1 < 2",
+Integer::True,
+ParserType::Expr
+},
+
+tuple<string, string, sObject, ParserType>{
+"0",
+"1 >= 2",
+Integer::False,
+ParserType::Expr
+},
+
+tuple<string, string, sObject, ParserType>{
+"0",
+"1 <= 2",
+Integer::True,
+ParserType::Expr
+},
+
+
+tuple<string, string, sObject, ParserType>{
+"0",
+"2 >= 2",
+Integer::True,
 ParserType::Expr
 }
 ));
@@ -406,11 +438,11 @@ tuple<string, string, sObject, ParserType>{
 R"({
 var a = 1
 if a {
-    var b = 2
-    if b - 2 {
+    var b = 1
+    if b >= 2 {
         1111
     }
-    elif b - 1 {
+    elif b <= 1 {
         2222
     }
     else {
@@ -441,9 +473,22 @@ sum
 })",
 make_shared<Integer>(15),
 ParserType::ExeUnit
+},
+
+tuple<string, string, sObject, ParserType>{
+"ProcessControl_WhileStmt_0",
+R"({
+var sum = 0
+var counter = 5
+while counter > 0 {
+    sum = sum + counter
+    counter = counter - 1
 }
-
-
+sum
+})",
+make_shared<Integer>(15),
+ParserType::ExeUnit
+}
 ));
 
 // /**********************************************

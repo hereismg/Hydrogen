@@ -26,12 +26,12 @@ namespace hdg {
             IDENT,
             KEYWORD,
 
-            NE,         ///> 不等于号“!=”
-            EE,         ///> 逻辑表达式的等于号“==”
-            GT,
-            LT,
-            GTE,
-            LTE,
+            NE,   // 不等于号“!=”
+            EE,   // 逻辑表达式的等于号“==”
+            GT,   // >
+            LT,   // <
+            GTE,  // >=
+            LTE,  // <=
 
             PLUS,
             MINUS,

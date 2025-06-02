@@ -64,7 +64,7 @@ namespace hdg {
                                            //                 {'elif' Expr ExeUnit }
                                            //                 ['else' ExeUnit ]
         uNode new_WhileStmt();             // WhileStmt     : 'while' Expr ExeUnit
-        optional<uNode> new_AssignStmt();  // AssignStmt    : PosifixExpr '=' Expr
+        optional<uNode> new_AssignStmt();  // AssignStmt    : PostfixExpr '=' Expr
         
         uNode new_VarDef();                // VarDef        : 'var'  IDENT '=' Expr | '[' [Params] ']'
         uNode new_FuncDef();               // FuncDef       : 'func' IDENT  '(' Params ')'  ExeUnit
@@ -75,7 +75,7 @@ namespace hdg {
         uNode new_ListExpr();              // ListExpr      : '[' [Expr] ']'
         uNode new_LogicExpr();             // LogicExpr     : ('not' LogicExpr)
                                            //               | (CompExpr {('and' | 'or') CompExpr}) 
-        uNode new_CompExpr();              // CompExpr      : ArithExpr {('>' | '<' | '>=' | ' <=' | '==') ArithExpr}
+        uNode new_CompExpr();              // CompExpr      : ArithExpr {('>' | '<' | '>=' | ' <=' | '==' | '!=') ArithExpr}
         uNode new_ArithExpr();             // ArithExpr     : Term {('+' | '-') Term}
         uNode new_Term();                  // Term          : Factor {('*' | '/') Factor}
         uNode new_Factor();                // Factor        : {'+' | '-'} PostfixExpr

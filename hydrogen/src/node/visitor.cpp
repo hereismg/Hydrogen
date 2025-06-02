@@ -106,21 +106,37 @@ namespace hdg{
 
         Token oper = node.getOper();
 
-        if (oper.getType() == Token::Type::PLUS){
-            m_rVal = left_val->plus(right_val);
+        switch (oper.getType()) {
+            case Token::PLUS  :{ m_rVal = left_val->plus(right_val);  break; }
+            case Token::MINUS :{ m_rVal = left_val->minus(right_val); break; }
+            case Token::MUL   :{ m_rVal = left_val->mul(right_val);   break; }
+            case Token::DIV   :{ m_rVal = left_val->div(right_val);   break; }
+
+            case Token::NE  :{ m_rVal = left_val->notEquation(right_val);         break; }
+            case Token::EE  :{ m_rVal = left_val->equation(right_val);            break; }
+            case Token::GT  :{ m_rVal = left_val->greaterThan(right_val);         break; }
+            case Token::LT  :{ m_rVal = left_val->lessThan(right_val);            break; }
+            case Token::GTE :{ m_rVal = left_val->greaterThanEquation(right_val); break; }
+            case Token::LTE :{ m_rVal = left_val->lessThanEquation(right_val);    break; }
+
+            default:{ assert(false && "Unknow Operator!"); }
         }
-        else if (oper.getType() == Token::Type::MINUS){
-            m_rVal = left_val->minus(right_val);
-        }
-        else if (oper.getType() == Token::Type::MUL){
-            m_rVal = left_val->mul(right_val);
-        }
-        else if (oper.getType() == Token::Type::DIV){
-            m_rVal = left_val->div(right_val);
-        }
-        else{
-            assert(false && "Unknow Oper!");
-        }
+
+//        if (oper.getType() == Token::Type::PLUS){
+//            m_rVal = left_val->plus(right_val);
+//        }
+//        else if (oper.getType() == Token::Type::MINUS){
+//            m_rVal = left_val->minus(right_val);
+//        }
+//        else if (oper.getType() == Token::Type::MUL){
+//            m_rVal = left_val->mul(right_val);
+//        }
+//        else if (oper.getType() == Token::Type::DIV){
+//            m_rVal = left_val->div(right_val);
+//        }
+//        else{
+//            assert(false && "Unknow Oper!");
+//        }
     }
 
     void InterpreterVisitor::visitPostfixNode(PostfixNode& node){ 
@@ -284,7 +300,7 @@ namespace hdg{
 
         while(true){
             cond->accept(*this);
-            auto obj = getResult();
+            auto obj = getRVal();
 
             if (obj->isTrue()){
                 loopUnit->accept(*this);

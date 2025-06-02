@@ -242,7 +242,7 @@ namespace hdg {
     sObject Integer::minus(sObject other){
         assert(other.get() != nullptr);
         if (typeid(*other.get()) == typeid(Integer)){
-            Integer* other_int = dynamic_cast<Integer*>(other.get());
+            auto* other_int = dynamic_cast<Integer*>(other.get());
             int64_t res = m_value - other_int->getValue();
 
             return std::make_shared<Integer>(res);
@@ -256,7 +256,7 @@ namespace hdg {
     sObject Integer::mul(sObject other){
         assert(other.get() != nullptr);
         if (typeid(*other.get()) == typeid(Integer)){
-            Integer* other_int = dynamic_cast<Integer*>(other.get());
+            auto* other_int = dynamic_cast<Integer*>(other.get());
             int64_t res = m_value * other_int->getValue();
 
             return std::make_shared<Integer>(res);
@@ -270,7 +270,7 @@ namespace hdg {
     sObject Integer::div(sObject other){
         assert(other.get() != nullptr);
         if (typeid(*other.get()) == typeid(Integer)){
-            Integer* other_int = dynamic_cast<Integer*>(other.get());
+            auto* other_int = dynamic_cast<Integer*>(other.get());
             int64_t res = m_value / other_int->getValue();
 
             return std::make_shared<Integer>(res);
@@ -290,9 +290,52 @@ namespace hdg {
 
         auto otherVal = dynamic_cast<Integer*>(other.get())->getValue();
 
-        if (otherVal != m_value) return Integer::False;
+        return std::make_shared<Integer>(m_value == otherVal);
+    }
 
-        return Integer::True;
+    sObject Integer::notEquation(sObject other) {
+        assert(other.get() != nullptr);
+        if (typeid(*other.get()) != typeid(Integer)) return Integer::False;
+
+        auto otherVal = dynamic_cast<Integer*>(other.get())->getValue();
+
+        return std::make_shared<Integer>(m_value != otherVal);
+    }
+
+    sObject Integer::greaterThan(sObject other) {
+        assert(other.get() != nullptr);
+        if (typeid(*other.get()) != typeid(Integer)) return Integer::False;
+
+        auto otherVal = dynamic_cast<Integer*>(other.get())->getValue();
+
+        return std::make_shared<Integer>(m_value > otherVal);
+    }
+
+    sObject Integer::lessThan(sObject other) {
+        assert(other.get() != nullptr);
+        if (typeid(*other.get()) != typeid(Integer)) return Integer::False;
+
+        auto otherVal = dynamic_cast<Integer*>(other.get())->getValue();
+
+        return std::make_shared<Integer>(m_value < otherVal);
+    }
+
+    sObject Integer::greaterThanEquation(sObject other) {
+        assert(other.get() != nullptr);
+        if (typeid(*other.get()) != typeid(Integer)) return Integer::False;
+
+        auto otherVal = dynamic_cast<Integer*>(other.get())->getValue();
+
+        return std::make_shared<Integer>(m_value >= otherVal);
+    }
+
+    sObject Integer::lessThanEquation(sObject other) {
+        assert(other.get() != nullptr);
+        if (typeid(*other.get()) != typeid(Integer)) return Integer::False;
+
+        auto otherVal = dynamic_cast<Integer*>(other.get())->getValue();
+
+        return std::make_shared<Integer>(m_value <= otherVal);
     }
 
     std::string Integer::toString() {

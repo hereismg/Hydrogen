@@ -6,7 +6,7 @@
 #include <sml.hpp>
 
 #include <kernel/Lexer.h>
-#include <kernel/Parser.h> 
+#include <kernel/Parser.h>
 #include <basic/Environment.h>
 #include <node/ObjectNode.h>
 #include <node/BinaryOperatorNode.h>
@@ -40,20 +40,20 @@ void debug_append_json_dump(
 ) {
     auto now = std::chrono::system_clock::now();
     auto now_time = std::chrono::system_clock::to_time_t(now);
-    
+
     std::ofstream outfile;
     outfile.open(filename, std::ios_base::app);
-    
+
     if (outfile.is_open()) {
         // 写入时间戳
         outfile << "[" << std::put_time(std::localtime(&now_time), "%F %T") << "] ";
-        
+
         // 写入上下文信息
         if (!context.empty()) {
             outfile << context << " ";
         }
         cout << j.dump(2) << endl;
-        
+
         // 写入JSON内容
         outfile << j.dump(2) << "\n\n";
         outfile.close();
@@ -74,7 +74,7 @@ TEST_P(Interepreter_TEST_P, _){
 
     uNode root;
     switch (parserType) {
-    case ParserType::Expr : 
+    case ParserType::Expr :
         root = parser.new_Expr();
         break;
     case ParserType::IfStmt :
@@ -87,27 +87,21 @@ TEST_P(Interepreter_TEST_P, _){
         root = parser.new_VarDef();
         break;
     default:
-        ASSERT_TRUE(false);   
+        ASSERT_TRUE(false);
     }
     ASSERT_NE(root, nullptr);
 
-    cout << root->toJSON().dump(4) << endl;
+//    cout << root->toJSON().dump(4) << endl;
 
     InterpreterVisitor visitor;
     root->accept(visitor);
 
     // 检测正确性，未使用 equation 方法
-    auto obj = visitor.getRVal().get();
+    auto obj = visitor.getRVal();
 
     ASSERT_NE(obj, nullptr);
 
-    obj->equation(expected);
-
-    // ASSERT_EQ(typeid(*obj), typeid(Integer));
-
-    // Integer* int_ptr = dynamic_cast<Integer*>(obj);
-
-    // ASSERT_EQ(int_ptr->getValue(), expected);
+    ASSERT_TRUE(obj->equation(expected)->isTrue());
 }
 
 INSTANTIATE_TEST_SUITE_P(ParseBasicType_String, Interepreter_TEST_P, testing::Values(

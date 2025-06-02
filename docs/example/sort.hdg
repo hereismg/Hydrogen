@@ -1,0 +1,12 @@
+{
+    var len = 6
+    var list = [2, 3, 1, 5, 6, 8]
+
+    var i = 0
+    while i < len {
+        var j = 0
+        while j < len {
+            if
+        }
+    }
+}

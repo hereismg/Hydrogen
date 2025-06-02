@@ -830,7 +830,7 @@ namespace hdg {
             return expr;
         }
 
-        expr = new_ArithExpr();
+        expr = new_CompExpr();
         if (expr != nullptr) {
             return expr;
         }
@@ -866,9 +866,38 @@ namespace hdg {
         return std::make_unique<ListObjNode>(std::move(arr), pos);
     }
 
-    // uNode Parser::new_CompExpr(){
-        
-    // }
+     uNode Parser::new_CompExpr(){
+         Position pos;
+         pos.setStart(m_currentToken->thisPosition()->getStart());
+
+         uNode left = new_ArithExpr();
+
+         Token::Type oper = m_currentToken->getType();
+         while( oper == Token::NE  ||
+                oper == Token::EE  ||
+                oper == Token::GT  ||
+                oper == Token::LT  ||
+                oper == Token::GTE ||
+                oper == Token::LTE)
+         {
+             advance();
+
+             uNode right = new_ArithExpr();
+             assert(right != nullptr);
+
+             pos.setEnd(m_currentToken->thisPosition()->getEnd());
+
+             left = std::make_unique<BinOperNode>(
+                     oper,
+                     std::move(left),
+                     std::move(right),
+                     pos
+             );
+             oper = m_currentToken->getType();
+         }
+
+         return left;
+     }
 
     uNode Parser::new_ArithExpr() {
         Position pos;

@@ -4,9 +4,17 @@
 
     var i = 0
     while i < len {
-        var j = 0
+        var j = i
         while j < len {
-            if
+            if list[i] > list[j] {
+                var temp = list[i]
+                list[i] = list[j]
+                list[j] = temp
+            }
+            j = j + 1
         }
+        i = i + 1
     }
+
+    list
 }

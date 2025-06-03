@@ -1,5 +1,8 @@
 {
-    var txt = input()
-    var arr = txt / " "
-    print(arr)
+    var grid = [
+        ["1", "2", "3"],
+        ["4", "5", "6"],
+        ["7", "8", "9"]
+    ]
+    grid[1][1]
 }

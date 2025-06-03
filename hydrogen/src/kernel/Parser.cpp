@@ -856,6 +856,7 @@ namespace hdg {
         }
 
         // 3. 右方括号 ']'
+        ignoreEL();
         if (m_currentToken->getType() != Token::Type::RBRACKET) {
             assert(false);
         }
@@ -1053,6 +1054,9 @@ namespace hdg {
                     pos
                 );
                 break;
+            }
+            case Token::DOT : {  // 点号 .
+
             }
             default : {
                 flag = false;

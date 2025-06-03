@@ -91,7 +91,7 @@ namespace hdg {
 
         inline std::vector<uNode>& getExprList() { return m_exprList; }
         inline uNode& getPrimary() { return m_primary; }
-        inline std::string getIdent() {return m_ident; }
+        inline std::string getIdent() { return m_ident; }
         inline Token::Type getType() { return m_type; }
 
         virtual nlohmann::json toJSON() const override;

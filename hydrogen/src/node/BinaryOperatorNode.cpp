@@ -219,22 +219,6 @@ namespace hdg {
             assert(m_primary != nullptr);
         }
 
-    // std::vector<uNode>& PostfixNode::getExprList(){
-    //     return m_exprList;
-    // }
-
-    // uNode& PostfixNode::getPrimary(){
-    //     return m_primary;
-    // }
-
-    // std::string PostfixNode::getIdent(){
-    //     return m_ident;
-    // }
-
-    // Token::Type PostfixNode::getType(){
-    //     return m_type;
-    // }
-
     nlohmann::json PostfixNode::toJSON() const {
         nlohmann::json j{
             {"__class__", "PostfixNode"},

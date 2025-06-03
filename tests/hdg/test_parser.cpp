@@ -279,6 +279,20 @@ tuple<string, string, sObject, ParserType>{
 "{var a = 1 var b = 2 a + b}",
 make_shared<Integer>(3),
 ParserType::ExeUnit
+},
+
+tuple<string, string, sObject, ParserType>{
+"VariableDef_3",
+R"({
+    var grid = [
+        ["1", "2", "3"],
+        ["4", "5", "6"],
+        ["7", "8", "9"]
+    ]
+    grid[1][1]
+})",
+make_shared<String>("5"),
+ParserType::ExeUnit
 }
 ));
 

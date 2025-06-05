@@ -3,8 +3,7 @@
 //
 
 
-#ifndef HDG_INTEGER_H
-#define HDG_INTEGER_H
+#pragma once
 
 #include "Object.h"
 
@@ -73,4 +72,3 @@ namespace hdg {
 
 } // hdg
 
-#endif //HDG_INTEGER_H

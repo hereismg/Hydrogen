@@ -2,8 +2,7 @@
 // Created by Magnesium on 2023/7/25.
 //
 
-#ifndef HDG_OBJECT_H
-#define HDG_OBJECT_H
+#pragma once
 
 #include <string>
 #include <vector>
@@ -13,6 +12,9 @@
 #include "../basic/Position.h"
 
 namespace hdg {
+    class VarType;
+    typedef std::weak_ptr<VarType> wVarType;
+
     class Visitor;
     class Object; // TODO 可以从尝试创建个专门放置这种类型定义的文件，譬如叫 define.h
     typedef std::unique_ptr<Object> uObject;
@@ -29,6 +31,8 @@ namespace hdg {
     protected:
         std::string m_class;        ///> 这里传入该对象实例的类名，用于强制类型转化
         Position m_position;        ///> 记录该对象定义的位置
+
+        wVarType type;
 
     public:
         Object();
@@ -107,4 +111,3 @@ namespace hdg {
 
 } // hdg
 
-#endif //HDG_OBJECT_H

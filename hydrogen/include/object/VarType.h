@@ -2,10 +2,10 @@
 // Created by Magnesium on 2025/6/5.
 //
 
-#ifndef HDG_VAR_TYPE_H
-#define HDG_VAR_TYPE_H
+#pragma once
 
 #include <map>
+#include <utility>
 
 #include "Object.h"
 #include "../basic/Environment.h"
@@ -19,10 +19,11 @@ namespace hdg{
         New_Environment   m_envir;
 
     public:
-        VarType(const std::string& m_class);
+        explicit VarType(std::string class_)
+            : m_class(std::move(class_)), m_base(nullptr) {}
 
-        sObject getMember(const std::string& std);
+        New_Environment& refEnvir() { return m_envir; }
+        const std::string& getClass() const { return m_class; }
     };
 } // hdg
 
-#endif //HDG_VAR_TYPE_H

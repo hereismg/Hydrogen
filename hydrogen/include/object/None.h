@@ -2,8 +2,7 @@
 // Created by Magnesium on 2023/8/2.
 //
 
-#ifndef HDG_NONE_H
-#define HDG_NONE_H
+#pragma once
 
 #include "Integer.h"
 
@@ -21,4 +20,3 @@ namespace hdg {
 
 } // hdg
 
-#endif //HDG_NONE_H

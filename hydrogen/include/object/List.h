@@ -2,10 +2,10 @@
 // Created by Magnesium on 2023/8/4.
 //
 
-#ifndef HDG_LIST_H
-#define HDG_LIST_H
+#pragma once
 
 #include "Object.h"
+#include "VarType.h"
 
 namespace hdg {
     class List;
@@ -71,4 +71,3 @@ namespace hdg {
 
 } // hdg
 
-#endif //HDG_LIST_H

@@ -58,6 +58,11 @@ namespace hdg {
         virtual sObject parenthesis(const std::vector<sObject>& args, Visitor& visitor); // ()
         virtual sObject brackets(const std::vector<sObject>& args, Visitor& visitor) { assert(false); return nullptr; }    // []
         virtual sObject braces(const std::vector<sObject>& args) { assert(false); return nullptr; }      // {}
+        virtual sObject dot(
+                const std::string& ident,
+                const std::vector<sObject>& args,
+                Visitor& visitor
+            ) { assert(false); return nullptr; }
 
         virtual void illegalOperator();
         virtual sObject clone() { assert(false); return nullptr; }

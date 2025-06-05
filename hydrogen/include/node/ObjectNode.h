@@ -1,9 +1,7 @@
 //
 // Created by Magnesium on 2023/8/9.
 //
-
-#ifndef HDG_OBJECTNODE_H
-#define HDG_OBJECTNODE_H
+#pragma once
 
 #include "Node.h"
 #include "../object/String.h"
@@ -170,5 +168,3 @@ namespace hdg {
         void accept(Visitor& visitor) override;
     };
 } // hdg
-
-#endif //HDG_OBJECTNODE_H

@@ -2,8 +2,7 @@
 // Created by Magnesium on 2023/7/11.
 //
 
-#ifndef HDG_TOKEN_H
-#define HDG_TOKEN_H
+#pragma once
 
 #include <string>
 #include <map>
@@ -153,4 +152,3 @@ namespace nlohmann {
     };
 }
 
-#endif //HDG_TOKEN_H

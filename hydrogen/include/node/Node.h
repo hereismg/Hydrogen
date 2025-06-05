@@ -1,9 +1,7 @@
 //
 // Created by Magnesium on 2023/7/19.
 //
-
-#ifndef HDG_NODE_H
-#define HDG_NODE_H
+#pragma once
 
 #include <string>
 #include <memory>
@@ -38,4 +36,3 @@ namespace hdg {
     typedef std::unique_ptr<Node> uNode;
 } // hdg
 
-#endif //HDG_NODE_H

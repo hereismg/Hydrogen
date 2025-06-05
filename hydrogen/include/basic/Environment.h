@@ -2,8 +2,7 @@
 // Created by Magnesium on 2023/7/27.
 //
 
-#ifndef HDG_ENVIRONMENT_H
-#define HDG_ENVIRONMENT_H
+#pragma once
 
 #include <map>
 #include <string>
@@ -75,4 +74,3 @@ namespace hdg {
 
 } // hdg
 
-#endif //HDG_ENVIRONMENT_H

@@ -2,9 +2,7 @@
 // Created by Magnesium on 2023/7/16.
 //
 
-
-#ifndef HDG_PARSER_H
-#define HDG_PARSER_H
+#pragma once
 
 #include <functional>
 #include <vector>
@@ -94,5 +92,3 @@ namespace hdg {
     };
 
 } // hdg
-
-#endif //HDG_PARSER_H

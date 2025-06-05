@@ -1,9 +1,7 @@
 //
 // Created by Magnesium on 2023/7/19.
 //
-
-#ifndef HDG_BINARYOPERATORNODE_H
-#define HDG_BINARYOPERATORNODE_H
+#pragma once
 
 #include <string>
 #include <cmath>
@@ -102,5 +100,3 @@ namespace hdg {
 
 } // hdg
 
-
-#endif //HDG_BINARYOPERATORNODE_H

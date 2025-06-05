@@ -1,5 +1,4 @@
-#ifndef VISITOR_H
-#define VISITOR_H
+#pragma once
 
 #include "../basic/define.h"
 
@@ -79,5 +78,3 @@ namespace hdg{
         void visitExeUnitNode(new_ExeUnitNode& node) override;
     };
 }
-
-#endif

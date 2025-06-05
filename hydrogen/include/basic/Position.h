@@ -1,9 +1,7 @@
 //
 // Created by Magnesium on 2023/7/25.
 //
-
-#ifndef HDG_POSITION_H
-#define HDG_POSITION_H
+#pragma once
 
 #include <string>
 #include <iostream>
@@ -64,4 +62,3 @@ namespace hdg {
 
 } // hdg
 
-#endif //HDG_POSITION_H

@@ -1,5 +1,4 @@
-#ifndef UNIT_NODE_H
-#define UNIT_NODE_H
+#pragma once
 
 #include "Node.h"
 
@@ -29,5 +28,3 @@ namespace hdg{
         virtual void accept(Visitor& visitor) override;
     };
 }
-
-#endif

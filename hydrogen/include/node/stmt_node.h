@@ -1,5 +1,4 @@
-#ifndef STMT_NODE_H
-#define STMT_NODE_H
+#pragma once
 
 #include "Node.h"
 
@@ -91,5 +90,3 @@ namespace hdg{
         virtual void accept(Visitor& visitor) override;
     };
 }
-
-#endif

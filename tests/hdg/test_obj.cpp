@@ -27,6 +27,20 @@ TEST(String, getType_uniqueness){
     ASSERT_TRUE(obj->equation(num)->isTrue());
 }
 
+TEST(List, getType_uniqueness){
+    wVarType strType = List::getType();
+
+    auto num = std::make_shared<Integer>(20250609);
+    strType.lock()->refEnvir().setSymbol("len", num);
+
+    wVarType strType2 = String::getType();
+
+    auto obj = strType2.lock()->refEnvir().getSymbol("len");
+
+    ASSERT_TRUE(obj->equation(num)->isTrue());
+}
+
+
 TEST(NodeJSON, _1){
     uNode left = std::make_unique<IntNode>(5);
     uNode right = std::make_unique<IntNode>(2);

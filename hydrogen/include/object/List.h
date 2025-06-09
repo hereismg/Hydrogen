@@ -37,6 +37,8 @@ namespace hdg {
         sObject clone() override;
         std::string getClass() override { return "List"; }
 
+        static wVarType getType();
+
     // ======================================
     // 下面是弃用的方法
     // ======================================

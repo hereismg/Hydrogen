@@ -125,4 +125,18 @@ namespace hdg {
 
         return m_list[index];
     }
+
+    wVarType List::getType() {
+        static auto listType = [] {
+            auto type = std::make_shared<VarType>("List");
+
+            auto envir = type->refEnvir();
+
+            envir.setSymbol("insert", std::make_shared<Integer>(2025));
+
+            return type;
+        }();
+
+        return listType;
+    }
 } // hdg

@@ -10,6 +10,7 @@
 #include <cassert>
 
 #include "../basic/Position.h"
+#include "../basic/Environment.h"
 
 namespace hdg {
     class VarType;
@@ -106,8 +107,32 @@ namespace hdg {
         virtual Object* brackets(const std::vector<Object*>& args);
         virtual Object* braces(const std::vector<Object*>& args);
 
-        virtual Object* copy() = 0;
+        virtual Object* copy() { assert(false); }
     };
 
+
+    class VarType : public Object {
+    protected:
+        VarType* m_base;
+
+        std::string m_class;
+        New_Environment   m_envir;
+
+    public:
+        VarType(const char* class_)
+            : m_class(class_), m_base(nullptr) {}
+
+        VarType(const char* class_, std::map<std::string, sObject>&& table);
+
+        New_Environment& refEnvir() { return m_envir; }
+        const std::string& getClass() const { return m_class; }
+    
+        std::string toString() { return "VarType"; }
+
+
+    };
+
+    typedef std::shared_ptr<VarType> sVarType;
+    typedef std::weak_ptr<VarType> wVarType;
 } // hdg
 

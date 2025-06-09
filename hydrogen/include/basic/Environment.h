@@ -8,12 +8,14 @@
 #include <string>
 #include <initializer_list>
 #include <stack>
-#include "../object/Object.h"
-#include "../object/Integer.h"
-#include "../object/Float.h"
+#include <memory>
 
 namespace hdg {
-
+    class Object;
+    typedef std::unique_ptr<Object> uObject;
+    typedef std::shared_ptr<Object> sObject;
+    typedef std::weak_ptr<Object>   wObject;
+    
     /**
      * @brief       环境。主要用来存储符号、模块名称等信息。
      * @details     信息这里式信息是
@@ -66,6 +68,8 @@ namespace hdg {
 
     public:
         New_Environment() = default;
+        New_Environment(std::map<std::string, sObject>&& table)
+            : m_table(std::move(table)) {}
         
         void setSymbol(const std::string& name, sObject obj);
         sObject  getSymbol(const std::string& name);

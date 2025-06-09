@@ -12,6 +12,8 @@
 #include <node/unit_node.h>
 #include <object/Function.h>
 #include <object/List.h>
+#include <object/Integer.h>
+#include <object/Float.h>
 
 using namespace std;
 using namespace hdg;

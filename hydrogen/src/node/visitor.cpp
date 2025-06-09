@@ -11,6 +11,8 @@
 #include "../../include/node/unit_node.h"
 #include "../../include/object/Function.h"
 #include "../../include/object/List.h"
+#include "../../include/object/Integer.h"
+#include "../../include/object/Float.h"
 
 namespace hdg{
     Visitor::Visitor(): m_lVal(nullptr){

@@ -7,6 +7,7 @@
 #include <utility>
 #include <cmath>
 #include <cassert>
+#include <map>
 
 #include "../../include/basic/Error.h"
 
@@ -156,4 +157,8 @@ namespace hdg {
                 m_position
                 );
     }
+
+    VarType::VarType(const char* class_, std::map<std::string, sObject>&& table)
+        : m_class(class_), m_envir(std::move(table)), m_base(nullptr)
+    {}
 } // hdg

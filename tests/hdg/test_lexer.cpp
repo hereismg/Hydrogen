@@ -10,6 +10,7 @@
 #include <node/BinaryOperatorNode.h>
 #include <node/stmt_node.h>
 #include <node/unit_node.h>
+#include <object/Integer.h>
 
 using namespace std;
 using namespace hdg;

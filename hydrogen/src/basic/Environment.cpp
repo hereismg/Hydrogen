@@ -15,9 +15,9 @@ namespace hdg {
         m_parent(parent), m_fPath(std::move(fPath)), m_moduleName(std::move(moduleName)){}
 
     Environment::~Environment() {
-        for (const auto& iter: m_symbolTable){
-            delete iter.second;
-        }
+        // for (const auto& iter: m_symbolTable){
+        //     delete iter.second;
+        // }
     }
 
     void Environment::setFilePath(const std::string &fPath) {

@@ -4,6 +4,8 @@
 
 #include "../../include/node/ForNode.h"
 
+#include "../../include/object/Integer.h"
+
 namespace hdg {
     ForNode::ForNode(const Token &index, int to, const Position &position, Environment *parent):
             Node(position, new Environment(parent, parent->getFilePath(), parent->getModuleName())),

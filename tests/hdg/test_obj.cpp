@@ -13,6 +13,10 @@
 using namespace std;
 using namespace hdg;
 
+TEST(VarType, _1){
+    
+}
+
 TEST(NodeJSON, _1){
     uNode left = std::make_unique<IntNode>(5);
     uNode right = std::make_unique<IntNode>(2);

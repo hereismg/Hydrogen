@@ -119,6 +119,20 @@ namespace hdg {
         return res;
     }
 
+    wVarType String::getType() {
+        static auto strType = [] {
+            auto type = std::make_shared<VarType>("String");
+            
+            auto envir = type->refEnvir();
+
+            envir.setSymbol("len", std::make_shared<Integer>(2025));
+
+            return type;
+        }();
+        
+        return strType;
+    }
+
     Object *String::plus(Object *other) {
         if (other->getClass_old() == "String"){
             std::string value = m_value + ((String*)other)->getValue();

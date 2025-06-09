@@ -8,6 +8,7 @@
 #include <cassert>
 
 #include "../../include/object/Function.h"
+#include "../../include/object/Float.h"
 
 namespace hdg {
     ObjectNode::ObjectNode() = default;

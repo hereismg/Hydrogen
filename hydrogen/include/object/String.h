@@ -32,7 +32,6 @@ namespace hdg {
         static std::shared_ptr<List> buildStrList(const std::vector<std::string>& list);
 
         static wVarType getType();
-        // inline static VarType stringMeta{"String", };
 
         // ======================================
         // 下面是弃用的方法

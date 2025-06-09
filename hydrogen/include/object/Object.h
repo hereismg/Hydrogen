@@ -63,6 +63,12 @@ namespace hdg {
         virtual sObject parenthesis(const std::vector<sObject>& args, Visitor& visitor); // ()
         virtual sObject brackets(const std::vector<sObject>& args, Visitor& visitor) { assert(false); return nullptr; }    // []
         virtual sObject braces(const std::vector<sObject>& args) { assert(false); return nullptr; }      // {}
+        
+        /**
+         * 点号运算符
+         * 
+         * 示例：list.append(ele) 在底层通过访问此函数实现。
+         */
         virtual sObject dot(
                 const std::string& ident,
                 const std::vector<sObject>& args,

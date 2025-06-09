@@ -6,22 +6,23 @@
 
 #include "../../include/object/Integer.h"
 #include "../../include/node/visitor.h"
+#include "../../include/object/String.h"
 
 namespace hdg {
     List::List() {
-        setClass("List");
+        m_type = getType();
     }
     
     List::List(std::vector<sObject>&& list): m_list(std::move(list)) {
-        setClass("List");
+        m_type = getType();
     }
 
-    List::List(size_t count, sObject obj) : m_list(count, obj){
-        setClass("List");
+    List::List(size_t count, sObject obj) : m_list(count, obj) {
+        m_type = getType();
     }
 
     List::List(const std::vector<Object*> &list): m_list_old(list) {
-        setClass("List");
+        m_type = getType();
     }
 
     Object *List::plus(Object *other) {
@@ -125,6 +126,30 @@ namespace hdg {
 
         return m_list[index];
     }
+
+    sObject List::dot(const std::string &ident, std::vector<sObject>&& args, Visitor &visitor) {
+        auto method = m_type.lock()->refEnvir().getSymbol(ident);
+
+        args.insert(args.begin(), shared_from_this());
+
+        return method->parenthesis(args, visitor);
+    }
+
+    sList List::append(sObject obj) {
+        m_list.emplace_back(std::move(obj));
+        return std::dynamic_pointer_cast<List>(shared_from_this());
+    }
+
+    sList List::append(int64_t obj) {
+        m_list.emplace_back(std::make_shared<Integer>(obj));
+        return std::dynamic_pointer_cast<List>(shared_from_this());
+    }
+
+    sList List::append(const std::string& obj) {
+        m_list.emplace_back(std::make_shared<String>(obj));
+        return std::dynamic_pointer_cast<List>(shared_from_this());
+    }
+
 
     wVarType List::getType() {
         static auto listType = [] {

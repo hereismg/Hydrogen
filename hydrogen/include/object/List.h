@@ -29,9 +29,14 @@ namespace hdg {
         sObject equation(sObject other) override;
 
         sObject brackets(const std::vector<sObject>& args, Visitor& visitor) override;    // []
+        sObject dot(const std::string &ident, std::vector<sObject>&& args, Visitor &visitor) override;
 
         bool isTrue() override;
         std::vector<sObject>& getList() { return m_list; }
+
+        sList append(sObject obj);
+        sList append(int64_t obj);
+        sList append(const std::string& obj);
 
         std::string toString() override;
         sObject clone() override;

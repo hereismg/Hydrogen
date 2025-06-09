@@ -33,7 +33,7 @@ namespace hdg {
         std::string m_class;        ///> 这里传入该对象实例的类名，用于强制类型转化
         Position m_position;        ///> 记录该对象定义的位置
 
-        wVarType type;
+        wVarType m_type;
 
     public:
         Object();
@@ -71,7 +71,7 @@ namespace hdg {
          */
         virtual sObject dot(
                 const std::string& ident,
-                const std::vector<sObject>& args,
+                std::vector<sObject>&& args,
                 Visitor& visitor
             ) { assert(false); return nullptr; }
 

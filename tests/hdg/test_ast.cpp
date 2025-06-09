@@ -567,6 +567,38 @@ TEST(Smoke, PostfixNode_2) {
     ASSERT_TRUE(res->equation(std::make_shared<Integer>(2025))->isTrue());
 }
 
+/**
+ * list = [1, 2]
+ * list.append(3)
+ */
+TEST(PostfixNode, Dot){
+    // list = [1, 2]
+    auto list = std::make_shared<List>();
+    list->append(1)
+        ->append(2);
+
+    InterpreterVisitor visitor;
+    visitor.getCurrentEnvir()->setSymbol("list", list);
+
+    // list.append(3)
+    auto ident = std::make_unique<IdentNode>("list");
+    std::vector<uNode> exprList;
+    exprList.emplace_back(std::make_unique<IntNode>(3));
+    auto postfix = std::make_unique<PostfixNode>(Token::DOT, std::move(ident), std::move(exprList));
+
+    // visitor
+    postfix->accept(visitor);
+
+
+    // judge
+    auto expected = std::make_shared<List>();
+    expected->append(1)
+            ->append(2)
+            ->append(3);
+    auto actual = visitor.getResult();
+
+    ASSERT_TRUE(expected->equation(actual)->isTrue());
+}
 
 
 // TEST(Smoke, ListObjNode_1) {

@@ -1,11 +1,12 @@
 //
 // Created by Magnesium on 2023/7/25.
 //
-
-
 #pragma once
 
+#include <memory>
+
 #include "Object.h"
+#include "List.h"
 
 namespace hdg {
     class Integer;
@@ -42,6 +43,8 @@ namespace hdg {
         std::string toString() override;
         sObject clone() override;
         std::string getClass() override { return "Integer"; }
+
+//        static sList buildIntList(const std::vector<int64_t>& list);
 
         static sInteger False;
         static sInteger True;

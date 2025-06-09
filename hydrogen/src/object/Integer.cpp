@@ -355,5 +355,13 @@ namespace hdg {
         return std::make_shared<Integer>(m_value);
     }
 
+//    sList Integer::buildIntList(const std::vector<int64_t> &list) {
+//        auto res = std::make_shared<List>();
+//        for (auto& i : list) {
+//            res->getList().push_back(std::make_shared<Integer>(i));
+//        }
+//        return res;
+//    }
+
 
 } // hdg

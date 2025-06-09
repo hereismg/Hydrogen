@@ -282,13 +282,23 @@ make_shared<Integer>(3),
 ParserType::ExeUnit
 },
 
+//tuple<string, string, sObject, ParserType>{
+//"VariableDef_3",
+//R"({
+//    var grid = [1, 2, 3]
+//    grid
+//})",
+//std::make_shared<List>(std::move(vector<int64_t>({1, 2, 3}))),
+//ParserType::ExeUnit
+//},
+
 tuple<string, string, sObject, ParserType>{
 "VariableDef_3",
 R"({
     var grid = [
-        ["1", "2", "3"],
-        ["4", "5", "6"],
-        ["7", "8", "9"]
+    ["1", "2", "3"],
+    ["4", "5", "6"],
+    ["7", "8", "9"]
     ]
     grid[1][1]
 })",

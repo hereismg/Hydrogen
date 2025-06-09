@@ -9,12 +9,22 @@
 #include <node/BinaryOperatorNode.h>
 #include <object/List.h>
 #include <object/Integer.h>
+#include <object/Object.h>
 
 using namespace std;
 using namespace hdg;
 
-TEST(VarType, _1){
-    
+TEST(String, getType_uniqueness){
+    wVarType strType = String::getType();
+
+    auto num = std::make_shared<Integer>(20250609);
+    strType.lock()->refEnvir().setSymbol("len", num);
+
+    wVarType strType2 = String::getType();
+
+    auto obj = strType2.lock()->refEnvir().getSymbol("len");
+
+    ASSERT_TRUE(obj->equation(num)->isTrue());
 }
 
 TEST(NodeJSON, _1){

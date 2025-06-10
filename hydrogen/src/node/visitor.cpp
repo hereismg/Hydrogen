@@ -181,7 +181,7 @@ namespace hdg{
             }
             case Token::Type::DOT : {
                 // 点号 .
-
+                m_rVal = obj->dot(node.getIdent(), std::move(args), *this);
                 break;
             }
             case Token::Type::IDENT : {

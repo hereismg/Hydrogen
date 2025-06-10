@@ -200,6 +200,16 @@ namespace hdg {
             assert(m_ident != "");
         }
 
+    PostfixNode::PostfixNode(Token::Type type, uNode&& primary, std::string ident, std::vector<uNode>&& exprList)
+        : m_type(type), 
+          m_primary(std::move(primary)), 
+          m_ident(std::move(ident)),
+          m_exprList(std::move(exprList))
+    {
+            assert(m_primary != nullptr);
+            assert(m_ident != "");
+    }
+
     PostfixNode::PostfixNode(Token::Type type, uNode&& primary, std::vector<uNode>&& exprList, const Position& pos)
         : Node(pos),
           m_type(type), 

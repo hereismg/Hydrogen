@@ -5,8 +5,9 @@
 #include "../../include/object/List.h"
 
 #include "../../include/object/Integer.h"
-#include "../../include/node/visitor.h"
 #include "../../include/object/String.h"
+#include "../../include/object/Function.h"
+#include "../../include/node/visitor.h"
 
 namespace hdg {
     List::List() {
@@ -130,6 +131,8 @@ namespace hdg {
     sObject List::dot(const std::string &ident, std::vector<sObject>&& args, Visitor &visitor) {
         auto method = m_type.lock()->refEnvir().getSymbol(ident);
 
+        assert(method != nullptr);
+
         args.insert(args.begin(), shared_from_this());
 
         return method->parenthesis(args, visitor);
@@ -155,13 +158,34 @@ namespace hdg {
         static auto listType = [] {
             auto type = std::make_shared<VarType>("List");
 
-            auto envir = type->refEnvir();
+            auto& envir = type->refEnvir();
 
-            envir.setSymbol("insert", std::make_shared<Integer>(2025));
+            {
+                auto fun = [](const std::vector<sObject> & args, Visitor & visitor)->sObject{
+                    assert(args.size() == 2);
+
+                    auto self = List::from(args[0]);
+
+                    self->append(args[1]);
+
+                    std::cout << "String::append" << std::endl;
+                    return Integer::False;
+                };
+                std::vector<std::string> args = {"self", "ele"};
+                envir.setSymbol("append", std::make_shared<New_BuiltInFunction>(std::move(fun), std::move(args)));
+            }
+
 
             return type;
         }();
 
         return listType;
+    }
+
+    sList List::from(sObject obj) {
+        assert(obj != nullptr);
+        assert(typeid(*obj.get()) == typeid(List));
+
+        return std::dynamic_pointer_cast<List>(obj);
     }
 } // hdg

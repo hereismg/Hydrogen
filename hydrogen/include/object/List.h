@@ -43,6 +43,8 @@ namespace hdg {
         std::string getClass() override { return "List"; }
 
         static wVarType getType();
+        
+        static sList from(sObject obj);
 
     // ======================================
     // 下面是弃用的方法

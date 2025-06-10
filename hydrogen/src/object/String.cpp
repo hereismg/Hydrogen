@@ -133,6 +133,22 @@ namespace hdg {
         return strType;
     }
 
+    sString String::from(sObject obj) {
+        assert(obj != nullptr);
+        assert(typeid(*obj.get()) == typeid(Object));
+
+        return std::dynamic_pointer_cast<String>(obj);
+    }
+
+    sString String::from(const std::string& str) {
+        return std::make_shared<String>(str);
+    }
+
+    sString String::from(int64_t num) {
+        return std::make_shared<String>(std::to_string(num));
+    }
+
+
     Object *String::plus(Object *other) {
         if (other->getClass_old() == "String"){
             std::string value = m_value + ((String*)other)->getValue();

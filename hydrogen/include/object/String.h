@@ -11,6 +11,9 @@
 
 namespace hdg {
 
+    class String;
+    typedef std::shared_ptr<String> sString;
+
     class String: public Object {
     protected:
         std::string m_value;
@@ -32,6 +35,10 @@ namespace hdg {
         static std::shared_ptr<List> buildStrList(const std::vector<std::string>& list);
 
         static wVarType getType();
+
+        static sString from(sObject obj);
+        static sString from(const std::string& str);
+        static sString from(int64_t num);
 
         // ======================================
         // 下面是弃用的方法

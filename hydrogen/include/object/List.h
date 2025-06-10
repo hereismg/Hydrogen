@@ -45,6 +45,8 @@ namespace hdg {
         static wVarType getType();
         
         static sList from(sObject obj);
+        static sList from(const std::vector<std::string>& list);
+        static sList from(const std::vector<int64_t>& list);
 
     // ======================================
     // 下面是弃用的方法

@@ -188,4 +188,20 @@ namespace hdg {
 
         return std::dynamic_pointer_cast<List>(obj);
     }
+
+    sList List::from(const std::vector<std::string>& list){
+        auto res = std::make_shared<List>();
+        for (auto& i : list){
+            res->getList().push_back(std::make_shared<String>(i));
+        }
+        return res;
+    }
+
+    sList List::from(const std::vector<int64_t>& list){
+        auto res = std::make_shared<List>();
+        for (auto& i : list){
+            res->getList().push_back(std::make_shared<Integer>(i));
+        }
+        return res;
+    }
 } // hdg

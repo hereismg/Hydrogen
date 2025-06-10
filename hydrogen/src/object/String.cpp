@@ -133,7 +133,7 @@ namespace hdg {
         return strType;
     }
 
-    sString String::from(sObject obj) {
+    sString String::from(const sObject& obj) {
         assert(obj != nullptr);
         assert(typeid(*obj.get()) == typeid(Object));
 

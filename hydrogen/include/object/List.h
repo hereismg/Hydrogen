@@ -4,10 +4,14 @@
 
 #pragma once
 
+#include <optional>
+
 #include "Object.h"
 #include "VarType.h"
 
 namespace hdg {
+    using std::optional;
+
     class List;
     typedef std::unique_ptr<List> uList;
     typedef std::shared_ptr<List> sList;
@@ -44,7 +48,7 @@ namespace hdg {
 
         static wVarType getType();
         
-        static sList from(sObject obj);
+        static optional<sList> from(const sObject& obj);
         static sList from(const std::vector<std::string>& list);
         static sList from(const std::vector<int64_t>& list);
 

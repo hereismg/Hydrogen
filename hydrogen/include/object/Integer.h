@@ -44,7 +44,6 @@ namespace hdg {
         sObject clone() override;
         std::string getClass() override { return "Integer"; }
 
-//        static sList buildIntList(const std::vector<int64_t>& list);
         static sInteger from(const sObject& obj);
         static sInteger from(int64_t obj);
 

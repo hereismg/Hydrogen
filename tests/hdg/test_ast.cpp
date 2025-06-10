@@ -571,7 +571,7 @@ TEST(Smoke, PostfixNode_2) {
  * list = [1, 2]
  * list.append(3)
  */
-TEST(PostfixNode, Dot){
+TEST(PostfixNode, Dot_1){
     // list = [1, 2]
     auto list = std::make_shared<List>();
     list->append(1)
@@ -598,7 +598,6 @@ TEST(PostfixNode, Dot){
 
     ASSERT_TRUE(expected->equation(actual)->isTrue());
 }
-
 
 // TEST(Smoke, ListObjNode_1) {
 //     // 构造初始环境：list = [2025]

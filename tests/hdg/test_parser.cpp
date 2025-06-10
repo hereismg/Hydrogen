@@ -128,7 +128,7 @@ R"({
     var list = a / split
     list
 })",
-String::buildStrList({
+List::from({
     "12",
     "34",
     "56"
@@ -142,7 +142,7 @@ R"({
     var a = "12 34 56" / " "
     a
 })",
-String::buildStrList({
+List::from({
     "12",
     "34",
     "56"
@@ -157,10 +157,10 @@ R"({
     var list = a / " "
     list
 })",
-String::buildStrList({
+List::from({
     "12",
     "34",
-    "56"// mgtodo 思考：这里不用再加一个空字符串吗？
+    "56" // mgtodo 思考：这里不用再加一个空字符串吗？
 }),
 ParserType::ExeUnit
 },

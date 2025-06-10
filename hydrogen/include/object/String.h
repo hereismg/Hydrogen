@@ -36,7 +36,7 @@ namespace hdg {
 
         static wVarType getType();
 
-        static sString from(sObject obj);
+        static sString from(const sObject& obj);
         static sString from(const std::string& str);
         static sString from(int64_t num);
 

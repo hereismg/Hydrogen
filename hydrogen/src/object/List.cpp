@@ -52,11 +52,11 @@ namespace hdg {
     }
 
     sObject List::equation(sObject other) {
-        assert(other != nullptr);
-        
-        if (typeid(*other.get()) != typeid(List)) return Integer::False;
+        auto opt = List::from(other);
 
-        auto& otherList = dynamic_cast<List*>(other.get())->getList();
+        if (!opt.has_value()) return Integer::False;
+
+        auto otherList = opt.value()->getList();
 
         if (m_list.size() != otherList.size()) return Integer::False;
 
@@ -164,12 +164,12 @@ namespace hdg {
                 auto fun = [](const std::vector<sObject> & args, Visitor & visitor)->sObject{
                     assert(args.size() == 2);
 
-                    auto self = List::from(args[0]);
+                    auto self = List::from(args[0]).value();
 
                     self->append(args[1]);
 
                     std::cout << "String::append" << std::endl;
-                    return Integer::False;
+                    return self;
                 };
                 std::vector<std::string> args = {"self", "ele"};
                 envir.setSymbol("append", std::make_shared<New_BuiltInFunction>(std::move(fun), std::move(args)));
@@ -182,11 +182,13 @@ namespace hdg {
         return listType;
     }
 
-    sList List::from(sObject obj) {
+    optional<sList> List::from(const sObject& obj) {
         assert(obj != nullptr);
-        assert(typeid(*obj.get()) == typeid(List));
 
-        return std::dynamic_pointer_cast<List>(obj);
+        if (typeid(*obj) == typeid(List))
+            return std::dynamic_pointer_cast<List>(obj);
+        else
+            return std::nullopt;
     }
 
     sList List::from(const std::vector<std::string>& list){

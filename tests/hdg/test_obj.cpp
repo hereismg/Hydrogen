@@ -40,6 +40,23 @@ TEST(List, getType_uniqueness){
     ASSERT_TRUE(obj->equation(num)->isTrue());
 }
 
+TEST(List, from_1) {
+    sObject obj = Integer::from(1);
+
+    auto opt = List::from(obj);
+
+    ASSERT_FALSE(opt.has_value());
+}
+
+TEST(List, from_2) {
+    sObject obj = std::make_shared<List>();
+
+    auto opt = List::from(obj);
+
+    ASSERT_TRUE(opt.has_value());
+}
+
+
 TEST(Integer, from_1) {
     sObject obj = Integer::True;
 

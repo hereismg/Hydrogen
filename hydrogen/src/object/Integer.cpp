@@ -338,6 +338,17 @@ namespace hdg {
         return std::make_shared<Integer>(m_value <= otherVal);
     }
 
+    sInteger Integer::from(const sObject& obj) {
+        assert(obj != nullptr);
+        assert(typeid(*obj.get()) == typeid(Integer));
+
+        return std::dynamic_pointer_cast<Integer>(obj);
+    }
+
+    sInteger Integer::from(int64_t num) {
+        return std::make_shared<Integer>(num);
+    }
+
     std::string Integer::toString() {
         return std::to_string(m_value);
     }

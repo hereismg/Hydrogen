@@ -40,6 +40,13 @@ TEST(List, getType_uniqueness){
     ASSERT_TRUE(obj->equation(num)->isTrue());
 }
 
+TEST(Integer, from_1) {
+    sObject obj = Integer::True;
+
+    auto num = Integer::from(1);
+
+    ASSERT_TRUE(obj->equation(num)->isTrue());
+}
 
 TEST(NodeJSON, _1){
     uNode left = std::make_unique<IntNode>(5);
@@ -140,21 +147,21 @@ TEST(Smoke, list_1) {
  * String
  **********************************************/
 
-TEST(String, equation_1){
+TEST(String, equation_1) {
     auto str1 = std::make_shared<String>("1");
     auto str2 = std::make_shared<String>("1");
 
     ASSERT_TRUE(str1->equation(str2)->isTrue());
 }
 
-TEST(String, equation_2){
+TEST(String, equation_2) {
     auto str1 = std::make_shared<String>("");
     auto str2 = std::make_shared<String>("");
 
     ASSERT_TRUE(str1->equation(str2)->isTrue());
 }
 
-TEST(String, plus_1){
+TEST(String, plus_1) {
     auto str1 = std::make_shared<String>("1");
     auto str2 = std::make_shared<String>("2");
 
@@ -165,7 +172,7 @@ TEST(String, plus_1){
     ASSERT_TRUE(actual->equation(expected)->isTrue());
 }
 
-TEST(String, plus_2){
+TEST(String, plus_2) {
     auto str1 = std::make_shared<String>("");
     auto str2 = std::make_shared<String>("");
 
@@ -176,8 +183,7 @@ TEST(String, plus_2){
     ASSERT_TRUE(actual->equation(expected)->isTrue());
 }
 
-TEST(String, div_1)
-{
+TEST(String, div_1) {
     auto str = std::make_shared<String>("12 34 56");
     auto split = std::make_shared<String>(" ");
 
@@ -185,7 +191,7 @@ TEST(String, div_1)
 
     ASSERT_NE(actual_list, nullptr);
 
-    auto expected_list = String::buildStrList({
+    auto expected_list = List::from({
         "12",
         "34",
         "56"
@@ -194,8 +200,7 @@ TEST(String, div_1)
     ASSERT_TRUE(actual_list->equation(expected_list)->isTrue());
 }
 
-TEST(String, div_2)
-{
+TEST(String, div_2) {
     auto str = std::make_shared<String>("12");
     auto split = std::make_shared<String>(" ");
 
@@ -210,8 +215,7 @@ TEST(String, div_2)
     ASSERT_TRUE(actual_list->equation(expected_list)->isTrue());
 }
 
-TEST(String, div_3)
-{
+TEST(String, div_3) {
     auto str = std::make_shared<String>("1");
     auto split = std::make_shared<String>("1");
 

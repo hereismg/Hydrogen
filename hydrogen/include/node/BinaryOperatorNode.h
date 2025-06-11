@@ -14,6 +14,7 @@
 #include "../basic/Error.h"
 
 namespace hdg {
+    using std::vector;
 
     class BinaryOperatorNode: public Node{
     protected:
@@ -74,7 +75,91 @@ namespace hdg {
         virtual void accept(Visitor& visitor) override; 
     };
 
+    /**
+     * 后缀结点
+     * 
+     * 该结点是“后缀表达式”的 AST 实现。譬如，对于表达式：
+     * 
+     * ```hdg
+     * list[1]
+     * ```
+     * 
+     * 它会被 PostfixNode 构建为下面的样子：
+     * 
+     * ```YAML
+     * __class__ : PostfixNode
+     * type   : Token::LBRACKET
+     * primary: 
+     *     __class__: IdentNode
+     *     ident    : "list"
+     * args : 
+     *     - __class__: IntNode
+     *       value    : 1
+     * ```
+     * 
+     * 以上面的表达式为例，可以归纳出 PostfixNode 的三个基本要素：
+     * 
+     * 1. 后缀类型 type   ：用来标记进行后缀运算的类型，圆括号运算符、方括号运算符、花括号运算符、点号运算符
+     * 2. 运算主体 primary：执行后缀运算的主体对象。例如，对于 list[1]，它的运算对象就是 list。
+     * 3. 运算参数 args   ：执行后缀运算的参数。
+     * 
+     * 因此，在海琛中，三类括号运算符内部都能够同时传入多个值。
+     * 
+     * 但点号运算符比较特别。它只能传入一个 IdentNode 类型的结点作为参数。例如：
+     * 
+     * ```hdg
+     * list.len
+     * ```
+     * 
+     * 上面的表达式会被解析成下面的样子：
+     * 
+     * ```YAML
+     * __class__ : PostfixNode
+     * type   : Token::DOT
+     * primary: 
+     *     __class__: IdentNode
+     *     ident    : "list"
+     * args : 
+     *     - __class__: IdentNode
+     *       ident    : "len"
+     * ```
+     * 
+     * 那么，海琛是怎么实现调用对象的方法的？海琛的解决方案是链式调用。
+     * 
+     * 例如下面的代码：
+     * 
+     * ```hdg
+     * list.append(1)
+     * ```
+     * 
+     * 它会被解析为：
+     * 
+     * ```YAML
+     * __class__ : PostfixNode
+     * type   : Token::LPAREN
+     * primary: 
+     *     __class__ : PostfixNode
+     *     type   : Token::DOT
+     *     primary: 
+     *         __class__: IdentNode
+     *         ident    : "list"
+     *     args : 
+     *         - __class__: IdentNode
+     *         ident    : "append"
+     * args : 
+     *     - __class__: IntNode
+     *       ident    : 1
+     * ```
+    */
+    class PostfixNode; 
+    typedef std::unique_ptr<PostfixNode> uPostfixNode;
+
     class PostfixNode: public Node{
+    public:
+        enum {
+            DOT
+        } Type;
+
     protected:
         Token::Type m_type;
         uNode m_primary;
@@ -88,6 +173,10 @@ namespace hdg {
         PostfixNode(Token::Type type, uNode&& primary, std::vector<uNode>&& exprList, const Position& pos);
         PostfixNode(Token::Type type, uNode&& primary, std::vector<uNode>&& exprList);
 
+        static uPostfixNode from(Token::Type type, uNode&& primary, vector<uNode>&& args);
+
+
+        
         inline std::vector<uNode>& getExprList() { return m_exprList; }
         inline uNode& getPrimary() { return m_primary; }
         inline std::string getIdent() { return m_ident; }

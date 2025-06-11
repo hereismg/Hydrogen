@@ -7,6 +7,8 @@
 #include <cmath>
 #include <utility>
 #include <cassert>
+#include <optional>
+
 #include <nlohmann/json.hpp>
 
 #include "Node.h"
@@ -15,6 +17,8 @@
 
 namespace hdg {
     using std::vector;
+    using std::optional;
+    using std::nullopt;
 
     class BinaryOperatorNode: public Node{
     protected:
@@ -156,11 +160,15 @@ namespace hdg {
 
     class PostfixNode: public Node{
     public:
-        enum {
-            DOT
-        } Type;
+        enum Type{
+            PAREN,   // 圆括号()
+            BRACKET, // 方括号[]
+            BRACE,   // 花括号{}
+            DOT      // 点号  .
+        };
 
     protected:
+        Type m_new_type;
         Token::Type m_type;
         uNode m_primary;
         std::string m_ident;
@@ -173,9 +181,14 @@ namespace hdg {
         PostfixNode(Token::Type type, uNode&& primary, std::vector<uNode>&& exprList, const Position& pos);
         PostfixNode(Token::Type type, uNode&& primary, std::vector<uNode>&& exprList);
 
-        static uPostfixNode from(Token::Type type, uNode&& primary, vector<uNode>&& args);
+        PostfixNode(Type type, uNode&& primary, vector<uNode>&& args, Position pos);
 
-
+        static optional<uPostfixNode> from(uNode&& node);
+        
+        static uPostfixNode createParen(uNode&& primary, vector<uNode> args, optional<Position> pos = nullopt);
+        static uPostfixNode createBracket(uNode&& primary, vector<uNode> args, optional<Position> pos = nullopt);
+        static uPostfixNode createBrace(uNode&& primary, vector<uNode> args, optional<Position> pos = nullopt);
+        static uPostfixNode createDot(uNode&& primary, const std::string& ident, optional<Position> pos = nullopt);
         
         inline std::vector<uNode>& getExprList() { return m_exprList; }
         inline uNode& getPrimary() { return m_primary; }

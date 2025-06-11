@@ -567,11 +567,22 @@ TEST(Smoke, PostfixNode_2) {
     ASSERT_TRUE(res->equation(std::make_shared<Integer>(2025))->isTrue());
 }
 
+TEST(PostfixNodeTest, from_NullInputReturnsNullopt){
+    uNode nullNode = nullptr;
+    auto res = PostfixNode::from(std::move(nullNode));
+    ASSERT_FALSE(res.has_value());
+}
+
+// TEST(PostfixNodeTest, from_ValidPostfixNodeConversion){
+//     uNode node = std::make_unique<PostfixNode>();
+
+// }
+
 /**
  * list = [1, 2]
  * list.append(3)
  */
-TEST(PostfixNode, Dot_1){
+TEST(PostfixNodeTest, Dot_1){
     // list = [1, 2]
     auto list = std::make_shared<List>();
     list->append(1)
@@ -611,7 +622,7 @@ TEST(PostfixNode, Dot_1){
 //  * list = [1, 2]
 //  * list.pop()
 //  */
-// TEST(PostfixNode, Dot_2){
+// TEST(PostfixNodeTest, Dot_2){
 //     // list = [1, 2]
 //     auto list = std::make_shared<List>();
 //     list->append(1)

@@ -205,10 +205,10 @@ namespace hdg {
           m_primary(std::move(primary)), 
           m_ident(std::move(ident)),
           m_exprList(std::move(exprList))
-    {
+        {
             assert(m_primary != nullptr);
             assert(m_ident != "");
-    }
+        }
 
     PostfixNode::PostfixNode(Token::Type type, uNode&& primary, std::vector<uNode>&& exprList, const Position& pos)
         : Node(pos),
@@ -228,6 +228,16 @@ namespace hdg {
         {
             assert(m_primary != nullptr);
         }
+
+    
+
+    optional<uPostfixNode> PostfixNode::from(uNode&& node) {
+        if (auto ptr = dynamic_cast<PostfixNode*>(node.get())) {
+            node.release();
+            return std::unique_ptr<PostfixNode>(ptr);
+        }
+        return nullopt;
+    }
 
     nlohmann::json PostfixNode::toJSON() const {
         nlohmann::json j{

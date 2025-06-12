@@ -154,6 +154,8 @@ namespace hdg {
      *     - __class__: IntNode
      *       ident    : 1
      * ```
+     * 
+     * 最开始的海琛代码会被解析为：先执行点号运算符，在执行圆括号运算符。
     */
     class PostfixNode; 
     typedef std::unique_ptr<PostfixNode> uPostfixNode;
@@ -188,7 +190,7 @@ namespace hdg {
         static uPostfixNode createParen(uNode&& primary, vector<uNode> args, optional<Position> pos = nullopt);
         static uPostfixNode createBracket(uNode&& primary, vector<uNode> args, optional<Position> pos = nullopt);
         static uPostfixNode createBrace(uNode&& primary, vector<uNode> args, optional<Position> pos = nullopt);
-        static uPostfixNode createDot(uNode&& primary, const std::string& ident, optional<Position> pos = nullopt);
+        static uPostfixNode createDot(uNode&& primary, uNode&& ident, optional<Position> pos = nullopt);
         
         inline std::vector<uNode>& getExprList() { return m_exprList; }
         inline uNode& getPrimary() { return m_primary; }

@@ -126,6 +126,8 @@ namespace hdg {
         IdentNode(IdentNode&&) noexcept = default;
         IdentNode& operator=(IdentNode&&) noexcept = default;
 
+        static std::unique_ptr<IdentNode> create();
+
         std::string& getIdent();
         void setIdent(std::string new_ident);
 

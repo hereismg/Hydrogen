@@ -230,6 +230,7 @@ namespace hdg {
         }
 
     uPostfixNode PostfixNode::createParen(uNode&& primary, vector<uNode> args, optional<Position> pos){
+        assert(primary != nullptr);
         if (pos.has_value())
             return std::make_unique<PostfixNode>(Token::LPAREN, std::move(primary), std::move(args), pos.value());
         else 
@@ -237,17 +238,23 @@ namespace hdg {
     }
 
     uPostfixNode PostfixNode::createBracket(uNode&& primary, vector<uNode> args, optional<Position> pos){
+        assert(primary != nullptr);
         if (pos.has_value())
             return std::make_unique<PostfixNode>(Token::LBRACKET, std::move(primary), std::move(args), pos.value());
         else 
             return std::make_unique<PostfixNode>(Token::LBRACKET, std::move(primary), std::move(args));
     }
 
-    uPostfixNode PostfixNode::createDot(uNode&& primary, const std::string& ident, optional<Position> pos){
-        // if (pos.has_value())
-        //     return std::make_unique<PostfixNode>(Token::DOT, std::move(primary), std::move(args), pos.value());
-        // else 
-        //     return std::make_unique<PostfixNode>(Token::DOT, std::move(primary), std::move(args));
+    uPostfixNode PostfixNode::createDot(uNode&& primary, uNode&& ident, optional<Position> pos){
+        assert(primary != nullptr);
+        assert(ident   != nullptr);
+
+        vector<uNode> args;
+        args.push_back(std::move(ident));
+        if (pos.has_value())
+            return std::make_unique<PostfixNode>(Token::DOT, std::move(primary), std::move(args), pos.value());
+        else 
+            return std::make_unique<PostfixNode>(Token::DOT, std::move(primary), std::move(args));
         return nullptr;
     }
 

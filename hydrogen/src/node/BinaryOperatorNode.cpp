@@ -229,7 +229,27 @@ namespace hdg {
             assert(m_primary != nullptr);
         }
 
-    
+    uPostfixNode PostfixNode::createParen(uNode&& primary, vector<uNode> args, optional<Position> pos){
+        if (pos.has_value())
+            return std::make_unique<PostfixNode>(Token::LPAREN, std::move(primary), std::move(args), pos.value());
+        else 
+            return std::make_unique<PostfixNode>(Token::LPAREN, std::move(primary), std::move(args));
+    }
+
+    uPostfixNode PostfixNode::createBracket(uNode&& primary, vector<uNode> args, optional<Position> pos){
+        if (pos.has_value())
+            return std::make_unique<PostfixNode>(Token::LBRACKET, std::move(primary), std::move(args), pos.value());
+        else 
+            return std::make_unique<PostfixNode>(Token::LBRACKET, std::move(primary), std::move(args));
+    }
+
+    uPostfixNode PostfixNode::createDot(uNode&& primary, const std::string& ident, optional<Position> pos){
+        // if (pos.has_value())
+        //     return std::make_unique<PostfixNode>(Token::DOT, std::move(primary), std::move(args), pos.value());
+        // else 
+        //     return std::make_unique<PostfixNode>(Token::DOT, std::move(primary), std::move(args));
+        return nullptr;
+    }
 
     optional<uPostfixNode> PostfixNode::from(uNode&& node) {
         if (auto ptr = dynamic_cast<PostfixNode*>(node.get())) {

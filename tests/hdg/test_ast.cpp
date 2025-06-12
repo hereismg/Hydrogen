@@ -523,7 +523,7 @@ TEST(Smoke, PostfixNode_1){
     std::vector<uNode> args;
     args.emplace_back(std::make_unique<IntNode>(1));
     args.emplace_back(std::make_unique<IntNode>(2));
-    auto postfix = std::make_unique<PostfixNode>(Token::Type::LPAREN, std::move(ident), std::move(args), Position());
+    auto postfix = PostfixNode::createParen(std::move(ident), std::move(args));
 
     // exe
     postfix->accept(visitor);
@@ -553,11 +553,7 @@ TEST(Smoke, PostfixNode_2) {
     auto ident = std::make_unique<IdentNode>("list");
     std::vector<uNode> exprList;
     exprList.emplace_back(std::make_unique<IntNode>(0));
-    auto postfix = std::make_unique<PostfixNode>(
-        Token::Type::LBRACKET,
-        std::move(ident),
-        std::move(exprList)
-    );
+    auto postfix = PostfixNode::createBracket(std::move(ident), std::move(exprList));
 
     // 执行
     postfix->accept(visitor);
@@ -574,7 +570,6 @@ TEST(PostfixNodeTest, from_NullInputReturnsNullopt){
 }
 
 // TEST(PostfixNodeTest, from_ValidPostfixNodeConversion){
-//     uNode node = std::make_unique<PostfixNode>();
 
 // }
 

@@ -1028,12 +1028,7 @@ namespace hdg {
                 advance();
 
                 pos.setEnd(m_currentToken->thisPosition()->getEnd());
-                primary = std::make_unique<PostfixNode>(
-                    Token::Type::LPAREN, 
-                    std::move(primary), 
-                    std::move(params), 
-                    pos
-                );
+                primary = PostfixNode::createParen(std::move(primary), std::move(params), pos);
                 break;
             }
             case Token::LBRACKET : { // 方括号 []
@@ -1047,10 +1042,9 @@ namespace hdg {
                 advance();
 
                 pos.setEnd(m_currentToken->thisPosition()->getEnd());
-                primary = std::make_unique<PostfixNode>(
-                    Token::Type::LBRACKET, 
-                    std::move(primary), 
-                    std::move(params), 
+                primary = PostfixNode::createBracket(
+                    std::move(primary),
+                    std::move(params),
                     pos
                 );
                 break;

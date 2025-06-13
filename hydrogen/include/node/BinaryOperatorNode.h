@@ -80,7 +80,9 @@ namespace hdg {
         static uBinOperNode createPlus(int64_t num1, int64_t num2);
         static uBinOperNode createPlus(uNode&& obj1, uNode&& obj2);
         static uBinOperNode createMinus(int64_t num1, int64_t num2);
+        static uBinOperNode createMinus(uNode&& obj1, uNode&& obj2);
         static uBinOperNode createMul(int64_t num1, int64_t num2);
+        static uBinOperNode createMul(uNode&& obj1, uNode&& obj2);
         static uBinOperNode createDiv(int64_t num1, int64_t num2);
 
         void setOper(Token oper);

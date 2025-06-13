@@ -162,6 +162,46 @@ namespace hdg {
         );
     }
 
+    uBinOperNode BinOperNode::createMinus(int64_t num1, int64_t num2) {
+        return std::make_unique<BinOperNode>(
+            Token(Token::MINUS),
+            IntNode::create(num1),
+            IntNode::create(num2)
+        );
+    }
+
+    uBinOperNode BinOperNode::createMinus(uNode&& obj1, uNode&& obj2) {
+        return std::make_unique<BinOperNode>(
+            Token(Token::MINUS),
+            move(obj1),
+            move(obj2)
+        );
+    }
+
+    uBinOperNode BinOperNode::createMul(int64_t num1, int64_t num2) {
+        return std::make_unique<BinOperNode>(
+            Token(Token::MUL),
+            IntNode::create(num1),
+            IntNode::create(num2)
+        );
+    }
+    
+    uBinOperNode BinOperNode::createMul(uNode&& obj1, uNode&& obj2) {
+        return std::make_unique<BinOperNode>(
+            Token(Token::MUL),
+            move(obj1),
+            move(obj2)
+        );
+    }
+
+    uBinOperNode BinOperNode::createDiv(int64_t num1, int64_t num2) {
+        return std::make_unique<BinOperNode>(
+            Token(Token::DIV),
+            IntNode::create(num1),
+            IntNode::create(num2)
+        );
+    }
+
     void BinOperNode::setOper(Token oper){
         m_oper = std::move(oper);
     }

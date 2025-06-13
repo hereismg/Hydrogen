@@ -24,7 +24,7 @@ using namespace hdg;
 
 class Expr_TEST_P: public testing::TestWithParam<std::tuple<
     std::string, // 测试标记（调试时通过该值定位测试点）
-    Node*,      // 测试表达式，注意，这里传入的是 “智能指针的地址“
+    sNode,       // 测试表达式，注意，这里是 共享指针
     sObject      // 预期测试结果
 >>{};
 TEST_P(Expr_TEST_P, _){
@@ -34,222 +34,82 @@ TEST_P(Expr_TEST_P, _){
     
     expr->accept(visitor);
     
-    delete(expr);
-    
     auto actual = visitor.getRVal();
     
-    ASSERT_TRUE(actual->equation(expected)->isTrue());
+    if (!actual->equation(expected)->isTrue()){
+        cout << "actual  : " << actual->toString()   << endl;
+        cout << "expected: " << expected->toString() << endl;
+        ASSERT_TRUE(false);
+    }
 }
-INSTANTIATE_TEST_SUITE_P(ExprNodeTest, Expr_TEST_P, testing::Values(
-    tuple<string, Node*, sObject>{
+
+INSTANTIATE_TEST_SUITE_P(BinOperNode_Arithmetic, Expr_TEST_P, testing::Values(
+    tuple<string, sNode, sObject>{
         "1", 
-        BinOperNode::createPlus(5, 2).release(), 
+        sNode(BinOperNode::createPlus(5, 2)),
         Integer::from(7)
+    },
+
+    tuple<string, sNode, sObject>{
+        "2", 
+        sNode(
+            BinOperNode::createPlus(
+                IntNode::create(3),
+                BinOperNode::createPlus(2, 5)
+            )
+        ),
+        Integer::from(10)
+    },
+
+    tuple<string, sNode, sObject>{
+        "3", 
+        sNode(
+            BinOperNode::createMinus(5, 2)
+        ),
+        Integer::from(3)
+    },
+
+    tuple<string, sNode, sObject>{
+        "1", 
+        sNode(
+            BinOperNode::createMul(5, 2)
+        ),
+        Integer::from(10)
+    },
+
+    tuple<string, sNode, sObject>{
+        "1", 
+        sNode(
+            BinOperNode::createDiv(5, 2)
+        ),
+        Integer::from(2)
+    },
+
+    tuple<string, sNode, sObject>{
+        /**
+         * 3 - (10 + 2) * 3 = -27
+         *
+         *      [ - ]
+         *     /     \
+         *  [ 3 ]    [ * ]
+         *          /     \
+         *      [ + ]     [ 3 ]
+         *      /   \
+         *  [10]   [ 2 ]
+         */
+        "1", 
+        sNode( 
+            BinOperNode::createMinus(
+                IntNode::create(3),
+                BinOperNode::createMul(
+                    BinOperNode::createPlus(8, 2),
+                    IntNode::create(3)
+                )
+            )
+        ),
+        Integer::from(-27)
     }
 ));
-
-
-TEST(test_BinOperNode, _1) {
-    auto expr = BinOperNode::createPlus(5, 2);
-
-    InterpreterVisitor visitor;
-
-    expr->accept(visitor);
-
-    ASSERT_EQ(typeid(*visitor.getResult().get()), typeid(Integer));
-
-    Integer* res = dynamic_cast<Integer*>(visitor.getResult().get());
-
-    ASSERT_EQ(res->getValue(), 7);
-}
-
-TEST(test_BinOperNode, _2) {
-    /*
-       BinOperNode(2)
-        /       \
-    Integer(3)   BinOperNode(1)
-                 /         \
-           Integer(1)       Integer(2)
-    */
-
-    auto expr = BinOperNode::createPlus(
-        IntNode::create(3),
-        BinOperNode::createPlus(2, 5)
-    );
-
-    InterpreterVisitor visitor;
-
-    expr->accept(visitor);
-
-    ASSERT_EQ(typeid(*visitor.getResult().get()), typeid(Integer));
-
-    Integer* res = dynamic_cast<Integer*>(visitor.getResult().get());
-
-    ASSERT_EQ(res->getValue(), 10);
-}
-
-TEST(test_BinOperNode, _3) {
-    uNode left = std::make_unique<IntNode>(5);
-    uNode right = std::make_unique<IntNode>(2);
-
-    Token oper(Token::Type::MINUS);
-
-    uNode expr = std::make_unique<BinOperNode>(
-        std::move(oper),
-        std::move(left),
-        std::move(right)
-    );
-
-    InterpreterVisitor visitor;
-
-    expr->accept(visitor);
-
-    ASSERT_EQ(typeid(*visitor.getResult().get()), typeid(Integer));
-
-    Integer* res = dynamic_cast<Integer*>(visitor.getResult().get());
-
-    ASSERT_EQ(res->getValue(), 3);
-}
-
-
-TEST(test_BinOperNode, _4) {
-    uNode left = std::make_unique<IntNode>(5);
-    uNode right = std::make_unique<IntNode>(2);
-
-    Token oper(Token::Type::MUL);
-
-    uNode expr = std::make_unique<BinOperNode>(
-        std::move(oper),
-        std::move(left),
-        std::move(right)
-    );
-
-    InterpreterVisitor visitor;
-
-    expr->accept(visitor);
-
-    ASSERT_EQ(typeid(*visitor.getResult().get()), typeid(Integer));
-
-    Integer* res = dynamic_cast<Integer*>(visitor.getResult().get());
-
-    ASSERT_EQ(res->getValue(), 10);
-}
-
-TEST(test_BinOperNode, _5) {
-    uNode left = std::make_unique<IntNode>(5);
-    uNode right = std::make_unique<IntNode>(2);
-
-    Token oper(Token::Type::DIV);
-
-    uNode expr = std::make_unique<BinOperNode>(
-        std::move(oper),
-        std::move(left),
-        std::move(right)
-    );
-
-    InterpreterVisitor visitor;
-
-    expr->accept(visitor);
-
-    ASSERT_EQ(typeid(*visitor.getResult().get()), typeid(Integer));
-
-    Integer* res = dynamic_cast<Integer*>(visitor.getResult().get());
-
-    ASSERT_EQ(res->getValue(), 2);
-}
-
-TEST(test_BinOperNode, _6) {
-    /*
-       BinOperNode-2
-        /       \
-  Integer-3     BinOperNode-1
-                 /         \
-           Integer-1       Integer-2
-    */
-    uNode int1 = std::make_unique<IntNode>(5);
-    uNode int2 = std::make_unique<IntNode>(2);
-
-    Token oper1(Token::Type::PLUS);
-
-    uNode binOper1 = std::make_unique<BinOperNode>(
-        std::move(oper1),
-        std::move(int1),
-        std::move(int2)
-    );
-
-    uNode int3 = std::make_unique<IntNode>(3);
-
-    Token oper2(Token::Type::MINUS);
-
-    uNode binOper2 = std::make_unique<BinOperNode>(
-        std::move(oper2),
-        std::move(int3),
-        std::move(binOper1)
-    );
-
-    InterpreterVisitor visitor;
-
-    binOper2->accept(visitor);
-
-    ASSERT_EQ(typeid(*visitor.getResult().get()), typeid(Integer));
-
-    Integer* res = dynamic_cast<Integer*>(visitor.getResult().get());
-
-    ASSERT_EQ(res->getValue(), -4);
-}
-
-TEST(test_BinOperNode, _7) {
-    /*
-        BinOperNode-3
-         /         \
-  Integer-4       BinOperNode-2
-                   /         \
-          BinOperNode-1       Integer-3
-           /       \
-    Integer-1     Integer-2
-    
-    */
-    uNode int1 = std::make_unique<IntNode>(10);
-    uNode int2 = std::make_unique<IntNode>(2);
-
-    Token oper1(Token::Type::PLUS);
-
-    uNode binOper1 = std::make_unique<BinOperNode>(
-        std::move(oper1),
-        std::move(int1),
-        std::move(int2)
-    );
-
-    uNode int3 = std::make_unique<IntNode>(3);
-
-    Token oper2(Token::Type::MINUS);
-
-    uNode binOper2 = std::make_unique<BinOperNode>(
-        std::move(oper2),
-        std::move(binOper1),
-        std::move(int3)
-    );
-
-    uNode int4 = std::make_unique<IntNode>(5);
-
-    Token oper3(Token::Type::MUL);
-
-    uNode binOper3 = std::make_unique<BinOperNode>(
-        std::move(oper3),
-        std::move(int4),
-        std::move(binOper2)
-    );
-
-    InterpreterVisitor visitor;
-
-    binOper3->accept(visitor);
-
-    ASSERT_EQ(typeid(*visitor.getResult().get()), typeid(Integer));
-
-    Integer* res = dynamic_cast<Integer*>(visitor.getResult().get());
-
-    ASSERT_EQ(res->getValue(), 45);
-}
 
 
 /**********************************************

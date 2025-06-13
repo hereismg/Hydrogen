@@ -13,6 +13,12 @@
 #include "visitor.h"
 
 namespace hdg {
+
+    class Node;
+    
+    typedef std::unique_ptr<Node> uNode;
+    typedef std::shared_ptr<Node> sNode;
+
     class Node {
     protected:
         Position m_position;
@@ -33,6 +39,5 @@ namespace hdg {
         virtual void accept(Visitor& visitor); // TODO 这里设为纯虚函数
     };
 
-    typedef std::unique_ptr<Node> uNode;
 } // hdg
 

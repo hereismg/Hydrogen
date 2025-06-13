@@ -168,6 +168,11 @@ namespace hdg {
         m_position = pos;
         m_class = "Integer"; // TODO 注意，这最好用 ObjectNode 直接构造，但因为 ObjectNode 的设计缺陷，暂时这样做。
     }
+    
+    uIntNode IntNode::create(int64_t val, optional<Position> pos) {
+        if (pos.has_value()) return std::make_unique<IntNode>(val, pos.value());
+        else return std::make_unique<IntNode>(val);
+    }
 
     void IntNode::setValue(int64_t new_val){
         m_val = new_val;
@@ -204,6 +209,11 @@ namespace hdg {
         : Node(pos), m_ident(ident)
     {
         assert(m_ident != "");
+    }
+
+    uIdentNode IdentNode::create(std::string ident, optional<Position> pos) {
+        if (pos.has_value()) return std::make_unique<IdentNode>(std::move(ident), pos.value());
+        else return std::make_unique<IdentNode>(ident);
     }
 
     std::string& IdentNode::getIdent(){

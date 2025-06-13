@@ -7,6 +7,8 @@
 #include "../object/String.h"
 
 namespace hdg {
+    using std::nullopt;
+
     class ObjAssignNode;
     class Function;
     class New_BaseFunction;
@@ -90,6 +92,9 @@ namespace hdg {
         virtual void accept(Visitor& visitor) override;
     };
 
+    class IntNode;
+    typedef std::unique_ptr<IntNode> uIntNode;
+
     class IntNode: public ObjectNode{
     protected:
         int64_t m_val;
@@ -104,6 +109,8 @@ namespace hdg {
         IntNode(IntNode&&) noexcept = default;
         IntNode& operator=(IntNode&&) noexcept = default;
 
+        static uIntNode create(int64_t val, optional<Position> pos = nullopt);
+
         int64_t getValue() const { return m_val; }
         void setValue(int64_t new_val);
 
@@ -112,6 +119,9 @@ namespace hdg {
         virtual Object* interpret() override;
         virtual void accept(Visitor& visitor) override;
     };
+
+    class IdentNode;
+    typedef std::unique_ptr<IdentNode> uIdentNode;
 
     class IdentNode: public Node{
     protected:
@@ -126,7 +136,7 @@ namespace hdg {
         IdentNode(IdentNode&&) noexcept = default;
         IdentNode& operator=(IdentNode&&) noexcept = default;
 
-        static std::unique_ptr<IdentNode> create();
+        static uIdentNode create(std::string ident, optional<Position> pos = nullopt);
 
         std::string& getIdent();
         void setIdent(std::string new_ident);

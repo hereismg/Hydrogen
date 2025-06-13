@@ -550,10 +550,10 @@ TEST(Smoke, PostfixNode_2) {
     visitor.getCurrentEnvir()->setSymbol("list", list);
 
     // 构造 PostfixNode：list[0]
-    auto ident = std::make_unique<IdentNode>("list");
+    auto ident = IdentNode::create("list");
     std::vector<uNode> exprList;
-    exprList.emplace_back(std::make_unique<IntNode>(0));
-    auto postfix = PostfixNode::createBracket(std::move(ident), std::move(exprList));
+    exprList.emplace_back(IntNode::create(0));
+    auto postfix = PostfixNode::createBracket(move(ident), move(exprList));
 
     // 执行
     postfix->accept(visitor);
@@ -565,7 +565,7 @@ TEST(Smoke, PostfixNode_2) {
 
 TEST(PostfixNodeTest, from_NullInputReturnsNullopt){
     uNode nullNode = nullptr;
-    auto res = PostfixNode::from(std::move(nullNode));
+    auto res = PostfixNode::from(move(nullNode));
     ASSERT_FALSE(res.has_value());
 }
 

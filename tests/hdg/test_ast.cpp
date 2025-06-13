@@ -22,17 +22,35 @@ using namespace hdg;
  * Test 1. BinOperNode
  **********************************************/
 
+class Expr_TEST_P: public testing::TestWithParam<std::tuple<
+    std::string, // 测试标记（调试时通过该值定位测试点）
+    Node*,      // 测试表达式，注意，这里传入的是 “智能指针的地址“
+    sObject      // 预期测试结果
+>>{};
+TEST_P(Expr_TEST_P, _){
+    auto [id, expr, expected] = GetParam();
+    
+    InterpreterVisitor visitor;
+    
+    expr->accept(visitor);
+    
+    delete(expr);
+    
+    auto actual = visitor.getRVal();
+    
+    ASSERT_TRUE(actual->equation(expected)->isTrue());
+}
+INSTANTIATE_TEST_SUITE_P(ExprNodeTest, Expr_TEST_P, testing::Values(
+    tuple<string, Node*, sObject>{
+        "1", 
+        BinOperNode::createPlus(5, 2).release(), 
+        Integer::from(7)
+    }
+));
+
+
 TEST(test_BinOperNode, _1) {
-    uNode left = std::make_unique<IntNode>(5);
-    uNode right = std::make_unique<IntNode>(2);
-
-    Token plus(Token::Type::PLUS);
-
-    uNode expr = std::make_unique<BinOperNode>(
-        std::move(plus),
-        std::move(left),
-        std::move(right)
-    );
+    auto expr = BinOperNode::createPlus(5, 2);
 
     InterpreterVisitor visitor;
 
@@ -53,30 +71,15 @@ TEST(test_BinOperNode, _2) {
                  /         \
            Integer(1)       Integer(2)
     */
-    uNode int1 = std::make_unique<IntNode>(5);
-    uNode int2 = std::make_unique<IntNode>(2);
 
-    Token plus1(Token::Type::PLUS);
-
-    uNode binOper1 = std::make_unique<BinOperNode>(
-        std::move(plus1),
-        std::move(int1),
-        std::move(int2)
-    );
-
-    uNode int3 = std::make_unique<IntNode>(3);
-
-    Token plus2(Token::Type::PLUS);
-
-    uNode binOper2 = std::make_unique<BinOperNode>(
-        std::move(plus2),
-        std::move(int3),
-        std::move(binOper1)
+    auto expr = BinOperNode::createPlus(
+        IntNode::create(3),
+        BinOperNode::createPlus(2, 5)
     );
 
     InterpreterVisitor visitor;
 
-    binOper2->accept(visitor);
+    expr->accept(visitor);
 
     ASSERT_EQ(typeid(*visitor.getResult().get()), typeid(Integer));
 

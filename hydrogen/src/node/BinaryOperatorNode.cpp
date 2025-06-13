@@ -6,6 +6,8 @@
 
 #include <cassert>
 
+#include "../../include/node/ObjectNode.h"
+
 namespace hdg {
 
     BinaryOperatorNode::BinaryOperatorNode(const Token& oper, Node *left, Node *right, const Position& position):
@@ -142,6 +144,22 @@ namespace hdg {
     {
         assert(m_left  != nullptr && "Left Child cannot be null!");
         assert(m_right != nullptr && "Right Child cannot be null!");
+    }
+
+    uBinOperNode BinOperNode::createPlus(int64_t num1, int64_t num2) {
+        return std::make_unique<BinOperNode>(
+            Token(Token::PLUS), 
+            IntNode::create(num1),
+            IntNode::create(num2)
+        );
+    }
+
+    uBinOperNode BinOperNode::createPlus(uNode&& obj1, uNode&& obj2) {
+        return std::make_unique<BinOperNode>(
+            Token(Token::PLUS), 
+            move(obj1),
+            move(obj2)
+        );
     }
 
     void BinOperNode::setOper(Token oper){

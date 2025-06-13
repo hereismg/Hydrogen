@@ -47,8 +47,20 @@ namespace hdg {
         virtual Object* interpret() override;
     };
 
+    class BinOperNode;
+    typedef std::unique_ptr<BinOperNode> uBinOperNode;
+
     class BinOperNode: public Node{
+    public:
+        enum Type{
+            PLUS,
+            MINUS,
+            MUL,
+            DIV
+        };
+
     protected:
+        Type m_new_oper;
         Token m_oper;
         uNode m_left;
         uNode m_right;
@@ -64,6 +76,12 @@ namespace hdg {
         
         BinOperNode(BinOperNode&&) noexcept = default;
         BinOperNode& operator=(BinOperNode&&) noexcept = default;
+
+        static uBinOperNode createPlus(int64_t num1, int64_t num2);
+        static uBinOperNode createPlus(uNode&& obj1, uNode&& obj2);
+        static uBinOperNode createMinus(int64_t num1, int64_t num2);
+        static uBinOperNode createMul(int64_t num1, int64_t num2);
+        static uBinOperNode createDiv(int64_t num1, int64_t num2);
 
         void setOper(Token oper);
         void setLeft(uNode&& new_left);

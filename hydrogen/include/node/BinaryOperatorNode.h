@@ -19,6 +19,7 @@ namespace hdg {
     using std::vector;
     using std::optional;
     using std::nullopt;
+    using std::move;
 
     class BinaryOperatorNode: public Node{
     protected:
@@ -166,7 +167,8 @@ namespace hdg {
             PAREN,   // 圆括号()
             BRACKET, // 方括号[]
             BRACE,   // 花括号{}
-            DOT      // 点号  .
+            DOT_VAR, // 点号，访问成员变量
+            DOT_FUN  // 点号，访问成员方法
         };
 
     protected:
@@ -177,21 +179,17 @@ namespace hdg {
         std::vector<uNode> m_exprList;
 
     public:
-        // PostfixNode(Token::Type type, std::string ident, const Position& pos);
-        PostfixNode(Token::Type type, uNode&& primary, std::string ident, std::vector<uNode>&& exprList, const Position& pos);
-        PostfixNode(Token::Type type, uNode&& primary, std::string ident, std::vector<uNode>&& exprList);
-        PostfixNode(Token::Type type, uNode&& primary, std::vector<uNode>&& exprList, const Position& pos);
-        PostfixNode(Token::Type type, uNode&& primary, std::vector<uNode>&& exprList);
+        PostfixNode(Type type, uNode&& primary, std::string ident, vector<uNode>&& args, optional<Position> pos);
 
-        PostfixNode(Type type, uNode&& primary, vector<uNode>&& args, Position pos);
-
+    public:
         static optional<uPostfixNode> from(uNode&& node);
         
         static uPostfixNode createParen(uNode&& primary, vector<uNode> args, optional<Position> pos = nullopt);
         static uPostfixNode createBracket(uNode&& primary, vector<uNode> args, optional<Position> pos = nullopt);
         static uPostfixNode createBrace(uNode&& primary, vector<uNode> args, optional<Position> pos = nullopt);
-        static uPostfixNode createDot(uNode&& primary, uNode&& ident, optional<Position> pos = nullopt);
-        
+        static uPostfixNode createDotFun(uNode&& primary, std::string ident, vector<uNode>&& args, optional<Position> pos = nullopt);
+        static uPostfixNode createDotVar(uNode&& primary, std::string ident, optional<Position> pos = nullopt);
+
         inline std::vector<uNode>& getExprList() { return m_exprList; }
         inline uNode& getPrimary() { return m_primary; }
         inline std::string getIdent() { return m_ident; }
@@ -201,6 +199,7 @@ namespace hdg {
         virtual std::string toString() override;
         virtual Object* interpret() override { assert(false); return nullptr; }
         virtual void accept(Visitor& visitor) override;
+
     };
 
 } // hdg

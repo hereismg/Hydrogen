@@ -181,81 +181,68 @@ namespace hdg {
         visitor.visitBinOperNode(*this);
     }
 
-    // PostfixNode::PostfixNode(Token::Type type, std::string ident, const Position& pos)
-    //     : Node(pos),
-    //       m_type(type), 
-    //       m_primary(nullptr), 
-    //       m_ident(std::move(ident))
-    //     {}
-
-
-    PostfixNode::PostfixNode(Token::Type type, uNode&& primary, std::string ident, std::vector<uNode>&& exprList, const Position& pos)
-        : Node(pos),
-          m_type(type), 
-          m_primary(std::move(primary)), 
-          m_ident(std::move(ident)),
-          m_exprList(std::move(exprList))
+    PostfixNode::PostfixNode(Type type, uNode&& primary, std::string ident, vector<uNode>&& args, optional<Position> pos)
+        : m_new_type(type), m_primary(std::move(primary)), m_ident(std::move(ident)), m_exprList(std::move(args))
         {
             assert(m_primary != nullptr);
-            assert(m_ident != "");
-        }
-
-    PostfixNode::PostfixNode(Token::Type type, uNode&& primary, std::string ident, std::vector<uNode>&& exprList)
-        : m_type(type), 
-          m_primary(std::move(primary)), 
-          m_ident(std::move(ident)),
-          m_exprList(std::move(exprList))
-        {
-            assert(m_primary != nullptr);
-            assert(m_ident != "");
-        }
-
-    PostfixNode::PostfixNode(Token::Type type, uNode&& primary, std::vector<uNode>&& exprList, const Position& pos)
-        : Node(pos),
-          m_type(type), 
-          m_primary(std::move(primary)), 
-          m_ident(""),
-          m_exprList(std::move(exprList))
-        {
-            assert(m_primary != nullptr);
-        }
-
-    PostfixNode::PostfixNode(Token::Type type, uNode&& primary, std::vector<uNode>&& exprList)
-        : m_type(type), 
-          m_primary(std::move(primary)), 
-          m_ident(""),
-          m_exprList(std::move(exprList))
-        {
-            assert(m_primary != nullptr);
+            if (pos.has_value()) m_position = pos.value();
         }
 
     uPostfixNode PostfixNode::createParen(uNode&& primary, vector<uNode> args, optional<Position> pos){
         assert(primary != nullptr);
-        if (pos.has_value())
-            return std::make_unique<PostfixNode>(Token::LPAREN, std::move(primary), std::move(args), pos.value());
-        else 
-            return std::make_unique<PostfixNode>(Token::LPAREN, std::move(primary), std::move(args));
+        auto node = std::make_unique<PostfixNode> (
+            PAREN,
+            move(primary),
+            "",
+            move(args),
+            pos
+        );
+
+        node->m_type = Token::LPAREN;
+
+        return node;
     }
 
     uPostfixNode PostfixNode::createBracket(uNode&& primary, vector<uNode> args, optional<Position> pos){
         assert(primary != nullptr);
-        if (pos.has_value())
-            return std::make_unique<PostfixNode>(Token::LBRACKET, std::move(primary), std::move(args), pos.value());
-        else 
-            return std::make_unique<PostfixNode>(Token::LBRACKET, std::move(primary), std::move(args));
+        auto node = std::make_unique<PostfixNode> (
+            BRACKET,
+            move(primary),
+            "",
+            move(args),
+            pos
+        );
+
+        node->m_type = Token::LBRACKET;
+
+        return node;
     }
 
-    uPostfixNode PostfixNode::createDot(uNode&& primary, uNode&& ident, optional<Position> pos){
+    uPostfixNode PostfixNode::createDotFun(uNode&& primary, std::string ident, vector<uNode>&& args, optional<Position> pos){
         assert(primary != nullptr);
-        assert(ident   != nullptr);
+        auto node = std::make_unique<PostfixNode>(
+            DOT_FUN, 
+            move(primary), 
+            move(ident), 
+            move(args), 
+            std::move(pos)
+        );
+        node->m_type = Token::DOT;
+        return node;
+    }
 
-        vector<uNode> args;
-        args.push_back(std::move(ident));
-        if (pos.has_value())
-            return std::make_unique<PostfixNode>(Token::DOT, std::move(primary), std::move(args), pos.value());
-        else 
-            return std::make_unique<PostfixNode>(Token::DOT, std::move(primary), std::move(args));
-        return nullptr;
+    uPostfixNode PostfixNode::createDotVar(uNode&& primary, std::string ident, optional<Position> pos) {
+        assert(primary != nullptr);
+        auto node = std::make_unique<PostfixNode>(
+            DOT_FUN, 
+            move(primary), 
+            move(ident), 
+            vector<uNode>(),
+            std::move(pos)
+        );
+
+        node->m_type = Token::DOT;
+        return node;
     }
 
     optional<uPostfixNode> PostfixNode::from(uNode&& node) {

@@ -577,41 +577,40 @@ TEST(PostfixNodeTest, from_NullInputReturnsNullopt){
  * list = [1, 2]
  * list.append(3)
  */
-TEST(PostfixNodeTest, Dot_1){
-    // list = [1, 2]
-    auto list = std::make_shared<List>();
-    list->append(1)
-        ->append(2);
+// TEST(PostfixNodeTest, Dot_1){
+//     // list = [1, 2]
+//     auto list = std::make_shared<List>();
+//     list->append(1)
+//         ->append(2);
 
-    InterpreterVisitor visitor;
-    visitor.getCurrentEnvir()->setSymbol("list", list);
+//     InterpreterVisitor visitor;
+//     visitor.getCurrentEnvir()->setSymbol("list", list);
 
-    /**
-     * hdg:
-     *     list.append(3)
-     * 
-     * AST:
-     *     __class__: PostfixNode
-     *     
-    */
-    auto primary = std::make_unique<IdentNode>("list");
-    auto postfix = PostfixNode::createDot(std::move(primary), std::make_unique<IdentNode>("append"));
+//     /**
+//      * hdg:
+//      *     list.append(3)
+//      * 
+//      * AST:
+//      *     __class__: PostfixNode
+//      *     
+//     */
+//     auto postfix = PostfixNode::createDot(std::move(primary), );
 
-    std::vector<uNode> args;
-    args.emplace_back(std::make_unique<IntNode>(3));
+//     std::vector<uNode> args;
+//     args.emplace_back(std::make_unique<IntNode>(3));
 
-    // visitor
-    postfix->accept(visitor);
+//     // visitor
+//     postfix->accept(visitor);
 
-    // judge
-    auto expected = std::make_shared<List>();
-    expected->append(1)
-            ->append(2)
-            ->append(3);
-    auto actual = visitor.getResult();
+//     // judge
+//     auto expected = std::make_shared<List>();
+//     expected->append(1)
+//             ->append(2)
+//             ->append(3);
+//     auto actual = visitor.getResult();
 
-    // ASSERT_TRUE(expected->equation(actual)->isTrue());
-}
+//     // ASSERT_TRUE(expected->equation(actual)->isTrue());
+// }
 
 
 // /**

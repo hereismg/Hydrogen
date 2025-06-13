@@ -535,7 +535,7 @@ function add(a, b){
     args.emplace_back(std::make_unique<IntNode>(1));
     args.emplace_back(std::make_unique<IntNode>(2));
     auto ident = std::make_unique<IdentNode>("add");
-    auto postfix = std::make_unique<PostfixNode>(Token::Type::LPAREN, std::move(ident), std::move(args), Position());
+    auto postfix = PostfixNode::createParen(move(ident), move(args));
 
     postfix->accept(visitor);
 

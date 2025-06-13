@@ -1,8 +1,13 @@
 #pragma once
 
+#include <optional>
+
 #include "Node.h"
 
 namespace hdg{
+    using std::optional;
+    using std::nullopt;
+
     // hdgTODO: rename AssignNode
     class new_AssignNode : public Node{
     protected:
@@ -32,6 +37,9 @@ namespace hdg{
         virtual void accept(Visitor& visitor) override;
     };
 
+    class DefNode;
+    typedef std::unique_ptr<DefNode> uDefNode;
+
     class DefNode: public Node {
     protected:
         std::string m_name;
@@ -40,6 +48,8 @@ namespace hdg{
     public:
         DefNode(std::string name, uNode&& val);
         DefNode(std::string name, uNode&& val, const Position& pos);
+
+        static uDefNode create(std::string name, uNode&& val, optional<Position> pos = nullopt);
 
         uNode& getVal() { return m_val; }
         std::string getName() { return m_name; }

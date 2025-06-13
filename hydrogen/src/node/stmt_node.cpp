@@ -81,6 +81,14 @@ namespace hdg{
         assert(m_val != nullptr);
     }
 
+    uDefNode DefNode::create(std::string name, uNode&& val, optional<Position> pos) {
+        auto node = std::make_unique<DefNode>(name, move(val));
+
+        if (pos.has_value()) node->m_position = pos.value();
+
+        return node;
+    }
+
     nlohmann::json DefNode::toJSON() const {
         return {
             {"__class__" , "DefNode"},

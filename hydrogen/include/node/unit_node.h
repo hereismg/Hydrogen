@@ -3,6 +3,9 @@
 #include "Node.h"
 
 namespace hdg{
+    class new_ExeUnitNode;
+    typedef std::unique_ptr<new_ExeUnitNode> uExeUnitNode;
+
     class new_ExeUnitNode:public Node{
     protected:
         std::vector<uNode> m_list;

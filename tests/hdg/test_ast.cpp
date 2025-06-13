@@ -87,15 +87,17 @@ INSTANTIATE_TEST_SUITE_P(BinOperNode_Arithmetic, Expr_TEST_P, testing::Values(
 
     tuple<string, sNode, sObject>{
         /**
-         * 3 - (10 + 2) * 3 = -27
+         * Expr:
+         *     3 - (10 + 2) * 3 = -27
          *
-         *      [ - ]
-         *     /     \
-         *  [ 3 ]    [ * ]
-         *          /     \
-         *      [ + ]     [ 3 ]
-         *      /   \
-         *  [10]   [ 2 ]
+         * AST:
+         *        [ - ]
+         *       /     \
+         *    [ 3 ]    [ * ]
+         *            /     \
+         *        [ + ]     [ 3 ]
+         *        /   \
+         *    [10]   [ 2 ]
          */
         "1", 
         sNode( 
@@ -142,27 +144,17 @@ TEST(test_DefNode, _1){
  **********************************************/
 
 TEST(test_ExeUnitNode, _1){
-    // a = 1
-    uNode int_node1 = std::make_unique<IntNode>(1);
-    std::string name1 = "a";
-
-    uNode assign_node1 = std::make_unique<DefNode>(name1, std::move(int_node1));
-
-    // b = 2 + 3
-    uNode int_node2 = std::make_unique<IntNode>(2);
-    uNode int_node3 = std::make_unique<IntNode>(3);
-    uNode oper_node = std::make_unique<BinOperNode>(
-        Token(Token::Type::PLUS), 
-        std::move(int_node2),
-        std::move(int_node3)
-    );
-    std::string name2 = "b";
-    uNode assign_node2 = std::make_unique<DefNode>(name2, std::move(oper_node));
-
+    /**
+     * var a = 1
+     * var b = 2 + 3
+     */
+    uNode stmt1 = DefNode::create("a", IntNode::create(1));
+    uNode stmt2 = DefNode::create("b", BinOperNode::createPlus(2, 3));
+    
     // ExeUnitNode
-    std::unique_ptr<new_ExeUnitNode> unit_node = std::make_unique<new_ExeUnitNode>();
-    unit_node->getList().emplace_back(std::move(assign_node1));
-    unit_node->getList().emplace_back(std::move(assign_node2));
+    auto unit_node = std::make_unique<new_ExeUnitNode>();
+    unit_node->getList().emplace_back(move(stmt1));
+    unit_node->getList().emplace_back(move(stmt2));
 
 
     InterpreterVisitor visitor;
@@ -172,7 +164,7 @@ TEST(test_ExeUnitNode, _1){
     // search symbol a, b
     {
         auto envir = visitor.getCurrentEnvir();
-        Object* obj_ptr = envir->getSymbol(name1).get();
+        Object* obj_ptr = envir->getSymbol("a").get();
 
         ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
 
@@ -182,7 +174,7 @@ TEST(test_ExeUnitNode, _1){
     }
     {
         auto envir = visitor.getCurrentEnvir();
-        Object* obj_ptr = envir->getSymbol(name2).get();
+        Object* obj_ptr = envir->getSymbol("b").get();
 
         ASSERT_EQ(typeid(*obj_ptr), typeid(Integer));
 
@@ -261,52 +253,9 @@ TEST(test_IfStmtNode, _1){
     }
 }
 
-
 /**********************************************
  * Test 4. Function Obj
  **********************************************/
-
-TEST(test_FuncObj, _1){
-    uNode int1 = std::make_unique<IntNode>(10);
-    uNode int2 = std::make_unique<IntNode>(2);
-
-    Token oper1(Token::Type::PLUS);
-
-    uNode binOper1 = std::make_unique<BinOperNode>(
-        std::move(oper1),
-        std::move(int1),
-        std::move(int2)
-    );
-
-    uNode int3 = std::make_unique<IntNode>(3);
-
-    Token oper2(Token::Type::MINUS);
-
-    uNode binOper2 = std::make_unique<BinOperNode>(
-        std::move(oper2),
-        std::move(binOper1),
-        std::move(int3)
-    );
-
-    uNode int4 = std::make_unique<IntNode>(5);
-
-    Token oper3(Token::Type::MUL);
-
-    uNode binOper3 = std::make_unique<BinOperNode>(
-        std::move(oper3),
-        std::move(int4),
-        std::move(binOper2)
-    );
-
-    // 函数的环境应该由函数自己维护
-    // visitor 和 envir 分离，因此 accept 应该要传入两个参数：visitor，envir
-    // 那么，该怎么考虑环境的父子级关系？
-
-    New_DefFunction(std::vector<std::string>(), std::move(binOper3));
-
-
-    InterpreterVisitor visitor;
-}
 
 TEST(Base, FuncObj_1){
     /**

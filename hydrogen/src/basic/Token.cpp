@@ -39,7 +39,11 @@ namespace hdg {
     }
 
     nlohmann::json Token::toJSON() const {
-        return *this;
+        return {
+                {"__class__", getClass()}, 
+                {"type", hdg::Token::TypeNameMap[getType()]}, 
+                {"value", getValue()}  // mgtodo: 很多时候，Token 的 value 都是空的，那么这就看起来很冗余，优化这一点
+            };
     }
 
     std::string Token::toString() {

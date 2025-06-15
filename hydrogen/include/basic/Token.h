@@ -134,21 +134,3 @@ namespace hdg {
     bool operator<(const Token& left, const Token& right);
     std::string kv_toString(const std::string& key, size_t keyShowLen, const std::string val, size_t valShowLen);
 } // hdg
-
-namespace nlohmann {
-    template<>
-    struct adl_serializer<hdg::Token> {
-        static void to_json(json& j, const hdg::Token& t) {
-            j = json{
-                {"__class__", t.getClass()}, 
-                {"type", hdg::Token::TypeNameMap[t.getType()]}, 
-                {"value", t.getValue()}  // mgtodo: 很多时候，Token 的 value 都是空的，那么这就看起来很冗余，优化这一点
-            };
-        }
- 
-        // static void from_json(const json& j, hdg::Token& p) {
-        //     p.setType(j.at("type"));
-        // }
-    };
-}
-

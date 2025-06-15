@@ -2,10 +2,11 @@
 // Created by Magnesium on 2023/7/16.
 //
 
+#include "../../include/kernel/Parser.h"
+
 #include <set>
 #include <cassert>
 
-#include "../../include/kernel/Parser.h"
 #include "../../include/node/CallNode.h"
 #include "../../include/node/StatementsNode.h"
 #include "../../include/node/ObjAssignNode.h"
@@ -18,11 +19,10 @@
 #include "../../include/node/stmt_node.h"
 #include "../../include/node/unit_node.h"
 #include "../../include/node/ObjectNode.h"
-// #include "../../include//unit_node.h"
 
 namespace hdg {
     Parser::Parser(std::vector<Token> tokens, Environment* environment):
-            m_tokens(std::move(tokens)), m_currentToken(m_tokens.begin()), m_environment(environment){
+            m_tokens(move(tokens)), m_currentToken(m_tokens.begin()), m_environment(environment){
     }
 
     void Parser::advance() {
@@ -32,627 +32,86 @@ namespace hdg {
     void Parser::advanceAndEL() {
         do {
             advance();
-        } while(m_currentToken->getType() == Token::Type::EL);
+        } while(m_currentToken->getType() == Token::EL);
     }
 
     void Parser::retreat() {
         if (m_currentToken != m_tokens.begin()) m_currentToken--;
     }
 
-    Node* Parser::run() {
-        if (m_tokens.empty())return nullptr;
-
-        Node* result = statements(m_environment);
-
-        if (m_currentToken->getType() != Token::EF){
-            throw InvalidSyntaxError(
-                    "Expected '+', '-', '*', '/' or '^'.",
-                    *m_currentToken->thisPosition()
-                    );
-        }
-
-        return result;
-    }
-
-    Node *Parser::statements(Environment *environment) {
-        if (m_currentToken->getType() == Token::EL || m_currentToken->getType() == Token::EF){
-            return nullptr;
-        }
-
-        ///? 这里是否要加上一行 if (m_currentToken.getType() == LPAREN) ？
-        auto* stats = new StatementsNode(*m_currentToken->thisPosition(), environment);
-
-        if (m_currentToken->getType() == Token::LBRACE){
-            advance();
-
-            while (m_currentToken->getType() != Token::RBRACE){
-                if (m_currentToken->getType() == Token::EL) {
-                    advance();       ///> 去除多余的换行符
-                    continue;
-                }
-                Node* node = expr(environment);
-                if (node == nullptr) continue;
-                stats->append(node);
-            }
-            stats->thisPosition()->setEnd(m_currentToken->thisPosition()->getEnd());
-            advance();
-        }
-        else {
-            while (m_currentToken->getType() != Token::EF){
-                if (m_currentToken->getType() == Token::EL) {
-                    advance();       ///> 去除多余的换行符
-                    continue;
-                }
-                Node* node = expr(environment);
-                stats->append(node);
-            }
-            stats->thisPosition()->setEnd(m_currentToken->thisPosition()->getEnd());
-            advance();
-        }
-
-        return stats;
-    }
-
-    Node* Parser::expr(Environment* environment) {
-        if (Token::IDENT == m_currentToken->getType()){
-            std::string name = m_currentToken->getValue();
-            Position pos(*m_currentToken->thisPosition());
-            advance();
-
-            if (m_currentToken->getType() == Token::EQ){
-                advance();
-
-                Node* obj = expr(environment);
-                pos.setEnd(obj->thisPosition()->getEnd());
-
-                return new ObjAssignNode(name, obj, pos, environment);
-            }
-            else {
-                retreat();
-            }
-        }
-
-        return binaryOperator(
-                environment,
-            std::set<Token, std::less<>>{{Token::KEYWORD, "or"}, {Token::KEYWORD, "and"}},
-            [this](Environment* e){return this->compExpr(e);}
-        );
-    }
-
-    Node *Parser::compExpr(Environment* environment) {
-        if (m_currentToken->match(Token::KEYWORD, "not")){
-            Token token(*m_currentToken);
-            advance();
-            Node* obj = compExpr(environment);
-            Position position(*token.thisPosition());
-            position.setEnd(obj->thisPosition()->getEnd());
-
-            return new UnaryOperatorNode(token, obj, position, environment);
-        }
-        return binaryOperator(
-                environment,
-                std::set<Token, std::less<>>{{Token::EE}, {Token::GT}, {Token::LT}, {Token::GTE}, {Token::LTE}},
-                [this](Environment* e){return this->arithExpr(e);});
-    }
-
-    Node *Parser::arithExpr(Environment* environment) {
-        return binaryOperator(
-                environment,
-                std::set<Token, std::less<>>{{Token::PLUS}, {Token::MINUS}},
-                [this](Environment* e){return this->term(e);}
-        );
-    }
-
-    Node *Parser::term(Environment* environment) {
-        return binaryOperator(
-                environment,
-                std::set<Token, std::less<>>{{Token::MUL}, {Token::DIV}, {Token::MOD}},
-                [this](Environment* e){return this->factor(e);}
-                );
-    }
-
-    Node *Parser::factor(Environment* environment) {
-        if (m_currentToken->getType() == Token::PLUS || m_currentToken->getType() == Token::MINUS){
-            return unaryOperator(
-                    environment,
-                    std::set<Token, std::less<>>{{Token::PLUS}, {Token::MINUS}},
-                    [this](Environment* e){return this->factor(e);}
-                    );
-        }else{
-            return power(environment);
-        }
-    }
-
-    Node *Parser::power(Environment* environment) {
-        return binaryOperator(
-                environment,
-                std::set<Token, std::less<>>{{Token::POW}},
-                [this](Environment* e){return this->call(e);},
-                [this](Environment* e){return this->factor(e);}
-                );
-    }
-
-    Node *Parser::call(Environment *environment) {
-        Node* node = atom(environment);
-        Token::Type lOper = m_currentToken->getType(), rOper;
-        std::string errorDetail;
-
-
-        // 这里要检查当前的 token 是否是下面的几种。
-        // 若是，则进行下一步操作；若不是，则直接返回 node 节点。
-        switch (lOper){
-            case Token::LPAREN:
-                rOper = Token::RPAREN;
-                errorDetail = "Expected ')'.";
-                break;
-            case Token::LBRACE:
-                rOper = Token::RBRACE;
-                errorDetail = "Expected '}'.";
-                break;
-            case Token::LBRACKET:
-                rOper = Token::RBRACKET;
-                errorDetail = "Expected ']'.";
-                break;
-            default:
-                return node;
-        }
-
-        // 若当前字符串是上面三种字符串，才进行下一步检测，同时 currentToken向后移动一格
-        advance();
-
-        /*
-         * 下面的代码将要进行 callNode 节点的构建。
-         * */
-
-        auto* callNode = new CallNode(*node->thisPosition(), environment);
-        while (m_currentToken->getType() != rOper){
-            callNode->addNode(expr(environment));
-
-            if (m_currentToken->getType() == Token::COMMA){
-                advance();
-                if (m_currentToken->getType() == rOper){
-                    throw InvalidSyntaxError(
-                            "Expected int, float, plus, minus etc.",
-                            *m_currentToken->thisPosition()
-                            );
-                }
-            }
-        }
-
-        if (m_currentToken->getType() == rOper){
-            callNode->setCall(node);
-            callNode->setOperator(lOper);
-            callNode->thisPosition()->setEnd(m_currentToken->thisPosition()->getEnd());
-            advance();
-            return callNode;
-        }else{
-            throw InvalidSyntaxError(
-                    errorDetail,
-                    *m_currentToken->thisPosition()
-                    );
-        }
-    }
-
-    /**
-     * @details     该函数是各种语句的入口。
-     * */
-    Node *Parser::atom(Environment *environment) {
-        if (m_currentToken->getType() == Token::IDENT){
-            Node* node = new ObjAccessNode(
-                    m_currentToken->getValue(),
-                    *m_currentToken->thisPosition(),
-                    environment
-            );
-
-            advance();
-            return node;
-        }
-        else if (m_currentToken->getType() == Token::INT){
-            Node *node = new NumObjNode((int64_t)std::atoi(m_currentToken->getValue().c_str()), *m_currentToken->thisPosition());
-            advance();
-            return node;
-        }
-        else if (m_currentToken->getType() == Token::FLOAT){
-            Node* node = new NumObjNode((double)std::atof(m_currentToken->getValue().c_str()), *m_currentToken->thisPosition());
-            advance();
-            return node;
-        }
-        else if (m_currentToken->getType() == Token::STRING){
-            Node* node = new StrNode(m_currentToken->getValue(), *m_currentToken->thisPosition(), environment);
-            advance();
-            return node;
-        }
-        else if (m_currentToken->getType() == Token::LPAREN){
-            advance();
-            Node* node = expr(environment);
-
-            if (m_currentToken->getType() != Token::RPAREN) throw InvalidSyntaxError(
-                        "Expected ')'.",
-                        *m_currentToken->thisPosition());
-            advance();
-
-            return node;
-        }
-        else if (m_currentToken->match(Token::KEYWORD, "if")){
-            return ifExpr(environment);
-        }
-        else if (m_currentToken->match(Token::KEYWORD, "for")){
-            return forExpr(environment);
-        }
-        else if (m_currentToken->match(Token::KEYWORD, "while")){
-            return whileExpr(environment);
-        }
-        else if (m_currentToken->match(Token::KEYWORD, "function")){
-            return funcExpr(environment);
-        }
-        else {
-            throw InvalidSyntaxError(
-                    "Unknown syntax.",
-                    *m_currentToken->thisPosition());
-        }
-    }
-
-    /*
-     * 注意：IfNode 的 Position 由 addBranch 函数维护，故在此只需要设定start即可。
-     * */
-    Node *Parser::ifExpr(Environment* environment) {
-        auto *ifNode = new IfNode(
-                Position(*m_currentToken->thisPosition()),
-                environment);
-        Node *condition;
-
-        while(m_currentToken != m_tokens.end() && (m_currentToken->match(Token::KEYWORD, "if") || m_currentToken->match(Token::KEYWORD, "elif"))){
-            advance();
-            condition = expr(ifNode->thisEnvironment());
-            ifNode->addBranch(condition, core(ifNode->thisEnvironment()));
-        }
-
-        if (m_currentToken != m_tokens.end() && m_currentToken->match(Token::KEYWORD, "else")){
-            advance();
-            ifNode->addBranch(nullptr, core(ifNode->thisEnvironment()));
-        }
-
-        return ifNode;
-    }
-
-    Node *Parser::forExpr(Environment* environment) {
-        Position position(*m_currentToken->thisPosition());
-        Token index(Token::IDENT);
-        auto* forNode = new ForNode(index, 0, -1, 1, nullptr, *m_currentToken->thisPosition(), environment);
-
-        if (m_currentToken->match(Token::KEYWORD, "for")) advance();
-
-        /// 读取 标识符
-        if (m_currentToken->getType() == Token::IDENT) {
-            forNode->setIndex({Token::IDENT, m_currentToken->getValue()});
-            advance();
-        }
-        else {
-            throw InvalidSyntaxError(
-                "Expected identifier.",
-                *m_currentToken->thisPosition()
-                );
-        }
-
-        /// 读取 初始值
-        if (m_currentToken->match(Token::KEYWORD, "from")){
-            advance();
-
-            int flag = 1;
-            if (m_currentToken->getType() == Token::PLUS){
-                advance();
-            }
-            if (m_currentToken->getType() == Token::MINUS) {
-                flag = -1;
-                advance();
-            }
-
-
-            if (m_currentToken->getType() != Token::INT){
-                throw InvalidSyntaxError(
-                        "Expected int.",
-                        *m_currentToken->thisPosition()
-                        );
-            }
-
-            forNode->setFrom(atoi(m_currentToken->getValue().c_str()) * flag);
-            advance();
-        }
-
-        /// 读取 终止值
-        if (m_currentToken->match(Token::KEYWORD, "to")){
-            advance();
-            int flag = 1;
-
-            if (m_currentToken->getType() == Token::PLUS){
-                advance();
-            }
-            if (m_currentToken->getType() == Token::MINUS) {
-                flag = -1;
-                advance();
-            }
-            if (m_currentToken->getType() != Token::INT){
-                throw InvalidSyntaxError(
-                        "Expected int.",
-                        *m_currentToken->thisPosition()
-                );
-            }
-
-            forNode->setTo(atoi(m_currentToken->getValue().c_str()) * flag);
-            advance();
-        }
-        else{
-            throw InvalidSyntaxError(
-                    "Expected 'to'.",
-                    *m_currentToken->thisPosition()
-                    );
-        }
-
-        /// 读取 步长
-        if (m_currentToken->match(Token::KEYWORD, "step")){
-            advance();
-            int flag = 1;
-
-            if (m_currentToken->getType() == Token::PLUS){
-                advance();
-            }
-            if (m_currentToken->getType() == Token::MINUS) {
-                flag = -1;
-                advance();
-            }
-
-
-            if (m_currentToken->getType() != Token::INT){
-                throw InvalidSyntaxError(
-                        "Expected int.",
-                        *m_currentToken->thisPosition()
-                );
-            }
-
-            forNode->setStep(atoi(m_currentToken->getValue().c_str()) * flag);
-            advance();
-        }
-
-
-        /// 构建 for 节点
-        Node* body = core(forNode->thisEnvironment());
-        forNode->setExpr(body);
-        forNode->thisPosition()->setEnd(body->thisPosition()->getEnd());
-
-        return forNode;
-    }
-
-    Node *Parser::whileExpr(Environment *environment) {
-        WhileNode *node;
-        node = new WhileNode(nullptr, nullptr, *m_currentToken->thisPosition(), environment);
-        Node *condition, *body;
-
-        if (m_currentToken->match(Token::KEYWORD, "while")) advance();
-
-        condition = expr(node->thisEnvironment());
-
-        body = core(node->thisEnvironment());
-        node->thisPosition()->setEnd(body->thisPosition()->getEnd());
-        node->setCondition(condition);
-        node->setExpression(body);
-        return node;
-    }
-
-    Node *Parser::funcExpr(hdg::Environment *environment) {
-        auto* func = new FuncObjNode;
-        Token name;
-        func->thisEnvironment()->setParent(environment);
-        func->thisPosition()->setStart(m_currentToken->thisPosition()->getStart());
-        advance();
-
-        if (m_currentToken->getType() == Token::IDENT){
-            name = *m_currentToken;
-            advance();
-        }else{
-            throw InvalidSyntaxError(
-                    "Expected identifier.",
-                    *m_currentToken->thisPosition()
-            );
-        }
-
-        if (m_currentToken->getType() == Token::LPAREN){
-            advance();
-        }else{
-            throw InvalidSyntaxError(
-                    "Expected '('",
-                    *m_currentToken->thisPosition()
-            );
-        }
-
-        while (m_tokens.end() != m_currentToken && m_currentToken->getType() == Token::IDENT){
-            Position pos(*m_currentToken->thisPosition());
-            std::string argName = m_currentToken->getValue();
-            Node* argExpr = nullptr;
-            advance();
-
-            if (m_currentToken->getType() == Token::EQ){
-                advance();
-                argExpr = expr(func->thisEnvironment());
-                pos.setEnd(argExpr->thisPosition()->getEnd());
-            }
-            func->setArg(new ObjAssignNode(argName, argExpr, pos, func->thisEnvironment()));
-
-            if (m_currentToken->getType() == Token::COMMA) {
-                advance();
-                if (m_currentToken->getType()!=Token::IDENT)
-                    throw InvalidSyntaxError(
-                            "Expected identifier.",
-                            *m_currentToken->thisPosition()
-                        );
-                continue;
-            }
-            else {
-                break;
-            }
-        }
-
-        if (m_currentToken->getType() == Token::RPAREN){
-            advance();
-        }else{
-            throw InvalidSyntaxError(
-                    "Expected ',' or ')'",
-                    *m_currentToken->thisPosition()
-            );
-        }
-
-        Node* body = core(func->thisEnvironment());
-        func->setBody(body);
-        func->thisPosition()->setEnd(body->thisPosition()->getEnd());
-        func->setName(name.getValue());
-        return new ObjAssignNode(name.getValue(), func, *func->thisPosition(), environment);
-    }
-
-    Node *Parser::core(Environment *environment) {
-        if (m_currentToken->getType() == Token::COLON){
-            advance();
-            Node* body = expr(environment);
-            return body;
-        }
-
-        ///> 是否要 advance 跳过LBRACE？
-        else if (m_currentToken->getType() == Token::LBRACE){
-            Node* body = statements(environment);
-            return body;
-        }
-        else{
-            throw InvalidSyntaxError(
-                    "Expected ':' or '{'",
-                    *m_currentToken->thisPosition()
-            );
-        }
-    }
-
-    Node *Parser::binaryOperator(
-        Environment* environment, 
-        const std::set<Token, std::less<>>&opers, 
-        std::function<Node*(Environment* envir)> funA, 
-        std::function<Node*(Environment* envir)> funB) 
-    {
-        if (funB == nullptr) funB = funA;
-        Node* left = funA(environment);
-
-        while(opers.find(*m_currentToken) != opers.end()){
-            BinaryOperatorNode *oper;
-            oper = new BinaryOperatorNode(
-                    *m_currentToken,
-                    nullptr,
-                    nullptr,
-                    *m_currentToken->thisPosition()
-            );
-            advance();
-
-            Node* right = funB(environment);
-
-            oper->setLeft(left);
-            oper->setRight(right);
-            oper->thisPosition()->setEnd(right->thisPosition()->getEnd());
-            left = oper;
-        }
-
-        return left;
-    }
-
-    Node *Parser::unaryOperator(
-        Environment* environment, 
-        const std::set<Token, std::less<>>&opers, 
-        std::function<Node*(Environment* envir)> fun) 
-    {
-        Node* node;
-
-        Token oper(*m_currentToken);
-        Position currentPos(*m_currentToken->thisPosition());
-
-        advance();
-        Node* obj = fun(environment);
-        currentPos.setEnd(obj->thisPosition()->getEnd());
-
-        node = new UnaryOperatorNode(
-                oper,
-                obj,
-                currentPos,
-                environment
-                );
-        return node;
-    }
-
-    uNode Parser::new_ExeUnit(){
-        while(m_currentToken->getType() == Token::Type::EL) advance();
-        if (m_currentToken->getType() != Token::Type::LBRACE){
+    uNode Parser::exeUnit(){
+        while(m_currentToken->getType() == Token::EL) advance();
+        if (m_currentToken->getType() != Token::LBRACE){
             throw -1;
         }
         advance();
 
         auto unit = std::make_unique<new_ExeUnitNode>();
-        while(m_currentToken->getType() != Token::Type::RBRACE){
+        while(m_currentToken->getType() != Token::RBRACE){
             // end of file
-            if (m_currentToken->getType() == Token::Type::EL){
+            if (m_currentToken->getType() == Token::EL){
                 advance();
                 continue;
             }
             uNode stmt;
 
-            auto resOpt = new_AssignStmt();
+            auto resOpt = assignStmt();
             if (resOpt.has_value()){
-                while (m_currentToken->getType() == Token::Type::EL){
+                while (m_currentToken->getType() == Token::EL){
                     advance();
                 }
 
-                unit->getList().emplace_back(std::move(resOpt.value()));
+                unit->getList().emplace_back(move(resOpt.value()));
                 continue;
             }
 
-            stmt = new_IfStmt();
+            stmt = ifStmt();
             if (stmt != nullptr){
-                while (m_currentToken->getType() == Token::Type::EL){
+                while (m_currentToken->getType() == Token::EL){
                     advance();
                 }
 
-                unit->getList().emplace_back(std::move(stmt));
+                unit->getList().emplace_back(move(stmt));
                 continue;
             }
 
-            stmt = new_WhileStmt();
+            stmt = whileStmt();
             if (stmt != nullptr){
-                while (m_currentToken->getType() == Token::Type::EL){
+                while (m_currentToken->getType() == Token::EL){
                     advance();
                 }
 
-                unit->getList().emplace_back(std::move(stmt));
+                unit->getList().emplace_back(move(stmt));
                 continue;
             }
 
-            stmt = new_FuncDef();
+            stmt = funcDef();
             if (stmt != nullptr){
-                while (m_currentToken->getType() == Token::Type::EL){
+                while (m_currentToken->getType() == Token::EL){
                     advance();
                 }
 
-                unit->getList().emplace_back(std::move(stmt));
+                unit->getList().emplace_back(move(stmt));
                 continue;
             }
 
-            stmt = new_VarDef();
+            stmt = varDef();
             if (stmt != nullptr){
-                while (m_currentToken->getType() == Token::Type::EL){
+                while (m_currentToken->getType() == Token::EL){
                     advance();
                 }
 
-                unit->getList().emplace_back(std::move(stmt));
+                unit->getList().emplace_back(move(stmt));
                 continue;
             }
 
-            stmt = new_Expr();
+            stmt = expr();
             if (stmt != nullptr){
-                while (m_currentToken->getType() == Token::Type::EL){
+                while (m_currentToken->getType() == Token::EL){
                     advance();
                 }
 
-                unit->getList().emplace_back(std::move(stmt));
+                unit->getList().emplace_back(move(stmt));
                 continue;
             }
              
@@ -662,20 +121,20 @@ namespace hdg {
         return unit;
     }
 
-    uNode Parser::new_IfStmt(){
+    uNode Parser::ifStmt(){
         auto ifStmtNode = std::make_unique<new_IfStmtNode>();
 
         // 'if' Expr ExeUnit
         ignoreEL();
-        if (!m_currentToken->match(Token::Type::KEYWORD, "if")) return nullptr;
+        if (!m_currentToken->match(Token::KEYWORD, "if")) return nullptr;
 
         Position *pos = ifStmtNode->thisPosition();
         pos->setStart(m_currentToken->thisPosition()->getStart());
         advanceAndEL();
 
-        auto cond = new_Expr();
-        auto exeUnit = new_ExeUnit();
-        ifStmtNode->addBranch(std::move(cond), std::move(exeUnit));
+        auto cond = expr();
+        auto exe = exeUnit();
+        ifStmtNode->addBranch(move(cond), move(exe));
 
 
         // { 'elif' Expr ExeUnit }
@@ -683,42 +142,42 @@ namespace hdg {
         while(m_currentToken->match(Token::Token::KEYWORD, "elif")){
             advance();
             ignoreEL();
-            cond = new_Expr();
-            exeUnit = new_ExeUnit();
-            ifStmtNode->addBranch(std::move(cond), std::move(exeUnit));
+            cond = expr();
+            exe = exeUnit();
+            ifStmtNode->addBranch(move(cond), move(exe));
         }
 
         // ['else' ExeUnit ]
         ignoreEL();
-        if (m_currentToken->match(Token::Type::KEYWORD, "else")){
+        if (m_currentToken->match(Token::KEYWORD, "else")){
             advanceAndEL();
-            exeUnit = new_ExeUnit();
-            ifStmtNode->addElseBranch(std::move(exeUnit));
+            exe = exeUnit();
+            ifStmtNode->addElseBranch(move(exe));
         }
 
         pos->setEnd(m_currentToken->thisPosition()->getEnd());
         return ifStmtNode;
     }
 
-    uNode Parser::new_WhileStmt(){
-        if (!m_currentToken->match(Token::Type::KEYWORD, "while")) return nullptr;
+    uNode Parser::whileStmt(){
+        if (!m_currentToken->match(Token::KEYWORD, "while")) return nullptr;
 
         Position pos;
         pos.setStart(m_currentToken->thisPosition()->getStart());
         advance();
 
-        uNode cond = new_Expr();
+        uNode cond = expr();
 
-        uNode loopUnit = new_ExeUnit(); // hdgtodo: 后面应该支持 break
+        uNode loopUnit = exeUnit(); // hdgtodo: 后面应该支持 break
     
         pos.setEnd(m_currentToken->thisPosition()->getEnd());
         return std::make_unique<new_WhileStmtNode>(
-            std::move(cond), 
-            std::move(loopUnit)
+            move(cond), 
+            move(loopUnit)
         );
     }
 
-    optional<uNode> Parser::new_AssignStmt(){
+    optional<uNode> Parser::assignStmt(){
         Position pos;
         pos.setStart(m_currentToken->thisPosition()->getStart());
 
@@ -727,10 +186,10 @@ namespace hdg {
         // 1. lVal
         auto resOpt = new_PostfixExpr();
         if (!resOpt.has_value()) return std::nullopt;
-        uNode lVal = std::move(resOpt.value());
+        uNode lVal = move(resOpt.value());
 
         // 2. '='
-        if (m_currentToken->getType() != Token::Type::EQ){
+        if (m_currentToken->getType() != Token::EQ){
             // retreat();
             m_currentToken = start;
             return std::nullopt;
@@ -738,53 +197,53 @@ namespace hdg {
         advance();
         
         // 3. rVal
-        uNode rVal = new_Expr();
+        uNode rVal = expr();
 
         // 4 return
         pos.setEnd(m_currentToken->thisPosition()->getEnd());
-        return std::make_unique<new_AssignNode>(std::move(lVal), std::move(rVal), pos);
+        return std::make_unique<new_AssignNode>(move(lVal), move(rVal), pos);
     }
 
     // uNode Parser::new_ValBuild() {
     //     return nullptr;
     // }
 
-    uNode Parser::new_VarDef() {
-        while (m_currentToken->getType() == Token::Type::EL) advance();
+    uNode Parser::varDef() {
+        while (m_currentToken->getType() == Token::EL) advance();
         
         // 1. 关键字 'var'
-        if (!m_currentToken->match(Token::Type::KEYWORD, "var")) return nullptr;
+        if (!m_currentToken->match(Token::KEYWORD, "var")) return nullptr;
         Position pos;
         pos.setStart(m_currentToken->thisPosition()->getStart());
         advance();
 
         // 2. 标识符 IDENT
-        if (m_currentToken->getType() != Token::Type::IDENT) {
+        if (m_currentToken->getType() != Token::IDENT) {
             assert(false); // 应该抛出异常
         }
         std::string ident = m_currentToken->getValue();
         advance();
 
         // 3. 等于号 '='
-        if (m_currentToken->getType() != Token::Type::EQ) {
+        if (m_currentToken->getType() != Token::EQ) {
             assert(false);
         }
         advance();
 
         // 4. 表达式
-        uNode expr = new_Expr();
+        uNode node = expr();
 
         pos.setEnd(m_currentToken->thisPosition()->getEnd());
 
-        return std::make_unique<DefNode>(ident, std::move(expr), pos);
+        return std::make_unique<DefNode>(ident, move(node), pos);
     }
 
     // FuncDef    : 'func' IDENT  '(' Params ')'  ExeUnit
-    uNode Parser::new_FuncDef(){ // hdgtodo: AST 的基本设计原则是：尽力保留原始的代码信息
-        while (m_currentToken->getType() == Token::Type::EL) advance();
+    uNode Parser::funcDef(){ // hdgtodo: AST 的基本设计原则是：尽力保留原始的代码信息
+        while (m_currentToken->getType() == Token::EL) advance();
 
         // 1. 关键字 'function'
-        if (!m_currentToken->match(Token::Type::KEYWORD, "function")){
+        if (!m_currentToken->match(Token::KEYWORD, "function")){
             return nullptr;
         }
         Position pos;
@@ -792,40 +251,40 @@ namespace hdg {
         advance();
 
         // 2. 标识符 IDENT
-        if (m_currentToken->getType() != Token::Type::IDENT) {
+        if (m_currentToken->getType() != Token::IDENT) {
             assert(false); // 应该抛出异常
         }
         std::string ident = m_currentToken->getValue();
         advance();
 
         // 3. 参数 '(' Params ')'
-        if (m_currentToken->getType() != Token::Type::LPAREN){
+        if (m_currentToken->getType() != Token::LPAREN){
             assert(false); // 应该抛出异常
         }
         advance();
 
         auto params = new_Params();
 
-        if (m_currentToken->getType() != Token::Type::RPAREN){
+        if (m_currentToken->getType() != Token::RPAREN){
             assert(false); // 应该抛出异常
         }
         advance();
 
         // 4. 函数的执行体 ExeUnit
-        auto unit = new_ExeUnit();
+        auto unit = exeUnit();
 
         // 5. 构建结点
         pos.setEnd(m_currentToken->thisPosition()->getEnd());
         
-        uNode funNode = std::make_unique<New_FuncObjNode>(std::move(params), std::move(unit), pos);
+        uNode funNode = std::make_unique<New_FuncObjNode>(move(params), move(unit), pos);
 
-        return std::make_unique<DefNode>(ident, std::move(funNode), pos);
+        return std::make_unique<DefNode>(ident, move(funNode), pos);
     }
 
-    uNode Parser::new_Expr(){
+    uNode Parser::expr(){
         uNode expr;
 
-        expr = new_ListExpr();
+        expr = listExpr();
         if (expr != nullptr) {
             return expr;
         }
@@ -839,32 +298,32 @@ namespace hdg {
         return nullptr;
     }
 
-    uNode Parser::new_ListExpr(){
-        while (m_currentToken->getType() == Token::Type::EL) advance();
+    uNode Parser::listExpr(){
+        while (m_currentToken->getType() == Token::EL) advance();
         Position pos;
         pos.setStart(m_currentToken->thisPosition()->getStart());
 
         // 1. 左方括号 '['
-        if (m_currentToken->getType() != Token::Type::LBRACKET) return nullptr;
+        if (m_currentToken->getType() != Token::LBRACKET) return nullptr;
         advance();
-        while (m_currentToken->getType() == Token::Type::EL) advance();
+        while (m_currentToken->getType() == Token::EL) advance();
 
         // 2. ExprArray
         std::vector<uNode> arr;
-        if (m_currentToken->getType() != Token::Type::RBRACKET){
+        if (m_currentToken->getType() != Token::RBRACKET){
             arr = new_ExprArray();
         }
 
         // 3. 右方括号 ']'
         ignoreEL();
-        if (m_currentToken->getType() != Token::Type::RBRACKET) {
+        if (m_currentToken->getType() != Token::RBRACKET) {
             assert(false);
         }
         advance();
 
         pos.setEnd(m_currentToken->thisPosition()->getEnd());
 
-        return std::make_unique<ListObjNode>(std::move(arr), pos);
+        return std::make_unique<ListObjNode>(move(arr), pos);
     }
 
      uNode Parser::new_CompExpr(){
@@ -873,13 +332,13 @@ namespace hdg {
 
          uNode left = new_ArithExpr();
 
-         Token::Type oper = m_currentToken->getType();
-         while( oper == Token::NE  ||
-                oper == Token::EE  ||
-                oper == Token::GT  ||
-                oper == Token::LT  ||
-                oper == Token::GTE ||
-                oper == Token::LTE)
+         Token oper = m_currentToken->getType();
+         while( oper.getType() == Token::NE  ||
+                oper.getType() == Token::EE  ||
+                oper.getType() == Token::GT  ||
+                oper.getType() == Token::LT  ||
+                oper.getType() == Token::GTE ||
+                oper.getType() == Token::LTE)
          {
              advance();
 
@@ -890,8 +349,8 @@ namespace hdg {
 
              left = std::make_unique<BinOperNode>(
                      oper,
-                     std::move(left),
-                     std::move(right),
+                     move(left),
+                     move(right),
                      pos
              );
              oper = m_currentToken->getType();
@@ -906,10 +365,10 @@ namespace hdg {
 
         uNode left = new_Term();
 
-        while (m_currentToken->getType() == Token::Type::PLUS || 
-               m_currentToken->getType() == Token::Type::MINUS) 
+        while (m_currentToken->getType() == Token::PLUS || 
+               m_currentToken->getType() == Token::MINUS) 
         {
-            Token::Type oper = m_currentToken->getType();
+            Token oper = m_currentToken->getType();
             advance();
 
             uNode right = new_Term();
@@ -919,8 +378,8 @@ namespace hdg {
 
             left = std::make_unique<BinOperNode>(
                 oper, 
-                std::move(left),
-                std::move(right),
+                move(left),
+                move(right),
                 pos
             );
         }
@@ -932,17 +391,17 @@ namespace hdg {
         std::vector<std::string> params;
 
         while(true) {
-            if (m_currentToken->getType() == Token::Type::EL){
+            if (m_currentToken->getType() == Token::EL){
                 advance();
                 continue;
             }
 
-            if (m_currentToken->getType() != Token::Type::IDENT) break;
+            if (m_currentToken->getType() != Token::IDENT) break;
             
             params.emplace_back(m_currentToken->getValue());
             advance();
 
-            if (m_currentToken->getType() == Token::Type::COMMA){
+            if (m_currentToken->getType() == Token::COMMA){
                 advance();
                 continue;
             }
@@ -961,10 +420,10 @@ namespace hdg {
         uNode left = new_Factor();
         assert(left != nullptr);
 
-        while (m_currentToken->getType() == Token::Type::MUL || 
-               m_currentToken->getType() == Token::Type::DIV) 
+        while (m_currentToken->getType() == Token::MUL || 
+               m_currentToken->getType() == Token::DIV) 
         {
-            Token::Type oper = m_currentToken->getType();
+            Token oper = m_currentToken->getType();
             advance();
 
             uNode right = new_Factor();
@@ -973,8 +432,8 @@ namespace hdg {
 
             left = std::make_unique<BinOperNode>(
                 oper, 
-                std::move(left),
-                std::move(right),
+                move(left),
+                move(right),
                 pos
             );
         }
@@ -986,22 +445,22 @@ namespace hdg {
         Position pos;
         pos.setStart(m_currentToken->thisPosition()->getStart());
 
-        Token::Type oper = m_currentToken->getType();
-        switch(oper){
-            case Token::Type::PLUS: {
+        Token oper = m_currentToken->getType();
+        switch(oper.getType()){
+            case Token::PLUS: {
                 auto resOpt = new_PostfixExpr();
                 if (!resOpt.has_value()) assert(false);
-                return std::move(resOpt.value()); // hdgtodo: 增加对单目运算符的支持
+                return move(resOpt.value()); // hdgtodo: 增加对单目运算符的支持
             }
-            case Token::Type::MINUS: {
+            case Token::MINUS: {
                 auto resOpt = new_PostfixExpr();
                 if (!resOpt.has_value()) assert(false);
-                return std::move(resOpt.value()); // hdgtodo: 增加对单目运算符的支持
+                return move(resOpt.value()); // hdgtodo: 增加对单目运算符的支持
             }
             default: {
                 auto resOpt = new_PostfixExpr();
                 if (!resOpt.has_value()) assert(false);
-                return std::move(resOpt.value()); // hdgtodo: 增加对单目运算符的支持
+                return move(resOpt.value()); // hdgtodo: 增加对单目运算符的支持
             }
         }
     }
@@ -1012,7 +471,7 @@ namespace hdg {
 
         auto resOpt = new_Primary();
         if (!resOpt.has_value()) return std::nullopt;
-        uNode primary = std::move(resOpt.value());
+        uNode primary = move(resOpt.value());
 
         bool flag = true;
         while(flag){
@@ -1022,13 +481,13 @@ namespace hdg {
 
                 std::vector<uNode> params;
 
-                if (m_currentToken->getType() != Token::Type::RPAREN){
+                if (m_currentToken->getType() != Token::RPAREN){
                     params = new_ExprArray();                    
                 }
                 advance();
 
                 pos.setEnd(m_currentToken->thisPosition()->getEnd());
-                primary = PostfixNode::createParen(std::move(primary), std::move(params), pos);
+                primary = PostfixNode::createParen(move(primary), move(params), pos);
                 break;
             }
             case Token::LBRACKET : { // 方括号 []
@@ -1036,15 +495,15 @@ namespace hdg {
 
                 std::vector<uNode> params;
 
-                if (m_currentToken->getType() != Token::Type::RBRACKET){
+                if (m_currentToken->getType() != Token::RBRACKET){
                     params = new_ExprArray();                    
                 }
                 advance();
 
                 pos.setEnd(m_currentToken->thisPosition()->getEnd());
                 primary = PostfixNode::createBracket(
-                    std::move(primary),
-                    std::move(params),
+                    move(primary),
+                    move(params),
                     pos
                 );
                 break;
@@ -1085,9 +544,9 @@ namespace hdg {
                 auto pos = m_currentToken->thisPosition()->clone();
                 advance();
 
-                node = new_Expr(); assert(node != nullptr);
+                node = expr(); assert(node != nullptr);
 
-                if (m_currentToken->getType() != Token::Type::RPAREN) {
+                if (m_currentToken->getType() != Token::RPAREN) {
                     assert(false && "Throw Error! Expect ')'."); 
                 }
                 advance();
@@ -1112,13 +571,13 @@ namespace hdg {
         std::vector<uNode> list;
 
         while(true) {
-            uNode expr = new_Expr();
+            uNode node = expr();
 
-            assert(expr != nullptr);
+            assert(node != nullptr);
 
-            list.emplace_back(std::move(expr));
+            list.emplace_back(move(node));
 
-            if (m_currentToken->getType() == Token::Type::COMMA) {
+            if (m_currentToken->getType() == Token::COMMA) {
                 advance();
                 continue;
             }

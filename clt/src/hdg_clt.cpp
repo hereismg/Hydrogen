@@ -120,7 +120,7 @@ int real_main(int argc, char *argv[]){
 
         hdg::Environment envir;
         hdg::Parser parser(tokens, &envir);
-        hdg::uNode ast = parser.new_ExeUnit();
+        hdg::uNode ast = parser.exeUnit();
 
         hdg::InterpreterVisitor visitor;
 
@@ -139,7 +139,7 @@ int real_main(int argc, char *argv[]){
 
         hdg::Environment envir;
         hdg::Parser parser(tokens, &envir);
-        hdg::uNode ast = parser.new_ExeUnit();
+        hdg::uNode ast = parser.exeUnit();
 
         std::cout << ast->toJSON().dump(4) << std::endl;
 

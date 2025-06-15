@@ -107,7 +107,7 @@ namespace hdg {
             if (mode == Mode::debug) std::cout << tokens << std::endl;                ///> 打印 tokens 列表
 
             Parser parser(tokens, m_globalEnvironment);
-            Node* tree = parser.run();
+            Node* tree = nullptr;
             if (mode == Mode::debug) {
                 std::cout << tree->toString() << std::endl;                            ///> 打印语法树
                 std::cout << "==================================" << std::endl;

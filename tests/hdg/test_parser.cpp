@@ -76,16 +76,16 @@ TEST_P(Interepreter_TEST_P, _){
     uNode root;
     switch (parserType) {
     case ParserType::Expr : 
-        root = parser.new_Expr();
+        root = parser.expr();
         break;
     case ParserType::IfStmt :
-        root = parser.new_IfStmt();
+        root = parser.ifStmt();
         break;
     case ParserType::ExeUnit :
-        root = parser.new_ExeUnit();
+        root = parser.exeUnit();
         break;
     case ParserType::VarDef :
-        root = parser.new_VarDef();
+        root = parser.varDef();
         break;
     default:
         ASSERT_TRUE(false);   

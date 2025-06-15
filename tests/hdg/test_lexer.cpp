@@ -225,7 +225,7 @@ TEST_P(Test_Template, AssignStmt_2){
 
     Parser parser(tokens, &envir2);
 
-    auto unit = parser.new_ExeUnit();
+    auto unit = parser.exeUnit();
 
     ASSERT_NE(unit, nullptr);
 
@@ -268,7 +268,7 @@ TEST(test_ExeUnit, _1){
 
     Parser parser(tokens, &envir2);
 
-    uNode ast = parser.new_ExeUnit();
+    uNode ast = parser.exeUnit();
 
     InterpreterVisitor visitor;
 
@@ -299,7 +299,7 @@ TEST(test_ExeUnit, _2){
 
     Parser parser(tokens, &envir2);
 
-    uNode ast = parser.new_ExeUnit();
+    uNode ast = parser.exeUnit();
 
     InterpreterVisitor visitor;
 
@@ -342,7 +342,7 @@ TEST(test_ExeUnit, _3){
 
     Parser parser(tokens, &envir2);
 
-    uNode ast = parser.new_ExeUnit();
+    uNode ast = parser.exeUnit();
 
     InterpreterVisitor visitor;
 
@@ -397,7 +397,7 @@ TEST(Base, IfStmt_1){
 
     Parser parser(tokens, &envir2);
 
-    uNode ast = parser.new_ExeUnit();
+    uNode ast = parser.exeUnit();
 
     InterpreterVisitor visitor;
 
@@ -519,7 +519,7 @@ function add(a, b){
 
     Parser parser(tokens, &envir2);
 
-    auto assignFunc = parser.new_FuncDef();
+    auto assignFunc = parser.funcDef();
 
     ASSERT_NE(assignFunc, nullptr);
 
@@ -566,7 +566,7 @@ TEST_P(Function_TEST_P, _1){
 
     Parser parser(tokens, &envir2);
 
-    auto unit = parser.new_ExeUnit();
+    auto unit = parser.exeUnit();
     // cout << unit->toJSON().dump(4) << endl;
 
     ASSERT_NE(unit, nullptr);

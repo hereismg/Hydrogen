@@ -1,0 +1,11 @@
+{
+sum = 0
+function fun(a) {
+    if a {
+        sum = sum + fun(a - 1)
+    }
+    a
+}
+fun(5)
+sum
+}

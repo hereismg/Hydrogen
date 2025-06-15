@@ -1,10 +1,11 @@
 //
 // Created by Magnesium on 2023/7/25.
 //
+#include "../../include/object/Integer.h"
 
 #include <cmath>
+#include <cassert>
 
-#include "../../include/object/Integer.h"
 #include "../../include/object/Float.h"
 #include "../../include/basic/Error.h"
 
@@ -25,11 +26,11 @@ namespace hdg {
     }
 
     Object *Integer::plus(Object* other) {
-        if (other->getClass() == "Integer"){
+        if (other->getClass_old() == "Integer"){
             int64_t result = m_value + ((Integer*)other)->m_value;
             return new Integer(result);
         }
-        else if (other->getClass() == "Float"){
+        else if (other->getClass_old() == "Float"){
             double result = (double)m_value + ((Float*)other)->getValue();
             return new Float(result);
         }
@@ -40,11 +41,11 @@ namespace hdg {
     }
 
     Object *Integer::minus(Object *other) {
-        if (other->getClass() == "Integer"){
+        if (other->getClass_old() == "Integer"){
             int64_t result = m_value - ((Integer*)other)->m_value;
             return new Integer(result);
         }
-        else if (other->getClass() == "Float"){
+        else if (other->getClass_old() == "Float"){
             double result = (double)m_value - ((Float*)other)->getValue();
             return new Float(result);
         }
@@ -55,11 +56,11 @@ namespace hdg {
     }
 
     Object *Integer::mul(Object *other) {
-        if (other->getClass() == "Integer"){
+        if (other->getClass_old() == "Integer"){
             int64_t result = m_value * ((Integer*)other)->m_value;
             return new Integer(result);
         }
-        else if (other->getClass() == "Float"){
+        else if (other->getClass_old() == "Float"){
             double result = (double)m_value * ((Float*)other)->getValue();
             return new Float(result);
         }
@@ -70,14 +71,14 @@ namespace hdg {
     }
 
     Object *Integer::div(Object *other) {
-        if (other->getClass() == "Integer"){
+        if (other->getClass_old() == "Integer"){
             int64_t right = ((Integer*)other)->m_value;
             if (right == 0) throw ZeroDivisionError();
 
             int64_t result = m_value / right;
             return new Integer(result);
         }
-        else if (other->getClass() == "Float"){
+        else if (other->getClass_old() == "Float"){
             double right = ((Float*)other)->getValue();
             if (right == 0) throw ZeroDivisionError();
 
@@ -91,7 +92,7 @@ namespace hdg {
     }
 
     Object *Integer::mod(Object *other) {
-        if (other->getClass() == "Integer"){
+        if (other->getClass_old() == "Integer"){
             int64_t right = ((Integer*)other)->m_value;
             if (right == 0) throw ZeroDivisionError();
 
@@ -105,11 +106,11 @@ namespace hdg {
     }
 
     Object *Integer::pow(Object *other) {
-        if (other->getClass() == "Integer"){
+        if (other->getClass_old() == "Integer"){
             double result = std::pow(m_value, ((Integer*)other)->m_value);
             return new Float(result);
         }
-        else if (other->getClass() == "Float"){
+        else if (other->getClass_old() == "Float"){
             double result = std::pow(m_value, ((Float*)other)->getValue());
             return new Float(result);
         }
@@ -120,11 +121,11 @@ namespace hdg {
     }
 
     Object *Integer::equation(Object *other) {
-        if (other->getClass() == "Integer"){
+        if (other->getClass_old() == "Integer"){
             int64_t result = m_value == ((Integer*)other)->m_value;
             return new Integer(result);
         }
-        else if (other->getClass() == "Float"){
+        else if (other->getClass_old() == "Float"){
             int64_t result = m_value == ((Float*)other)->getValue();
             return new Integer(result);
         }
@@ -135,11 +136,11 @@ namespace hdg {
     }
 
     Object *Integer::notEquation(Object *other) {
-        if (other->getClass() == "Integer"){
+        if (other->getClass_old() == "Integer"){
             int64_t result = m_value != ((Integer*)other)->m_value;
             return new Integer(result);
         }
-        else if (other->getClass() == "Float"){
+        else if (other->getClass_old() == "Float"){
             int64_t result = m_value != ((Float*)other)->getValue();
             return new Integer(result);
         }
@@ -150,11 +151,11 @@ namespace hdg {
     }
 
     Object *Integer::greaterThan(Object *other) {
-        if (other->getClass() == "Integer"){
+        if (other->getClass_old() == "Integer"){
             int64_t result = m_value > ((Integer*)other)->m_value;
             return new Integer(result);
         }
-        else if (other->getClass() == "Float"){
+        else if (other->getClass_old() == "Float"){
             int64_t result = m_value > ((Float*)other)->getValue();
             return new Integer(result);
         }
@@ -165,11 +166,11 @@ namespace hdg {
     }
 
     Object *Integer::lessThan(Object *other) {
-        if (other->getClass() == "Integer"){
+        if (other->getClass_old() == "Integer"){
             int64_t result = m_value < ((Integer*)other)->m_value;
             return new Integer(result);
         }
-        else if (other->getClass() == "Float"){
+        else if (other->getClass_old() == "Float"){
             int result = m_value < ((Float*)other)->getValue();
             return new Integer(result);
         }
@@ -180,11 +181,11 @@ namespace hdg {
     }
 
     Object *Integer::greaterThanEquation(Object *other) {
-        if (other->getClass() == "Integer"){
+        if (other->getClass_old() == "Integer"){
             int64_t result = m_value >= ((Integer*)other)->m_value;
             return new Integer(result);
         }
-        else if (other->getClass() == "Float"){
+        else if (other->getClass_old() == "Float"){
             int64_t result = m_value >= ((Float*)other)->getValue();
             return new Integer(result);
         }
@@ -195,11 +196,11 @@ namespace hdg {
     }
 
     Object *Integer::lessThanEquation(Object *other) {
-        if (other->getClass() == "Integer"){
+        if (other->getClass_old() == "Integer"){
             int64_t result = m_value <= ((Integer*)other)->m_value;
             return new Integer(result);
         }
-        else if (other->getClass() == "Float"){
+        else if (other->getClass_old() == "Float"){
             int64_t result = m_value <= ((Float*)other)->getValue();
             return new Integer(result);
         }
@@ -224,6 +225,130 @@ namespace hdg {
         return new Integer(result);
     }
 
+    sObject Integer::plus(sObject other){
+        assert(other.get() != nullptr);
+        if (typeid(*other.get()) == typeid(Integer)){
+            Integer* other_int = dynamic_cast<Integer*>(other.get());
+            int64_t res = m_value + other_int->getValue();
+
+            return std::make_shared<Integer>(res);
+        }
+        else{
+            assert(false && "Error!");
+            return nullptr;
+        }
+    }
+
+    sObject Integer::minus(sObject other){
+        assert(other.get() != nullptr);
+        if (typeid(*other.get()) == typeid(Integer)){
+            auto* other_int = dynamic_cast<Integer*>(other.get());
+            int64_t res = m_value - other_int->getValue();
+
+            return std::make_shared<Integer>(res);
+        }
+        else{
+            assert(false && "Error!");
+            return nullptr;
+        }
+    }
+
+    sObject Integer::mul(sObject other){
+        assert(other.get() != nullptr);
+        if (typeid(*other.get()) == typeid(Integer)){
+            auto* other_int = dynamic_cast<Integer*>(other.get());
+            int64_t res = m_value * other_int->getValue();
+
+            return std::make_shared<Integer>(res);
+        }
+        else{
+            assert(false && "Error!");
+            return nullptr;
+        }
+    }
+
+    sObject Integer::div(sObject other){
+        assert(other.get() != nullptr);
+        if (typeid(*other.get()) == typeid(Integer)){
+            auto* other_int = dynamic_cast<Integer*>(other.get());
+            int64_t res = m_value / other_int->getValue();
+
+            return std::make_shared<Integer>(res);
+        }
+        else{
+            assert(false && "Error!");
+            return nullptr;
+        }
+    }
+
+    sInteger Integer::True  = std::make_shared<Integer>(1);
+    sInteger Integer::False = std::make_shared<Integer>(0);
+
+    sObject Integer::equation(sObject other) {
+        assert(other.get() != nullptr);
+        if (typeid(*other.get()) != typeid(Integer)) return Integer::False;
+
+        auto otherVal = dynamic_cast<Integer*>(other.get())->getValue();
+
+        return std::make_shared<Integer>(m_value == otherVal);
+    }
+
+    sObject Integer::notEquation(sObject other) {
+        assert(other.get() != nullptr);
+        if (typeid(*other.get()) != typeid(Integer)) return Integer::False;
+
+        auto otherVal = dynamic_cast<Integer*>(other.get())->getValue();
+
+        return std::make_shared<Integer>(m_value != otherVal);
+    }
+
+    sObject Integer::greaterThan(sObject other) {
+        assert(other.get() != nullptr);
+        if (typeid(*other.get()) != typeid(Integer)) return Integer::False;
+
+        auto otherVal = dynamic_cast<Integer*>(other.get())->getValue();
+
+        return std::make_shared<Integer>(m_value > otherVal);
+    }
+
+    sObject Integer::lessThan(sObject other) {
+        assert(other.get() != nullptr);
+        if (typeid(*other.get()) != typeid(Integer)) return Integer::False;
+
+        auto otherVal = dynamic_cast<Integer*>(other.get())->getValue();
+
+        return std::make_shared<Integer>(m_value < otherVal);
+    }
+
+    sObject Integer::greaterThanEquation(sObject other) {
+        assert(other.get() != nullptr);
+        if (typeid(*other.get()) != typeid(Integer)) return Integer::False;
+
+        auto otherVal = dynamic_cast<Integer*>(other.get())->getValue();
+
+        return std::make_shared<Integer>(m_value >= otherVal);
+    }
+
+    sObject Integer::lessThanEquation(sObject other) {
+        assert(other.get() != nullptr);
+        if (typeid(*other.get()) != typeid(Integer)) return Integer::False;
+
+        auto otherVal = dynamic_cast<Integer*>(other.get())->getValue();
+
+        return std::make_shared<Integer>(m_value <= otherVal);
+    }
+
+    sInteger Integer::from(const sObject& obj) {
+        assert(obj != nullptr);
+        assert(typeid(*obj.get()) == typeid(Integer));
+
+        return std::dynamic_pointer_cast<Integer>(obj);
+    }
+
+    sInteger Integer::from(int64_t num) {
+        return std::make_shared<Integer>(num);
+    }
+
     std::string Integer::toString() {
         return std::to_string(m_value);
     }
@@ -237,4 +362,7 @@ namespace hdg {
         else return false;
     }
 
+    sObject Integer::clone() {
+        return std::make_shared<Integer>(m_value);
+    }
 } // hdg

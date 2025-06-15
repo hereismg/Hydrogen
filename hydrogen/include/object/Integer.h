@@ -1,14 +1,18 @@
 //
 // Created by Magnesium on 2023/7/25.
 //
+#pragma once
 
-
-#ifndef HDG_INTEGER_H
-#define HDG_INTEGER_H
+#include <memory>
 
 #include "Object.h"
+#include "List.h"
 
 namespace hdg {
+    class Integer;
+    typedef std::unique_ptr<Integer> uInteger;
+    typedef std::shared_ptr<Integer> sInteger;
+    typedef std::weak_ptr<Integer>   wInteger;
 
     class Integer: public Object{
     private:
@@ -21,6 +25,34 @@ namespace hdg {
 
         void setValue(int64_t value);
         [[nodiscard]] int64_t getValue() const;
+
+        sObject plus(sObject other) override;
+        sObject minus(sObject other) override;
+        sObject mul(sObject other) override;
+        sObject div(sObject other) override;
+        bool isTrue() override;
+
+        sObject equation(sObject other) override;
+        sObject notEquation(sObject other) override;
+        sObject greaterThan(sObject other) override;
+        sObject lessThan(sObject other) override;
+        sObject greaterThanEquation(sObject other) override;
+        sObject lessThanEquation(sObject other) override;
+
+
+        std::string toString() override;
+        sObject clone() override;
+        std::string getClass() override { return "Integer"; }
+
+        static sInteger from(const sObject& obj);
+        static sInteger from(int64_t obj);
+
+        static sInteger False;
+        static sInteger True;
+
+        // ======================================
+        // 下面是弃用的方法
+        // ======================================
 
         Object* plus(Object* other) override;
         Object* minus(Object* other) override;
@@ -39,12 +71,8 @@ namespace hdg {
         Object* andOperator(Object* other) override;
         Object* orOperator(Object* other) override;
         Object* notOperator() override;
-
-        bool isTrue() override;
-        std::string toString() override;
         Object* copy() override;
     };
 
 } // hdg
 
-#endif //HDG_INTEGER_H

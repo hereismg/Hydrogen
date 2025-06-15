@@ -39,12 +39,12 @@ namespace hdg {
         Object* value = m_obj->interpret();
 
         if (m_oper.getType() == Token::MINUS){
-            if (value->getClass() == "Integer"){
+            if (value->getClass_old() == "Integer"){
                 int64_t num = -((Integer*)value)->getValue();
                 delete value;
                 return new Integer(num);
             }
-            else if (value->getClass() == "Float"){
+            else if (value->getClass_old() == "Float"){
                 double num = -((Float*)value)->getValue();
                 delete value;
                 return new Float(num);

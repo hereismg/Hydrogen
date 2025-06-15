@@ -1,9 +1,7 @@
 //
 // Created by Magnesium on 2023/7/11.
 //
-
-#ifndef HDG_LEXER_H
-#define HDG_LEXER_H
+#pragma once
 
 #include <set>
 #include <vector>
@@ -27,6 +25,7 @@ namespace hdg {
             "while",
 
             "function",
+            "var",
     };
 
     enum LegalChar{
@@ -92,4 +91,3 @@ namespace hdg {
     };
 } // hdg
 
-#endif //HDG_LEXER_H

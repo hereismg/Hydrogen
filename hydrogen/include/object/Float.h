@@ -3,8 +3,7 @@
 //
 
 
-#ifndef HDG_FLOAT_H
-#define HDG_FLOAT_H
+#pragma once
 
 #include "Integer.h"
 
@@ -49,4 +48,3 @@ namespace hdg {
 
 } // hdg
 
-#endif //HDG_FLOAT_H

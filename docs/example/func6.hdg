@@ -1,0 +1,12 @@
+{
+    function outer(x) {
+        function inner(y) {
+            x + y
+        }
+
+        inner
+    }
+
+    add_five = outer(5)
+    add_five(10)
+}

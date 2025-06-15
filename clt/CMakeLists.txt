@@ -9,4 +9,10 @@ add_executable(
     hdg_clt
     main.cpp
 )
-target_link_libraries(hdg_clt PRIVATE hdg_clt_static)
+
+target_link_libraries(
+    hdg_clt 
+    PUBLIC 
+    "hdg_clt_static"
+    "libhdg"
+)

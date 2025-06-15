@@ -2,23 +2,64 @@
 // Created by Magnesium on 2023/8/4.
 //
 
-#ifndef HDG_LIST_H
-#define HDG_LIST_H
+#pragma once
+
+#include <optional>
 
 #include "Object.h"
+#include "VarType.h"
 
 namespace hdg {
+    using std::optional;
+
+    class List;
+    typedef std::unique_ptr<List> uList;
+    typedef std::shared_ptr<List> sList;
+    typedef std::weak_ptr<List>   wList;
 
     class List: public Object{
-    private:
-        std::vector<Object*> m_list;
+    protected:
+        std::vector<sObject> m_list;
 
     public:
         List();
+        List(std::vector<sObject>&& list);
+        List(size_t count, sObject obj);
+
+        List(const List&) = delete;
+
+        sObject plus(sObject other) override;
+
+        sObject equation(sObject other) override;
+
+        sObject brackets(const std::vector<sObject>& args, Visitor& visitor) override;    // []
+        sObject dot(const std::string &ident, std::vector<sObject>&& args, Visitor &visitor) override;
+
+        bool isTrue() override;
+        std::vector<sObject>& getList() { return m_list; }
+
+        sList append(sObject obj);
+        sList append(int64_t obj);
+        sList append(const std::string& obj);
+
+        std::string toString() override;
+        sObject clone() override;
+        std::string getClass() override { return "List"; }
+
+        static wVarType getType();
+        
+        static optional<sList> from(const sObject& obj);
+        static sList from(const std::vector<std::string>& list);
+        static sList from(const std::vector<int64_t>& list);
+
+    // ======================================
+    // 下面是弃用的方法
+    // ======================================
+    private:
+        std::vector<Object*> m_list_old;
+
+    public:
         explicit List(const std::vector<Object*>& list);
-
-        std::vector<Object*> getValue();
-
         Object* plus(Object* other) override;
 //        Object* minus(Object* other) override;
 //        Object* mul(Object* other) override;
@@ -37,13 +78,11 @@ namespace hdg {
 //        Object* orOperator(Object* other) override;
 //        Object* notOperator() override;
 
+        std::vector<Object*> getValue();
         Object* brackets(const std::vector<Object*>& args) override;
 
-        bool isTrue() override;
-        std::string toString() override;
         Object* copy() override;
     };
 
 } // hdg
 
-#endif //HDG_LIST_H

@@ -6,13 +6,10 @@ file(GLOB_RECURSE SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 
 # hdg 库文件，测试框架将会引用该共享库
 add_library(libhdg SHARED "${SOURCES}")
-target_compile_options(
+
+target_include_directories(
     libhdg 
-    PRIVATE 
-    -Wall -Wextra
-    -Werror
-    -Wno-unused-parameter
-    -Wno-deprecated-copy
-    -Wno-unused-variable
+    PUBLIC 
+    "${SML_INCLUDE_DIR}"
+    "${LIB_INCLUDE}"
 )
-target_include_directories(libhdg PUBLIC "${SML_INCLUDE_DIR}")

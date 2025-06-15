@@ -2,10 +2,13 @@
 // Created by Magnesium on 2023/7/25.
 //
 
+#include "../../include/object/Object.h"
+
 #include <utility>
 #include <cmath>
+#include <cassert>
+#include <map>
 
-#include "../../include/object/Object.h"
 #include "../../include/basic/Error.h"
 
 
@@ -20,7 +23,7 @@ namespace hdg {
         m_class = std::move(className);
     }
 
-    std::string Object::getClass() {
+    std::string Object::getClass_old() {
         return m_class;
     }
 
@@ -101,10 +104,35 @@ namespace hdg {
         return nullptr;
     }
 
+    sObject Object::plus(sObject other){
+        assert(false && "Object::plus error!");
+        return nullptr;
+    }
+
+    sObject Object::minus(sObject other){
+        assert(false && "Object::plus error!");
+        return nullptr;
+    }
+
+    sObject Object::mul(sObject other){
+        assert(false && "Object::plus error!");
+        return nullptr;
+    }
+
+    sObject Object::div(sObject other){
+        assert(false && "Object::plus error!");
+        return nullptr;
+    }
+
     /**
      * @details     括号运算符主要是用做对函数的实现。函数就是通过该方法实现的。
      * */
     Object *Object::parenthesis(const std::vector<Object*>& args) {
+        illegalOperator();
+        return nullptr;
+    }
+
+    sObject Object::parenthesis(const std::vector<sObject>& args, Visitor& visitor) {
         illegalOperator();
         return nullptr;
     }
@@ -129,4 +157,8 @@ namespace hdg {
                 m_position
                 );
     }
+
+    VarType::VarType(const char* class_, std::map<std::string, sObject>&& table)
+        : m_class(class_), m_envir(std::move(table)), m_base(nullptr)
+    {}
 } // hdg

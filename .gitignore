@@ -1,5 +1,5 @@
 cmake-*
 .idea
 bin
-build
+build*
 .vscode

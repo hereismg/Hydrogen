@@ -1,12 +1,11 @@
 //
 // Created by Magnesium on 2023/7/19.
 //
-
-#ifndef HDG_NODE_H
-#define HDG_NODE_H
+#pragma once
 
 #include <string>
 #include <memory>
+#include <nlohmann/json.hpp>
 
 #include "../object/Object.h"
 #include "../basic/Position.h"
@@ -14,6 +13,12 @@
 #include "visitor.h"
 
 namespace hdg {
+
+    class Node;
+    
+    typedef std::unique_ptr<Node> uNode;
+    typedef std::shared_ptr<Node> sNode;
+
     class Node {
     protected:
         Position m_position;
@@ -28,12 +33,11 @@ namespace hdg {
         Position* thisPosition();
         Environment* thisEnvironment();
 
+        virtual nlohmann::json toJSON() const { return {{"__class__", "Node?????????????????"}}; }
         virtual std::string toString() = 0;
         virtual Object* interpret() = 0;
         virtual void accept(Visitor& visitor); // TODO 这里设为纯虚函数
     };
 
-    typedef std::unique_ptr<Node> uNode;
 } // hdg
 
-#endif //HDG_NODE_H

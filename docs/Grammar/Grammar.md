@@ -187,7 +187,7 @@ StateAssign : 'def' IDENT ['(' [Params] ')'] '{' State '}'
 Params      : IDENT {',' IDENT}
 
 ## 表达式对象
-ValAssign   : 'val' IDENT "=" Expr END\
+ValAssign   : 'val' IDENT "=" Expr END
 Expr      : LogicExpr
 
 LogicExpr : ('not' LogicExpr)

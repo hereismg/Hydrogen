@@ -244,7 +244,7 @@ namespace hdg {
 
     void Lexer::buildIdentifier() {
         Indicator posStart = m_pos;
-        Token::Type type = Token::IDENTIFIER;
+        Token::Type type = Token::IDENT;
 
         advance();
 

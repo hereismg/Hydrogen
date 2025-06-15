@@ -1,0 +1,24 @@
+{
+    "__class__" : "DefNode",
+    "name" : "add",
+    "val" : {
+        "__class__" : "ExeUnitNode",
+        "list" : {
+            "__class__" : "std::vector<uNode>",
+            "val" : [
+                {
+                    "__class__" : "BinOperNode",
+                    "oper" : "Token::Type::PLUS",
+                    "left" : {
+                        "__class__" : "IntNode",
+                        "val" : 1
+                    },
+                    "right" : {
+                        "__class__" : "IntNode",
+                        "val" : 2
+                    }
+                }
+            ]
+        }
+    }
+}

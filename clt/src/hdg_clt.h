@@ -9,7 +9,8 @@ public:
         Unknow,
         Lexer,
         Parser,
-        Interpreter
+        Interpreter,
+        JSON
     };
 
 public:
@@ -33,6 +34,8 @@ protected:
     // Options
     Mode m_optMode;
 };
+
+void printUsage();
 
 /**
  * Usage: hdg_clt [Options] <file>

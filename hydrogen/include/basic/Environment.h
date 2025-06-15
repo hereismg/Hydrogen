@@ -2,19 +2,20 @@
 // Created by Magnesium on 2023/7/27.
 //
 
-#ifndef HDG_ENVIRONMENT_H
-#define HDG_ENVIRONMENT_H
+#pragma once
 
 #include <map>
 #include <string>
 #include <initializer_list>
 #include <stack>
-#include "../object/Object.h"
-#include "../object/Integer.h"
-#include "../object/Float.h"
+#include <memory>
 
 namespace hdg {
-
+    class Object;
+    typedef std::unique_ptr<Object> uObject;
+    typedef std::shared_ptr<Object> sObject;
+    typedef std::weak_ptr<Object>   wObject;
+    
     /**
      * @brief       环境。主要用来存储符号、模块名称等信息。
      * @details     信息这里式信息是
@@ -60,6 +61,20 @@ namespace hdg {
         Object* getSymbol(const std::string& name);
     };
 
+
+    class New_Environment{
+    protected:
+        std::map<std::string, sObject> m_table;
+
+    public:
+        New_Environment() = default;
+        New_Environment(std::map<std::string, sObject>&& table)
+            : m_table(std::move(table)) {}
+        
+        void setSymbol(const std::string& name, sObject obj);
+        sObject  getSymbol(const std::string& name);
+        sObject* getSymbolPtr(const std::string& name);
+    };
+
 } // hdg
 
-#endif //HDG_ENVIRONMENT_H

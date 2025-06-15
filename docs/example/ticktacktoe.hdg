@@ -1,0 +1,20 @@
+{
+    var _ = 0
+    var X = 1
+    var O = -1
+    var grid = [
+        [_, _, _],
+        [_, _, _],
+        [_, _, _]
+    ]
+
+    function judgeWin(grid) {
+        "横向"
+
+        var i = 0
+        while i < 3 {
+            
+        }
+    }
+    grid
+}

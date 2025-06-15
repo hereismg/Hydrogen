@@ -1,9 +1,13 @@
+#include "hdg_clt.h"
+
 #include <iostream>
 #include <fstream>
 #include <cassert>
 #include <cstring>
-#include "hdg_clt.h"
+
 #include "../../hydrogen/include/kernel/Interpreter.h"
+#include "../../hydrogen/include/kernel/Parser.h"
+#include "../../hydrogen/include/node/visitor.h"
 
 bool startsWith(const char * str, const char * prefix){
     for (int i=0; str[i] != '\0' && prefix[i] != '\0'; i++){
@@ -42,6 +46,7 @@ Option::Option(int argc, char *argv[]) {
             if (endWith(argv[ptr], "lexer")) m_optMode = Lexer;
             else if (endWith(argv[ptr], "parser")) m_optMode = Parser;
             else if (endWith(argv[ptr], "interpreter")) m_optMode = Interpreter;
+            else if (endWith(argv[ptr], "JSON")) m_optMode = JSON;
             else m_optMode = Unknow;
         }
     }
@@ -65,9 +70,21 @@ bool Option::getOptVersion(){
     return m_optVersion;
 }
 
+void printUsage(){
+    std::cout << R"(Usage: hdg_clt [Global Options] [Options] <file>
+
+Global Options:
+  1. [-v|--version]
+  2. [-h|--help]
+ 
+Options:
+  1. [-m|--mode]=[lexer | parser | interpreter | JSON])" << std::endl;
+}
+
 int real_main(int argc, char *argv[]){
     if (argc < 2){
-        std::cout << "argc < 2!" << std::endl;
+        printUsage();
+        // std::cout << "argc < 2!" << std::endl;
         return 1;
     }
     Option opt(argc, argv);
@@ -89,18 +106,49 @@ int real_main(int argc, char *argv[]){
     // 模式
     auto mode = opt.getOptMode();
     switch (mode){
-    case Option::Mode::Lexer:
+    case Option::Mode::Lexer:{
+        
         break;
-    case Option::Mode::Parser:
+    }
+    case Option::Mode::Parser:{
         break;
-    case Option::Mode::Interpreter:
-        hdg::Interpreter interpreter;
-        auto res = interpreter.interpret(opt.getFilePath(), codeText);
+    }
+    case Option::Mode::Interpreter:{
+        hdg::Lexer lexer;
 
-        std::cout << res << std::endl;
+        auto tokens = lexer.run("<stdin>", &codeText);
+
+        hdg::Environment envir;
+        hdg::Parser parser(tokens, &envir);
+        hdg::uNode ast = parser.new_ExeUnit();
+
+        hdg::InterpreterVisitor visitor;
+
+        ast->accept(visitor);
+
+        auto res = visitor.getResult();
+        
+        std::cout << res->toString() << std::endl;
+
         break;
-    default:
+    }
+    case Option::Mode::JSON:{
+        hdg::Lexer lexer;
+
+        auto tokens = lexer.run("<stdin>", &codeText);
+
+        hdg::Environment envir;
+        hdg::Parser parser(tokens, &envir);
+        hdg::uNode ast = parser.new_ExeUnit();
+
+        std::cout << ast->toJSON().dump(4) << std::endl;
+
         break;
+    }
+    default:{
+        
+        break;
+    }
     }
 
 

@@ -2,8 +2,7 @@
 // Created by Magnesium on 2023/7/16.
 //
 
-#ifndef HDG_ERROR_H
-#define HDG_ERROR_H
+#pragma once
 
 #include <iostream>
 #include <exception>
@@ -75,4 +74,3 @@ namespace hdg {
 
 } // hdg
 
-#endif //HDG_ERROR_H

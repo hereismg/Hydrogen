@@ -1,0 +1,26 @@
+
+// getList()[1] = 1
+{
+    "__class__" : "AssignNode",
+    "lVal" : {
+        "__class__" : "PostfixNode",
+        "type"      : "$Token::Type::LBRACKET",   // []
+        "primary"   : {
+            "__class__" : "PostfixNode",
+            "type"      : "$Token::Type::LPAREN", // ()
+            "primary"   : {
+                "__class__" : "IdentNode",
+                "val"       : "getList"
+            }
+        }
+    },
+    "rVal" : {
+        "__class__" : "IntNode",
+        "val" : 1
+    }
+}
+
+/*
+list = [ 1, 2 ]
+(list + 3)[2] = 33
+*/

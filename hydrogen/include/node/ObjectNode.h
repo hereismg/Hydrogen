@@ -1,16 +1,17 @@
 //
 // Created by Magnesium on 2023/8/9.
 //
-
-#ifndef HDG_OBJECTNODE_H
-#define HDG_OBJECTNODE_H
+#pragma once
 
 #include "Node.h"
 #include "../object/String.h"
 
 namespace hdg {
+    using std::nullopt;
+
     class ObjAssignNode;
     class Function;
+    class New_BaseFunction;
 
     class ObjectNode: public Node{
     protected:
@@ -25,8 +26,8 @@ namespace hdg {
         void setClass(const std::string& className);
         std::string getClass();
 
-        virtual std::string toString() = 0;
-        virtual Object* interpret() = 0;
+        virtual std::string toString() override = 0;
+        virtual Object* interpret() override = 0;
     };
 
     class FuncObjNode: public ObjectNode {
@@ -35,8 +36,11 @@ namespace hdg {
         std::vector<ObjAssignNode*> m_args;
         Node* m_body{};
 
+        sObject m_funcObj;
+
     public:
         FuncObjNode();
+        FuncObjNode(sObject funcObj, const Position& pos);
         FuncObjNode(const Position& position, Environment* parent);
         ~FuncObjNode() override;
 
@@ -44,8 +48,11 @@ namespace hdg {
         void setBody(Node* body);
         void setName(const std::string& name);
 
-        std::string toString() override;
-        Object* interpret() override;
+        sObject getObj();
+
+        virtual std::string toString() override;
+        virtual Object* interpret() override;
+        virtual void accept(Visitor& visitor) override;
     };
 
     class NumObjNode: public ObjectNode{
@@ -65,20 +72,111 @@ namespace hdg {
         Object* interpret() override;
     };
 
-    class StrObjNode: public ObjectNode{
+    class StrNode: public ObjectNode{
     protected:
         std::string m_value;
 
     public:
-        StrObjNode();
-        StrObjNode(std::string value, const Position& position, Environment* environment);
-        ~StrObjNode() override;
+        StrNode();
+        StrNode(std::string value, const Position& pos);
+        StrNode(std::string value, const Position& position, Environment* environment);
+        ~StrNode() override;
 
         void setValue(const std::string& value);
+        std::string getValue()const { return m_value; }
 
+        virtual nlohmann::json toJSON() const override;
+        
+        virtual std::string toString() override;
+        virtual Object* interpret() override;
+        virtual void accept(Visitor& visitor) override;
+    };
+
+    class IntNode;
+    typedef std::unique_ptr<IntNode> uIntNode;
+
+    class IntNode: public ObjectNode{
+    protected:
+        int64_t m_val;
+
+    public:
+        explicit IntNode(int64_t val);
+        IntNode(int64_t val, const Position& pos);
+
+        IntNode(const IntNode&) = delete;
+        IntNode& operator=(const IntNode&) = delete;
+
+        IntNode(IntNode&&) noexcept = default;
+        IntNode& operator=(IntNode&&) noexcept = default;
+
+        static uIntNode create(int64_t val, optional<Position> pos = nullopt);
+
+        int64_t getValue() const { return m_val; }
+        void setValue(int64_t new_val);
+
+        virtual nlohmann::json toJSON() const override;
+        virtual std::string toString() override;
+        virtual Object* interpret() override;
+        virtual void accept(Visitor& visitor) override;
+    };
+
+    class IdentNode;
+    typedef std::unique_ptr<IdentNode> uIdentNode;
+
+    class IdentNode: public Node{
+    protected:
+        std::string m_ident;
+
+    public:
+        explicit IdentNode(std::string ident);
+        IdentNode(std::string ident, const Position& pos);
+
+        IdentNode(const IdentNode&) = delete;
+        IdentNode& operator=(const IdentNode&) = delete;
+        IdentNode(IdentNode&&) noexcept = default;
+        IdentNode& operator=(IdentNode&&) noexcept = default;
+
+        static uIdentNode create(std::string ident, optional<Position> pos = nullopt);
+
+        std::string& getIdent();
+        void setIdent(std::string new_ident);
+
+        virtual nlohmann::json toJSON() const override;
+        virtual std::string toString() override;
+        virtual Object* interpret() override;
+        virtual void accept(Visitor& visitor) override;
+    };
+
+    class New_FuncObjNode: public ObjectNode{
+    protected:
+        std::vector<std::string> m_args;
+        uNode m_body;
+
+    public:
+        New_FuncObjNode(std::vector<std::string>&& args, uNode&& body, const Position& pos);
+
+        std::vector<std::string> getArgs() { return m_args; }
+        uNode moveBody() { return std::move(m_body); }
+
+        nlohmann::json toJSON() const override;
         std::string toString() override;
         Object* interpret() override;
+        void accept(Visitor& visitor) override;
+    };
+
+    class ListObjNode: public ObjectNode {
+    protected:
+        std::vector<uNode> m_exprList;
+
+    public:
+        ListObjNode(std::vector<uNode>&& exprList);
+        ListObjNode(std::vector<uNode>&& exprList, const Position& pos);
+
+        std::vector<uNode>& getExprList() { return m_exprList; }
+
+        nlohmann::json toJSON() const override;
+        std::string toString() override;
+        Object* interpret() override;
+        void accept(Visitor& visitor) override;
     };
 } // hdg
-
-#endif //HDG_OBJECTNODE_H

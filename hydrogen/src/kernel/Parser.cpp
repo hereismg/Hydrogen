@@ -3,6 +3,7 @@
 //
 
 #include <set>
+#include <cassert>
 
 #include "../../include/kernel/Parser.h"
 #include "../../include/node/CallNode.h"
@@ -14,6 +15,10 @@
 #include "../../include/node/ForNode.h"
 #include "../../include/node/WhileNode.h"
 #include "../../include/node/BinaryOperatorNode.h"
+#include "../../include/node/stmt_node.h"
+#include "../../include/node/unit_node.h"
+#include "../../include/node/ObjectNode.h"
+// #include "../../include//unit_node.h"
 
 namespace hdg {
     Parser::Parser(std::vector<Token> tokens, Environment* environment):
@@ -22,6 +27,12 @@ namespace hdg {
 
     void Parser::advance() {
         if (m_currentToken->getType() != Token::EF) m_currentToken++;
+    }
+
+    void Parser::advanceAndEL() {
+        do {
+            advance();
+        } while(m_currentToken->getType() == Token::Type::EL);
     }
 
     void Parser::retreat() {
@@ -83,7 +94,7 @@ namespace hdg {
     }
 
     Node* Parser::expr(Environment* environment) {
-        if (Token::IDENTIFIER == m_currentToken->getType()){
+        if (Token::IDENT == m_currentToken->getType()){
             std::string name = m_currentToken->getValue();
             Position pos(*m_currentToken->thisPosition());
             advance();
@@ -226,7 +237,7 @@ namespace hdg {
      * @details     该函数是各种语句的入口。
      * */
     Node *Parser::atom(Environment *environment) {
-        if (m_currentToken->getType() == Token::IDENTIFIER){
+        if (m_currentToken->getType() == Token::IDENT){
             Node* node = new ObjAccessNode(
                     m_currentToken->getValue(),
                     *m_currentToken->thisPosition(),
@@ -247,7 +258,7 @@ namespace hdg {
             return node;
         }
         else if (m_currentToken->getType() == Token::STRING){
-            Node* node = new StrObjNode(m_currentToken->getValue(), *m_currentToken->thisPosition(), environment);
+            Node* node = new StrNode(m_currentToken->getValue(), *m_currentToken->thisPosition(), environment);
             advance();
             return node;
         }
@@ -306,14 +317,14 @@ namespace hdg {
 
     Node *Parser::forExpr(Environment* environment) {
         Position position(*m_currentToken->thisPosition());
-        Token index(Token::IDENTIFIER);
+        Token index(Token::IDENT);
         auto* forNode = new ForNode(index, 0, -1, 1, nullptr, *m_currentToken->thisPosition(), environment);
 
         if (m_currentToken->match(Token::KEYWORD, "for")) advance();
 
         /// 读取 标识符
-        if (m_currentToken->getType() == Token::IDENTIFIER) {
-            forNode->setIndex({Token::IDENTIFIER, m_currentToken->getValue()});
+        if (m_currentToken->getType() == Token::IDENT) {
+            forNode->setIndex({Token::IDENT, m_currentToken->getValue()});
             advance();
         }
         else {
@@ -434,7 +445,7 @@ namespace hdg {
         func->thisPosition()->setStart(m_currentToken->thisPosition()->getStart());
         advance();
 
-        if (m_currentToken->getType() == Token::IDENTIFIER){
+        if (m_currentToken->getType() == Token::IDENT){
             name = *m_currentToken;
             advance();
         }else{
@@ -453,7 +464,7 @@ namespace hdg {
             );
         }
 
-        while (m_tokens.end() != m_currentToken && m_currentToken->getType() == Token::IDENTIFIER){
+        while (m_tokens.end() != m_currentToken && m_currentToken->getType() == Token::IDENT){
             Position pos(*m_currentToken->thisPosition());
             std::string argName = m_currentToken->getValue();
             Node* argExpr = nullptr;
@@ -468,7 +479,7 @@ namespace hdg {
 
             if (m_currentToken->getType() == Token::COMMA) {
                 advance();
-                if (m_currentToken->getType()!=Token::IDENTIFIER)
+                if (m_currentToken->getType()!=Token::IDENT)
                     throw InvalidSyntaxError(
                             "Expected identifier.",
                             *m_currentToken->thisPosition()
@@ -516,7 +527,12 @@ namespace hdg {
         }
     }
 
-    Node *Parser::binaryOperator(Environment* environment, const std::set<Token, std::less<>>&opers, std::function<Node*(Environment* envir)> funA, std::function<Node*(Environment* envir)> funB) {
+    Node *Parser::binaryOperator(
+        Environment* environment, 
+        const std::set<Token, std::less<>>&opers, 
+        std::function<Node*(Environment* envir)> funA, 
+        std::function<Node*(Environment* envir)> funB) 
+    {
         if (funB == nullptr) funB = funA;
         Node* left = funA(environment);
 
@@ -541,7 +557,11 @@ namespace hdg {
         return left;
     }
 
-    Node *Parser::unaryOperator(Environment* environment, const std::set<Token, std::less<>>&opers, std::function<Node*(Environment* envir)> fun) {
+    Node *Parser::unaryOperator(
+        Environment* environment, 
+        const std::set<Token, std::less<>>&opers, 
+        std::function<Node*(Environment* envir)> fun) 
+    {
         Node* node;
 
         Token oper(*m_currentToken);
@@ -560,45 +580,553 @@ namespace hdg {
         return node;
     }
 
+    uNode Parser::new_ExeUnit(){
+        while(m_currentToken->getType() == Token::Type::EL) advance();
+        if (m_currentToken->getType() != Token::Type::LBRACE){
+            throw -1;
+        }
+        advance();
+
+        auto unit = std::make_unique<new_ExeUnitNode>();
+        while(m_currentToken->getType() != Token::Type::RBRACE){
+            // end of file
+            if (m_currentToken->getType() == Token::Type::EL){
+                advance();
+                continue;
+            }
+            uNode stmt;
+
+            auto resOpt = new_AssignStmt();
+            if (resOpt.has_value()){
+                while (m_currentToken->getType() == Token::Type::EL){
+                    advance();
+                }
+
+                unit->getList().emplace_back(std::move(resOpt.value()));
+                continue;
+            }
+
+            stmt = new_IfStmt();
+            if (stmt != nullptr){
+                while (m_currentToken->getType() == Token::Type::EL){
+                    advance();
+                }
+
+                unit->getList().emplace_back(std::move(stmt));
+                continue;
+            }
+
+            stmt = new_WhileStmt();
+            if (stmt != nullptr){
+                while (m_currentToken->getType() == Token::Type::EL){
+                    advance();
+                }
+
+                unit->getList().emplace_back(std::move(stmt));
+                continue;
+            }
+
+            stmt = new_FuncDef();
+            if (stmt != nullptr){
+                while (m_currentToken->getType() == Token::Type::EL){
+                    advance();
+                }
+
+                unit->getList().emplace_back(std::move(stmt));
+                continue;
+            }
+
+            stmt = new_VarDef();
+            if (stmt != nullptr){
+                while (m_currentToken->getType() == Token::Type::EL){
+                    advance();
+                }
+
+                unit->getList().emplace_back(std::move(stmt));
+                continue;
+            }
+
+            stmt = new_Expr();
+            if (stmt != nullptr){
+                while (m_currentToken->getType() == Token::Type::EL){
+                    advance();
+                }
+
+                unit->getList().emplace_back(std::move(stmt));
+                continue;
+            }
+             
+        }
+        advance();
+        
+        return unit;
+    }
+
+    uNode Parser::new_IfStmt(){
+        auto ifStmtNode = std::make_unique<new_IfStmtNode>();
+
+        // 'if' Expr ExeUnit
+        ignoreEL();
+        if (!m_currentToken->match(Token::Type::KEYWORD, "if")) return nullptr;
+
+        Position *pos = ifStmtNode->thisPosition();
+        pos->setStart(m_currentToken->thisPosition()->getStart());
+        advanceAndEL();
+
+        auto cond = new_Expr();
+        auto exeUnit = new_ExeUnit();
+        ifStmtNode->addBranch(std::move(cond), std::move(exeUnit));
+
+
+        // { 'elif' Expr ExeUnit }
+        ignoreEL();
+        while(m_currentToken->match(Token::Token::KEYWORD, "elif")){
+            advance();
+            ignoreEL();
+            cond = new_Expr();
+            exeUnit = new_ExeUnit();
+            ifStmtNode->addBranch(std::move(cond), std::move(exeUnit));
+        }
+
+        // ['else' ExeUnit ]
+        ignoreEL();
+        if (m_currentToken->match(Token::Type::KEYWORD, "else")){
+            advanceAndEL();
+            exeUnit = new_ExeUnit();
+            ifStmtNode->addElseBranch(std::move(exeUnit));
+        }
+
+        pos->setEnd(m_currentToken->thisPosition()->getEnd());
+        return ifStmtNode;
+    }
+
+    uNode Parser::new_WhileStmt(){
+        if (!m_currentToken->match(Token::Type::KEYWORD, "while")) return nullptr;
+
+        Position pos;
+        pos.setStart(m_currentToken->thisPosition()->getStart());
+        advance();
+
+        uNode cond = new_Expr();
+
+        uNode loopUnit = new_ExeUnit(); // hdgtodo: 后面应该支持 break
+    
+        pos.setEnd(m_currentToken->thisPosition()->getEnd());
+        return std::make_unique<new_WhileStmtNode>(
+            std::move(cond), 
+            std::move(loopUnit)
+        );
+    }
+
+    optional<uNode> Parser::new_AssignStmt(){
+        Position pos;
+        pos.setStart(m_currentToken->thisPosition()->getStart());
+
+        auto start = m_currentToken;
+
+        // 1. lVal
+        auto resOpt = new_PostfixExpr();
+        if (!resOpt.has_value()) return std::nullopt;
+        uNode lVal = std::move(resOpt.value());
+
+        // 2. '='
+        if (m_currentToken->getType() != Token::Type::EQ){
+            // retreat();
+            m_currentToken = start;
+            return std::nullopt;
+        }
+        advance();
+        
+        // 3. rVal
+        uNode rVal = new_Expr();
+
+        // 4 return
+        pos.setEnd(m_currentToken->thisPosition()->getEnd());
+        return std::make_unique<new_AssignNode>(std::move(lVal), std::move(rVal), pos);
+    }
+
+    // uNode Parser::new_ValBuild() {
+    //     return nullptr;
+    // }
+
+    uNode Parser::new_VarDef() {
+        while (m_currentToken->getType() == Token::Type::EL) advance();
+        
+        // 1. 关键字 'var'
+        if (!m_currentToken->match(Token::Type::KEYWORD, "var")) return nullptr;
+        Position pos;
+        pos.setStart(m_currentToken->thisPosition()->getStart());
+        advance();
+
+        // 2. 标识符 IDENT
+        if (m_currentToken->getType() != Token::Type::IDENT) {
+            assert(false); // 应该抛出异常
+        }
+        std::string ident = m_currentToken->getValue();
+        advance();
+
+        // 3. 等于号 '='
+        if (m_currentToken->getType() != Token::Type::EQ) {
+            assert(false);
+        }
+        advance();
+
+        // 4. 表达式
+        uNode expr = new_Expr();
+
+        pos.setEnd(m_currentToken->thisPosition()->getEnd());
+
+        return std::make_unique<DefNode>(ident, std::move(expr), pos);
+    }
+
+    // FuncDef    : 'func' IDENT  '(' Params ')'  ExeUnit
+    uNode Parser::new_FuncDef(){ // hdgtodo: AST 的基本设计原则是：尽力保留原始的代码信息
+        while (m_currentToken->getType() == Token::Type::EL) advance();
+
+        // 1. 关键字 'function'
+        if (!m_currentToken->match(Token::Type::KEYWORD, "function")){
+            return nullptr;
+        }
+        Position pos;
+        pos.setStart(m_currentToken->thisPosition()->getStart());
+        advance();
+
+        // 2. 标识符 IDENT
+        if (m_currentToken->getType() != Token::Type::IDENT) {
+            assert(false); // 应该抛出异常
+        }
+        std::string ident = m_currentToken->getValue();
+        advance();
+
+        // 3. 参数 '(' Params ')'
+        if (m_currentToken->getType() != Token::Type::LPAREN){
+            assert(false); // 应该抛出异常
+        }
+        advance();
+
+        auto params = new_Params();
+
+        if (m_currentToken->getType() != Token::Type::RPAREN){
+            assert(false); // 应该抛出异常
+        }
+        advance();
+
+        // 4. 函数的执行体 ExeUnit
+        auto unit = new_ExeUnit();
+
+        // 5. 构建结点
+        pos.setEnd(m_currentToken->thisPosition()->getEnd());
+        
+        uNode funNode = std::make_unique<New_FuncObjNode>(std::move(params), std::move(unit), pos);
+
+        return std::make_unique<DefNode>(ident, std::move(funNode), pos);
+    }
+
+    uNode Parser::new_Expr(){
+        uNode expr;
+
+        expr = new_ListExpr();
+        if (expr != nullptr) {
+            return expr;
+        }
+
+        expr = new_CompExpr();
+        if (expr != nullptr) {
+            return expr;
+        }
+
+        assert(false);
+        return nullptr;
+    }
+
+    uNode Parser::new_ListExpr(){
+        while (m_currentToken->getType() == Token::Type::EL) advance();
+        Position pos;
+        pos.setStart(m_currentToken->thisPosition()->getStart());
+
+        // 1. 左方括号 '['
+        if (m_currentToken->getType() != Token::Type::LBRACKET) return nullptr;
+        advance();
+        while (m_currentToken->getType() == Token::Type::EL) advance();
+
+        // 2. ExprArray
+        std::vector<uNode> arr;
+        if (m_currentToken->getType() != Token::Type::RBRACKET){
+            arr = new_ExprArray();
+        }
+
+        // 3. 右方括号 ']'
+        ignoreEL();
+        if (m_currentToken->getType() != Token::Type::RBRACKET) {
+            assert(false);
+        }
+        advance();
+
+        pos.setEnd(m_currentToken->thisPosition()->getEnd());
+
+        return std::make_unique<ListObjNode>(std::move(arr), pos);
+    }
+
+     uNode Parser::new_CompExpr(){
+         Position pos;
+         pos.setStart(m_currentToken->thisPosition()->getStart());
+
+         uNode left = new_ArithExpr();
+
+         Token::Type oper = m_currentToken->getType();
+         while( oper == Token::NE  ||
+                oper == Token::EE  ||
+                oper == Token::GT  ||
+                oper == Token::LT  ||
+                oper == Token::GTE ||
+                oper == Token::LTE)
+         {
+             advance();
+
+             uNode right = new_ArithExpr();
+             assert(right != nullptr);
+
+             pos.setEnd(m_currentToken->thisPosition()->getEnd());
+
+             left = std::make_unique<BinOperNode>(
+                     oper,
+                     std::move(left),
+                     std::move(right),
+                     pos
+             );
+             oper = m_currentToken->getType();
+         }
+
+         return left;
+     }
+
     uNode Parser::new_ArithExpr() {
         Position pos;
         pos.setStart(m_currentToken->thisPosition()->getStart());
 
-        uNode left = new_Primary();
+        uNode left = new_Term();
 
-        if (m_currentToken->getType() != Token::Type::PLUS && m_currentToken->getType() != Token::Type::MINUS){
-            throw -1;
+        while (m_currentToken->getType() == Token::Type::PLUS || 
+               m_currentToken->getType() == Token::Type::MINUS) 
+        {
+            Token::Type oper = m_currentToken->getType();
+            advance();
+
+            uNode right = new_Term();
+            assert(right != nullptr);
+
+            pos.setEnd(m_currentToken->thisPosition()->getEnd());
+
+            left = std::make_unique<BinOperNode>(
+                oper, 
+                std::move(left),
+                std::move(right),
+                pos
+            );
         }
-        Token::Type oper = m_currentToken->getType();
-        advance();
 
-        uNode right = new_Primary();
-
-        pos.setEnd(m_currentToken->thisPosition()->getEnd());
-
-        return std::make_unique<BinOperNode>(oper, std::move(left), std::move(right), pos);
+        return left;
     }
 
-    uNode Parser::new_Primary() {
+    std::vector<std::string> Parser::new_Params(){
+        std::vector<std::string> params;
+
+        while(true) {
+            if (m_currentToken->getType() == Token::Type::EL){
+                advance();
+                continue;
+            }
+
+            if (m_currentToken->getType() != Token::Type::IDENT) break;
+            
+            params.emplace_back(m_currentToken->getValue());
+            advance();
+
+            if (m_currentToken->getType() == Token::Type::COMMA){
+                advance();
+                continue;
+            }
+            else{
+                break;
+            }
+        }
+
+        return params;
+    }
+
+    uNode Parser::new_Term() {
+        Position pos;
+        pos.setStart(m_currentToken->thisPosition()->getStart());
+
+        uNode left = new_Factor();
+        assert(left != nullptr);
+
+        while (m_currentToken->getType() == Token::Type::MUL || 
+               m_currentToken->getType() == Token::Type::DIV) 
+        {
+            Token::Type oper = m_currentToken->getType();
+            advance();
+
+            uNode right = new_Factor();
+
+            pos.setEnd(m_currentToken->thisPosition()->getEnd());
+
+            left = std::make_unique<BinOperNode>(
+                oper, 
+                std::move(left),
+                std::move(right),
+                pos
+            );
+        }
+
+        return left;
+    }
+
+    uNode Parser::new_Factor() {
+        Position pos;
+        pos.setStart(m_currentToken->thisPosition()->getStart());
+
+        Token::Type oper = m_currentToken->getType();
+        switch(oper){
+            case Token::Type::PLUS: {
+                auto resOpt = new_PostfixExpr();
+                if (!resOpt.has_value()) assert(false);
+                return std::move(resOpt.value()); // hdgtodo: 增加对单目运算符的支持
+            }
+            case Token::Type::MINUS: {
+                auto resOpt = new_PostfixExpr();
+                if (!resOpt.has_value()) assert(false);
+                return std::move(resOpt.value()); // hdgtodo: 增加对单目运算符的支持
+            }
+            default: {
+                auto resOpt = new_PostfixExpr();
+                if (!resOpt.has_value()) assert(false);
+                return std::move(resOpt.value()); // hdgtodo: 增加对单目运算符的支持
+            }
+        }
+    }
+
+    optional<uNode> Parser::new_PostfixExpr() {
+        Position pos;
+        pos.setStart(m_currentToken->thisPosition()->getStart());
+
+        auto resOpt = new_Primary();
+        if (!resOpt.has_value()) return std::nullopt;
+        uNode primary = std::move(resOpt.value());
+
+        bool flag = true;
+        while(flag){
+            switch (m_currentToken->getType()){
+            case Token::LPAREN : { // 圆括号 ()
+                advance();
+
+                std::vector<uNode> params;
+
+                if (m_currentToken->getType() != Token::Type::RPAREN){
+                    params = new_ExprArray();                    
+                }
+                advance();
+
+                pos.setEnd(m_currentToken->thisPosition()->getEnd());
+                primary = PostfixNode::createParen(std::move(primary), std::move(params), pos);
+                break;
+            }
+            case Token::LBRACKET : { // 方括号 []
+                advance();
+
+                std::vector<uNode> params;
+
+                if (m_currentToken->getType() != Token::Type::RBRACKET){
+                    params = new_ExprArray();                    
+                }
+                advance();
+
+                pos.setEnd(m_currentToken->thisPosition()->getEnd());
+                primary = PostfixNode::createBracket(
+                    std::move(primary),
+                    std::move(params),
+                    pos
+                );
+                break;
+            }
+            case Token::DOT : {  // 点号 .
+
+            }
+            default : {
+                flag = false;
+                break;
+            }
+            }
+        }
+
+        return primary;
+    }
+
+
+    optional<uNode> Parser::new_Primary() {
         uNode node;
 
-        if (m_currentToken->getType() == Token::Type::INT){
-            int64_t val = std::stoll(m_currentToken->getValue().c_str());
-            auto pos = *m_currentToken->thisPosition();
+        switch (m_currentToken->getType()){
+            case Token::INT : {
+                int64_t val = std::stoll(m_currentToken->getValue().c_str());
+                auto pos = *m_currentToken->thisPosition();
 
-            node = std::make_unique<NumObjNode>(val, pos);
-        }
-        else if (m_currentToken->getType() == Token::Type::FLOAT){
-            double val = std::stod(m_currentToken->getValue().c_str());
-            auto pos = *m_currentToken->thisPosition();
+                node = std::make_unique<IntNode>(val, pos);
+                advance();
+                return node;
+            }
+            case Token::IDENT : {
+                std::string name = m_currentToken->getValue();
+                advance();
 
-            return std::make_unique<NumObjNode>(val, pos);
+                return std::make_unique<IdentNode>(name);
+            }
+            case Token::LPAREN : {
+                auto pos = m_currentToken->thisPosition()->clone();
+                advance();
+
+                node = new_Expr(); assert(node != nullptr);
+
+                if (m_currentToken->getType() != Token::Type::RPAREN) {
+                    assert(false && "Throw Error! Expect ')'."); 
+                }
+                advance();
+                return node;
+            }
+            case Token::STRING : {
+                Position pos;
+                pos.setStart(m_currentToken->thisPosition()->getStart());
+                std::string val = m_currentToken->getValue();
+                advance();
+
+                pos.setEnd(m_currentToken->thisPosition()->getEnd());
+                return std::make_unique<StrNode>(val, pos);
+            }
+            default:{
+                 return std::nullopt;
+            }
         }
-        else{
-            throw -1;
+    }
+
+    std::vector<uNode> Parser::new_ExprArray() {
+        std::vector<uNode> list;
+
+        while(true) {
+            uNode expr = new_Expr();
+
+            assert(expr != nullptr);
+
+            list.emplace_back(std::move(expr));
+
+            if (m_currentToken->getType() == Token::Type::COMMA) {
+                advance();
+                continue;
+            }
+            else{
+                break;
+            }
         }
 
-        advance();
-        return node;
+        return list;
     }
 } // hdg

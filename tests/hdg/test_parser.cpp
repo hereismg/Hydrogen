@@ -602,6 +602,57 @@ Animal(getAge)
 })",
 make_shared<Integer>(180),
 ParserType::ExeUnit
+},
+
+tuple<string, string, sObject, ParserType>{
+"52801",
+R"({
+function fun(l, r) {
+    if l < r {
+        var mid = (l + r) / 2
+        fun(l, mid)
+        fun(mid + 1, r)
+        var i = l
+        var j = mid + 1
+        var k = 0
+        while (mid - i + 1) * (r - j + 1) {
+            if nums[i] < nums[j] {
+                temp[k] = nums[i]
+                k = k + 1
+                i = i + 1
+            } else {
+                temp[k] = nums[j]
+                k = k + 1
+                j = j + 1
+            }
+        }
+        while mid - i + 1 {
+            temp[k] = nums[i]
+            k = k + 1
+            i = i + 1
+        }
+        while r - j + 1 {
+            temp[k] = nums[j]
+            k = k + 1
+            j = j + 1
+        }
+        k = 0
+        while l <= r {
+            nums[l] = temp[k]
+            l = l + 1
+            k = k + 1
+        }
+    }
+}
+
+var n = 10
+var nums = [1, 5, 3, 9, 2, 3, 1, 9, 5, 2]
+var temp = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+fun(0, n - 1)
+nums
+})",
+List::from({1, 1, 2, 2, 3, 3, 5, 5, 9, 9}),
+ParserType::ExeUnit
 }
 
 

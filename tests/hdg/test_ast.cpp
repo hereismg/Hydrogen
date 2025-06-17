@@ -387,10 +387,7 @@ TEST(PostfixNodeTest, from_NullInputReturnsNullopt){
  */
 TEST(PostfixNodeTest, Dot_1){
     // list = [1, 2]
-    auto list = std::make_shared<List>();
-    list->append(1)
-        ->append(2);
-
+    auto list = List::from({1, 2});
     InterpreterVisitor visitor;
     visitor.getCurrentEnvir()->setSymbol("list", list);
 
@@ -411,16 +408,42 @@ TEST(PostfixNodeTest, Dot_1){
 
     // judge
     auto actual = visitor.getResult();
-
-    auto expected = std::make_shared<List>();
-    expected->append(1)
-            ->append(2);
+    auto expected = List::from({1, 2});
 
     ASSERT_FALSE(expected->equation(actual)->isTrue());
 
     expected->append(3);
 
     ASSERT_TRUE(expected->equation(actual)->isTrue());
+}
+
+TEST(PostfixNodeTest, Dot_2){
+    // list = [1, 2]
+    auto list = List::from({1, 2});
+    InterpreterVisitor visitor;
+    visitor.getCurrentEnvir()->setSymbol("list", list);
+
+    /**
+     * hdg:
+     *     list.insert(1, 2025)
+     * 
+     * AST:
+     *     __class__: PostfixNode
+     *     
+    */
+    vector<uNode> args;
+    args.emplace_back(IntNode::create(1));
+    args.emplace_back(IntNode::create(2025));
+    auto postfix = PostfixNode::createDotFun(IdentNode::create("list"), "insert", move(args));
+
+    postfix->accept(visitor);
+
+    // judge
+    auto res = List::from(visitor.getResult());
+
+    ASSERT_TRUE(visitor.getResult()->equation(
+        List::from({1, 2025, 2})
+    )->isTrue());
 }
 
 

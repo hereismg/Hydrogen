@@ -165,6 +165,23 @@ namespace hdg {
                 envir.setSymbol("append", std::make_shared<New_BuiltInFunction>(std::move(fun), std::move(args)));
             }
 
+            {
+                auto fun = [](const std::vector<sObject> & args, Visitor & visitor)->sObject{
+                    assert(args.size() == 3);
+
+                    auto  self = List::from(args[0]).value();
+                    auto& selfList = self->getList();
+                    
+                    auto index = Integer::from(args[1]);
+                    selfList.insert(selfList.begin() + index->getValue(), args[2]);
+
+                    std::cout << "String::insert" << std::endl;
+                    return self;
+                };
+                std::vector<std::string> args = {"self", "index", "ele"};
+                envir.setSymbol("insert", std::make_shared<New_BuiltInFunction>(std::move(fun), std::move(args)));
+            }
+
 
             return type;
         }();

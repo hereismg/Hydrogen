@@ -165,6 +165,10 @@ namespace hdg {
                 m_tokens.emplace_back(Token::COMMA, Position(m_fPath, m_code, m_pos));
                 advance();
             }
+            else if (m_currentChar == '.'){
+                m_tokens.emplace_back(Token::DOT, Position(m_fPath, m_code, m_pos));
+                advance();
+            }
             else{
                 throw IllegalCharError(
                         "Expect digital, '+', '-', '*', '/' or '^'.",

@@ -504,7 +504,37 @@ namespace hdg {
                 break;
             }
             case Token::DOT : {  // 点号 .
+                advance();
 
+                std::string ident = m_currentToken->getValue();
+
+                advance();
+
+                
+                // DotFun
+                if (m_currentToken->getType() == Token::LPAREN){
+                    advance();
+
+                    vector<uNode> args;
+                    if (m_currentToken->getType() != Token::RPAREN){
+                        args = new_ExprArray();                    
+                    }
+                    advance();
+
+                    pos.setEnd(m_currentToken->thisPosition()->getEnd());
+                    primary = PostfixNode::createDotFun(
+                        move(primary), 
+                        ident, 
+                        move(args),
+                        pos
+                    );
+                    continue;
+                }
+
+                // DotVar
+                else {
+                    assert(false);
+                }
             }
             default : {
                 flag = false;

@@ -100,7 +100,11 @@ TEST_P(Interepreter_TEST_P, _){
 
     ASSERT_NE(obj, nullptr);
 
-    ASSERT_TRUE(obj->equation(expected)->isTrue());
+    if (!obj->equation(expected)->isTrue()){
+        cout << obj->toString() << endl;
+        cout << expected->toString() << endl;
+        ASSERT_TRUE(false);
+    }
 }
 
 
@@ -516,9 +520,9 @@ ParserType::ExeUnit
 }
 ));
 
-// /**********************************************
-//  * Test 6. Function
-//  **********************************************/
+/**********************************************
+ * Test 6. Function
+ **********************************************/
 
 INSTANTIATE_TEST_SUITE_P(Function, Interepreter_TEST_P, testing::Values(
 tuple<string, string, sObject, ParserType>{
@@ -603,3 +607,20 @@ ParserType::ExeUnit
 
 ));
 
+
+/**********************************************
+ * Test 7. Postfix
+ **********************************************/
+
+INSTANTIATE_TEST_SUITE_P(Postfix_Dot, Interepreter_TEST_P, testing::Values(
+tuple<string, string, sObject, ParserType>{
+"Postfix_Dot",
+R"({
+    var list = [1, 2]
+    list.append(3)
+})",
+List::from({1, 2, 3}),
+ParserType::ExeUnit
+}
+
+));

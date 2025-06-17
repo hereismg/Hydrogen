@@ -9,7 +9,7 @@
 #include <kernel/Parser.h>
 #include <basic/Environment.h>
 #include <node/ObjectNode.h>
-#include <node/BinaryOperatorNode.h>
+#include <node/expr.h>
 #include <node/stmt_node.h>
 #include <node/unit_node.h>
 

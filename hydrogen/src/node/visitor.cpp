@@ -5,7 +5,7 @@
 #include <typeinfo>
 #include <ranges>
 
-#include "../../include/node/BinaryOperatorNode.h"
+#include "../../include/node/expr.h"
 #include "../../include/node/ObjectNode.h"
 #include "../../include/node/stmt_node.h"
 #include "../../include/node/unit_node.h"

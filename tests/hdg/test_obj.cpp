@@ -6,7 +6,7 @@
 #include <kernel/Lexer.h>
 #include <kernel/Parser.h> 
 #include <node/ObjectNode.h>
-#include <node/BinaryOperatorNode.h>
+#include <node/expr.h>
 #include <object/List.h>
 #include <object/Integer.h>
 #include <object/Object.h>

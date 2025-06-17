@@ -15,7 +15,7 @@
 #include "../../include/node/IfNode.h"
 #include "../../include/node/ForNode.h"
 #include "../../include/node/WhileNode.h"
-#include "../../include/node/BinaryOperatorNode.h"
+#include "../../include/node/expr.h"
 #include "../../include/node/stmt_node.h"
 #include "../../include/node/unit_node.h"
 #include "../../include/node/ObjectNode.h"

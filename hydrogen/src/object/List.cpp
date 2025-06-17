@@ -128,16 +128,6 @@ namespace hdg {
         return m_list[index];
     }
 
-    sObject List::dot(const std::string &ident, std::vector<sObject>&& args, Visitor &visitor) {
-        auto method = m_type.lock()->refEnvir().getSymbol(ident);
-
-        assert(method != nullptr);
-
-        args.insert(args.begin(), shared_from_this());
-
-        return method->parenthesis(args, visitor);
-    }
-
     sList List::append(sObject obj) {
         m_list.emplace_back(std::move(obj));
         return std::dynamic_pointer_cast<List>(shared_from_this());

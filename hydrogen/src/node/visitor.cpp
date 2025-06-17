@@ -179,7 +179,7 @@ namespace hdg{
             }
             case PostfixNode::Type::DOT_FUN :{
                 // 点号 .
-                m_rVal = obj->dot(node.getIdent(), std::move(args), *this);
+                m_rVal = obj->dotFun(node.getIdent(), std::move(args), *this);
                 break;
             }
             // case Token::Type::IDENT : {

@@ -19,6 +19,16 @@ namespace hdg {
     Object::Object(std::string className, const Position &position):
         m_class(std::move(className)), m_position(position){}
 
+    sObject Object::dotFun(const std::string &ident, std::vector<sObject>&& args, Visitor &visitor) {
+        auto method = m_type.lock()->refEnvir().getSymbol(ident);
+
+        assert(method != nullptr);
+
+        args.insert(args.begin(), shared_from_this());
+
+        return method->parenthesis(args, visitor);
+    }
+
     void Object::setClass(std::string className){
         m_class = std::move(className);
     }

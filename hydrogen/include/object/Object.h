@@ -69,11 +69,11 @@ namespace hdg {
          * 
          * 示例：list.append(ele) 在底层通过访问此函数实现。
          */
-        virtual sObject dot(
+        virtual sObject dotFun(
                 const std::string& ident,
                 std::vector<sObject>&& args,
                 Visitor& visitor
-            ) { assert(false); return nullptr; }
+            );
 
         virtual void illegalOperator();
         virtual sObject clone() { assert(false); return nullptr; }

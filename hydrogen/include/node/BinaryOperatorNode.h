@@ -21,32 +21,6 @@ namespace hdg {
     using std::nullopt;
     using std::move;
 
-    class BinaryOperatorNode: public Node{
-    protected:
-        Token m_oper;
-        Node* m_left;
-        Node* m_right;
-
-        std::unique_ptr<Node> m_left_u;
-        std::unique_ptr<Node> m_right_u;
-
-    public:
-        BinaryOperatorNode();
-        BinaryOperatorNode(const Token& oper, Node* left, Node* right, const Position& position);
-        BinaryOperatorNode(Token::Type oper, Node* left, Node* right, const Position& position, Environment* environment);
-        ~BinaryOperatorNode() override;
-
-        void setOperator(const Token& oper);
-        void setLeft(Node* node);
-        void setRight(Node* node);
-        Token getOperator();
-        Node* getLeft();
-        Node* getRight();
-
-        virtual std::string toString() override;
-        virtual Object* interpret() override;
-    };
-
     class BinOperNode;
     typedef std::unique_ptr<BinOperNode> uBinOperNode;
 

@@ -32,6 +32,9 @@ namespace hdg{
     class Float;
 
     class New_Environment;
+
+    typedef int     i32;
+    typedef int64_t i64;
 }
 
 #endif

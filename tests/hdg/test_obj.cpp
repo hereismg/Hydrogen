@@ -66,16 +66,8 @@ TEST(Integer, from_1) {
 }
 
 TEST(NodeJSON, _1){
-    uNode left = std::make_unique<IntNode>(5);
-    uNode right = std::make_unique<IntNode>(2);
-
-    Token plus(Token::Type::PLUS);
-
-    auto expr = std::make_unique<BinOperNode>(
-        std::move(plus),
-        std::move(left),
-        std::move(right)
-    );
+    auto expr = BinOperNode::createPlus(5, 2);
+    ASSERT_NE(expr, nullptr);
 
     cout << expr->toJSON().dump(4) << endl;
 }

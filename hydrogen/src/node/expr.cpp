@@ -12,18 +12,18 @@ namespace hdg {
 
     BinOperNode::BinOperNode(Token oper, uNode&& left, uNode&& right, Position pos)
         : Node(pos),
-          m_oper(std::move(oper)),
-          m_left(std::move(left)),
-          m_right(std::move(right))
+          m_oper(move(oper)),
+          m_left(move(left)),
+          m_right(move(right))
     {
         assert(m_left  != nullptr && "Left Child cannot be null!");
         assert(m_right != nullptr && "Right Child cannot be null!");
     }
 
     BinOperNode::BinOperNode(Token oper, uNode&& left, uNode&& right)
-        : m_oper(std::move(oper)),
-          m_left(std::move(left)),
-          m_right(std::move(right))
+        : m_oper(move(oper)),
+          m_left(move(left)),
+          m_right(move(right))
     {
         assert(m_left  != nullptr && "Left Child cannot be null!");
         assert(m_right != nullptr && "Right Child cannot be null!");
@@ -86,15 +86,15 @@ namespace hdg {
     }
 
     void BinOperNode::setOper(Token oper){
-        m_oper = std::move(oper);
+        m_oper = move(oper);
     }
 
     void BinOperNode::setLeft(uNode&& new_left){
-        m_left = std::move(new_left);
+        m_left = move(new_left);
     }
 
     void BinOperNode::setRight(uNode&& new_right){
-        m_right = std::move(new_right);
+        m_right = move(new_right);
     }
     
     nlohmann::json BinOperNode::toJSON() const {
@@ -123,7 +123,7 @@ namespace hdg {
     }
 
     PostfixNode::PostfixNode(Type type, uNode&& primary, std::string ident, vector<uNode>&& args, optional<Position> pos)
-        : m_new_type(type), m_primary(std::move(primary)), m_ident(std::move(ident)), m_exprList(std::move(args))
+        : m_type(type), m_primary(move(primary)), m_ident(move(ident)), m_exprList(move(args))
         {
             assert(m_primary != nullptr);
             if (pos.has_value()) m_position = pos.value();
@@ -132,14 +132,14 @@ namespace hdg {
     uPostfixNode PostfixNode::createParen(uNode&& primary, vector<uNode> args, optional<Position> pos){
         assert(primary != nullptr);
         auto node = std::make_unique<PostfixNode> (
-            PAREN,
+            Type::PAREN,
             move(primary),
             "",
             move(args),
             pos
         );
 
-        node->m_type = Token::LPAREN;
+        // node->m_type = Token::LPAREN;
 
         return node;
     }
@@ -147,14 +147,14 @@ namespace hdg {
     uPostfixNode PostfixNode::createBracket(uNode&& primary, vector<uNode> args, optional<Position> pos){
         assert(primary != nullptr);
         auto node = std::make_unique<PostfixNode> (
-            BRACKET,
+            Type::BRACKET,
             move(primary),
             "",
             move(args),
             pos
         );
 
-        node->m_type = Token::LBRACKET;
+        // node->m_type = Token::LBRACKET;
 
         return node;
     }
@@ -162,27 +162,27 @@ namespace hdg {
     uPostfixNode PostfixNode::createDotFun(uNode&& primary, std::string ident, vector<uNode>&& args, optional<Position> pos){
         assert(primary != nullptr);
         auto node = std::make_unique<PostfixNode>(
-            DOT_FUN, 
+            Type::DOT_FUN, 
             move(primary), 
             move(ident), 
             move(args), 
-            std::move(pos)
+            move(pos)
         );
-        node->m_type = Token::DOT;
+        // node->m_type = Token::DOT;
         return node;
     }
 
     uPostfixNode PostfixNode::createDotVar(uNode&& primary, std::string ident, optional<Position> pos) {
         assert(primary != nullptr);
         auto node = std::make_unique<PostfixNode>(
-            DOT_FUN, 
+            Type::DOT_FUN, 
             move(primary), 
             move(ident), 
             vector<uNode>(),
-            std::move(pos)
+            move(pos)
         );
 
-        node->m_type = Token::DOT;
+        // node->m_type = Token::DOT;
         return node;
     }
 

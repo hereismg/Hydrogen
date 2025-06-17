@@ -167,28 +167,26 @@ namespace hdg{
         }
 
         switch (type){
-            case Token::Type::RPAREN :
-            case Token::Type::LPAREN : { 
+            case PostfixNode::Type::PAREN : { 
                 // 圆括号 ()
                 obj->parenthesis(args, *this);
                 break;
             }
-            case Token::Type::RBRACKET :
-            case Token::Type::LBRACKET : {
+            case PostfixNode::Type::BRACKET :{
                 // 方括号 []
                 m_rVal = obj->brackets(args, *this);
                 break;
             }
-            case Token::Type::DOT : {
+            case PostfixNode::Type::DOT_FUN :{
                 // 点号 .
                 m_rVal = obj->dot(node.getIdent(), std::move(args), *this);
                 break;
             }
-            case Token::Type::IDENT : {
-                // 变量
-                m_rVal = std::move(obj);
-                break;
-            }
+            // case Token::Type::IDENT : {
+            //     // 变量
+            //     m_rVal = std::move(obj);
+            //     break;
+            // }
             default : {
                 assert(false); // hdgtodo: 这样应该 hdg 报错：非法的后缀表达式
                 break;

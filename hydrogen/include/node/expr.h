@@ -157,7 +157,7 @@ namespace hdg {
 
     class PostfixNode: public Node{
     public:
-        enum Type{
+        enum class Type: i32{
             PAREN,   // 圆括号()
             BRACKET, // 方括号[]
             BRACE,   // 花括号{}
@@ -165,9 +165,16 @@ namespace hdg {
             DOT_FUN  // 点号，访问成员方法
         };
 
+        static inline vector<std::string> typeName = {
+            "PAREN",
+            "BRACKET",
+            "BRACE",
+            "DOT_VAR",
+            "DOT_FUN"
+        };
+
     protected:
-        Type m_new_type;
-        Token::Type m_type;
+        Type m_type;
         uNode m_primary;
         std::string m_ident;
         std::vector<uNode> m_exprList;
@@ -187,7 +194,7 @@ namespace hdg {
         inline std::vector<uNode>& getExprList() { return m_exprList; }
         inline uNode& getPrimary() { return m_primary; }
         inline std::string getIdent() { return m_ident; }
-        inline Token::Type getType() { return m_type; }
+        inline Type getType() { return m_type; }
 
         virtual nlohmann::json toJSON() const override;
         virtual std::string toString() override;

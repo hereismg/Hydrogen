@@ -189,6 +189,8 @@ namespace hdg {
                     auto  self = List::from(args[0]).value();
                     auto& selfList = self->getList();
 
+                    assert(!selfList.empty());
+
                     std::cout << "List::head" << std::endl;
                     return selfList[0];
                 };
@@ -203,14 +205,10 @@ namespace hdg {
                     auto  self = List::from(args[0]).value();
                     auto& selfList = self->getList();
 
-                    auto res = std::make_shared<List>(selfList.size() - 1, nullptr);
-                    auto& resList = res->getList();
-                    for (size_t i = 0; i < selfList.size() - 1; i++) {
-                        resList[i] = selfList[i + 1]->clone();
-                    }
+                    assert(!selfList.empty());
 
                     std::cout << "List::tail" << std::endl;
-                    return res;
+                    return selfList[selfList.size() - 1];
                 };
                 std::vector<std::string> args = {"self"};
                 envir.setSymbol("tail", std::make_shared<New_BuiltInFunction>(move(fun), move(args)));

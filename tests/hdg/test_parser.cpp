@@ -678,9 +678,9 @@ tuple<string, string, sObject, ParserType>{
 "Postfix_Dot",
 R"({
     var list = [9, 6, 5, 8, 3, 7]
-    list.tail().append(list.head())
+    list.append(list.head()).append(list.tail())
 })",
-List::from({6, 5, 8, 3, 7, 9}),
+List::from({9, 6, 5, 8, 3, 7, 9, 9}),
 ParserType::ExeUnit
 },
 

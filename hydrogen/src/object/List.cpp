@@ -14,7 +14,7 @@ namespace hdg {
         m_type = getType();
     }
     
-    List::List(std::vector<sObject>&& list): m_list(std::move(list)) {
+    List::List(std::vector<sObject>&& list): m_list(move(list)) {
         m_type = getType();
     }
 
@@ -129,7 +129,7 @@ namespace hdg {
     }
 
     sList List::append(sObject obj) {
-        m_list.emplace_back(std::move(obj));
+        m_list.emplace_back(move(obj));
         return std::dynamic_pointer_cast<List>(shared_from_this());
     }
 
@@ -162,7 +162,7 @@ namespace hdg {
                     return self;
                 };
                 std::vector<std::string> args = {"self", "ele"};
-                envir.setSymbol("append", std::make_shared<New_BuiltInFunction>(std::move(fun), std::move(args)));
+                envir.setSymbol("append", std::make_shared<New_BuiltInFunction>(move(fun), move(args)));
             }
 
             {
@@ -179,7 +179,7 @@ namespace hdg {
                     return self;
                 };
                 std::vector<std::string> args = {"self", "index", "ele"};
-                envir.setSymbol("insert", std::make_shared<New_BuiltInFunction>(std::move(fun), std::move(args)));
+                envir.setSymbol("insert", std::make_shared<New_BuiltInFunction>(move(fun), move(args)));
             }
 
             {
@@ -193,7 +193,7 @@ namespace hdg {
                     return selfList[0];
                 };
                 std::vector<std::string> args = {"self"};
-                envir.setSymbol("head", std::make_shared<New_BuiltInFunction>(std::move(fun), std::move(args)));
+                envir.setSymbol("head", std::make_shared<New_BuiltInFunction>(move(fun), move(args)));
             }
 
             {
@@ -213,7 +213,7 @@ namespace hdg {
                     return res;
                 };
                 std::vector<std::string> args = {"self"};
-                envir.setSymbol("tail", std::make_shared<New_BuiltInFunction>(std::move(fun), std::move(args)));
+                envir.setSymbol("tail", std::make_shared<New_BuiltInFunction>(move(fun), move(args)));
             }
 
             {
@@ -229,7 +229,7 @@ namespace hdg {
                     return res;
                 };
                 std::vector<std::string> args = {"self"};
-                envir.setSymbol("length", std::make_shared<New_BuiltInFunction>(std::move(fun), std::move(args)));
+                envir.setSymbol("length", std::make_shared<New_BuiltInFunction>(move(fun), move(args)));
             }
 
 

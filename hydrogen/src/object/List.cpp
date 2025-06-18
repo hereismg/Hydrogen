@@ -158,7 +158,7 @@ namespace hdg {
 
                     self->append(args[1]);
 
-                    std::cout << "String::append" << std::endl;
+                    std::cout << "List::append" << std::endl;
                     return self;
                 };
                 std::vector<std::string> args = {"self", "ele"};
@@ -175,11 +175,61 @@ namespace hdg {
                     auto index = Integer::from(args[1]);
                     selfList.insert(selfList.begin() + index->getValue(), args[2]);
 
-                    std::cout << "String::insert" << std::endl;
+                    std::cout << "List::insert" << std::endl;
                     return self;
                 };
                 std::vector<std::string> args = {"self", "index", "ele"};
                 envir.setSymbol("insert", std::make_shared<New_BuiltInFunction>(std::move(fun), std::move(args)));
+            }
+
+            {
+                auto fun = [](const std::vector<sObject> & args, Visitor & visitor)->sObject{
+                    assert(args.size() == 1);
+
+                    auto  self = List::from(args[0]).value();
+                    auto& selfList = self->getList();
+
+                    std::cout << "List::head" << std::endl;
+                    return selfList[0];
+                };
+                std::vector<std::string> args = {"self"};
+                envir.setSymbol("head", std::make_shared<New_BuiltInFunction>(std::move(fun), std::move(args)));
+            }
+
+            {
+                auto fun = [](const std::vector<sObject> & args, Visitor & visitor)->sObject{
+                    assert(args.size() == 1);
+
+                    auto  self = List::from(args[0]).value();
+                    auto& selfList = self->getList();
+
+                    auto res = std::make_shared<List>(selfList.size() - 1, nullptr);
+                    auto& resList = res->getList();
+                    for (size_t i = 0; i < selfList.size() - 1; i++) {
+                        resList[i] = selfList[i + 1]->clone();
+                    }
+
+                    std::cout << "List::tail" << std::endl;
+                    return res;
+                };
+                std::vector<std::string> args = {"self"};
+                envir.setSymbol("tail", std::make_shared<New_BuiltInFunction>(std::move(fun), std::move(args)));
+            }
+
+            {
+                auto fun = [](const std::vector<sObject> & args, Visitor & visitor)->sObject{
+                    assert(args.size() == 1);
+
+                    auto  self = List::from(args[0]).value();
+                    auto& selfList = self->getList();
+
+                    auto res = Integer::from(selfList.size());
+
+                    std::cout << "List::length" << std::endl;
+                    return res;
+                };
+                std::vector<std::string> args = {"self"};
+                envir.setSymbol("length", std::make_shared<New_BuiltInFunction>(std::move(fun), std::move(args)));
             }
 
 

@@ -672,6 +672,26 @@ R"({
 })",
 List::from({1, 2, 3}),
 ParserType::ExeUnit
+},
+
+tuple<string, string, sObject, ParserType>{
+"Postfix_Dot",
+R"({
+    var list = [9, 6, 5, 8, 3, 7]
+    list.tail().append(list.head())
+})",
+List::from({6, 5, 8, 3, 7, 9}),
+ParserType::ExeUnit
+},
+
+tuple<string, string, sObject, ParserType>{
+"Postfix_Dot",
+R"({
+    var list = [9, 6, 5, 8, 3, 7]
+    list.length()
+})",
+Integer::from(6),
+ParserType::ExeUnit
 }
 
 ));

@@ -271,6 +271,20 @@ namespace hdg {
                 envir.setSymbol("reverse", std::make_shared<New_BuiltInFunction>(move(fun), move(args)));
             }
 
+            {
+                auto fun = [](const std::vector<sObject> & args, Visitor & visitor)->sObject{
+                    assert(args.size() == 1);
+
+                    auto self = List::from(args[0]).value();
+                    auto res = List::from(self->clone()).value();
+
+                    std::cout << "List::clone" << std::endl;
+                    return res;
+                };
+                std::vector<std::string> args = {"self"};
+                envir.setSymbol("clone", std::make_shared<New_BuiltInFunction>(move(fun), move(args)));
+            }
+
 
             return type;
         }();

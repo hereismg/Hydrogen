@@ -221,13 +221,33 @@ namespace hdg {
                     auto  self = List::from(args[0]).value();
                     auto& selfList = self->getList();
 
-                    auto res = Integer::from(selfList.size());
+                    auto res = Integer::from((int64_t)selfList.size());
 
                     std::cout << "List::length" << std::endl;
                     return res;
                 };
                 std::vector<std::string> args = {"self"};
                 envir.setSymbol("length", std::make_shared<New_BuiltInFunction>(move(fun), move(args)));
+            }
+
+            {
+                auto fun = [](const std::vector<sObject> & args, Visitor & visitor)->sObject{
+                    assert(args.size() == 2);
+
+                    auto self = List::from(args[0]).value();
+                    auto elem = List::from(args[1]).value();
+                    auto elemList = elem->getList();
+
+                    auto size = elemList.size();
+                    for (auto i = 0; i < size; i++) {
+                        self->append(elemList[i]);
+                    }
+
+                    std::cout << "List::extend" << std::endl;
+                    return self;
+                };
+                std::vector<std::string> args = {"self", "ele"};
+                envir.setSymbol("extend", std::make_shared<New_BuiltInFunction>(move(fun), move(args)));
             }
 
 

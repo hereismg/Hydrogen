@@ -702,6 +702,16 @@ R"({
 })",
 List::from({9, 6, 5, 3, 9, 6, 5, 3}),
 ParserType::ExeUnit
+},
+
+tuple<string, string, sObject, ParserType>{
+"Postfix_Dot",
+R"({
+    var list = [9, 6, 5, 3]
+    list.reverse()
+})",
+List::from({3, 5, 6, 9}),
+ParserType::ExeUnit
 }
 
 ));

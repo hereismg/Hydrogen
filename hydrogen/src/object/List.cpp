@@ -250,6 +250,27 @@ namespace hdg {
                 envir.setSymbol("extend", std::make_shared<New_BuiltInFunction>(move(fun), move(args)));
             }
 
+            {
+                auto fun = [](const std::vector<sObject> & args, Visitor & visitor)->sObject{
+                    assert(args.size() == 1);
+
+                    auto self = List::from(args[0]).value();
+                    auto& selfList = self->getList();
+
+                    auto size = selfList.size();
+                    for (auto i = 0ULL, j = size - 1; i < j; i++, j--) {
+                        auto swp = selfList[i];
+                        selfList[i] = selfList[j];
+                        selfList[j] = swp;
+                    }
+
+                    std::cout << "List::reverse" << std::endl;
+                    return self;
+                };
+                std::vector<std::string> args = {"self"};
+                envir.setSymbol("reverse", std::make_shared<New_BuiltInFunction>(move(fun), move(args)));
+            }
+
 
             return type;
         }();

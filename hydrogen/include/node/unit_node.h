@@ -3,25 +3,25 @@
 #include "Node.h"
 
 namespace hdg{
-    class new_ExeUnitNode;
-    typedef std::unique_ptr<new_ExeUnitNode> uExeUnitNode;
+    class ExeUnitNode;
+    typedef std::unique_ptr<ExeUnitNode> uExeUnitNode;
 
-    class new_ExeUnitNode:public Node{
+    class ExeUnitNode:public Node{
     protected:
         std::vector<uNode> m_list;
 
     public:
-        new_ExeUnitNode() = default;
-        new_ExeUnitNode(std::vector<uNode> list);
-        new_ExeUnitNode(std::vector<uNode> list, const Position& pos);
+        ExeUnitNode() = default;
+        ExeUnitNode(std::vector<uNode> list);
+        ExeUnitNode(std::vector<uNode> list, const Position& pos);
         
-        ~new_ExeUnitNode() = default;
+        ~ExeUnitNode() = default;
 
-        new_ExeUnitNode(const new_ExeUnitNode&) = delete;
-        new_ExeUnitNode& operator=(const new_ExeUnitNode&) = delete;
+        ExeUnitNode(const ExeUnitNode&) = delete;
+        ExeUnitNode& operator=(const ExeUnitNode&) = delete;
         
-        new_ExeUnitNode(new_ExeUnitNode&&) noexcept = default;
-        new_ExeUnitNode& operator=(new_ExeUnitNode&&) noexcept = default;
+        ExeUnitNode(ExeUnitNode&&) noexcept = default;
+        ExeUnitNode& operator=(ExeUnitNode&&) noexcept = default;
 
         std::vector<uNode>& getList();
 

@@ -13,7 +13,7 @@ namespace hdg{
     class AssignNode;
     class IfStmtNode;
     class WhileStmtNode;
-    class new_ExeUnitNode;
+    class ExeUnitNode;
     
     class NumObjNode;
     class IntNode;

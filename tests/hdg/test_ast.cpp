@@ -152,7 +152,7 @@ TEST(test_ExeUnitNode, _1){
     uNode stmt2 = DefNode::create("b", BinOperNode::createPlus(2, 3));
     
     // ExeUnitNode
-    auto unit_node = std::make_unique<new_ExeUnitNode>();
+    auto unit_node = std::make_unique<ExeUnitNode>();
     unit_node->getList().emplace_back(move(stmt1));
     unit_node->getList().emplace_back(move(stmt2));
 
@@ -214,7 +214,7 @@ TEST(test_IfStmtNode, _1){
     uNode assign_node2 = std::make_unique<DefNode>(name2, std::move(oper_node));
 
     // ExeUnitNode
-    std::unique_ptr<new_ExeUnitNode> unit_node = std::make_unique<new_ExeUnitNode>();
+    std::unique_ptr<ExeUnitNode> unit_node = std::make_unique<ExeUnitNode>();
     unit_node->getList().emplace_back(std::move(assign_node1));
     unit_node->getList().emplace_back(std::move(assign_node2));
 

@@ -38,7 +38,7 @@ namespace hdg {
         }
         advance();
 
-        auto unit = std::make_unique<new_ExeUnitNode>();
+        auto unit = std::make_unique<ExeUnitNode>();
         while(m_currentToken->getType() != Token::RBRACE){
             // end of file
             if (m_currentToken->getType() == Token::EL){

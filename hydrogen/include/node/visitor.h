@@ -8,7 +8,7 @@
 namespace hdg{
     class BinOperNode;
     class AssignNode;
-    class new_ExeUnitNode;
+    class ExeUnitNode;
     class IdentNode;
     class IfStmtNode;
     class WhileStmtNode;
@@ -42,7 +42,7 @@ namespace hdg{
 
         virtual void visitIfStmtNode(IfStmtNode& node);
         virtual void visitWhileStmtNode(WhileStmtNode& node);
-        virtual void visitExeUnitNode(new_ExeUnitNode& node);
+        virtual void visitExeUnitNode(ExeUnitNode& node);
 
         virtual sObject  getRVal() { return m_rVal; }
         virtual sObject* getLVal() { return m_lVal; }
@@ -75,6 +75,6 @@ namespace hdg{
 
         void visitIfStmtNode(IfStmtNode& node) override;
         void visitWhileStmtNode(WhileStmtNode& node) override;
-        void visitExeUnitNode(new_ExeUnitNode& node) override;
+        void visitExeUnitNode(ExeUnitNode& node) override;
     };
 }

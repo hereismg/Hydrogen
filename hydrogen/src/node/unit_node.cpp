@@ -6,20 +6,20 @@
 
 
 namespace hdg{
-    new_ExeUnitNode::new_ExeUnitNode(std::vector<uNode> list)
+    ExeUnitNode::ExeUnitNode(std::vector<uNode> list)
         : m_list(move(list))
     {}
 
-    new_ExeUnitNode::new_ExeUnitNode(std::vector<uNode> list, const Position& pos)
+    ExeUnitNode::ExeUnitNode(std::vector<uNode> list, const Position& pos)
         : Node(pos), m_list(move(list))
     {}
 
-    std::vector<uNode>& new_ExeUnitNode::getList(){
+    std::vector<uNode>& ExeUnitNode::getList(){
         return m_list;
     }
 
     
-    nlohmann::json new_ExeUnitNode::toJSON() const {
+    nlohmann::json ExeUnitNode::toJSON() const {
         nlohmann::json j{{"__class__", "ExeUnitNode"}};
 
         j["list"] = nlohmann::json::array();
@@ -31,16 +31,16 @@ namespace hdg{
         return j;
     }
 
-    std::string new_ExeUnitNode::toString(){
+    std::string ExeUnitNode::toString(){
         return "ExeUnitNode";
     }
 
-    Object* new_ExeUnitNode::interpret(){
+    Object* ExeUnitNode::interpret(){
         assert(false);
         return nullptr;
     }
 
-    void new_ExeUnitNode::accept(Visitor& visitor){
+    void ExeUnitNode::accept(Visitor& visitor){
         visitor.visitExeUnitNode(*this);
     }
 }

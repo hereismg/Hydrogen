@@ -10,7 +10,6 @@ namespace hdg {
     using std::nullopt;
 
     class ObjAssignNode;
-    class Function;
     class New_BaseFunction;
 
     class ObjectNode: public Node{

@@ -21,73 +21,73 @@ namespace hdg {
     Interpreter::~Interpreter() = default;
 
     void Interpreter::init() {
-        m_globalEnvironment->setSymbol("hydrogen", new String("Hello, Hydrogen_v0.3.0!"));
-        m_globalEnvironment->setSymbol("whania", new String("Whania, the dragon wolf, is here!"));
-        m_globalEnvironment->setSymbol("null", new Integer(0));
-        m_globalEnvironment->setSymbol("true", new Integer(1));
-        m_globalEnvironment->setSymbol("false", new Integer(0));
-        m_globalEnvironment->setSymbol("None", new None());
+//         m_globalEnvironment->setSymbol("hydrogen", new String("Hello, Hydrogen_v0.3.0!"));
+//         m_globalEnvironment->setSymbol("whania", new String("Whania, the dragon wolf, is here!"));
+//         m_globalEnvironment->setSymbol("null", new Integer(0));
+//         m_globalEnvironment->setSymbol("true", new Integer(1));
+//         m_globalEnvironment->setSymbol("false", new Integer(0));
+//         m_globalEnvironment->setSymbol("None", new None());
 
-        m_globalEnvironment->setSymbol("input", new BuiltInFunction(
-                [this](const std::vector<Object*> &args)->Object*{
-                        std::string text;
-                        std::getline(std::cin, text);
-                        return new String(text);
-                }, "input"));
+//         m_globalEnvironment->setSymbol("input", new BuiltInFunction(
+//                 [this](const std::vector<Object*> &args)->Object*{
+//                         std::string text;
+//                         std::getline(std::cin, text);
+//                         return new String(text);
+//                 }, "input"));
 
-        m_globalEnvironment->setSymbol("print", new BuiltInFunction(
-                [this](const std::vector<Object*> &args)->Object*{
-                    std::cout << args[0]->toString();
-                    return new None;
-                }, "print", {"object"}));
+//         m_globalEnvironment->setSymbol("print", new BuiltInFunction(
+//                 [this](const std::vector<Object*> &args)->Object*{
+//                     std::cout << args[0]->toString();
+//                     return new None;
+//                 }, "print", {"object"}));
 
-        m_globalEnvironment->setSymbol("println", new BuiltInFunction(
-                [this](const std::vector<Object*> &args)->Object*{
-                    std::cout << args[0]->toString() << std::endl;
-                    return new None;
-                }, "println", {"object"}));
+//         m_globalEnvironment->setSymbol("println", new BuiltInFunction(
+//                 [this](const std::vector<Object*> &args)->Object*{
+//                     std::cout << args[0]->toString() << std::endl;
+//                     return new None;
+//                 }, "println", {"object"}));
 
-        m_globalEnvironment->setSymbol("parseInt", new BuiltInFunction(
-                [this](const std::vector<Object*> &args)->Object*{
-                    char * success;
-                    std::string arg = args[0]->toString();
-//                    if(args[0]->getClass() == "String") arg = arg.substr(1, arg.length() - 2);
-                    return new Integer(std::strtoll(arg.c_str(), &success, 10));
-                }, "parseInt",{"number"}));
+//         m_globalEnvironment->setSymbol("parseInt", new BuiltInFunction(
+//                 [this](const std::vector<Object*> &args)->Object*{
+//                     char * success;
+//                     std::string arg = args[0]->toString();
+// //                    if(args[0]->getClass() == "String") arg = arg.substr(1, arg.length() - 2);
+//                     return new Integer(std::strtoll(arg.c_str(), &success, 10));
+//                 }, "parseInt",{"number"}));
 
-        m_globalEnvironment->setSymbol("type", new BuiltInFunction(
-                [this](const std::vector<Object*> &args)->Object*{
-                    return new String(args[0]->getClass_old());
-                }, "type", {"object"}));
+//         m_globalEnvironment->setSymbol("type", new BuiltInFunction(
+//                 [this](const std::vector<Object*> &args)->Object*{
+//                     return new String(args[0]->getClass_old());
+//                 }, "type", {"object"}));
 
-        m_globalEnvironment->setSymbol("rand", new BuiltInFunction(
-                [this](const std::vector<Object*> &args)->Object*{
-                    return new Integer(rand() % 1000);
-                }, "rand"));
+//         m_globalEnvironment->setSymbol("rand", new BuiltInFunction(
+//                 [this](const std::vector<Object*> &args)->Object*{
+//                     return new Integer(rand() % 1000);
+//                 }, "rand"));
 
-        m_globalEnvironment->setSymbol("len", new BuiltInFunction(
-                [this](const std::vector<Object*> &args)->Object*{
-                    if (args[0]->getClass_old() == "List"){
-                        return new Integer(((List*)args[0])->getValue().size());
-                    }
-                    return nullptr;
-                }, "len", {"list"}));
+//         m_globalEnvironment->setSymbol("len", new BuiltInFunction(
+//                 [this](const std::vector<Object*> &args)->Object*{
+//                     if (args[0]->getClass_old() == "List"){
+//                         return new Integer(((List*)args[0])->getValue().size());
+//                     }
+//                     return nullptr;
+//                 }, "len", {"list"}));
 
-        m_globalEnvironment->setSymbol("list", new BuiltInFunction(
-                [this](const std::vector<Object*> &args)->Object*{
-                    return new List;
-                }, "list"));
+//         m_globalEnvironment->setSymbol("list", new BuiltInFunction(
+//                 [this](const std::vector<Object*> &args)->Object*{
+//                     return new List;
+//                 }, "list"));
 
-        m_globalEnvironment->setSymbol("gcd", new BuiltInFunction(
-                [this](const std::vector<Object*> &args)->Object*{
-                    int64_t x1 = ((Integer*)args[0])->getValue(), x2 = ((Integer*)args[1])->getValue();
-                    while(x2) {
-                        int64_t temp = x2;
-                        x2 = x1 % x2;
-                        x1 = temp;
-                    }
-                    return new Integer(x1);
-                }, "gcd", {"x1", "x2"}));
+//         m_globalEnvironment->setSymbol("gcd", new BuiltInFunction(
+//                 [this](const std::vector<Object*> &args)->Object*{
+//                     int64_t x1 = ((Integer*)args[0])->getValue(), x2 = ((Integer*)args[1])->getValue();
+//                     while(x2) {
+//                         int64_t temp = x2;
+//                         x2 = x1 % x2;
+//                         x1 = temp;
+//                     }
+//                     return new Integer(x1);
+//                 }, "gcd", {"x1", "x2"}));
     }
 
     Environment *Interpreter::thisEnvironment() {

@@ -114,7 +114,7 @@ namespace hdg {
 
     Object *FuncObjNode::interpret() {
         m_environment->setModuleName(m_name);
-        return new Function(m_name, m_args, m_environment, m_body, m_position);
+        return nullptr;
     }
 
     void FuncObjNode::accept(Visitor& visitor) {

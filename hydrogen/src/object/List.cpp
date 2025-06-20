@@ -258,7 +258,7 @@ namespace hdg {
                     auto& selfList = self->getList();
 
                     auto size = selfList.size();
-                    for (auto i = 0ULL, j = size - 1; i < j; i++, j--) {
+                    for (size_t i = 0, j = size - 1; i < j; i++, j--) {
                         auto swp = selfList[i];
                         selfList[i] = selfList[j];
                         selfList[j] = swp;

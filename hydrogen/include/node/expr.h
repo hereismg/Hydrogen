@@ -40,8 +40,8 @@ namespace hdg {
         uNode m_right;
 
     public:
-        BinOperNode(Token oper, uNode&& left, uNode&& right);
-        BinOperNode(Token oper, uNode&& left, uNode&& right, Position pos);
+        BinOperNode(Token oper, uNode left, uNode right);
+        BinOperNode(Token oper, uNode left, uNode right, Position pos);
         
         ~BinOperNode() = default;
 
@@ -52,16 +52,16 @@ namespace hdg {
         BinOperNode& operator=(BinOperNode&&) noexcept = default;
 
         static uBinOperNode createPlus(int64_t num1, int64_t num2);
-        static uBinOperNode createPlus(uNode&& obj1, uNode&& obj2);
+        static uBinOperNode createPlus(uNode obj1, uNode obj2);
         static uBinOperNode createMinus(int64_t num1, int64_t num2);
-        static uBinOperNode createMinus(uNode&& obj1, uNode&& obj2);
+        static uBinOperNode createMinus(uNode obj1, uNode obj2);
         static uBinOperNode createMul(int64_t num1, int64_t num2);
-        static uBinOperNode createMul(uNode&& obj1, uNode&& obj2);
+        static uBinOperNode createMul(uNode obj1, uNode obj2);
         static uBinOperNode createDiv(int64_t num1, int64_t num2);
 
         void setOper(Token oper);
-        void setLeft(uNode&& new_left);
-        void setRight(uNode&& new_right);
+        void setLeft(uNode new_left);
+        void setRight(uNode new_right);
 
         const Token& getOper() const { return m_oper; }
         uNode& getLeft() { return m_left; }
@@ -180,16 +180,16 @@ namespace hdg {
         std::vector<uNode> m_exprList;
 
     public:
-        PostfixNode(Type type, uNode&& primary, std::string ident, vector<uNode>&& args, optional<Position> pos);
+        PostfixNode(Type type, uNode primary, std::string ident, vector<uNode>&& args, optional<Position> pos);
 
     public:
-        static optional<uPostfixNode> from(uNode&& node);
+        static optional<uPostfixNode> from(uNode node);
         
-        static uPostfixNode createParen(uNode&& primary, vector<uNode> args, optional<Position> pos = nullopt);
-        static uPostfixNode createBracket(uNode&& primary, vector<uNode> args, optional<Position> pos = nullopt);
-        static uPostfixNode createBrace(uNode&& primary, vector<uNode> args, optional<Position> pos = nullopt);
-        static uPostfixNode createDotFun(uNode&& primary, std::string ident, vector<uNode>&& args, optional<Position> pos = nullopt);
-        static uPostfixNode createDotVar(uNode&& primary, std::string ident, optional<Position> pos = nullopt);
+        static uPostfixNode createParen(uNode primary, vector<uNode> args, optional<Position> pos = nullopt);
+        static uPostfixNode createBracket(uNode primary, vector<uNode> args, optional<Position> pos = nullopt);
+        static uPostfixNode createBrace(uNode primary, vector<uNode> args, optional<Position> pos = nullopt);
+        static uPostfixNode createDotFun(uNode primary, std::string ident, vector<uNode>&& args, optional<Position> pos = nullopt);
+        static uPostfixNode createDotVar(uNode primary, std::string ident, optional<Position> pos = nullopt);
 
         inline std::vector<uNode>& getExprList() { return m_exprList; }
         inline uNode& getPrimary() { return m_primary; }

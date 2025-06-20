@@ -5,7 +5,7 @@
 #include "../../include/node/ObjectNode.h"
 
 namespace hdg{
-    new_AssignNode::new_AssignNode(std::string name, uNode&& expr)
+    new_AssignNode::new_AssignNode(std::string name, uNode expr)
         : m_name(name), 
           m_lVal(std::make_unique<IdentNode>(name)),
           m_rVal(std::move(expr)) 
@@ -13,7 +13,7 @@ namespace hdg{
         assert(m_rVal!=nullptr && "m_expr cannot is NULL!");
     }
 
-    new_AssignNode::new_AssignNode(std::string name, uNode&& expr, const Position& pos)
+    new_AssignNode::new_AssignNode(std::string name, uNode expr, const Position& pos)
         : Node(pos),
           m_name(name), 
           m_lVal(std::make_unique<IdentNode>(name)),
@@ -22,11 +22,11 @@ namespace hdg{
         assert(m_rVal!=nullptr && "m_expr cannot is NULL!");
     }
 
-    new_AssignNode::new_AssignNode(uNode&& lVal, uNode&& rVal)
+    new_AssignNode::new_AssignNode(uNode lVal, uNode rVal)
         : m_lVal(std::move(lVal)), m_rVal(std::move(rVal)) {}
 
 
-    new_AssignNode::new_AssignNode(uNode&& lVal, uNode&& rVal, const Position& pos)
+    new_AssignNode::new_AssignNode(uNode lVal, uNode rVal, const Position& pos)
         : Node(pos), m_lVal(std::move(lVal)), m_rVal(std::move(rVal)) {}
 
     std::string& new_AssignNode::getName(){
@@ -41,7 +41,7 @@ namespace hdg{
         m_name = std::move(new_name);
     }
 
-    void new_AssignNode::setExpr(uNode&& new_expr){
+    void new_AssignNode::setExpr(uNode new_expr){
         m_rVal = std::move(new_expr);
     }
 
@@ -68,20 +68,20 @@ namespace hdg{
         visitor.visitAssignNode(*this);
     }
 
-    DefNode::DefNode(std::string name, uNode&& val)
+    DefNode::DefNode(std::string name, uNode val)
         : m_name(std::move(name)), m_val(std::move(val)) 
     {
         assert(m_val != nullptr);
     }
 
     
-    DefNode::DefNode(std::string name, uNode&& val, const Position& pos)
+    DefNode::DefNode(std::string name, uNode val, const Position& pos)
         : Node(pos), m_name(std::move(name)), m_val(std::move(val)) 
     {
         assert(m_val != nullptr);
     }
 
-    uDefNode DefNode::create(std::string name, uNode&& val, optional<Position> pos) {
+    uDefNode DefNode::create(std::string name, uNode val, optional<Position> pos) {
         auto node = std::make_unique<DefNode>(name, move(val));
 
         if (pos.has_value()) node->m_position = pos.value();
@@ -110,12 +110,12 @@ namespace hdg{
         visitor.visitDefNode(*this);
     }
 
-    void new_IfStmtNode::addBranch(uNode&& cond, uNode&& exeUnit){
+    void new_IfStmtNode::addBranch(uNode cond, uNode exeUnit){
         m_cond.emplace_back(std::move(cond));
         m_exeUnit.emplace_back(std::move(exeUnit));
     }
 
-    void new_IfStmtNode::addElseBranch(uNode&& exeUnit){
+    void new_IfStmtNode::addElseBranch(uNode exeUnit){
         m_elseExeUnit = std::move(exeUnit);
     }
 
@@ -166,14 +166,14 @@ namespace hdg{
         visitor.visitIfStmtNode(*this);
     }
 
-    new_WhileStmtNode::new_WhileStmtNode(uNode&& cond, uNode&& loopUnit)
+    new_WhileStmtNode::new_WhileStmtNode(uNode cond, uNode loopUnit)
         : m_cond(std::move(cond)), m_loopUnit(std::move(loopUnit))
     {
         assert(m_cond != nullptr);
         assert(m_loopUnit != nullptr);
     }
 
-    new_WhileStmtNode::new_WhileStmtNode(uNode&& cond, uNode&& loopUnit, const Position& pos)
+    new_WhileStmtNode::new_WhileStmtNode(uNode cond, uNode loopUnit, const Position& pos)
         : Node(pos), m_cond(std::move(cond)), m_loopUnit(std::move(loopUnit))
     {
         assert(m_cond != nullptr);

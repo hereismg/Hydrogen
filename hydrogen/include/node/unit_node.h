@@ -12,8 +12,8 @@ namespace hdg{
 
     public:
         new_ExeUnitNode() = default;
-        new_ExeUnitNode(std::vector<uNode>&& list);
-        new_ExeUnitNode(std::vector<uNode>&& list, const Position& pos);
+        new_ExeUnitNode(std::vector<uNode> list);
+        new_ExeUnitNode(std::vector<uNode> list, const Position& pos);
         
         ~new_ExeUnitNode() = default;
 

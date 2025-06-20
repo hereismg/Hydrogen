@@ -16,10 +16,10 @@ namespace hdg{
         uNode m_rVal;
 
     public:
-        new_AssignNode(std::string name, uNode&& rVal);
-        new_AssignNode(std::string name, uNode&& rVal, const Position& pos);
-        new_AssignNode(uNode&& lVal, uNode&& rVal);
-        new_AssignNode(uNode&& lVal, uNode&& rVal, const Position& pos);
+        new_AssignNode(std::string name, uNode rVal);
+        new_AssignNode(std::string name, uNode rVal, const Position& pos);
+        new_AssignNode(uNode lVal, uNode rVal);
+        new_AssignNode(uNode lVal, uNode rVal, const Position& pos);
 
         std::string& getName();
         uNode& getExpr();
@@ -27,9 +27,9 @@ namespace hdg{
         uNode& getRVal() { return m_rVal; }
 
         void setName(std::string new_name);
-        void setExpr(uNode&& new_expr);
-        void setLVal(uNode&& lVal) { m_lVal = std::move(lVal); }
-        void setRVal(uNode&& rVal) { m_rVal = std::move(rVal); }
+        void setExpr(uNode new_expr);
+        void setLVal(uNode lVal) { m_lVal = std::move(lVal); }
+        void setRVal(uNode rVal) { m_rVal = std::move(rVal); }
 
         nlohmann::json toJSON() const override;
         virtual std::string toString() override;
@@ -46,10 +46,10 @@ namespace hdg{
         uNode m_val;
 
     public:
-        DefNode(std::string name, uNode&& val);
-        DefNode(std::string name, uNode&& val, const Position& pos);
+        DefNode(std::string name, uNode val);
+        DefNode(std::string name, uNode val, const Position& pos);
 
-        static uDefNode create(std::string name, uNode&& val, optional<Position> pos = nullopt);
+        static uDefNode create(std::string name, uNode val, optional<Position> pos = nullopt);
 
         uNode& getVal() { return m_val; }
         std::string getName() { return m_name; }
@@ -69,8 +69,8 @@ namespace hdg{
     public:
         new_IfStmtNode() = default;
 
-        void addBranch(uNode&& cond, uNode&& exeUnit);
-        void addElseBranch(uNode&& exeUnit);
+        void addBranch(uNode cond, uNode exeUnit);
+        void addElseBranch(uNode exeUnit);
 
         std::vector<uNode>& getCond();
         std::vector<uNode>& getExeUnit();
@@ -88,8 +88,8 @@ namespace hdg{
         uNode m_loopUnit;
     
     public:
-        new_WhileStmtNode(uNode&& cond, uNode&& loopUnit);
-        new_WhileStmtNode(uNode&& cond, uNode&& loopUnit, const Position& pos);
+        new_WhileStmtNode(uNode cond, uNode loopUnit);
+        new_WhileStmtNode(uNode cond, uNode loopUnit, const Position& pos);
 
         uNode& getCond();
         uNode& getLoopUnit();

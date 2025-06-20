@@ -9,7 +9,6 @@
 
 #include "../../include/node/ObjAssignNode.h"
 #include "../../include/node/UnaryOperatorNode.h"
-#include "../../include/node/WhileNode.h"
 #include "../../include/node/expr.h"
 #include "../../include/node/stmt_node.h"
 #include "../../include/node/unit_node.h"

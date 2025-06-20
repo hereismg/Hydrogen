@@ -10,7 +10,7 @@
 
 namespace hdg {
 
-    BinOperNode::BinOperNode(Token oper, uNode&& left, uNode&& right, Position pos)
+    BinOperNode::BinOperNode(Token oper, uNode left, uNode right, Position pos)
         : Node(pos),
           m_oper(move(oper)),
           m_left(move(left)),
@@ -20,7 +20,7 @@ namespace hdg {
         assert(m_right != nullptr && "Right Child cannot be null!");
     }
 
-    BinOperNode::BinOperNode(Token oper, uNode&& left, uNode&& right)
+    BinOperNode::BinOperNode(Token oper, uNode left, uNode right)
         : m_oper(move(oper)),
           m_left(move(left)),
           m_right(move(right))
@@ -37,7 +37,7 @@ namespace hdg {
         );
     }
 
-    uBinOperNode BinOperNode::createPlus(uNode&& obj1, uNode&& obj2) {
+    uBinOperNode BinOperNode::createPlus(uNode obj1, uNode obj2) {
         return std::make_unique<BinOperNode>(
             Token(Token::PLUS), 
             move(obj1),
@@ -53,7 +53,7 @@ namespace hdg {
         );
     }
 
-    uBinOperNode BinOperNode::createMinus(uNode&& obj1, uNode&& obj2) {
+    uBinOperNode BinOperNode::createMinus(uNode obj1, uNode obj2) {
         return std::make_unique<BinOperNode>(
             Token(Token::MINUS),
             move(obj1),
@@ -69,7 +69,7 @@ namespace hdg {
         );
     }
     
-    uBinOperNode BinOperNode::createMul(uNode&& obj1, uNode&& obj2) {
+    uBinOperNode BinOperNode::createMul(uNode obj1, uNode obj2) {
         return std::make_unique<BinOperNode>(
             Token(Token::MUL),
             move(obj1),
@@ -89,11 +89,11 @@ namespace hdg {
         m_oper = move(oper);
     }
 
-    void BinOperNode::setLeft(uNode&& new_left){
+    void BinOperNode::setLeft(uNode new_left){
         m_left = move(new_left);
     }
 
-    void BinOperNode::setRight(uNode&& new_right){
+    void BinOperNode::setRight(uNode new_right){
         m_right = move(new_right);
     }
     
@@ -122,14 +122,14 @@ namespace hdg {
         visitor.visitBinOperNode(*this);
     }
 
-    PostfixNode::PostfixNode(Type type, uNode&& primary, std::string ident, vector<uNode>&& args, optional<Position> pos)
+    PostfixNode::PostfixNode(Type type, uNode primary, std::string ident, vector<uNode>&& args, optional<Position> pos)
         : m_type(type), m_primary(move(primary)), m_ident(move(ident)), m_exprList(move(args))
         {
             assert(m_primary != nullptr);
             if (pos.has_value()) m_position = pos.value();
         }
 
-    uPostfixNode PostfixNode::createParen(uNode&& primary, vector<uNode> args, optional<Position> pos){
+    uPostfixNode PostfixNode::createParen(uNode primary, vector<uNode> args, optional<Position> pos){
         assert(primary != nullptr);
         auto node = std::make_unique<PostfixNode> (
             Type::PAREN,
@@ -144,7 +144,7 @@ namespace hdg {
         return node;
     }
 
-    uPostfixNode PostfixNode::createBracket(uNode&& primary, vector<uNode> args, optional<Position> pos){
+    uPostfixNode PostfixNode::createBracket(uNode primary, vector<uNode> args, optional<Position> pos){
         assert(primary != nullptr);
         auto node = std::make_unique<PostfixNode> (
             Type::BRACKET,
@@ -159,7 +159,7 @@ namespace hdg {
         return node;
     }
 
-    uPostfixNode PostfixNode::createDotFun(uNode&& primary, std::string ident, vector<uNode>&& args, optional<Position> pos){
+    uPostfixNode PostfixNode::createDotFun(uNode primary, std::string ident, vector<uNode>&& args, optional<Position> pos){
         assert(primary != nullptr);
         auto node = std::make_unique<PostfixNode>(
             Type::DOT_FUN, 
@@ -172,7 +172,7 @@ namespace hdg {
         return node;
     }
 
-    uPostfixNode PostfixNode::createDotVar(uNode&& primary, std::string ident, optional<Position> pos) {
+    uPostfixNode PostfixNode::createDotVar(uNode primary, std::string ident, optional<Position> pos) {
         assert(primary != nullptr);
         auto node = std::make_unique<PostfixNode>(
             Type::DOT_FUN, 
@@ -186,7 +186,7 @@ namespace hdg {
         return node;
     }
 
-    optional<uPostfixNode> PostfixNode::from(uNode&& node) {
+    optional<uPostfixNode> PostfixNode::from(uNode node) {
         if (auto ptr = dynamic_cast<PostfixNode*>(node.get())) {
             node.release();
             return std::unique_ptr<PostfixNode>(ptr);

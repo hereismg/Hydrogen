@@ -114,7 +114,7 @@ namespace hdg {
     }
 
     uNode Parser::ifStmt(){
-        auto ifStmtNode = std::make_unique<new_IfStmtNode>();
+        auto ifStmtNode = std::make_unique<IfStmtNode>();
 
         // 'if' Expr ExeUnit
         ignoreEL();
@@ -163,7 +163,7 @@ namespace hdg {
         uNode loopUnit = exeUnit(); // hdgtodo: 后面应该支持 break
     
         pos.setEnd(m_currentToken->thisPosition()->getEnd());
-        return std::make_unique<new_WhileStmtNode>(
+        return std::make_unique<WhileStmtNode>(
             move(cond), 
             move(loopUnit)
         );
@@ -193,7 +193,7 @@ namespace hdg {
 
         // 4 return
         pos.setEnd(m_currentToken->thisPosition()->getEnd());
-        return std::make_unique<new_AssignNode>(move(lVal), move(rVal), pos);
+        return std::make_unique<AssignNode>(move(lVal), move(rVal), pos);
     }
 
     // uNode Parser::new_ValBuild() {

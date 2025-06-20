@@ -244,7 +244,7 @@ namespace hdg {
         visitor.visitIdentNode(*this);
     }
 
-    New_FuncObjNode::New_FuncObjNode(std::vector<std::string>&& args, uNode&& body, const Position& pos)
+    New_FuncObjNode::New_FuncObjNode(std::vector<std::string>&& args, uNode body, const Position& pos)
         : ObjectNode("Function", pos, nullptr), m_args(std::move(args)), m_body(std::move(body))
         {}
 

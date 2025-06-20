@@ -5,7 +5,7 @@
 #include "../../include/node/ObjectNode.h"
 
 namespace hdg{
-    new_AssignNode::new_AssignNode(std::string name, uNode expr)
+    AssignNode::AssignNode(std::string name, uNode expr)
         : m_name(name), 
           m_lVal(std::make_unique<IdentNode>(name)),
           m_rVal(std::move(expr)) 
@@ -13,7 +13,7 @@ namespace hdg{
         assert(m_rVal!=nullptr && "m_expr cannot is NULL!");
     }
 
-    new_AssignNode::new_AssignNode(std::string name, uNode expr, const Position& pos)
+    AssignNode::AssignNode(std::string name, uNode expr, const Position& pos)
         : Node(pos),
           m_name(name), 
           m_lVal(std::make_unique<IdentNode>(name)),
@@ -22,30 +22,30 @@ namespace hdg{
         assert(m_rVal!=nullptr && "m_expr cannot is NULL!");
     }
 
-    new_AssignNode::new_AssignNode(uNode lVal, uNode rVal)
+    AssignNode::AssignNode(uNode lVal, uNode rVal)
         : m_lVal(std::move(lVal)), m_rVal(std::move(rVal)) {}
 
 
-    new_AssignNode::new_AssignNode(uNode lVal, uNode rVal, const Position& pos)
+    AssignNode::AssignNode(uNode lVal, uNode rVal, const Position& pos)
         : Node(pos), m_lVal(std::move(lVal)), m_rVal(std::move(rVal)) {}
 
-    std::string& new_AssignNode::getName(){
+    std::string& AssignNode::getName(){
         return m_name;
     }
 
-    uNode& new_AssignNode::getExpr(){
+    uNode& AssignNode::getExpr(){
         return m_rVal;
     }
 
-    void new_AssignNode::setName(std::string new_name){
+    void AssignNode::setName(std::string new_name){
         m_name = std::move(new_name);
     }
 
-    void new_AssignNode::setExpr(uNode new_expr){
+    void AssignNode::setExpr(uNode new_expr){
         m_rVal = std::move(new_expr);
     }
 
-    nlohmann::json new_AssignNode::toJSON() const {
+    nlohmann::json AssignNode::toJSON() const {
         nlohmann::json j{{"__class__", "AssignNode"}};
 
         return {
@@ -55,16 +55,16 @@ namespace hdg{
         };
     }
 
-    std::string new_AssignNode::toString(){
+    std::string AssignNode::toString(){
         return "AssignNode: " + m_name;
     }
 
-    Object* new_AssignNode::interpret(){
+    Object* AssignNode::interpret(){
         assert(false && "new_AssignNode::interpret");
         return nullptr;
     }
 
-    void new_AssignNode::accept(Visitor& visitor){
+    void AssignNode::accept(Visitor& visitor){
         visitor.visitAssignNode(*this);
     }
 
@@ -110,28 +110,28 @@ namespace hdg{
         visitor.visitDefNode(*this);
     }
 
-    void new_IfStmtNode::addBranch(uNode cond, uNode exeUnit){
+    void IfStmtNode::addBranch(uNode cond, uNode exeUnit){
         m_cond.emplace_back(std::move(cond));
         m_exeUnit.emplace_back(std::move(exeUnit));
     }
 
-    void new_IfStmtNode::addElseBranch(uNode exeUnit){
+    void IfStmtNode::addElseBranch(uNode exeUnit){
         m_elseExeUnit = std::move(exeUnit);
     }
 
-    std::vector<uNode>& new_IfStmtNode::getCond(){
+    std::vector<uNode>& IfStmtNode::getCond(){
         return m_cond;
     }
 
-    std::vector<uNode>& new_IfStmtNode::getExeUnit(){
+    std::vector<uNode>& IfStmtNode::getExeUnit(){
         return m_exeUnit;
     }
 
-    uNode& new_IfStmtNode::getElseExeUnit(){
+    uNode& IfStmtNode::getElseExeUnit(){
         return m_elseExeUnit;
     }
 
-    nlohmann::json new_IfStmtNode::toJSON() const {
+    nlohmann::json IfStmtNode::toJSON() const {
         nlohmann::json j{{"__class__", "IfStmtNode"}};
 
         j["cond"] = nlohmann::json::array();
@@ -153,43 +153,43 @@ namespace hdg{
         return j;
     }
 
-    std::string new_IfStmtNode::toString(){
+    std::string IfStmtNode::toString(){
         return "if";
     }
 
-    Object* new_IfStmtNode::interpret(){
+    Object* IfStmtNode::interpret(){
         assert(false);
         return nullptr;
     }
 
-    void new_IfStmtNode::accept(Visitor& visitor){
+    void IfStmtNode::accept(Visitor& visitor){
         visitor.visitIfStmtNode(*this);
     }
 
-    new_WhileStmtNode::new_WhileStmtNode(uNode cond, uNode loopUnit)
+    WhileStmtNode::WhileStmtNode(uNode cond, uNode loopUnit)
         : m_cond(std::move(cond)), m_loopUnit(std::move(loopUnit))
     {
         assert(m_cond != nullptr);
         assert(m_loopUnit != nullptr);
     }
 
-    new_WhileStmtNode::new_WhileStmtNode(uNode cond, uNode loopUnit, const Position& pos)
+    WhileStmtNode::WhileStmtNode(uNode cond, uNode loopUnit, const Position& pos)
         : Node(pos), m_cond(std::move(cond)), m_loopUnit(std::move(loopUnit))
     {
         assert(m_cond != nullptr);
         assert(m_loopUnit != nullptr);
     }
 
-    uNode& new_WhileStmtNode::getCond(){
+    uNode& WhileStmtNode::getCond(){
         return m_cond;
     }
 
-    uNode& new_WhileStmtNode::getLoopUnit(){
+    uNode& WhileStmtNode::getLoopUnit(){
         return m_loopUnit;
     }
 
 
-    nlohmann::json new_WhileStmtNode::toJSON() const {
+    nlohmann::json WhileStmtNode::toJSON() const {
         return {
             {"__class__", "WhileStmtNode"},
             {"cond", m_cond->toJSON()},
@@ -197,16 +197,16 @@ namespace hdg{
         };
     }
 
-    std::string new_WhileStmtNode::toString(){
+    std::string WhileStmtNode::toString(){
         return "while";
     }
     
-    Object* new_WhileStmtNode::interpret(){
+    Object* WhileStmtNode::interpret(){
         assert(false);
         return nullptr;
     }
 
-    void new_WhileStmtNode::accept(Visitor& visitor){
+    void WhileStmtNode::accept(Visitor& visitor){
         visitor.visitWhileStmtNode(*this);
     }
 }

@@ -66,7 +66,7 @@ namespace hdg {
         );
     }
     
-    New_DefFunction::New_DefFunction(std::vector<std::string> args, uNode&& body)
+    New_DefFunction::New_DefFunction(std::vector<std::string> args, uNode body)
         : New_BaseFunction(std::move(args)), m_body(std::move(body))
     {
         assert(m_body != nullptr);

@@ -52,7 +52,7 @@ namespace hdg{
         std::cout << "Visitor::visitIdentNode() is not implement!" << std::endl;
     }
     
-    void Visitor::visitAssignNode(new_AssignNode& node){
+    void Visitor::visitAssignNode(AssignNode& node){
         std::cout << "Visitor::visitAssignNode() is not implement!" << std::endl;
     }
 
@@ -65,11 +65,11 @@ namespace hdg{
         std::cout << "Visitor::visitFuncDefNode() is not implement!" << std::endl;
     }
 
-    void Visitor::visitIfStmtNode(new_IfStmtNode& node){
+    void Visitor::visitIfStmtNode(IfStmtNode& node){
         std::cout << "Visitor::visitIfStmtNode() is not implement!" << std::endl;
     }
 
-    void Visitor::visitWhileStmtNode(new_WhileStmtNode& node){
+    void Visitor::visitWhileStmtNode(WhileStmtNode& node){
         std::cout << "Visitor::visitWhileStmtNode() is not implement!" << std::endl;
     }
 
@@ -234,7 +234,7 @@ namespace hdg{
         assert(false && "The symbol does not exist");
     }
 
-    void InterpreterVisitor::visitAssignNode(new_AssignNode& node) {
+    void InterpreterVisitor::visitAssignNode(AssignNode& node) {
         // std::string& name = node.getName();
 
         // auto& expr = node.getExpr();
@@ -273,7 +273,7 @@ namespace hdg{
         );
     }
 
-    void InterpreterVisitor::visitIfStmtNode(new_IfStmtNode& node) {
+    void InterpreterVisitor::visitIfStmtNode(IfStmtNode& node) {
         auto& cond = node.getCond();
         auto& exeUnit = node.getExeUnit();
         assert(cond.size() == exeUnit.size());
@@ -294,7 +294,7 @@ namespace hdg{
         }
     }
 
-    void InterpreterVisitor::visitWhileStmtNode(new_WhileStmtNode& node) {
+    void InterpreterVisitor::visitWhileStmtNode(WhileStmtNode& node) {
         auto& cond = node.getCond();
         auto& loopUnit = node.getLoopUnit();
 

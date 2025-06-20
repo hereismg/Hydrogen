@@ -53,7 +53,7 @@ namespace hdg {
         uNode m_body;
 
     public:
-        New_DefFunction(std::vector<std::string> args, uNode&& body);
+        New_DefFunction(std::vector<std::string> args, uNode body);
 
         sObject parenthesis(const std::vector<sObject> &args, Visitor& visitor) override;
 

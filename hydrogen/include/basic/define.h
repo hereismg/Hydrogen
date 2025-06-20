@@ -10,9 +10,9 @@ namespace hdg{
     class BinOperNode;
     class PostfixNode;
 
-    class new_AssignNode;
-    class new_IfStmtNode;
-    class new_WhileStmtNode;
+    class AssignNode;
+    class IfStmtNode;
+    class WhileStmtNode;
     class new_ExeUnitNode;
     
     class NumObjNode;

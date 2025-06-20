@@ -152,7 +152,7 @@ namespace hdg {
         uNode m_body;
 
     public:
-        New_FuncObjNode(std::vector<std::string>&& args, uNode&& body, const Position& pos);
+        New_FuncObjNode(std::vector<std::string>&& args, uNode body, const Position& pos);
 
         std::vector<std::string> getArgs() { return m_args; }
         uNode moveBody() { return std::move(m_body); }

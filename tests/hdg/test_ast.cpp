@@ -222,7 +222,7 @@ TEST(test_IfStmtNode, _1){
     uNode cond1 = std::make_unique<IntNode>(1);
 
     // if stmt
-    auto ifStmt = std::make_unique<new_IfStmtNode>();
+    auto ifStmt = std::make_unique<IfStmtNode>();
 
     ifStmt->addBranch(std::move(cond1), std::move(unit_node));
 

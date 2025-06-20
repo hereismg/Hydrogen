@@ -7,11 +7,11 @@
 
 namespace hdg{
     class BinOperNode;
-    class new_AssignNode;
+    class AssignNode;
     class new_ExeUnitNode;
     class IdentNode;
-    class new_IfStmtNode;
-    class new_WhileStmtNode;
+    class IfStmtNode;
+    class WhileStmtNode;
     class New_FuncObjNode;
     class DefNode;
     class ListObjNode;
@@ -36,12 +36,12 @@ namespace hdg{
         virtual void visitListObjNode(ListObjNode& node);
         virtual void visitIdentNode(IdentNode& node);
         
-        virtual void visitAssignNode(new_AssignNode& node);
+        virtual void visitAssignNode(AssignNode& node);
         virtual void visitDefNode(DefNode& node);
         virtual void visitFuncDefNode(New_FuncObjNode& node);
 
-        virtual void visitIfStmtNode(new_IfStmtNode& node);
-        virtual void visitWhileStmtNode(new_WhileStmtNode& node);
+        virtual void visitIfStmtNode(IfStmtNode& node);
+        virtual void visitWhileStmtNode(WhileStmtNode& node);
         virtual void visitExeUnitNode(new_ExeUnitNode& node);
 
         virtual sObject  getRVal() { return m_rVal; }
@@ -69,12 +69,12 @@ namespace hdg{
         void visitListObjNode(ListObjNode& node) override;
         void visitIdentNode(IdentNode& node) override;
 
-        void visitAssignNode(new_AssignNode& node) override;
+        void visitAssignNode(AssignNode& node) override;
         void visitDefNode(DefNode& node) override;
         void visitFuncDefNode(New_FuncObjNode& node) override;
 
-        void visitIfStmtNode(new_IfStmtNode& node) override;
-        void visitWhileStmtNode(new_WhileStmtNode& node) override;
+        void visitIfStmtNode(IfStmtNode& node) override;
+        void visitWhileStmtNode(WhileStmtNode& node) override;
         void visitExeUnitNode(new_ExeUnitNode& node) override;
     };
 }

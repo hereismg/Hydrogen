@@ -9,17 +9,17 @@ namespace hdg{
     using std::nullopt;
 
     // hdgTODO: rename AssignNode
-    class new_AssignNode : public Node{
+    class AssignNode : public Node{
     protected:
         std::string m_name;
         uNode m_lVal;
         uNode m_rVal;
 
     public:
-        new_AssignNode(std::string name, uNode rVal);
-        new_AssignNode(std::string name, uNode rVal, const Position& pos);
-        new_AssignNode(uNode lVal, uNode rVal);
-        new_AssignNode(uNode lVal, uNode rVal, const Position& pos);
+        AssignNode(std::string name, uNode rVal);
+        AssignNode(std::string name, uNode rVal, const Position& pos);
+        AssignNode(uNode lVal, uNode rVal);
+        AssignNode(uNode lVal, uNode rVal, const Position& pos);
 
         std::string& getName();
         uNode& getExpr();
@@ -60,14 +60,14 @@ namespace hdg{
         virtual void accept(Visitor& visitor) override;
     };
 
-    class new_IfStmtNode: public Node{
+    class IfStmtNode: public Node{
     protected:
         std::vector<uNode> m_cond;
         std::vector<uNode> m_exeUnit;
         uNode m_elseExeUnit;
     
     public:
-        new_IfStmtNode() = default;
+        IfStmtNode() = default;
 
         void addBranch(uNode cond, uNode exeUnit);
         void addElseBranch(uNode exeUnit);
@@ -82,14 +82,14 @@ namespace hdg{
         virtual void accept(Visitor& visitor) override;
     };
 
-    class new_WhileStmtNode: public Node{
+    class WhileStmtNode: public Node{
     protected:
         uNode m_cond;
         uNode m_loopUnit;
     
     public:
-        new_WhileStmtNode(uNode cond, uNode loopUnit);
-        new_WhileStmtNode(uNode cond, uNode loopUnit, const Position& pos);
+        WhileStmtNode(uNode cond, uNode loopUnit);
+        WhileStmtNode(uNode cond, uNode loopUnit, const Position& pos);
 
         uNode& getCond();
         uNode& getLoopUnit();

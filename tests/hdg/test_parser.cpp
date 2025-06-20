@@ -647,7 +647,7 @@ function fun(l, r) {
 
 var n = 10
 var nums = [1, 5, 3, 9, 2, 3, 1, 9, 5, 2]
-var temp = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+var temp = nums.clone()
 fun(0, n - 1)
 nums
 })",
@@ -671,6 +671,68 @@ R"({
     list.append(3)
 })",
 List::from({1, 2, 3}),
+ParserType::ExeUnit
+},
+
+tuple<string, string, sObject, ParserType>{
+"Postfix_Dot",
+R"({
+    var list = [9, 6, 5, 8, 3, 7]
+    list.append(list.head()).append(list.tail())
+})",
+List::from({9, 6, 5, 8, 3, 7, 9, 9}),
+ParserType::ExeUnit
+},
+
+tuple<string, string, sObject, ParserType>{
+"Postfix_Dot",
+R"({
+    var list = [9, 6, 5, 8, 3, 7]
+    list.length()
+})",
+Integer::from(6),
+ParserType::ExeUnit
+},
+
+tuple<string, string, sObject, ParserType>{
+"Postfix_Dot",
+R"({
+    var list = [9, 6, 5, 3]
+    list.extend(list)
+})",
+List::from({9, 6, 5, 3, 9, 6, 5, 3}),
+ParserType::ExeUnit
+},
+
+tuple<string, string, sObject, ParserType>{
+"Postfix_Dot",
+R"({
+    var list = [9, 6, 5, 3]
+    list.reverse()
+})",
+List::from({3, 5, 6, 9}),
+ParserType::ExeUnit
+},
+
+tuple<string, string, sObject, ParserType>{
+"Postfix_Dot",
+R"({
+    var cl1 = [1, 9]
+    var cl2 = cl1.clone()
+    var ncl1 = [2, 8]
+    var ncl2 = ncl1
+    cl1[0] = 0
+    cl2[1] = 0
+    ncl1[0] = 0
+    ncl2[1] = 0
+    var res = []
+    res.extend(cl1)
+    res.extend(cl2)
+    res.extend(ncl1)
+    res.extend(ncl2)
+    res
+})",
+List::from({0, 9, 1, 0, 0, 0, 0, 0}),
 ParserType::ExeUnit
 }
 

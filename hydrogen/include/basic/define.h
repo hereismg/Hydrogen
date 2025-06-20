@@ -35,6 +35,8 @@ namespace hdg{
 
     typedef int     i32;
     typedef int64_t i64;
+
+    using std::move;
 }
 
 #endif

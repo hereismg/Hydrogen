@@ -263,6 +263,7 @@ namespace hdg{
         sObject obj = getRVal();
         assert(obj != nullptr);
 
+        assert(m_stack.back() != nullptr);
         m_stack.back()->setSymbol(name, obj);
     }
 

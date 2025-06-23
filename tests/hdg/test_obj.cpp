@@ -7,6 +7,7 @@
 #include <kernel/Parser.h> 
 #include <node/ObjectNode.h>
 #include <node/expr.h>
+#include <node/stmt_node.h>
 #include <object/List.h>
 #include <object/Integer.h>
 #include <object/Object.h>
@@ -244,18 +245,39 @@ TEST(String, div_3) {
 
 /**
  * sm Test{
- *     a = 1
- *     b = 2
- *     c = a + b
- *     
+ *     1 + 2
  * }
  */
 
-TEST(SM, _){
+TEST(SM, exe_1){
     vector<uNode> stmts;
     stmts.emplace_back(BinOperNode::createPlus(1, 2));
-
     auto sm = StateMachine::create(std::move(stmts));
 
+    InterpreterVisitor visitor;
 
+    sm->exe(visitor, 0);
+
+    auto res = Integer::from(visitor.getResult());
+    ASSERT_TRUE(res->equation(Integer::from(3))->isTrue());
+}
+
+/**
+ * sm Test{
+ *     var a = 1 + 2
+ *     a + 3
+ * }
+*/
+TEST(SM, exe_2){
+    vector<uNode> stmts;
+    stmts.emplace_back(DefNode::create("a", BinOperNode::createPlus(1, 2)));
+    stmts.emplace_back(BinOperNode::createPlus(IdentNode::create("a"), IntNode::create(3)));
+    auto sm = StateMachine::create(std::move(stmts));
+
+    InterpreterVisitor visitor;
+
+    sm->exe(visitor, 0, 2);
+
+    auto res = Integer::from(visitor.getResult());
+    ASSERT_TRUE(res->equation(Integer::from(6))->isTrue());
 }

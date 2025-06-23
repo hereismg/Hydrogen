@@ -14,17 +14,17 @@ namespace hdg {
     class StateMachine: public Object{
     protected:
         vector<uNode> m_stmts;
-        New_Environment m_envir;
+        std::shared_ptr<New_Environment> m_envir;
 
     public:
-        StateMachine() = default;
+        StateMachine();
 
         static sStateMachine create(vector<uNode> stmts);
 
         inline vector<uNode>& refStmts() { return m_stmts; }
 
-        // void exe(i32 index);
-        // void exe(i32 begin, i32 end);
+        void exe(Visitor & visitor, i32 index);
+        void exe(Visitor & visitor, i32 begin, i32 end);
 
         std::string toString() override { return "StateMachine"; }
 

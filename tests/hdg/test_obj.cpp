@@ -10,6 +10,7 @@
 #include <object/List.h>
 #include <object/Integer.h>
 #include <object/Object.h>
+#include <object/state_machine.h>
 
 using namespace std;
 using namespace hdg;
@@ -94,11 +95,9 @@ TEST(Smoke, Clone_1){
     myList->getList().emplace_back(make_shared<Integer>(2));
     myList->getList().emplace_back(make_shared<Integer>(3));
 
-    auto listCopy = myList->clone();
-    ASSERT_NE(listCopy, nullptr);
-    ASSERT_EQ(typeid(*(listCopy.get())), typeid(List));
-    List* listCopy_ptr = dynamic_cast<List*>(listCopy.get());
-    ASSERT_EQ(myList->getList().size(), listCopy_ptr->getList().size());
+    auto listCopy = List::from(myList->clone()).value();
+
+    ASSERT_EQ(myList->getList().size(), listCopy->getList().size());
     
     myList->getList()[0] = make_shared<Integer>(10);
     myList->getList()[1] = make_shared<Integer>(10);
@@ -235,4 +234,28 @@ TEST(String, div_3) {
     auto expected_list = String::buildStrList({});
 
     ASSERT_TRUE(actual_list->equation(expected_list)->isTrue());
+}
+
+
+
+/**********************************************
+ * StateMachine
+ **********************************************/
+
+/**
+ * sm Test{
+ *     a = 1
+ *     b = 2
+ *     c = a + b
+ *     
+ * }
+ */
+
+TEST(SM, _){
+    vector<uNode> stmts;
+    stmts.emplace_back(BinOperNode::createPlus(1, 2));
+
+    auto sm = StateMachine::create(std::move(stmts));
+
+
 }

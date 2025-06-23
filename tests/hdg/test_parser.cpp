@@ -13,6 +13,7 @@
 #include <node/stmt_node.h>
 #include <node/unit_node.h>
 #include <object/Integer.h>
+#include <object/state_machine.h>
 
 using namespace std;
 using namespace hdg;

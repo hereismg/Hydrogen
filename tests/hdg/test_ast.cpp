@@ -14,6 +14,7 @@
 #include <object/List.h>
 #include <object/Integer.h>
 #include <object/Float.h>
+#include <object/state_machine.h>
 
 using namespace std;
 using namespace hdg;

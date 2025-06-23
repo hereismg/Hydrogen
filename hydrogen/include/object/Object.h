@@ -77,7 +77,7 @@ namespace hdg {
 
         virtual void illegalOperator();
         virtual sObject clone() { assert(false); return nullptr; }
-        virtual std::string toString() = 0;
+        virtual std::string toString() { assert(false); return nullptr; }
         virtual std::string getClass() { assert(false); return nullptr; }
 
         // ======================================

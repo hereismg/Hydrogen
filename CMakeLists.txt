@@ -19,21 +19,22 @@ set(GTEST_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/lib/gtest-1.16/googlemock" "$
 set(LIB_INCLUDE "${CMAKE_CURRENT_SOURCE_DIR}/lib")
 
 
-if (CMAKE_CXX_COMPILE_ID STREQUAL "GNU")
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     add_compile_options(
-        libhdg 
-        PRIVATE 
         -Wall -Wextra
         -Werror
         -Wno-unused-parameter
         -Wno-deprecated-copy
         -Wno-unused-variable
-        -Werror=return-type   # 将返回值警告转为错误
+        -Werror=return-type         # 将返回值警告转为错误
+    )
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR
+       CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
+    add_compile_options(
+        -Wunqualified-std-cast-call # 取消对 move 的意义不明确的警告
     )
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     add_compile_options(
-        libhdg 
-        PRIVATE 
         /utf-8  # 使 MSVC 使用 UTF-8 字符集
         /Zc:__cplusplus # 正确报告 __cplusplus 值
     )

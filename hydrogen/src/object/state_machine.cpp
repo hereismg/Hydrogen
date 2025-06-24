@@ -1,6 +1,7 @@
 #include "../../include/object/state_machine.h"
 
 #include "../../include/node/visitor.h"
+#include "../../include/object/Integer.h"
 
 namespace hdg{
     StateMachine::StateMachine(): m_envir(std::make_shared<New_Environment>()){}
@@ -31,5 +32,15 @@ namespace hdg{
         }
 
         visitor.getStack().pop_back();
+    }
+
+    sObject StateMachine::brackets(const vector<sObject>& args, Visitor& visitor) {
+        assert(args.size() >= 1 && args.size() <= 2);
+        auto left = Integer::from(args[0])->getValue();
+        if (args.size() == 2) auto right = Integer::from(args[1])->getValue();
+
+        
+
+        return nullptr;
     }
 } // namespace hdg

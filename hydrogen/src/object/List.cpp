@@ -113,13 +113,9 @@ namespace hdg {
 
     sObject List::brackets(const std::vector<sObject>& args, Visitor& visitor) {
         assert(args.size() == 1);
-
-        Object* obj = args[0].get();
-
-        assert(typeid(*obj) == typeid(Integer));
-
-        auto index = dynamic_cast<Integer*>(obj)->getValue();
         
+        auto index = Integer::from(args[0])->getValue();
+
         assert(index >= 0 && index < (int64_t)m_list.size());
 
         visitor.setRVal(m_list[index]);

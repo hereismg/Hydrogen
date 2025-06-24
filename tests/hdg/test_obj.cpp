@@ -267,6 +267,7 @@ TEST(SM, exe_1){
  *     var a = 1 + 2
  *     a + 3
  * }
+ * Test[0:2]()
 */
 TEST(SM, exe_2){
     vector<uNode> stmts;
@@ -281,3 +282,10 @@ TEST(SM, exe_2){
     auto res = Integer::from(visitor.getResult());
     ASSERT_TRUE(res->equation(Integer::from(6))->isTrue());
 }
+
+/**
+ * sm Test{
+ *     var a = 1 + 2
+ *     a + 3
+ * }
+*/

@@ -1,0 +1,13 @@
+{
+function solution(layer, a, b, c, result){
+    if layer != 1{
+        result = result + a + "->" + b + "\n"
+        solution(layer-1, a, c, b, result)
+        result = result + b "->" + c + "\n"
+    }
+    result
+}
+
+var result = ""
+solution(2, "x", "y", "z", result)
+}

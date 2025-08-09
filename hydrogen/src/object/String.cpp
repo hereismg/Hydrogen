@@ -66,22 +66,26 @@ namespace hdg {
         }
     }
 
-    sObject String::equation(sObject other)
-    {
+    sObject String::equation(sObject other) {
         assert(other != nullptr);
 
-        if (typeid(*other.get()) == typeid(String))
-        {
-            String* otherStr = dynamic_cast<String*>(other.get());
+        auto other_str = String::from(other);
 
-            if (otherStr->getValue() == m_value) return Integer::True;
-            else return Integer::False;
-        }
-        else
-        {
-            assert(false);
-            return nullptr;
-        }
+        if (other_str->m_value == this->m_value) return Integer::True;
+        else return Integer::False;
+
+        // if (typeid(*other.get()) == typeid(String))
+        // {
+        //     String* otherStr = dynamic_cast<String*>(other.get());
+
+        //     if (otherStr->getValue() == m_value) return Integer::True;
+        //     else return Integer::False;
+        // }
+        // else
+        // {
+        //     assert(false);
+        //     return nullptr;
+        // }
     }
 
 
@@ -135,7 +139,7 @@ namespace hdg {
 
     sString String::from(const sObject& obj) {
         assert(obj != nullptr);
-        assert(typeid(*obj.get()) == typeid(Object));
+        assert(typeid(*obj.get()) == typeid(String));
 
         return std::dynamic_pointer_cast<String>(obj);
     }

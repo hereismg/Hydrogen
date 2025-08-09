@@ -1,6 +1,18 @@
 {
-    function add(a, b){
-        a + b
+    function Animal(oper) {
+        var age = 180
+        var phone = 123456789
+
+        oper()
     }
-    add(1, 2)
+
+    function getAge(){
+        age
+    }
+
+    function getPhone(){
+        phone
+    }
+
+    Animal(getPhone)
 }

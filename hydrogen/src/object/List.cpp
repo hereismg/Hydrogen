@@ -219,7 +219,7 @@ namespace hdg {
 
                     auto res = Integer::from((int64_t)selfList.size());
 
-                    std::cout << "List::length" << std::endl;
+                    // std::cout << "List::length" << std::endl;
                     return res;
                 };
                 std::vector<std::string> args = {"self"};

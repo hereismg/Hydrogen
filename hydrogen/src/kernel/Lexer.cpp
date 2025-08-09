@@ -169,6 +169,20 @@ namespace hdg {
                 m_tokens.emplace_back(Token::DOT, Position(m_fPath, m_code, m_pos));
                 advance();
             }
+            else if (m_currentChar == '!'){
+                Position pos;
+                pos.setStart(m_pos);
+
+                advance();
+
+                if (m_currentChar != '=') {
+                    assert(false && "Expect '='.");
+                }
+
+                pos.setEnd(m_pos);
+                m_tokens.emplace_back(Token::NE, pos);
+                advance();
+            }
             else{
                 throw IllegalCharError(
                         "Expect digital, '+', '-', '*', '/' or '^'.",

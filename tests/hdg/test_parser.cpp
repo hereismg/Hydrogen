@@ -485,6 +485,21 @@ else {
 })",
 make_shared<Integer>(2222),
 ParserType::ExeUnit
+},
+
+tuple<string, string, sObject, ParserType>{
+"0527",
+R"({
+var a = 1
+if a != 1{
+    2025
+}
+else {
+    2024
+}
+})",
+make_shared<Integer>(2024),
+ParserType::ExeUnit
 }
 ));
 
@@ -736,5 +751,24 @@ R"({
 List::from({0, 9, 1, 0, 0, 0, 0, 0}),
 ParserType::ExeUnit
 }
+
+// tuple<string, string, sObject, ParserType>{
+// "Postfix_Dot",
+// R"({
+// function solution(layer, a, b, c, result){
+//     if layer != 1{
+//         result = result + a + "->" + b + "\n"
+//         solution(layer-1, a, c, b, result)
+//         result = result + b "->" + c + "\n"
+//     }
+//     result
+// }
+
+// var result = ""
+// solution(2, "x", "y", "z", result)
+// })",
+// String::from("12"),
+// ParserType::ExeUnit
+// }
 
 ));

@@ -1,13 +1,14 @@
 {
-function solution(layer, a, b, c, result){
-    if layer != 1{
-        result = result + a + "->" + b + "\n"
-        solution(layer-1, a, c, b, result)
-        result = result + b "->" + c + "\n"
+function hanoi(layer, a, b, c){
+    if layer > 1 {
+        hanoi(layer-1, a, c, b);
+        print(a + " -> " + c)
+        hanoi(layer-1, b, a, c)
     }
-    result
+    else {
+        print(a + " -> " + c)
+    }
 }
 
-var result = ""
-solution(2, "x", "y", "z", result)
+hanoi(3, "x", "y", "z")
 }

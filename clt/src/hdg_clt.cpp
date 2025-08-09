@@ -128,7 +128,7 @@ int real_main(int argc, char *argv[]){
 
         auto res = visitor.getResult();
         
-        std::cout << res->toString() << std::endl;
+        // std::cout << res->toString() << std::endl;
 
         break;
     }

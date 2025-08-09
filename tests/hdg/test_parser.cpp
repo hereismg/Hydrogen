@@ -750,25 +750,22 @@ R"({
 })",
 List::from({0, 9, 1, 0, 0, 0, 0, 0}),
 ParserType::ExeUnit
+},
+
+tuple<string, string, sObject, ParserType>{
+"Postfix_Dot",
+R"({
+function hanoi(layer, a, b, c){
+
+
+    print(a + " -> " + b)
+    print(b + " -> " + c)
 }
 
-// tuple<string, string, sObject, ParserType>{
-// "Postfix_Dot",
-// R"({
-// function solution(layer, a, b, c, result){
-//     if layer != 1{
-//         result = result + a + "->" + b + "\n"
-//         solution(layer-1, a, c, b, result)
-//         result = result + b "->" + c + "\n"
-//     }
-//     result
-// }
-
-// var result = ""
-// solution(2, "x", "y", "z", result)
-// })",
-// String::from("12"),
-// ParserType::ExeUnit
-// }
+hanoi(2, "x", "y", "z")
+})",
+String::from("12"),
+ParserType::ExeUnit
+}
 
 ));

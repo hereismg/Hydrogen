@@ -12,7 +12,7 @@
 #include <ranges>
 #include <string>
 
-#include "../basic/Position.h"q
+#include "../basic/Position.h"
 
 namespace hdg {
 

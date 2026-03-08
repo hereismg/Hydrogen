@@ -1,6 +1,9 @@
 #include <memory>
 #include <fstream>
 #include <chrono>
+#include <tuple>
+#include <string>
+#include <iostream>
 
 #include <gtest/gtest.h>
 #include <sml.hpp>

@@ -10,7 +10,9 @@
 #include <utility>
 #include <sstream>
 #include <ranges>
-#include "../basic/Position.h"
+#include <string>
+
+#include "../basic/Position.h"q
 
 namespace hdg {
 

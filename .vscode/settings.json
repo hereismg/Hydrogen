@@ -1,0 +1,55 @@
+{
+  // clangd 配置
+  "clangd.path": "clangd",
+  "clangd.arguments": [
+    "--compile-commands-dir=.",
+    "--background-index",
+    "--clang-tidy",
+    "--header-insertion=iwyu",
+    "--completion-style=detailed",
+    "--function-arg-placeholders",
+    "--fallback-style=llvm",
+    "--enable-config",
+    "--log=info"
+  ],
+
+  // C/C++ 配置（禁用 IntelliSense 以避免与 clangd 冲突）
+  "C_Cpp.intelliSenseEngine": "disabled",
+
+  // 编辑器配置
+  "editor.formatOnSave": false,
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+
+  // 文件关联
+  "files.associations": {
+    "*.cpp": "cpp",
+    "*.hpp": "cpp",
+    "*.h": "cpp",
+    "*.cc": "cpp",
+    "*.cxx": "cpp"
+  },
+
+  // 排除文件
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/build": true,
+    "**/bin": true,
+    "**/obj": true,
+    "**/*.o": true,
+    "**/*.a": true,
+    "**/*.so": true
+  },
+
+  // 搜索排除
+  "search.exclude": {
+    "**/build": true,
+    "**/bin": true,
+    "**/obj": true,
+    "**/lib": true
+  }
+}

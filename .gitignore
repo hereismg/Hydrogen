@@ -2,4 +2,9 @@ cmake-*
 .idea
 bin
 build*
-.vscode
+
+# .vscode/ 中的缓存文件，但保留配置
+.vscode/*.bak
+
+# Clangd 缓存
+.cache/clangd/

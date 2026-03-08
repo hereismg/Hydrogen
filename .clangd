@@ -1,0 +1,40 @@
+# Clangd 配置文件
+# https://clangd.llvm.org/config
+
+CompileFlags:
+  # 添加编译选项
+  Add:
+    - -std=c++20
+    - -Wall
+    - -Wextra
+    - -I/home/user/workplace/Hydrogen/hydrogen/include
+    - -I/home/user/workplace/Hydrogen/lib/boost
+    - -I/home/user/workplace/Hydrogen/lib
+    - -I/home/user/workplace/Hydrogen/lib/gtest-1.16/googlemock/include
+    - -I/home/user/workplace/Hydrogen/lib/gtest-1.16/googletest/include
+
+  # 移除可能导致问题的警告
+  Remove:
+    - -W*
+
+# 诊断选项
+Diagnostics:
+  # 未使用的参数
+  UnusedIncludes: Strict
+  # 缺少包含
+  MissingIncludes: Strict
+
+# 补全选项
+Completion:
+  # 代码补全样式
+  AllScopes: true
+
+# 索引选项
+Index:
+  # 后台索引
+  Background: Build
+
+# 悬停信息
+Hover:
+  # 显示变量类型
+  ShowAKA: Yes

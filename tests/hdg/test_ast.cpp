@@ -1,4 +1,9 @@
+#include <iostream>
 #include <memory>
+#include <string>
+#include <tuple>
+#include <utility>
+#include <vector>
 
 #include <sml.hpp>
 #include <gtest/gtest.h>
@@ -6,10 +11,13 @@
 #include <kernel/Lexer.h>
 #include <kernel/Parser.h> 
 #include <basic/Environment.h>
+#include <basic/Token.h>
 #include <node/ObjectNode.h>
+#include <node/Node.h>
 #include <node/expr.h>
 #include <node/stmt_node.h>
 #include <node/unit_node.h>
+#include <node/visitor.h>
 #include <object/Function.h>
 #include <object/List.h>
 #include <object/Integer.h>

@@ -27,6 +27,56 @@ setup:
 	else \
 		echo "✓ Build directory exists"; \
 	fi
+	@# 为 clangd 创建 compile_commands.json 符号链接
+	@if [ -f "$(BUILD_DIR)/compile_commands.json" ] && [ ! -L "compile_commands.json" ]; then \
+		ln -sf $(BUILD_DIR)/compile_commands.json compile_commands.json; \
+		echo "✓ Linked compile_commands.json for clangd"; \
+	fi
+
+# ========== Clangd 支持 ==========
+.PHONY: clangd
+clangd: setup
+	@echo "🔧 Setting up clangd support..."
+	@if [ -f "$(BUILD_DIR)/compile_commands.json" ]; then \
+		if [ ! -L "compile_commands.json" ]; then \
+			ln -sf $(BUILD_DIR)/compile_commands.json compile_commands.json; \
+		fi; \
+		echo "✓ compile_commands.json linked for clangd"; \
+		echo ""; \
+		echo "Clangd configuration:"; \
+		echo "  - compile_commands.json: ✓"; \
+		echo "  - C++ Standard: C++20"; \
+		echo "  - Include paths: auto-detected"; \
+	else \
+		echo "✗ compile_commands.json not found. Run 'make clean && make clangd'"; \
+	fi
+
+.PHONY: check-clangd
+check-clangd:
+	@echo "🔍 Checking clangd setup..."
+	@echo ""
+	@if command -v clangd >/dev/null 2>&1; then \
+		echo "✓ clangd is installed: $$(clangd --version | head -n1)"; \
+	else \
+		echo "✗ clangd is NOT installed"; \
+		echo ""; \
+		echo "Install with:"; \
+		echo "  Ubuntu/Debian: sudo apt install clangd"; \
+		echo "  macOS: brew install llvm"; \
+		echo "  Arch: sudo pacman -S clang"; \
+	fi
+	@echo ""
+	@if [ -L "compile_commands.json" ]; then \
+		echo "✓ compile_commands.json is linked"; \
+	elif [ -f "compile_commands.json" ]; then \
+		echo "✓ compile_commands.json exists"; \
+	else \
+		echo "✗ compile_commands.json NOT found"; \
+		echo "  Run 'make clangd' to generate it"; \
+	fi
+	@echo ""
+	@echo "VSCode clangd settings:"
+	@echo "  {\"clangd.arguments\": [\"--compile-commands-dir=.\"]}"
 
 # ========== Debug 构建 ==========
 .PHONY: debug
@@ -144,6 +194,10 @@ help:
 	@echo "  make memcheck       - 内存泄漏检查"
 	@echo "  make depends        - 生成依赖图"
 	@echo "  make ui             - 启动 CMake GUI"
+	@echo ""
+	@echo "🔍 Clangd 支持:"
+	@echo "  make clangd         - 配置 clangd 支持"
+	@echo "  make check-clangd   - 检查 clangd 配置状态"
 	@echo ""
 	@echo "📋 信息:"
 	@echo "  make help           - 显示此帮助信息"

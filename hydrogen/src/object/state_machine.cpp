@@ -15,7 +15,7 @@ namespace hdg{
     void StateMachine::exe(Visitor& visitor, i32 index) {
         visitor.getStack().push_back(m_envir);
 
-        assert(m_stmts.size() > index);
+        assert(index >= 0 && static_cast<size_t>(index) < m_stmts.size());
         m_stmts[index]->accept(visitor);
 
         visitor.getStack().pop_back();
@@ -25,8 +25,8 @@ namespace hdg{
         visitor.getStack().push_back(m_envir);
 
         assert(begin >= 0);
-        assert(end   <= m_stmts.size());
-        
+        assert(end >= 0 && static_cast<size_t>(end) <= m_stmts.size());
+
         for (i32 i = begin; i < end; i++){
             m_stmts[i]->accept(visitor);
         }

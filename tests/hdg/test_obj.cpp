@@ -110,16 +110,16 @@ TEST(Smoke, Clone_1){
 TEST(Smoke, Clone_2){
     size_t count = 5;
     auto myList = std::make_shared<List>(count, nullptr);
-    for (int i = 0; i < count; i++) {
+    for (size_t i = 0; i < count; i++) {
         myList->getList()[i] = make_shared<Integer>(i);
     }
 
     auto arr2di = std::make_shared<List>(count, nullptr);
-    for (int i = 0; i < count; i++) {
+    for (size_t i = 0; i < count; i++) {
         arr2di->getList()[i] = myList->clone();
     }
 
-    for (int i = 0; i < count; i++) {
+    for (size_t i = 0; i < count; i++) {
         // arr2di->getList()
     }
     // myList->getList()[0]

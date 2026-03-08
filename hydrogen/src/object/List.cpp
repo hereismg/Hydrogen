@@ -235,7 +235,7 @@ namespace hdg {
                     auto elemList = elem->getList();
 
                     auto size = elemList.size();
-                    for (auto i = 0; i < size; i++) {
+                    for (size_t i = 0; i < size; i++) {
                         self->append(elemList[i]);
                     }
 

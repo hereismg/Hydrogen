@@ -514,14 +514,14 @@ namespace hdg {
 
                     vector<uNode> args;
                     if (m_currentToken->getType() != Token::RPAREN){
-                        args = new_ExprArray();                    
+                        args = new_ExprArray();
                     }
                     advance();
 
                     pos.setEnd(m_currentToken->thisPosition()->getEnd());
                     primary = PostfixNode::createDotFun(
-                        move(primary), 
-                        ident, 
+                        move(primary),
+                        ident,
                         move(args),
                         pos
                     );
@@ -531,6 +531,7 @@ namespace hdg {
                 // DotVar
                 else {
                     assert(false);
+                    break;  // 避免fallthrough到default
                 }
             }
             default : {

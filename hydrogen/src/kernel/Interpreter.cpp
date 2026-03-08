@@ -4,6 +4,7 @@
 
 #include "../../include/kernel/Interpreter.h"
 #include "../../include/kernel/Parser.h"
+#include "../../include/node/Node.h"
 #include "../../include/object/Function.h"
 #include "../../include/object/List.h"
 #include "../../include/object/None.h"
@@ -107,14 +108,19 @@ namespace hdg {
             if (mode == Mode::debug) std::cout << tokens << std::endl;                ///> 打印 tokens 列表
 
             Parser parser(tokens, m_globalEnvironment);
-            Node* tree = nullptr;
-            if (mode == Mode::debug) {
+            uNode treeUPtr = parser.exeUnit();  // 生成语法树
+            Node* tree = treeUPtr.get();
+
+            if (mode == Mode::debug && tree) {
                 std::cout << tree->toString() << std::endl;                            ///> 打印语法树
                 std::cout << "==================================" << std::endl;
             }
 
-            std::string result = tree->interpret()->toString();
-            return result;
+            if (tree) {
+                std::string result = tree->interpret()->toString();
+                return result;
+            }
+            return "";
         }
         catch (Error &error){
             return error.toString();

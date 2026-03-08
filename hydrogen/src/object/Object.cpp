@@ -169,6 +169,6 @@ namespace hdg {
     }
 
     VarType::VarType(const char* class_, std::map<std::string, sObject>&& table)
-        : m_class(class_), m_envir(std::move(table)), m_base(nullptr)
+        : m_base(nullptr), m_class(class_), m_envir(std::move(table))
     {}
 } // hdg

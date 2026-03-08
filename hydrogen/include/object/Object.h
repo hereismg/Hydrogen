@@ -113,20 +113,22 @@ namespace hdg {
         virtual Object* brackets(const std::vector<Object*>& args);
         virtual Object* braces(const std::vector<Object*>& args);
 
-        virtual Object* copy() { assert(false); }
+        virtual Object* copy() { assert(false); return nullptr; }
     };
 
 
     class VarType : public Object {
     protected:
         VarType* m_base;
-
         std::string m_class;
         New_Environment   m_envir;
 
     public:
+        // 使用 using 声明避免隐藏父类的虚函数
+        using Object::getClass;
+
         VarType(const char* class_)
-            : m_class(class_), m_base(nullptr) {}
+            : m_base(nullptr), m_class(class_) {}
 
         VarType(const char* class_, std::map<std::string, sObject>&& table);
 

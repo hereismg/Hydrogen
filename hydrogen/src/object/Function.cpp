@@ -28,8 +28,8 @@ namespace hdg {
     }
 
     New_BuiltInFunction::New_BuiltInFunction(FuncInterface&& fun, std::vector<std::string>&& args)
-        : m_fun(std::move(fun)),
-          New_BaseFunction(std::move(args))
+        : New_BaseFunction(std::move(args)),
+          m_fun(std::move(fun))
     {
         assert(m_fun != nullptr);
     }
